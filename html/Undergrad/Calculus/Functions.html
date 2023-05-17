@@ -1,0 +1,1091 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Functions &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Calculus/Functions';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Optimization of Cobbs-Douglas Production Functions" href="Optimization_and_Cobbs_Douglas_Production.html" />
+    <link rel="prev" title="Intro" href="Intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED Paul Isihara, Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../JMM23.html">JMM 2023</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE OUTREACH Paul Isihara, Martha Van Zee</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Patterns.html">Celestial Ministries  Outreach Program</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Demo.html">After School Program Demo</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">INTRODUCTORY PROBABILITY AND STATISTICS Laura Gross, Peter Jantsch, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/Random_Numbers_and_Pi.html">Random Number Approximation of Pi</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FOUNDATIONAL UNDERGRADUATE MATH COURSES Soheil Anbouhi, Rachel Petrik, Inne Sinnghe</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Intro.html">Intro</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Optimization_and_Cobbs_Douglas_Production.html">Optimization of Cobbs-Douglas Production Functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED TOPICS Paul Isihara, Ying Li</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/Calculus/Functions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Undergrad/Calculus/Functions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Functions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h1>
+<h1 style="font-size:3rem;color:black;">2. Functions</h1><p>Below is the list of topics that are covered in this section:</p>
+<ul class="simple">
+<li><p>Function Definition and Terminology</p></li>
+<li><p>Function Behaviors</p></li>
+<li><p>Common Functions (Linear, Exponential, Logarithm, Logistic)</p></li>
+<li><p>Function Operations, Compositions, and Inverse</p></li>
+</ul>
+<h2 style>2.1 Function Definition and Terminology </h2><p>A <strong>function</strong> is a <em>rule</em> that assigns exactly one output to each input. </br>
+When a function <span class="math notranslate nohighlight">\(f\)</span> has input <span class="math notranslate nohighlight">\(x\)</span>, the output is written <span class="math notranslate nohighlight">\(f(x)\)</span>. This notation is read “<span class="math notranslate nohighlight">\(f\)</span> of <span class="math notranslate nohighlight">\(x\)</span>”.</p>
+<p><strong>Example</strong> </br></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=x+3\)</span> is a rule that adding <span class="math notranslate nohighlight">\(3\)</span> into the input <span class="math notranslate nohighlight">\(x\)</span>, giving the output <span class="math notranslate nohighlight">\(x+3\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x)=8-x^2\)</span> is a rule that squaring the input <span class="math notranslate nohighlight">\(x\)</span>, then subtracting the result from <span class="math notranslate nohighlight">\(8\)</span>, giving the output <span class="math notranslate nohighlight">\(8-x^2\)</span>.</p></li>
+</ul>
+<p>Code example for <span class="math notranslate nohighlight">\(f(x)=x+3\)</span> is given below. Enter an input value and the code will return the output value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define the function f(x)</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">3</span>
+
+<span class="c1"># Ask for user input</span>
+<span class="n">user_input</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter input value x =&quot;</span><span class="p">))</span> 
+
+<span class="c1"># Call the function with the user input</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span> 
+
+<span class="c1"># Print the output</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The output is f(x) =&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Ask for user input</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">user_input</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter input value x =&quot;</span><span class="p">))</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Call the function with the user input</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">output</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span> 
+
+<span class="nn">File //anaconda3/lib/python3.10/site-packages/ipykernel/kernelbase.py:1172,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1165</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Forward raw_input to frontends</span>
+<span class="g g-Whitespace">   </span><span class="mi">1166</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1167</span><span class="sd"> Raises</span>
+<span class="g g-Whitespace">   </span><span class="mi">1168</span><span class="sd"> ------</span>
+<span class="g g-Whitespace">   </span><span class="mi">1169</span><span class="sd"> StdinNotImplementedError if active frontend doesn&#39;t support stdin.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1170</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1171</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1172</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1173</span>         <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1174</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1175</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1177</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parent_ident</span><span class="p">[</span><span class="s2">&quot;shell&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1180</span> <span class="p">)</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+<br><p>The <strong>domain</strong>  of a function is the set of all input values that can be plugged into a function such that the output exists. </br>
+The <strong>range</strong> of a function is the set of all possible output values that a function can take.</p>
+<p>Note that for the domain we need to avoid division by zero, square roots of negative numbers, and logarithms of nonpositive numbers. Can you explain why?</p>
+<p>Python itself does not have built-in functionality to directly determine the domain and range of a given function. <br>
+The domain and range of a function often depend on the specific characteristics of the function and its mathematical properties.</p>
+<p><strong>Example</strong></br>
+Given <span class="math notranslate nohighlight">\(f(x)=\frac{1}{\sqrt{x}}\)</span>. </br>
+Excluding the zeroes of denominator and negative number inside the square root, the domain of <span class="math notranslate nohighlight">\(f(x)\)</span> is <span class="math notranslate nohighlight">\(\left(0,\infty\right)\)</span>. The range of <span class="math notranslate nohighlight">\(f(x)\)</span> hence also <span class="math notranslate nohighlight">\(\left(0,\infty\right)\)</span>.</p>
+<p>Code example for <span class="math notranslate nohighlight">\(f(x)\)</span> is given below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Define the function symbolically</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># Find the domain: denominator not zero AND inside square root must be positive</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">denom</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Print the domain</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Domain:&quot;</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Domain: (0 &lt; x) &amp; (x &lt; oo)
+</pre></div>
+</div>
+</div>
+</div>
+<br><h2 style>2.2 Function Behaviors</h2><h4 style>Increasing, Decreasing, and Constant Function </h4>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> defined over an interval is:</p>
+<ul class="simple">
+<li><p><strong>increasing</strong> if the output values increase as the input values increase.</p></li>
+<li><p><strong>decreasing</strong> if the output values decrease as the input values increase.</p></li>
+<li><p><strong>constant</strong> if the output values remain the same as the input values increase.</p></li>
+</ul>
+<h4 style>Concave Up and Concave Down Function, Inflection Point </h4>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> defined over an interval is:</p>
+<ul class="simple">
+<li><p><strong>concave up</strong> if a graph of <span class="math notranslate nohighlight">\(f\)</span> appears to be a portion of an arc opening upward.</p></li>
+<li><p><strong>concave down</strong> if a graph of <span class="math notranslate nohighlight">\(f\)</span> appears to be a portion of an arc opening downward.</p></li>
+</ul>
+<p>A point on a function changes concavity is called an <strong>inflection point</strong>.</p>
+<br><h2 style>2.3 Common Functions (Linear, Exponential, Logarithm, Logistic)</h2><h4 style>Linear Functions </h4><p>A linear function is a function that can be expressed in the form <span class="math notranslate nohighlight">\(f(x)=mx+b\)</span>, where <span class="math notranslate nohighlight">\(m\)</span> represents the slope and <span class="math notranslate nohighlight">\(b\)</span> represents the <span class="math notranslate nohighlight">\(y\)</span>-intercept.</p>
+<p>The slope <span class="math notranslate nohighlight">\(m\)</span>:</p>
+<ul class="simple">
+<li><p>Determines the steepness or inclination of the line. <br>
+A positive slope indicates an upward trend, a negative slope indicates a downward trend, and a slope of zero represents a horizontal line.</p></li>
+<li><p>Represents the rate at which the function’s output changes with respect to the input.</p></li>
+<li><p>Is calculated as the ratio of the change in <span class="math notranslate nohighlight">\(y\)</span>-coordinates to the change in <span class="math notranslate nohighlight">\(x\)</span>-coordinates between two points on the line, that is, <br>
+between point <span class="math notranslate nohighlight">\((x_1,y_1)\)</span> and <span class="math notranslate nohighlight">\((x_2,y_2)\)</span>, the slope <span class="math notranslate nohighlight">\(m=\dfrac{y_2-y_1}{x_2-x_1}\)</span>.</p></li>
+</ul>
+<p>The <span class="math notranslate nohighlight">\(y\)</span>-intercept <span class="math notranslate nohighlight">\(b\)</span>:</p>
+<ul class="simple">
+<li><p>Is the point where the line intersects the <span class="math notranslate nohighlight">\(y\)</span>-axis.</p></li>
+<li><p>Represents the value of the <span class="math notranslate nohighlight">\(f(x)\)</span> when <span class="math notranslate nohighlight">\(x = 0\)</span>.</p></li>
+</ul>
+<p>To find the <span class="math notranslate nohighlight">\(x\)</span>-intercept, set <span class="math notranslate nohighlight">\(y = 0\)</span> in the equation <span class="math notranslate nohighlight">\(f(x)=mx+b\)</span> and solve for <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Below is the code prompting user to input the constants <span class="math notranslate nohighlight">\(m\)</span>, and <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Prompt the user to input the slope and y-intercept</span>
+<span class="n">m</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value for the slope (m): &quot;</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value for the y-intercept (b): &quot;</span><span class="p">))</span>
+
+<span class="c1"># Define the linear function</span>
+<span class="k">def</span> <span class="nf">linear_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># Generate a range of x values for plotting</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Compute the corresponding y values using the linear function</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">linear_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Plot the linear function</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = mx + b&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the x-axis and y-axis lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># x-axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># y-axis</span>
+
+<span class="c1"># Set plot labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Linear Function&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1b0d8f8188b52bb9aeb64c79a048a6129e618d8dc6a0da85984e3f52f88f462f.png" src="../../_images/1b0d8f8188b52bb9aeb64c79a048a6129e618d8dc6a0da85984e3f52f88f462f.png" />
+</div>
+</div>
+<h4 style>Exponential Functions </h4><p>An exponential function is a function in the form <span class="math notranslate nohighlight">\(f(x)=ab^x\)</span>, where <span class="math notranslate nohighlight">\(a\)</span> is the <span class="math notranslate nohighlight">\(y\)</span>-intercept and <span class="math notranslate nohighlight">\(b&gt;0\)</span> is the constant multiplier.</p>
+<p>Below is the code to plot the graphs of <span class="math notranslate nohighlight">\(f(x)=2^x\)</span> and <span class="math notranslate nohighlight">\(f(x)=\left(\frac{1}{2}\right)^x\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the x range</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Define the functions</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">x</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="n">x</span>
+
+<span class="c1"># Plot the functions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 2^x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = (1/2)^x&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the x-axis and y-axis lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># x-axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># y-axis</span>
+
+<span class="c1"># Set plot labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot of f(x) = 2^x and f(x) = (1/2)^x&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ff79357f5214cc6b22b7f8e766c24fbee2223fe28fe4a7f51f7fb09e947e4cac.png" src="../../_images/ff79357f5214cc6b22b7f8e766c24fbee2223fe28fe4a7f51f7fb09e947e4cac.png" />
+</div>
+</div>
+<p>Properties of <span class="math notranslate nohighlight">\(f(x)=ab^x\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(0)=a\)</span>. The <span class="math notranslate nohighlight">\(y\)</span>-intercept is always at <span class="math notranslate nohighlight">\(y=a\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) &gt; 0\)</span>. An exponential function is always positive (never touch zero either)</p></li>
+<li><p>The domain of <span class="math notranslate nohighlight">\(f(x)\)</span> is <span class="math notranslate nohighlight">\((-\infty,\infty)\)</span> while the range of <span class="math notranslate nohighlight">\(f(x)\)</span> is <span class="math notranslate nohighlight">\((0,\infty)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(0&lt;b&lt;1\)</span> then</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(x\)</span> goes to <span class="math notranslate nohighlight">\(\infty\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> goes to <span class="math notranslate nohighlight">\(\infty\)</span> as <span class="math notranslate nohighlight">\(x\)</span> goes to <span class="math notranslate nohighlight">\(-\infty\)</span>.</p></li>
+</ul>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(b&gt;1\)</span> then</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> goes to <span class="math notranslate nohighlight">\(\infty\)</span> as <span class="math notranslate nohighlight">\(x\)</span> goes to <span class="math notranslate nohighlight">\(\infty\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(x\)</span> goes to <span class="math notranslate nohighlight">\(-\infty\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<p>The <strong>natural exponential function</strong> is <span class="math notranslate nohighlight">\(f(x)=e^x\)</span>, where <span class="math notranslate nohighlight">\(e\)</span> is the Euler’s number <span class="math notranslate nohighlight">\(e=2.71828182845905\ldots\)</span></p>
+<h4 style>Logarithm Functions </h4><p>A logarithm (log) function is a function in the form <span class="math notranslate nohighlight">\(f(x)=a+b\ln(x)\)</span>, where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\neq 0\)</span> are constants for positive input <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Below is the code to plot the graphs of <span class="math notranslate nohighlight">\(f(x)=1+2\ln(x)\)</span> and <span class="math notranslate nohighlight">\(f(x)=1-2\ln(x)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the functions</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Generate a range of x values for plotting</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Compute the corresponding y values for each function</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">f1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">f2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Plot the functions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 1 + 2 * ln(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 1 - 2 * ln(x)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the x-axis and y-axis lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># x-axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># y-axis</span>
+
+<span class="c1"># Set plot labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot of f(x) = 1 + 2 * ln(x) and f(x) = 1 - 2 * ln(x)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e7e80c6af3d16ece6073e7bb3648fffa918f43bb9586faa10d26034a1364c4dd.png" src="../../_images/e7e80c6af3d16ece6073e7bb3648fffa918f43bb9586faa10d26034a1364c4dd.png" />
+</div>
+</div>
+<p>Properties of <span class="math notranslate nohighlight">\(f(x)=a+b\ln(x)\)</span>. <br>
+The input <span class="math notranslate nohighlight">\(x\)</span> restricted to be positive since <span class="math notranslate nohighlight">\(\ln(x)\)</span> only defined for <span class="math notranslate nohighlight">\(x&gt;0\)</span>. <br>
+The log function then can be either increasing or decreasing depending the value of <span class="math notranslate nohighlight">\(b\)</span>. <br>
+For increasing log functions:</p>
+<ul class="simple">
+<li><p>concave down</p></li>
+<li><p><span class="math notranslate nohighlight">\(b&gt;0\)</span></p></li>
+<li><p>vertical asymptote <span class="math notranslate nohighlight">\(x=0\)</span>, with <span class="math notranslate nohighlight">\(f(x)\)</span> goes to <span class="math notranslate nohighlight">\(-\infty\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> goes to <span class="math notranslate nohighlight">\(\infty\)</span> as <span class="math notranslate nohighlight">\(x\)</span> goes to <span class="math notranslate nohighlight">\(\infty\)</span> <br></p></li>
+</ul>
+<p>For decreasing log functions:</p>
+<ul class="simple">
+<li><p>concave up</p></li>
+<li><p><span class="math notranslate nohighlight">\(b&lt;0\)</span></p></li>
+<li><p>vertical asymptote <span class="math notranslate nohighlight">\(x=0\)</span>, with <span class="math notranslate nohighlight">\(f(x)\)</span> goes to <span class="math notranslate nohighlight">\(\infty\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> goes to <span class="math notranslate nohighlight">\(-\infty\)</span> as <span class="math notranslate nohighlight">\(x\)</span> goes to <span class="math notranslate nohighlight">\(\infty\)</span></p></li>
+</ul>
+<h4 style>Logistic Functions </h4><p>While exponential and log functions are commonly used in real life, it is unrealistic to believe that exponential growth can continue forever. In many situations, the growth ultimately restricted by the logistic availability. <br></p>
+<p>A logistic function is a function in the form <span class="math notranslate nohighlight">\(f(x)=\dfrac{L}{1+ae^{-bx}}\)</span>, where <span class="math notranslate nohighlight">\(L,a\)</span>, and <span class="math notranslate nohighlight">\(b\)</span> are nonzero constant. <br></p>
+<p>In this function, <span class="math notranslate nohighlight">\(y=0\)</span> and <span class="math notranslate nohighlight">\(y=L\)</span> are the horizontal asymptotes of the graph of <span class="math notranslate nohighlight">\(f(x)\)</span>, corresponds to the fact that the amount of resources is always positive but the growth is limited at a certain point.</p>
+<p>Depending on the positive or negative growth of the logistics, the logistic function can either increasing or decreasing. <br>
+Below is an example of the graph of an increasing logistic function <span class="math notranslate nohighlight">\(f(x)=\dfrac{400}{1+2.5e^{-0.5x}}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the x range</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Define the logistic function</span>
+<span class="n">f</span> <span class="o">=</span> <span class="mi">400</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># Plot the logistic function</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 400 / (1 + 2.5 * e^(-0.5x))&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the x-axis and y-axis lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># x-axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># y-axis</span>
+
+<span class="c1"># Set plot labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot of the Logistic Function&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0bc22ee01949afae5d339021c296e5d6bb908d44304c7f5376e643ca67b9a26e.png" src="../../_images/0bc22ee01949afae5d339021c296e5d6bb908d44304c7f5376e643ca67b9a26e.png" />
+</div>
+</div>
+<p>Below is the code prompting user to input the constants <span class="math notranslate nohighlight">\(L, a\)</span>, and <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Prompt the user to input the parameters</span>
+<span class="n">L</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value for L: &quot;</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value for a: &quot;</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value for b: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Define the logistic function</span>
+<span class="k">def</span> <span class="nf">logistic_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">L</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># Generate a range of x values for plotting</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Compute the corresponding y values using the logistic function</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">logistic_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Plot the logistic function</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = L / (1 + a * e^(-b * x))&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the x-axis and y-axis lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># x-axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># y-axis</span>
+
+<span class="c1"># Set plot labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Logistic Function&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0c193842ceb36e760d3aad9a3dacac37d092de3a7f35dd23e37b93d1cbbb236e.png" src="../../_images/0c193842ceb36e760d3aad9a3dacac37d092de3a7f35dd23e37b93d1cbbb236e.png" />
+</div>
+</div>
+<p>Properties of  <span class="math notranslate nohighlight">\(f(x)=\dfrac{L}{1+ae^{-bx}}\)</span>. <br>
+For increasing logistic function:</p>
+<ul class="simple">
+<li><p>The function begins concave up then changes to concave down</p></li>
+<li><p><span class="math notranslate nohighlight">\(b&gt;0\)</span></p></li>
+<li><p>Horizontal asymptotes <span class="math notranslate nohighlight">\(y=0\)</span> to the left and <span class="math notranslate nohighlight">\(y=L\)</span> to the right<br></p></li>
+</ul>
+<p>For decreasing logistic function:</p>
+<ul class="simple">
+<li><p>The function begins concave down then changes to concave up</p></li>
+<li><p><span class="math notranslate nohighlight">\(b&lt;0\)</span></p></li>
+<li><p>Horizontal asymptotes <span class="math notranslate nohighlight">\(y=L\)</span> to the left and <span class="math notranslate nohighlight">\(y=0\)</span> to the right<br></p></li>
+</ul>
+<p>Both increasing and decreasing logistic function have exactly one inflection point.<br>
+Without further contextual restriction on the domain, the domain of a logistic function is <span class="math notranslate nohighlight">\((-\infty,\infty)\)</span> and the range is <span class="math notranslate nohighlight">\((0,L)\)</span>.</p>
+<br><h2 style>2.4 Function Operations, Compositions, and Inverse</h2><h4 style>Function Operations</h4><p>Note that not everything can be mathematically operated. Simple example, adding apples and oranges can’t be equal apples or oranges. If given contexts, it is important to pay attention on what you are trying to operate. As mentioned in the Introduction section, restricted to this Calculus module, we focus on the values rather than the contexts.<br></p>
+<p>If the input <span class="math notranslate nohighlight">\(x\)</span> of functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are well defined for the functions to be operated, then the following new functions can be constructed:</p>
+<ul class="simple">
+<li><p><strong>function addition:</strong>
+<span class="math notranslate nohighlight">\([f+g](x)=f(x)+g(x)\)</span></p></li>
+<li><p><strong>function subtraction:</strong>
+<span class="math notranslate nohighlight">\([f-g](x)=f(x)-g(x)\)</span></p></li>
+<li><p><strong>function mutiplication:</strong>
+<span class="math notranslate nohighlight">\([f\cdot g](x)=f(x) \cdot g(x)\)</span></p></li>
+<li><p><strong>function division:</strong>
+<span class="math notranslate nohighlight">\(\left[\dfrac{f}{g}\right](x)=\dfrac{f(x)}{g(x)}\)</span>, where <span class="math notranslate nohighlight">\(g(x)\neq 0\)</span></p></li>
+</ul>
+<p><strong>Example</strong> <br>
+Below is a code example that prompts the user to input a value of <span class="math notranslate nohighlight">\(x\)</span>, as well as two functions <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span>. <br>
+It then computes and returns the sum, difference, product, and quotient of the functions at the given value of <span class="math notranslate nohighlight">\(x\)</span>. <br>
+Note that <span class="math notranslate nohighlight">\(g(x)\)</span> cannot be zero at the given input <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_operations</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="c1"># Evaluate f(x) and g(x)</span>
+    <span class="n">f_value</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">g_value</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Compute sum, difference, product, and quotient</span>
+    <span class="n">sum_result</span> <span class="o">=</span> <span class="n">f_value</span> <span class="o">+</span> <span class="n">g_value</span>
+    <span class="n">difference_result</span> <span class="o">=</span> <span class="n">f_value</span> <span class="o">-</span> <span class="n">g_value</span>
+    <span class="n">product_result</span> <span class="o">=</span> <span class="n">f_value</span> <span class="o">*</span> <span class="n">g_value</span>
+    <span class="n">quotient_result</span> <span class="o">=</span> <span class="n">f_value</span> <span class="o">/</span> <span class="n">g_value</span>
+
+    <span class="c1"># Return the results</span>
+    <span class="k">return</span> <span class="n">sum_result</span><span class="p">,</span> <span class="n">difference_result</span><span class="p">,</span> <span class="n">product_result</span><span class="p">,</span> <span class="n">quotient_result</span>
+
+<span class="c1"># Prompt the user to enter the value of x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value of x: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Prompt the user to enter the functions as strings</span>
+<span class="n">f_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the first function (f(x)): &quot;</span><span class="p">)</span>
+<span class="n">g_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the second function (g(x)): &quot;</span><span class="p">)</span>
+
+<span class="c1"># Create the functions from the user input</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;lambda x: &quot;</span> <span class="o">+</span> <span class="n">f_input</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;lambda x: &quot;</span> <span class="o">+</span> <span class="n">g_input</span><span class="p">)</span>
+
+<span class="c1"># Calculate the operations at the given value of x</span>
+<span class="n">sum_result</span><span class="p">,</span> <span class="n">difference_result</span><span class="p">,</span> <span class="n">product_result</span><span class="p">,</span> <span class="n">quotient_result</span> <span class="o">=</span> <span class="n">calculate_operations</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Print the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum:&quot;</span><span class="p">,</span> <span class="n">sum_result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference:&quot;</span><span class="p">,</span> <span class="n">difference_result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Product:&quot;</span><span class="p">,</span> <span class="n">product_result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quotient:&quot;</span><span class="p">,</span> <span class="n">quotient_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sum: 76.0
+Difference: 94.0
+Product: -765.0
+Quotient: -9.444444444444445
+</pre></div>
+</div>
+</div>
+</div>
+<h4 style>Function Compositions</h4><p>The <strong>function composition</strong> of two functions evaluated by plugging one function into the other function. <br>
+The composition operator is <span class="math notranslate nohighlight">\(\circ\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((f\circ g)(x)=f(g(x))\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((g\circ f)(x)=g(f(x))\)</span></p></li>
+</ul>
+<p><strong>Example</strong>
+Given <span class="math notranslate nohighlight">\(f(x)=3x^2+10\)</span> and <span class="math notranslate nohighlight">\(g(x)=1-2x\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((f\circ g)(x)=f(g(x))=f(1-2x)=3(1-2x)^2+10\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((g\circ f)(x)=g(f(x))=g\left(3x^2+10\right)=1-2\left(3x^2+10\right)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((g\circ g)(x)=g(g(x))=g(1-2x)=1-2\left(1-2x\right)\)</span></p></li>
+</ul>
+<p>To create a composition function of two user functions at a certain input value, you can prompt the user to enter the functions as strings and dynamically evaluate and compose them.<br>
+For <span class="math notranslate nohighlight">\((f\circ g)(x)\)</span> from above example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compose_functions</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">composed_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">composed_function</span>
+
+<span class="c1"># Prompt the user to enter the functions as strings</span>
+<span class="n">f_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the first function: &quot;</span><span class="p">)</span>
+<span class="n">g_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the second function: &quot;</span><span class="p">)</span>
+
+<span class="c1"># Create the functions from the user input</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;lambda x: &quot;</span> <span class="o">+</span> <span class="n">f_input</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;lambda x: &quot;</span> <span class="o">+</span> <span class="n">g_input</span><span class="p">)</span>
+
+<span class="c1"># Create the composition function</span>
+<span class="n">composed</span> <span class="o">=</span> <span class="n">compose_functions</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+
+<span class="c1"># Prompt the user to enter an input value</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the input value: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Compute the composition of the user input functions</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">composed</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result: 202.0
+</pre></div>
+</div>
+</div>
+</div>
+<h4 style>Inverse Functions</h4><p>Given a one-to-one function, a new function can sometimes be created by reversing the input and output of the original function. This reversed function is called an <strong>inverse function</strong>. <Br>
+The inverse function of a one-to-one function <span class="math notranslate nohighlight">\(f(x)\)</span> is denoted <span class="math notranslate nohighlight">\(f^{-1}(x)\)</span>.<br>
+Composing a function and its inverse will undo what each of the function done to the input <span class="math notranslate nohighlight">\(x\)</span>, hence <span class="math notranslate nohighlight">\(\left(f\circ f^{-1}\right)(x)=x\)</span> and <span class="math notranslate nohighlight">\(\left(f^{-1}\circ f\right)(x)=x\)</span></p>
+<p><strong>Example</strong> <br>
+Given <span class="math notranslate nohighlight">\(f(x)=2x+3\)</span>. What <span class="math notranslate nohighlight">\(f\)</span> does here is first multiply <span class="math notranslate nohighlight">\(x\)</span> by <span class="math notranslate nohighlight">\(2\)</span>, then adding the result by <span class="math notranslate nohighlight">\(3\)</span>.<br>
+To reverse what <span class="math notranslate nohighlight">\(f\)</span> does, we took the reverse of the action backward. Reverse of “add <span class="math notranslate nohighlight">\(3\)</span>” is “subtract <span class="math notranslate nohighlight">\(3\)</span>”. Reverse of “multiply by <span class="math notranslate nohighlight">\(2\)</span>” is “divide by <span class="math notranslate nohighlight">\(2\)</span>”.<br>
+This mean the inverse function first subtract the input <span class="math notranslate nohighlight">\(x\)</span> by <span class="math notranslate nohighlight">\(3\)</span>, then divide the result by <span class="math notranslate nohighlight">\(2\)</span>. Hence the inverse function is <span class="math notranslate nohighlight">\(f^{-1}(x)=\frac{x-3}{2}\)</span>.<br>
+This can easily checked by confirming that <span class="math notranslate nohighlight">\(\left(f\circ f^{-1}\right)(x)=x\)</span> and <span class="math notranslate nohighlight">\(\left(f^{-1}\circ f\right)(x)=x\)</span>.</p>
+<p>Below is a code example that prompts the user to input a function <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(x=a\)</span>, and then calculates and returns <span class="math notranslate nohighlight">\(f^{-1}(a)\)</span>.<br>
+Note that user must input a one-to-one function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_inverse</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="c1"># Use a binary search algorithm to find the inverse</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1000</span>  <span class="c1"># Starting point for search</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Ending point for search</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="mf">0.0001</span>  <span class="c1"># Precision of the inverse calculation</span>
+
+        <span class="k">while</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">&gt;</span> <span class="n">precision</span><span class="p">:</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span>
+
+        <span class="k">return</span> <span class="nb">round</span><span class="p">((</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># Return the approximate inverse with 4 decimal places</span>
+
+    <span class="k">return</span> <span class="n">inverse</span>
+
+<span class="c1"># Prompt the user to enter the function f(x) as a string</span>
+<span class="n">f_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+
+<span class="c1"># Create the function from the user input</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;lambda x: &quot;</span> <span class="o">+</span> <span class="n">f_input</span><span class="p">)</span>
+
+<span class="c1"># Calculate the inverse function</span>
+<span class="n">inverse_f</span> <span class="o">=</span> <span class="n">find_inverse</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Prompt the user to enter a value for x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a value for x: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Calculate the inverse of f(x) at the given x value</span>
+<span class="n">inverse_result</span> <span class="o">=</span> <span class="n">inverse_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inverse of f(x) at x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;is approximately:&quot;</span><span class="p">,</span> <span class="n">inverse_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inverse of f(x) at x = 5.0 is approximately: 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<br><h2 style>Exercises </h2><ol class="arabic simple">
+<li><p>Find the domain of the following, both manually and using the code.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=\sqrt{x-9}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)=\dfrac{1}{\sqrt{x}-9}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)=\ln(x-9)\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>Given the graph of the function <span class="math notranslate nohighlight">\(f\)</span> below.<br>
+<img src="2Function2.png" style="width:250px; height:auto;"> <br></p>
+<ul class="simple">
+<li><p>Find the intervals on which the graph of <span class="math notranslate nohighlight">\(f\)</span> is increasing or decreasing</p></li>
+<li><p>Find the intervals on which the graph of <span class="math notranslate nohighlight">\(f\)</span> is concave up or concave down</p></li>
+<li><p>Find the inflection points (if any)</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p>Plot the following functions on the interval <span class="math notranslate nohighlight">\([-5,5]\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=4+3x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)=4\cdot 3^x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)=4+3\log(x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)=4\cos(3x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)=\dfrac{1.5}{1+4e^{-2.45x}}\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Given <span class="math notranslate nohighlight">\(f(x)=1+6x^2\)</span> and <span class="math notranslate nohighlight">\(g(x)=6-\sqrt{x}\)</span>. Find each of the following:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\([f+g](1234)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((g\circ f)(2345)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\([f\cdot g](0.3456)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((f\circ f)(4567)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g^{-1}(0.2345)\)</span></p></li>
+</ul>
+</li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/Calculus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Intro</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Optimization_and_Cobbs_Douglas_Production.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Optimization of Cobbs-Douglas Production Functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
