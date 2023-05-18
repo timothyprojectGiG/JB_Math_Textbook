@@ -17,47 +17,26 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-#define the function f(x)
-def f(x): 
-    return x+3
+import sympy as sp
 
-# Ask for user input
-user_input = float(input("Enter input value x =")) 
+# Define the function symbolically
+x = sp.Symbol('x')
+f = 1 / (sp.sqrt(x))
 
-# Call the function with the user input
-output = f(user_input) 
+# Find the domain: denominator not zero AND inside square root must be positive
+domain = sp.solve(sp.denom(f) != 0 and x>0, x)
 
-# Print the output
-print("The output is f(x) =", output) 
+# Print the domain
+print("Domain:", domain)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
-Cell [0;32mIn[1], line 6[0m
-[1;32m      3[0m     [38;5;28;01mreturn[39;00m x[38;5;241m+[39m[38;5;241m3[39m
-[1;32m      5[0m [38;5;66;03m# Ask for user input[39;00m
-[0;32m----> 6[0m user_input [38;5;241m=[39m [38;5;28mfloat[39m([38;5;28;43minput[39;49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mEnter input value x =[39;49m[38;5;124;43m"[39;49m[43m)[49m) 
-[1;32m      8[0m [38;5;66;03m# Call the function with the user input[39;00m
-[1;32m      9[0m output [38;5;241m=[39m f(user_input) 
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[2], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01msympy[39;00m [38;5;28;01mas[39;00m [38;5;21;01msp[39;00m
+[1;32m      3[0m [38;5;66;03m# Define the function symbolically[39;00m
+[1;32m      4[0m x [38;5;241m=[39m sp[38;5;241m.[39mSymbol([38;5;124m'[39m[38;5;124mx[39m[38;5;124m'[39m)
 
-File [0;32m//anaconda3/lib/python3.10/site-packages/ipykernel/kernelbase.py:1172[0m, in [0;36mKernel.raw_input[0;34m(self, prompt)[0m
-[1;32m   1165[0m [38;5;250m[39m[38;5;124;03m"""Forward raw_input to frontends[39;00m
-[1;32m   1166[0m 
-[1;32m   1167[0m [38;5;124;03mRaises[39;00m
-[1;32m   1168[0m [38;5;124;03m------[39;00m
-[1;32m   1169[0m [38;5;124;03mStdinNotImplementedError if active frontend doesn't support stdin.[39;00m
-[1;32m   1170[0m [38;5;124;03m"""[39;00m
-[1;32m   1171[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_allow_stdin:
-[0;32m-> 1172[0m     [38;5;28;01mraise[39;00m StdinNotImplementedError(
-[1;32m   1173[0m         [38;5;124m"[39m[38;5;124mraw_input was called, but this frontend does not support input requests.[39m[38;5;124m"[39m
-[1;32m   1174[0m     )
-[1;32m   1175[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_input_request(
-[1;32m   1176[0m     [38;5;28mstr[39m(prompt),
-[1;32m   1177[0m     [38;5;28mself[39m[38;5;241m.[39m_parent_ident[[38;5;124m"[39m[38;5;124mshell[39m[38;5;124m"[39m],
-[1;32m   1178[0m     [38;5;28mself[39m[38;5;241m.[39mget_parent([38;5;124m"[39m[38;5;124mshell[39m[38;5;124m"[39m),
-[1;32m   1179[0m     password[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
-[1;32m   1180[0m )
-
-[0;31mStdinNotImplementedError[0m: raw_input was called, but this frontend does not support input requests.
-StdinNotImplementedError: raw_input was called, but this frontend does not support input requests.
+[0;31mModuleNotFoundError[0m: No module named 'sympy'
+ModuleNotFoundError: No module named 'sympy'
 
