@@ -1,3 +1,3 @@
 # Statistical Inference
 :::{note}
-Peter Jantsch and Claire Carlson will cover the basics of statistical inference.
+Peter Jantsch and Claire Wagner  will cover the basics of statistical inference.
