@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>7. Probability Distributions and Drive Thrus &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+    <title>4. Optimization and Cobbs-Douglas Production &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
   
@@ -62,11 +62,9 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedCalc/drivethru';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedCalc/cobbs';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Linear Algebra" href="../../Linear.html" />
-    <link rel="prev" title="6. Related Rates with Trig Functions" href="football.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -191,13 +189,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Sam Carlson, Paul Isihara, Ziling Zhong</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="marginal.html">2. Marginal and Average Cost</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">3. Max/Min and Object Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rates.html">5. Related Rates and Volumes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="football.html">6. Related Rates with Trig Functions</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
 <ul class="nav bd-sidenav">
@@ -292,7 +290,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/AppliedCalc/drivethru.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/AppliedCalc/cobbs.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +320,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/Undergrad/AppliedCalc/drivethru.ipynb" target="_blank"
+      <li><a href="../../_sources/Undergrad/AppliedCalc/cobbs.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -402,7 +400,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>7. Probability Distributions and Drive Thrus</h1>
+    <h1>4. Optimization and Cobbs-Douglas Production</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -416,93 +414,72 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="probability-distributions-and-drive-thrus">
-<h1>7. Probability Distributions and Drive Thrus<a class="headerlink" href="#probability-distributions-and-drive-thrus" title="Permalink to this headline">#</a></h1>
-<p>PROBLEM  Suppose you are the owner of a fast food restaurant. Currently there is one drive up lane, but you are considering adding a second drive-up lane.  What factors need to be considered in making a decision whether to add a second drive-up lane?</p>
-<img src="sim1.png" width="100px"> <h4> Introduction </h4>
-A statistical simulation model uses data of customer arrival and ordering times to re-create a scenario and explore options such as adding a second drive thru lane. (For example, see https://blog.promodel.com/2013/07/10/fast-food-drive-thru-2-lanes-faster-than-1/)<p>We can create a very simple simulation using JNB’s object-oriented script capability.</p>
-<p>Calculus is used in  statistically-based simulations since probabilities are represented as areas under curves called probability distributions.</p>
-<p>This lab will focus on the use of uniform (constant) and exponential distributions to model arrival times of customers.</p>
-<h4> Example</h4>
-<p>A computer simulation of 1 versus 2 drive up lanes uses probabilities computed using definite integrals. The probability that some timed event <span class="math notranslate nohighlight">\(X\)</span> occurs between <span class="math notranslate nohighlight">\(t=a\)</span> and <span class="math notranslate nohighlight">\(t=b\)</span> is given by</p>
-<p><span class="math notranslate nohighlight">\(prob(a\le X \le b) =\int_a^b f(t)\, dt\)</span></p>
-<p>Example 1 Suppose the time to place an  order is given by U(15,30)=<span class="math notranslate nohighlight">\(\frac{1}{15}\)</span> meaning there is equal likelihood that the time will be between 15 and 30 seconds. Find the probability that the length of the next order is between 15 and 25 seconds.</p>
-<p>Solution: probability=<span class="math notranslate nohighlight">\(\int_{15}^{25} f(t) dt = \int_{15}^{25} \frac{1}{15} dt = \frac{t}{15}\mid_{15}^{25}=\frac{25}{15}-\frac{15}{15}=\frac{10}{15}=\frac{2}{3}. \)</span></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="optimization-and-cobbs-douglas-production">
+<h1>4. Optimization and Cobbs-Douglas Production<a class="headerlink" href="#optimization-and-cobbs-douglas-production" title="Permalink to this headline">#</a></h1>
+<p>In this lab we will consider two optimization problems related to a Cobbs-Douglas production function <span class="math notranslate nohighlight">\(Q=AL^aK^{1-a}\)</span> where <span class="math notranslate nohighlight">\(Q\)</span> is units of production, <span class="math notranslate nohighlight">\(L=\)</span> units of labor and <span class="math notranslate nohighlight">\(K=\)</span> units of capital.  We also use a total cost function of the form <span class="math notranslate nohighlight">\(TC=FC+c_LL+c_KK\)</span> where <span class="math notranslate nohighlight">\(FC=\)</span>fixed cost, <span class="math notranslate nohighlight">\(c_L=\)</span> cost per unit of labor and <span class="math notranslate nohighlight">\(c_K=\)</span> cost per unit of capital.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">f</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span><span class="mi">0</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">15</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">14.95</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">y</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Uniform Distribution U(15,30)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mf">.04</span><span class="p">,</span><span class="s1">&#39;Shaded area = 2/3&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mf">.063</span><span class="p">,</span><span class="s1">&#39;y=1/15&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Order Time t (seconds)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Order Time t (seconds)&#39;)
-</pre></div>
 </div>
-<img alt="../../_images/c68e7d1bbe04edfdb2e55c193d8102da94678453cc57f6ed820a20d8cf9fb542.png" src="../../_images/c68e7d1bbe04edfdb2e55c193d8102da94678453cc57f6ed820a20d8cf9fb542.png" />
-</div>
-</div>
-<p>Example 2a) Suppose the time to the next car arriving at the drive up is given by E(1) (i.e. k=1). What is the probability that the next arrival is within 3 minutes.</p>
-<p>Solution.  probability = <span class="math notranslate nohighlight">\(\int_0^3 e^{-t}\,dt= - e^{-t}\mid_0^3= -e^{-3}+e^0=1-e^{-3}\approx .95.\)</span></p>
+<p>Problem 1: By constraining the total cost, we can obtain a formula for <span class="math notranslate nohighlight">\(K\)</span> in terms of <span class="math notranslate nohighlight">\(L\)</span>, in which case <span class="math notranslate nohighlight">\(Q\)</span> becomes a function of <span class="math notranslate nohighlight">\(L\)</span>. A plot of <span class="math notranslate nohighlight">\(Q(L)\)</span> shows there is a maximum value.  The exact coordinates of the maximum can be obtained by setting <span class="math notranslate nohighlight">\(\frac{dQ}{dL}\)</span> equal to zero and solving for <span class="math notranslate nohighlight">\(L\)</span>.</p>
+<p>Example: Plot <span class="math notranslate nohighlight">\(Q=40L^{1/4}K^{3/4}\)</span> under the total cost constraint constraint <span class="math notranslate nohighlight">\(TC=1000 = 100 + 100L + 10K \Rightarrow K=90-10L\)</span>.</p>
+<p>Solution: In this case, <span class="math notranslate nohighlight">\(Q=40L^{.25}(90-10*L)^{.75}\)</span>, whose graph created in the next cell has a maximum value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">f</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">y</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="n">x1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">y1</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Exponential Distribution E(1)=e^(-t)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">.2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Shaded area = .95&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">.6</span><span class="p">,</span><span class="s1">&#39;y=e^(-t)&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t to next arrival (seconds)&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">Q</span><span class="o">=</span><span class="mi">40</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">**</span><span class="mf">.25</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="mi">10</span><span class="o">*</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="mf">.75</span>
+<span class="n">K</span><span class="o">=</span><span class="mi">90</span><span class="o">-</span><span class="mi">10</span><span class="o">*</span><span class="n">L</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;production&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;K=90-10L=units capital&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mf">9.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">1200.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;L=units labor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Q=Production level&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cobbsdouglas.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Time t to next arrival (seconds)&#39;)
+<img alt="../../_images/d77386db3001d1d0e4b193d42b641abcfd10cfe01802ef108b28044f0772909c.png" src="../../_images/d77386db3001d1d0e4b193d42b641abcfd10cfe01802ef108b28044f0772909c.png" />
+</div>
+</div>
+<p>Problem 2: If we set the production level <span class="math notranslate nohighlight">\(Q\)</span> to be a specific value, we can solve for <span class="math notranslate nohighlight">\(K\)</span> in terms of <span class="math notranslate nohighlight">\(L\)</span> and express the total cost function as a function of <span class="math notranslate nohighlight">\(L\)</span> only.  A plot of the total cost function <span class="math notranslate nohighlight">\(TC(L)\)</span> shows it has a minimum value.</p>
+<p>Example: Plot <span class="math notranslate nohighlight">\(TC(L,K)=100+100L+10K\)</span> under the constraint <span class="math notranslate nohighlight">\(Q=40L^{1/4}K^{3/4}=400 \Rightarrow K=\frac{10^{4/3}}{L^{1/3}}\)</span>.</p>
+<p>Solution: In this case <span class="math notranslate nohighlight">\(TC=100+100L+10^{7/3}L^{-1/3}\)</span>, and the graph created in the next cell shows there is a minimum value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">.01</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">TC</span><span class="o">=</span><span class="mi">100</span><span class="o">+</span><span class="mi">100</span><span class="o">*</span><span class="n">L</span><span class="o">+</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="mi">7</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">L</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">TC</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Total cost&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;K=10^(4/3)/L^(1/3)=units capital&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mf">2.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">600.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;L=units labor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;TC=Total Cost&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cobbsdouglas2.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/814123fa5c9af30b930794fd8780d656ff9a93803eeece08fce68809180663c9.png" src="../../_images/814123fa5c9af30b930794fd8780d656ff9a93803eeece08fce68809180663c9.png" />
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/19aaa555a772da2219946b6eb3c7b0f2cea94227281415bf0e2d09aa2f5bac8d.png" src="../../_images/19aaa555a772da2219946b6eb3c7b0f2cea94227281415bf0e2d09aa2f5bac8d.png" />
 </div>
 </div>
-<p>Example 2b) Find the value of <span class="math notranslate nohighlight">\(k\)</span> so that there is a 25% chance (probability=.25) that the next car will arrive within 1 minute.</p>
-<p>Solution  <span class="math notranslate nohighlight">\(\int_0^1 k e^{-kt}\,dt = .25 \Rightarrow - e^{-kt}\mid_0^1=.25 \Rightarrow -e^{-k}+1=.25 \Rightarrow -e^{-k}=-.75\Rightarrow e^{-k}=.75.\)</span> Take <span class="math notranslate nohighlight">\(\ln()\)</span> of both sides, we have <span class="math notranslate nohighlight">\(-k=\ln(.75)\Rightarrow k=-\ln(.75)\approx .29.\)</span></p>
-<p>Example 3a) Using the value of <span class="math notranslate nohighlight">\(k\)</span> given in 2b), find the probability <span class="math notranslate nohighlight">\(F(x)\)</span> that the next car will arrive within <span class="math notranslate nohighlight">\(x\)</span> minutes.</p>
-<p>Solution
-<span class="math notranslate nohighlight">\(F(x)=\int_0^x .29 e^{-.29t}\,dt= -e^{-.29t}\mid_0^x = -e^{-.29x}+1.\)</span> That is <span class="math notranslate nohighlight">\(F(x)=1-e^{-.29x}\)</span></p>
-<p>Example 3b) Use your function in part a) to find the probability that the next car will arrive within 2 minutes.</p>
-<p>Solution<br />
-<span class="math notranslate nohighlight">\(F(2)=1-e^{-.29(2)}=1-e^{-.58}\approx .44\)</span></p>
-<h4> LAB ON THE EXPONENTIAL DISTRIBUTION</H4>
-<p>An important probability function called the exponential distribution has the form</p>
-<div class="math notranslate nohighlight">
-\[f(t) = k e^{-kt}  \hspace{.2in} (t \ge 0 \hspace{.1in} and \hspace{.1in} k&gt;0).\]</div>
-<p>The exponential distribution is used to describe the amount of time until some event occurs such as the time to the next arrival of a car at a drive through window.  More specifically, the probability that the next car arrives somewhere between <span class="math notranslate nohighlight">\(t=a\)</span> and <span class="math notranslate nohighlight">\(t=b\)</span> minutes is given by the definite integral</p>
-<div class="math notranslate nohighlight">
-\[
-Prob(a\le t \le b) = \int_a^b f(t) dt  =  \int_a^b k e^{-kt}  \hspace{.05in} dt.\]</div>
-<ol class="arabic simple">
-<li><p>Suppose <span class="math notranslate nohighlight">\(k=1\)</span>.  Find the probability that the next car will arrive at the drive through within 2 minutes.</p></li>
-<li><p>Using <span class="math notranslate nohighlight">\(k=1\)</span>, show that the probability that the next car will arrive between 0 and <span class="math notranslate nohighlight">\(\infty\)</span> minutes is equal to 1 (i.e. there is a 100% chance another car will arrive some time)</p></li>
-<li><p>Find the value of <span class="math notranslate nohighlight">\(k\)</span> such that there is a 50% chance (i.e. probability = .5) that the next car will arrive in one minute.</p></li>
-<li><p>Using your answer to problem 3, find a function <span class="math notranslate nohighlight">\(F(x)\)</span> which gives the probability that the next car will arrive within <span class="math notranslate nohighlight">\(x\)</span> minutes.
-(In general, given a probability distribution function <span class="math notranslate nohighlight">\(f(t)\)</span> defined on an interval <span class="math notranslate nohighlight">\(a\le x \le b\)</span>, the cumulative distribution function <span class="math notranslate nohighlight">\(F(x)\)</span> is obtained by the definite integral <span class="math notranslate nohighlight">\(\int_a^x f(t) \hspace{.1in} dt\)</span>).</p></li>
-<li><p>se your answer to d) to find the probability that the next car will arrive within 3 minutes.</p></li>
+<h3>Exercise</h3>
+ 1) (Maximize Production given Total Cost)  Consider the Cobb-Douglas  production function $Q=2  L^{.4} K^{.6}$. Suppose the labor input cost is $c_L=\$10$ per unit and the capital input cost is $c_K =\$20$  per unit.  Suppose further that there is a \$20 fixed cost and the firm decides it will limit the total cost to \$3,040. Find the maximum production.<ol class="arabic simple" start="2">
+<li><p>(Minimizing Total Cost given the Production Level)  Consider the Cobb-Douglas  production function <span class="math notranslate nohighlight">\(Q=2  L^{.4} K^{.6}\)</span> and the same cost function in problem 1.  Minimize the total cost if 130 units are produced.</p></li>
 </ol>
 </section>
 
@@ -537,24 +514,6 @@ Prob(a\le t \le b) = \int_a^b f(t) dt  =  \int_a^b k e^{-kt}  \hspace{.05in} dt.
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="football.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">6. Related Rates with Trig Functions</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../../Linear.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Linear Algebra</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
