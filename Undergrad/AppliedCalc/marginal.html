@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Marginal and Average Cost &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedCalc/marginal';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Related Rates with Trig Functions" href="football.html" />
+    <link rel="prev" title="1. Linear Systems and the 2 Commodity Model" href="twocommodity.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">INTRODUCTION TO PYTHON Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE OUTREACH Paul Isihara, Sam Carlson, Ziling Zhong, Martha Van Zee</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Demo.html">After School Program Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/Random_Numbers_and_Pi.html">Random Number Approximation of Pi</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILTY MODELS Laura Gross,  Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Sam Carlson, Paul Isihara, Ziling Zhong</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="football.html">Related Rates with Trig Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Optimization_and_Cobbs_Douglas_Production.html">Optimization of Cobbs-Douglas Production Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drivethru.html">Probability Distributions and Drive Thrus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/OLS_LINEAR_FITTING.html">Ordinary Least Squares Linear Fitting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Paul Isihara, Lucy Henneker, Andrew Luhmann</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/AppliedCalc/marginal.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Undergrad/AppliedCalc/marginal.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2. Marginal and Average Cost</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="marginal-and-average-cost">
+<h1>2. Marginal and Average Cost<a class="headerlink" href="#marginal-and-average-cost" title="Permalink to this headline">#</a></h1>
+<h4> Derivative Rules</h4>
+ There are rules to quickly finding the derivative of polynomials and functions with powers.
+<ul>
+    <li> If $f(x)=mx+b$, $f'(x)=m.$ </li>
+    <li>If $f(x)=kx^n,$ $f'(x)=knx^{n-1}.$ </li>
+    <li> If $f(x)=a_0+a_1x+a_2x^2+a_3x^3$, then $f'(x)=a_1+2a_2x + 3a_3 x^2$. (Note that the derivative of the constant term by itself is 0. The same pattern continues for higher power). </li></ul>
+<p>EXAMPLE: If <span class="math notranslate nohighlight">\(f(x)=2x^3 -5x^2+2x + 10\)</span>, then <span class="math notranslate nohighlight">\(f'(x)=6x^2-10x+2.\)</span></p>
+<p>EXAMPLE:  If <span class="math notranslate nohighlight">\(f(x)=\frac{2}{x^{.5}}=2x^{-.5}\)</span>, then <span class="math notranslate nohighlight">\(f'(x)=2(-.5)x^{-1.5}=\frac{-1}{x^{1.5}}\)</span></p>
+<h4> Marginal Functions</h4>
+<p>The term ``marginal’’ is used to mean derivative.</p>
+<p>EXAMPLE:
+Let TC be total cost and Q be the number of units produced.  If <span class="math notranslate nohighlight">\(TC(Q)= 50+10 Q^{3/2}\)</span>, then the marginal cost is <span class="math notranslate nohighlight">\(MC(Q)=TC'(Q)=10(3/2) Q^{1/2}=15\sqrt{Q}\)</span></p>
+<p>Note: Since the derivative of a function <span class="math notranslate nohighlight">\(f(x)\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[ f'(x)=\lim_{h\rightarrow 0} \frac{f(x+h)-f(x)}{h},\]</div>
+<p>if we choose <span class="math notranslate nohighlight">\(h=1\)</span>, then we get an approximation</p>
+<div class="math notranslate nohighlight">
+\[ f'(x) \approx  f(x+1)-f(x).\]</div>
+<p>Thus, marginal functions can be used to approximate the difference between the value of the original function at <span class="math notranslate nohighlight">\(x+1\)</span> and the value of the original function at <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>For the total cost function, the derivative <span class="math notranslate nohighlight">\(MC(Q)=TC'(Q)\)</span> approximates the difference in total cost producing <span class="math notranslate nohighlight">\(Q+1\)</span> units and producing <span class="math notranslate nohighlight">\(Q\)</span> units. In other words, the marginal total cost approximates the the total cost to produce 1 more unit if the current production level is <span class="math notranslate nohighlight">\(Q\)</span>.</p>
+<h4> Fixed Cost</h4>
+<p>The term ``fixed cost’’ means the cost incurred when <span class="math notranslate nohighlight">\(Q=0\)</span> units are produced.</p>
+<p>EXAMPLE: Let <span class="math notranslate nohighlight">\(TC(Q)=50+10 Q^{3/2}. \)</span> Then the fixed cost is <span class="math notranslate nohighlight">\(TC(0)=50.\)</span></p>
+<h4> Demand Function </h4>
+<p>A demand function <span class="math notranslate nohighlight">\(P(Q)\)</span> gives the price <span class="math notranslate nohighlight">\(P\)</span> per unit when selling <span class="math notranslate nohighlight">\(Q\)</span> units. The total revenue <span class="math notranslate nohighlight">\(TR\)</span> generated by selling <span class="math notranslate nohighlight">\(Q\)</span> units    is therefore <span class="math notranslate nohighlight">\(TR=Q * P(Q).\)</span></p>
+<p>Example 1. Find the total revenue (TR) and marginal revenue (MR) if the demand function is <span class="math notranslate nohighlight">\(P=100-5\sqrt{Q}\)</span>.</p>
+<p>Answer: <span class="math notranslate nohighlight">\(TR=Q(100-5\sqrt{Q})=100Q - 5Q\sqrt{Q}=100Q-5Q(Q^{.5})=100Q-5Q^{1.5}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(MR=TR'=100-5(1.5)Q^{.5}=100-7.5Q^{.5}.\)</span></p>
+<p>Example 2. Algebra might be needed to find the demand function <span class="math notranslate nohighlight">\(P(Q)\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(Q=\frac{10}{P^2}\)</span>, then <span class="math notranslate nohighlight">\(P^2=\frac{10}{Q}\Rightarrow P=\frac{\sqrt{10}}{\sqrt{Q}}.\)</span> The total revenue is therefore <span class="math notranslate nohighlight">\(TR= Q P = Q (\frac{\sqrt{10}}{\sqrt{Q}}) = \sqrt{Q} \sqrt{10} = \sqrt{10}Q^{1/2}.\)</span> It follows that the marginal revenue is <span class="math notranslate nohighlight">\(MR=\frac{1}{2}\sqrt{10}Q^{-1/2}= \frac{\sqrt{10}}{2\sqrt{Q}}\)</span>.</p>
+<h4> Average Cost </h4>
+<p>Average cost is equal to total cost divided by number of units produced.</p>
+<p>EXAMPLE.
+If the total cost is <span class="math notranslate nohighlight">\(TC= 10Q^2+ 5Q+10,\)</span> then the average cost is <span class="math notranslate nohighlight">\(AC=\frac{TQ}{Q}=10Q + 5 + \frac{10}{Q}\)</span></p>
+<h4> Graphical Intesections </h4>
+<p>To find a point where the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> intersects the graph of <span class="math notranslate nohighlight">\(g(x)\)</span>, solve the equation <span class="math notranslate nohighlight">\(f(x)=g(x).\)</span> (For our applications we require that <span class="math notranslate nohighlight">\(x\ge 0\)</span>)</p>
+<p>EXAMPLE: Find where <span class="math notranslate nohighlight">\(f(x)=2x^2\)</span> and <span class="math notranslate nohighlight">\(g(x)=3x+2\)</span> intersect.</p>
+<p>Solution. We must solve <span class="math notranslate nohighlight">\(2x^2=3x+2\)</span>. That is <span class="math notranslate nohighlight">\(2x^2-3x-2=0\)</span>.
+To solve <span class="math notranslate nohighlight">\(ax^2+bx+c=0,\)</span> we can use the quadratic formula <span class="math notranslate nohighlight">\(x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}.\)</span>  In our case,
+$<span class="math notranslate nohighlight">\( x=\frac{3\pm\sqrt{9+16}}{4}=\frac{3\pm 5}{4}=2\)</span><span class="math notranslate nohighlight">\(  (we do not use the other root at x= -1/2 since we require \)</span>x\ge 0$).</p>
+<p>The <span class="math notranslate nohighlight">\(y\)</span>-coordinate of the intersection point with <span class="math notranslate nohighlight">\(x=2\)</span> is <span class="math notranslate nohighlight">\(y=f(2)=2(2^2)=8\)</span>.  Note that <span class="math notranslate nohighlight">\(g(2)=3(2)+2=8\)</span> so in fact, the graph of both <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> includes the point <span class="math notranslate nohighlight">\((2,8)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">f</span><span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>  <span class="c1">#first function</span>
+<span class="n">g</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span> <span class="c1"># second function</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;g(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">12.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/edba4165152439570463d53d5ea2c4105729c838335d968ab7b6811396b68f43.png" src="../../_images/edba4165152439570463d53d5ea2c4105729c838335d968ab7b6811396b68f43.png" />
+</div>
+</div>
+<h3> Exercises</h3><ol class="arabic simple">
+<li><p>Consider the total cost function</p></li>
+</ol>
+<p>$<span class="math notranslate nohighlight">\(TC=.5 Q^3 - 3 Q^2+12Q+50.\)</span><span class="math notranslate nohighlight">\(  Find and graph the average total cost \)</span>ATC<span class="math notranslate nohighlight">\( and the marginal cost \)</span>MC<span class="math notranslate nohighlight">\(. Use the graph to determine where \)</span>ATC=MQ<span class="math notranslate nohighlight">\(. Then show that  \)</span>ATC$ has a minimum value at the point of intersection. (That is, show that ATC=0 at the point of intersection).</p>
+<ol class="arabic simple" start="2">
+<li><p>Repeat problem 1 using the total cost function</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[TC(Q)=-10Q^3+128Q^2+3Q.\]</div>
+<p>(In this case, the average total cost has a maximum rather than minimum value at the point of intersection.)</p>
+<p>3*) The quotient rule says that</p>
+<p>$<span class="math notranslate nohighlight">\(\frac{d}{dx} \frac{f(x)}{g(x)} = \frac{g(x) f'(x)-f(x)g'(x)}{(g(x))^2}.\)</span>$.</p>
+<p>Use the quotient rule to prove that the average total cost must have a max or min at the point where it equals the marginal cost.</p>
+<h4>Solutions</h4>
+1) $$ATC=\frac{TC}{Q}=.5 Q^2 - 3Q + 12 + 50/Q $$
+<div class="math notranslate nohighlight">
+\[MC = TC'(Q)= 1.5 Q^2 - 6Q + 12\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ATC</span><span class="o">=</span> <span class="mf">.5</span><span class="o">*</span><span class="n">Q</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">Q</span><span class="o">+</span><span class="mi">12</span><span class="o">+</span><span class="mi">50</span><span class="o">/</span><span class="n">Q</span> <span class="c1">#average total cost</span>
+<span class="n">MC</span><span class="o">=</span><span class="mf">1.5</span><span class="o">*</span><span class="n">Q</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">Q</span><span class="o">+</span><span class="mi">12</span> <span class="c1"># second function</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span><span class="n">ATC</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;ATC&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span><span class="n">MC</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;MC&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">60.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f42ac0e89ad4a8b3ddf98857dcb19de8402d342e817792afba16a4b9b9896775.png" src="../../_images/f42ac0e89ad4a8b3ddf98857dcb19de8402d342e817792afba16a4b9b9896775.png" />
+</div>
+</div>
+<p>From the graph it appears ATC=MC at <span class="math notranslate nohighlight">\(Q=5\)</span>. We can check this:</p>
+<div class="math notranslate nohighlight">
+\[ATC(5)= .5 (5^2)-3(5)+12 + \frac{50}{5}=19.5.\]</div>
+<div class="math notranslate nohighlight">
+\[MC(5)=1.5(5^2)-6(5)+12=19.5.\]</div>
+<p>Finally, note that</p>
+<p>$<span class="math notranslate nohighlight">\(ATC'(Q) = Q - 3 -\frac{50}{Q^2}\)</span>$.</p>
+<p>At <span class="math notranslate nohighlight">\(Q=5\)</span>, <span class="math notranslate nohighlight">\(ATC'(5)= 5 - 3 - \frac{50}{5^2}=0\)</span>.</p>
+<ol class="arabic" start="2">
+<li><div class="math notranslate nohighlight">
+\[ATC=\frac{TC}{Q}=-10 Q^2 +128 Q + 3. \]</div>
+</li>
+</ol>
+<div class="math notranslate nohighlight">
+\[MC = TC'(Q)= -30Q^2+256Q+3.\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ATC</span><span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="o">*</span><span class="n">Q</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">128</span><span class="o">*</span><span class="n">Q</span><span class="o">+</span><span class="mi">12</span><span class="o">+</span><span class="mi">3</span> <span class="c1">#average total cost</span>
+<span class="n">MC</span><span class="o">=-</span><span class="mi">30</span><span class="o">*</span><span class="n">Q</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">256</span><span class="o">*</span><span class="n">Q</span><span class="o">+</span><span class="mi">4</span> <span class="c1"># second function</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span><span class="n">ATC</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;ATC&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span><span class="n">MC</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;MC&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">600.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2d3d36fab4f119124593e14f20ed1a25e3423063f7a164958e8e582ecfd3db27.png" src="../../_images/2d3d36fab4f119124593e14f20ed1a25e3423063f7a164958e8e582ecfd3db27.png" />
+</div>
+</div>
+<p>The graph does not show clearly the value of <span class="math notranslate nohighlight">\(Q\)</span> at the intersection. Note that ATC’(Q)=-20Q+128=0 when Q=6.4.</p>
+<p>We can check that ATC(6.4) = MC(6.4)=412.6.</p>
+<ol class="arabic simple" start="3">
+<li><p>ATC= TC/Q, so by the quotient rule, ATC’(Q)=0  when</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ \frac{Q *  MC - TC}{Q^2}=0.\]</div>
+<p>This occurs when <span class="math notranslate nohighlight">\(Q * MC - TC=0\)</span>, or <span class="math notranslate nohighlight">\(MC = \frac{TC}{Q}=ATC\)</span>.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/AppliedCalc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="twocommodity.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. Linear Systems and the 2 Commodity Model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="football.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Related Rates with Trig Functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
