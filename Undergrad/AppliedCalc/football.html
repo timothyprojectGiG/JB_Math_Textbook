@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>6. Related Rates with Trig Functions &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+    <title>6. Related Rates with Trig Functions and Football &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="7. Probability Distributions and Drive Thrus" href="drivethru.html" />
-    <link rel="prev" title="6. Related Rates with Trig Functions and Football" href="rates.html" />
+    <link rel="prev" title="5. Related Rates and Volumes" href="rates.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -197,8 +197,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="marginal.html">2. Marginal and Average Cost</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">3. Max/Min and Object Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rates.html">6. Related Rates with Trig Functions and Football</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Related Rates with Trig Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Related Rates with Trig Functions and Football</a></li>
 <li class="toctree-l1"><a class="reference internal" href="drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="control.html">8. Normal Distribution and Process Control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ols.html">9. Partial Derivatives and OLS Regression</a></li>
@@ -398,7 +398,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -409,11 +411,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>6. Related Rates with Trig Functions</h1>
+    <h1>6. Related Rates with Trig Functions and Football</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-s-internal-class-modules">Jupyter Notebook’s internal class modules</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -423,65 +433,332 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="related-rates-with-trig-functions">
-<h1>6. Related Rates with Trig Functions<a class="headerlink" href="#related-rates-with-trig-functions" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="related-rates-with-trig-functions-and-football">
+<h1>6. Related Rates with Trig Functions and Football<a class="headerlink" href="#related-rates-with-trig-functions-and-football" title="Permalink to this headline">#</a></h1>
 <p>In this lab, we will solve a related rates problem which involves the use of trig functions.  In particular, we will determine how fast a camera is rotating as it tracks a football player speeding along the sideline to the endzone.</p>
+<p>The following code creates an animation, Football_Animation.gif. Execute the code and then open the .gif file to view the video.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.path</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+<span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="o">%</span><span class="k">matplotlib</span> notebook
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">matplotlib.markers</span> <span class="kn">import</span> <span class="n">MarkerStyle</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">from</span> <span class="nn">matplotlib.transforms</span> <span class="kn">import</span> <span class="n">Affine2D</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span>
+
+<span class="n">frames</span><span class="o">=</span><span class="mi">9</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
+
+<span class="c1">#green background</span>
+    <span class="n">verts</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">),</span>  <span class="c1"># left, bottom</span>
+         <span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>  <span class="c1"># left, top</span>
+         <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>  <span class="c1"># right, top</span>
+         <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">),</span>  <span class="c1"># right, bottom</span>
+         <span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">),</span>  <span class="c1"># ignored</span>
+        <span class="p">]</span>
+    <span class="n">codes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">MOVETO</span><span class="p">,</span><span class="n">Path</span><span class="o">.</span><span class="n">LINETO</span><span class="p">,</span><span class="n">Path</span><span class="o">.</span><span class="n">LINETO</span><span class="p">,</span><span class="n">Path</span><span class="o">.</span><span class="n">LINETO</span><span class="p">,</span><span class="n">Path</span><span class="o">.</span><span class="n">CLOSEPOLY</span><span class="p">,]</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">codes</span><span class="p">)</span>
+    <span class="n">patch</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">PathPatch</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    
+<span class="c1">#endzone</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">7.88</span><span class="p">,</span><span class="o">-</span><span class="mi">20</span><span class="p">),</span><span class="mi">50</span><span class="p">,</span><span class="mf">20.04</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="p">(</span><span class="mf">.0</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.4</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1">#side line</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">6.8</span><span class="p">,</span><span class="o">-</span><span class="mi">20</span><span class="p">),</span><span class="mi">70</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">70</span><span class="p">))</span>
+
+<span class="c1">#Yard Marks</span>
+    <span class="n">yards</span><span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yards</span><span class="p">)):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">8.1</span><span class="p">,</span><span class="n">i</span><span class="p">),</span><span class="mf">.5</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1">#5 &amp; 10</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">8.1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="mi">50</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">8.1</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="mi">50</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1">#Adjacent line to camera</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.3</span><span class="p">,</span><span class="o">-</span><span class="mf">0.1</span><span class="p">),</span><span class="mf">7.68</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1">#Tracking line</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="p">((</span><span class="mi">8</span><span class="o">-</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,((</span><span class="mi">8</span><span class="o">-</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;--y&#39;</span><span class="p">)</span>
+
+<span class="c1">#Bob Hayes</span>
+    <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+    <span class="kn">from</span> <span class="nn">svgpath2mpl</span> <span class="kn">import</span> <span class="n">parse_path</span>
+    <span class="kn">from</span> <span class="nn">svgpathtools</span> <span class="kn">import</span> <span class="n">svg2paths</span>
+    <span class="n">player_path</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="n">svg2paths</span><span class="p">(</span><span class="s1">&#39;bullet_bob.svg&#39;</span><span class="p">)</span>
+    <span class="n">player_marker</span> <span class="o">=</span> <span class="n">parse_path</span><span class="p">(</span><span class="n">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;d&#39;</span><span class="p">])</span>
+    <span class="n">player_marker</span><span class="o">.</span><span class="n">vertices</span> <span class="o">-=</span> <span class="n">player_marker</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">=</span><span class="mf">7.8</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">8.8</span><span class="o">-</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">player_marker</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span><span class="n">color</span><span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    
+<span class="c1">#Camera</span>
+    <span class="n">camera_path</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="n">svg2paths</span><span class="p">(</span><span class="s1">&#39;camera.svg&#39;</span><span class="p">)</span>
+    <span class="n">camera_marker</span> <span class="o">=</span> <span class="n">parse_path</span><span class="p">(</span><span class="n">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;d&#39;</span><span class="p">])</span>
+    <span class="n">camera_marker</span><span class="o">.</span><span class="n">vertices</span> <span class="o">-=</span> <span class="n">camera_marker</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">camera_marker</span> <span class="o">=</span> <span class="n">camera_marker</span><span class="o">.</span><span class="n">transformed</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Affine2D</span><span class="p">()</span><span class="o">.</span><span class="n">rotate_deg</span><span class="p">(</span><span class="mi">45</span><span class="o">-</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">n</span><span class="p">)))</span>
+    <span class="n">camera_marker</span> <span class="o">=</span> <span class="n">camera_marker</span><span class="o">.</span><span class="n">transformed</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Affine2D</span><span class="p">()</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.1</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.01</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="n">camera_marker</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">#Annotations</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Camera&#39;</span><span class="p">,</span>
+                <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xycoords</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+                <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">35</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="c1">#Legend</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance from camera (yds)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance from endzone (yds)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;&quot;Bullet&quot; Bob Hayes Returning a Kick&#39;</span><span class="p">)</span>
+
+<span class="c1">#Save each frame as a .png</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1">#Save as a GIF</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
+    <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;=Image.open(&quot;&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&quot;)&#39;</span><span class="p">)</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+<span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;Football_Animation.gif&#39;</span><span class="p">,</span>
+               <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">append_images</span><span class="o">=</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+               <span class="n">duration</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+               <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">60</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="c1">#Bob Hayes</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="ne">---&gt; </span><span class="mi">60</span>     <span class="kn">from</span> <span class="nn">svgpath2mpl</span> <span class="kn">import</span> <span class="n">parse_path</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="kn">from</span> <span class="nn">svgpathtools</span> <span class="kn">import</span> <span class="n">svg2paths</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="n">player_path</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="n">svg2paths</span><span class="p">(</span><span class="s1">&#39;bullet_bob.svg&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;svgpath2mpl&#39;
+</pre></div>
+</div>
+<img alt="../../_images/fdeee435e1800099334fd71dc55da025dd2157acb342cefc76959c0f06426aae.png" src="../../_images/fdeee435e1800099334fd71dc55da025dd2157acb342cefc76959c0f06426aae.png" />
+</div>
+</div>
+<p>Now the idea of the scenario is how we can use calculus to solve the problem of how fast the camera must rotate to stay pointed at the player. To begin, we need to review some basic info about trig functions.</p>
 <h4> Defintion of Trig Functions</h4>
 The acronym SOH-CAH-TOA is helpful to remember the definitions of the three basic trig functions sine, cosine, and tangent as ratios of sides of a right triangle:
-<ul>
-    <li> $\sin(\theta)=\frac{opposite}{hypotenuse}$</li>
-    <li> $\cos(\theta)=\frac{adjacent}{hypotenuse}$</li>
-    <li> $\tan(\theta)=\frac{opposite}{adjacent}$</li><h4> Derivatives of basic trig functions</h4>
-In the application problem, we will assume that the angle $\theta$ is changing with time $t$.  In this case, the derivatives with respect to time $t$ are given by
-<ul>
-    <li> $\frac{d}{dt}\sin(\theta(t))=\cos(\theta)\frac{d\theta}{dt}$</li>
-    <li> $\frac{d}{dt}\cos(\theta(t))=-\sin(\theta)\frac{d\theta}{dt}$</li>
-   <li> $\frac{d}{dt}\tan(\theta(t))=\sec^2(\theta)\frac{d\theta}{dt}=\frac{\frac{d\theta}{dt}}{\cos^2(\theta)}$</li>
-<h4>Example</h4> Find $d/dt$ $\tan$($t^2$).
-<p>Answer:  <span class="math notranslate nohighlight">\(\frac{2t}{\cos^2(t^2)}\)</span> or <span class="math notranslate nohighlight">\(2t\)</span> <span class="math notranslate nohighlight">\(\sec^2\)</span>(<span class="math notranslate nohighlight">\(t^2\)</span>)</p>
-<p>Explanation: It’s been given that the derivative <span class="math notranslate nohighlight">\(d/dt\)</span> of <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>) is <span class="math notranslate nohighlight">\(\frac{d\theta/dt}{\cos^2(\theta)}\)</span> . Therefore, since <span class="math notranslate nohighlight">\(d\)</span><span class="math notranslate nohighlight">\(\theta\)</span>/<span class="math notranslate nohighlight">\(dt\)</span> is <span class="math notranslate nohighlight">\(2t\)</span>, dividing by <span class="math notranslate nohighlight">\(\cos^2\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>) gives <span class="math notranslate nohighlight">\(\frac{2t}{\cos^2(t^2)}\)</span>  or <span class="math notranslate nohighlight">\(2t\)</span><span class="math notranslate nohighlight">\(\sec^2\)</span>(<span class="math notranslate nohighlight">\(t^2\)</span>).</p>
-<h4>Radian Measure</h4> 
+<p style='text-align:center; font-family: Time New Roman; font-size:1.2em; color:black;'>
+    $\sin(\theta)=\frac{opposite}{hypotenuse} $&emsp;&emsp;&emsp;&emsp;&emsp;  $\cos(\theta)=\frac{adjacent}{hypotenuse}$ &emsp;&emsp;&emsp;&emsp;&emsp;$  \tan(\theta)= \frac{opposite}{adjacent} $
+    </p><h4> Derivatives of basic trig functions</h4>
+The basic derivative formuas are 
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+     $\frac{d}{d\theta} \sin(\theta)=\cos(\theta)$&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   $\frac{d}{d\theta} \cos(\theta)=-\sin(\theta)$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  $ \frac{d}{d\theta} \tan(\theta)=\sec^2(\theta)=\frac{1}{\cos^2(\theta)} $
+<p>In our application problem, we will assume that the angle <span class="math notranslate nohighlight">\(\theta\)</span> is changing with time <span class="math notranslate nohighlight">\(t\)</span>.  In this case, the derivatives with respect to time <span class="math notranslate nohighlight">\(t\)</span> are given by
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+<span class="math notranslate nohighlight">\(\frac{d}{dt}\sin(\theta(t))=\cos(\theta)\frac{d\theta}{dt}\)</span>         <span class="math notranslate nohighlight">\(\frac{d}{dt}\cos(\theta(t))=-\sin(\theta)\frac{d\theta}{dt}\)</span>         <span class="math notranslate nohighlight">\(\frac{d}{dt}\tan(\theta(t))=\sec^2(\theta)\frac{d\theta}{dt}=\frac{d\theta/dt}{\cos^2(\theta)} \)</span></p>
+<h4>Example</h4> 
+<p>Find <span class="math notranslate nohighlight">\(\frac{d}{dt}\)</span> of <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(t^2\)</span>). (Hint: In this case, <span class="math notranslate nohighlight">\(\theta(t)=t^2\)</span>)</p>
+<blockquote>
+<div><p><strong>Answer</strong>:    <span class="math notranslate nohighlight">\(\sec^2(t^2)2t\)</span> or <span class="math notranslate nohighlight">\(\frac{2t}{\cos^2(t^2)}\)</span></p>
+</div></blockquote>
+<p><em>Explanation:</em></p>
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+It's been given that the derivative $d/dt$ of $\tan$($\theta(t)$) is $\sec^2(\theta)\frac{d\theta}{dt}$ . Therefore, since $d\theta/dt$ is $2t$, multiplying by $\sec^2(\theta)\frac{d\theta}{dt}$ gives $\sec^2(t^2)2t$ or more simply,   $\frac{2t}{\cos^2(t^2)}$.<h4>Radian Measure</h4> 
 <p>The above formulas for the derivatives of <span class="math notranslate nohighlight">\(\sin(\theta)\)</span>, <span class="math notranslate nohighlight">\(\cos(\theta))\)</span> and <span class="math notranslate nohighlight">\(\tan(\theta)\)</span> all assume that the angle <span class="math notranslate nohighlight">\(\theta\)</span> is measured in radians.</p>
-<p>Conversion between radians and degrees is possible if we remember that <span class="math notranslate nohighlight">\(\pi\)</span> radians = 180 degrees or <span class="math notranslate nohighlight">\(2\pi\)</span> radians =360 degrees.</p>
+<p>Conversion between radians and degrees is possible if we remember that <span class="math notranslate nohighlight">\(\pi\)</span> radians = 180 degrees or <span class="math notranslate nohighlight">\(2\pi\)</span> radians = 360 degrees.</p>
 <h4> Example:</h4> Convert $\frac{5}{6}$ radians to degrees
-<p>Answer: <span class="math notranslate nohighlight">\(\frac{5}{6}\)</span> <span class="math notranslate nohighlight">\(radians\)</span> * <span class="math notranslate nohighlight">\(\frac{180 degrees}{\pi  radians}\)</span> = <span class="math notranslate nohighlight">\(\frac{150}{\pi}\)</span> degrees</p>
-<p>Explanation: It’s been given that <span class="math notranslate nohighlight">\(\pi\)</span> radians = 180 degrees so <span class="math notranslate nohighlight">\(\frac{180 degrees}{\pi  radians} = 1\)</span> . We can use cross canceling to complete the conversion.</p>
+<blockquote>
+<div><p><strong>Answer</strong>: <span class="math notranslate nohighlight">\(\frac{5}{6}\)</span> <span class="math notranslate nohighlight">\(radians\)</span> x <span class="math notranslate nohighlight">\(\frac{180 degrees}{\pi  radians}\)</span> = <span class="math notranslate nohighlight">\(\frac{150}{\pi}\)</span> degrees</p>
+</div></blockquote>
+<p><em>Explanation:</em></p>
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+It's been given that $\pi$ radians = 180 degrees so $\frac{180 degrees}{\pi  radians} = 1$. We can complete the conversion using cross cancelation method.
+<section id="jupyter-notebook-s-internal-class-modules">
+<h2>Jupyter Notebook’s internal class modules<a class="headerlink" href="#jupyter-notebook-s-internal-class-modules" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">asin</span><span class="p">,</span> <span class="n">acos</span><span class="p">,</span> <span class="n">atan</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">degrees</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can use the imported modules to do calculations within the notebook. For correct syntax, code as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7071067811865475
+</pre></div>
+</div>
+</div>
+</div>
+<p>To convert from radians to degrees, simply type degrees(radian value). This will give you the following value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degrees</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>180.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Furthermore, by default Python returns the input in radians, but you can shortcut the conversion to degrees as such:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degrees</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1">#This asks for the degree conversion of the radian value of arctangent of a right triangle with congruent sides (8/8, 6/6, and so on)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45.0
+</pre></div>
+</div>
+</div>
+</div>
+<h4>Plotting a Triangle using vertex points<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f967cd12d10&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/0f3fa912e4a6170219b8d00ff7bfdf43becb7ef688c7b83a74d90265cb955a1f.png" src="../../_images/0f3fa912e4a6170219b8d00ff7bfdf43becb7ef688c7b83a74d90265cb955a1f.png" />
+</div>
+</div>
+<p>This Triangle is made up of 4 vertices. Its vertices’ points are as follows: plt.plot([ x1, x2, x3, x4 ][ y1, y2, y3, y4 ]). Thus, you can control its vertices by manipultating the appropriate axes variables. However, make sure its first and last vertices are set on the origin, by giving x1, y1 &amp; x4, y4 values of 0:                  [ 0, x2, x3, 0 ][ 0, y2, y3, 0 ].</p>
+<p>(Hint: To keep the adjacent sides of a right triangle on the axes, make sure x2 and y3 = 0. )</p>
 <h3> Football Problem </h3>
 <p>Bob Hayes won the 100 meter dash at the Tokyo ‘64 Olympics equalling the world record of 10.0 seconds.  Hayes went on to be a star wide receiver with the Dallas Cowboys.</p>
 <p>A TV camera is positioned on the goal line and 8 yards from the sideline. The camera stays fixed on Hayes, who is currently on the 8 yard line and sprinting towards the end zone at 10 yards per second.</p>
 <p>Answer the questions below to determine how fast the camera is turning (in degrees per second).</p>
 <ol class="arabic simple">
-<li><p>From the Figure below , give an equation for <span class="math notranslate nohighlight">\(y\)</span> in terms of <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p>From the Figure below , give an equation for <span class="math notranslate nohighlight">\(y\)</span> in terms of <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../../_images/football.png"><img alt="../../_images/football.png" class="align-center" src="../../_images/football.png" style="width: 200px;" /></a>
-<p>Answer: <span class="math notranslate nohighlight">\(y(t)\)</span> = <span class="math notranslate nohighlight">\(8\)</span> <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>)(<span class="math notranslate nohighlight">\(t\)</span>)</p>
-<p>Explanation: We know that <span class="math notranslate nohighlight">\(tangent\)</span> = <span class="math notranslate nohighlight">\(\frac{opposite}{adjacent}\)</span>. In our case, the opposite side is <span class="math notranslate nohighlight">\(y\)</span> and adjacent side is 8, so <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>) =  <span class="math notranslate nohighlight">\(\frac{y}{8}\)</span>. To convert to <span class="math notranslate nohighlight">\(y(t)\)</span>, we multiply on both sides and get <span class="math notranslate nohighlight">\(y(t)\)</span> = <span class="math notranslate nohighlight">\(8\)</span> <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>)</p>
-<p>2a)  What is the physical meaning of <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span> ?</p>
-<p>Answer: The physical meaning of <span class="math notranslate nohighlight">\(dy/dt\)</span> is the speed of Hayes as he is running towards the end line from the side line</p>
+<img src="football.png" alt="Drawing" style="width: 250px;"/><blockquote>
+<div><p><strong>Answer</strong>: <span class="math notranslate nohighlight">\(y(t) = 8 \tan(\theta(t)\)</span>)</p>
+</div></blockquote>
+<p><em>Explanation:</em></p>
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+We know that $tangent$ = $\frac{opposite}{adjacent}$. 
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+In our case, the opposite side is $y$ and adjacent side is 8, so $\tan$($\theta$) =  $\frac{y}{8}$. 
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+To convert to $y(t)$, we multiply on both sides and get $y(t)$ = $8$ $\tan$($\theta$)<p>2a)  What is the physical meaning of <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span> ?</p>
+<blockquote>
+<div><p><strong>Answer</strong>: The physical meaning of <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span> is the speed of Bob Hayes as he is running towards the end line from the side line measured in yds/sec.</p>
+</div></blockquote>
 <p>2b) What is the physical meaning of <span class="math notranslate nohighlight">\(\frac{d\theta}{dt}\)</span> ?</p>
-<p>Answer: The physical meaning of <span class="math notranslate nohighlight">\(d\)</span><span class="math notranslate nohighlight">\(\theta\)</span>/<span class="math notranslate nohighlight">\(dt\)</span> is how fast the camera angle is turning as it keeps pointing at Hayes as he runs towards the goal line.</p>
+<blockquote>
+<div><p><strong>Answer</strong>: The physical meaning of <span class="math notranslate nohighlight">\(\frac{d\theta}{/dt}\)</span> is how fast the camera angle is turning as it keeps pointing at Hayes as he runs towards the goal line.</p>
+</div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>If <span class="math notranslate nohighlight">\(\theta\)</span> is measured in radians, then <span class="math notranslate nohighlight">\(\frac{d}{dt} \tan \theta = \frac{1}{\cos^2\theta} \frac {d\theta}{dt}\)</span>.  Use your answer to problem 1 to find a general relationship between <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span> and <span class="math notranslate nohighlight">\(\frac{d\theta}{dt}\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\theta\)</span> is measured in radians, then <span class="math notranslate nohighlight">\(\frac{d}{dt} \tan(\theta(t)) = \frac{1}{\cos^2\theta} \frac{d\theta}{dt}\)</span>.  Use your answer to problem 1 to find a general relationship between <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span> and <span class="math notranslate nohighlight">\(\frac{d\theta}{dt}\)</span>.</p></li>
 </ol>
-<p>Answer: If <span class="math notranslate nohighlight">\(y\)</span> = <span class="math notranslate nohighlight">\(8\)</span> <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>), then <span class="math notranslate nohighlight">\(dy/dt\)</span>   equals <span class="math notranslate nohighlight">\(8\)</span><span class="math notranslate nohighlight">\(\frac{ d\theta/dt}{\cos^2(\theta)}\)</span></p>
-<p>Explanation: Applying the derivative rule for <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta(t)\)</span>) rule to the equation in question 1.</p>
-<ol class="arabic simple" start="4">
-<li><p>Find <span class="math notranslate nohighlight">\(\frac{d\theta}{dt}\)</span> (in radians per second) at the instant when <span class="math notranslate nohighlight">\(y=8.\)</span> (Hint: <span class="math notranslate nohighlight">\(\cos(\theta)=\frac{adjacent}{hypotenuse}\)</span>.)</p></li>
+<blockquote>
+<div><p><strong>Answer</strong>: If <span class="math notranslate nohighlight">\(y = 8\tan(\theta)\)</span>, then <span class="math notranslate nohighlight">\(dy/dt = 8\frac{ d\theta/dt}{\cos^2(\theta)}\)</span></p>
+</div></blockquote>
+<p><em>Explanation:</em></p>
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+We learn that the derivative of $tan(\theta)$ = $\frac{1}{\cos^2\theta}$ . 
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+Using chain rule, we deduce that the derivative of $tan(\theta(t))= \frac{1}{\cos^2\theta}\frac{d\theta}{dt}$ . 
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+Thus, dy/dt, using the equation in question one in which $y(t) = 8\tan(\theta(t))$, equals $8 \frac{d(\theta)/dt} {\cos^2(\theta)}$<ol class="arabic simple" start="4">
+<li><p>Find <span class="math notranslate nohighlight">\(\frac{d\theta}{dt}\)</span> (in radians per second) at the instant when <span class="math notranslate nohighlight">\(y=8.\)</span> (Hint: <span class="math notranslate nohighlight">\(\cos(\theta)=\frac{adjacent}{hypotenuse}\)</span>).</p></li>
 </ol>
-<p>Answer: <span class="math notranslate nohighlight">\(-\)</span><span class="math notranslate nohighlight">\(\frac{5}{8}\)</span></p>
-<p>Explanation: y = 8 <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>), or <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>) = <span class="math notranslate nohighlight">\(\frac{y}{8}\)</span>. Since <span class="math notranslate nohighlight">\(y = 8\)</span>, then <span class="math notranslate nohighlight">\(\tan\)</span>(<span class="math notranslate nohighlight">\(\theta\)</span>) = 1, which means <span class="math notranslate nohighlight">\(\theta\)</span> is  <span class="math notranslate nohighlight">\(\frac{\pi}{4}\)</span> radians. The formula <span class="math notranslate nohighlight">\(dy/dt\)</span> = <span class="math notranslate nohighlight">\(\frac{d\theta/dt}{\cos^2(\theta)}\)</span> implies that <span class="math notranslate nohighlight">\(d\)</span><span class="math notranslate nohighlight">\(\theta\)</span>/<span class="math notranslate nohighlight">\(dt\)</span> = <span class="math notranslate nohighlight">\(\frac{\cos^2(\theta)*dy/dt}{8}\)</span>. We can plug in <span class="math notranslate nohighlight">\(\theta\)</span> as <span class="math notranslate nohighlight">\(\frac{\pi}{4}\)</span> and <span class="math notranslate nohighlight">\(-10\)</span> for <span class="math notranslate nohighlight">\(dy/dt\)</span>. Then we get <span class="math notranslate nohighlight">\(-\)</span><span class="math notranslate nohighlight">\(\frac{\cos^2 \frac{\pi}{4} *10}{8}\)</span> = <span class="math notranslate nohighlight">\(-\)</span><span class="math notranslate nohighlight">\(\frac{10 * \cos^2 * \frac{\pi}{4}}{8}\)</span> = <span class="math notranslate nohighlight">\(-\)</span> <span class="math notranslate nohighlight">\(\frac{5}{4}\)</span>*<span class="math notranslate nohighlight">\(\cos^2\)</span>(<span class="math notranslate nohighlight">\(\frac{\pi}{4}\)</span>) = <span class="math notranslate nohighlight">\(-\)</span> <span class="math notranslate nohighlight">\(\frac{5}{4}\)</span>  <span class="math notranslate nohighlight">\((\frac{\sqrt 2}{2})^2\)</span> = <span class="math notranslate nohighlight">\(-\)</span> <span class="math notranslate nohighlight">\(\frac{5}{4}\)</span> * <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> = <span class="math notranslate nohighlight">\(-\)</span><span class="math notranslate nohighlight">\(\frac{5}{8}\)</span></p>
-<ol class="arabic simple" start="5">
+<blockquote>
+<div><p><strong>Answer</strong>: <span class="math notranslate nohighlight">\(-\)</span><span class="math notranslate nohighlight">\(\frac{5}{8}\)</span></p>
+</div></blockquote>
+<p><em>Explanation:</em></p>
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+y(t) = 8 $\tan(\theta(t))$, or $\tan(\theta(t)) = \frac{y(t)}{8}$.
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+Since $y(t) = 8$, then $\tan(\theta(t)) = 1$, which means $\theta(t)$ is  $\frac{\pi}{4}$ radians .
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+The formula $\frac{dy}{dt} = \frac{\frac{d\theta}{dt}}{\cos^2(\theta)}$ implies that $\frac{d\theta}{dt} = \frac{\cos^2(\theta)\frac{dy}{dt}}{8}$.
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+We can substitute $\theta$ with $\frac{\pi}{4}$ and $\frac{dy}{dt}$ with -10.
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+Then we get: 
+$-\frac{10 \cos^2 (\frac{\pi}{4})}{8} = - \frac{5}{4}\cos^2(\frac{\pi}{4}) = - \frac{5}{4}  (\frac{\sqrt 2}{2})^2 = - \frac{5}{4} * \frac{1}{2} = -\frac{5}{8}$.<ol class="arabic simple" start="5">
 <li><p>Use the fact that 1 radian = <span class="math notranslate nohighlight">\((\frac{180}{\pi})^o\)</span> to express your answer to problem 4 in degrees per second.</p></li>
 </ol>
-<p>Answer: <span class="math notranslate nohighlight">\(-\)</span><span class="math notranslate nohighlight">\(\frac{225}{2\pi}\)</span> degrees per second or around 35.7 degrees per second</p>
-<p>Explanation: Multiply <span class="math notranslate nohighlight">\(-\)</span><span class="math notranslate nohighlight">\(\frac{5 radians}{8 seconds}\)</span> by <span class="math notranslate nohighlight">\(\frac{180 degrees}{\pi radians}
-= -225/(2\pi)\)</span> degrees per second = <span class="math notranslate nohighlight">\(-\)</span>35.7 degrees per second</p>
-<ol class="arabic simple" start="6">
+<blockquote>
+<div><p><strong>Answer</strong>: <span class="math notranslate nohighlight">\(-\)</span><span class="math notranslate nohighlight">\(\frac{225}{2\pi}\)</span> degrees per second or around 35.8 degrees per second.</p>
+</div></blockquote>
+<p><em>Explanation:</em></p>
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+    Multiply $-\frac{5}{8}\frac{ radians}{ second}$ by $\frac{180 degrees}{\pi radians}
+= \frac{225 degrees}{2\pi seconds}$ = $-$35.8 degrees per second.<ol class="arabic simple" start="6">
 <li><p>Let <span class="math notranslate nohighlight">\(R\)</span> be your answer to problem 5.  If the camera revolves at the constant rate of <span class="math notranslate nohighlight">\(R\)</span> degrees per second, how many seconds would it take to make one <span class="math notranslate nohighlight">\(360^o\)</span> revolution?</p></li>
 </ol>
-<p>Answer: Around 10 seconds</p>
-<p>Explanation: Using cross canceling unit method, <span class="math notranslate nohighlight">\(\frac{360 degrees}{R \frac{degrees}{second}}\)</span> cancels degrees and gives us seconds. 360/35.7 = 10.09 seconds.</p>
-<h3>Exercise</h3></section>
+<blockquote>
+<div><p><strong>Answer</strong>: It will take the camera approximately 10 seconds to make a full revolution.</p>
+</div></blockquote>
+<p><em>Explanation:</em></p>
+<p style='text-align:center; font-family: Time New Roman; font-size:1.em; color:black;'>
+    Using cross canceling unit method, 360 degrees x ${\frac{1\ second}{R\ degrees}},$ we cancel the degrees and we are given seconds: 360/35.8 = 10.04 seconds.<h3>Lab Exercises</h3><ol class="arabic simple">
+<li><p>Find <span class="math notranslate nohighlight">\(\theta\)</span> in degrees if the camera was 3.5 yds from the sidelines.</p></li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>If the camera is rotated .5 radians away from the endzone towards Bob Hayes, what yard line must he be on? (Given he is running at velocity of 10yds/sec again).</p></li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p>Find <span class="math notranslate nohighlight">\(\theta\)</span> in radians when t = 0.4 seconds.</p></li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Find <span class="math notranslate nohighlight">\(\frac{d\theta}{dt}\)</span> in degrees/sec if Bob Hayes had pulled his hamstring and could only run 6 yds/sec at the instant when y=5.</p></li>
+</ol>
+<ol class="arabic simple" start="5">
+<li><p>Find <span class="math notranslate nohighlight">\(\frac{d\theta}{dt}\)</span> in radians/sec of the angle relative from Bob to the camera when y=4 and he was going 9 yds/sec.</p></li>
+</ol>
+<h3> Calculus Exercises </h3>
+<p>Hint: draw pictures to assist you in visualizing the problem and marking necessary measurements.</p>
+<ol class="arabic simple">
+<li><p>A baseball diamond is a square with side length of 90ft. A batter hits the ball and runs toward first base with a speed of 20ft/s. At what rate is his distance from second base decreasing when he is halfway to the first base? At what rate is his angle to second base changing?</p></li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>At 1:00 PM, Jet-ski A is 7 miles east of Jet-ski B. Jet-ski A is moving north at 20 miles/hr while Jet-ski B is moving south 30 miles/h. How fast is the distance between the Jet-skis changing at 3:00 PM?</p></li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p>A boat is pulled into a dock by a rope attached to the bow of the boat and passsing through a pulley on the dock that is 4 ft higher than the bow of the boat. If the rope is pulled in at a rate of 3 ft/s, how fast is the boat approaching the dock when it is 20 ft from the dock?</p></li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Two carts, A &amp; B are connected by a rope 39 ft long that passes over a pulley, point P. Point Q is on the floor 12 ft directly beneath P and between the carts. Cart A is being pulled away at a speed of 2ft/s. How fast is cart B moving toward Q at the instant when cart A is 5 ft from Q.</p></li>
+</ol>
+<ol class="arabic simple" start="5">
+<li><p>Two sides of a triangle have lengths 12 ft and 15 ft. The angel between them is increasing at a rate of 4 degrees/min. How fast is the length of the third side increasing when the angle between the sides of fixed length is 60 degrees?</p></li>
+</ol>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -520,7 +797,7 @@ In the application problem, we will assume that the angle $\theta$ is changing w
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">6. Related Rates with Trig Functions and Football</p>
+        <p class="prev-next-title">5. Related Rates and Volumes</p>
       </div>
     </a>
     <a class="right-next"
@@ -541,6 +818,20 @@ In the application problem, we will assume that the angle $\theta$ is changing w
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-s-internal-class-modules">Jupyter Notebook’s internal class modules</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
