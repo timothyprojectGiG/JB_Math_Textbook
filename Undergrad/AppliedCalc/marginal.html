@@ -60,12 +60,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedCalc/marginal';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Max/Min and Object Design" href="design.html" />
+    <link rel="next" title="3. Max/Min and Object Design" href="design.html" />
     <link rel="prev" title="1. Linear Systems and the 2 Commodity Model" href="twocommodity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -157,10 +155,15 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE Paul Isihara</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED  Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Beginners/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Beginners/numpy.html">2. The Numerical Python (NUMPY) Library</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTRODUCTION TO PYTHON Thomas VanDrunen</span></p>
 <ul class="nav bd-sidenav">
@@ -168,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE OUTREACH Paul Isihara, Sam Carlson, Ziling Zhong, Martha Van Zee</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Demo.html">After School Program Demo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/Random_Numbers_and_Pi.html">Random Number Approximation of Pi</a></li>
@@ -194,10 +198,16 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Marginal and Average Cost</a></li>
-<li class="toctree-l1"><a class="reference internal" href="design.html">Max/Min and Object Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="football.html">Related Rates with Trig Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Calculus/Optimization_and_Cobbs_Douglas_Production.html">Optimization of Cobbs-Douglas Production Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="drivethru.html">Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
 <ul class="nav bd-sidenav">
@@ -416,50 +426,48 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="marginal-and-average-cost">
+  <section id="marginal-and-average-cost">
 <h1>2. Marginal and Average Cost<a class="headerlink" href="#marginal-and-average-cost" title="Permalink to this headline">#</a></h1>
 <h4> Derivative Rules</h4>
  There are rules to quickly finding the derivative of polynomials and functions with powers.
-<p>If <span class="math notranslate nohighlight">\(f(x)=mx+b\)</span>, then <span class="math notranslate nohighlight">\(f'(x)=m.\)</span></p>
-<p>If <span class="math notranslate nohighlight">\(f(x)=kx^n,\)</span> then <span class="math notranslate nohighlight">\(f'(x)=knx^{n-1}.\)</span></p>
-<p>If <span class="math notranslate nohighlight">\(f(x)=a_0+a_1x+a_2x^2+a_3x^3\)</span>, then <span class="math notranslate nohighlight">\(f'(x)=a_1+2a_2x + 3a_3 x^2\)</span>.</p>
+<p>If $f(x)=mx+b$, then $f’(x)=m.$</p>
+<p>If $f(x)=kx^n,$ then $f’(x)=knx^{n-1}.$</p>
+<p>If $f(x)=a_0+a_1x+a_2x^2+a_3x^3$, then $f’(x)=a_1+2a_2x + 3a_3 x^2$.</p>
 <p>(Note that the derivative of the constant term by itself is 0. The same pattern continues for higher power).</p>
-<p>EXAMPLE: If <span class="math notranslate nohighlight">\(f(x)=2x^3 -5x^2+2x + 10\)</span>, then <span class="math notranslate nohighlight">\(f'(x)=6x^2-10x+2.\)</span></p>
-<p>EXAMPLE:  If <span class="math notranslate nohighlight">\(f(x)=\frac{2}{\sqrt{x}}=2x^{-.5}\)</span>, then <span class="math notranslate nohighlight">\(f'(x)=2(-.5)x^{-1.5}=\frac{-1}{x^{1.5}}\)</span></p>
+<p>EXAMPLE: If $f(x)=2x^3 -5x^2+2x + 10$, then $f’(x)=6x^2-10x+2.$</p>
+<p>EXAMPLE:  If $f(x)=\frac{2}{\sqrt{x}}=2x^{-.5}$, then $f’(x)=2(-.5)x^{-1.5}=\frac{-1}{x^{1.5}}$</p>
 <h4> Marginal Functions</h4>
 <p>The term ``marginal’’ is used to mean derivative.</p>
 <p>EXAMPLE:
-Let TC be total cost and Q be the number of units produced.  If <span class="math notranslate nohighlight">\(TC(Q)= 50+10 Q^{3/2}\)</span>, then the marginal cost is <span class="math notranslate nohighlight">\(MC(Q)=TC'(Q)=10(3/2) Q^{1/2}=15\sqrt{Q}\)</span></p>
-<p>Note: Since the derivative of a function <span class="math notranslate nohighlight">\(f(x)\)</span> is given by</p>
-<div class="math notranslate nohighlight">
-\[ f'(x)=\lim_{h\rightarrow 0} \frac{f(x+h)-f(x)}{h},\]</div>
-<p>if we choose <span class="math notranslate nohighlight">\(h=1\)</span>, then we get an approximation</p>
-<div class="math notranslate nohighlight">
-\[ f'(x) \approx  f(x+1)-f(x).\]</div>
-<p>Thus, marginal functions can be used to approximate the difference between the value of the original function at <span class="math notranslate nohighlight">\(x+1\)</span> and the value of the original function at <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p>For the total cost function, the derivative <span class="math notranslate nohighlight">\(MC(Q)=TC'(Q)\)</span> approximates the difference in total cost producing <span class="math notranslate nohighlight">\(Q+1\)</span> units and producing <span class="math notranslate nohighlight">\(Q\)</span> units. In other words, the marginal total cost approximates the the total cost to produce 1 more unit if the current production level is <span class="math notranslate nohighlight">\(Q\)</span>.</p>
+Let TC be total cost and Q be the number of units produced.  If $TC(Q)= 50+10 Q^{3/2}$, then the marginal cost is $MC(Q)=TC’(Q)=10(3/2) Q^{1/2}=15\sqrt{Q}$</p>
+<p>Note: Since the derivative of a function $f(x)$ is given by</p>
+<p>$$ f’(x)=\lim_{h\rightarrow 0} \frac{f(x+h)-f(x)}{h},$$</p>
+<p>if we choose $h=1$, then we get an approximation</p>
+<p>$$ f’(x) \approx  f(x+1)-f(x).$$</p>
+<p>Thus, marginal functions can be used to approximate the difference between the value of the original function at $x+1$ and the value of the original function at $x$.</p>
+<p>For the total cost function, the derivative $MC(Q)=TC’(Q)$ approximates the difference in total cost producing $Q+1$ units and producing $Q$ units. In other words, the marginal total cost approximates the the total cost to produce 1 more unit if the current production level is $Q$.</p>
 <h4> Fixed Cost</h4>
-<p>The term ``fixed cost’’ means the cost incurred when <span class="math notranslate nohighlight">\(Q=0\)</span> units are produced.</p>
-<p>EXAMPLE: Let <span class="math notranslate nohighlight">\(TC(Q)=50+10 Q^{3/2}. \)</span> Then the fixed cost is <span class="math notranslate nohighlight">\(TC(0)=50.\)</span></p>
+<p>The term ``fixed cost’’ means the cost incurred when $Q=0$ units are produced.</p>
+<p>EXAMPLE: Let $TC(Q)=50+10 Q^{3/2}. $ Then the fixed cost is $TC(0)=50.$</p>
 <h4> Demand Function </h4>
-<p>A demand function <span class="math notranslate nohighlight">\(P(Q)\)</span> gives the price <span class="math notranslate nohighlight">\(P\)</span> per unit when selling <span class="math notranslate nohighlight">\(Q\)</span> units. The total revenue <span class="math notranslate nohighlight">\(TR\)</span> generated by selling <span class="math notranslate nohighlight">\(Q\)</span> units    is therefore <span class="math notranslate nohighlight">\(TR=Q * P(Q).\)</span></p>
-<p>Example 1. Find the total revenue (TR) and marginal revenue (MR) if the demand function is <span class="math notranslate nohighlight">\(P=100-5\sqrt{Q}\)</span>.</p>
-<p>Answer: <span class="math notranslate nohighlight">\(TR=Q(100-5\sqrt{Q})=100Q - 5Q\sqrt{Q}=100Q-5Q(Q^{.5})=100Q-5Q^{1.5}\)</span>.</p>
-<p><span class="math notranslate nohighlight">\(MR=TR'=100-5(1.5)Q^{.5}=100-7.5Q^{.5}.\)</span></p>
-<p>Example 2. Algebra might be needed to find the demand function <span class="math notranslate nohighlight">\(P(Q)\)</span>.</p>
-<p>If <span class="math notranslate nohighlight">\(Q=\frac{10}{P^2}\)</span>, then <span class="math notranslate nohighlight">\(P^2=\frac{10}{Q}\Rightarrow P=\frac{\sqrt{10}}{\sqrt{Q}}.\)</span> The total revenue is therefore <span class="math notranslate nohighlight">\(TR= Q P = Q (\frac{\sqrt{10}}{\sqrt{Q}}) = \sqrt{Q} \sqrt{10} = \sqrt{10}Q^{1/2}.\)</span> It follows that the marginal revenue is <span class="math notranslate nohighlight">\(MR=\frac{1}{2}\sqrt{10}Q^{-1/2}= \frac{\sqrt{10}}{2\sqrt{Q}}\)</span>.</p>
+<p>A demand function $P(Q)$ gives the price $P$ per unit when selling $Q$ units. The total revenue $TR$ generated by selling $Q$ units    is therefore $TR=Q * P(Q).$</p>
+<p>Example 1. Find the total revenue (TR) and marginal revenue (MR) if the demand function is $P=100-5\sqrt{Q}$.</p>
+<p>Answer: $TR=Q(100-5\sqrt{Q})=100Q - 5Q\sqrt{Q}=100Q-5Q(Q^{.5})=100Q-5Q^{1.5}$.</p>
+<p>$MR=TR’=100-5(1.5)Q^{.5}=100-7.5Q^{.5}.$</p>
+<p>Example 2. Algebra might be needed to find the demand function $P(Q)$.</p>
+<p>If $Q=\frac{10}{P^2}$, then $P^2=\frac{10}{Q}\Rightarrow P=\frac{\sqrt{10}}{\sqrt{Q}}.$ The total revenue is therefore $TR= Q P = Q (\frac{\sqrt{10}}{\sqrt{Q}}) = \sqrt{Q} \sqrt{10} = \sqrt{10}Q^{1/2}.$ It follows that the marginal revenue is $MR=\frac{1}{2}\sqrt{10}Q^{-1/2}= \frac{\sqrt{10}}{2\sqrt{Q}}$.</p>
 <h4> Average Cost </h4>
 <p>Average cost is equal to total cost divided by number of units produced.</p>
 <p>EXAMPLE.
-If the total cost is <span class="math notranslate nohighlight">\(TC= 10Q^2+ 5Q+10,\)</span> then the average cost is <span class="math notranslate nohighlight">\(AC=\frac{TQ}{Q}=10Q + 5 + \frac{10}{Q}\)</span></p>
+If the total cost is $TC= 10Q^2+ 5Q+10,$ then the average cost is $AC=\frac{TQ}{Q}=10Q + 5 + \frac{10}{Q}$</p>
 <h4> Graphical Intesections </h4>
-<p>To find a point where the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> intersects the graph of <span class="math notranslate nohighlight">\(g(x)\)</span>, solve the equation <span class="math notranslate nohighlight">\(f(x)=g(x).\)</span> (For our applications we require that <span class="math notranslate nohighlight">\(x\ge 0\)</span>)</p>
-<p>EXAMPLE: Find where <span class="math notranslate nohighlight">\(f(x)=2x^2\)</span> and <span class="math notranslate nohighlight">\(g(x)=3x+2\)</span> intersect.</p>
-<p>Solution. We must solve <span class="math notranslate nohighlight">\(2x^2=3x+2\)</span>. That is <span class="math notranslate nohighlight">\(2x^2-3x-2=0\)</span>.
-To solve <span class="math notranslate nohighlight">\(ax^2+bx+c=0,\)</span> we can use the quadratic formula <span class="math notranslate nohighlight">\(x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}.\)</span>  In our case,
-$<span class="math notranslate nohighlight">\( x=\frac{3\pm\sqrt{9+16}}{4}=\frac{3\pm 5}{4}=2\)</span>$</p>
-<p>(We do not use the other root at x= -1/2 since we require <span class="math notranslate nohighlight">\(x\ge 0\)</span>).</p>
-<p>The <span class="math notranslate nohighlight">\(y\)</span>-coordinate of the intersection point with <span class="math notranslate nohighlight">\(x=2\)</span> is <span class="math notranslate nohighlight">\(y=f(2)=2(2^2)=8\)</span>.  Note that <span class="math notranslate nohighlight">\(g(2)=3(2)+2=8\)</span> so in fact, the graph of both <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> includes the point <span class="math notranslate nohighlight">\((2,8)\)</span></p>
+<p>To find a point where the graph of $f(x)$ intersects the graph of $g(x)$, solve the equation $f(x)=g(x).$ (For our applications we require that $x\ge 0$)</p>
+<p>EXAMPLE: Find where $f(x)=2x^2$ and $g(x)=3x+2$ intersect.</p>
+<p>Solution. We must solve $2x^2=3x+2$. That is $2x^2-3x-2=0$.
+To solve $ax^2+bx+c=0,$ we can use the quadratic formula $x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}.$  In our case,
+$$ x=\frac{3\pm\sqrt{9+16}}{4}=\frac{3\pm 5}{4}=2$$</p>
+<p>(We do not use the other root at x= -1/2 since we require $x\ge 0$).</p>
+<p>The $y$-coordinate of the intersection point with $x=2$ is $y=f(2)=2(2^2)=8$.  Note that $g(2)=3(2)+2=8$ so in fact, the graph of both $f(x)$ and $g(x)$ includes the point $(2,8)$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -486,25 +494,20 @@ $<span class="math notranslate nohighlight">\( x=\frac{3\pm\sqrt{9+16}}{4}=\frac
 <h3> Exercises</h3><ol class="arabic simple">
 <li><p>Consider the total cost function</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[TC=.5 Q^3 - 3 Q^2+12Q+50.\]</div>
-<p>Find and graph the average total cost <span class="math notranslate nohighlight">\(ATC\)</span> and the marginal cost <span class="math notranslate nohighlight">\(MC\)</span>. Use the graph to determine where <span class="math notranslate nohighlight">\(ATC=MQ\)</span>. Then show that  <span class="math notranslate nohighlight">\(ATC\)</span> has a minimum value at the point of intersection. (That is, show that ATC=0 at the point of intersection).</p>
+<p>$$TC=.5 Q^3 - 3 Q^2+12Q+50.$$</p>
+<p>Find and graph the average total cost $ATC$ and the marginal cost $MC$. Use the graph to determine where $ATC=MQ$. Then show that  $ATC$ has a minimum value at the point of intersection. (That is, show that ATC=0 at the point of intersection).</p>
 <ol class="arabic simple" start="2">
 <li><p>Repeat problem 1 using the total cost function</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[TC(Q)=-10Q^3+128Q^2+3Q.\]</div>
+<p>$$TC(Q)=-10Q^3+128Q^2+3Q.$$</p>
 <p>(In this case, the average total cost has a maximum rather than minimum value at the point of intersection.)</p>
 <p>3*) The quotient rule says that</p>
-<div class="math notranslate nohighlight">
-\[\frac{d}{dx} \frac{f(x)}{g(x)} = \frac{g(x) f'(x)-f(x)g'(x)}{(g(x))^2}.\]</div>
+<p>$$\frac{d}{dx} \frac{f(x)}{g(x)} = \frac{g(x) f’(x)-f(x)g’(x)}{(g(x))^2}.$$</p>
 <p>Use the quotient rule to prove that the average total cost must have a max or min at the point where it equals the marginal cost.</p>
 <h4>Solutions</h4>
 1) 
-<div class="math notranslate nohighlight">
-\[ATC=\frac{TC}{Q}=.5 Q^2 - 3Q + 12 + 50/Q \]</div>
-<div class="math notranslate nohighlight">
-\[MC = TC'(Q)= 1.5 Q^2 - 6Q + 12\]</div>
+<p>$$ATC=\frac{TC}{Q}=.5 Q^2 - 3Q + 12 + 50/Q $$</p>
+<p>$$MC = TC’(Q)= 1.5 Q^2 - 6Q + 12$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
@@ -525,21 +528,16 @@ $<span class="math notranslate nohighlight">\( x=\frac{3\pm\sqrt{9+16}}{4}=\frac
 <img alt="../../_images/f42ac0e89ad4a8b3ddf98857dcb19de8402d342e817792afba16a4b9b9896775.png" src="../../_images/f42ac0e89ad4a8b3ddf98857dcb19de8402d342e817792afba16a4b9b9896775.png" />
 </div>
 </div>
-<p>From the graph it appears ATC=MC at <span class="math notranslate nohighlight">\(Q=5\)</span>. We can check this:</p>
-<div class="math notranslate nohighlight">
-\[ATC(5)= .5 (5^2)-3(5)+12 + \frac{50}{5}=19.5.\]</div>
-<div class="math notranslate nohighlight">
-\[MC(5)=1.5(5^2)-6(5)+12=19.5.\]</div>
+<p>From the graph it appears ATC=MC at $Q=5$. We can check this:</p>
+<p>$$ATC(5)= .5 (5^2)-3(5)+12 + \frac{50}{5}=19.5.$$</p>
+<p>$$MC(5)=1.5(5^2)-6(5)+12=19.5.$$</p>
 <p>Finally, note that</p>
-<p>$<span class="math notranslate nohighlight">\(ATC'(Q) = Q - 3 -\frac{50}{Q^2}\)</span>$.</p>
-<p>At <span class="math notranslate nohighlight">\(Q=5\)</span>, <span class="math notranslate nohighlight">\(ATC'(5)= 5 - 3 - \frac{50}{5^2}=0\)</span>.</p>
-<ol class="arabic" start="2">
-<li><div class="math notranslate nohighlight">
-\[ATC=\frac{TC}{Q}=-10 Q^2 +128 Q + 3. \]</div>
-</li>
+<p>$$ATC’(Q) = Q - 3 -\frac{50}{Q^2}$$.</p>
+<p>At $Q=5$, $ATC’(5)= 5 - 3 - \frac{50}{5^2}=0$.</p>
+<ol class="arabic simple" start="2">
+<li><p>$$ATC=\frac{TC}{Q}=-10 Q^2 +128 Q + 3. $$</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[MC = TC'(Q)= -30Q^2+256Q+3.\]</div>
+<p>$$MC = TC’(Q)= -30Q^2+256Q+3.$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
@@ -560,14 +558,13 @@ $<span class="math notranslate nohighlight">\( x=\frac{3\pm\sqrt{9+16}}{4}=\frac
 <img alt="../../_images/2d3d36fab4f119124593e14f20ed1a25e3423063f7a164958e8e582ecfd3db27.png" src="../../_images/2d3d36fab4f119124593e14f20ed1a25e3423063f7a164958e8e582ecfd3db27.png" />
 </div>
 </div>
-<p>The graph does not show clearly the value of <span class="math notranslate nohighlight">\(Q\)</span> at the intersection. Note that ATC’(Q)=-20Q+128=0 when Q=6.4.</p>
+<p>The graph does not show clearly the value of $Q$ at the intersection. Note that ATC’(Q)=-20Q+128=0 when Q=6.4.</p>
 <p>We can check that ATC(6.4) = MC(6.4)=412.6.</p>
 <ol class="arabic simple" start="3">
 <li><p>ATC= TC/Q, so by the quotient rule, ATC’(Q)=0  when</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[ \frac{Q *  MC - TC}{Q^2}=0.\]</div>
-<p>This occurs when <span class="math notranslate nohighlight">\(Q * MC - TC=0\)</span>, or <span class="math notranslate nohighlight">\(MC = \frac{TC}{Q}=ATC\)</span>.</p>
+<p>$$ \frac{Q *  MC - TC}{Q^2}=0.$$</p>
+<p>This occurs when $Q * MC - TC=0$, or $MC = \frac{TC}{Q}=ATC$.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -615,7 +612,7 @@ $<span class="math notranslate nohighlight">\( x=\frac{3\pm\sqrt{9+16}}{4}=\frac
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Max/Min and Object Design</p>
+        <p class="prev-next-title">3. Max/Min and Object Design</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

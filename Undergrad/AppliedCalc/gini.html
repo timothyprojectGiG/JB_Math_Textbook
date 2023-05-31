@@ -60,12 +60,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedCalc/gini';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Linear Algebra" href="../../Linear.html" />
+    <link rel="next" title="11. Integral Test and Income Streams" href="income.html" />
     <link rel="prev" title="9. Partial Derivatives and OLS Regression" href="ols.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -157,10 +155,15 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE Paul Isihara</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED  Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Beginners/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Beginners/numpy.html">2. The Numerical Python (NUMPY) Library</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTRODUCTION TO PYTHON Thomas VanDrunen</span></p>
 <ul class="nav bd-sidenav">
@@ -168,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE OUTREACH Paul Isihara, Sam Carlson, Ziling Zhong, Martha Van Zee</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Demo.html">After School Program Demo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/Random_Numbers_and_Pi.html">Random Number Approximation of Pi</a></li>
@@ -197,11 +201,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="design.html">3. Max/Min and Object Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rates.html">5. Related Rates and Volumes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="football.html">6. Related Rates with Trig Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="football.html">6. Related Rates with Trig Functions and Football</a></li>
 <li class="toctree-l1"><a class="reference internal" href="drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="control.html">8. Normal Distribution and Process Control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ols.html">9. Partial Derivatives and OLS Regression</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
 <ul class="nav bd-sidenav">
@@ -420,19 +426,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="area-between-curves-and-the-gini-index">
+  <section id="area-between-curves-and-the-gini-index">
 <h1>10. Area Between Curves and the Gini Index<a class="headerlink" href="#area-between-curves-and-the-gini-index" title="Permalink to this headline">#</a></h1>
 <p>Areas under curves called probability distributions can be used to represent probabilities.  Another way to use area is to represent inequitable distribution of resources as the area between two curves.</p>
 <h4>Computing Area Between Two Curves</h4>
-<p>Suppose <span class="math notranslate nohighlight">\(f(x)\le g(x)\)</span> on an interval <span class="math notranslate nohighlight">\(a\le x \le b\)</span>.
-Then the area <span class="math notranslate nohighlight">\(A\)</span> between the graph of <span class="math notranslate nohighlight">\(y=f(x)\)</span> and <span class="math notranslate nohighlight">\(y=g(x)\)</span> on the interval <span class="math notranslate nohighlight">\(a\le x \le b\)</span> is given by the definite integral.</p>
-<div class="math notranslate nohighlight">
-\[ A= \int_a^b [g(x)-f(x)]\, dx . \]</div>
+<p>Suppose $f(x)\le g(x)$ on an interval $a\le x \le b$.
+Then the area $A$ between the graph of $y=f(x)$ and $y=g(x)$ on the interval $a\le x \le b$ is given by the definite integral.</p>
+<p>$$ A= \int_a^b [g(x)-f(x)], dx . $$</p>
 <h4> Example </h4>
 Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.$
 <p>Solution.</p>
-<div class="math notranslate nohighlight">
-\[ A = \int_0^1 (x - x^2)\,dx = \frac{x^2}{2}-\frac{x^3}{3}\mid_0^1=\frac{1}{2}-\frac{1}{3} - (0-0) = \frac{1}{6}.\]</div>
+<p>$$ A = \int_0^1 (x - x^2),dx = \frac{x^2}{2}-\frac{x^3}{3}\mid_0^1=\frac{1}{2}-\frac{1}{3} - (0-0) = \frac{1}{6}.$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -510,26 +514,24 @@ Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.
 </div>
 </div>
 <p>The Lorentz curve plotted in red in this case tells us that the lowest paid starter received .06 = 6% of the total starting 5 salary. This is indicated by the red point at (1,.06).  The 2 lowest paid starters received .22 of the salary total. This is indicated by the red point at (2,.22). The 3 lowest paid starters received .44 of the total. This is indicated by the red point at (3,.44). The 4 lowest paid starters received .69 of the total. This is indicated by the red point at (4,.69).  The final point must be (5,1) since the 5 starters account for 100% of the total starting salary.</p>
-<p>Note that the least inequity occurs when the Lorentz curve coincides with the line <span class="math notranslate nohighlight">\(y=x\)</span>. In this care, the area <span class="math notranslate nohighlight">\(A\)</span> between <span class="math notranslate nohighlight">\(y=x\)</span> and the Lorentz curve is equal to sero (<span class="math notranslate nohighlight">\(A=0\)</span>).</p>
-<p>The greatest inequity occurs if  one person  receives everything and the rest nothing. In this case, the area <span class="math notranslate nohighlight">\(A\)</span> between <span class="math notranslate nohighlight">\(y=x\)</span> and the Lorentz curve is one-half (A=1/2).</p>
-<p>The GINI index G.I. measures iniquity as <span class="math notranslate nohighlight">\(G.I.=2A\)</span> so that <span class="math notranslate nohighlight">\(0\le G.I. \le 1\)</span>.</p>
+<p>Note that the least inequity occurs when the Lorentz curve coincides with the line $y=x$. In this care, the area $A$ between $y=x$ and the Lorentz curve is equal to sero ($A=0$).</p>
+<p>The greatest inequity occurs if  one person  receives everything and the rest nothing. In this case, the area $A$ between $y=x$ and the Lorentz curve is one-half (A=1/2).</p>
+<p>The GINI index G.I. measures iniquity as $G.I.=2A$ so that $0\le G.I. \le 1$.</p>
 <p>The larger the value of the GINI index, the greater the inequity.</p>
 <h3> LAB </h3>
-<p>Suppose the Lorentz curve for Profession 1 is <span class="math notranslate nohighlight">\(L_1(x)=x^{1.7}\)</span> and the Lorentz curve for Profession 2 is <span class="math notranslate nohighlight">\(L_2(x)=.8x^2+.2x.\)</span></p>
+<p>Suppose the Lorentz curve for Profession 1 is $L_1(x)=x^{1.7}$ and the Lorentz curve for Profession 2 is $L_2(x)=.8x^2+.2x.$</p>
 <ol class="arabic simple">
 <li><p>Compute the GINI index of both profession 1 and profession 2 to determine which has the more even income distribution.</p></li>
 </ol>
 <ol class="arabic simple" start="2">
-<li><p>Plot the Lorentz curve for each profession and shade the area <span class="math notranslate nohighlight">\(A\)</span> between the curve and the line <span class="math notranslate nohighlight">\(y=x\)</span> for each profession.</p></li>
+<li><p>Plot the Lorentz curve for each profession and shade the area $A$ between the curve and the line $y=x$ for each profession.</p></li>
 </ol>
 <h4> Solution</h4>
 <ol class="arabic simple">
 <li></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[GI_1= 2\int_0^1(x-x^{1.7})\,dx = 2(\frac{x^2}{2}-\frac{x^{2.7}}{2.7})\mid_0^1=2(\frac{1}{2}-\frac{1}{2.7})\approx .259. \]</div>
-<div class="math notranslate nohighlight">
-\[GI_2= 2\int_0^1(x-(.8x^2+.2x))\,dx = 2\int_0^1(.8x-.8x^2)\,dx 2(.8)(\frac{x^2}{2}-\frac{x^3}{3})\mid_0^1=1.6(\frac{1}{2}-\frac{1}{3})\approx .27. \]</div>
+<p>$$GI_1= 2\int_0^1(x-x^{1.7}),dx = 2(\frac{x^2}{2}-\frac{x^{2.7}}{2.7})\mid_0^1=2(\frac{1}{2}-\frac{1}{2.7})\approx .259. $$</p>
+<p>$$GI_2= 2\int_0^1(x-(.8x^2+.2x)),dx = 2\int_0^1(.8x-.8x^2),dx 2(.8)(\frac{x^2}{2}-\frac{x^3}{3})\mid_0^1=1.6(\frac{1}{2}-\frac{1}{3})\approx .27. $$</p>
 <p>Profession 1 has a slightly more even salary distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -649,11 +651,11 @@ Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.
       </div>
     </a>
     <a class="right-next"
-       href="../../Linear.html"
+       href="income.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Linear Algebra</p>
+        <p class="prev-next-title">11. Integral Test and Income Streams</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

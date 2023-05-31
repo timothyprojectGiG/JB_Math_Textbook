@@ -60,12 +60,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedCalc/control';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Linear Algebra" href="../../Linear.html" />
+    <link rel="next" title="9. Partial Derivatives and OLS Regression" href="ols.html" />
     <link rel="prev" title="7. Probability Distributions and Drive Thrus" href="drivethru.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -157,10 +155,15 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE Paul Isihara</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED  Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Beginners/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Beginners/numpy.html">2. The Numerical Python (NUMPY) Library</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTRODUCTION TO PYTHON Thomas VanDrunen</span></p>
 <ul class="nav bd-sidenav">
@@ -168,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE OUTREACH Paul Isihara, Sam Carlson, Ziling Zhong, Martha Van Zee</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Demo.html">After School Program Demo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/Random_Numbers_and_Pi.html">Random Number Approximation of Pi</a></li>
@@ -195,10 +199,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="marginal.html">2. Marginal and Average Cost</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rates.html">5. Related Rates and Volumes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="football.html">6. Related Rates with Trig Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="football.html">6. Related Rates with Trig Functions and Football</a></li>
 <li class="toctree-l1"><a class="reference internal" href="drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
 <ul class="nav bd-sidenav">
@@ -417,42 +426,33 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="normal-distribution-and-process-control">
+  <section id="normal-distribution-and-process-control">
 <h1>8. Normal Distribution and Process Control<a class="headerlink" href="#normal-distribution-and-process-control" title="Permalink to this headline">#</a></h1>
 <p>In this lab we will apply the Normal distribution to statistical process control. The main goal of the latter is to ensure the output of a manufacturing process remains within limits determined by usual random  variation. If a very low probability event occurs, this may be used as a signal that there is a problem with the manufacturing process, in which case the process might be stopped and equipment checked for possible defects.</p>
 <h4>Derivatives of Exponential Functions</h4>
 <p>The normal distribution is given by</p>
-<div class="math notranslate nohighlight">
-\[f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is a constant called the <i>mean</i> and <span class="math notranslate nohighlight">\(\sigma\)</span> is another constant called the <i>standard deviation.</i></p>
+<p>$$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}},$$</p>
+<p>where $\mu$ is a constant called the <i>mean</i> and $\sigma$ is another constant called the <i>standard deviation.</i></p>
 <p>To analyze the normal distribution using calculus, we need the derivative formula</p>
-<div class="math notranslate nohighlight">
-\[\frac{d}{dx} e^{u(x)}= e^{u(x)}u'(x).\]</div>
-<p>For example, let <span class="math notranslate nohighlight">\(f(x) = c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}}\)</span>. Then,</p>
-<div class="math notranslate nohighlight">
-\[f'(x)= c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}} [\frac{-2(x-c_2)}{2c_3^2}]=c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}} [\frac{-(x-c_2)}{c_3^2}]\]</div>
-<p>Note that <span class="math notranslate nohighlight">\(f'(c_2)=0\)</span>.  Since <span class="math notranslate nohighlight">\(f'(x)&gt;0\)</span> (<span class="math notranslate nohighlight">\(f\)</span> is increasing) for all <span class="math notranslate nohighlight">\(x&lt;c_2\)</span> and <span class="math notranslate nohighlight">\(f'(x)&lt;0\)</span> (<span class="math notranslate nohighlight">\(f\)</span> is decreasing) for all <span class="math notranslate nohighlight">\(x&gt;c_2\)</span>, we know <span class="math notranslate nohighlight">\(f(x)\)</span> has an absolute maximum value at <span class="math notranslate nohighlight">\(x=c_2\)</span>.</p>
-<p>We use the product rule to find <span class="math notranslate nohighlight">\(f''(x)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[ f''(x)= c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}} [\frac{-(x-c_2)}{c_3^2}]^2+c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}}(-\frac{1}{c_3^2})\]</div>
-<div class="math notranslate nohighlight">
-\[= c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}}[\frac{(x-c_2)^2}{c_3^4}-\frac{1}{c_3^2}].\]</div>
-<p>To find the <span class="math notranslate nohighlight">\(x\)</span>-coordinates of the two inflection points, set <span class="math notranslate nohighlight">\(f''(x)=0\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\frac{(x-c_2)^2}{c_3^4}-\frac{1}{c_3^2}=0 \Rightarrow\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{(x-c_2)^2}{c_3^4}= \frac{1}{c_3^2}\Rightarrow \]</div>
-<div class="math notranslate nohighlight">
-\[(x-c_2)^2 = c_3^2 \Rightarrow x-c_2= \pm c_3 \Rightarrow\]</div>
-<div class="math notranslate nohighlight">
-\[x=c_2\pm c_3.\]</div>
-<p>The inflection points occur symmetrically about the maximum point at <span class="math notranslate nohighlight">\(x=c_2\)</span>.</p>
+<p>$$\frac{d}{dx} e^{u(x)}= e^{u(x)}u’(x).$$</p>
+<p>For example, let $f(x) = c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}}$. Then,</p>
+<p>$$f’(x)= c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}} [\frac{-2(x-c_2)}{2c_3^2}]=c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}} [\frac{-(x-c_2)}{c_3^2}]$$</p>
+<p>Note that $f’(c_2)=0$.  Since $f’(x)&gt;0$ ($f$ is increasing) for all $x&lt;c_2$ and $f’(x)&lt;0$ ($f$ is decreasing) for all $x&gt;c_2$, we know $f(x)$ has an absolute maximum value at $x=c_2$.</p>
+<p>We use the product rule to find $f’’(x)$:</p>
+<p>$$ f’’(x)= c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}} [\frac{-(x-c_2)}{c_3^2}]^2+c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}}(-\frac{1}{c_3^2})$$</p>
+<p>$$= c_1 e^{-\frac{(x-c_2)^2}{2c_3^2}}[\frac{(x-c_2)^2}{c_3^4}-\frac{1}{c_3^2}].$$</p>
+<p>To find the $x$-coordinates of the two inflection points, set $f’’(x)=0$:</p>
+<p>$$\frac{(x-c_2)^2}{c_3^4}-\frac{1}{c_3^2}=0 \Rightarrow$$</p>
+<p>$$\frac{(x-c_2)^2}{c_3^4}= \frac{1}{c_3^2}\Rightarrow $$</p>
+<p>$$(x-c_2)^2 = c_3^2 \Rightarrow x-c_2= \pm c_3 \Rightarrow$$</p>
+<p>$$x=c_2\pm c_3.$$</p>
+<p>The inflection points occur symmetrically about the maximum point at $x=c_2$.</p>
 <h4> Rule of 68-95-99.7 </h4>
 <p>If data points are normally distributed</p>
 <p>68% of the data will be within 1 standard deviation of the mean</p>
 <p>95% of the data will be within 2 standard deviations of the mean</p>
 <p>99.7% of the data will be within 3 standard deviations of the mean.</p>
-<p>The plot below shows the standard normal distribution with mean <span class="math notranslate nohighlight">\(\mu=0\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma=1\)</span>. The total area under the curve is equal to 1.  The shaded area on the graph below represents the probability that standard normally distributed data will be within 1 standard deviation of the mean.</p>
+<p>The plot below shows the standard normal distribution with mean $\mu=0$ and standard deviation $\sigma=1$. The total area under the curve is equal to 1.  The shaded area on the graph below represents the probability that standard normally distributed data will be within 1 standard deviation of the mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -523,7 +523,7 @@ document.write(`
 </div>
 </div>
 <h4> Lab </h4>
-<p>Suppose a manufacturing process of a certain part is “in control” when a sample is normally distributed with average length <span class="math notranslate nohighlight">\(\mu=1\)</span> inch (mean)  and standard deviation <span class="math notranslate nohighlight">\(\sigma=.01\)</span> inch.</p>
+<p>Suppose a manufacturing process of a certain part is “in control” when a sample is normally distributed with average length $\mu=1$ inch (mean)  and standard deviation $\sigma=.01$ inch.</p>
 <ol class="arabic simple">
 <li><p>Make a sketch of a  normal distribution with this mean and standard deviation, showing the rule of 68,95,99.7.</p></li>
 </ol>
@@ -563,15 +563,14 @@ document.write(`
 </div>
 <p>b) Suppose the process is stopped if the average sample length has a probability of less than .0015 of occurring. Will the process be stopped?  If so, at what point(s)?</p>
 <ol class="arabic simple" start="4">
-<li><p>A normal distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> is given by</p></li>
+<li><p>A normal distribution with mean $\mu$ and standard deviation $\sigma$ is given by</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[ f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the mean and<span class="math notranslate nohighlight">\(\sigma\)</span> the standard deviation <span class="math notranslate nohighlight">\(\sigma&gt;0\)</span></p>
+<p>$$ f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$</p>
+<p>where $\mu$ is the mean and$\sigma$ the standard deviation $\sigma&gt;0$</p>
 <p>a) Use the first and second derivatives to find the exact coordinates of the
 max/min and inflection points of this exponential function.</p>
-<p>b) Sketch the graph for the case <span class="math notranslate nohighlight">\(\mu=1, \sigma=.01\)</span> on the interval <span class="math notranslate nohighlight">\(-3 \le x \le 5\)</span>.</p>
-<p>Reference: Wayworld.Inc tutorial on Statistical Process Control (SPC) (<a class="reference external" href="http://www.wayworld.com/spc/spc.cfm">http://www.wayworld.com/spc/spc.cfm</a>).</p>
+<p>b) Sketch the graph for the case $\mu=1, \sigma=.01$ on the interval $-3 \le x \le 5$.</p>
+<p>Reference: Wayworld.Inc tutorial on Statistical Process Control (SPC) (http://www.wayworld.com/spc/spc.cfm).</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -615,11 +614,11 @@ max/min and inflection points of this exponential function.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../Linear.html"
+       href="ols.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Linear Algebra</p>
+        <p class="prev-next-title">9. Partial Derivatives and OLS Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
