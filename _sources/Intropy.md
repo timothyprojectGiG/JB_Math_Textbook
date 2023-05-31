@@ -1,3 +1,4 @@
-# Intro to Python 
+# Intro to Python
+ 
 :::{note}
-Dr. VanDrunen will give an intro to Python programming.
+Dr. VanDrunen will give a guide to Python programming to help navigate the reader through the remainder of the book.
