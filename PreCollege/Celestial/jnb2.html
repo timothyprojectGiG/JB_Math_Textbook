@@ -1,0 +1,1551 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2 How bad is COVID by Chicago Zipcode &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'PreCollege/Celestial/jnb2';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="After School Program Demo" href="../Demo.html" />
+    <link rel="prev" title="1 Functions Michael Jordan’s Highest Scoring Game" href="jnb1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE OUTREACH Paul Isihara</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jnb1.html">1 Functions Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Demo.html">After School Program Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/Random_Numbers_and_Pi.html">Random Number Approximation of Pi</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Sec4.html">4 Derivatives</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Paul Isihara, Sam Carlson, Ziling Zhong</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/OLS_LINEAR_FITTING.html">Ordinary Least Squares Linear Fitting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Paul Isihara, Lucy Henneker, Andrew Luhmann</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPreCollege/Celestial/jnb2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/PreCollege/Celestial/jnb2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2 How bad is COVID by Chicago Zipcode</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="how-bad-is-covid-by-chicago-zipcode">
+<h1>2 How bad is COVID by Chicago Zipcode<a class="headerlink" href="#how-bad-is-covid-by-chicago-zipcode" title="Permalink to this headline">#</a></h1>
+<p>In this lab we will analyze data imported directly from the Chicago Data Portal</p>
+<p><a class="reference external" href="https://data.cityofchicago.org/">https://data.cityofchicago.org/</a></p>
+<h3> STEP 1</h3>
+Let's read in up to 100,000 rows of COVID data for Chicago from the Chicago Data Portal.<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">rawCOVID</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;https://data.cityofchicago.org/resource/yhhz-zm2v.json?$limit=100000&#39;</span><span class="p">)</span> <span class="c1">#Import data directly from data portal</span>
+<span class="n">rawCOVID</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>zip_code</th>
+      <th>week_number</th>
+      <th>week_start</th>
+      <th>week_end</th>
+      <th>cases_weekly</th>
+      <th>cases_cumulative</th>
+      <th>case_rate_weekly</th>
+      <th>case_rate_cumulative</th>
+      <th>tests_weekly</th>
+      <th>tests_cumulative</th>
+      <th>...</th>
+      <th>death_rate_weekly</th>
+      <th>death_rate_cumulative</th>
+      <th>population</th>
+      <th>row_id</th>
+      <th>zip_code_location</th>
+      <th>:@computed_region_rpca_8um6</th>
+      <th>:@computed_region_vrxf_vc4k</th>
+      <th>:@computed_region_6mkv_f3dw</th>
+      <th>:@computed_region_bdys_3d7i</th>
+      <th>:@computed_region_43wa_7qmu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>60601</td>
+      <td>25</td>
+      <td>2020-06-14T00:00:00.000</td>
+      <td>2020-06-20T00:00:00.000</td>
+      <td>6.0</td>
+      <td>84.0</td>
+      <td>40.9</td>
+      <td>572.4</td>
+      <td>118.0</td>
+      <td>899</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>34.1</td>
+      <td>14675</td>
+      <td>60601-2020-25</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>60601</td>
+      <td>26</td>
+      <td>2020-06-21T00:00:00.000</td>
+      <td>2020-06-27T00:00:00.000</td>
+      <td>4.0</td>
+      <td>88.0</td>
+      <td>27.3</td>
+      <td>599.7</td>
+      <td>175.0</td>
+      <td>1074</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>34.1</td>
+      <td>14675</td>
+      <td>60601-2020-26</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>60601</td>
+      <td>27</td>
+      <td>2020-06-28T00:00:00.000</td>
+      <td>2020-07-04T00:00:00.000</td>
+      <td>4.0</td>
+      <td>92.0</td>
+      <td>27.3</td>
+      <td>626.9</td>
+      <td>162.0</td>
+      <td>1236</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>34.1</td>
+      <td>14675</td>
+      <td>60601-2020-27</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>60601</td>
+      <td>10</td>
+      <td>2021-03-07T00:00:00.000</td>
+      <td>2021-03-13T00:00:00.000</td>
+      <td>17.0</td>
+      <td>945.0</td>
+      <td>115.8</td>
+      <td>6439.5</td>
+      <td>690.0</td>
+      <td>21466</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-10</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>60601</td>
+      <td>11</td>
+      <td>2021-03-14T00:00:00.000</td>
+      <td>2021-03-20T00:00:00.000</td>
+      <td>29.0</td>
+      <td>974.0</td>
+      <td>197.6</td>
+      <td>6637.1</td>
+      <td>978.0</td>
+      <td>22444</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-11</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>60601</td>
+      <td>12</td>
+      <td>2021-03-21T00:00:00.000</td>
+      <td>2021-03-27T00:00:00.000</td>
+      <td>29.0</td>
+      <td>1003.0</td>
+      <td>197.6</td>
+      <td>6834.8</td>
+      <td>616.0</td>
+      <td>23060</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-12</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>60601</td>
+      <td>13</td>
+      <td>2021-03-28T00:00:00.000</td>
+      <td>2021-04-03T00:00:00.000</td>
+      <td>20.0</td>
+      <td>1023.0</td>
+      <td>136.3</td>
+      <td>6971.0</td>
+      <td>865.0</td>
+      <td>23925</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-13</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>60601</td>
+      <td>14</td>
+      <td>2021-04-04T00:00:00.000</td>
+      <td>2021-04-10T00:00:00.000</td>
+      <td>17.0</td>
+      <td>1040.0</td>
+      <td>115.8</td>
+      <td>7086.9</td>
+      <td>800.0</td>
+      <td>24725</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-14</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Unknown</td>
+      <td>1</td>
+      <td>2022-01-02T00:00:00.000</td>
+      <td>2022-01-08T00:00:00.000</td>
+      <td>540.0</td>
+      <td>3313.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4105.0</td>
+      <td>185189</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>Unknown-2022-1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>60601</td>
+      <td>33</td>
+      <td>2021-08-15T00:00:00.000</td>
+      <td>2021-08-21T00:00:00.000</td>
+      <td>18.0</td>
+      <td>1195.0</td>
+      <td>122.7</td>
+      <td>8143.1</td>
+      <td>1236.0</td>
+      <td>36523</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>81.8</td>
+      <td>14675</td>
+      <td>60601-2021-33</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 26 columns</p>
+</div></div></div>
+</div>
+<p>We’ll list the 26 column names</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rawCOVID</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10080, 26)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">rawCOVID</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;zip_code&#39;,
+ &#39;week_number&#39;,
+ &#39;week_start&#39;,
+ &#39;week_end&#39;,
+ &#39;cases_weekly&#39;,
+ &#39;cases_cumulative&#39;,
+ &#39;case_rate_weekly&#39;,
+ &#39;case_rate_cumulative&#39;,
+ &#39;tests_weekly&#39;,
+ &#39;tests_cumulative&#39;,
+ &#39;test_rate_weekly&#39;,
+ &#39;test_rate_cumulative&#39;,
+ &#39;percent_tested_positive_weekly&#39;,
+ &#39;percent_tested_positive_cumulative&#39;,
+ &#39;deaths_weekly&#39;,
+ &#39;deaths_cumulative&#39;,
+ &#39;death_rate_weekly&#39;,
+ &#39;death_rate_cumulative&#39;,
+ &#39;population&#39;,
+ &#39;row_id&#39;,
+ &#39;zip_code_location&#39;,
+ &#39;:@computed_region_rpca_8um6&#39;,
+ &#39;:@computed_region_vrxf_vc4k&#39;,
+ &#39;:@computed_region_6mkv_f3dw&#39;,
+ &#39;:@computed_region_bdys_3d7i&#39;,
+ &#39;:@computed_region_43wa_7qmu&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Q1. .Does case matter when referring to a column name?</p>
+<hr>
+<h3> STEP TWO </h3>
+Let's streamline the data to just 4 columns, drop rows with missing data,  simplify the column names, and then display the first 20 rows.<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">COVID</span><span class="o">=</span><span class="n">rawCOVID</span><span class="p">[[</span><span class="s1">&#39;deaths_cumulative&#39;</span><span class="p">,</span> <span class="s2">&quot;population&quot;</span><span class="p">,</span>  <span class="s1">&#39;tests_cumulative&#39;</span><span class="p">,</span><span class="s1">&#39;zip_code&#39;</span><span class="p">]]</span>
+<span class="n">COVID</span><span class="o">.</span><span class="n">dropna</span>  <span class="c1">#drop rows with missing data</span>
+<span class="n">COVID</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;deaths&quot;</span><span class="p">,</span><span class="s2">&quot;population&quot;</span><span class="p">,</span><span class="s2">&quot;tests&quot;</span><span class="p">,</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span> <span class="c1">#simplify the column names</span>
+<span class="n">COVID</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>deaths</th>
+      <th>population</th>
+      <th>tests</th>
+      <th>zip</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>14675</td>
+      <td>899</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>14675</td>
+      <td>1074</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>14675</td>
+      <td>1236</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>21466</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>22444</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>23060</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>23925</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>24725</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>10</td>
+      <td>0</td>
+      <td>185189</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>12</td>
+      <td>14675</td>
+      <td>36523</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>12</td>
+      <td>14675</td>
+      <td>37650</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>14675</td>
+      <td>38480</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>12</td>
+      <td>14675</td>
+      <td>39197</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>12</td>
+      <td>14675</td>
+      <td>40232</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>18244</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>18865</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>19451</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>20095</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>20776</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0</td>
+      <td>1244</td>
+      <td>1208</td>
+      <td>60602</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Q2. Why is there different information for the same zip code?</p>
+<hr>
+<h3> STEP THREE</h3>
+Let's check how many rows have data in each column</h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">COVID</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deaths        10080
+population    10080
+tests         10080
+zip           10080
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Q3.  How many data rows are there in each column?</p>
+<hr>
+<h3> STEP FOUR</h3>
+Let's find out how many times each zip code appears.<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">COVID</span><span class="p">[</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zip
+60601      168
+Unknown    168
+60639      168
+60640      168
+60641      168
+60642      168
+60643      168
+60644      168
+60646      168
+60647      168
+60651      168
+60652      168
+60653      168
+60655      168
+60656      168
+60657      168
+60659      168
+60660      168
+60707      168
+60666      168
+60614      168
+60827      168
+60626      168
+60638      168
+60617      168
+60645      168
+60654      168
+60608      168
+60661      168
+60637      168
+60634      168
+60636      168
+60616      168
+60602      168
+60603      168
+60604      168
+60607      168
+60605      168
+60606      168
+60609      168
+60610      168
+60611      168
+60612      168
+60613      168
+60615      168
+60618      168
+60633      168
+60619      168
+60620      168
+60621      168
+60622      168
+60623      168
+60624      168
+60625      168
+60628      168
+60629      168
+60630      168
+60631      168
+60632      168
+60649      168
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<h2>STEP FIVE </h2>
+Let's make a copy of the COVID dataframe and display the first 5 rows.<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span><span class="o">=</span><span class="n">COVID</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>deaths</th>
+      <th>population</th>
+      <th>tests</th>
+      <th>zip</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>14675</td>
+      <td>899</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>14675</td>
+      <td>1074</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>14675</td>
+      <td>1236</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>21466</td>
+      <td>60601</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11</td>
+      <td>14675</td>
+      <td>22444</td>
+      <td>60601</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<h2> STEP SIX </h2> 
+<p>Filter data by a specific zip code, for example, ‘60611’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="o">=</span><span class="n">df1</span><span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;zip&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;60611&#39;</span><span class="p">]</span>
+<span class="n">df2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>deaths</th>
+      <th>population</th>
+      <th>tests</th>
+      <th>zip</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>101</th>
+      <td>4</td>
+      <td>32426</td>
+      <td>20743</td>
+      <td>60611</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>5</td>
+      <td>32426</td>
+      <td>22402</td>
+      <td>60611</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>5</td>
+      <td>32426</td>
+      <td>23889</td>
+      <td>60611</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>9</td>
+      <td>32426</td>
+      <td>31113</td>
+      <td>60611</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>10</td>
+      <td>32426</td>
+      <td>32337</td>
+      <td>60611</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="p">[</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zip
+60611    168
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<h2> STEP SEVEN </h2>
+Let's find the largest value in the 'tests' column for zip '60611'.<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;60637&#39;</span><span class="p">]</span> <span class="c1">#get just rows with zip 60611</span>
+<span class="n">numtested</span><span class="o">=</span><span class="n">df2</span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1">#get the largest number for tests</span>
+<span class="n">numtested</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>411154
+</pre></div>
+</div>
+</div>
+</div>
+<p>Question:  How can we find how many deaths due to COVID have occurred in zip ‘60623’?  (Create a new dataframe for 60623 called temp)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span> <span class="o">=</span> <span class="n">COVID</span><span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;60623&#39;</span><span class="p">]</span> <span class="c1">#get just rows with zip 60611</span>
+<span class="n">numdeaths</span><span class="o">=</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;deaths&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1">#get the largest number for tests</span>
+<span class="n">numdeaths</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>334
+</pre></div>
+</div>
+</div>
+</div>
+<p>Question: How can we get the population in 60623?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span> <span class="o">=</span> <span class="n">COVID</span><span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;60623&#39;</span><span class="p">]</span> <span class="c1">#get just rows with zip 60611</span>
+<span class="n">pop</span><span class="o">=</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1">#get the largest number for tests</span>
+<span class="n">pop</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85979
+</pre></div>
+</div>
+</div>
+</div>
+<h3> STEP EIGHT</h3>
+We can instruct the computer to give us the number COVID tests for any Chicago zipcode. </h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MyCOVID</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="nb">zip</span><span class="p">):</span>
+    <span class="n">alreadychecked</span><span class="o">=</span><span class="mi">0</span>  <span class="c1">#eliminate duplication of information</span>
+    <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">COVID</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>  <span class="c1">#go through all the index values</span>
+        <span class="k">if</span> <span class="n">COVID</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">z</span><span class="p">,</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="nb">zip</span> <span class="ow">and</span> <span class="n">alreadychecked</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>    <span class="c1">#found the zip we requested (first-time)</span>
+            <span class="n">alreadychecked</span><span class="o">=</span><span class="mi">1</span>  <span class="c1">#we will only do this once</span>
+            <span class="n">df</span><span class="o">=</span><span class="n">COVID</span><span class="p">[</span><span class="n">COVID</span><span class="p">[</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="nb">zip</span><span class="p">]</span>
+            <span class="n">numtested</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zip code: &quot;</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)</span>  <span class="c1">#print zipcode</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number tested is &quot;</span><span class="p">,</span> <span class="n">numtested</span><span class="p">)</span> <span class="c1">#print number tested</span>
+    <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;Enter a different zip code if you wish.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Q5. Test out the function on zip code ‘60610’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyCOVID</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="s1">&#39;60637&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zip code:  60637
+number tested is  411154
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Enter a different zip code if you wish.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MyCOVID2</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="nb">zip</span><span class="p">):</span>
+    <span class="n">alreadychecked</span><span class="o">=</span><span class="mi">0</span>  <span class="c1">#eliminate duplication of information</span>
+    <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">COVID</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>  <span class="c1">#go through all the index values</span>
+        <span class="k">if</span> <span class="n">COVID</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">z</span><span class="p">,</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="nb">zip</span> <span class="ow">and</span> <span class="n">alreadychecked</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>    <span class="c1">#found the zip we requested (first-time)</span>
+            <span class="n">alreadychecked</span><span class="o">=</span><span class="mi">1</span>  <span class="c1">#we will only do this once</span>
+            <span class="n">df</span><span class="o">=</span><span class="n">COVID</span><span class="p">[</span><span class="n">COVID</span><span class="p">[</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="nb">zip</span><span class="p">]</span>
+            <span class="n">numtested</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">numdeaths</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;deaths&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zip code: &quot;</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)</span>  <span class="c1">#print zipcode</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number tested is &quot;</span><span class="p">,</span> <span class="n">numtested</span><span class="p">)</span> <span class="c1">#print number tested</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of deaths is &quot;</span><span class="p">,</span> <span class="n">numdeaths</span><span class="p">)</span> <span class="c1">#print number tested</span>
+    <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;Enter a different zip code if you wish.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<h3> Assignment </h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyCOVID2</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="s2">&quot;60619&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zip code:  60619
+number tested is  362379
+number of deaths is  239
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Enter a different zip code if you wish.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Q1)  Define a function myCOVID2() which outputs for each given zip code the population, number tested, and number of deaths.</p>
+<p>Q2)  Use your function myCOVID2() to determine the COVID data for each of the following Chicago landmarks:</p>
+<p>a) North Park University (zip  ‘60625’)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># solution to 2a)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) Wheaton in Chicago (zip=‘60637’)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># solution to 2b)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Q3) Why is COVID disproportionately impacting black and brown communities?</p>
+<section id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Permalink to this headline">#</a></h2>
+<p>Q1)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MyCOVID2</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="nb">zip</span><span class="p">):</span>
+    <span class="n">alreadychecked</span><span class="o">=</span><span class="mi">0</span>  <span class="c1">#eliminate duplication of information</span>
+    <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">COVID</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>  <span class="c1">#go through all the index values</span>
+        <span class="k">if</span> <span class="n">COVID</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">z</span><span class="p">,</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="nb">zip</span> <span class="ow">and</span> <span class="n">alreadychecked</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>    <span class="c1">#found the zip we requested (first-time)</span>
+            <span class="n">alreadychecked</span><span class="o">=</span><span class="mi">1</span>  <span class="c1">#we will only do this once</span>
+            <span class="n">df</span><span class="o">=</span><span class="n">COVID</span><span class="p">[</span><span class="n">COVID</span><span class="p">[</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span><span class="o">==</span><span class="nb">zip</span><span class="p">]</span>
+            <span class="n">numtested</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">numdeaths</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;deaths&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zip code: &quot;</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)</span>  <span class="c1">#print zipcode</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number tested is &quot;</span><span class="p">,</span> <span class="n">numtested</span><span class="p">)</span> <span class="c1">#print number tested</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of deaths is &quot;</span><span class="p">,</span> <span class="n">numdeaths</span><span class="p">)</span> <span class="c1">#print number tested</span>
+    <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;Enter a different zip code if you wish.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Q2a)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyCOVID</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="s1">&#39;60625&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zip code:  60625
+number tested is  488120
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Enter a different zip code if you wish.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Q2b)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyCOVID</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="s1">&#39;60637&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zip code:  60637
+number tested is  411154
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Enter a different zip code if you wish.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Q3)</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./PreCollege/Celestial"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="jnb1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1 Functions Michael Jordan’s Highest Scoring Game</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Demo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">After School Program Demo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
