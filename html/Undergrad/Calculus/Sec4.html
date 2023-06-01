@@ -1,0 +1,1328 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4 Derivatives &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Calculus/Sec4';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1. Linear Systems and the 2 Commodity Model" href="../AppliedCalc/twocommodity.html" />
+    <link rel="prev" title="3. Limits, Continuity, and Rates" href="Sec3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb1.html">1 Functions Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Demo.html">After School Program Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/Random_Numbers_and_Pi.html">Random Number Approximation of Pi</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sec3.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4 Derivatives</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Paul Isihara, Sam Carlson, Ziling Zhong</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/OLS_LINEAR_FITTING.html">Ordinary Least Squares Linear Fitting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Paul Isihara, Lucy Henneker, Andrew Luhmann</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/Calculus/Sec4.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Undergrad/Calculus/Sec4.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4 Derivatives</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="derivatives">
+<h1>4 Derivatives<a class="headerlink" href="#derivatives" title="Permalink to this headline">#</a></h1>
+<p>Below is the list of topics that are covered in this section:</p>
+<ul class="simple">
+<li><p>Derivatives and Derivative Notations</p></li>
+<li><p>Properties, Formulas, and Rules</p></li>
+<li><p>Derivative Graphs</p></li>
+<li><p>Extrema</p></li>
+<li><p>The Mean Value Theorem</p></li>
+<li><p>Linearization</p></li>
+<li><p>Implicit Differentiation</p></li>
+</ul>
+<h2 style>4.1 Derivatives and Derivative Notations</h2><p><strong>Derivative</strong> shows the sensitivity of change of a function’s output when the input changes. <br>
+From the previous section, this is the same of what being measured by the instantaneous rate of change (RoC), which is the slope of the tangent line at a certain point. <br>
+One notation of the derivative of the function <span class="math notranslate nohighlight">\(f(x)\)</span> is <span class="math notranslate nohighlight">\(f\,'(x)\)</span>, read “<span class="math notranslate nohighlight">\(f\)</span> prime of <span class="math notranslate nohighlight">\(x\)</span>”.<br>
+Hence, the derivative of the function <span class="math notranslate nohighlight">\(f(x)\)</span> at the point <span class="math notranslate nohighlight">\(x=a\)</span> is <span class="math notranslate nohighlight">\(f\,'(a)=\lim\limits_{h\to 0}\dfrac{f(a+h)-f(a)}{h}\)</span>.</p>
+<p>For the function <span class="math notranslate nohighlight">\(f(x)\)</span>, the <strong>derivative of <span class="math notranslate nohighlight">\(\boldsymbol{f(x)}\)</span> with respect to <span class="math notranslate nohighlight">\(x\)</span></strong>, or, some say the <strong>limit definition of the derivative of <span class="math notranslate nohighlight">\(\boldsymbol{f(x)}\)</span></strong>, is defined as</p>
+<div class="math notranslate nohighlight">
+\[f\,'(x)=\lim\limits_{h\to 0}\dfrac{f(x+h)-f(x)}{h}\]</div>
+<p>If derivative <span class="math notranslate nohighlight">\(f\,'(x)\)</span> exists at all point in the interval <span class="math notranslate nohighlight">\((a,b)\)</span>, then <span class="math notranslate nohighlight">\(f(x)\)</span> is said to be <strong>differentiable</strong> in <span class="math notranslate nohighlight">\((a,b)\)</span>.</p>
+<p><strong>Example</strong> <br>
+Find the derivative of <span class="math notranslate nohighlight">\(f(x)=5x^2-2x\)</span> using the definition of the derivative. <br>
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-90178e65-d19c-4cdb-a7ed-fcdf3d3b35e8">
+<span class="eqno">(4)<a class="headerlink" href="#equation-90178e65-d19c-4cdb-a7ed-fcdf3d3b35e8" title="Permalink to this equation">#</a></span>\[\begin{align}
+f\,'(x) 
+&amp;= \lim\limits_{h\to 0}\dfrac{f(x+h)-f(x)}{h}\\
+&amp;= \lim\limits_{h\to 0}\dfrac{\left[5(x+h)^2-2(x+h)\right]-\left[5x^2-2x\right]}{h}\\
+&amp;= \lim\limits_{h\to 0}\dfrac{\left[5\left(x^2+2xh+h^2\right)-2(x+h)\right]-\left[5x^2-2x\right]}{h}\\
+&amp;= \lim\limits_{h\to 0}\dfrac{5x^2+10xh+5h^2-2x-2h-5x^2+2x}{h}\\
+&amp;= \lim\limits_{h\to 0}\dfrac{10xh+5h^2-2h}{h}\\
+&amp;= \lim\limits_{h\to 0}\dfrac{h\left(10x+5h-2\right)}{h}\\
+&amp;= \lim\limits_{h\to 0} \; (10x+5h-2)\\
+&amp;= 10x+5(0)-2 = 10x-2
+\end{align}\]</div>
+<p>$$</p>
+<p>The notation <span class="math notranslate nohighlight">\(f\,'(x)\)</span> is the <strong>Lagrange’s</strong> notation for derivative. <br>
+The derivative of <span class="math notranslate nohighlight">\(f\,'(x)\)</span>, or the second derivative of <span class="math notranslate nohighlight">\(f(x)\)</span> is denoted by <span class="math notranslate nohighlight">\(f\,''(x)\)</span> or <span class="math notranslate nohighlight">\(f^{(2)}(x)\)</span>. <br>
+The derivative of <span class="math notranslate nohighlight">\(f^{(2)}(x)\)</span>, or the third derivative of <span class="math notranslate nohighlight">\(f(x)\)</span> is denoted by <span class="math notranslate nohighlight">\(f^{(3)}(x)\)</span>, and so on. <br>
+Various notations for derivatives have been proposed by various mathematicians, and some are used independently in different locations and/or era. <br>
+Some common notations for derivatives are given below. <br></p>
+<table>
+    <tr>
+        <td><b>Notation</b></td>
+        <td style="text-align: center"><b>1st derivative</b></td>
+        <td style="text-align: center"><b>2nd derivative</b></td>
+        <td style="text-align: center"><b>3rd derivative</b></td>
+        <td style="text-align: center"><b>$\ldots$</b></td>
+    </tr>
+    <tr>
+        <td><b>Lagrange&#39;s</b></td>
+        <td style="text-align: center">$f'(x)$</td>
+        <td style="text-align: center">$f^{(2)}(x)$</td>
+        <td style="text-align: center">$f^{(3)}(x)$</td>
+        <td style="text-align: center">$\ldots$</td>
+    </tr>
+    <tr>
+        <td><b>Leibniz&#39;s</b></td>
+        <td style="text-align: center">$\dfrac{df}{dx}$</td>
+        <td style="text-align: center">$\dfrac{d^2f}{dx^2}$</td>
+        <td style="text-align: center">$\dfrac{d^3f}{dx^3}$</td>
+        <td style="text-align: center">$\ldots$</td>
+    </tr>
+    <tr>
+        <td><b>Euler&#39;s</b></td>
+        <td style="text-align: center">$\left(Df\right)(x)$</td>
+        <td style="text-align: center">$\left(D^2f\right)(x)$</td>
+        <td style="text-align: center">$\left(D^3f\right)(x)$</td>
+        <td style="text-align: center">$\ldots$</td>
+    </tr>
+    <tr>
+        <td><b>Newton&#39;s</b></td>
+        <td style="text-align: center">$\dot{f}$</td>
+        <td style="text-align: center">$\ddot{f}$</td>
+        <td style="text-align: center">$\dddot{f}$</td>
+        <td style="text-align: center">$\ldots$</td>
+    </tr>
+</table>
+<p>Motivated students are encouraged to browse the variations of these notations for multivariable functions or higher level mathematics. <br>
+<strong>Lagrange’s</strong> and <strong>Leibniz’s</strong> notation are two of the most used derivative notations, at least restricted to undergraduate Calculus course.</p>
+<br><h2 style>4.2 Properties, Formulas, and Rules</h2><h4 style>Derivative Properties</h4><ul class="simple">
+<li><p>Derivative of sum (or difference) is the sum (or difference) of derivative.<br>
+<span class="math notranslate nohighlight">\(\left[f \pm g\right]' = f' \pm g'\quad\quad \text{or} \quad \quad \dfrac{d}{dx}\left[f \pm g\right] = \dfrac{df}{dx} \pm \dfrac{dg}{dx} \)</span></p></li>
+<li><p>Constant multiple can be factored outside derivative. <br>
+<span class="math notranslate nohighlight">\(\left[c\cdot f\right]' = c\cdot f' \quad\quad \text{or} \quad \quad \dfrac{d}{dx}\left[c\cdot f\right] = c \cdot \dfrac{df}{dx} \)</span></p></li>
+</ul>
+<p>Both properties can be proved using the limit definition of derivative and some basic algebraic manipulation. <br>
+Below is the proof of the second property, while the proof of the first property are left as one of the Exercises problems for the reader.</p>
+<p><strong>Proof of <span class="math notranslate nohighlight">\(\boldsymbol{\left[c\cdot f\right]' = c\cdot f'}\)</span></strong><br></p>
+<p><span class="math notranslate nohighlight">\(\left[c\cdot f\right]' = \lim\limits_{h\to 0} \dfrac{cf(x+h)-cf(x)}{h} = \lim\limits_{h\to 0} \dfrac{c\cdot \left[f(x+h)-f(x)\right]}{h} = \lim\limits_{h\to 0} c\cdot \dfrac{f(x+h)-f(x)}{h} = c\cdot \lim\limits_{h\to 0}  \dfrac{f(x+h)-f(x)}{h} = c\cdot f'\)</span><br></p>
+<h4 style>Basic Derivative Formulas</h4><p>While limit definition of derivative can always be used to find the derivative of a function, here are some common derivative formulas that will be helpful to remember to save the time and lower the risk of algebraic manipulations. Motivated students are encouraged to try proving these formulas.</p>
+<p>Derivative of:</p>
+<ul class="simple">
+<li><p>Constant by itself:<br>
+<span class="math notranslate nohighlight">\(\dfrac{d}{dx}\left[c\right]= 0\)</span></p></li>
+<li><p>Power function: <br>
+<span class="math notranslate nohighlight">\(\dfrac{d}{dx}\left[x^n\right]= nx^{n-1}\)</span></p></li>
+<li><p>Exponential function: <br>
+<span class="math notranslate nohighlight">\(\dfrac{d}{dx}\left[b^x\right]= b^x\cdot \ln(b)\)</span></p></li>
+<li><p>Special exponential function when <span class="math notranslate nohighlight">\(b=e\)</span>: <br>
+<span class="math notranslate nohighlight">\(\dfrac{d}{dx}\left[e^x\right]= e^x \cdot \ln(e)= e^x \cdot 1= e^x\)</span></p></li>
+<li><p>Natural log funcion: <br>
+<span class="math notranslate nohighlight">\(\dfrac{d}{dx}\left[\ln(x)\right]= \dfrac{1}{x}\)</span></p></li>
+<li><p>Sine function: <br>
+<span class="math notranslate nohighlight">\(\dfrac{d}{dx}\left[\sin(x)\right]= \cos(x)\)</span></p></li>
+<li><p>Cosine function: <br>
+<span class="math notranslate nohighlight">\(\dfrac{d}{dx}\left[\cos(x)\right]= -\sin(x)\)</span></p></li>
+</ul>
+<h4 style>Product, Quotient, and Chain Rule</h4><p>Limit definition of derivative can also be used to prove the derivative of product, quotient, and composition of two functions:</p>
+<ul class="simple">
+<li><p>Product Rule: <br>
+<span class="math notranslate nohighlight">\(\left[f\cdot g\right]'=f\,'\cdot g+f \cdot g\,'\)</span></p></li>
+<li><p>Quotient Rule: <br>
+<span class="math notranslate nohighlight">\(\left[\dfrac{f}{g}\right]' = \dfrac{f\,'\cdot g - f \cdot g\,'}{g^2}\)</span></p></li>
+<li><p>Chain Rule - for composition of two functions <span class="math notranslate nohighlight">\((f\circ g)(x) = f(g(x))\)</span>: <br>
+<span class="math notranslate nohighlight">\(\left[\left(f \circ g\right)(x)\right]' = f\,'(g(x))\cdot g\,'(x) \quad\quad \text{or} \quad \quad \dfrac{df}{dx}=\dfrac{df}{dg}\cdot \dfrac{dg}{dx}\)</span></p></li>
+</ul>
+<h4 style> Examples and Code </h4><ul class="simple">
+<li><p>Find the derivative of <span class="math notranslate nohighlight">\(a(x)=x^3\cdot 3^x\)</span>. <br>
+Note that <span class="math notranslate nohighlight">\(a(x)\)</span> is a product <span class="math notranslate nohighlight">\(f(x)\cdot g(x)\)</span> with <span class="math notranslate nohighlight">\(f(x)=x^3\)</span> and <span class="math notranslate nohighlight">\(g(x)=3^x\)</span>. <br>
+Using basic derivative formulas, we have <span class="math notranslate nohighlight">\(f\,'(x)=3x^2\)</span> and <span class="math notranslate nohighlight">\(g\,'(x)=3^x\ln(3)\)</span>. <br>
+Using Product Rule, we have <span class="math notranslate nohighlight">\(a\,'(x)=3x^2\cdot 3^x + x^3\cdot 3^x\ln(3)\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Find the derivative of <span class="math notranslate nohighlight">\(b(x)=\dfrac{3x+1}{\sqrt{x}+2}\)</span>. <br>
+Note that <span class="math notranslate nohighlight">\(b(x)\)</span> is a quotient <span class="math notranslate nohighlight">\(\dfrac{f(x)}{g(x)}\)</span> with <span class="math notranslate nohighlight">\(f(x)=3x+1\)</span> and <span class="math notranslate nohighlight">\(g(x)=\sqrt{x}+2=x^{1/2}+2\)</span>. <br>
+Using basic derivative formulas, we have <span class="math notranslate nohighlight">\(f\,'(x)=3\)</span> and <span class="math notranslate nohighlight">\(g\,'(x)=\dfrac{1}{2}x^{-1/2}\)</span>. <br>
+Using Quotient Rule, we have <span class="math notranslate nohighlight">\(b\,'(x)=\dfrac{3\cdot \left(x^{1/2}+2\right)-(3x+1)\cdot\left(\frac{1}{2}x^{-1/2}\right)}{\left(x^{1/2}+2\right)^2}\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Note that <span class="math notranslate nohighlight">\(b(x)=\dfrac{3x+1}{\sqrt{x}+2}\)</span> can be written as the product of two functions: <span class="math notranslate nohighlight">\(b(x)=(3x+1)\left(\sqrt{x}+2\right)^{-1}\)</span>. <br>
+Hence, <span class="math notranslate nohighlight">\(b\,'(x)\)</span> can also be found by using product rule. <br>
+Here <span class="math notranslate nohighlight">\(f(x)=(3x+1)\)</span> so <span class="math notranslate nohighlight">\(f\,'(x)=3\)</span>. While <span class="math notranslate nohighlight">\(g(x)=\left(x^{1/2}+2\right)^{-1}\)</span> so applying Chain Rule we have <span class="math notranslate nohighlight">\(g\,'(x)=-\left(x^{1/2}+2\right)^{-2}\cdot \frac{1}{2}x^{-1/2}\)</span>.<br>
+Using Product Rule, we have <span class="math notranslate nohighlight">\(b\,'(x)=3\cdot \left(x^{1/2}+2\right)^{-1}+(3x+1)\cdot \left(-\left(x^{1/2}+2\right)^{-2}\right)\cdot \frac{1}{2}x^{-1/2}\)</span>.<br>
+It is quite an easy exercise to see that this <span class="math notranslate nohighlight">\(b\,'(x)\)</span> is equivalent with <span class="math notranslate nohighlight">\(b\,'(x)\)</span> obtained by using the Quotient Rule above.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Find the derivative of <span class="math notranslate nohighlight">\(c(x)=\sin\left(2x^3+\ln(x)\right)\)</span>. <br>
+Note that <span class="math notranslate nohighlight">\(c(x)\)</span> is a composition function <span class="math notranslate nohighlight">\((f\circ g)(x)\)</span> with <span class="math notranslate nohighlight">\(f(x)=\sin(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)=2x^3+\ln(x)\)</span>. <br>
+Using basic derivative formulas, we have <span class="math notranslate nohighlight">\(f\,'(x)=\cos(x)\)</span> and <span class="math notranslate nohighlight">\(g\,'(x)=6x+\frac{1}{x}\)</span>. <br>
+Using Quotient Rule, we have <span class="math notranslate nohighlight">\(c\,'(x)=\cos\left(2x^3+\ln(x)\right)\cdot \left(6x+\frac{1}{x}\right)\)</span>.</p></li>
+</ul>
+<p>Below is an example code that prompt user to input the function <span class="math notranslate nohighlight">\(f(x)\)</span> and return the derivative function <span class="math notranslate nohighlight">\(f\,'(x)\)</span>. <br>
+Note that Python use <strong>log</strong> instead of <strong>ln</strong> for natural log. Also, user must input and read the exponent symbols and multiplication symbols carefully.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Prompt user for the function f(x)</span>
+<span class="n">f_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+
+<span class="c1"># Define the variable and the function symbolically</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">f_input</span><span class="p">)</span>
+
+<span class="c1"># Calculate the derivative</span>
+<span class="n">f_prime</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Print the derivative</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The derivative f&#39;(x) is:&quot;</span><span class="p">,</span> <span class="n">f_prime</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Prompt user for the function f(x)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">f_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Define the variable and the function symbolically</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="nn">File //anaconda3/lib/python3.10/site-packages/ipykernel/kernelbase.py:1172,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1165</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Forward raw_input to frontends</span>
+<span class="g g-Whitespace">   </span><span class="mi">1166</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1167</span><span class="sd"> Raises</span>
+<span class="g g-Whitespace">   </span><span class="mi">1168</span><span class="sd"> ------</span>
+<span class="g g-Whitespace">   </span><span class="mi">1169</span><span class="sd"> StdinNotImplementedError if active frontend doesn&#39;t support stdin.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1170</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1171</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1172</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1173</span>         <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1174</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1175</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1177</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parent_ident</span><span class="p">[</span><span class="s2">&quot;shell&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1180</span> <span class="p">)</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+<h4 style>L'Hospital's Rule and Indeterminate Forms</h4><p>In the previous section we already discussed about limit. Recall that there are cases where the limit of <span class="math notranslate nohighlight">\(f(x)\)</span> exists at <span class="math notranslate nohighlight">\(x=a\)</span> since the left limit and the right limit are the same, but <span class="math notranslate nohighlight">\(f(a)\)</span> itself does not exists.<br>
+Algebraically, we can use the following examples:
+$<span class="math notranslate nohighlight">\(\lim\limits_{x\to 2} \dfrac{x^2-4}{x-2} \qquad \qquad \lim\limits_{x\to \infty} \dfrac{3x^2-2x}{5x^2+7x}\)</span><span class="math notranslate nohighlight">\(
+If we apply the \)</span>x\to 2<span class="math notranslate nohighlight">\( and \)</span>x\to \infty<span class="math notranslate nohighlight">\( directly into these limits, the first limit gives \)</span>\frac{0}{0}<span class="math notranslate nohighlight">\( while the second limit gives \)</span>\frac{\infty}{\infty}$. <br>
+However, with some algebraic manipulation, we can calculate the limits:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\lim\limits_{x\to 2} \dfrac{x^2-4}{x-2}=\lim\limits_{x\to 2} \dfrac{(x+2)(x-2)}{x-2}=\lim\limits_{x\to 2} \;(x+2) =4\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\lim\limits_{x\to \infty} \dfrac{3x^2-2x}{5x^2+7x}=\lim\limits_{x\to \infty} \dfrac{3-\frac{2}{x}}{5+\frac{7}{x}}=\dfrac{3}{5}\)</span></p></li>
+</ul>
+<p>Both <span class="math notranslate nohighlight">\(\frac{0}{0}\)</span> and <span class="math notranslate nohighlight">\(\frac{\infty}{\infty}\)</span> are types of <strong>indeterminate forms</strong>. Some other types of indeterminate forms are <span class="math notranslate nohighlight">\(0\cdot\infty, 1^\infty, 0^0, \infty^0, \infty-\infty\)</span>. <br>
+These forms have conflicting behaviors and it is not clear which behavior come on top of another hence the result is indeterminate. <br></p>
+<p><strong>L’Hospital Rule</strong> is a rule that utilize derivative to calculate limit of indeterminate form <span class="math notranslate nohighlight">\(\frac{0}{0}\)</span> or <span class="math notranslate nohighlight">\(\frac{\infty}{\infty}\)</span>, that often simpler than doing algebraic manipulation:<br>
+If <span class="math notranslate nohighlight">\(\lim\limits_{x\to a} \dfrac{f(x)}{g(x)}=\dfrac{0}{0}\)</span> or <span class="math notranslate nohighlight">\(\lim\limits_{x\to a} \dfrac{f(x)}{g(x)}=\pm \dfrac{\infty}{\infty}\)</span>, where <span class="math notranslate nohighlight">\(a\)</span> can be any real number or <span class="math notranslate nohighlight">\(\pm \infty\)</span>, then <span class="math notranslate nohighlight">\(\lim\limits_{x\to a} \dfrac{f(x)}{g(x)}=\lim\limits_{x\to a} \dfrac{f\,'(x)}{g\,'(x)}\)</span>.</p>
+<p>Above examples using L’Hospital Rule:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\lim\limits_{x\to 2} \dfrac{x^2-4}{x-2}=\lim\limits_{x\to 2} \dfrac{2x}{1}=\lim\limits_{x\to 2} \;(2x) =4\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\lim\limits_{x\to \infty} \dfrac{3x^2-2x}{5x^2+7x}=\lim\limits_{x\to \infty} \dfrac{6x-2}{10x+7}=\lim\limits_{x\to \infty} \dfrac{6}{10}=\dfrac{3}{5}\)</span></p></li>
+</ul>
+<p>Note that with the code given on the previous section, it doesnot matter if the limit is of indeterminate form <span class="math notranslate nohighlight">\(\frac{0}{0}\)</span> or <span class="math notranslate nohighlight">\(\frac{\infty}{\infty}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Prompt the user to input the function f(x) and the constant a</span>
+<span class="n">expression_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the constant a: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Define the variable x and the function f(x)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f_x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">expression_str</span><span class="p">)</span>
+
+<span class="c1"># Calculate the limit of f(x) as x approaches a</span>
+<span class="n">limit_result</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The limit of f(x) as x approaches&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot;is:&quot;</span><span class="p">,</span> <span class="n">limit_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The limit of f(x) as x approaches 2.0 is: 4.00000000000000
+</pre></div>
+</div>
+</div>
+</div>
+<br><h2 style>4.3 Derivative Graphs</h2><h4 style>Increasing and Decreasing </h4><p>Given any inputs <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> from an interval <span class="math notranslate nohighlight">\(I\)</span> with <span class="math notranslate nohighlight">\(x_1&lt;x_2\)</span>.</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f(x_1)&lt;f(x_2)\)</span>, then <span class="math notranslate nohighlight">\(f(x)\)</span> is <strong>increasing</strong> on <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(x_1)&gt;f(x_2)\)</span>, then <span class="math notranslate nohighlight">\(f(x)\)</span> is <strong>decreasing</strong> on <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+</ul>
+<p>Since <span class="math notranslate nohighlight">\(f\,'(a)\)</span> is the slope of the tangent line of <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x=a\)</span>, then if for every input <span class="math notranslate nohighlight">\(x\)</span> on an interval <span class="math notranslate nohighlight">\(I\)</span>: <br></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\,'(x)&gt;0 \Rightarrow\)</span> slope of tangent line is positive <span class="math notranslate nohighlight">\(\Rightarrow\)</span> tangent line is increasing <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(f(x)\)</span> is increasing.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\,'(x)&lt;0 \Rightarrow\)</span> slope of tangent line is negative <span class="math notranslate nohighlight">\(\Rightarrow\)</span> tangent line is decreasing <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(f(x)\)</span> is decreasing.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\,'(x)=0 \Rightarrow\)</span> slope of tangent line is zero     <span class="math notranslate nohighlight">\(\Rightarrow\)</span> tangent line is flat <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(f(x)\)</span> is constant.</p></li>
+</ul>
+<p>Below is an example code that ask user for the function <span class="math notranslate nohighlight">\(f(x)\)</span> and the interval <span class="math notranslate nohighlight">\(I=(a,b)\)</span>. It will return the intervals within <span class="math notranslate nohighlight">\((a,b)\)</span> where <span class="math notranslate nohighlight">\(f(x)\)</span> increase or decrease.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">check_interval</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Generate x values within the interval</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Evaluate f(x) for each x value</span>
+
+    <span class="n">intervals</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">prev_direction</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">a</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="s2">&quot;Increasing&quot;</span> <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;Decreasing&quot;</span>
+
+        <span class="k">if</span> <span class="n">prev_direction</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">prev_direction</span> <span class="o">=</span> <span class="n">direction</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">!=</span> <span class="n">prev_direction</span><span class="p">:</span>
+            <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">round</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="n">prev_direction</span><span class="p">))</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">prev_direction</span> <span class="o">=</span> <span class="n">direction</span>
+
+    <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">round</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">prev_direction</span><span class="p">))</span>  <span class="c1"># Add the last interval</span>
+
+    <span class="k">return</span> <span class="n">intervals</span>
+
+<span class="c1"># Prompt user for the function f(x) and the interval (a, b)</span>
+<span class="n">equation</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">eval</span><span class="p">(</span><span class="n">equation</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value of a: &quot;</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value of b: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Determine the intervals of increase, decrease, and constancy</span>
+<span class="n">intervals</span> <span class="o">=</span> <span class="n">check_interval</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Print the intervals</span>
+<span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">interval</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interval (</span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interval (-4.0, -2.0): Decreasing
+Interval (-2.0, 4.0): Increasing
+Interval (4.0, 5.0): Decreasing
+</pre></div>
+</div>
+</div>
+</div>
+<h4 style>Concave Up and Concave Down </h4><p>A function is <strong>concave up</strong> if it “opens” upward. A function is <strong>concave down</strong> if it “opens” downward.</p>
+<p><a class="reference internal" href="../../_images/4Deriv3Concavity.png"><img alt="../../_images/4Deriv3Concavity.png" src="../../_images/4Deriv3Concavity.png" style="width: 750px;" /></a> <br></p>
+<p>A point <span class="math notranslate nohighlight">\(x=c\)</span> is called an <strong>inflection point</strong> of <span class="math notranslate nohighlight">\(f(x)\)</span> if the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> is continious and its concavity changes at <span class="math notranslate nohighlight">\(x=c\)</span>.</p>
+<p>Suppose the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> is concave up as given below. Draw tangent lines across the inputs of <span class="math notranslate nohighlight">\(f(x)\)</span>.<br></p>
+<p><a class="reference internal" href="../../_images/4Deriv3Concavityslope.png"><img alt="../../_images/4Deriv3Concavityslope.png" src="../../_images/4Deriv3Concavityslope.png" style="width: 250px;" /></a> <br></p>
+<p>Note that as the value of <span class="math notranslate nohighlight">\(a\)</span> increases, the slope of the tangent line of <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x=a\)</span> also increases (from negative, to zero, to positive). <br>
+This imply that if graph of <span class="math notranslate nohighlight">\(f\,'(x)\)</span> is increasing, then graph of <span class="math notranslate nohighlight">\(f(x)\)</span> is concave up. <br>
+From the previous subsection about Increasing and Decreasing, if graph of <span class="math notranslate nohighlight">\(f\,''(x)\)</span> is positive then graph of <span class="math notranslate nohighlight">\(f\,'(x)\)</span> is increasing. <br></p>
+<p>Apply a similar argument for cases where graph of <span class="math notranslate nohighlight">\(f(x)\)</span> is concave down, we can summarize that if for all <span class="math notranslate nohighlight">\(x\)</span> in some interval <span class="math notranslate nohighlight">\(I\)</span> we have:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\,''(x)&gt;0\)</span> then <span class="math notranslate nohighlight">\(f(x)\)</span> is concave up on <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\,''(x)&lt;0\)</span> then <span class="math notranslate nohighlight">\(f(x)\)</span> is concave down on <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+</ul>
+<p>Note that if <span class="math notranslate nohighlight">\(f\,''(x)=0\)</span> then we cannot guarantee the shape of graph of <span class="math notranslate nohighlight">\(f(x)\)</span>. <br>
+<span class="math notranslate nohighlight">\(f\,''(x)=0\)</span> only means graph of <span class="math notranslate nohighlight">\(f'(x)\)</span> is flat, and many different cases that can cause this. Can you think of these cases?</p>
+<p>Below is an example code that ask user for the function <span class="math notranslate nohighlight">\(f(x)\)</span> and the interval <span class="math notranslate nohighlight">\(I=(a,b)\)</span>. <br>
+It will plot the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(f\,''(x)\)</span> on <span class="math notranslate nohighlight">\((a,b)\)</span>, list all the inflection points, and highlighted the area on whihc <span class="math notranslate nohighlight">\(f(x)\)</span> concave up (or concave down) with green (or red).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">plot_concavity</span><span class="p">():</span>
+    <span class="c1"># Prompt the user for the function and interval</span>
+    <span class="n">function_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+    <span class="n">interval_a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the left endpoint of the interval (a): &quot;</span><span class="p">))</span>
+    <span class="n">interval_b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the right endpoint of the interval (b): &quot;</span><span class="p">))</span>
+
+    <span class="c1"># Define the function using numpy</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">interval_a</span><span class="p">,</span> <span class="n">interval_b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;lambda x: &quot;</span> <span class="o">+</span> <span class="n">function_input</span><span class="p">)</span>
+
+    <span class="c1"># Compute the second derivative of f(x)</span>
+    <span class="n">f_double_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Plot the function and concavity</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_double_prime</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;f&#39;&#39;(x)&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+    <span class="c1"># Identify the intervals of concavity</span>
+    <span class="n">concave_up_intervals</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">concave_down_intervals</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">f_double_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">concave_up_intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">f_double_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">concave_down_intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+
+    <span class="c1"># Add vertical lines for concavity intervals</span>
+    <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">concave_up_intervals</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">concave_down_intervals</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># Find the inflection points</span>
+    <span class="n">inflection_points</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">f_double_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">f_double_prime</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">f_double_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">f_double_prime</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">inflection_points</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+
+    <span class="c1"># Add points for inflection points</span>
+    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">inflection_points</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Add x-axis and y-axis</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Horizontal line for x-axis</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Vertical line for y-axis</span>
+
+    <span class="c1"># Set plot labels and legend</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Concavity of f(x)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="c1"># Show the plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Print the inflection points</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inflection Points:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">inflection_points</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Run the function to plot the concavity</span>
+<span class="n">plot_concavity</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c479f224a32efb7ee77f5cf5c2f958642a873f59d809a6bba99146b0abae882c.png" src="../../_images/c479f224a32efb7ee77f5cf5c2f958642a873f59d809a6bba99146b0abae882c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inflection Points:
+(-1.388, -16.236)
+(-0.001, 5.000)
+(2.886, 298.696)
+</pre></div>
+</div>
+</div>
+</div>
+<br><h2 style>4.4 Extrema</h2><p>Many applications of Calculus reveolve around maximizing or minimizing values of a function. <br>
+While vizualizing the extrema can be done by analyzing the graph of the function, it might be computationally cheaper to find the extrema using derivatives.</p>
+<h4 style>Definition</h4><p><strong>Relative Extrema</strong><br></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> has a <strong>relative (or local) maximum</strong> at <span class="math notranslate nohighlight">\(x=a\)</span> if <span class="math notranslate nohighlight">\(f(x)&gt;f(a)\)</span> for every <span class="math notranslate nohighlight">\(x\)</span> in some open interval around <span class="math notranslate nohighlight">\(x=a\)</span> (in the “local” neighborhood of <span class="math notranslate nohighlight">\(x=a\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> has a <strong>relative (or local) minimum</strong> at <span class="math notranslate nohighlight">\(x=a\)</span> if <span class="math notranslate nohighlight">\(f(x)&lt;f(a)\)</span> for every <span class="math notranslate nohighlight">\(x\)</span> in some open interval around <span class="math notranslate nohighlight">\(x=a\)</span> (in the “local” neighborhood of <span class="math notranslate nohighlight">\(x=a\)</span>).</p></li>
+</ul>
+<p>Relative extrema cannot happen at the endpoints of the domain (since open interval around <span class="math notranslate nohighlight">\(x=a\)</span> should include some value both to the left and to the right of <span class="math notranslate nohighlight">\(x=a\)</span>).</p>
+<p><strong>Absolute Extrema</strong><br></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> has a <strong>absolute (or global) maximum</strong> at <span class="math notranslate nohighlight">\(x=a\)</span> if <span class="math notranslate nohighlight">\(f(x)\leq f(a)\)</span> for every <span class="math notranslate nohighlight">\(x\)</span> in the domain of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> has a <strong>absolute (or global) minimum</strong> at <span class="math notranslate nohighlight">\(x=a\)</span> if <span class="math notranslate nohighlight">\(f(x)\geq f(a)\)</span> for every <span class="math notranslate nohighlight">\(x\)</span> in the domain of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+</ul>
+<h4 style>Extreme Value Theorem</h4><p><strong>Theorem:</strong> Suppose that <span class="math notranslate nohighlight">\(f(x)\)</span> is continuous on the interval <span class="math notranslate nohighlight">\([a,b]\)</span> then there are two numbers <span class="math notranslate nohighlight">\(c,d\)</span> where <span class="math notranslate nohighlight">\(a\leq c\)</span> and <span class="math notranslate nohighlight">\(d\leq b\)</span> such that <span class="math notranslate nohighlight">\(f(c)\)</span> is an absolute maximum for <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f(d)\)</span> is an absolute minimum of <span class="math notranslate nohighlight">\(f\)</span>. <br></p>
+<p>Note that this theorem doesn’t provide the information on where the absolute extrema are, or whether they will occur more than once. It only say that absolute extrema exists somewhere in the interval.</p>
+<p>On the other hand, since relative extrema cannot occur at the endpoints, the existence of relative extrema is not guaranteed.<br></p>
+<p>One easy example is the constant function <span class="math notranslate nohighlight">\(f(x)=k\)</span> for some real number <span class="math notranslate nohighlight">\(k\)</span>.<br>
+This function have no relative extrema in any interval, but the absolute max and absolute min are both <span class="math notranslate nohighlight">\(k\)</span> (that occurs infinitely many times at every single point in the domain).</p>
+<h4 style>Finding Extrema</h4><p>A <strong>critical number</strong> of a function <span class="math notranslate nohighlight">\(f(x)\)</span> is <span class="math notranslate nohighlight">\(x=c\)</span> where <span class="math notranslate nohighlight">\(f(c)\)</span> exists, but either <span class="math notranslate nohighlight">\(f\,'(c)=0\)</span> or <span class="math notranslate nohighlight">\(f\,'(c)\)</span> does not exists. The point <span class="math notranslate nohighlight">\((c,f(c))\)</span> is then called <strong>critical point</strong>.<br></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\,'(c)=0\)</span> means the tangent line of <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x=c\)</span> has slope <span class="math notranslate nohighlight">\(0\)</span>, meaning its a horizontal tangent line.<br>
+This can happen on the relative max, relative min, or inflection point concave down to concave up.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\,'(c)\)</span> does not exists means there is no tangent line, or tangent line exists but is vertical (has undefined slope).<br>
+This can happen at a corner/cusp, when the function is not continuous, or inflection point convace up to concave down.</p></li>
+</ul>
+<p>Using critical number, we have the First Derivative Test:</p>
+<p><strong>First Derivative Test</strong><br>
+Suppose that <span class="math notranslate nohighlight">\(x=c\)</span> is a critical point of <span class="math notranslate nohighlight">\(f(x)\)</span>, then:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f\,'(x)\)</span> change sign from <span class="math notranslate nohighlight">\(+\)</span> to <span class="math notranslate nohighlight">\(-\)</span> at <span class="math notranslate nohighlight">\(x=c\)</span>, then <span class="math notranslate nohighlight">\(f(x)\)</span> has a relative maximum at <span class="math notranslate nohighlight">\(x=c\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\,'(x)\)</span> change sign from <span class="math notranslate nohighlight">\(-\)</span> to <span class="math notranslate nohighlight">\(+\)</span> at <span class="math notranslate nohighlight">\(x=c\)</span>, then <span class="math notranslate nohighlight">\(f(x)\)</span> has a relative minimum at <span class="math notranslate nohighlight">\(x=c\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\,'(x)\)</span> doesn’t change sign at <span class="math notranslate nohighlight">\(x=c\)</span>, then <span class="math notranslate nohighlight">\(f(x)\)</span> has neither a relative maximum nor a relative minimum at <span class="math notranslate nohighlight">\(x=c\)</span>.<br></p></li>
+</ul>
+<p>Going further to second derivative, recall the relation between the second derivative <span class="math notranslate nohighlight">\(f\,''(x)\)</span> and the shape of graph <span class="math notranslate nohighlight">\(f(x)\)</span>.<br>
+Note that a concave up graph has a lowest point while a concave down graph has a highest point, and this give us the Second Derivative Test:<br></p>
+<p><strong>Second Derivative Test</strong><br>
+Suppose that <span class="math notranslate nohighlight">\(x=c\)</span> is a critical point of <span class="math notranslate nohighlight">\(f(x)\)</span> such that <span class="math notranslate nohighlight">\(f\,'(c)=0\)</span> and that <span class="math notranslate nohighlight">\(f\,''(x)\)</span> is continuous in the local neighborhood around <span class="math notranslate nohighlight">\(x=c\)</span>, then:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f\,''(x)&lt;0\)</span>, then <span class="math notranslate nohighlight">\(f(x)\)</span> has a relative maximum at <span class="math notranslate nohighlight">\(x=c\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\,''(x)&gt;0\)</span>, then <span class="math notranslate nohighlight">\(f(x)\)</span> has a relative minimum at <span class="math notranslate nohighlight">\(x=c\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f\,''(x)=0\)</span>, then at <span class="math notranslate nohighlight">\(x=c\)</span> the function <span class="math notranslate nohighlight">\(f(x)\)</span> can have a relative maximum, relative minimum, or neither.</p></li>
+</ul>
+<p>Summarizing, below are the steps to find extrema given a continuous function <span class="math notranslate nohighlight">\(f(x)\)</span> on the interval <span class="math notranslate nohighlight">\([a,b]\)</span>:</p>
+<ul class="simple">
+<li><p>Find the critical points</p></li>
+<li><p>Do the first or second derivative test to get the relative extrema</p></li>
+<li><p>Evaluate and compare the values of <span class="math notranslate nohighlight">\(f(x)\)</span> at the critical points and the endpoints to get the absolute extrema</p></li>
+</ul>
+<p>It is left to motivated students to do these steps manually. <br>
+Below is the example code that ask user to give <span class="math notranslate nohighlight">\(f(x)\)</span> and the endpoints of closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>. Code will return the list of absolute and relative extrema.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="k">def</span> <span class="nf">find_extrema</span><span class="p">():</span>
+    <span class="c1"># Prompt the user for the function and interval</span>
+    <span class="n">function_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+    <span class="n">interval_a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the left endpoint of the interval (a): &quot;</span><span class="p">))</span>
+    <span class="n">interval_b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the right endpoint of the interval (b): &quot;</span><span class="p">))</span>
+
+    <span class="c1"># Convert the function string to a SymPy expression</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">function_input</span><span class="p">)</span>
+
+    <span class="c1"># Evaluate the function at critical points and exclude endpoints</span>
+    <span class="n">critical_points</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">critical_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">point</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">critical_points</span> <span class="k">if</span> <span class="n">interval_a</span> <span class="o">&lt;</span> <span class="n">point</span> <span class="o">&lt;</span> <span class="n">interval_b</span><span class="p">]</span>
+
+    <span class="c1"># Evaluate the function at the endpoints</span>
+    <span class="n">endpoints</span> <span class="o">=</span> <span class="p">[</span><span class="n">interval_a</span><span class="p">,</span> <span class="n">interval_b</span><span class="p">]</span>
+    <span class="n">extrema_coordinates</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">round</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">critical_points</span><span class="p">]</span>
+
+    <span class="c1"># Find the absolute maximum and minimum</span>
+    <span class="n">extrema_coordinates</span><span class="o">.</span><span class="n">extend</span><span class="p">([(</span><span class="n">interval_a</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval_a</span><span class="p">),</span> <span class="mi">3</span><span class="p">)),</span> <span class="p">(</span><span class="n">interval_b</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval_b</span><span class="p">),</span> <span class="mi">3</span><span class="p">))])</span>
+    <span class="n">absolute_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">extrema_coordinates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">coord</span><span class="p">:</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">absolute_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">extrema_coordinates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">coord</span><span class="p">:</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Find the relative maxima and minima</span>
+    <span class="n">relative_maxima</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">relative_minima</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">critical_points</span><span class="p">:</span>
+        <span class="n">second_derivative</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">second_derivative</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">relative_maxima</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">point</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">),</span> <span class="mi">3</span><span class="p">)))</span>
+        <span class="k">elif</span> <span class="n">second_derivative</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">relative_minima</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">point</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">),</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="c1"># Print the extrema coordinates</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Relative Maxima:&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">relative_maxima</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">coordinate</span> <span class="ow">in</span> <span class="n">relative_maxima</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Relative Minima:&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">relative_minima</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">coordinate</span> <span class="ow">in</span> <span class="n">relative_minima</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Absolute Maximum:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">absolute_max</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Absolute Minimum:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">absolute_min</span><span class="p">)</span>
+
+<span class="c1"># Run the function to find the extrema</span>
+<span class="n">find_extrema</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relative Maxima:
+(4.00000000000000, 474.333)
+Relative Minima:
+(-2.00000000000000, -29.667)
+Absolute Maximum:
+(-4.0, 815.667)
+Absolute Minimum:
+(-2.00000000000000, -29.667)
+</pre></div>
+</div>
+</div>
+</div>
+<br><h2 style>4.5 The Mean Value Theorem</h2><p>Also called the <strong>Lagrange Theorem</strong>, the <strong>Mean Value Theorem (MVT)</strong> stated that:<br>
+If <span class="math notranslate nohighlight">\(f\)</span> is a continuous function on the closed interval <span class="math notranslate nohighlight">\([a,b]\)</span> and differentiable on the open interval <span class="math notranslate nohighlight">\((a,b)\)</span>, then there is a point <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\((a,b)\)</span> such that the tangent at <span class="math notranslate nohighlight">\(c\)</span> is parallel to the secant line throught the endpoints <span class="math notranslate nohighlight">\((a,f(a))\)</span> and <span class="math notranslate nohighlight">\((b,f(b))\)</span>, that is, <span class="math notranslate nohighlight">\(f\,'(c)=\dfrac{f(b)-f(a)}{b-a}\)</span>, or, <span class="math notranslate nohighlight">\(f(b)-f(a)=f\,'(c)(b-a)\)</span>.<br></p>
+<p><a class="reference internal" href="Undergrad/Calculus/4Deriv6MVT.png"><img alt="Undergrad/Calculus/4Deriv6MVT.png" src="Undergrad/Calculus/4Deriv6MVT.png" style="width: 300px;" /></a> <br></p>
+<p>Note that MVT doesn’t give what <span class="math notranslate nohighlight">\(c\)</span> is. It only guarantee the existence of at least one of such <span class="math notranslate nohighlight">\(c\)</span>. Finding the <span class="math notranslate nohighlight">\(c\)</span> can be done manually or using code.<br></p>
+<p><strong>Example</strong><br>
+Determine the number(s) <span class="math notranslate nohighlight">\(c\)</span> which satisfy the conclusion of the MVT for the function <span class="math notranslate nohighlight">\(f(x)=4x-x^2\)</span> on <span class="math notranslate nohighlight">\([0.5,3]\)</span>. <br></p>
+<p>The derivative of <span class="math notranslate nohighlight">\(f(x)\)</span> is <span class="math notranslate nohighlight">\(f\,'(x)=4-2x\)</span>. From the conclusion of the MVT we have <span class="math notranslate nohighlight">\(4-2c=f\,'(c) =\dfrac{f(3)-f(0.5)}{3-0.5}=\dfrac{1.25}{2.5}=0.5\)</span>, giving <span class="math notranslate nohighlight">\(c=1.75\)</span> as the only such <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p>Below is the code that prompt user to given <span class="math notranslate nohighlight">\(f(x)\)</span> and interval endpoints <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, and then return the value(s) of <span class="math notranslate nohighlight">\(c\)</span> satisfying the conclusion of MVT.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Prompt the user for the function f(x)</span>
+<span class="n">equation</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+
+<span class="c1"># Define the variable x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a SymPy expression for f(x)</span>
+<span class="n">f_expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">equation</span><span class="p">)</span>
+
+<span class="c1"># Prompt the user for the values of a and b</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value of a: &quot;</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value of b: &quot;</span><span class="p">))</span>
+
+<span class="c1"># Compute the derivative of f(x)</span>
+<span class="n">f_prime_expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f_expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Compute the right-hand side of the equation</span>
+<span class="n">rhs</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">f_expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># Find all values of c that satisfy f&#39;(c) = (f(b) - f(a))/(b - a)</span>
+<span class="n">solutions</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">f_prime_expr</span><span class="p">,</span> <span class="n">rhs</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Print the values of c</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Values of c that satisfy the conclusion of MVT:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">solutions</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c = </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Evaluate the symbolic solution</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Values of c that satisfy the conclusion of MVT:
+c = 1.75000000000000
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Example</strong><br>
+Given <span class="math notranslate nohighlight">\(f(x)\)</span> a continuous and differentiable function on <span class="math notranslate nohighlight">\([2,10]\)</span>. It is known that <span class="math notranslate nohighlight">\(f(2)=-5\)</span> and <span class="math notranslate nohighlight">\(f\,'(x)\leq 6\)</span>. What is the largest possible value for <span class="math notranslate nohighlight">\(f(10)\)</span>? <br>
+From the conclusion of MVT, we have <span class="math notranslate nohighlight">\(f(10)-f(2)=f\,'(c)(10-2)\)</span>, so <span class="math notranslate nohighlight">\(f(10)=f(2)+f\,'(c)(10-2)=-5+8f\,'(c)\)</span>.<br>
+Since <span class="math notranslate nohighlight">\(f\,'(x)\leq 6\)</span> then <span class="math notranslate nohighlight">\(f\,'(c)\leq 6\)</span>. Thus <span class="math notranslate nohighlight">\(f(10)=-5+8f\,'(c)\leq -5+8(6)=43\)</span>. Thus, the largest possible value for <span class="math notranslate nohighlight">\(f(10)\)</span> is 43.</p>
+<br><h2 style>4.6 Linearization</h2><p>Recall that <span class="math notranslate nohighlight">\(f\,'(a)\)</span> is the slope of the tangent line of <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x=a\)</span>. Conversely, given a function <span class="math notranslate nohighlight">\(f(x)\)</span>, the equation of the tangent line that touch <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x=a\)</span> using derivative <span class="math notranslate nohighlight">\(f\,'(a)\)</span> is given by
+$<span class="math notranslate nohighlight">\(L(x)=f(a)+f\,'(a)(x-a)\)</span>$</p>
+<p>Look at the graph of a function <span class="math notranslate nohighlight">\(f(x)\)</span> with its tangent line at <span class="math notranslate nohighlight">\(x=a\)</span> below:<br>
+<a class="reference internal" href="../../_images/4Deriv7Linear.png"><img alt="../../_images/4Deriv7Linear.png" src="../../_images/4Deriv7Linear.png" style="width: 300px;" /></a> <br>
+Note that the values of <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(L(x)\)</span> are closer and closer as <span class="math notranslate nohighlight">\(x\to a\)</span>, so we can use <span class="math notranslate nohighlight">\(L(x)\)</span> to approximate the value of <span class="math notranslate nohighlight">\(f(x)\)</span> near <span class="math notranslate nohighlight">\(x=a\)</span>. <br>
+Due to this, this tangent line <span class="math notranslate nohighlight">\(L(x)\)</span> is often called the <strong>linear approximation</strong> or <strong>linearization</strong> of <span class="math notranslate nohighlight">\(f(x)\)</span> at <span class="math notranslate nohighlight">\(x=a\)</span>.</p>
+<p><strong>Example</strong><br>
+Find the linearization for <span class="math notranslate nohighlight">\(f(x)=\sqrt[3]{x}\)</span> at <span class="math notranslate nohighlight">\(x=27\)</span>, and use it to approximate <span class="math notranslate nohighlight">\(\sqrt[3]{27.137}\)</span> and <span class="math notranslate nohighlight">\(\sqrt[3]{8}\)</span>.<br>
+Now <span class="math notranslate nohighlight">\(f(27)=\sqrt[3]{27}=3\)</span> and using power rule get <span class="math notranslate nohighlight">\(f\,'(x)=\dfrac{1}{3}x^{2/3}=\dfrac{1}{3\sqrt[3]{2}}\)</span> so <span class="math notranslate nohighlight">\(f\,'(x)=\dfrac{1}{27}\)</span>. <br>
+The linearization is then <span class="math notranslate nohighlight">\(L(x)=3+\dfrac{1}{27}(x-27)\)</span>.<br></p>
+<p>Thus <span class="math notranslate nohighlight">\(\sqrt[3]{27.137}\approx L(27.137) =3+\dfrac{1}{27}(0.137) = 3.00507\overline{407}\)</span> and <span class="math notranslate nohighlight">\(\sqrt[3]{8}\approx L(8) =3+\dfrac{1}{27}(-19) = 2.\overline{296}\)</span>. <br></p>
+<p>Comparing with the actual value <span class="math notranslate nohighlight">\(\sqrt[3]{27.137}\approx 3.005065516\ldots\)</span> and <span class="math notranslate nohighlight">\(\sqrt[3]{8}=2\)</span>, see that the approximation for <span class="math notranslate nohighlight">\(\sqrt[3]{27.137}\)</span> is much more accurate than the approximation for <span class="math notranslate nohighlight">\(\sqrt[3]{8}\)</span>. <br>
+This make sense since <span class="math notranslate nohighlight">\(8\)</span> is much further from <span class="math notranslate nohighlight">\(27\)</span> compared to <span class="math notranslate nohighlight">\(27.137\)</span> and hence the distance between the curve of <span class="math notranslate nohighlight">\(f(x)\)</span> and the tangent line <span class="math notranslate nohighlight">\(L(x)\)</span> is much further as well.</p>
+<p>Below is the code that prompt the user to give the function <span class="math notranslate nohighlight">\(f(x)\)</span> and the point <span class="math notranslate nohighlight">\(x=a\)</span>. The code return equation <span class="math notranslate nohighlight">\(L(x)\)</span> at <span class="math notranslate nohighlight">\(x=a\)</span> as well as their plots.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Prompt user for the function f(x) and a value of x=a</span>
+<span class="n">equation</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the value of x (a): &quot;</span><span class="p">))</span>
+
+<span class="c1"># Create a symbolic expression for the given equation</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f_expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">equation</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_expr</span><span class="p">)</span>
+
+<span class="c1"># Calculate the derivative of f(x) at x=a</span>
+<span class="n">f_prime</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f_expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># Calculate the linearization L(x) at x=a</span>
+<span class="n">L_expr</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">f_prime</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L_expr</span><span class="p">)</span>
+
+<span class="c1"># Generate x values from a-15 to a+15</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">15</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1">#Print the linearization L(x)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equation of L(x):&quot;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">L_expr</span><span class="p">))</span>
+
+<span class="c1"># Plot f(x), L(x), and the point (a, f(a))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_vals</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">L</span><span class="p">(</span><span class="n">x_vals</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;L(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;(a, f(a))&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Linearization of f(x) at x=a&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Equation of L(x): 0.037037037037037 x + 2.0
+</pre></div>
+</div>
+<img alt="../../_images/d9f4c2e0b81dae860840e97374602bf2f9e31ac482da7129080bda6bf1ed611d.png" src="../../_images/d9f4c2e0b81dae860840e97374602bf2f9e31ac482da7129080bda6bf1ed611d.png" />
+</div>
+</div>
+<br><h2 style>4.7 Implicit Differentiation</h2><p>So far we have discussed derivative from the function of the form <span class="math notranslate nohighlight">\(y=f(x)\)</span>. However, there are cases where equation relating <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> either cannot be written explicitly as <span class="math notranslate nohighlight">\(y=f(x)\)</span>, or writing it as <span class="math notranslate nohighlight">\(y=f(x)\)</span> resulting some issues on finding the derivative. In these cases, we can use <strong>implicit differentiation</strong>.</p>
+<p><strong>Example</strong><br></p>
+<ul class="simple">
+<li><p>Writing the equation <span class="math notranslate nohighlight">\(e^{x+2y}=\ln\left(xy^2\right)+x^2\)</span> in the form <span class="math notranslate nohighlight">\(y=f(x)\)</span> is challenging at best.</p></li>
+<li><p>Writing the equation <span class="math notranslate nohighlight">\(x^2+y^2=4\)</span> in the form <span class="math notranslate nohighlight">\(y=f(x)\)</span> gives <span class="math notranslate nohighlight">\(y=\pm\sqrt{4-x^2}\)</span>, but then how to deal with the <span class="math notranslate nohighlight">\(\pm\)</span> for the derivative if we only want to write the derivative as a single function?</p></li>
+</ul>
+<p>With implicit differentiation, we can treat the variable <span class="math notranslate nohighlight">\(y\)</span> as <span class="math notranslate nohighlight">\(y(x)\)</span> and utilize Chain Rule as we derive both side and obtain the derivative as a single function that likely will have both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. Below is the example for the equation <span class="math notranslate nohighlight">\(x^2+y^2=4\)</span>:
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7206e74f-8d44-4134-89f9-ec09f3fd114a">
+<span class="eqno">(5)<a class="headerlink" href="#equation-7206e74f-8d44-4134-89f9-ec09f3fd114a" title="Permalink to this equation">#</a></span>\[\begin{align}
+\dfrac{d}{dx}\left(x^2+\left[y(x)\right]^2\right) &amp;=\dfrac{d}{dx}[4]\\
+2x+2\cdot y(x)\cdot y\,'(x) &amp;=0 \\
+2x+2yy\,'&amp;=0\\
+2yy\,'&amp;=-2x\\
+y\,'&amp;=-\dfrac{x}{y}
+\end{align}\]</div>
+<p>$$</p>
+<p>While Python does not have built-in functionality specifically dedicated to implicit differentiation, we can leverage SymPy to perform implicit differentiation. Depending on the complexity of the equation, further algebraic manipulation or specific handling may be required. Below is a code example, prompting user to input the equation. For <span class="math notranslate nohighlight">\(x^2+y^2=4\)</span>, first rewrite into <span class="math notranslate nohighlight">\(x^2+y^2-4=0\)</span> and input the nonzero side as the equation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Prompt the user to input the equation</span>
+<span class="n">equation_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the equation: &quot;</span><span class="p">)</span>
+
+<span class="c1"># Define the variables</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+
+<span class="c1"># Convert the equation string to a SymPy expression</span>
+<span class="n">equation</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">equation_str</span><span class="p">)</span>
+
+<span class="c1"># Differentiate implicitly</span>
+<span class="n">diff_eq</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># Differentiate with respect to x</span>
+<span class="n">diff_eq_y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># Differentiate with respect to y</span>
+
+<span class="c1"># Solve for dy/dx using the chain rule</span>
+<span class="n">dy_dx</span> <span class="o">=</span> <span class="o">-</span><span class="n">diff_eq</span> <span class="o">/</span> <span class="n">diff_eq_y</span>
+
+<span class="c1"># Simplify the result</span>
+<span class="n">dy_dx_simplified</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">dy_dx</span><span class="p">)</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The derivative dy/dx is:&quot;</span><span class="p">,</span> <span class="n">dy_dx_simplified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The derivative dy/dx is: -x/y
+</pre></div>
+</div>
+</div>
+</div>
+<br><h2 style>Exercises</h2><ol class="arabic simple">
+<li><p>Find the derivative of the following functions using the limit definition of the derivative.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=3x^2-12x+32\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x)=\dfrac{x}{x+2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(x)=\sqrt{4x^2-6}\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>Proof <span class="math notranslate nohighlight">\(\left[f \pm g\right]' = f' \pm g'\)</span> using the limit definition of the derivative.</p></li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p>Find the derivative of the following functions using the appropriate properties, formulas, and/or rules. Compare the result by using code.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=3x^2-12x+32\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x)=\dfrac{x}{x+2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(x)=\sqrt{4x^2-6}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(z(x)=x^5\sin\left(3x^4+1\right)+\ln\left(20^x-e^{5x}\right)\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Find the derivative of the following function using both Product and Quotient Rule, and verify that they gives the same answer.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a(x)=\dfrac{\sin(x)}{x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b(x)=\dfrac{\cos(x)}{2-x^9}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c(x)=\dfrac{\sin\left(3+4^x\right)}{2-x^9}\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="5">
+<li><p>Use Quotient Rule and the Basic Derivative formulas for <span class="math notranslate nohighlight">\(\sin(x)\)</span> and <span class="math notranslate nohighlight">\(\cos(x)\)</span>, one can find the derivative of <span class="math notranslate nohighlight">\(\tan(x),\cot(x),\sec(x),\)</span> and <span class="math notranslate nohighlight">\(\csc(x)\)</span>.</p></li>
+</ol>
+<ol class="arabic simple" start="6">
+<li><p>Find the interval(s) in which the following functions is increasing, decreasing, concave up, concave down.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a(x)=2x^3+3x^2-12x+4\)</span> on <span class="math notranslate nohighlight">\([-4,3]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b(x)=3x+\sin(4x)\)</span> on <span class="math notranslate nohighlight">\([0,1]\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="7">
+<li><p>Find the absolute and relative extrema of the following functions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a(x)=2x^3+3x^2-12x+4\)</span> on <span class="math notranslate nohighlight">\([-4,3]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b(x)=3x+\sin(4x)\)</span> on <span class="math notranslate nohighlight">\([0,1]\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="8">
+<li><p>Use the MVT to do the following problems:</p>
+<ul class="simple">
+<li><p>Determine all the number(s) <span class="math notranslate nohighlight">\(c\)</span> which satisty the conclusion of the MVT for the function <span class="math notranslate nohighlight">\(f(x)=4x^3-8x^2+7x-2\)</span> on <span class="math notranslate nohighlight">\([-3,5]\)</span></p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(f(x)\)</span> a continuous and differentiable function on <span class="math notranslate nohighlight">\([-3,2]\)</span>. It is known that <span class="math notranslate nohighlight">\(f(-3)=5\)</span> and <span class="math notranslate nohighlight">\(f\,'(x)\geq 7\)</span>. What is the smallest possible value for <span class="math notranslate nohighlight">\(f(2)\)</span>?</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="9">
+<li><p>Find the linearization for each given function at each given points, and plot the graph together with their linearization.<br>
+For each, also use the linearlization to approximate the value at the given nearby point, then calculate the error of the approximation.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=\sqrt[4]{x}\)</span> at <span class="math notranslate nohighlight">\(x=16\)</span>, use to approximate <span class="math notranslate nohighlight">\(\sqrt[4]{16.7}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x)=\sin(x)\)</span> at <span class="math notranslate nohighlight">\(x=\dfrac{\pi}{4}\)</span>, use to approximate <span class="math notranslate nohighlight">\(\sin\left(\dfrac{3\pi}{11}\right)\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="10">
+<li><p>Use implicit differentiation to find <span class="math notranslate nohighlight">\(y\,'\)</span> for each of the following:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(5x+x^4y^3=7y^3-2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(3x^2\tan(y)=x-y^5\sec{x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{x+2y}=\ln\left(xy^2\right)+x^2\)</span></p></li>
+</ul>
+</li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/Calculus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Sec3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3. Limits, Continuity, and Rates</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../AppliedCalc/twocommodity.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1. Linear Systems and the 2 Commodity Model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
