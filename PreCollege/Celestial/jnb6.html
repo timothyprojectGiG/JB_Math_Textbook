@@ -491,60 +491,51 @@ Use pandas (pd) to read in the Excel file with the words of the chorus "I have t
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">joy</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;joy.xlsx&quot;</span><span class="p">)</span>  <span class="c1">#read in the Excel file with the words</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">joy</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/excel/_base.py:478,</span> in <span class="ni">read_excel</span><span class="nt">(io, sheet_name, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, parse_dates, date_parser, date_format, thousands, decimal, comment, skipfooter, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">ExcelFile</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="n">should_close</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="ne">--&gt; </span><span class="mi">478</span>     <span class="n">io</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">479</span> <span class="k">elif</span> <span class="n">engine</span> <span class="ow">and</span> <span class="n">engine</span> <span class="o">!=</span> <span class="n">io</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">481</span>         <span class="s2">&quot;Engine should not be specified when passing &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">482</span>         <span class="s2">&quot;an ExcelFile - ExcelFile already has the engine set&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="p">)</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/excel/_base.py:1496,</span> in <span class="ni">ExcelFile.__init__</span><span class="nt">(self, path_or_buffer, engine, storage_options)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1494</span>     <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;xls&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1495</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1496</span>     <span class="n">ext</span> <span class="o">=</span> <span class="n">inspect_excel_format</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1497</span>         <span class="n">content_or_path</span><span class="o">=</span><span class="n">path_or_buffer</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span>
-<span class="g g-Whitespace">   </span><span class="mi">1498</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1499</span>     <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1500</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1501</span>             <span class="s2">&quot;Excel file format cannot be determined, you must specify &quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1502</span>             <span class="s2">&quot;an engine manually.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1503</span>         <span class="p">)</span>
-
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/excel/_base.py:1371,</span> in <span class="ni">inspect_excel_format</span><span class="nt">(content_or_path, storage_options)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1368</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1369</span>     <span class="n">content_or_path</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1371</span> <span class="k">with</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1372</span>     <span class="n">content_or_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">is_text</span><span class="o">=</span><span class="kc">False</span>
-<span class="g g-Whitespace">   </span><span class="mi">1373</span> <span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1374</span>     <span class="n">stream</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">handle</span>
-<span class="g g-Whitespace">   </span><span class="mi">1375</span>     <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/common.py:868,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">859</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">860</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">865</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">866</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">867</span>         <span class="c1"># Binary mode</span>
-<span class="ne">--&gt; </span><span class="mi">868</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span> <span class="c1"># Convert BytesIO or file objects passed with an encoding</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;joy.xlsx&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WORDS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>I</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>have</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>the</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>joy</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>joy</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Q2. What word is in row 4?</p>
 <hr>
@@ -556,19 +547,20 @@ Get the frequencies of each word<div class="cell docutils container">
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>joy      8
-heart    5
-in       5
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WORDS
+joy      8
 down     5
+in       5
+heart    5
 my       3
 where    3
-have     2
-my       2
 I        2
+have     2
 the      2
-stay     1
+my       2
 to       1
-Name: WORDS, dtype: int64
+stay     1
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -594,9 +586,7 @@ Add the text joy to the word cloud at position .3,.5 in color 'red' and fontsize
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.figure.Figure at 0x20449931748&gt;
-</pre></div>
-</div>
+<img alt="../../_images/f4f78265f3c390fb86f335f21d95bed73f1431d7fe22ba06a2227fb67938b9fa.png" src="../../_images/f4f78265f3c390fb86f335f21d95bed73f1431d7fe22ba06a2227fb67938b9fa.png" />
 </div>
 </div>
 <p>Q4. What command is used to include the word joy?</p>
@@ -610,27 +600,22 @@ Data scientists have created functions to make word clouds so we don't have to e
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wordcloud in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (1.4.1)
-Requirement already satisfied: pillow in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (from wordcloud) (5.0.0)
-Requirement already satisfied: matplotlib in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (from wordcloud) (2.1.2)
-Requirement already satisfied: numpy&gt;=1.6.1 in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (from wordcloud) (1.19.3)
-Requirement already satisfied: six&gt;=1.10 in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (from matplotlib-&gt;wordcloud) (1.11.0)
-Requirement already satisfied: python-dateutil&gt;=2.1 in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (from matplotlib-&gt;wordcloud) (2.6.1)
-Requirement already satisfied: pytz in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (from matplotlib-&gt;wordcloud) (2017.3)
-Requirement already satisfied: cycler&gt;=0.10 in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (from matplotlib-&gt;wordcloud) (0.10.0)
-Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 in c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages (from matplotlib-&gt;wordcloud) (2.2.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wordcloud in /anaconda3/lib/python3.10/site-packages (1.9.2)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: Ignoring invalid distribution -umpy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -cipy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -umpy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -cipy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -umpy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -cipy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -umpy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -cipy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -umpy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
-WARNING: Ignoring invalid distribution -cipy (c:\users\pisihara\appdata\local\continuum\anaconda3\lib\site-packages)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.6.1 in /anaconda3/lib/python3.10/site-packages (from wordcloud) (1.24.3)
+Requirement already satisfied: pillow in /anaconda3/lib/python3.10/site-packages (from wordcloud) (9.4.0)
+Requirement already satisfied: matplotlib in /anaconda3/lib/python3.10/site-packages (from wordcloud) (3.7.1)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /anaconda3/lib/python3.10/site-packages (from matplotlib-&gt;wordcloud) (1.0.7)
+Requirement already satisfied: cycler&gt;=0.10 in /anaconda3/lib/python3.10/site-packages (from matplotlib-&gt;wordcloud) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /anaconda3/lib/python3.10/site-packages (from matplotlib-&gt;wordcloud) (4.39.4)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /anaconda3/lib/python3.10/site-packages (from matplotlib-&gt;wordcloud) (1.4.4)
+Requirement already satisfied: packaging&gt;=20.0 in /anaconda3/lib/python3.10/site-packages (from matplotlib-&gt;wordcloud) (23.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /anaconda3/lib/python3.10/site-packages (from matplotlib-&gt;wordcloud) (3.0.9)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /anaconda3/lib/python3.10/site-packages (from matplotlib-&gt;wordcloud) (2.8.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /anaconda3/lib/python3.10/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;wordcloud) (1.16.0)
 </pre></div>
 </div>
 </div>
@@ -650,7 +635,7 @@ Check how fast the computer can read the text file with the lyrics to All I Need
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.001997709274291992
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0024390220642089844
 </pre></div>
 </div>
 </div>
@@ -716,7 +701,7 @@ Make the word cloud by executing the next cell.  Then modify the calculate_frequ
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e87a76b164c6427cdea45a18717b69cdaf91e3c97cfad8d6057a1e63ee401862.png" src="../../_images/e87a76b164c6427cdea45a18717b69cdaf91e3c97cfad8d6057a1e63ee401862.png" />
+<img alt="../../_images/2d8934d9d3ae7a79c1faabff2df46967f04a79e6b724fe7d760625aa2d659df5.png" src="../../_images/2d8934d9d3ae7a79c1faabff2df46967f04a79e6b724fe7d760625aa2d659df5.png" />
 </div>
 </div>
 <p>Q8. What is the name of the file with the word cloud image for the I have a dream speech?</p>
@@ -751,7 +736,7 @@ Create word cloud of a famous speech, poem, song etc. Then edit out all the unin
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4913e2611116af441d0e1735fce3ad77ce7ef61f2016465e3b5312578c1ec856.png" src="../../_images/4913e2611116af441d0e1735fce3ad77ce7ef61f2016465e3b5312578c1ec856.png" />
+<img alt="../../_images/e67b5e942bd4cade12e2dce8eed82c0cf5d4925894e1601712bfad271f2b4bdb.png" src="../../_images/e67b5e942bd4cade12e2dce8eed82c0cf5d4925894e1601712bfad271f2b4bdb.png" />
 </div>
 </div>
 </section>
