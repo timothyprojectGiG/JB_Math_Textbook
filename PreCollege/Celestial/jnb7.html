@@ -462,72 +462,99 @@ Let's' begin by importing data of some famous people born in Chicago.<div class=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Chi</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;chicagoans.csv&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">Chi</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/parsers/readers.py:912,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">    </span><span class="mi">899</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">900</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">901</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">908</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">909</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">910</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">912</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/parsers/readers.py:577,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">576</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">577</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">579</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">580</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/parsers/readers.py:1407,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1404</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1406</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1407</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/parsers/readers.py:1661,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1659</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1660</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1661</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1662</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1663</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1664</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1665</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1666</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1667</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1668</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1669</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1670</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1671</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1672</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/io/common.py:859,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">854</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">855</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">856</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">857</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">858</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">859</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">860</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">862</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">865</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">866</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">867</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;chicagoans.csv&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Alive</th>
+      <th>Noted For</th>
+      <th>Place of Birth</th>
+      <th>Zip</th>
+      <th>Lat</th>
+      <th>Lon</th>
+      <th>fun fact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Michelle Obama</td>
+      <td>56</td>
+      <td>yes</td>
+      <td>First Lady</td>
+      <td>Provident Hospital</td>
+      <td>60605</td>
+      <td>41.802665</td>
+      <td>-87.613657</td>
+      <td>father worked at city water plant</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Robin Williams</td>
+      <td>63</td>
+      <td>no</td>
+      <td>Actor</td>
+      <td>St Luke's Hospital</td>
+      <td>60605</td>
+      <td>41.863100</td>
+      <td>-87.623100</td>
+      <td>went to Julliard with Christopher Reeve</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Walt Disney</td>
+      <td>65</td>
+      <td>no</td>
+      <td>Film Producer</td>
+      <td>149 Tripp Ave</td>
+      <td>60651</td>
+      <td>41.907879</td>
+      <td>-87.732594</td>
+      <td>won 22 oscars</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bobby Fischer</td>
+      <td>64</td>
+      <td>no</td>
+      <td>Chess</td>
+      <td>Michael Reese  Hospital</td>
+      <td>60606</td>
+      <td>41.884116</td>
+      <td>-87.637656</td>
+      <td>grandmaster at age 15</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Isiah Thomas</td>
+      <td>59</td>
+      <td>yes</td>
+      <td>Basketball</td>
+      <td>West Side</td>
+      <td>60624</td>
+      <td>41.874827</td>
+      <td>-87.710075</td>
+      <td>youngest of 9 children</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Q1. How old was Bobby Fischer when he became a grandmaster?</p>
 <hr>
@@ -535,6 +562,22 @@ Let's' begin by importing data of some famous people born in Chicago.<div class=
 Let's use a Python library called folium to make a map of Chicago.<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>folium
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: folium in /anaconda3/lib/python3.10/site-packages (0.14.0)
+Requirement already satisfied: branca&gt;=0.6.0 in /anaconda3/lib/python3.10/site-packages (from folium) (0.6.0)
+Requirement already satisfied: jinja2&gt;=2.9 in /anaconda3/lib/python3.10/site-packages (from folium) (3.1.2)
+Requirement already satisfied: numpy in /anaconda3/lib/python3.10/site-packages (from folium) (1.24.3)
+Requirement already satisfied: requests in /anaconda3/lib/python3.10/site-packages (from folium) (2.29.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: MarkupSafe&gt;=2.0 in /anaconda3/lib/python3.10/site-packages (from jinja2&gt;=2.9-&gt;folium) (2.1.1)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /anaconda3/lib/python3.10/site-packages (from requests-&gt;folium) (2.0.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /anaconda3/lib/python3.10/site-packages (from requests-&gt;folium) (3.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /anaconda3/lib/python3.10/site-packages (from requests-&gt;folium) (1.26.15)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /anaconda3/lib/python3.10/site-packages (from requests-&gt;folium) (2022.12.7)
 </pre></div>
 </div>
 </div>
@@ -548,6 +591,76 @@ Let's use a Python library called folium to make a map of Chicago.<div class="ce
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_7f591c9b6b6fc81ac9ff3c51860ca791 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_7f591c9b6b6fc81ac9ff3c51860ca791&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_7f591c9b6b6fc81ac9ff3c51860ca791 = L.map(
+                &quot;map_7f591c9b6b6fc81ac9ff3c51860ca791&quot;,
+                {
+                    center: [41.886456, -87.62325],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b591525fa6973621346441ab8fb87e3d = L.tileLayer(
+                &quot;https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Map tiles by \u003ca target=\&quot;_blank\&quot; href=\&quot;http://stamen.com\&quot;\u003eStamen Design\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://creativecommons.org/licenses/by/3.0\&quot;\u003eCC BY 3.0\u003c/a\u003e. Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_7f591c9b6b6fc81ac9ff3c51860ca791);
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
 </div>
 <p>Q2.</p>
 <p>Try adjusting the “zoom_start” value. What happens?</p>
@@ -570,6 +683,156 @@ Let's add our data about famous Chicagoans to the map.<div class="cell docutils 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_229eb9ac4bf2b9ede9395cb2e6e00cad {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_229eb9ac4bf2b9ede9395cb2e6e00cad&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_229eb9ac4bf2b9ede9395cb2e6e00cad = L.map(
+                &quot;map_229eb9ac4bf2b9ede9395cb2e6e00cad&quot;,
+                {
+                    center: [41.886456, -87.62325],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_daf6951c26e11c124502c03d7613afd9 = L.tileLayer(
+                &quot;https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Map tiles by \u003ca target=\&quot;_blank\&quot; href=\&quot;http://stamen.com\&quot;\u003eStamen Design\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://creativecommons.org/licenses/by/3.0\&quot;\u003eCC BY 3.0\u003c/a\u003e. Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var marker_9d237f8b24ac9626ed5f99d019c80b7c = L.marker(
+                [41.802665, -87.613657],
+                {}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var div_icon_be7507809a6d5bb41e323ced2182aab7 = L.divIcon({&quot;className&quot;: &quot;empty&quot;, &quot;html&quot;: &quot;\u003cdiv style=\&quot;font-size:20pt; color:red\&quot;\u003eMichelle Obama\u003c/div\u003e&quot;, &quot;iconAnchor&quot;: [0, 8], &quot;iconSize&quot;: [100, 0]});
+            marker_9d237f8b24ac9626ed5f99d019c80b7c.setIcon(div_icon_be7507809a6d5bb41e323ced2182aab7);
+        
+    
+            var circle_marker_6ad0c8470e8e96dad660f75d57a0c8cb = L.circleMarker(
+                [41.802665, -87.613657],
+                {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;red&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: false, &quot;fillColor&quot;: &quot;red&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 1, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var marker_15773fca8fbe8796e4176948d2e63987 = L.marker(
+                [41.8631, -87.6231],
+                {}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var div_icon_0535fee7284264eeaccf75da9aad1c3d = L.divIcon({&quot;className&quot;: &quot;empty&quot;, &quot;html&quot;: &quot;\u003cdiv style=\&quot;font-size:20pt; color:red\&quot;\u003eRobin Williams\u003c/div\u003e&quot;, &quot;iconAnchor&quot;: [0, 8], &quot;iconSize&quot;: [100, 0]});
+            marker_15773fca8fbe8796e4176948d2e63987.setIcon(div_icon_0535fee7284264eeaccf75da9aad1c3d);
+        
+    
+            var circle_marker_0f67dff7c8ef9507b1600ac7305c95b9 = L.circleMarker(
+                [41.8631, -87.6231],
+                {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;red&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: false, &quot;fillColor&quot;: &quot;red&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 1, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var marker_30398e6e34ff4912b9f9d166765ff4c2 = L.marker(
+                [41.907879, -87.732594],
+                {}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var div_icon_b5fc5e0e47ac626324173008095f78f4 = L.divIcon({&quot;className&quot;: &quot;empty&quot;, &quot;html&quot;: &quot;\u003cdiv style=\&quot;font-size:20pt; color:red\&quot;\u003eWalt Disney\u003c/div\u003e&quot;, &quot;iconAnchor&quot;: [0, 8], &quot;iconSize&quot;: [100, 0]});
+            marker_30398e6e34ff4912b9f9d166765ff4c2.setIcon(div_icon_b5fc5e0e47ac626324173008095f78f4);
+        
+    
+            var circle_marker_3a465cf64b957b3794096f6653b16213 = L.circleMarker(
+                [41.907879, -87.732594],
+                {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;red&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: false, &quot;fillColor&quot;: &quot;red&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 1, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var marker_0b6a38e88ce7ddd2f77aea157562344e = L.marker(
+                [41.884116, -87.637656],
+                {}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var div_icon_ed22283553dcdbdbee5368662b2e135c = L.divIcon({&quot;className&quot;: &quot;empty&quot;, &quot;html&quot;: &quot;\u003cdiv style=\&quot;font-size:20pt; color:red\&quot;\u003eBobby Fischer\u003c/div\u003e&quot;, &quot;iconAnchor&quot;: [0, 8], &quot;iconSize&quot;: [100, 0]});
+            marker_0b6a38e88ce7ddd2f77aea157562344e.setIcon(div_icon_ed22283553dcdbdbee5368662b2e135c);
+        
+    
+            var circle_marker_40727a9b673e1aa356f6614bbfc34493 = L.circleMarker(
+                [41.884116, -87.637656],
+                {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;red&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: false, &quot;fillColor&quot;: &quot;red&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 1, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var marker_56fe6efc496fe796037784f81aefe750 = L.marker(
+                [41.874827, -87.710075],
+                {}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+    
+            var div_icon_56582fce85de4fe447507eccf418fa46 = L.divIcon({&quot;className&quot;: &quot;empty&quot;, &quot;html&quot;: &quot;\u003cdiv style=\&quot;font-size:20pt; color:red\&quot;\u003eIsiah Thomas\u003c/div\u003e&quot;, &quot;iconAnchor&quot;: [0, 8], &quot;iconSize&quot;: [100, 0]});
+            marker_56fe6efc496fe796037784f81aefe750.setIcon(div_icon_56582fce85de4fe447507eccf418fa46);
+        
+    
+            var circle_marker_37c1c6c33b421ca0ab01450918af494c = L.circleMarker(
+                [41.874827, -87.710075],
+                {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;red&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: false, &quot;fillColor&quot;: &quot;red&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 1, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
+            ).addTo(map_229eb9ac4bf2b9ede9395cb2e6e00cad);
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
 </div>
 <p>Map tiles by Stamen Design Data by (c)Open Street Map</p>
 <p>Q3. What side of the city was Michelle Obama born?</p>
@@ -608,8 +871,41 @@ Let's add Jenifer Hudson to our dataframe using the following info:
 <p>‘Jennifer Hudson’,38,‘yes’,‘Actress’,‘Englewood’,60621,41.779699,-87.633194,‘worked at Burger King’</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Chi</span><span class="p">,</span><span class="n">Chicagomap</span><span class="p">]</span><span class="o">=</span><span class="n">addperson</span><span class="p">(</span><span class="n">Chicago_map</span><span class="p">,</span><span class="n">Chi</span><span class="p">,</span><span class="s1">&#39;Jennifer Hudson&#39;</span><span class="p">,</span><span class="s1">&#39;Actress&#39;</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="s1">&#39;Englewood&#39;</span><span class="p">,</span><span class="mi">60621</span><span class="p">,</span><span class="mf">41.779699</span><span class="p">,</span><span class="o">-</span><span class="mf">87.633194</span><span class="p">,</span><span class="s1">&#39;worked at Burger King&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Chi</span><span class="p">,</span><span class="n">Chicago_map</span><span class="p">]</span><span class="o">=</span><span class="n">addperson</span><span class="p">(</span><span class="n">Chicago_map</span><span class="p">,</span><span class="n">Chi</span><span class="p">,</span><span class="s1">&#39;Jennifer Hudson&#39;</span><span class="p">,</span><span class="s1">&#39;Actress&#39;</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="s1">&#39;Englewood&#39;</span><span class="p">,</span><span class="mi">60621</span><span class="p">,</span><span class="mf">41.779699</span><span class="p">,</span><span class="o">-</span><span class="mf">87.633194</span><span class="p">,</span><span class="s1">&#39;worked at Burger King&#39;</span><span class="p">)</span>
 <span class="n">Chicago_map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="p">[</span><span class="n">Chi</span><span class="p">,</span><span class="n">Chicago_map</span><span class="p">]</span><span class="o">=</span><span class="n">addperson</span><span class="p">(</span><span class="n">Chicago_map</span><span class="p">,</span><span class="n">Chi</span><span class="p">,</span><span class="s1">&#39;Jennifer Hudson&#39;</span><span class="p">,</span><span class="s1">&#39;Actress&#39;</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="s1">&#39;Englewood&#39;</span><span class="p">,</span><span class="mi">60621</span><span class="p">,</span><span class="mf">41.779699</span><span class="p">,</span><span class="o">-</span><span class="mf">87.633194</span><span class="p">,</span><span class="s1">&#39;worked at Burger King&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">Chicago_map</span>
+
+<span class="nn">Cell In[5], line 12,</span> in <span class="ni">addperson</span><span class="nt">(map_name, df, name, age, alive, noted, birth, zipcode, lat, lon, fact)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">our_map</span><span class="o">=</span><span class="n">map_name</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">new_row</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="n">name</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span>                <span class="s1">&#39;Age&#39;</span><span class="p">:</span><span class="n">age</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">5</span>                <span class="s1">&#39;Alive&#39;</span><span class="p">:</span><span class="n">alive</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>                 <span class="s1">&#39;Lon&#39;</span><span class="p">:</span><span class="n">lon</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>                 <span class="s1">&#39;Fun Fact&#39;</span><span class="p">:</span><span class="n">fact</span>            <span class="p">}</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">df</span><span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_row</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;Lat&quot;</span><span class="p">],</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;Lon&quot;</span><span class="p">]]</span>
+
+<span class="nn">File //anaconda3/lib/python3.10/site-packages/pandas/core/generic.py:5989,</span> in <span class="ni">NDFrame.__getattr__</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5982</span> <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5983</span>     <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_internal_names_set</span>
+<span class="g g-Whitespace">   </span><span class="mi">5984</span>     <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span>
+<span class="g g-Whitespace">   </span><span class="mi">5985</span>     <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_accessors</span>
+<span class="g g-Whitespace">   </span><span class="mi">5986</span>     <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_info_axis</span><span class="o">.</span><span class="n">_can_hold_identifiers_and_holds_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5987</span> <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5988</span>     <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">5989</span> <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;DataFrame&#39; object has no attribute &#39;append&#39;
 </pre></div>
 </div>
 </div>
