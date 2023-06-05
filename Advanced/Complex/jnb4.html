@@ -1,0 +1,694 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Contaminant Extraction Modeling &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/Complex/jnb4';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Complex Potentials" href="Complex_Potentials.html" />
+    <link rel="prev" title="3. Idealized Groundwater Flow" href="jnb3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb1.html">1 Functions Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb8.html">9. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb10.html">10. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb11.html">11. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Demo.html">12. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Sec4.html">4 Derivatives</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Paul Isihara, Sam Carlson, Ziling Zhong</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/OLS/jnb1.html">1. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/KMeans/jnb2.html">2. K-means Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FAdvanced/Complex/jnb4.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Advanced/Complex/jnb4.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4. Contaminant Extraction Modeling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assumptions">Model Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-output">Model Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="contaminant-extraction-modeling">
+<h1>4. Contaminant Extraction Modeling<a class="headerlink" href="#contaminant-extraction-modeling" title="Permalink to this headline">#</a></h1>
+<p>Though the idea of streamline modeling of 2-dimensional groundwater flow using a complex potential <span class="math notranslate nohighlight">\(\Omega(z)\)</span> is conceptually elegant, in reality, groundwater flow is more complicated to analyze. Being by nature 3 dimensional, a polluted groundwater flow (plume) is normally analyzed using field data that is processed using sophisticated software such as MODFLOW.
+Good data and advanced software alone, however, will not guarantee that  a  3 dimensional model gives good results. As has unfortunately been the case in real-life, errors in  assumptions used to design a pollutant well extraction (“pump-and-treat”) system can result in a counter-productive remediation that  wastes many hours of labor and millions of dollars. Essential features of  a good model include</p>
+<ul>
+    <li>good conceptual model (see the first section called Setting the Scene);</li>
+    <li>good assumptions on boundary conditions, initial conditions, and hydraulic parameters;</li>
+    <li>appropriate calibration;</li>
+    <li>consideration of lateral (horizontal) properties; and </li>
+    <li> analysis of multiple (vertical) layers. </li>
+   </ul><p>An aquifer
+which is sufficiently isotropic (permeability is constant with direction) and homogeneous (permeability is constant with location) may be amenable to a relatively simple 2-dimensional model.  Data from the Space Leasing plume at the Fischer-Calo Superfund site involving monitoring and extraction wells at different depths and locations (see the table below) suggest an aquifer flow system that behaves in a fairly ideal fashion, leading us to develop a 2-dimensional model to simulate flow through this porous media (sand).</p>
+<a class="reference internal image-reference" href="../../_images/table1.png"><img alt="../../_images/table1.png" src="../../_images/table1.png" style="width: 300px;" /></a>
+<p>This table summarizes the data used in analysis of the basic model’s system well extraction strength parameter <span class="math notranslate nohighlight">\(k\)</span>. Level designations:  NE=did not exceed action level Volatile Organic Compound (VOC) contaminant concentration in past 5 years; XX=above action level contaminant. A dash (-) for Level indicates data that was not sampled/available.  The well name codes CRA , MW, and PZSL refer to monitoring wells, and EWSL to extraction wells (only positions and levels were considered for the latter).  <span class="math notranslate nohighlight">\((x,y)\)</span> coordinates are the approximations used in a reduced-scale horizontal plume model.  The extraction well strength <span class="math notranslate nohighlight">\(k\)</span> values computed using equation (\ref{strength})  has an average strength <span class="math notranslate nohighlight">\(k=k_{ave}\approx .16\)</span>. Well levels, names, locations, and potentials are based on EPA Fifth 5-Year Review Space Leasing Plume data included in [U.S. Environmental Protection Agency 2020].
+Summary of data used in analysis of the basic model’s system well extraction strength parameter <span class="math notranslate nohighlight">\(k\)</span>. Level designations:  NE=did not exceed action level Volatile Organic Compound (VOC) contaminant concentration in past 5 years; XX=above action level contaminant. A dash (-) for Level indicates data that was not sampled/available.  The well name codes CRA , MW, and PZSL refer to monitoring wells, and EWSL to extraction wells (only positions and levels were considered for the latter).  <span class="math notranslate nohighlight">\((x,y)\)</span> coordinates are the approximations used in a reduced-scale horizontal plume model.  The extraction well strength <span class="math notranslate nohighlight">\(k\)</span> values computed using equation (\ref{strength})  has an average strength <span class="math notranslate nohighlight">\(k=k_{ave}\approx .16\)</span>. Well levels, names, locations, and potentials are based on EPA Fifth 5-Year Review Space Leasing Plume data included in [U.S. Environmental Protection Agency 2020].</p>
+<section id="model-assumptions">
+<h2>Model Assumptions<a class="headerlink" href="#model-assumptions" title="Permalink to this headline">#</a></h2>
+<p>Basic model assumptions include</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> The Space Leasing plume is sufficiently isotropic and homogeneous and flow is generally horizontal to justify a relatively simple 2D analysis. In particular, we assume that above action level contaminant may depend on position but not on depth.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\,\)</span>  The contaminant behaves conservatively and moves along groundwater streamlines. Thus, our model represents convection, but excludes natural processes that include diffusion, dispersion, and chemical reaction.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\,\)</span>  A reduced-scale model of the plume may be positioned horizontally as in Figure \ref{slpHor}. The extraction wells (denoted EW) are thereby located at <span class="math notranslate nohighlight">\(z_{EWSL-2}=(0,0)\)</span> and <span class="math notranslate nohighlight">\(z_{EWSL-4}=(10.8,0)\)</span>, and uniform flow is from left to right</p></li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/fig12.png"><img alt="../../_images/fig12.png" src="../../_images/fig12.png" style="width: 300px;" /></a>
+<p>This figure shows the space leasing plume positioned horizontally with midplume extraction well EWSL-2 at the origin and downstream extraction well EWSL-4 at (10.8,0). Wells marked NE did not reach action level  Volatile Organic Compound (VOC) contaminant concentrations in the past 5 years. Those marked XX exceeded action levels and are the targeted contaminant locations in this study. (Image based on data in [U.S. Environmental Protection Agency 2020]</p>
+<ol class="arabic simple" start="4">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span>  Contaminant which is above action level must be contained by the two extraction wells. (Above action level contaminant that is not contained by the two well system is considered to be part of a secondary plume requiring an alternate method of remediation.) Hence, our goal for an effective system is that all streamlines from  above action level monitoring locations to be a subset of the streamlines  which end at the two extraction wells EWSL-2 (mid-plume) and EWSL-4 (downstream).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> Based on Oct. 2019 data, the EWSL-2 (mid-plume) has a flow-rate of 24.6 gallons/minute (GPM), and EWSL-4 (downstream) is 16.1 GPM; we assume the strengths of the extraction wells are in a constant 3:2 ratio even though the extent of the plume today has certainly been impacted by a more complex history of pumping.</p></li>
+</ol>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
+<p>We model the pollution extraction system using a complex potential of the form</p>
+<div class="math notranslate nohighlight">
+\[
+    \Omega(z)=k_0z + k_1\log(z-z_{EWSL-2})+ k_2\log(z-z_{EWSL-4})+ C,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(C=\Phi_0\)</span> is a real constant. This is based on our discussions of modeling uniform flow and sinks. As we did in the Rankine oval problem, we use the superposition principle to  obtain the complex potential <span class="math notranslate nohighlight">\(\Omega(z)\)</span> by  adding together the complex potentials for uniform flow and the two extraction wells modeled as sinks. We determine the coefficients as follows:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> based on an equipotential map for the SL plume [U.S. Environmental Protection Agency 2020], we set the baseline potential at <span class="math notranslate nohighlight">\(\Phi_0=717\)</span>, so <span class="math notranslate nohighlight">\(C=717.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> Since the strengths of the mid-plume and downstream extraction wells are in a 3:2 ratio, we let <span class="math notranslate nohighlight">\(k_1=3k\)</span> and <span class="math notranslate nohighlight">\(k_2=2k\)</span>. We call <span class="math notranslate nohighlight">\(k\)</span> the system’s \emph{extraction well strength parameter}. It follows that the velocity potential has the form</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+    \Phi(z)=\Phi(x+iy)=k_0 x + 3k\ln(\mid z-z_{EWSL-2}\mid)+2k\ln(\mid z-z_{EWSL-4}\mid)+717.
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> Under the assumption of constant horizontal uniform flow, if we estimate <span class="math notranslate nohighlight">\(k_0\)</span> using two equipotentials, one at <span class="math notranslate nohighlight">\(x=x_1\)</span> with value <span class="math notranslate nohighlight">\(\Phi_1\)</span> and one at <span class="math notranslate nohighlight">\(x_1+d\)</span> with value <span class="math notranslate nohighlight">\(\Phi_2\)</span>, then <span class="math notranslate nohighlight">\(k_0x_1 =\Phi_1\)</span> and <span class="math notranslate nohighlight">\(k_0(x_1+d)=\Phi_2\Rightarrow\)</span>  <span class="math notranslate nohighlight">\(k_0\approx\frac{\Phi_2-\Phi_1}{d}.\)</span>  Using this process on three pairs of upstream equipotentials in a horizontally rotated version of Figure \ref{slp} (lower) and then averaging, we obtained the estimate <span class="math notranslate nohighlight">\(k_0\approx -.145.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\,\)</span>  We study the system’s extraction well strength-parameter <span class="math notranslate nohighlight">\(k\)</span>  by two related methods:</p></li>
+</ol>
+<p>A. <span class="math notranslate nohighlight">\(\,\)</span> <b> System Sensitivity Method </b></p>
+<p>Using the values of <span class="math notranslate nohighlight">\(\Phi\)</span> at the  monitoring wells in the above Table  and computing the strength parameter <span class="math notranslate nohighlight">\(k\)</span> using equation  gives a range of values for <span class="math notranslate nohighlight">\(k\)</span> between roughly .1 and .5 with an average value <span class="math notranslate nohighlight">\(k_{ave}\approx .16\)</span>.  In order to better understand the significance of <span class="math notranslate nohighlight">\(k_{ave}\approx .16\)</span>, we explore the types of contaminant extraction behavior that can be observed for a wide range of <span class="math notranslate nohighlight">\(k\)</span> values.</p>
+<p>B) <span class="math notranslate nohighlight">\(\,\)</span> <b> Critical Value Method </b></p>
+<p>Since we assume that an effective system must capture all targeted above action level pollutant, we look for a critical value <span class="math notranslate nohighlight">\(k=k^*\)</span> at which all monitoring wells with above action level contaminant are contained within  the dividing streamlines for the  extraction wells. The critical value <span class="math notranslate nohighlight">\(k=k^*\)</span> is the smallest value of the extraction well strength parameter for which the well system is effective.
+A second critical value <span class="math notranslate nohighlight">\(k=\hat{k}\)</span> indicates the strength parameter level above which the system becomes inefficient. In this case, we take inefficient to mean that the mid-plume extraction well EWSL-2 can be turned off and the targeted contaminant captured using only the downstream extraction well EWSL-4 without increasing the latter well’s strength.</p>
+</section>
+<section id="model-output">
+<h2>Model Output<a class="headerlink" href="#model-output" title="Permalink to this headline">#</a></h2>
+<p><b> A) <span class="math notranslate nohighlight">\(\,\)</span> System Sensitivity Method </b></p>
+<p>The System Sensitivity Method explores a wide range of <span class="math notranslate nohighlight">\(k\)</span> values to arrive at a system classification.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> <b> Ineffective System </b> (<span class="math notranslate nohighlight">\(k\)</span> is too low to capture the targeted contaminant.) }</p></li>
+</ol>
+<p>An ineffective system occurs when <span class="math notranslate nohighlight">\(k=k_{ave}\approx .16\)</span> as the system fails to capture streamlines from two of the targeted monitoring well locations with above  action level contaminant.</p>
+<p><span class="math notranslate nohighlight">\(k=k_{ave}\approx.16\)</span></p>
+<a class="reference internal image-reference" href="../../_images/fig13a.png"><img alt="../../_images/fig13a.png" src="../../_images/fig13a.png" style="width: 300px;" /></a>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> <b> Regular System </b> (<span class="math notranslate nohighlight">\(k\)</span> is effective and efficient.)</p></li>
+</ol>
+<p>A regular system such as  occurs when <span class="math notranslate nohighlight">\(k=.4\)</span> is characterized as one which must use both the mid-plume well (EWSL-2) and the downstream extraction well EWSL-4 to capture streamlines emanating from all the targeted above action level positions.</p>
+<a class="reference internal image-reference" href="../../_images/fig13b.png"><img alt="../../_images/fig13b.png" src="../../_images/fig13b.png" style="width: 300px;" /></a>
+<ol class="arabic simple" start="3">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> <b> Inefficient System </b>  (<span class="math notranslate nohighlight">\(k\)</span> is sufficiently high that the midplume well could be turned off and still maintain system effectiveness.)}</p></li>
+</ol>
+<p>An inefficient system such as occurs when <span class="math notranslate nohighlight">\(k=1\)</span> is such that the downstream  well (EWSL-4) operating by itself could capture  all the streamlines from the targeted above action level positions, thus rendering the midstream well EWSL-2 unnecessary. The figure below shows that all the targeted streamlines are captured by EWSL-4 when the strength of EWSL-2 has been reduced to 0.</p>
+<a class="reference internal image-reference" href="../../_images/fig13c.png"><img alt="../../_images/fig13c.png" src="../../_images/fig13c.png" style="width: 300px;" /></a>
+<p><b> B) <span class="math notranslate nohighlight">\(\,\)</span> Critical Value Method</b></p>
+<p>The critical value method focuses on ``critical’’ values between effective/ineffective systems and between regular/inefficient systems. (Such critical values may be discovered using the System Sensitivity Method.) As shown in the figures below, we found the critical value <span class="math notranslate nohighlight">\(k=k^*\approx .285\)</span> is the smallest <span class="math notranslate nohighlight">\(k\)</span> for which  the  two well system effectively captures streamlines from all the targeted action level positions (XX). The system is ineffective for <span class="math notranslate nohighlight">\(k&lt;k^*\)</span>. A second critical value <span class="math notranslate nohighlight">\(k=\hat{k}\approx .51\)</span> marks the highest value of <span class="math notranslate nohighlight">\(k\)</span> for which both wells are needed to capture all the targeted contaminant.  The system is inefficient when <span class="math notranslate nohighlight">\(k&gt;\hat{k}\)</span>. A regular system is one whose <span class="math notranslate nohighlight">\(k\)</span> value satisfies <span class="math notranslate nohighlight">\(k^*&lt;k&lt;\hat{k}\)</span>. That is, the system is both effective and efficient.</p>
+<a class="reference internal image-reference" href="../../_images/fig14a.png"><img alt="../../_images/fig14a.png" src="../../_images/fig14a.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fig14b.png"><img alt="../../_images/fig14b.png" src="../../_images/fig14b.png" style="width: 300px;" /></a>
+</section>
+<section id="sensitivity-analysis">
+<h2>Sensitivity Analysis<a class="headerlink" href="#sensitivity-analysis" title="Permalink to this headline">#</a></h2>
+<p>The System Sensitivity Method is used to classify systems as being ineffective, regular, or inefficient.  The Critical Value Method identifies numerically the critical values <span class="math notranslate nohighlight">\(k=k^*\approx .285\)</span> dividing ineffective and regular systems and <span class="math notranslate nohighlight">\(k=\hat{k}\approx .51\)</span> dividing regular and inefficient systems.  Our estimate that <span class="math notranslate nohighlight">\(k\approx k_{ave}=.16\)</span> is in the range of ineffective systems.</p>
+<p>We can repeat the analysis only reversing the relative pumping strengths of EWSL2:EWSL4 from 3:2 to 2:3. Such a change would presumably maintain the same system cost and carbon footprint. As shown in the table below, both critical values <span class="math notranslate nohighlight">\(k^*\)</span> and <span class="math notranslate nohighlight">\(\hat{k}\)</span> decrease, indicating that reduced pumping strength is required for the 2:3 system to be regular (both effective and efficient).  However, for <span class="math notranslate nohighlight">\(k=k_{ave}\approx .16\)</span>, this reversal in pumping strength ratios would not change the ineffectiveness of the system.</p>
+<a class="reference internal image-reference" href="../../_images/table2.png"><img alt="../../_images/table2.png" src="../../_images/table2.png" style="width: 300px;" /></a>
+<p>Intuitively, when <span class="math notranslate nohighlight">\(k\)</span> is small, the total volume of pumped out water remains roughly the same for both pumping strength ratios since the midplume well does not extract much water from downstream. Therefore, the total extent of the combined capture zones for the two extraction wells remains roughly the same.  On the other hand, for higher <span class="math notranslate nohighlight">\(k\)</span> values where the mid-stream well EWSL-2 extracts more downstream water (contributing to inefficiency), the overall system performance will improve if the strength ratio is reversed from 3:2 to 2:3.  (Note: Removing three outliers in the data for potentials, our model estimates <span class="math notranslate nohighlight">\(k_{ave}\approx .12\)</span>. This suggests that an effective system might be achievable by reversing the  strength ratio to 2:3 and roughly doubling the pumping rates. Additional data would be needed to check the correlation between the parameter <span class="math notranslate nohighlight">\(k\)</span> and the pumping rates for the range of <span class="math notranslate nohighlight">\(k\)</span> values under consideration.)</p>
+</section>
+<section id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
+<p>The 2D groundwater flow modeling we have introduced in this Module is an elegant application of complex variables. Moreover, complex potentials are useful in many other physical contexts such as heat conduction,  and also gravitational and electrostatic fields. An important strength of using a complex potential <span class="math notranslate nohighlight">\(\Omega(z)\)</span> for groundwater modeling is that it gives a clearer picture of how contaminated flow can be captured  by extraction wells. Direction arrows which are perpendicular to equipotential lines  give the direction of streamlines but not a clear indication of dividing streamlines. Using a complex potential, one can precisely specify these streamlines via the stream function. This is useful to find critical parameter values such as for the well strength parameter.  As suggested, a system sensitivity analysis may quickly furnish evidence in answer to certain “what if” questions about the effectiveness or efficiency of the extraction well system after a modification of the original design.</p>
+<p>We hpe this chapter will stimulate the reader to further study hydrology in conjunction with advanced mathematical and computational analysis. The latter are important tools in more sophisticated modeling of groundwater flow, with potential implications that include efficient and effective remediation.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<p>U.S. Environmental Protection Agency. 2020. Fifth five-year review for the Fischer-Calo Superfund Site. <a class="reference external" href="https://semspub.epa.gov/work/05/959749.pdf">https://semspub.epa.gov/work/05/959749.pdf</a></p>
+<p>Kelly, P.,  Panton, R.,  and  Martin, E.D.  1990.  Three-dimensional  potential flows from functions of a 3D complex variable. \emph{Fluid Dynamics Research} 6:119–137,</p>
+<p>Sato, K. 2015. <i>Complex Analysis for Practical Engineering.</i>Switzerland: Springer International Publishing,</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Advanced/Complex"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="jnb3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3. Idealized Groundwater Flow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Complex_Potentials.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Complex Potentials</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assumptions">Model Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-output">Model Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
