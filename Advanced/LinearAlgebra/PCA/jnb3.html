@@ -1,0 +1,915 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Dimension Reduction by Principal Component Analysis &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/LinearAlgebra/PCA/jnb3';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Differential Equations" href="../../../DifEq.html" />
+    <link rel="prev" title="2. K-means Clustering" href="../KMeans/jnb2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb1.html">1 Functions Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb8.html">9. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb10.html">10. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb11.html">11. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Demo.html">12. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Prob.html">Probability Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Stat.html">Statistical Inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/Calculus/Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/Calculus/Sec4.html">4 Derivatives</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Paul Isihara, Sam Carlson, Ziling Zhong</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/drivethru.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Linear.html">Linear Algebra</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OLS/jnb1.html">1. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../KMeans/jnb2.html">2. K-means Clustering</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Dimension Reduction by Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../DifEq.html">Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FAdvanced/LinearAlgebra/PCA/jnb3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Advanced/LinearAlgebra/PCA/jnb3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4. Dimension Reduction by Principal Component Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-and-covariance-for-mean-centered-data">Variance and Covariance for Mean-centered Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix">Covariance Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projected-variance">Projected Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-2">Example 4.2.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximization-of-projected-variance-by-principal-component-analysis">Maximization of Projected Variance by Principal Component Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dimension-reduction-by-principal-component-analysis">
+<h1>4. Dimension Reduction by Principal Component Analysis<a class="headerlink" href="#dimension-reduction-by-principal-component-analysis" title="Permalink to this headline">#</a></h1>
+<p>Principal component analysis (PCA) is used to reduce high-dimensional data by projecting the data onto a much-lower-dimensional subspace. The subspace is chosen so that the variance of the projected data points is maximized.</p>
+<p>For a simple example illustrating why maximizing the projected variance is useful,   consider the scatterplot of covid test rates and death rates by Chicago zipcode as shown in the figure below.  For the zipcodes in the shaded portion of the scatterplot, we notice  a much higher variance in the death rate than in the test rate. Hence, from the death rate for a zipcode, we would expect to learn more than from its test rate; the test rates are roughly the same for all zipcodes, but there is considerable spread in the death rates.  Thus, if we wish to reduce the dimensionality of the data, it would be more informative to project onto the death rate rather than  onto the test rate, since the former has greater variance. Dimension reduction is based on projections that maximize variance.</p>
+<a class="reference internal image-reference" href="../../../_images/fig81.png"><img alt="../../../_images/fig81.png" src="../../../_images/fig81.png" style="width: 600px;" /></a>
+<p>Chicago zipcodes shown in the shaded portion of the scatterplot have a variance of roughly 0.1 for the standardized test rate and 0.9 for the standardized death rate. (Zipcode 60604, which includes the Chicago Board of Trade, Federal Building, and Chicago Symphony Center, has a standardized test rate of 5.7 and is not shown.)</p>
+<section id="variance-and-covariance-for-mean-centered-data">
+<h2>Variance and Covariance for Mean-centered Data<a class="headerlink" href="#variance-and-covariance-for-mean-centered-data" title="Permalink to this headline">#</a></h2>
+<p>Consider real data values <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with mean <span class="math notranslate nohighlight">\(\bar{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> with mean <span class="math notranslate nohighlight">\(\bar{y}\)</span>.</p>
+<p>i) The variance <span class="math notranslate nohighlight">\(Var(\mathbf{x})\)</span> of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>    and variance <span class="math notranslate nohighlight">\(Var(\mathbf{y})\)</span> of <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> are</p>
+<div class="math notranslate nohighlight">
+\[
+Var(\mathbf{x})=\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n},\hspace{.25in} Var(\mathbf{y})=\frac{\sum_{i=1}^n (y_i-\bar{y})^2}{n}.
+\]</div>
+<p>ii) The covariance of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> (denoted <span class="math notranslate nohighlight">\(Cov(\mathbf{x},\mathbf{y})\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+Cov(\mathbf{x},\mathbf{y})=\frac{\sum_{i=1}^n\, (x_i-\bar{x})(y_i-\bar{y}){}}{n}.
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(Cov(\mathbf{x},\mathbf{y})=Cov(\mathbf{y},\mathbf{x}).\)</span> Furthermore, for mean-centered data (<span class="math notranslate nohighlight">\(\bar{x}=0\)</span> and <span class="math notranslate nohighlight">\(\bar{y}=0\)</span>), the formulas  simplify to</p>
+<div class="math notranslate nohighlight">
+\[
+Var(\mathbf{x})=\dfrac{\sum_{i=1}^n x_i^2}{n}=\frac{1}{n}\,\mathbf{x}\cdot\mathbf{x},\qquad Cov(\mathbf{x},\mathbf{y})=\frac{\sum_{i=1}^n x_iy_i}{n}=\frac{1}{n}\,\mathbf{x}\cdot\mathbf{y}.
+\]</div>
+<p>The variance measures how far the data are spread away  from the mean, and the covariance  measures the correspondence between  <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values.</p>
+</section>
+<section id="covariance-matrix">
+<h2>Covariance Matrix<a class="headerlink" href="#covariance-matrix" title="Permalink to this headline">#</a></h2>
+<p>Consider an <span class="math notranslate nohighlight">\(n\times m\)</span> data matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> where each row represents a different data point (e.g., <span class="math notranslate nohighlight">\(n\)</span> people) and each column represents one of <span class="math notranslate nohighlight">\(m\)</span> different features (e.g., height, weight, age etc.). We assume that the columns have all been mean-centered.  Define the real <i>covariance matrix</i> <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{A}=\tfrac{1}{n}\,\mathbf{X}^T\mathbf{X}.
+\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{A}\)</span> must be symmetric since <span class="math notranslate nohighlight">\(\mathbf{A}^T=\frac{1}{n}\mathbf{X}^T(\mathbf{X}^T)^T=\frac{1}{n}\mathbf{X}^T\mathbf{X}=\mathbf{A}.\)</span> (Recall that <span class="math notranslate nohighlight">\((\mathbf{M}\mathbf{N})^T=\mathbf{N}^T\mathbf{M}^T.\)</span>)</p>
+<p>As a consequence of the definition of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and as illustrated in the following example, the <span class="math notranslate nohighlight">\((i,i)\)</span> entry of the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the variance of the <span class="math notranslate nohighlight">\(i^{th}\)</span> column of the data matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, and the <span class="math notranslate nohighlight">\((i,j)\)</span> entry (<span class="math notranslate nohighlight">\(i\neq j\)</span>) of the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the covariance of the <span class="math notranslate nohighlight">\(i^{th}\)</span> and <span class="math notranslate nohighlight">\(j^{th}\)</span> columns of the data matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h3>
+<p>Consider the data points <span class="math notranslate nohighlight">\((-5,0)\)</span>, <span class="math notranslate nohighlight">\((0,2)\)</span>, <span class="math notranslate nohighlight">\((5,-2)\)</span>.  The data are mean-centered. We have <span class="math notranslate nohighlight">\(Var(\mathbf{x})=[(-5)^2+0^2+5^2]/3=50/3\)</span>, <span class="math notranslate nohighlight">\(Var(\mathbf{y})=[0^2+2^2+(-2)^2]/3=8/3\)</span>, and <span class="math notranslate nohighlight">\(Cov(\mathbf{x},\mathbf{y})= [(-5)(0)+0(2)+5(-2)]/3=-10/3.\)</span></p>
+<p>For the corresponding data matrix</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbf{X}=
+\begin{pmatrix}
+   -5 &amp; 0 \\
+0&amp; 2 \\
+5&amp;-2
+\end{pmatrix},
+\end{align*}\]</div>
+<p>the mean of both columns is zero.  The covariance matrix is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbf{A}&amp;=\tfrac{1}{3}\mathbf{X}^T\mathbf{X}=\frac{1}{3}
+\begin{pmatrix}
+-5 &amp; 0 &amp; 5\\
+0&amp;2&amp;-2
+\end{pmatrix}
+\begin{pmatrix}
+-5 &amp; 0 \\
+0&amp;2&amp;\\
+5&amp;-2\end{pmatrix}\\&amp;=
+\dfrac{1}{3}
+\begin{pmatrix}
+   50 &amp; -10 \\
+-10 &amp; 8\\
+\end{pmatrix}=
+ \begin{pmatrix}
+   50/3 &amp; -10/3 \\
+-10/3 &amp; 8/3\\
+\end{pmatrix}.
+  \end{align*}\]</div>
+<p>As expected, the <span class="math notranslate nohighlight">\((1,1)\)</span> entry of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> gives <span class="math notranslate nohighlight">\(Var(\mathbf{x})=50/3\)</span>, the <span class="math notranslate nohighlight">\((2,2)\)</span> entry gives <span class="math notranslate nohighlight">\(Var(\mathbf{y})=8/3\)</span>, and the <span class="math notranslate nohighlight">\((1,2)\)</span> and <span class="math notranslate nohighlight">\((2,1)\)</span> entries both give <span class="math notranslate nohighlight">\(Cov(\mathbf{x},\mathbf{y})=Cov(\mathbf{y},\mathbf{x})=-10/3\)</span>.</p>
+</section>
+</section>
+<section id="projected-variance">
+<h2>Projected Variance<a class="headerlink" href="#projected-variance" title="Permalink to this headline">#</a></h2>
+<p>Consider the data points <span class="math notranslate nohighlight">\((x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)\)</span>. We assume that the data are mean-centered, so <span class="math notranslate nohighlight">\(\bar{x}=\bar{y}=0\)</span>. Our goal in this section is to find a simple matrix expression that can be used compute the variance VAR of these data projected onto a line <span class="math notranslate nohighlight">\(L_{\mathbf{u}}\)</span> through the origin determined by a unit vector <span class="math notranslate nohighlight">\(\mathbf{u}=(u_1,u_2)\)</span>. Referring to the left panel of the figure below, note that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\text{VAR} &amp;=  \frac{1}{n}\sum_{i=1}^n s_i^2
+= \frac{1}{n}\sum_{i=1}^n (x_iu_1 + y_iu_2)^2\nonumber\\
+&amp;= \frac{1}{n}\sum_{i=1}^n x_i^2u_1^2 + 2x_iy_iu_1u_2 + y_i^2u_2^2\nonumber\\
+&amp;= u_1^2 Var(\mathbf{x}) + 2u_1u_2Cov(\mathbf{x},\mathbf{y}) + u_2^2Var(\mathbf{y}).
+\end{align*}\]</div>
+<p>On the other hand, if we write <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> as a <span class="math notranslate nohighlight">\(2\times 1\)</span> column vector, VAR can also be computed as the matrix product <span class="math notranslate nohighlight">\({\mathbf{u}}^T\mathbf{A}\mathbf{u}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1aea033c-6f0b-4c19-83e1-1d93c0bb2230">
+<span class="eqno">(8)<a class="headerlink" href="#equation-1aea033c-6f0b-4c19-83e1-1d93c0bb2230" title="Permalink to this equation">#</a></span>\[\begin{align}
+{\mathbf{u}}^T\mathbf{A}\mathbf{u}  &amp;=
+\begin{pmatrix}
+u_1 \, u_2
+\end{pmatrix}
+\begin{pmatrix}
+Var(\mathbf{x}) &amp; Cov(\mathbf{x},\mathbf{y}) \\
+Cov(\mathbf{x},\mathbf{y})&amp;Var(\mathbf{y})\\
+\end{pmatrix}
+\begin{pmatrix}
+u_1\\
+u_2
+\end{pmatrix}\nonumber\\
+&amp;=
+\begin{pmatrix}
+u_1Var(\mathbf{x})+u_2Cov(\mathbf{x},\mathbf{y}), &amp; u_1Cov(\mathbf{x},\mathbf{y})+u_2Var(\mathbf{y})
+\end{pmatrix}
+\begin{pmatrix}
+u_1\\
+u_2
+\end{pmatrix}\nonumber\\
+&amp;=
+u_1^2Var(\mathbf{x})+2u_1u_2Cov(\mathbf{x},\mathbf{y})+u_2^2Var(\mathbf{y})=\text{VAR}.
+\end{align}\]</div>
+ <img src="fig9.png" width="600px"> 
+ (Left) Projected value $s_i$ of a data point $(x_i,y_i)$ onto a line through the origin determined by a unit vector $\mathbf{u}=(u_1,u_2)$. (Right) Projection of the 3 data points $(-5,0)$, $(0,2)$, and $(5,-2)$ onto the line $L_{\mathbf{u}}$ determined by the unit vector $\mathbf{u}=(1/\sqrt{2},1/\sqrt{2})$. The values $s_1$, $s_2$, and $s_3$ determine the variance $\text{VAR}=\frac{1}{3}(s_1^2+s_2^2+s_3^2$) of the projected points on $L_{\mathbf{u}}$.</section>
+<section id="example-4-2">
+<h2>Example 4.2.<a class="headerlink" href="#example-4-2" title="Permalink to this headline">#</a></h2>
+<p>Let us project the three data points <span class="math notranslate nohighlight">\((-5,0)\)</span>, <span class="math notranslate nohighlight">\((0,2)\)</span>, and <span class="math notranslate nohighlight">\((5,-2)\)</span> onto the line <span class="math notranslate nohighlight">\(L_{\mathbf{u}}\)</span> through the origin determined by the unit vector <span class="math notranslate nohighlight">\(\mathbf{u}=(u_1,u_2)=(\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}})\)</span> (see the right panel of the figure above). If we write <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> as a <span class="math notranslate nohighlight">\(2\times 1\)</span> column vector, the variance VAR of the projected points is equal to <span class="math notranslate nohighlight">\(\mathbf{u}^T\mathbf{A}\mathbf{u}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\text{VAR}&amp;=(s_1^2+s_2^2+s_3^2)/3=(25/2+4/2+9/2)/3=38/6=19/3,\\
+\mathbf{u}^T\mathbf{A}\mathbf{u}&amp;= 
+\begin{pmatrix}
+1/\sqrt{2} &amp;  1/\sqrt{2}
+\end{pmatrix}
+ \begin{pmatrix}
+   50/3 &amp; -10/3 \\
+-10/3 &amp; 8/3\\
+\end{pmatrix}
+\begin{pmatrix}
+1/\sqrt{2} \\  1/\sqrt{2}
+\end{pmatrix}\\
+&amp;=
+\begin{pmatrix}
+40/3\sqrt{2} &amp; -2/3\sqrt{2}
+\end{pmatrix}
+\begin{pmatrix}
+1/\sqrt{2} \\  1/\sqrt{2}
+\end{pmatrix}=40/6 - 2/6 = 38/6=19/3.
+\end{align*}\]</div>
+</section>
+<section id="maximization-of-projected-variance-by-principal-component-analysis">
+<h2>Maximization of Projected Variance by Principal Component Analysis<a class="headerlink" href="#maximization-of-projected-variance-by-principal-component-analysis" title="Permalink to this headline">#</a></h2>
+<p>Given an <span class="math notranslate nohighlight">\(n\times m\)</span> data matrix <span class="math notranslate nohighlight">\(X\)</span> whose columns all have mean  zero, the <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the symmetric matrix</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d7f2c526-44c7-4920-9fbf-7681a76b29d9">
+<span class="eqno">(9)<a class="headerlink" href="#equation-d7f2c526-44c7-4920-9fbf-7681a76b29d9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \mathbf{A}=\tfrac{1}{n}\mathbf{X}^T\mathbf{X}.
+\end{equation}\]</div>
+<p>Since the <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a real symmetric matrix, it has <span class="math notranslate nohighlight">\(m\)</span> linearly independent eigenvectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_m \in \mathbf{R}^m\)</span> with <span class="math notranslate nohighlight">\(m\)</span> real eigenvalues <span class="math notranslate nohighlight">\(\lambda_1\ge\lambda_2\ge\dots\ge\lambda_m.\)</span>  The first two principal components solve the following optimization problems:</p>
+<p><b>  (First principal component)</b> Find vector <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span> (written as an <span class="math notranslate nohighlight">\(m\times 1\)</span> column vector) that will</p>
+<div class="math notranslate nohighlight">
+\[
+      maximize \, J(\mathbf{v}_1)=\mathbf{v}_1^T \mathbf{A}\mathbf{v}_1
+\]</div>
+<p>such that <span class="math notranslate nohighlight">\(\|\mathbf{v}_1\|^2=1.\)</span> When the data is projected onto the line <span class="math notranslate nohighlight">\(\mathbf{L_{v_1}}\)</span> through the origin  determined by the unit vector <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>,  <span class="math notranslate nohighlight">\(J(\mathbf{v}_1)\)</span> is the variance of the data along that line.</p>
+<p>The choice of <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>  that maximizes the variance is a unit eigenvector of <span class="math notranslate nohighlight">\(\mathbf{A}=\frac{1}{n}\mathbf{X}^T\mathbf{X}\)</span> that has the largest eigenvalue [Aggarwal 2020].</p>
+<p><b>Second principal component</b>  Find vector <span class="math notranslate nohighlight">\(\mathbf{v}_2\)</span> (written as an  <span class="math notranslate nohighlight">\(m\times 1\)</span> column vector) that will</p>
+<div class="math notranslate nohighlight">
+\[
+      maximize \, J(\mathbf{v}_2)=\mathbf{v}_2^T\mathbf{A}\mathbf{v}_2
+\]</div>
+<p>such that <span class="math notranslate nohighlight">\(\|\mathbf{v}_2\|^2=1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v_1}\cdot\mathbf{v}_2=0.\)</span> The vector  <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span> is the one obtained in the first step as the first principal component;  <span class="math notranslate nohighlight">\(\mathbf{v}_2\)</span> must be orthogonal to <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span> and captures as much of the remaining variance in the data as possible that was not captured by <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>.</p>
+<p>More generally, to achieve our goal of dimensionality reduction we consider the following:</p>
+<p><b>  PRINCIPAL COMPONENT ANALYSIS OPTIMIZATION PROBLEM </b></p>
+<p>The first <span class="math notranslate nohighlight">\(k\)</span> principal component vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\dots\mathbf{v}_k\)</span> will</p>
+<div class="math notranslate nohighlight">
+\[
+      maximize \, J(\mathbf{v}_1,\dots,\mathbf{v}_k)=\sum_{i=1}^k \mathbf{v}_i^T \mathbf{A} \mathbf{v}_i
+\]</div>
+<p>subject to <span class="math notranslate nohighlight">\(\|\mathbf{v}_i\|^2=1\)</span> for all <span class="math notranslate nohighlight">\(i=1,\dots,k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_i\cdot\mathbf{v}_j=0\)</span> for all <span class="math notranslate nohighlight">\(i\neq j\)</span>.
+The vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\dots\mathbf{v}_k\)</span> are orthonormal eigenvectors of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with the largest eigenvalues.</p>
+<p>Typically, only a few of the non-negative eigenvalues of the positive semi-definite matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are relatively large.  Assemble the <span class="math notranslate nohighlight">\(k\)</span> principal unit eigenvectors with  the largest eigenvalues (principal components) as the columns of a <span class="math notranslate nohighlight">\(m\times k\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{Q}_k\)</span>. The transformed data matrix <span class="math notranslate nohighlight">\(\mathbf{X}_k=\mathbf{X}\mathbf{Q}_k\)</span> is an <span class="math notranslate nohighlight">\(n\times k\)</span> matrix that is a reduced <span class="math notranslate nohighlight">\(k\)</span>-dimensional feature representation (<span class="math notranslate nohighlight">\(k&lt;&lt;m\)</span>) of the original <span class="math notranslate nohighlight">\(n\times m\)</span> data matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. The PCA reduced matrix <span class="math notranslate nohighlight">\(\mathbf{X_k}\)</span> captures as much of the variance of the original data matrix as is possible by a <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspace [Aggarwal 2020].</p>
+<p>Not all <span class="math notranslate nohighlight">\(m\)</span> features of the data set may be equally important in describing the data. PCA can be viewed as providing a sequence of best-fit subspaces of dimensions <span class="math notranslate nohighlight">\(k=1,2,\dots, m-1\)</span>.
+These subspaces minimize the projected squared distances from the data and maximize the variance of the projected data. JNB Exercise 5 illustrates how PCA can be used to reduce high-dimensional (<span class="math notranslate nohighlight">\(N\times N\)</span>-pixel) vector representations of letter images. After projecting these <span class="math notranslate nohighlight">\(N^2\)</span> dimensional vectors onto a two-dimensional subspace determined by the first two principal components, and then converting the projected vectors back to an image, we still maintain a good idea of the original  letters. This would not be the case if we projected the image vectors onto a two-dimensional subspace determined by any two of the <span class="math notranslate nohighlight">\(N^2\)</span> standard basis vectors <span class="math notranslate nohighlight">\(\mathbf{e_1}=(1,0,0,\dots,0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{e_2}=(0,1,0,\dots,0),\dots,\mathbf{e_{N^2}}=(0,0,0,\dots,1).\)</span></p>
+<section id="exercises">
+<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h3>
+<ol class="arabic simple">
+<li></li>
+</ol>
+<p>a) <span class="math notranslate nohighlight">\(\,\)</span> Use the covariance matrix to determine the variance and  covariance of the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates of the points  <span class="math notranslate nohighlight">\((-1,3),(0,0),(1,-3)\)</span>.</p>
+<p>b) <span class="math notranslate nohighlight">\(\,\)</span>  Use a principal component to determine on what line should we project the points <span class="math notranslate nohighlight">\((-1,3),(0,0),(1,-3)\)</span>  to maximize the variance on that line.</p>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> Consider the <span class="math notranslate nohighlight">\(n\times m = 4\times 3\)</span> data matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> defined as</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X}=
+\begin{pmatrix}
+ 2 &amp; 2 &amp; 0 \\
+ 0 &amp; 0 &amp;  1 \\
+ 0 &amp; 0 &amp;  -1\\
+-2 &amp; -2 &amp; 0
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Each row represents a person, so there are data for <span class="math notranslate nohighlight">\(n=4\)</span> people.  Each column represents a feature, so there are <span class="math notranslate nohighlight">\(m=3\)</span> features (e.g., height, weight, and age.)
+We assume that the columns are mean-centered and in standard units.
+Person 1 is  tall and heavy, with average age. Person 2 has average height and weight and is older. Person 3 is average height and weight and is younger. Person 4 is relatively short and light, with average age.</p>
+<p>a) <span class="math notranslate nohighlight">\(\,\)</span> Find the symmetric <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}=\frac{1}{n}\mathbf{X}^T\mathbf{X}\)</span></p>
+<p>b) <span class="math notranslate nohighlight">\(\,\)</span> Find the eigenvalues and eigenvectors of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> What are the first, second, and third principal components?</p>
+<p>c)  Explain how the variance is maximized by the principal components.</p>
+<ol class="arabic simple" start="3">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> Consider the <span class="math notranslate nohighlight">\(n\times m = 4\times 3\)</span> data matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> defined as</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\scriptsize
+\mathbf{X}=
+\begin{pmatrix}
+ 0 &amp; 4 &amp; 0 \\
+ 2 &amp; 0 &amp;  1 \\
+ -2 &amp; 0 &amp;  -1\\
+0 &amp; -4 &amp; 0
+\end{pmatrix}.
+\end{split}\]</div>
+<p>a) <span class="math notranslate nohighlight">\(\,\)</span> Without calculating eigenvectors, conjecture the first two principal components.</p>
+<p>b) <span class="math notranslate nohighlight">\(\,\)</span>
+Check your answer to a) by computing the eigenvectors of the covariance
+matrix <span class="math notranslate nohighlight">\(\mathbf{A}=\frac{1}{n}\mathbf{X}^T\mathbf{X}.\)</span></p>
+<ol class="arabic simple" start="4">
+<li></li>
+</ol>
+<p>a) <span class="math notranslate nohighlight">\(\,\)</span> Using the JNB PRINCIPAL COMPONENT ANALYSIS at <a class="reference external" href="https://tinyurl.com/2neb4z4c">https://tinyurl.com/2neb4z4c</a>,  the figure below shows a scatterplot of standardized  hardship index data for unemployment over age 16 and per capita income [UIC Great Cities 2017]. The original data are labelled by the number of the Chicago community area (1–77). What do the projected points indicate?</p>
+<a class="reference internal image-reference" href="../../../_images/fig10a.png"><img alt="../../../_images/fig10a.png" src="../../../_images/fig10a.png" style="width: 200px;" /></a>
+<p>b) <span class="math notranslate nohighlight">\(\,\)</span> The figure below  shows overcrowded housing and per capita income. Find a difference between this graph and the graph for unemployment in part a)</p>
+<a class="reference internal image-reference" href="../../../_images/fig10b.png"><img alt="../../../_images/fig10b.png" src="../../../_images/fig10b.png" style="width: 200px;" /></a>
+<p>4.5 <span class="math notranslate nohighlight">\(\,\)</span> a) <span class="math notranslate nohighlight">\(\,\)</span> We can illustrate the dimensionality reduction capacity of PCA by applying it to character recognition.  The Jupyter Notebook PRINCIPAL COMPONENT ANALYSIS at \url{<a class="reference external" href="https://tinyurl.com/2neb4z4c">https://tinyurl.com/2neb4z4c</a>}  shows how to take a collection of eight  64<span class="math notranslate nohighlight">\(\times\)</span>64 bit images of the letters <code class="docutils literal notranslate"><span class="pre">a'</span> <span class="pre">and</span> </code>b’, and project each letter onto a two-dimensional subspace determined by the first two principal components.  Referring to the figurese below, explain why the original image is <span class="math notranslate nohighlight">\(64^2=4096\)</span>-dimensional and the PCA image only two-dimensional.</p>
+<p>Original 64x64 pixel image.
+<a class="reference internal" href="../../../_images/fig11a.png"><img alt="../../../_images/fig11a.png" src="../../../_images/fig11a.png" style="width: 200px;" /></a></p>
+<p>2 dimensional representation obtained by projecting the  original image onto a 2 dimensional subspace determined by the first two principal components.
+<a class="reference internal" href="../../../_images/fig11b.png"><img alt="../../../_images/fig11b.png" src="../../../_images/fig11b.png" style="width: 200px;" /></a></p>
+<p>b)  <span class="math notranslate nohighlight">\(\,\)</span> The basis vectors <span class="math notranslate nohighlight">\({\mathbf v_1}\)</span>, <span class="math notranslate nohighlight">\({\mathbf{v}_2}\)</span> for the two-dimensional subspace determined by PCA correspond to the images in {\bf Figure \ref{Ex4.6b}}. The reduced dimensional representation of the letter `a’ in part {\bf a)} is the linear combination <span class="math notranslate nohighlight">\(2560.3 {\mathbf{v}_1}-2207.85\mathbf{v_2}\)</span>. What would happen if we used two standard basis vectors <span class="math notranslate nohighlight">\(\mathbf{e}_i\)</span>, <span class="math notranslate nohighlight">\(\mathbf{e}_j\)</span> to determine the subspace of projection? For example, what would happen if we choose <span class="math notranslate nohighlight">\(\mathbf{e_1}=(1,0,0,\dots,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{e_2}=(0,1,0,0,\dots,0)\)</span>?</p>
+<p>Images corresponding to the PCA 2D basis vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\mathbf{v}_2\)</span>.
+<a class="reference internal" href="../../../_images/fig12a.png"><img alt="../../../_images/fig12a.png" src="../../../_images/fig12a.png" style="width: 200px;" /></a>
+<a class="reference internal" href="../../../_images/fig12b.png"><img alt="../../../_images/fig12b.png" src="../../../_images/fig12b.png" style="width: 200px;" /></a></p>
+</section>
+<section id="solutions">
+<h3>Solutions.<a class="headerlink" href="#solutions" title="Permalink to this headline">#</a></h3>
+<p>1)<span class="math notranslate nohighlight">\(\,\)</span> a)</p>
+<p>The data matrix is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbf{X}=
+\begin{pmatrix}
+   -1 &amp; 3\\
+0&amp; 0 \\
+1&amp;-3
+\end{pmatrix}.
+ \end{align*}\]</div>
+<p>The covariance matrix is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbf{V}=\frac{1}{3}
+\begin{pmatrix}
+   2 &amp; -6 \\
+-6 &amp; 18\\
+\end{pmatrix}= 
+ \begin{pmatrix}
+   2/3 &amp; -2 \\
+-2 &amp; 6\\
+\end{pmatrix}
+  \end{align*}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(Var(\mathbf{x})=2/3\)</span>, <span class="math notranslate nohighlight">\(Var(\mathbf{y})=6\)</span>, and <span class="math notranslate nohighlight">\(Cov(\mathbf{x},\mathbf{y})=-2.\)</span></p>
+<p>b) <span class="math notranslate nohighlight">\(\,\)</span>The eigenvalues are 0 and 10. The principal component is determined by the largest eigenvalue <span class="math notranslate nohighlight">\(\lambda=10\)</span>, which has eigenvector <span class="math notranslate nohighlight">\((1,-3).\)</span> This vector determines the line <span class="math notranslate nohighlight">\(y=-3x,\)</span> which is the desired line.</p>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span>a)</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\scriptsize
+\mathbf{A}=
+\begin{pmatrix}
+ 2 &amp; 2 &amp; 0 \\
+ 2 &amp; 2 &amp; 0 \\
+ 0 &amp; 0 &amp;  1/2
+\end{pmatrix}.
+\end{align*}\]</div>
+<p>b)</p>
+<p>The eigenvalues of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are <span class="math notranslate nohighlight">\(\lambda_1=4\)</span>, <span class="math notranslate nohighlight">\(\lambda_2=1/2\)</span>, <span class="math notranslate nohighlight">\(\lambda_3=0\)</span>, with corresponding unit eigenvectors for  <span class="math notranslate nohighlight">\(\mathbf{v}_1=(1/\sqrt{2},1/\sqrt{2},0)^T\)</span>, <span class="math notranslate nohighlight">\(\mathbf{v}_2=(0,0,1)^T\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{v}_3=(1/\sqrt{2},-1/\sqrt{2},0)^T\)</span></p>
+<p>The first principal component of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is given by <span class="math notranslate nohighlight">\(\lambda_1,\mathbf{v}_1\)</span>, the second principal component of  is given by <span class="math notranslate nohighlight">\(\lambda_2,\mathbf{v}_2\)</span>, and  the third principal component  is given by <span class="math notranslate nohighlight">\(\lambda_3,\mathbf{v}_3\)</span>.</p>
+<p>c)</p>
+<p>The variance of the data along the line through the origin determined by <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span> is the maximum among all lines through the origin.</p>
+<p>The total variance of the data (sum of squared distances to the origin) is the sum of the variances by projecting the data onto the three lines through the origin determined by the mutually orthogonal unit vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>,  <span class="math notranslate nohighlight">\(\mathbf{v}_2\)</span>, and  <span class="math notranslate nohighlight">\(\mathbf{v}_3\)</span>.</p>
+<p>The variances along each of these lines decreases. Each captures more of the variance in an optimal way. The first principal component captures the most amount of variance projecting the data onto a line through the origin (1D subspace). This line is determined by <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>. The first two principal components capture the most variance if the data is projected onto a plane through the origin (2D subspace): the plane is determined by the vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_2\)</span>.</p>
+<ol class="arabic simple" start="3">
+<li></li>
+</ol>
+<p>a) <span class="math notranslate nohighlight">\(\,\)</span> By inspection, the greatest variance occurs in the <span class="math notranslate nohighlight">\(y\)</span>-coordinate, so we expect the first principal component to be in the direction of the line determined by <span class="math notranslate nohighlight">\((0,1,0)\)</span>. In the orthogonal direction (i.e., the <span class="math notranslate nohighlight">\(xz\)</span>-plane), we see that the data lie on the line <span class="math notranslate nohighlight">\(x=2z\)</span>. Thus, we  expect the second principal component to be in the direction of the line determined by <span class="math notranslate nohighlight">\((2,0,1)/\sqrt{5}\)</span>.</p>
+<p>b) <span class="math notranslate nohighlight">\(\,\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{A}=
+\begin{pmatrix}
+ 2 &amp; 0 &amp; 1 \\
+ 0 &amp; 8 &amp;  0 \\
+ 1 &amp; 0 &amp;  1/2
+\end{pmatrix}.
+\end{split}\]</div>
+<p>The first principal component is given by <span class="math notranslate nohighlight">\(\lambda_1=8\)</span> with eigenvector <span class="math notranslate nohighlight">\((0,1,0)\)</span>.</p>
+<p>The second principal component is given by eigenvector <span class="math notranslate nohighlight">\(\lambda_2=5/2\)</span> with eigenvector <span class="math notranslate nohighlight">\((2,0,1)/\sqrt{5}\)</span>.</p>
+<ol class="arabic simple" start="4">
+<li><p><span class="math notranslate nohighlight">\(\,\)</span> a) <span class="math notranslate nohighlight">\(\,\)</span> The line along which the projected points have the greatest variance.</p></li>
+</ol>
+<p>b) <span class="math notranslate nohighlight">\(\,\)</span> There is a difference in the ouliers–of significance in considering the most vulnerable.</p>
+<ol class="arabic simple" start="5">
+<li></li>
+</ol>
+<p>a) <span class="math notranslate nohighlight">\(\,\)</span> The original image is represented by a vector in <span class="math notranslate nohighlight">\(\mathbf{R}^{32^2}=\mathbf{R}^{1024}\)</span> where each pixel value corresponds to a coefficient in the standard basis.  The PCA image can be represented using  just 2 coefficients corresponding to the first two PCA basis vectors.</p>
+<p>b)  If we used the standard basis, we would get the grayscale values for
+two of the <span class="math notranslate nohighlight">\(64^2\)</span> pixels, and the rest of the pixels would have a value of 0 (i.e., appear as pure black.) There would be no way to distinguish whether the letter is an ‘a’ or ‘b’ using just two coordinates in the standard basis.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Advanced/LinearAlgebra/PCA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../KMeans/jnb2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2. K-means Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../../DifEq.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Differential Equations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-and-covariance-for-mean-centered-data">Variance and Covariance for Mean-centered Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix">Covariance Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projected-variance">Projected Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-2">Example 4.2.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximization-of-projected-variance-by-principal-component-analysis">Maximization of Projected Variance by Principal Component Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
