@@ -516,7 +516,8 @@ c_0 + c_1 x_1 = y_1,
 \[
 c_0+c_1x_2  = y_2,
 \]</div>
-<p><span class="math notranslate nohighlight">\(\vdots\)</span></p>
+<div class="math notranslate nohighlight">
+\[\vdots\]</div>
 <div class="math notranslate nohighlight">
 \[
 c_0+c_1 x_n  = y_n. 
@@ -556,18 +557,19 @@ y_n
 \[
 J(c_0,c_1)=\tfrac{1}{2}\sum_{i=1}^n (y_i-(c_0+c_1x_i) )^2=\tfrac{1}{2}\|\mathbf{y} - \mathbf{A}\mathbf{c}\|^2.
 \]</div>
+<p>(The factor of 1/2 multiplying the sum is introduced to simplify theoretical analysis of the loss function.)</p>
 <p>The loss function <span class="math notranslate nohighlight">\(J\)</span> is  zero when the points are collinear and situated on the line <span class="math notranslate nohighlight">\(y=c_0+c_1x\)</span>; otherwise,  <span class="math notranslate nohighlight">\(J\)</span>  is positive, since it is  half the sum of the squared vertical separations between data points and the line <span class="math notranslate nohighlight">\(y=c_0+c_1x\)</span>, as shown in the previous figure.</p>
 </section>
 <section id="minimizing-the-ols-loss-function-via-normal-equations">
 <h2>Minimizing the OLS Loss Function  via Normal Equations<a class="headerlink" href="#minimizing-the-ols-loss-function-via-normal-equations" title="Permalink to this headline">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(\mathbb{A}\)</span> be an <span class="math notranslate nohighlight">\(n\times 2\)</span> matrix of real numbers, and let the linear transformation <span class="math notranslate nohighlight">\(\mathbf{T}:\mathbb{R}^2\rightarrow\mathbb{R}^n\)</span> be defined by <span class="math notranslate nohighlight">\(\mathbf{T}(\mathbf{c})= \mathbf{A}\mathbf{c}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is a <span class="math notranslate nohighlight">\(2\times 1\)</span> column vector. The range of  <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the set of all <span class="math notranslate nohighlight">\(n\times 1\)</span> vectors defined  by</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> be an <span class="math notranslate nohighlight">\(n\times 2\)</span> matrix of real numbers, and let the linear transformation <span class="math notranslate nohighlight">\(\mathbf{L}:\mathbb{R}^2\rightarrow\mathbb{R}^n\)</span> be defined by <span class="math notranslate nohighlight">\(\mathbf{L}(\mathbf{c})= \mathbf{A}\mathbf{c}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is a <span class="math notranslate nohighlight">\(2\times 1\)</span> column vector. The range of  <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the set of all <span class="math notranslate nohighlight">\(n\times 1\)</span> vectors defined  by</p>
 <div class="math notranslate nohighlight">
 \[
 range\, of \, \mathbf{A} = \{ \mathbf{A}\mathbf{c} \mid \mathbf{c}\in\mathbf{R}^2\}. 
 \]</div>
 <p>By choosing <span class="math notranslate nohighlight">\(\mathbf{c}=(1,0)^T\)</span>, we see that  the first column of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> (denoted <span class="math notranslate nohighlight">\(\mathbf{a}_1\)</span>) is in the range of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. By choosing <span class="math notranslate nohighlight">\(\mathbf{c}=(0,1)^T\)</span>, we see that  the second column of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> (denoted <span class="math notranslate nohighlight">\(\mathbf{a}_2\)</span>) is also in the range of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
 <p>Minimizing the loss function <span class="math notranslate nohighlight">\(J(\mathbf{c}) =\frac{1}{2}\|\mathbf{y} - \mathbf{A}\mathbf{c}\|^2\)</span> is equivalent to minimizing  <span class="math notranslate nohighlight">\(\|\mathbf{y} - \mathbf{A}\mathbf{c}\|\)</span>, the latter being   the distance between <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> and an arbitrary vector <span class="math notranslate nohighlight">\(\mathbf{A} \mathbf{c}\)</span> that is in the range of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> (see figure below). If there is no exact solution (i.e., <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is not in the range of <span class="math notranslate nohighlight">\(\mathbf{A})\)</span>, this minimization is accomplished by choosing <span class="math notranslate nohighlight">\(\mathbf{\hat{c}}\)</span> such that vector <span class="math notranslate nohighlight">\(\mathbf{y}-\mathbf{A}\hat{c}\)</span> is orthogonal to the range of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.  That is, for <span class="math notranslate nohighlight">\(\mathbf{\hat{c}}\)</span> to be a least-squares solution to <span class="math notranslate nohighlight">\( \mathbf{A}\mathbf{c}=\mathbf{y}\)</span>, the vector  <span class="math notranslate nohighlight">\(\mathbf{y}-\mathbf{A}\mathbf{\hat{c}}\)</span> must be orthogonal (perpendicular) to each vector  in the range of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Since both column vectors of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> (namely,  <span class="math notranslate nohighlight">\(\mathbf{a}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{a}_2\)</span>) are in the range of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, it follows that <span class="math notranslate nohighlight">\(\mathbf{a}_i\cdot(\mathbf{y}-\mathbf{A}\mathbf{\hat{c}})=\mathbf{a}_i^T(\mathbf{y}-\mathbf{A}\mathbf{\hat{c}})=0\)</span> for each column vector <span class="math notranslate nohighlight">\(\mathbf{a}_i\)</span> of matrix~<span class="math notranslate nohighlight">\(\mathbf{A}.\)</span></p>
-<a class="reference internal image-reference" href="../../../_images/fig3.png"><img alt="../../../_images/fig3.png" src="../../../_images/fig3.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/fig3.png"><img alt="../../../_images/fig3.png" src="../../../_images/fig3.png" style="width: 400px;" /></a>
 <p>Hence,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -615,8 +617,8 @@ c_1
 \end{pmatrix}.
 \end{align*}\]</div>
 <p>The normal equations are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-38292fa4-bd07-4aa8-ab97-0509a2c7b974">
-<span class="eqno">(6)<a class="headerlink" href="#equation-38292fa4-bd07-4aa8-ab97-0509a2c7b974" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-3c15499d-717c-4022-a4f9-bb80fc3ee2b9">
+<span class="eqno">(6)<a class="headerlink" href="#equation-3c15499d-717c-4022-a4f9-bb80fc3ee2b9" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 \begin{pmatrix}
 1&amp; 1&amp;1&amp;1\\
 -1&amp;0&amp;1&amp;2
@@ -713,8 +715,8 @@ J(c_0,c_1)&amp;=\tfrac{1}{2}[\bigl(1-(c_0-c_1)\bigr)^2+(0-c_0)^2+\bigl(2-(c_0+c_
 \]</div>
 <p>Solving this system, we obtain <span class="math notranslate nohighlight">\(c_0=11/10\)</span> and <span class="math notranslate nohighlight">\(c_1=4/5\)</span>.</p>
 <p>{\flushleft The} system used to find these critical values is equivalent to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9432441e-4d5a-4dff-b50d-a5d3812a4346">
-<span class="eqno">(7)<a class="headerlink" href="#equation-9432441e-4d5a-4dff-b50d-a5d3812a4346" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-635dd880-566a-45b5-bb3b-6ff76adf2055">
+<span class="eqno">(7)<a class="headerlink" href="#equation-635dd880-566a-45b5-bb3b-6ff76adf2055" title="Permalink to this equation">#</a></span>\[\begin{align}
 %\scriptstyle
 \begin{pmatrix}
 %\scriptstyle
@@ -762,7 +764,7 @@ c_1
 <p>Gradient-based optimization expressed  is indeed equivalent to the normal equations.</p>
 <p>To say that solving the normal equations is mathematically equivalent to gradient-based optimization of the OLS loss function does not  imply that the normal equations offer the best numerical method for optimization of the loss function [Epperly 2022]. Beyond the scope of this Module is an assessment of different numerical approaches such as gradient descent and its variants including the  Adam method [Sun et. al. 2019], matrix factorizations such as <span class="math notranslate nohighlight">\(SVD\)</span> or <span class="math notranslate nohighlight">\(QR\)</span> [Aggarwal 2020], and mean-centering and standardizing data [Toth 2020].</p>
 <p>In addition to facilitating numerical analysis, mean-centering simplifies the linear algebra approach. Mean-centered data is obtained from a collection of data points by  replacing the original dataset  <span class="math notranslate nohighlight">\((x_i,y_i)\)</span>  with  the data points <span class="math notranslate nohighlight">\((x_i-\bar{x},y_i-\bar{y})\)</span>, <span class="math notranslate nohighlight">\(i=1, \dots n\)</span>, where <span class="math notranslate nohighlight">\(\bar{x}\)</span> and <span class="math notranslate nohighlight">\(\bar{y}\)</span> are the respective  means of the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates of the original data.  One can show that for mean-centered data,  <span class="math notranslate nohighlight">\(\hat{c}_0=0\)</span>, and the regression line is  <span class="math notranslate nohighlight">\(y = \hat{c}_1 x\)</span>.  Let <span class="math notranslate nohighlight">\(\mathbf{x}=(x_1,x_2,...,x_n)^{tr}\)</span>.  For mean-centered data, the regression vector <span class="math notranslate nohighlight">\({\bf \hat{y}}=\hat{c}_1\mathbf{x}\)</span> is obtained by projecting the vector <span class="math notranslate nohighlight">\({\bf y}\)</span> directly onto  the vector <span class="math notranslate nohighlight">\({\bf x}\)</span> as shown in the figure below.</p>
-<a class="reference internal image-reference" href="../../../_images/fig4.png"><img alt="../../../_images/fig4.png" src="../../../_images/fig4.png" style="width: 130px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/fig4.png"><img alt="../../../_images/fig4.png" src="../../../_images/fig4.png" style="width: 200px;" /></a>
 <p>The <i>variation equation</i> states that the total variation in the y-values is the sum of the explained variation (variation in the corresponding <span class="math notranslate nohighlight">\(y\)</span>-values on the regression line)  and the unexplained variation (the sum of squared residuals or twice the value of the loss function <span class="math notranslate nohighlight">\(J\)</span>). For mean-centered data, the total variation is <span class="math notranslate nohighlight">\(\mid\mid \mathbf{y}\mid\mid^2\)</span>, the explained variation is <span class="math notranslate nohighlight">\(\mid\mid \hat{c}_1\mathbf{x}\mid\mid^2\)</span> and the unexplained variation is <span class="math notranslate nohighlight">\(\mid\mid \mathbf{y} -\hat{c}_1 \mathbf{x}\mid\mid^2\)</span>. In other words, the variation equation for mean-centered data is simply the Pythagorean theorem.</p>
 </section>
 <section id="exercises">
