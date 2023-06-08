@@ -1,0 +1,1298 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Linear Regression &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Stat/04_Regression';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb1.html">1 Functions- Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb8.html">8. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb9.html">9. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Celestial/jnb10.html">10. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PreCollege/Demo.html">12. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Prob.html">Probability Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Stat.html">Statistical Inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/Calculus/Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/Calculus/Sec4.html">4 Derivatives</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Paul Isihara, Sam Carlson, Ziling Zhong</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/Linear/0intro.html">0. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Undergrad/Linear/1system.html">1. Systems of Linear Equations</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Undergrad/Linear/1_2sol.html">1.2 Solution Set of  Linear Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Undergrad/Linear/2matrix.html">2. Matrix Algebra</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Undergrad/Linear/2_1det.html">2.1 Determinant</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../DifEq.html">Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FStat/04_Regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Stat/04_Regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#world-bank-development-indicators">World Bank Development Indicators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple linear regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-sum-of-squares-error">Minimizing the Sum of Squares Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-least-squares-line">Finding the Least Squares Line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-and-goodness-of-fit-tests"><span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-on-model-parameters">Inference on model parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-test-of-hypothesis-for-beta-0">A test of hypothesis for <span class="math notranslate nohighlight">\(\beta = 0\)</span>.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-diagnostics">Model diagnostics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">Multiple regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variables">Dummy Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Model Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Inference on Model Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+<span class="c1"># Always run this cell first!</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="c1"># appear to need to import the api as well as the library itself for the interpreter to find the modules</span>
+<span class="kn">import</span> <span class="nn">statsmodels</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">ticker</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># make plotly work with Jupyter Notebook using CDN</span>
+
+<span class="c1"># an extra function for plotting a straight line</span>
+<span class="k">def</span> <span class="nf">plot_abline</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a line from slope and intercept&quot;&quot;&quot;</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span>
+    <span class="n">y_vals</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x_vals</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">math</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">scipy</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="c1"># appear to need to import the api as well as the library itself for the interpreter to find the modules</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">statsmodels</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;statsmodels&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="linear-regression">
+<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h1>
+<p>We next turn to explore another type of statistical decision making tool, linear regression. Linear regression is a tool to allow us to explore the connections between 2 or more variables.</p>
+<section id="world-bank-development-indicators">
+<h2>World Bank Development Indicators<a class="headerlink" href="#world-bank-development-indicators" title="Permalink to this headline">#</a></h2>
+<p>The World Development Indicators dataset, maintained by the World Bank, contains information about a wide variety of topics related to global development. The <a class="reference external" href="https://datacatalog.worldbank.org/search/dataset/0037712">most recent version</a> of the dataset, as of writing, provides over 1500 indicators for 217 economies from 1960 to 2021. The dataset is licensed under a <a class="reference external" href="https://datacatalog.worldbank.org/public-licenses#cc-by">Creative Commons Attribution 4.0 International License</a>.</p>
+<p>For our example, we will look at three statistics related to literacy. We will limit our analysis to the 89 countries that have valid data for all three statistics for at least one year in the time range 2017-2021. For each country, we will consider the most recent year from that time range for which all three statistics are available.</p>
+<p>Let’s take a look at this data, which is in a file called <code class="docutils literal notranslate"><span class="pre">world_bank_literacy.csv</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wbl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;world_bank_literacy.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="s1">&#39;country_code&#39;</span><span class="p">)</span>
+<span class="n">wbl</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>year</th>
+      <th>adult_literacy_rate_(pct)</th>
+      <th>primary_school_completion_rate_(pct)</th>
+      <th>primary_school_enrollment_rate_(pct)</th>
+    </tr>
+    <tr>
+      <th>country_code</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ALB</th>
+      <td>Albania</td>
+      <td>2021</td>
+      <td>98.449997</td>
+      <td>98.155830</td>
+      <td>95.921783</td>
+    </tr>
+    <tr>
+      <th>ARE</th>
+      <td>United Arab Emirates</td>
+      <td>2019</td>
+      <td>95.526482</td>
+      <td>111.938820</td>
+      <td>114.412361</td>
+    </tr>
+    <tr>
+      <th>ARG</th>
+      <td>Argentina</td>
+      <td>2018</td>
+      <td>99.003868</td>
+      <td>98.706253</td>
+      <td>109.659172</td>
+    </tr>
+    <tr>
+      <th>ARM</th>
+      <td>Armenia</td>
+      <td>2020</td>
+      <td>99.788612</td>
+      <td>93.165291</td>
+      <td>91.235443</td>
+    </tr>
+    <tr>
+      <th>AZE</th>
+      <td>Azerbaijan</td>
+      <td>2019</td>
+      <td>99.795982</td>
+      <td>100.383339</td>
+      <td>97.935349</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The column labeled <code class="docutils literal notranslate"><span class="pre">adult_literacy_rate_(pct)</span></code> (World Bank indicator <a class="reference external" href="https://data.worldbank.org/indicator/SE.ADT.LITR.ZS">SE.ADT.LITR.ZS</a>) contains the percentage of people age 15 and up in each country who are literate. The World Bank <a class="reference external" href="https://databank.worldbank.org/metadataglossary/world-development-indicators/series/SE.ADT.LITR.ZS">defines</a> a person as literate if they can “read and write with understanding a short simple statement about their everyday life.”</p>
+<p>The column labeled <code class="docutils literal notranslate"><span class="pre">primary_school_enrollment_rate_(pct)</span></code> (World Bank indicator <a class="reference external" href="https://data.worldbank.org/indicator/SE.PRM.ENRR">SE.PRM.ENRR</a>) contains the gross percentage of people enrolled in primary school in each country. This percentage is <a class="reference external" href="https://databank.worldbank.org/metadataglossary/world-development-indicators/series/SE.PRM.ENRR">calculated</a> by taking the total number of primary school students in a given country (no matter what their age is) and dividing it by the total number of people in the <em>official</em> age group for primary school in that country. Because some of the students in primary school might be older or younger than the official primary school ages, this percentage can be greater than 100%.</p>
+<p>The column labeled <code class="docutils literal notranslate"><span class="pre">primary_school_completion_rate_(pct)</span></code> (World Bank indicator <a class="reference external" href="https://data.worldbank.org/indicator/SE.PRM.CMPT.ZS">SE.PRM.CMPT.ZS</a>) contains the gross percentage of people enrolled in the <em>last</em> grade of primary school in each country. This percentage is <a class="reference external" href="https://databank.worldbank.org/metadataglossary/world-development-indicators/series/SE.PRM.CMPT.ZS">calculated</a> by taking the total number of non-repeating students in the last grade of primary school in a given country (no matter what their age is) and dividing it by the total number of people in the <em>official</em> age group for the last grade of primary school in that country. This percentage is not the actual rate of students who complete primary school, but it serves as a proxy (a variable we can measure that helps us approximate something else we can’t measure) for that rate. As with <code class="docutils literal notranslate"><span class="pre">primary_school_enrollment_(pct)</span></code>, this percentage can be greater than 100% because some of the students in the last grade of primary school might be older or younger than the official age for that grade.</p>
+<p>Let’s suppose we are interested in literacy rates worldwide. We could begin our exploration by taking a look at some summary statistics:</p>
+<p><em>Note that since we take the average over <em>countries</em> in the sample, the average literacy rate here also refers to an average country. Since it doesn’t take into account the population of any country, it is not reflective of the overal worldwide literacy rate.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wbl</span><span class="p">[</span><span class="s1">&#39;adult_literacy_rate_(pct)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    89.000000
+mean     85.170694
+std      18.214867
+min      26.760000
+25%      76.570518
+50%      94.971130
+75%      98.419998
+max      99.999947
+Name: adult_literacy_rate_(pct), dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>An average country in our sample has a literacy rate of about 85%, and there is a fair bit of variation in the literacy rates. But what are some of the things that are connected with literacy rates in different countries? For example, maybe literacy rate is connected to the percentage of students in the country that complete primary schooling. We could explore this connection with a scatter plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">wbl</span><span class="p">,</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;primary_school_completion_rate_(pct)&#39;</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;adult_literacy_rate_(pct)&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;primary_school_completion_rate_(pct)&#39;, ylabel=&#39;adult_literacy_rate_(pct)&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/4e32403b03d45e12dfeeda36c197c75588fd849cccff50b7d8adf791d970111c.png" src="../_images/4e32403b03d45e12dfeeda36c197c75588fd849cccff50b7d8adf791d970111c.png" />
+</div>
+</div>
+<p>It looks like there is some connection here! As primary school completion rate increases, so does the literacy rate. We might call this a <strong>positive trend</strong>. Plus, it looks like you might be able to draw a line through the middle of this cloud of points to describe the way the cluster of points moves. We might say also that it is a <strong>linear trend</strong>. We can describe this relationship in more depth using the tools of linear regression.</p>
+<p>Note that just because these two variables seem to have some pattern when plotted together, that doesn’t mean that primary school completion rate <em>causes</em> the change in literacy rate. We’ll use the word <strong>association</strong> to describe any patter or connection between two variables, because “correlation is not causation”.</p>
+</section>
+<section id="simple-linear-regression">
+<h2>Simple linear regression<a class="headerlink" href="#simple-linear-regression" title="Permalink to this headline">#</a></h2>
+<p>Simple linear regression is the method we have of modeling the linear association between two variables. You may have learned in algebra that one common way to write the equation of a line is through <em>slope-intercept form</em> <span class="math notranslate nohighlight">\(b + mx\)</span>, where <span class="math notranslate nohighlight">\(b\)</span> indicates that the line passes through the point <span class="math notranslate nohighlight">\((0,b)\)</span>, called the intercept of the line, and <span class="math notranslate nohighlight">\(m\)</span> is the slope. However, these points don’t exactly fit a line, but seem to have some random deviations around a general trend line. We can write this <em>line-plus-random-error</em> idea using the mathematical equation</p>
+<div class="amsmath math notranslate nohighlight" id="equation-21890b91-d3ab-4ea1-af5a-b82a87c7b958">
+<span class="eqno">()<a class="headerlink" href="#equation-21890b91-d3ab-4ea1-af5a-b82a87c7b958" title="Permalink to this equation">#</a></span>\[\begin{equation}
+Y = \alpha + \beta x + \varepsilon.
+\end{equation}\]</div>
+<p>This is another type of statistical model, called a linear regression model. It says that the value of (the random variable) <span class="math notranslate nohighlight">\(Y\)</span> is just the value along the line <span class="math notranslate nohighlight">\(\alpha + \beta x\)</span> plus a random error <span class="math notranslate nohighlight">\(\varepsilon\)</span>. If we knew the slope <span class="math notranslate nohighlight">\(\beta\)</span> and intercept <span class="math notranslate nohighlight">\(\alpha\)</span> of the line, then we could plug in the value of <span class="math notranslate nohighlight">\(x\)</span> to get a good guess for <span class="math notranslate nohighlight">\(Y\)</span>, though off by some error.</p>
+<p>You probably have many questions at this point, especially if this idea is new to you! But we want to first consider a big one: how do we figure out the equation for the line? There are multiple lines we could draw. Here are three of them!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make your own line by changing around these numbers:</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">intercept</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="c1"># add scatter plot of data</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">wbl</span><span class="p">,</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;primary_school_completion_rate_(pct)&#39;</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;adult_literacy_rate_(pct)&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># plot the line with given slope and intercept</span>
+<span class="c1"># use function defined in first cell</span>
+<span class="n">plot_abline</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">)</span>
+<span class="n">plot_abline</span><span class="p">(</span><span class="mf">.9</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="n">plot_abline</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6aa6b10600117d1e49c4dbd34c4b70e1cbc22171245c6d6dda22370711472fb7.png" src="../_images/6aa6b10600117d1e49c4dbd34c4b70e1cbc22171245c6d6dda22370711472fb7.png" />
+</div>
+</div>
+<p>But which one is best? And what would make a line the “best” one in this situation? The method of least squares, described below, is a way to answer both of these questions.</p>
+<section id="minimizing-the-sum-of-squares-error">
+<h3>Minimizing the Sum of Squares Error<a class="headerlink" href="#minimizing-the-sum-of-squares-error" title="Permalink to this headline">#</a></h3>
+<p>If you spent some time thinking about where the “best” line should go, you probably tried to get it somewhere in the middle of the cloud of points, so that it wasn’t too far away from any one point. In that way it would follow the general trend, even if it didn’t exaclty match any of the data points.</p>
+<p>We can make this idea more mathematical by considering something called the <strong>residual</strong>. Given any line <span class="math notranslate nohighlight">\(\hat y = a + bx\)</span>, the residual is the difference between the actual value of <span class="math notranslate nohighlight">\(y\)</span> associated with <span class="math notranslate nohighlight">\(x\)</span>, and the value <span class="math notranslate nohighlight">\(\hat y\)</span> that lies along the line, i.e., the residual is <span class="math notranslate nohighlight">\(y - \hat y\)</span>.</p>
+<p>Below we look at plots of two different lines, and examine the residuals associated with a few points in our “cloud” of data points. The residual for each point is the vertical distance from the point to the line. Which line do you think better fits the trend of the points? And what is the difference between the the residuals of the two trend lines?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">wbl</span><span class="p">,</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;primary_school_completion_rate_(pct)&#39;</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;adult_literacy_rate_(pct)&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># plot the line with given slope and intercept</span>
+<span class="c1"># use function defined in first cell</span>
+<span class="n">plot_abline</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plot_abline</span><span class="p">(</span><span class="mf">.95</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># add in lines showing the residuals</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/163971a57f4bc145a00a11ee2cab6f5a09b5c164321667e9e6e7cbfbaa8327b8.png" src="../_images/163971a57f4bc145a00a11ee2cab6f5a09b5c164321667e9e6e7cbfbaa8327b8.png" />
+</div>
+</div>
+<p>The better trend line has overall smaller residuals, so we might think that it would help  to pick the line that minimizes the sum of the residuals.</p>
+<p>However, the worse line has only negative residuals! So in fact the sum of the residuals is a negative number that will be smaller. It turns out we don’t care about the sign of the residual, only it’s magnitude! To solve this issue, we square each of the residuals and take the sum to form a <strong>sum of squared errors (SSE)</strong></p>
+<div class="amsmath math notranslate nohighlight" id="equation-066a080a-3975-4fc4-9c40-60fc8b7a2399">
+<span class="eqno">()<a class="headerlink" href="#equation-066a080a-3975-4fc4-9c40-60fc8b7a2399" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    SSE = \sum_{i=1}^n (y_i - \hat y_i)^2
+\end{equation}\]</div>
+<p>In the end, we want to find the slope and intercept of the line that minimizes this quantity. Since we are minimizing the sum of squared errors, this best-fit line also goes by the name <strong>least-squares regression</strong> line. Solving this problem looks like it could be tricky, but it turns out that the solution is straightforward when we employ the help of a little bit of calculus. Or, even nicer (in the author’s opinion) is to use a little algebra <strong>(link to algebra chapter)</strong>. We do need to assume that the random error <span class="math notranslate nohighlight">\(\varepsilon\)</span> is normally distributed, but we will gloss over this for now. You can read more about how to find the line of best fit elsewhere if you’re interested, but here we’ll simply find the solution using code.</p>
+<p>Why square the residuals and not just take the absolute value? One reason is mathematical: there is always a unique global minimizer to the SSE. Since squaring a large number will make it larger, this method penalizes very large residuals. Another reason is statistical: it turns out the slope and intercept of the least squares solution have special mathematical properties which make them the <em>maximum likelihood estimators</em> of the model’s true slope and intercept. But we won’t look into that here!</p>
+</section>
+<section id="finding-the-least-squares-line">
+<h3>Finding the Least Squares Line<a class="headerlink" href="#finding-the-least-squares-line" title="Permalink to this headline">#</a></h3>
+<p>First, we can easily get a plot of the regression line using <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>’s <code class="docutils literal notranslate"><span class="pre">lmplot</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">wbl</span><span class="p">,</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;primary_school_completion_rate_(pct)&#39;</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;adult_literacy_rate_(pct)&#39;</span><span class="p">,</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ff1814e77ca19178206d51fc728d4ca4d3571ae4bc989c2b69fc33556da13ce5.png" src="../_images/ff1814e77ca19178206d51fc728d4ca4d3571ae4bc989c2b69fc33556da13ce5.png" />
+</div>
+</div>
+<p>But what if we want to be more precise and want the equation of the line? For this, we’ll use some functionality from the <code class="docutils literal notranslate"><span class="pre">OLS</span></code> module in <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>. This is going to display a lot of stuff, but we’ll walk through it slowly!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;primary_school_completion_rate_(pct)&#39;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;adult_literacy_rate_(pct)&#39;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">regression</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span>
+    <span class="n">wbl</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="c1"># the dependent variable (y)</span>
+    <span class="n">sm</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">wbl</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="c1"># the independent variable (x)</span>
+<span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                OLS Regression Results                               
+=====================================================================================
+Dep. Variable:     adult_literacy_rate_(pct)   R-squared:                       0.567
+Model:                                   OLS   Adj. R-squared:                  0.562
+Method:                        Least Squares   F-statistic:                     114.0
+Date:                       Thu, 08 Jun 2023   Prob (F-statistic):           1.70e-17
+Time:                               12:51:25   Log-Likelihood:                -346.82
+No. Observations:                         89   AIC:                             697.6
+Df Residuals:                             87   BIC:                             702.6
+Df Model:                                  1                                         
+Covariance Type:                   nonrobust                                         
+========================================================================================================
+                                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------------------------
+const                                    6.6714      7.462      0.894      0.374      -8.160      21.503
+primary_school_completion_rate_(pct)     0.8615      0.081     10.677      0.000       0.701       1.022
+==============================================================================
+Omnibus:                       12.535   Durbin-Watson:                   1.772
+Prob(Omnibus):                  0.002   Jarque-Bera (JB):               13.251
+Skew:                          -0.842   Prob(JB):                      0.00133
+Kurtosis:                       3.861   Cond. No.                         540.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wow! There is a lot of information here, most of which we’ll explain later on. For now, let’s see how to get the information about the slope and the intercept of the line. You can find these values in the second table under the column heading “coef”. From this, we can see that the intercept (<code class="docutils literal notranslate"><span class="pre">const</span></code>) is 6.6714, and the slope associated with the primary school completion rate is 0.8615. We can write that as the line</p>
+<div class="amsmath math notranslate nohighlight" id="equation-80a5384f-82ac-436e-93fc-d477ee7901c4">
+<span class="eqno">()<a class="headerlink" href="#equation-80a5384f-82ac-436e-93fc-d477ee7901c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \hat y = 6.6714 + 0.8615 x
+\end{equation}\]</div>
+<p>Now that we have this line, how can we understand how to use it? First, the slope tells us how the changes in <span class="math notranslate nohighlight">\(x\)</span> are connected to changes in <span class="math notranslate nohighlight">\(\hat y\)</span>. Here, an increase of 1% in the primary school completion rate (<span class="math notranslate nohighlight">\(x\)</span>) is associated with an average increase of about .865% in the literacy rate (<span class="math notranslate nohighlight">\(y\)</span>).</p>
+<p>The intercept is a bit harder to interpret in this context, but it’s saying that in this model, a country with 0% primary school completion rate will, on average, have a literacy rate of 6.6714%. Of course, a 0% completion rate is much outside the range of values we have for <span class="math notranslate nohighlight">\(x\)</span>, and we don’t recommend using the model to make predictions there!</p>
+<p>Next, we want to look at how well this model fits the data.</p>
+</section>
+<section id="r-2-and-goodness-of-fit-tests">
+<h3><span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit tests<a class="headerlink" href="#r-2-and-goodness-of-fit-tests" title="Permalink to this headline">#</a></h3>
+<p>We mentioned before that that we are using linear regression to <em>model</em> the relationship between two variables. But this only works if these variables actually have a linear relationship! Maybe they are actually related in a nonlinear way, or not related at all.</p>
+<p>We can get some idea of this by looking at the scatter plot, but we can also quantify the strength of a linear relationship through a number called the <strong>correlation coefficient</strong> <span class="math notranslate nohighlight">\(r\)</span>. The number <span class="math notranslate nohighlight">\(r\)</span> is a value between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span> that gives measures the strength of the linear association between two variables.</p>
+<p>What’s a large value of <span class="math notranslate nohighlight">\(r\)</span> versus a small one? It depends on the problem! And as you get more comfortable with this, you’ll get a sense for it. Below we’ll take a closer look at how to understand this. As you look at these different plots, which would you say have a strong linear association?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TO DO: interactive plot of different r&#39;s</span>
+<span class="c1"># or just a plot with several different choices of r</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are a few ways to calculate <span class="math notranslate nohighlight">\(r\)</span> in Python. First, we could calculate it directly using the <code class="docutils literal notranslate"><span class="pre">pearsonr</span></code> command from <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">wbl</span><span class="p">[</span><span class="s1">&#39;primary_school_completion_rate_(pct)&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">wbl</span><span class="p">[</span><span class="s1">&#39;adult_literacy_rate_(pct)&#39;</span><span class="p">]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7531156213152443
+</pre></div>
+</div>
+</div>
+</div>
+<p>Second, we also get the magnitude of <span class="math notranslate nohighlight">\(r\)</span> in the output of our linear model. If you look above, you see that the output of the linear model says <code class="docutils literal notranslate"><span class="pre">R-squared:</span> <span class="pre">0.567</span></code>. This actually provides you with a value <span class="math notranslate nohighlight">\(r^2\)</span>, which is simply the square of the correlation coeffient <span class="math notranslate nohighlight">\(r\)</span> that we calculated above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5671831390690465
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even though it doesn’t tell us if the trend is positive or negative, <span class="math notranslate nohighlight">\(r^2\)</span> is often preffered to <span class="math notranslate nohighlight">\(r\)</span> as it has a simple interpretation. The value of <span class="math notranslate nohighlight">\(r^2\)</span> quantifies the percentage of variation in <span class="math notranslate nohighlight">\(Y\)</span> that is explained by the linear model.</p>
+<p>In the context of our problem, using a linear model with the primary school completion rate explains 56.7% of the variation in literacy rates between the countries. More simply, the school completion rate explains some of the differences in literacy rates between countries, but not all, and that amount is quantified as 56.7%.</p>
+<p>Is this a small or large amount? One way to quantify how well the model fits is through a <em>Goodness of Fit Test</em>. Without giving all of the details, this is a hypothesis test that determines if the value of <span class="math notranslate nohighlight">\(r\)</span> is significantly different from 0. In terms of hypotheses, the null hypothesis is that the model is not a good fit, versus the alternative that it is a good fit.</p>
+<p>The test statistic has a special type of distribution called an F distribution, and its value can be found one the right of the summary table as <code class="docutils literal notranslate"><span class="pre">F-statistic</span></code>. The <span class="math notranslate nohighlight">\(P\)</span>-value for the test is right below it. In this case an F statistic of 114.0 yields a <span class="math notranslate nohighlight">\(P\)</span>-value of <span class="math notranslate nohighlight">\(1.70\times 10^{-17}\)</span>, which is about as close to 0 as you can get on a standard computer. Hence, we reject the null hypothesis, and conclude that this linear model fits the data well.</p>
+<p>There is a lot more to these kinds of tests, which become more important in the multiple regression case. We’ll come back to that later on!</p>
+</section>
+</section>
+<section id="inference-on-model-parameters">
+<h2>Inference on model parameters<a class="headerlink" href="#inference-on-model-parameters" title="Permalink to this headline">#</a></h2>
+<p>Now that we know how to find the line of best fit, we want to know how good our estimates of the slope and intercept are. We began by assuming that there was a linear model describing the relationship between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c406b220-a77e-4952-8ef4-5b36262f8c44">
+<span class="eqno">()<a class="headerlink" href="#equation-c406b220-a77e-4952-8ef4-5b36262f8c44" title="Permalink to this equation">#</a></span>\[\begin{equation}
+Y = \alpha + \beta x + \varepsilon.
+\end{equation}\]</div>
+<p>Because we only have limited data on the relationship between these two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, we can’t calculate <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> exactly, but only estimate them with our least squares estimates <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. How can we know how good these estimates actually are? We again turn to our statistical inference tools of the confidence interval and hypothesis test.</p>
+<section id="a-test-of-hypothesis-for-beta-0">
+<h3>A test of hypothesis for <span class="math notranslate nohighlight">\(\beta = 0\)</span>.<a class="headerlink" href="#a-test-of-hypothesis-for-beta-0" title="Permalink to this headline">#</a></h3>
+<p>A big question in linear regression is whether knowing the value of <span class="math notranslate nohighlight">\(x\)</span> makes a difference in our estimation of <span class="math notranslate nohighlight">\(Y\)</span>. If it didn’t, the slope value in the model would actually be 0. If it does, it would be something different from 0. But <span class="math notranslate nohighlight">\(\beta\)</span> is a parameter of the model, which we estimated by calculating <span class="math notranslate nohighlight">\(b\)</span>. We can use our hypothesis testing skills to decide if <span class="math notranslate nohighlight">\(\beta = 0\)</span> or not!</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7c112c60-3dc4-4444-a7fe-842f30873acc">
+<span class="eqno">()<a class="headerlink" href="#equation-7c112c60-3dc4-4444-a7fe-842f30873acc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    H_0: \beta = 0, \\ H_1: \beta \neq 0.
+\end{equation}\]</div>
+<p>We can show that the test statistic for this hypothesis test is a T random variable, and the value is given in the model summary readout. Look for the column <code class="docutils literal notranslate"><span class="pre">t</span></code>, just two columns to the right of where you found the coefficients. And just next to that is the <span class="math notranslate nohighlight">\(P\)</span>-value for the test.</p>
+<p>In this case, we go <span class="math notranslate nohighlight">\(T=10.677\)</span> which yields a <span class="math notranslate nohighlight">\(P\)</span>-value of 0.000. This woulc cause us to reject the null hypothesis, and conclude that the true slope is actually different from 0. We can also give a 95% confidence interval for our estimate of the slope, which is again given in the table as <span class="math notranslate nohighlight">\((0.701, 1.022)\)</span>.</p>
+<p>If this seems similar to the goodness of fit test we just covered, you’re right! In fact, they are exactly the same in the simple linear regression case (verify for yourself that <span class="math notranslate nohighlight">\(F = T^2\)</span>). However, once we move to the multiple regression case, they will no longer be the same, and both tests will be important!</p>
+<p>Before moving on, make sure you take some time to look over the model summary output again, and that you can find all the information we talked about in the text.</p>
+</section>
+</section>
+<section id="model-diagnostics">
+<h2>Model diagnostics<a class="headerlink" href="#model-diagnostics" title="Permalink to this headline">#</a></h2>
+<p>To wrap up our discussion of simple linear regression, we need to address a few details that we have so far glossed over. In all of the previous discussion, we have made a few assumptions at which we need to take a deeper look.</p>
+<p>We assumed:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> really do have a linear relationship. We made this assumption when we decided to use the model <span class="math notranslate nohighlight">\(Y = \alpha + \beta x + \varepsilon\)</span>.</p></li>
+<li><p>The random error <span class="math notranslate nohighlight">\(\varepsilon\)</span> is normally distributed with mean 0.</p></li>
+<li><p>The random error <span class="math notranslate nohighlight">\(\varepsilon\)</span> is independent of <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ol>
+<p>These last two assumptions were not explicitly stated, but are needed to make the regression interpretations work. And when we make assumptions like this, we need to check to see if these are reasonable! Here, we will show how to visually evaluate these assumptions using graphs.</p>
+<p>The first question of the relationship between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> can be easily evaluated through the scatter plot we made at the beginning of the section. If the scatter plot isn’t clear, then the correlation coefficient can help!</p>
+<p>We can evaluate the next two claims by examining the residuals. The residuals are related to the random error since according to the model,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9bf11c6f-b665-4bff-b078-8a7f96f50e9a">
+<span class="eqno">()<a class="headerlink" href="#equation-9bf11c6f-b665-4bff-b078-8a7f96f50e9a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    y_i - \hat y_i =  y_i - (a + b x_i) \approx y_i - (\alpha + \beta x_i) = \varepsilon_i.
+\end{equation}\]</div>
+<p>Plotting the residuals will give us an idea about the distribution of the <span class="math notranslate nohighlight">\(\varepsilon\)</span>, but we need two different types of plots to examine the assumptions.</p>
+<p>First, we can plot a histogram of the residuals</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
+    <span class="n">stat</span> <span class="o">=</span> <span class="s1">&#39;density&#39;</span>
+<span class="p">)</span>
+<span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">std</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="n">std</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="n">std</span><span class="p">),</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c166085b381cd7b13110b60338e1afc95907b9dbd78365d0a2f38f613d6244a0.png" src="../_images/c166085b381cd7b13110b60338e1afc95907b9dbd78365d0a2f38f613d6244a0.png" />
+</div>
+</div>
+<p>Here we see that the residuals have a roughly mound shaped distribution though there is some left skew and the histogram deviates somewhat from the normal distribution. We will say that the normal residual assumption is ok in this case, but it doesn’t look as normal as we might like!</p>
+<p>Finally, we look at a scatter plot between <span class="math notranslate nohighlight">\(x\)</span> and the residuals. If the errors are truly independent of <span class="math notranslate nohighlight">\(x\)</span>, then we will not observe any patterns in the graph, and it should look like a random cloud of points. There should be roughly an equal number spread out above and below 0, with most of them being close to 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4db75da27992013abfeb68e059b251f267dbab51d9276e8a7ec7b3be52967466.png" src="../_images/4db75da27992013abfeb68e059b251f267dbab51d9276e8a7ec7b3be52967466.png" />
+</div>
+</div>
+<p>What would it look like if there was a pattern? Here is an example using a different variable from our data along the <span class="math notranslate nohighlight">\(x\)</span>-axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;primary_school_enrollment_rate_(pct)&#39;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;adult_literacy_rate_(pct)&#39;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">regression</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">wbl</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">sm</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">wbl</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">wbl</span><span class="p">,</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Fitted Values&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Fitted vs. Residuals&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
+    <span class="n">stat</span> <span class="o">=</span> <span class="s1">&#39;density&#39;</span>
+<span class="p">)</span>
+<span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">std</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="n">std</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">resid</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="n">std</span><span class="p">),</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                OLS Regression Results                               
+=====================================================================================
+Dep. Variable:     adult_literacy_rate_(pct)   R-squared:                       0.000
+Model:                                   OLS   Adj. R-squared:                 -0.011
+Method:                        Least Squares   F-statistic:                  0.003546
+Date:                       Thu, 08 Jun 2023   Prob (F-statistic):              0.953
+Time:                               12:43:41   Log-Likelihood:                -384.08
+No. Observations:                         89   AIC:                             772.2
+Df Residuals:                             87   BIC:                             777.1
+Df Model:                                  1                                         
+Covariance Type:                   nonrobust                                         
+========================================================================================================
+                                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------------------------
+const                                   86.0796     15.388      5.594      0.000      55.495     116.664
+primary_school_enrollment_rate_(pct)    -0.0088      0.148     -0.060      0.953      -0.303       0.286
+==============================================================================
+Omnibus:                       22.660   Durbin-Watson:                   1.728
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               29.654
+Skew:                          -1.356   Prob(JB):                     3.64e-07
+Kurtosis:                       3.800   Cond. No.                         823.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+<img alt="../_images/56ba8fbc97d4ae10612baca7034362d484c84311e6b760b03122709698165253.png" src="../_images/56ba8fbc97d4ae10612baca7034362d484c84311e6b760b03122709698165253.png" />
+<img alt="../_images/9b2b18249b199ad5001e4b03ccfaf914e98ef0ee87b46d31e9b2d0cecae8bb99.png" src="../_images/9b2b18249b199ad5001e4b03ccfaf914e98ef0ee87b46d31e9b2d0cecae8bb99.png" />
+<img alt="../_images/440c293e94d8a1ecb17cfbd4a6abe31ec0147efa7a496f67048b03177a0c099d.png" src="../_images/440c293e94d8a1ecb17cfbd4a6abe31ec0147efa7a496f67048b03177a0c099d.png" />
+</div>
+</div>
+<p>If all of these plots look ok, then the assumptions are reasonable, and our modeling results can be trusted! If not, you may have to proceed with another method, but this is outside the scope of this section!</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<p>What sorts of team statistics are associated with winning in the English Premier League? We can explore this question at a high level using simple linear regression.</p>
+<p>Below we load a data set that contains the league standings, along with some common statistics, for the 2022-23 EPL season. A few notes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">points</span></code> is the total number of points accrued by a team through winning or drawing matches. A team earns 1 point for a draw, and 3 points for a win.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">goals_for</span></code> is the number of goals scored by the team, while <code class="docutils literal notranslate"><span class="pre">goals_against</span></code> is the number of goals allowed by the team. <code class="docutils literal notranslate"><span class="pre">goal_diff</span></code> is how many more (or less) goals a team scored than allowed.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;epl_table_22_23.csv&#39;</span><span class="p">)</span>
+<span class="n">epl</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>team</th>
+      <th>wins</th>
+      <th>draws</th>
+      <th>losses</th>
+      <th>points</th>
+      <th>goals_for</th>
+      <th>goals_against</th>
+      <th>goal_diff</th>
+      <th>expected_goals_for</th>
+      <th>expected_goals_against</th>
+      <th>expected_goal_diff</th>
+      <th>attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Arsenal</td>
+      <td>26</td>
+      <td>6</td>
+      <td>6</td>
+      <td>84</td>
+      <td>88</td>
+      <td>43</td>
+      <td>45</td>
+      <td>71.9</td>
+      <td>42.0</td>
+      <td>29.9</td>
+      <td>60191</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Aston Villa</td>
+      <td>18</td>
+      <td>7</td>
+      <td>13</td>
+      <td>61</td>
+      <td>51</td>
+      <td>46</td>
+      <td>5</td>
+      <td>50.2</td>
+      <td>52.5</td>
+      <td>-2.2</td>
+      <td>39485</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bournemouth</td>
+      <td>11</td>
+      <td>6</td>
+      <td>21</td>
+      <td>39</td>
+      <td>37</td>
+      <td>71</td>
+      <td>-34</td>
+      <td>38.6</td>
+      <td>63.9</td>
+      <td>-25.3</td>
+      <td>10362</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Brentford</td>
+      <td>15</td>
+      <td>14</td>
+      <td>9</td>
+      <td>59</td>
+      <td>58</td>
+      <td>46</td>
+      <td>12</td>
+      <td>56.8</td>
+      <td>49.9</td>
+      <td>6.8</td>
+      <td>17078</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Brighton</td>
+      <td>18</td>
+      <td>8</td>
+      <td>12</td>
+      <td>62</td>
+      <td>72</td>
+      <td>53</td>
+      <td>19</td>
+      <td>73.3</td>
+      <td>50.2</td>
+      <td>23.1</td>
+      <td>31477</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ol class="arabic simple">
+<li><p>Make a scatter plot of the number of goals a team scored (<code class="docutils literal notranslate"><span class="pre">goals_for</span></code>) versus the number of points they accrued in the standings (<code class="docutils literal notranslate"><span class="pre">points</span></code>). How would you describe the relationship?</p></li>
+<li><p>Fit a linear model to these two variables, and print out the summary.</p></li>
+<li><p>Use the summary to write down the estimated slope and intercept of the model. Interpret these values in the context of the problem. How many points, on average, is each additional goal scored in the standings?</p></li>
+<li><p>What is the value of <span class="math notranslate nohighlight">\(r^2\)</span>? Does the model seem to be a good fit? Explain your reasoning.</p></li>
+<li><p>Repeat this analysis with another variable or variables. Do your new models seem to be a better or worse fit? Why or why not?</p></li>
+<li><p>Do you think <code class="docutils literal notranslate"><span class="pre">attendance</span></code> has any effect on a team’s performance? Use some of the tools from this section to answer, and explain what you find. How might you use this example to help understand the common phrase “correlation is not causation”?</p></li>
+</ol>
+</section>
+<section id="multiple-regression">
+<h2>Multiple regression<a class="headerlink" href="#multiple-regression" title="Permalink to this headline">#</a></h2>
+<p><strong>Everything else here is under construction</strong></p>
+<p>We might also be interested in the case when there are many independent variables that are connected to an output. ** To do **</p>
+<section id="dummy-variables">
+<h3>Dummy Variables<a class="headerlink" href="#dummy-variables" title="Permalink to this headline">#</a></h3>
+<p>Categorical or qualitative variables can also sometimes be incorporated into a linear regression model by an appropriate transformation.</p>
+</section>
+<section id="id1">
+<h3>Model Diagnostics<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>The assumptions for a multiple linear regression model are the same as for a simple linear regression model, but may be slightly more difficult to evaluate.</p>
+</section>
+<section id="id2">
+<h3>Inference on Model Parameters<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>The techniques of inference that we talked about in the single variable case carry over to the multiple regression model. The main difference is the interpretation of the readout results. Because we have multiple variables involved in the model, which themselves may be linearly connected, complicates things somewhat.</p>
+</section>
+</section>
+<section id="id3">
+<h2>Exercises<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Stat"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#world-bank-development-indicators">World Bank Development Indicators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple linear regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-sum-of-squares-error">Minimizing the Sum of Squares Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-least-squares-line">Finding the Least Squares Line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-and-goodness-of-fit-tests"><span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-on-model-parameters">Inference on model parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-test-of-hypothesis-for-beta-0">A test of hypothesis for <span class="math notranslate nohighlight">\(\beta = 0\)</span>.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-diagnostics">Model diagnostics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">Multiple regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variables">Dummy Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Model Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Inference on Model Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
