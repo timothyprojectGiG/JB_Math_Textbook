@@ -66,6 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Stat/01_Foundations';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hypothesis Testing for Categorical Data" href="02_Inference_Categorical.html" />
+    <link rel="prev" title="Section 0: Instructor Notes" href="00_Instructor_Notes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -201,8 +203,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Data.html">Exploratory Data Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_Instructor_Notes.html">Section 0: Instructor Notes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Regression.html">Linear Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
 <ul class="nav bd-sidenav">
@@ -772,8 +779,8 @@ document.write(`
 </div>
 <p>Now let’s compare this to the theory. What does the Central Limit Theorem tell us?</p>
 <p>If the sample size is “large enough”, then the sample mean, considered as a random variable, is approximately normally distributed with the same mean as the population and with standard deviation equal to the population standard deviation divided by the sample size. In mathematical language,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f8e97585-2247-40a2-b1fc-63a297b5af7d">
-<span class="eqno">()<a class="headerlink" href="#equation-f8e97585-2247-40a2-b1fc-63a297b5af7d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7c8bd18b-995e-4381-a439-d02f0d06ca39">
+<span class="eqno">(4)<a class="headerlink" href="#equation-7c8bd18b-995e-4381-a439-d02f0d06ca39" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \displaystyle \overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right),
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\overline{X}\)</span> is the sample mean, <span class="math notranslate nohighlight">\(\mu\)</span> is the population mean, <span class="math notranslate nohighlight">\(\sigma\)</span> is the population standard deviation, and <span class="math notranslate nohighlight">\(n\)</span> is the sample size.</p>
@@ -1023,13 +1030,13 @@ if (outputEl) {{
 </div>
 </div>
 <p>Now we know where <span class="math notranslate nohighlight">\(\overline X\)</span> is likely to fall in relation to <span class="math notranslate nohighlight">\(\mu\)</span>. We can express what we see in the graph as a probability:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2aa7fd44-c952-4563-be6d-811130725ea6">
-<span class="eqno">()<a class="headerlink" href="#equation-2aa7fd44-c952-4563-be6d-811130725ea6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cf817c61-a4a6-477a-824b-3d0a9da0fc9f">
+<span class="eqno">(5)<a class="headerlink" href="#equation-cf817c61-a4a6-477a-824b-3d0a9da0fc9f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P\left(\mu-1.96 \frac{\sigma}{\sqrt{n}} \le \overline X \le \mu + 1.96  \frac{\sigma}{\sqrt{n}}\right) = .95.
 \end{equation}\]</div>
 <p>With a little bit of algebraic manipulation, we can write this as an interval for <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-40042518-ab1e-4fca-8eae-c60d1d25327d">
-<span class="eqno">()<a class="headerlink" href="#equation-40042518-ab1e-4fca-8eae-c60d1d25327d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-da269d8f-0716-4022-9b07-5696d4e1964c">
+<span class="eqno">(6)<a class="headerlink" href="#equation-da269d8f-0716-4022-9b07-5696d4e1964c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P\left(\overline{X}-1.96 \frac{\sigma}{\sqrt{n}} \le \mu \le \overline{X} + 1.96  \frac{\sigma}{\sqrt{n}}\right) = .95.
 \end{equation}\]</div>
 <p>In the real world, we’ll have a value of <span class="math notranslate nohighlight">\(\overline{X}\)</span>, and we want to know where <span class="math notranslate nohighlight">\(\mu\)</span> is. This second interval gives us exactly this! Look at what’s on the upper and lower side of the interval: (almost) all things we can calculate from the data, like <span class="math notranslate nohighlight">\(\overline X\)</span> and <span class="math notranslate nohighlight">\(n\)</span> (we’ll discuss how to handle the <span class="math notranslate nohighlight">\(\sigma\)</span> in a moment). This gives an interval for <span class="math notranslate nohighlight">\(\mu\)</span>, the population mean that we can’t calculate but want to know.</p>
@@ -1594,6 +1601,24 @@ if (outputEl) {{
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="00_Instructor_Notes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Section 0: Instructor Notes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_Inference_Categorical.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hypothesis Testing for Categorical Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>

@@ -66,6 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Stat/02_Inference_Categorical';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hypothesis Testing for Numerical Data" href="03_Inference_Numerical.html" />
+    <link rel="prev" title="Foundations of Statistical Inference" href="01_Foundations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -201,8 +203,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Data.html">Exploratory Data Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_Instructor_Notes.html">Section 0: Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Regression.html">Linear Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
 <ul class="nav bd-sidenav">
@@ -760,8 +767,8 @@ Name: Trust_Index, dtype: int64
 <h3>Making a Hypothesis<a class="headerlink" href="#making-a-hypothesis" title="Permalink to this headline">#</a></h3>
 <p>The first step in a hypothesis test is to determine the hypotheses that we are comparing. We are comparing two opposing views of the world: either it works like this, or it doesn’t. These views are best understood in terms of <em>models</em>—a framework for understanding how the world works.</p>
 <p>For example, perhaps I think that the proportion of residents in the United States who have a high trust in scientists is large, say over 0.25. In this situation, the two models are statistical: we are hypothesizing about the proportion from a population. Either the proportion of people in our chosen country who have high trust in scientists is 0.25, or it’s more than that. In mathematical terms, we’ll write this as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c1b2115d-0c36-4975-bff4-a596b8753794">
-<span class="eqno">()<a class="headerlink" href="#equation-c1b2115d-0c36-4975-bff4-a596b8753794" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7f2b6820-998a-40e6-9667-c042e1748480">
+<span class="eqno">(7)<a class="headerlink" href="#equation-7f2b6820-998a-40e6-9667-c042e1748480" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: p = 0.25, \\
     H_1: p &gt; 0.25.
 \end{equation}\]</div>
@@ -789,8 +796,8 @@ Name: Trust_Index, dtype: int64
 <p>We are asking questions about the proportion of people in the United States who have high trust in scientists. It would be impossible to get an answer from every single person in the entire country! However, the Wellcome Global Monitor data gives us answers from a large representative sample of people in the USA. So we can use this data to get a statistically sound idea of what the true proportion in the entire population is.</p>
 <p>Let’s compare the proportion from the sample to what the null hypothesis says it should be. If the sample proportion is close to what the null hypothesis says it should be, that would mean that the null hypothesis is probably right. On the other hand, if it is different, perhaps the null hypothesis is wrong!</p>
 <p>We can compute the sample proportion of people with high trust in scientists by taking the total number of people in the sample with a high trust score and dividing it by the total sample size:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-31da6b54-8b72-48c2-87e3-1354be53206d">
-<span class="eqno">()<a class="headerlink" href="#equation-31da6b54-8b72-48c2-87e3-1354be53206d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9105c5cf-7560-487e-8fe5-a4f07e2844ae">
+<span class="eqno">(8)<a class="headerlink" href="#equation-9105c5cf-7560-487e-8fe5-a4f07e2844ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat p = \frac{\mbox{num. of respondents with high trust in scientists}}{\mbox{num. of respondents}}.
 \end{equation}\]</div>
 <div class="cell docutils container">
@@ -822,8 +829,8 @@ Name: Trust_Index, dtype: int64
 \[ \hat{p} \sim N\left(.25, \sqrt{\frac{.25(1-.25)}{1006}} \right). \]</div>
 <p>We call this the <strong>null distribution</strong>, since it is the distribution of the sample statistic under the assumption that the null hypothesis is true.</p>
 <p>Back to the question: is the difference between the observed value of <span class="math notranslate nohighlight">\(\hat p\)</span> and the value that the null hypothesis says it should be a big difference or small difference? One way to answer that question would be to <strong>standardize</strong> by taking the difference between the sample mean and the (hypothesized) population mean and dividing by the standard deviation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f084f4e1-7365-470d-afa6-047cd4d2b18f">
-<span class="eqno">()<a class="headerlink" href="#equation-f084f4e1-7365-470d-afa6-047cd4d2b18f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-783f7133-e73d-4b6d-a773-43b9c3587080">
+<span class="eqno">(9)<a class="headerlink" href="#equation-783f7133-e73d-4b6d-a773-43b9c3587080" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 \end{equation}\]</div>
 <p>This gives us the standardized test statistic Z, which has a standard normal distribution (<span class="math notranslate nohighlight">\(\mu = 0, \sigma = 1\)</span>)—again assuming that the null hypothesis is true.</p>
@@ -1002,8 +1009,8 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 <section id="difference-of-two-proportions">
 <h2>Difference of Two Proportions<a class="headerlink" href="#difference-of-two-proportions" title="Permalink to this headline">#</a></h2>
 <p>We can also use hypothesis testing to compare two proportions. This test is most common when you want to see if a population proportion is the same in two independent populations. For example, maybe we want to see if the proportion of men in the United States who have high trust in scientists (<span class="math notranslate nohighlight">\(p_1\)</span>) is different than the proportion of women in the United States who have high trust in scientists (<span class="math notranslate nohighlight">\(p_2\)</span>). Our two hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-73233057-43d7-4007-9100-2f89a366abb7">
-<span class="eqno">()<a class="headerlink" href="#equation-73233057-43d7-4007-9100-2f89a366abb7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-532b82df-aa22-4660-a84e-ec536683437c">
+<span class="eqno">(10)<a class="headerlink" href="#equation-532b82df-aa22-4660-a84e-ec536683437c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: p_1 - p_2 = 0, \\
     H_1: p_1 - p_2 \neq 0.
 \end{equation}\]</div>
@@ -1064,23 +1071,23 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 <p>Overall, in our sample we see a difference of about 0.04 between the proportions of men and women who have high trust in scientists. Again we ask, is that a large difference?</p>
 <p>Recall that if our sample sizes <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span> are large enough,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c72118dc-8c70-4d7e-92f5-a0f73f3d1779">
-<span class="eqno">()<a class="headerlink" href="#equation-c72118dc-8c70-4d7e-92f5-a0f73f3d1779" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-16da6b3e-a13d-4598-a4b6-513da8991f11">
+<span class="eqno">(11)<a class="headerlink" href="#equation-16da6b3e-a13d-4598-a4b6-513da8991f11" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat p_1 - \hat p_2 \sim N\left(p_1 - p_2, \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } \right).
 \end{equation}\]</div>
 <p>and hence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a4a1d847-1f04-47cb-8188-9c17f7ae73a4">
-<span class="eqno">()<a class="headerlink" href="#equation-a4a1d847-1f04-47cb-8188-9c17f7ae73a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6d55ecc9-b689-4178-9af0-6c12e015aaf9">
+<span class="eqno">(12)<a class="headerlink" href="#equation-6d55ecc9-b689-4178-9af0-6c12e015aaf9" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Z = \frac{\hat p_1 - \hat p_2 - (p_1 - p_2)}{ \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } } \sim N(0,1).
 \end{equation}\]</div>
 <p>The null hypothesis tells us what to fill in for <span class="math notranslate nohighlight">\(p_1-p_2\)</span>, but it doesn’t hypothesize directly about the values of <span class="math notranslate nohighlight">\(p_1\)</span> or <span class="math notranslate nohighlight">\(p_2\)</span>. However, it does hypothesize that <span class="math notranslate nohighlight">\(p_1 = p_2\)</span>, and it that is true, then our estimates <span class="math notranslate nohighlight">\(\hat p_1\)</span> and <span class="math notranslate nohighlight">\(\hat p_2\)</span> are estimating the same thing. In that case, we can combine them to estimate the variance. Define <span class="math notranslate nohighlight">\(p\)</span> to be the common value of <span class="math notranslate nohighlight">\(p_1 = p_2 = p\)</span>. Then the variance of our test statistic is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fb144bb5-1cc5-4c62-81d3-93381aa00b92">
-<span class="eqno">()<a class="headerlink" href="#equation-fb144bb5-1cc5-4c62-81d3-93381aa00b92" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0505c47a-3411-48b1-a37b-fc6d16706ff6">
+<span class="eqno">(13)<a class="headerlink" href="#equation-0505c47a-3411-48b1-a37b-fc6d16706ff6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  }  = \sqrt{ \frac{p(1-p)}{n_1} + \frac{p(1-p)}{n_2}  } = \sqrt{ p(1-p)\left( \frac{1}{n_1} + \frac{1}{n_2}\right)  },
 \end{equation}\]</div>
 <p>and we can estimate <span class="math notranslate nohighlight">\(p\)</span> using</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f19b1784-29f3-4434-9c6b-85ac4f840690">
-<span class="eqno">()<a class="headerlink" href="#equation-f19b1784-29f3-4434-9c6b-85ac4f840690" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-61d108a6-b742-43fc-9296-e6cafe8aff11">
+<span class="eqno">(14)<a class="headerlink" href="#equation-61d108a6-b742-43fc-9296-e6cafe8aff11" title="Permalink to this equation">#</a></span>\[\begin{equation}
     p \approx \hat p = \frac{\mbox{num. of male respondents with high trust in scientists} + \mbox{num. of female respondents with high trust in scientists}}{\mbox{num. of male respondents} + \mbox{num. of female respondents}}.
 \end{equation}\]</div>
 <p>We call <span class="math notranslate nohighlight">\(\hat p\)</span> the <strong>pooled sample proportion</strong>.</p>
@@ -1304,6 +1311,24 @@ The sample proportion for women is 0.302. There are 464 total observations for w
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="01_Foundations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Foundations of Statistical Inference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_Inference_Numerical.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hypothesis Testing for Numerical Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
