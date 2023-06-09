@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/claire/opt/miniconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import sympy as sym
+
+x = sym.Symbol('x')
+#Define f(x)
+f = sym.exp(-x)
+print('This is the function f(x):', f)
+
+#Define f'(x)
+dfdx = sym.diff(f)
+print('This is the derivative of f(x):', dfdx)
+
+#See if f(x) is a solution to the differential equation. If it outputs True, f(x) is a solution.
+2*dfdx+3*f == sym.exp(-x)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01msympy[39;00m [38;5;28;01mas[39;00m [38;5;21;01msym[39;00m
+[1;32m      3[0m x [38;5;241m=[39m sym[38;5;241m.[39mSymbol([38;5;124m'[39m[38;5;124mx[39m[38;5;124m'[39m)
+[1;32m      4[0m [38;5;66;03m#Define f(x)[39;00m
+
+[0;31mModuleNotFoundError[0m: No module named 'sympy'
+

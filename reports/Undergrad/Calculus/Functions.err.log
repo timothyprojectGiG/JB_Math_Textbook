@@ -1,85 +1,48 @@
 Traceback (most recent call last):
-  File "//anaconda3/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
-    return just_run(coro(*args, **kwargs))
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
-    return loop.run_until_complete(coro)
-  File "//anaconda3/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/claire/opt/miniconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
     return future.result()
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import matplotlib.pyplot as plt
+!pip install sympy
+import sympy as sp
 
-# Prompt the user to input the slope and y-intercept
-m = float(input("Enter the value for the slope (m): "))
-b = float(input("Enter the value for the y-intercept (b): "))
+# Define the function symbolically
+x = sp.Symbol('x')
+f = 1 / (sp.sqrt(x))
 
-# Define the linear function
-def linear_function(x):
-    return m * x + b
+# Find the domain: denominator not zero AND inside square root must be positive
+domain = sp.solve(sp.denom(f) != 0 and x>0, x)
 
-# Generate a range of x values for plotting
-x = np.linspace(-10, 10, 100)
+# Print the domain
+print("Domain:", domain)
+------------------
 
-# Compute the corresponding y values using the linear function
-y = linear_function(x)
-
-# Plot the linear function
-plt.plot(x, y, label='f(x) = mx + b')
-
-# Plot the x-axis and y-axis lines
-plt.axhline(0, color='black', linewidth=0.5)  # x-axis
-plt.axvline(0, color='black', linewidth=0.5)  # y-axis
-
-# Set plot labels and title
-plt.xlabel('x')
-plt.ylabel('f(x)')
-plt.title('Linear Function')
-
-# Add a legend
-plt.legend()
-
-# Display the plot
-plt.show()
+----- stdout -----
+Defaulting to user installation because normal site-packages is not writeable
+----- stdout -----
+Requirement already satisfied: sympy in /Users/claire/Library/Python/3.8/lib/python/site-packages (1.12)
+Requirement already satisfied: mpmath>=0.19 in /Users/claire/Library/Python/3.8/lib/python/site-packages (from sympy) (1.3.0)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
-Cell [0;32mIn[3], line 5[0m
-[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
-[1;32m      4[0m [38;5;66;03m# Prompt the user to input the slope and y-intercept[39;00m
-[0;32m----> 5[0m m [38;5;241m=[39m [38;5;28mfloat[39m([38;5;28;43minput[39;49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mEnter the value for the slope (m): [39;49m[38;5;124;43m"[39;49m[43m)[49m)
-[1;32m      6[0m b [38;5;241m=[39m [38;5;28mfloat[39m([38;5;28minput[39m([38;5;124m"[39m[38;5;124mEnter the value for the y-intercept (b): [39m[38;5;124m"[39m))
-[1;32m      8[0m [38;5;66;03m# Define the linear function[39;00m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[2], line 2[0m
+[1;32m      1[0m get_ipython()[38;5;241m.[39msystem([38;5;124m'[39m[38;5;124mpip install sympy[39m[38;5;124m'[39m)
+[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01msympy[39;00m [38;5;28;01mas[39;00m [38;5;21;01msp[39;00m
+[1;32m      4[0m [38;5;66;03m# Define the function symbolically[39;00m
+[1;32m      5[0m x [38;5;241m=[39m sp[38;5;241m.[39mSymbol([38;5;124m'[39m[38;5;124mx[39m[38;5;124m'[39m)
 
-File [0;32m//anaconda3/lib/python3.10/site-packages/ipykernel/kernelbase.py:1172[0m, in [0;36mKernel.raw_input[0;34m(self, prompt)[0m
-[1;32m   1165[0m [38;5;250m[39m[38;5;124;03m"""Forward raw_input to frontends[39;00m
-[1;32m   1166[0m 
-[1;32m   1167[0m [38;5;124;03mRaises[39;00m
-[1;32m   1168[0m [38;5;124;03m------[39;00m
-[1;32m   1169[0m [38;5;124;03mStdinNotImplementedError if active frontend doesn't support stdin.[39;00m
-[1;32m   1170[0m [38;5;124;03m"""[39;00m
-[1;32m   1171[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_allow_stdin:
-[0;32m-> 1172[0m     [38;5;28;01mraise[39;00m StdinNotImplementedError(
-[1;32m   1173[0m         [38;5;124m"[39m[38;5;124mraw_input was called, but this frontend does not support input requests.[39m[38;5;124m"[39m
-[1;32m   1174[0m     )
-[1;32m   1175[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_input_request(
-[1;32m   1176[0m     [38;5;28mstr[39m(prompt),
-[1;32m   1177[0m     [38;5;28mself[39m[38;5;241m.[39m_parent_ident[[38;5;124m"[39m[38;5;124mshell[39m[38;5;124m"[39m],
-[1;32m   1178[0m     [38;5;28mself[39m[38;5;241m.[39mget_parent([38;5;124m"[39m[38;5;124mshell[39m[38;5;124m"[39m),
-[1;32m   1179[0m     password[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
-[1;32m   1180[0m )
-
-[0;31mStdinNotImplementedError[0m: raw_input was called, but this frontend does not support input requests.
-StdinNotImplementedError: raw_input was called, but this frontend does not support input requests.
+[0;31mModuleNotFoundError[0m: No module named 'sympy'
 

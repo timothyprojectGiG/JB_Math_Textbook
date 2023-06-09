@@ -1,0 +1,916 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3. First-Order Differential Equations &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/DifEq/DE - Section 3';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1. Setting the Scene" href="../../Advanced/Complex/jnb1.html" />
+    <link rel="prev" title="2. Introduction to Differential Equations" href="DE%20-%20Section%202.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb1.html">1 Functions- Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb8.html">8. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb9.html">9. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb10.html">10. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Demo.html">12. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Section 0: Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec4.html">4 Derivatives</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Paul Isihara, Sam Carlson, Ziling Zhong</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/0intro.html">0. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Linear/1system.html">1. Systems of Linear Equations</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Linear/1_2sol.html">1.2 Solution Set of  Linear Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Linear/2matrix.html">2. Matrix Algebra</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Linear/2_1det.html">2.1 Determinant</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DE%20-%20Section%202.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. First-Order Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/DifEq/DE - Section 3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Undergrad/DifEq/DE - Section 3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3. First-Order Differential Equations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separable-first-order-differential-equations">3.1 Separable First-Order Differential Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-first-order-differential-equations">3.2 Linear First-Order Differential Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slope-fields">3.4 Slope Fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autonomous-equations">3.5 Autonomous Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="section" id="first-order-differential-equations">
+<h1>3. First-Order Differential Equations<a class="headerlink" href="#first-order-differential-equations" title="Permalink to this headline">#</a></h1>
+<p>In this chapter, methods will be given for solving first-order differential equations. Remember that first-order means that the first derivative of the unknown function is the highest derivative appearing in the equation.</p>
+<div class="section" id="separable-first-order-differential-equations">
+<h2>3.1 Separable First-Order Differential Equations<a class="headerlink" href="#separable-first-order-differential-equations" title="Permalink to this headline">#</a></h2>
+<p>A first order differential equation is called <strong>separable</strong> if it can be written as <span class="math notranslate nohighlight">\(\frac{dx}{dt} = f(x) \cdot g(t)\)</span>, that is , the independent variable and the dependent variable of the differential equation can be <em>separated</em> from one another.</p>
+<p><strong>Example</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y' = x^3\)</span> is a separable differential equation.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{dx}{dt} = kx^2\sin(t)\)</span> is a separable differential equation.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y'(x) = x^2 -3y\)</span> is not a separable differential equation.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{dx}{dt}\cdot t -3xt^2 = 7t^2\)</span> is a separable differential equation. In particular, this can be rewritten as <span class="math notranslate nohighlight">\(\frac{dx}{dt} = (7+3x)t\)</span>.</p></li>
+</ul>
+<p>Given a separable differential equation <span class="math notranslate nohighlight">\(\frac{dx}{dt} = f(x) \cdot g(t)\)</span>, we can solve it with the following procedure.</p>
+<ol class="arabic">
+<li><p>Separate the variables: <span class="math notranslate nohighlight">\(\frac{1}{f(x)}dx = g(t)dt\)</span></p>
+<p><em>Note: <span class="math notranslate nohighlight">\(\frac{dx}{dt}\)</span> is not a fraction, but this process can be done because we are implicitly applying the chain rule for multivariate functions.</em></p>
+</li>
+<li><p>Integrate both sides with respect to the appropriate variable: <span class="math notranslate nohighlight">\(\displaystyle{\int \frac{1}{f(x)}dx = \int g(t)dt}\)</span>.</p></li>
+<li><p>Write the solution in the form <span class="math notranslate nohighlight">\(F(x) = G(t)+C\)</span>, where <span class="math notranslate nohighlight">\(F'(x) = \frac{1}{f(x)}\)</span> and <span class="math notranslate nohighlight">\(G'(t)=g(t)\)</span>.</p></li>
+<li><p>If possible, solve the equation explicity for the dependent variable, in this case <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ol>
+<p><strong>Example</strong> Find the explicit general solution to the differential equation <span class="math notranslate nohighlight">\(\frac{dx}{dt} = xt^2\)</span>.</p>
+<p>Separate: <span class="math notranslate nohighlight">\(\frac{1}{x} dx = t^2 dt\)</span></p>
+<p>Integrate: <span class="math notranslate nohighlight">\(\displaystyle{\int \frac{1}{x} dx = \int t^2 dt}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\ln|x| = \frac{1}{3}t^3 + C\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>Note: This is the implicit solution to the differential equation.</em></p>
+<p>Solve for the Dependent Variable:</p>
+<p><span class="math notranslate nohighlight">\(\ln|x| = \frac{1}{3}t^3 + C\)</span></p>
+<p><span class="math notranslate nohighlight">\(e^{\ln|x|} = e^{\frac{1}{3}t^3 + C}\)</span></p>
+<p><span class="math notranslate nohighlight">\(|x| = e^{\frac{1}{3}t^3}e^{C}\)</span></p>
+<p><span class="math notranslate nohighlight">\(x = \pm e^{C} e^{\frac{1}{3}t^3}\)</span></p>
+<p><span class="math notranslate nohighlight">\(x = De^{\frac{1}{3}t^3}\)</span>, where <span class="math notranslate nohighlight">\(D = \pm e^{C}\)</span></p>
+<p><strong>Example</strong> Find the explicit solution to the initial value problem <span class="math notranslate nohighlight">\(\frac{dW}{ds} = \frac{2s \cos^2(W)}{s^2-1}\)</span> where <span class="math notranslate nohighlight">\(W(0)=0\)</span>.</p>
+<p>Separate: <span class="math notranslate nohighlight">\(\frac{1}{\cos^2(W)} dW = \frac{2s}{s^2-1} ds\)</span></p>
+<p>Integrate: <span class="math notranslate nohighlight">\(\displaystyle{\int \sec^2(W) dW = \int \frac{2s}{s^2-1} ds}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\tan(W) = \ln|s^2-1| + C\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>Note: This is the implicit solution to the differential equation.</em></p>
+<p>Solve for the Dependent Variable:</p>
+<p><span class="math notranslate nohighlight">\(W = \arctan(\ln|s^2-1|+C)\)</span></p>
+<p>Use Initial Condition <span class="math notranslate nohighlight">\(W(0)=0\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(0 = \arctan(\ln|-1|+C)\)</span></p>
+<p><span class="math notranslate nohighlight">\(0 = \arctan(C)\)</span></p>
+<p><span class="math notranslate nohighlight">\(0 = C\)</span></p>
+<p>Explicit Solution: <span class="math notranslate nohighlight">\(W = \arctan(\ln|s^2-1|)\)</span></p>
+</div>
+<div class="section" id="linear-first-order-differential-equations">
+<h2>3.2 Linear First-Order Differential Equations<a class="headerlink" href="#linear-first-order-differential-equations" title="Permalink to this headline">#</a></h2>
+<p>A first order differential equation is called <strong>linear</strong> if it can be written as <span class="math notranslate nohighlight">\(a_1(t)\frac{dx}{dt} + a_0(t)x= g(t)\)</span>. The equation is linear in the dependent variable, in this case <span class="math notranslate nohighlight">\(x\)</span>, and its derivative; the coefficient functions <span class="math notranslate nohighlight">\(a_1(t)\)</span>, <span class="math notranslate nohighlight">\(a_0(t)\)</span>, and <span class="math notranslate nohighlight">\(g(t)\)</span> can be any function involving <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p><strong>Example</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y' + ye^x = \tan(t)\)</span> is a linear differential equation.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\frac{dx}{dt} = kx^2\sin(t)\)</span> is not a linear differential equation because of the <span class="math notranslate nohighlight">\(x \frac{dx}{dt}\)</span> term.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x'(t) = x^2 -3t\)</span> is not a linear differential equation because of the <span class="math notranslate nohighlight">\(x^2\)</span> term.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{dx}{dt}\cdot t -3xt^2 = 7t^2\)</span> is a linear differential equation. In particular, this can be rewritten as <span class="math notranslate nohighlight">\(t\frac{dx}{dt} -3t^2x = 7t^2\)</span>.</p></li>
+</ul>
+<p>A first-order linear differential equation is said to be in <strong>standard form</strong> if it is written in the form <span class="math notranslate nohighlight">\(\frac{dx}{dt} + p(t)x = q(t)\)</span>. In other words, if the coefficient on the first derivative is <span class="math notranslate nohighlight">\(1\)</span>. Note that any first-order linear differential equation can be written in standard form by performing simple algebra.</p>
+<p>If <span class="math notranslate nohighlight">\(q(t)=0\)</span>, we say that the differential equation is <strong>homogeneous</strong>. If <span class="math notranslate nohighlight">\(q(t) \neq 0\)</span>, we say that the differential equation is <strong>nonhomogeneous</strong>. Note that if a first order differential equation is both linear and homogeneous, then it is also separable. You will be asked to show <em>why</em> in the exercises.</p>
+<p>We will now develop a strategy for solving first-order linear differential equations. The basic idea is that we will multiply by a positive function that simplifies the left hand side of the differential equation. We must choose a positive function in order to preserve the solutions to the differential equation.</p>
+<p>Given a first-order linear differential equation <em>in standard form</em> <span class="math notranslate nohighlight">\(x' + p(t)x = q(t)\)</span>, the <strong>integrating factor</strong> for the differential equation is the function <span class="math notranslate nohighlight">\(\mu(t) = e^{P(t)}\)</span> where <span class="math notranslate nohighlight">\(P(t)\)</span> is <em>any</em> antiderivative of <span class="math notranslate nohighlight">\(p(t)\)</span>, that is, <span class="math notranslate nohighlight">\(P'(t)=p(t)\)</span>. The integrating factor is the positive function that we will multiply our differential equation by. So what is the significance of multiplying by the integrating factor?</p>
+<p>Consider <span class="math notranslate nohighlight">\(x' + p(t)x = q(t)\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Multiply by <span class="math notranslate nohighlight">\(\mu(t) = e^{P(t)}\)</span>, which yields <span class="math notranslate nohighlight">\(\mu(t)x' + \mu(t)p(t)x = \mu(t)q(t)\)</span></p></li>
+<li><p>Observe <span class="math notranslate nohighlight">\(\mu'(t) = e^{P(t)}P'(t) = e^{P(t)}p(t) = \mu(t)p(t)\)</span>.</p></li>
+<li><p>Rewrite <span class="math notranslate nohighlight">\(\mu(t)x' + \mu(t)p(t)x = \mu(t)q(t)\)</span> as <span class="math notranslate nohighlight">\(\mu(t)x' + \mu'(t)x = \mu(t)q(t)\)</span>.</p></li>
+<li><p>Observe <span class="math notranslate nohighlight">\(\frac{d}{dt}\left( \mu(t)x(t) \right) = \mu(t)x'(t) + \mu'(t)x(t)\)</span>.</p></li>
+<li><p>Rewrite <span class="math notranslate nohighlight">\(\mu(t)x' + \mu'(t)x = \mu(t)q(t)\)</span> as <span class="math notranslate nohighlight">\(\frac{d}{dt}\left( \mu(t)x(t) \right) = \mu(t)q(t)\)</span>.</p></li>
+<li><p>Integrate <span class="math notranslate nohighlight">\(\displaystyle{\int \frac{d}{dt}\left( \mu(t)x(t) \right) dt = \int \mu(t)q(t) dt}\)</span>.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(\displaystyle{\mu(t)x(t) = \int \mu(t)q(t) dt}\)</span></p>
+<ol class="arabic simple" start="7">
+<li><p>Solve for the dependent variable</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(x(t) = \displaystyle{\frac{1}{\mu(t)} \int \mu(t)q(t) dt}\)</span>.</p>
+<p>Note we have no guarantee that we can integrate <span class="math notranslate nohighlight">\(\int \mu(t)q(t) dt\)</span>, but if we can we are able to solve first-order linear differential equations.</p>
+<p><strong>Example</strong> Find the general solution to the differential equation <span class="math notranslate nohighlight">\(\frac{dx}{dt} + 3x = te^{-3t}\)</span>.</p>
+<p><em>Note:</em> This differential equation is in standard form so we can proceed by finding the integrating factor.</p>
+<ol class="arabic simple">
+<li><p>Multiply by <span class="math notranslate nohighlight">\(\mu(t) = e^{\int 3 dt} = e^{3t}\)</span>.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(e^{3t}x'(t)+3e^{3t}x(t) = t\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p>Observe <span class="math notranslate nohighlight">\(\frac{d}{dt}(e^{3t}\cdot x(t)) = e^{3t}x'(t)+3e^{3t}x(t)\)</span>.</p></li>
+<li><p>Rewrite <span class="math notranslate nohighlight">\(e^{3t}x'(t)+3e^{3t}x(t) = t\)</span> as <span class="math notranslate nohighlight">\(\frac{d}{dt}(e^{3t}\cdot x(t)) = t\)</span>.</p></li>
+<li><p>Integrate <span class="math notranslate nohighlight">\(\displaystyle{\int \frac{d}{dt}(e^{3t}\cdot x(t)) dt = \int t dt}\)</span>.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(e^{3t}x(t) = \frac{1}{2}t^2+C\)</span></p>
+<ol class="arabic simple" start="5">
+<li><p>Solve for the dependent variable.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(x(t) = e^{-3t}(\frac{1}{2}t^2+C)\)</span>.</p>
+</div>
+<div class="section" id="slope-fields">
+<h2>3.4 Slope Fields<a class="headerlink" href="#slope-fields" title="Permalink to this headline">#</a></h2>
+<p>Note we still do not know how to solve every first-order linear differential equation. For example, <span class="math notranslate nohighlight">\(y' = x(x^2-y^2)\)</span> is neither separable or linear. However, even if we cannot solve a differential equation, it is still possible to get qualitative information about the solution.</p>
+<p>Consider the first-order differential equation <span class="math notranslate nohighlight">\(\frac{dx}{dt} = f(t,x)\)</span>. If we evaluate <span class="math notranslate nohighlight">\(f(t,x)\)</span> at a set of grid points, we can then draw short vectors that represent the slope of the solution <span class="math notranslate nohighlight">\(x(t)\)</span> at those points. If we look at this grid of vectors at many points, we can get an idea of what the solution, <span class="math notranslate nohighlight">\(x(t)\)</span>, looks like. This grid of vectors is called a <strong>slope field</strong> or <strong>direction field</strong>.</p>
+<p><strong>Example</strong> Plot a direction field for <span class="math notranslate nohighlight">\(y'(x) = x + \sin(y)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mf">.3</span><span class="p">,</span> <span class="mf">.3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">nx</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>
+
+<span class="c1">#Create a rectangular grid with points</span>
+<span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1">#Define the functions</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">dy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1">#Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Direction Field for dy/dx = x + sin(y)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1a55d1d67826301a195ea58199899dfe0bbdc8c7d892744a7aab8eb2b6b62e21.png" src="../../_images/1a55d1d67826301a195ea58199899dfe0bbdc8c7d892744a7aab8eb2b6b62e21.png" />
+</div>
+</div>
+<p><strong>Example</strong> Plot a direction field for <span class="math notranslate nohighlight">\(y'(x) = x^2 - y^2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#Take some time to play around with the various parameters and see how it impacts the slope-field that is produced.</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.2</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nx</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>
+
+<span class="c1">#Create a rectangular grid with points</span>
+<span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1">#Define the functions</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span><span class="n">Y</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">dy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1">#Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Direction Field for dy/dx = x^2 -y^2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/03e77855370ae2c57fd387102bc04d8a7e55b4e4c587d5f4ef900b64c0f8ab66.png" src="../../_images/03e77855370ae2c57fd387102bc04d8a7e55b4e4c587d5f4ef900b64c0f8ab66.png" />
+</div>
+</div>
+<p><strong>Example</strong> Plot a direction field for <span class="math notranslate nohighlight">\(y'(x) = x^2 - y^2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#Take some time to play around with the various parameters and see how it impacts the slope-field that is produced.</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.2</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nx</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>
+
+<span class="c1">#Create a rectangular grid with points</span>
+<span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1">#Define the functions</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span><span class="n">Y</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">dy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1">#Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Direction Field for dy/dx = x^2 -y^2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#You can also use the streamlines of the field to give a nice impression of the flow and color the curves.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">dy</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/03e77855370ae2c57fd387102bc04d8a7e55b4e4c587d5f4ef900b64c0f8ab66.png" src="../../_images/03e77855370ae2c57fd387102bc04d8a7e55b4e4c587d5f4ef900b64c0f8ab66.png" />
+<img alt="../../_images/15cb74e39ba4bd96322220ca7a04624bb0e691ebc924328e0794377d41efa1f3.png" src="../../_images/15cb74e39ba4bd96322220ca7a04624bb0e691ebc924328e0794377d41efa1f3.png" />
+</div>
+</div>
+</div>
+<div class="section" id="autonomous-equations">
+<h2>3.5 Autonomous Equations<a class="headerlink" href="#autonomous-equations" title="Permalink to this headline">#</a></h2>
+<p>A first-order differential equation of the form <span class="math notranslate nohighlight">\(\frac{dx}{dt} = f(x)\)</span> is called <strong>autonomous</strong>, that is, a differential equation where only the dependent variable appears. We can always solve these because they are always separable. In particular, we can always rewrite the differential equation as <span class="math notranslate nohighlight">\(\displaystyle{\int \frac{1}{f(x)} dx = \int dt}\)</span> assuming <span class="math notranslate nohighlight">\(f(x) \neq 0\)</span>. But it can sometimes be very difficult to do so.</p>
+<p>It turns out that autonomous differential equations are nice in that they have constant solutions. In particular, <span class="math notranslate nohighlight">\(x(t)=c\)</span> is a solution if <span class="math notranslate nohighlight">\(x'(t) = \frac{dc}{dt} = 0 = f(x(t)) = f(c)\)</span>. These are the trivial solutions we would lose when dividing by zero when handling it as a separable differential equation.</p>
+<p>An <strong>equilibrium solution</strong> of an autonomous differential equation is a constant solution to the differential equation. In other words, if <span class="math notranslate nohighlight">\(f(c)=0\)</span>, then <span class="math notranslate nohighlight">\(x(t)=c\)</span> is an equilibrium solution of <span class="math notranslate nohighlight">\(x'(t)=f(x)\)</span>.</p>
+<p><strong>Example</strong> Find the equilibrium solutions of <span class="math notranslate nohighlight">\(x'(t) = x^2 - 9\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(x'(t)=0\)</span></p>
+<p><span class="math notranslate nohighlight">\(x^2-9=(x-3)(x+3)=0\)</span></p>
+<p>So <span class="math notranslate nohighlight">\(x(t) = -3\)</span> and <span class="math notranslate nohighlight">\(x(t)=3\)</span> are the equilibrium solutions.</p>
+<p>*Note: <span class="math notranslate nohighlight">\(\displaystyle{\int \frac{1}{x^2-9} dx = \int dt}\)</span> would not have recovered these solutions.</p>
+<p>Given the equilibrium solutions of an autonomous differential equation, we can make a phase line to analyze the behavior of the solution.</p>
+<p><strong>Example</strong> Draw a phase line and determine where the solution of the differential equation <span class="math notranslate nohighlight">\(y'(x) = y(y-1)^2(x-2)\)</span> are increasing and decreasing.</p>
+<p>First we must find the equilibrium solutions, which means we must solve <span class="math notranslate nohighlight">\(y'(x)=0\)</span>. This means <span class="math notranslate nohighlight">\(y(y-1)^2(x-2)=0\)</span>. So <span class="math notranslate nohighlight">\(y(x)=0\)</span>, <span class="math notranslate nohighlight">\(y(x)=1\)</span>, and <span class="math notranslate nohighlight">\(y(x)=2\)</span> are the equilibrium solutions. To draw a phase line, see the code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Function for the autonomous differential equation</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Identify the critical points (where dy/dx = 0)</span>
+<span class="n">critical_points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Create the figure and axis</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the phase line at x = 0 with markers at the critical points</span>
+<span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">critical_points</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">point</span> <span class="o">-</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">point</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="s1">&#39;go&#39;</span><span class="p">)</span>  <span class="c1"># Stable points in green</span>
+    <span class="k">elif</span> <span class="n">f</span><span class="p">(</span><span class="n">point</span> <span class="o">-</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">f</span><span class="p">(</span><span class="n">point</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>  <span class="c1"># Unstable points in red</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="s1">&#39;yo&#39;</span><span class="p">)</span> <span class="c1"># Semi-stable point in yellow</span>
+        
+<span class="c1"># Draw arrows indicating direction of movement</span>
+<span class="n">arrow_properties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.075</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">.3</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>  <span class="c1"># Decrease head_width to make arrows skinnier</span>
+
+<span class="n">check_points</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
+
+<span class="c1"># Check below the lowest critical point separately</span>
+<span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">check_points</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">check_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mf">1.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_properties</span><span class="p">)</span>  <span class="c1"># Pointing up if derivative is positive</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">check_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mf">1.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_properties</span><span class="p">)</span>  <span class="c1"># Pointing down if derivative is negative</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">critical_points</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">check_points</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">critical_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">critical_points</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mf">1.7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_properties</span><span class="p">)</span>  <span class="c1"># Pointing up if derivative is positive</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">critical_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">critical_points</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mf">1.7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_properties</span><span class="p">)</span>  <span class="c1"># Pointing down if derivative is negative</span>
+
+<span class="c1"># Check above the highest critical point separately</span>
+<span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">check_points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">critical_points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mf">2.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_properties</span><span class="p">)</span>  <span class="c1"># Pointing up if derivative is positive</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">critical_points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mf">2.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_properties</span><span class="p">)</span>  <span class="c1"># Pointing down if derivative is negative</span>
+
+<span class="c1"># Set the y-axis limits</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">)</span>
+<span class="c1"># Set the x-axis limits</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Label the y-axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+<span class="c1"># Title of the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Phase Line Plot&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remove the x-axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2dd03689902fc47effc524587483c26aa89baeb8ff2b30c2b2199ffbaa5d62c9.png" src="../../_images/2dd03689902fc47effc524587483c26aa89baeb8ff2b30c2b2199ffbaa5d62c9.png" />
+</div>
+</div>
+<p>Notice that this tells us that a solution to the previous differential equation would have to be increasing on the interval <span class="math notranslate nohighlight">\((-\infty,0)\)</span> or decreasing on <span class="math notranslate nohighlight">\((0,1)\)</span> or decreasing on <span class="math notranslate nohighlight">\((1,2)\)</span> or increasing on <span class="math notranslate nohighlight">\((2,\infty)\)</span>.</p>
+<p>In addition it allows us to classify the stability of our equilibrium solutions. An equilibrium solution <span class="math notranslate nohighlight">\(x(t)=c\)</span> is <strong>stable</strong> if solutions whose initial value is near <span class="math notranslate nohighlight">\(c\)</span> stays near <span class="math notranslate nohighlight">\(c\)</span> as the independent variable incrases.  An equilibrium solution <span class="math notranslate nohighlight">\(x(t)=c\)</span> is <strong>unstable</strong> if solutions whose initial value is near <span class="math notranslate nohighlight">\(c\)</span> goes away from <span class="math notranslate nohighlight">\(c\)</span> as the independent variable incrases. An equilibrium solution is considered <strong>semi-stable</strong> if both cases occur (one in the region above and one in the region below). We can see an example of each type of equilibrium in the above example. In particular, <span class="math notranslate nohighlight">\(x(t)=0\)</span> is stable, <span class="math notranslate nohighlight">\(x(t)=1\)</span> is semi-stable, and <span class="math notranslate nohighlight">\(x(t)=2\)</span> is unstable.</p>
+<p>It turns out that if we know that there is a unique solution to the autonomous initial-value problem <span class="math notranslate nohighlight">\(\frac{dx}{dt} = f(x)\)</span> where <span class="math notranslate nohighlight">\(x(t_0)=x_0\)</span>, then we know a few more things about the solution. Namely,</p>
+<ol class="arabic simple">
+<li><p>The equilibrium points divide the region <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> plane into regions. A solution cannot pass between regions and the initial value will determine which region a particular solution is in.</p></li>
+<li><p>The solution <span class="math notranslate nohighlight">\(x(t)\)</span> is increasing/decreasing everywhere inside a particular region because <span class="math notranslate nohighlight">\(f(x)\)</span> is either positive or negative everywhere in a region.</p></li>
+<li><p>The limit of a solution <span class="math notranslate nohighlight">\(x(t)\)</span> as <span class="math notranslate nohighlight">\(t \rightarrow \pm \infty\)</span> is one of the boundaries of that region.</p></li>
+</ol>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<ol class="arabic simple">
+<li><p>Determine if the following first-order differential equations are linear, separable, both, or neither.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\frac{dy}{dx} = y + x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sqrt{y} + 2\frac{dy}{dx} = e^{x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sqrt{y}\frac{dy}{dx} = e^{x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{dy}{dx} = x+5\)</span></p></li>
+</ul>
+</li>
+<li><p>Find the explicit solution to the differential equation <span class="math notranslate nohighlight">\(y'(x) = y+5\)</span>.</p></li>
+<li><p>Find the explicit solution to the differential equation <span class="math notranslate nohighlight">\(W'(s) = s+sW^2\)</span>.</p></li>
+<li><p>Find the explicit solution to the initial value problem <span class="math notranslate nohighlight">\(y'(t) = ty\)</span> where <span class="math notranslate nohighlight">\(y(0)=3\)</span>.</p></li>
+<li><p>Find the explicit solution to the initial value problem <span class="math notranslate nohighlight">\(x'(t) = x\sin(t)\)</span> where <span class="math notranslate nohighlight">\(x(0)=1\)</span>.</p></li>
+<li><p>Show that if a first order differential equation is both linear and homogeneous, then it is also separable.</p></li>
+<li><p>Find the solution to the differential equation <span class="math notranslate nohighlight">\(\frac{dP}{dt} = \frac{2P}{t} + t^2\sec^2(t)\)</span>.</p></li>
+<li><p>Find the solution to the initial value problem <span class="math notranslate nohighlight">\(xy' + y = \sin(x)\)</span>, where <span class="math notranslate nohighlight">\(y(\pi)=0\)</span>.</p></li>
+<li><p>Plot a direction field for <span class="math notranslate nohighlight">\(y'(x) = y+x\)</span>.</p></li>
+<li><p>Plot a direction field for <span class="math notranslate nohighlight">\(y'(x) = xy\)</span>.</p></li>
+<li><p>Find the equilibirum solutions of <span class="math notranslate nohighlight">\(y'(x) = \sin(y)\)</span>.</p></li>
+<li><p>Draw a phase line and determine where a solution of the differential equation <span class="math notranslate nohighlight">\(\frac{dT}{dt} = (T+1)T(T-3)^2\)</span> is increasing and decreasing. Then classify the stability of each equilibrium point.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/DifEq"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="DE%20-%20Section%202.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2. Introduction to Differential Equations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../Advanced/Complex/jnb1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1. Setting the Scene</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separable-first-order-differential-equations">3.1 Separable First-Order Differential Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-first-order-differential-equations">3.2 Linear First-Order Differential Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slope-fields">3.4 Slope Fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autonomous-equations">3.5 Autonomous Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
