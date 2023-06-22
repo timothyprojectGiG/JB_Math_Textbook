@@ -1,0 +1,1482 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5.1 Antiderivative and Indefinite Integrals &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Calculus/5int/5int';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="1. Linear Systems and the 2 Commodity Model" href="../../AppliedCalc/twocommodity.html" />
+    <link rel="prev" title="4 Derivatives" href="../Sec4.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb1.html">1 Functions- Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb8.html">8. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb9.html">9. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb10.html">10. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Demo.html">12. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/00_Instructor_Notes.html">Section 0: Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sec3.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sec4.html">4 Derivatives</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5.1 Antiderivative and Indefinite Integrals</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Linear/0intro.html">0. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear/1system.html">1. Systems of Linear Equations</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear/1_2sol.html">1.2 Solution Set of  Linear Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear/2matrix.html">2. Matrix Algebra</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear/2_1det.html">2.1 Determinant</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq/DE%20-%20Section%202.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq/DE%20-%20Section%203.html">3. First-Order Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedDifEq/covid.html">1. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedDifEq/cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedDifEq/hiv/hiv.html">4. HIV-AIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedDifEq/cws/cws.html">5. CWS Model of Alzheimemer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedDifEq/gravity/gravity.html">6. Gravity Fed Water Delivery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/Calculus/5int/5int.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Undergrad/Calculus/5int/5int.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5.1 Antiderivative and Indefinite Integrals</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5.1 Antiderivative and Indefinite Integrals</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-indefinite-integral">Properties of the Indefinite Integral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-antiderivative-formulas">Basic Antiderivative Formulas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-by-u-substitution">Integration by U-substitution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-by-parts-ibp">Integration by Parts (IBP)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#area-problem-and-definite-integrals">5.2 Area Problem and Definite Integrals</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-definite-integral">Properties of Definite Integral</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-theorems-of-calculus-ftc">5.3 Fundamental Theorems of Calculus (FTC)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ftc-part-1">FTC Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ftc-part-2">FTC Part 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#improper-integrals">5.4 Improper Integrals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#average-value">5.5 Average Value</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mean-value-theorem-for-integrals">The Mean Value Theorem for Integrals</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#area-between-curves">5.6 Area Between Curves</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1 style="font-size:3rem;color:black;">5. Integrals</h1><p>Below is the list of topics that are covered in this section:</p>
+<ul class="simple">
+<li><p>Antiderivative and Indefinite Integrals</p></li>
+<li><p>Area Problem and Definite Integrals</p></li>
+<li><p>Fundamental Theorems of Calculus</p></li>
+<li><p>Improper Integrals</p></li>
+<li><p>Average Value</p></li>
+<li><p>Area Between Curves</p></li>
+</ul>
+<section id="antiderivative-and-indefinite-integrals">
+<h1>5.1 Antiderivative and Indefinite Integrals<a class="headerlink" href="#antiderivative-and-indefinite-integrals" title="Permalink to this headline">#</a></h1>
+<p>In the previous section we worked with derivatives. One easy example with power rule is that <strong>the</strong> derivative of <span class="math notranslate nohighlight">\(f(x)=x^2\)</span> is <span class="math notranslate nohighlight">\(f\,'(x)=2x\)</span>.<br>
+What if we would like to reverse this process? What is a function <span class="math notranslate nohighlight">\(f(x)\)</span> that has derivative <span class="math notranslate nohighlight">\(2x\)</span>? <br>
+Note that <span class="math notranslate nohighlight">\(x^2\)</span> is not the only such function as <span class="math notranslate nohighlight">\(x^2+3, x^2-5, x^2+66, x^2-\pi\)</span>, in general <span class="math notranslate nohighlight">\(x^2+C\)</span> for any constant <span class="math notranslate nohighlight">\(C\)</span>, are all derived into <span class="math notranslate nohighlight">\(2x\)</span>.</p>
+<p>Given a function <span class="math notranslate nohighlight">\(f(x)\)</span>. <br>
+<strong>An antiderivative</strong> of <span class="math notranslate nohighlight">\(f(x)\)</span> is any function <span class="math notranslate nohighlight">\(F(x)\)</span>
+such that <span class="math notranslate nohighlight">\(F\,'(x)=f(x)\)</span>.<br></p>
+<p>If <span class="math notranslate nohighlight">\(F(x)\)</span> is an antiderivative of <span class="math notranslate nohighlight">\(f(x)\)</span>, then the general antiderivative of <span class="math notranslate nohighlight">\(f(x)\)</span> is called an <strong>indefinite integral</strong>, denoted
+$<span class="math notranslate nohighlight">\(
+\int f(x)\,dx=F(x)+C, \quad \text{where }C \text{ is a constant}
+\)</span>$</p>
+<ul class="simple">
+<li><p>The symbol <span class="math notranslate nohighlight">\(\int\)</span> is called the <strong>integral</strong> symbol</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> is called the <strong>integrand</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is called the <strong>integration variable</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(C\)</span> is called the <strong>constant of integration</strong></p></li>
+</ul>
+<p>In this case we say we are <strong>integrating <span class="math notranslate nohighlight">\(\boldsymbol{f(x)}\)</span> with respect to (w.r.t.) <span class="math notranslate nohighlight">\(x\)</span></strong>.</p>
+<section id="properties-of-the-indefinite-integral">
+<h2>Properties of the Indefinite Integral<a class="headerlink" href="#properties-of-the-indefinite-integral" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Constant multiple can be factored out the indefinite integral <br>
+$<span class="math notranslate nohighlight">\(\int k\cdot f(x)\,dx=k\cdot \int f(x)\,dx\)</span>$</p></li>
+<li><p>Indefinite integral of the sum or difference of functions <br>
+$<span class="math notranslate nohighlight">\(\int f(x)\pm g(x) \,dx = \int f(x)\,dx \pm \int g(x)\,dx\)</span>$</p></li>
+</ul>
+</section>
+<section id="basic-antiderivative-formulas">
+<h2>Basic Antiderivative Formulas<a class="headerlink" href="#basic-antiderivative-formulas" title="Permalink to this headline">#</a></h2>
+<p>Antiderivative formulas for some basic integrands:</p>
+<ul class="simple">
+<li><p>Constant <br>
+$<span class="math notranslate nohighlight">\(\int k \,dx=kx+C\)</span>$</p></li>
+<li><p>Power Rule <br>
+$<span class="math notranslate nohighlight">\(\int x^n\,dx=\dfrac{x^{n+1}}{n+1}+C,\quad n\neq -1\)</span>$</p></li>
+<li><p>Power of <span class="math notranslate nohighlight">\(-1\)</span> <br>
+$<span class="math notranslate nohighlight">\(\int \dfrac{1}{x}\,dx = \ln|x|+C\)</span>$</p></li>
+<li><p>Exponential <br>
+$<span class="math notranslate nohighlight">\(\int b^x\,dx=\dfrac{b^x}{\ln(b)}+C\)</span>$</p></li>
+<li><p>Exponential when <span class="math notranslate nohighlight">\(b=e\)</span> <br>
+$<span class="math notranslate nohighlight">\(\int e^x\,dx=\dfrac{e^x}{\ln(e)}+C=\dfrac{e^x}{1}+C=e^x+C\)</span>$</p></li>
+<li><p>Sine <br>
+$<span class="math notranslate nohighlight">\(\int \sin(x)\,dx=-\cos(x)+C\)</span>$</p></li>
+<li><p>Cosine <br>
+$<span class="math notranslate nohighlight">\(\int \cos(x)\,dx=\sin(x)+C\)</span>$</p></li>
+</ul>
+</section>
+<section id="integration-by-u-substitution">
+<h2>Integration by U-substitution<a class="headerlink" href="#integration-by-u-substitution" title="Permalink to this headline">#</a></h2>
+<p>On the Derivative section, we already see how Chain Rule is used to find the derivative of a composition of two functions.<br>
+Similarly, there is a tool that can be used to find an antiderivative of certain functions involving composition of functions. <br></p>
+<p><strong>Rule:</strong><br>
+$<span class="math notranslate nohighlight">\(\int f\left(g\left(x\right)\right)\cdot g\,'(x)\,dx=\int f(u) \,du, \quad \text{ where }u=g(x)\)</span>$</p>
+<p>Note that to use this rule, the integrand must contain a composition function <span class="math notranslate nohighlight">\(f\left(g\left(x\right)\right)\)</span> multiplied with the derivative of the inside function <span class="math notranslate nohighlight">\(g(x)\)</span>.</p>
+<p><strong>Steps for U-subs</strong><br></p>
+<ol class="arabic simple">
+<li><p>Find <span class="math notranslate nohighlight">\(u\)</span>, which is the inside function</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(du\)</span> in terms of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(dx\)</span></p></li>
+<li><p>Substitute the integrals, if done correctly will only have integration in terms of variable <span class="math notranslate nohighlight">\(u\)</span>, not the original variable.</p></li>
+<li><p>Integrate</p></li>
+<li><p>Substitute back the <span class="math notranslate nohighlight">\(u\)</span> in terms of the original variable.</p></li>
+</ol>
+<p><strong>Example</strong><br>
+Determine <span class="math notranslate nohighlight">\(\displaystyle\int 6x^2\left(x^3+8\right)^5\, dx\)</span>. <br></p>
+<p>The “inside function” here is <span class="math notranslate nohighlight">\(x^3+8\)</span>, which derivative is <span class="math notranslate nohighlight">\(3x^2\)</span>. Hence, set up the integration as such, then do the steps above:<br>
+$<span class="math notranslate nohighlight">\(\int 6x^2\left(x^3+8\right)^5\,dx = 2\cdot \int \left(x^3+8\right)^5\cdot 3x^2\,dx\)</span>$</p>
+<p>Steps:<br></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(u=x^3+8\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(du=3x^2 \,dx\)</span></p></li>
+<li><p>Substitute ro <span class="math notranslate nohighlight">\(u\)</span>:<br> <span class="math notranslate nohighlight">\(2\cdot \displaystyle\int \underbrace{\left(x^3+8\right)}_{u}^5\cdot \underbrace{3x^2\,dx}_{du} = 2\cdot \displaystyle\int u^5\,du\)</span></p></li>
+<li><p>Integrate: <br><span class="math notranslate nohighlight">\(2\cdot \displaystyle\int u^5\,du=2\cdot \dfrac{u^6}{6}+C\)</span></p></li>
+<li><p>Substitute back to <span class="math notranslate nohighlight">\(x\)</span>: <br>
+<span class="math notranslate nohighlight">\(2\cdot \dfrac{u^6}{6}+C=2\cdot \dfrac{\left(x^3+8\right)^6}{6}+C=\dfrac{\left(x^3+8\right)^6}{3}+C\)</span></p></li>
+</ol>
+<p>Hence:
+$<span class="math notranslate nohighlight">\(\int 6x^2\left(x^3+8\right)^5\,dx = \dfrac{\left(x^3+8\right)^6}{3}+C\)</span>$</p>
+</section>
+<section id="integration-by-parts-ibp">
+<h2>Integration by Parts (IBP)<a class="headerlink" href="#integration-by-parts-ibp" title="Permalink to this headline">#</a></h2>
+<p>On the Derivative section, we already see how Product Rule is used to find the derivative of a product of two functions.<br>
+Similarly, there is a tool that can be used to find an antiderivative of certain functions involving product of two functions.</p>
+<p><strong>Rule</strong><br>
+$<span class="math notranslate nohighlight">\(
+\int f\cdot g\,'\;dx=fg-\int f\,'\cdot g \;dx
+\)</span><span class="math notranslate nohighlight">\(
+or, more commonly remembered as: &lt;br&gt;
+\)</span><span class="math notranslate nohighlight">\(
+\int u\; dv = uv-\int v\; du
+\)</span>$</p>
+<p>A common issue with this set up is deciding which factor of the product should be <span class="math notranslate nohighlight">\(u\)</span> and which one should be <span class="math notranslate nohighlight">\(dv\)</span>. While there are many “tricks” offered by some resources, there are no official rules on which factor is which. If one set up does not work, we can always try the other set up. Repetitive practice is the best way to develop the sense of recognizing which factor is “a good choice” to be <span class="math notranslate nohighlight">\(u\)</span> or <span class="math notranslate nohighlight">\(dv\)</span>.</p>
+<p><strong>Example</strong><br>
+Determine <span class="math notranslate nohighlight">\(\displaystyle\int x\cdot e^{3x}\,dx\)</span><br></p>
+<p>First choose the <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(dv\)</span>:<br>
+$<span class="math notranslate nohighlight">\(u=x \qquad dv=e^{3x} \,dx\)</span>$</p>
+<p>Next, find <span class="math notranslate nohighlight">\(du\)</span> and <span class="math notranslate nohighlight">\(v\)</span>:<br>
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-21738661-6278-4697-84d9-d710e828c018">
+<span class="eqno">(29)<a class="headerlink" href="#equation-21738661-6278-4697-84d9-d710e828c018" title="Permalink to this equation">#</a></span>\[\begin{align}
+u=x &amp;\Rightarrow du=dx \\
+dv=e^{3x} &amp;\Rightarrow \int e^{3x}\,dx = \dfrac{e^{3x}}{3}
+\end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[Thus:&lt;br&gt;
+\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-35185613-e042-41c6-8396-7a291dff3908">
+<span class="eqno">(30)<a class="headerlink" href="#equation-35185613-e042-41c6-8396-7a291dff3908" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int x\cdot e^{3x}\,dx 
+&amp;= x\cdot \dfrac{e^{3x}}{3} - \int \dfrac{e^{3x}}{3} \,dx\\
+&amp;= \dfrac{xe^{3x}}{3}- \dfrac{1}{3}\cdot \int e^{3x} \,dx\\
+&amp;= \dfrac{xe^{3x}}{3}- \dfrac{1}{9}e^{3x}+C
+\end{align}\]</div>
+<p>$$</p>
+<p>Now, try to do <span class="math notranslate nohighlight">\(u=e^{3x}\)</span> and <span class="math notranslate nohighlight">\(dv=x\,dx\)</span> instead, what happen?</p>
+<p>Note that both U-Subs and IBP are used to work on product of two functions, with the restriction on U-Subs being stricter. Hence, there are indefinite integrals that can be evaluated using either U-Subs and IBP.</p>
+<p>Below is a code example that ask user for the integrand <span class="math notranslate nohighlight">\(f(x)\)</span>, and returned the general antiderivative <span class="math notranslate nohighlight">\(\displaystyle\int f(x)\,dx\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="k">def</span> <span class="nf">find_antiderivative</span><span class="p">():</span>
+    <span class="c1"># Prompt the user for the function f(x)</span>
+    <span class="n">function_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+
+    <span class="c1"># Define the variable and function using sympy</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">function_input</span><span class="p">)</span>
+
+    <span class="c1"># Compute the antiderivative of f(x)</span>
+    <span class="n">antiderivative</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Return the general antiderivative</span>
+    <span class="k">return</span> <span class="n">antiderivative</span>
+
+<span class="c1"># Run the function to find the antiderivative</span>
+<span class="n">antiderivative</span> <span class="o">=</span> <span class="n">find_antiderivative</span><span class="p">()</span>
+
+<span class="c1"># Print the general antiderivative</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;General Antiderivative:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">antiderivative</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">18</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="k">return</span> <span class="n">antiderivative</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="c1"># Run the function to find the antiderivative</span>
+<span class="ne">---&gt; </span><span class="mi">18</span> <span class="n">antiderivative</span> <span class="o">=</span> <span class="n">find_antiderivative</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="c1"># Print the general antiderivative</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;General Antiderivative:&quot;</span><span class="p">)</span>
+
+<span class="nn">Cell In[1], line 5,</span> in <span class="ni">find_antiderivative</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">find_antiderivative</span><span class="p">():</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1"># Prompt the user for the function f(x)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="n">function_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="c1"># Define the variable and function using sympy</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="nn">File //anaconda3/lib/python3.10/site-packages/ipykernel/kernelbase.py:1172,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1165</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Forward raw_input to frontends</span>
+<span class="g g-Whitespace">   </span><span class="mi">1166</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1167</span><span class="sd"> Raises</span>
+<span class="g g-Whitespace">   </span><span class="mi">1168</span><span class="sd"> ------</span>
+<span class="g g-Whitespace">   </span><span class="mi">1169</span><span class="sd"> StdinNotImplementedError if active frontend doesn&#39;t support stdin.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1170</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1171</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1172</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1173</span>         <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1174</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1175</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1177</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parent_ident</span><span class="p">[</span><span class="s2">&quot;shell&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1180</span> <span class="p">)</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the function to find the antiderivative</span>
+<span class="n">antiderivative</span> <span class="o">=</span> <span class="n">find_antiderivative</span><span class="p">()</span>
+
+<span class="c1"># Print the general antiderivative</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;General Antiderivative:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">antiderivative</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br></section>
+</section>
+<section id="area-problem-and-definite-integrals">
+<h1>5.2 Area Problem and Definite Integrals<a class="headerlink" href="#area-problem-and-definite-integrals" title="Permalink to this headline">#</a></h1>
+<p>Unlike indefinite integrals, definite integrals don’t come from reversing the process of evaluating derivative. Definite integrals comes from <strong>Area Problem</strong>. <br>
+Analogically, the area problems to definite integrals is just like RoC problems to derivatives.</p>
+<p>The goal of the area problem is to find the area of the region between the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>-axis. If that region has a common two-dimensional shapes, then it is enough to use basic geometry to find the area.<br></p>
+<p><strong>Example</strong><br>
+Find the shaded area formed by the function <span class="math notranslate nohighlight">\(f(x)=2x\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>-axis on the interval <span class="math notranslate nohighlight">\([0,2]\)</span>.<br>
+<a class="reference internal" href="../../../_images/5Int2AP1.png"><img alt="../../../_images/5Int2AP1.png" src="../../../_images/5Int2AP1.png" style="width: 200px;" /></a> <br>
+Note that the area is simply a triangle area with base <span class="math notranslate nohighlight">\(2\)</span> and height <span class="math notranslate nohighlight">\(4\)</span>. Hence the area is <span class="math notranslate nohighlight">\(\frac{1}{2}\cdot 2\cdot 4=4\)</span>.<br></p>
+<p>Now, how about finding the shaded area formed by the function, say, <span class="math notranslate nohighlight">\(f(x)=0.5x^2+2\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>-axis on the interval <span class="math notranslate nohighlight">\([0,2]\)</span>?<br>
+<a class="reference internal" href="../../../_images/5Int2AP2.png"><img alt="../../../_images/5Int2AP2.png" src="../../../_images/5Int2AP2.png" style="width: 200px;" /></a> <br>
+While we might not able to calculate this area exactly using high school 2D geometry, we can do an estimation.</p>
+<p>Estimating the area can be done by dividing the interval into several subintervals, and in each subinterval create a rectangle whose height is using the function value at a specific point in that subinterval.<br>
+The approximation of the area is then obtained by adding the total area of all rectangles. <br>
+Below are the example if we divide the interval <span class="math notranslate nohighlight">\([0,2]\)</span> into 4 subintervals, and use certain points as the height of each rectangle:<br>
+<a class="reference internal" href="../../../_images/5Int2AP3.png"><img alt="../../../_images/5Int2AP3.png" src="../../../_images/5Int2AP3.png" style="width: 650px;" /></a> <br>
+As their name suggests, the <strong>Left Sum, Middle Sum (Midpoint Rule)</strong>, and <strong>Right Sum</strong> are using the function values at the left endpoints, midpoints, and right endpoints, respectively, as the height of the rectangles. <br></p>
+<p>Since this example divides the interval <span class="math notranslate nohighlight">\([0,2]\)</span> into 4 subintervals, then the width of each rectangle is <span class="math notranslate nohighlight">\(\frac{2-0}{4}=0.5\)</span>. <br>
+Let <span class="math notranslate nohighlight">\(A_L,A_M,\)</span>and <span class="math notranslate nohighlight">\(A_R\)</span> denotes the area approximation using the Left, Middle, and Right sum, respectively. Then: <br>
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7874cdb0-eb6a-473b-86fc-491ea6aa068f">
+<span class="eqno">(31)<a class="headerlink" href="#equation-7874cdb0-eb6a-473b-86fc-491ea6aa068f" title="Permalink to this equation">#</a></span>\[\begin{align}
+A_L &amp;= 0.5\cdot f(0) + 0.5\cdot f(0.5) + 0.5\cdot f(1) + 0.5\cdot f(1.5)\\
+    &amp;= 0.5\cdot\left[f(0)+f(0.5)+f(1)+f(1.5)\right] \\
+    &amp;= 0.5\cdot\left[2+2.125+2.5+3.125\right] = \boldsymbol{4.875}\\[2mm]
+A_M &amp;= 0.5\cdot f(0.25) + 0.5\cdot f(0.75) + 0.5\cdot f(1.25) + 0.5\cdot f(1.75) \\
+    &amp;= 0.5\cdot\left[f(0.25)+f(0.75)+f(1.25)+f(1.25)\right] \\
+    &amp;= 0.5\cdot\left[2.03125+2.28125+2.78125+3.53125\right] = \boldsymbol{5.3125} \\[2mm]
+A_R &amp;= 0.5\cdot f(0.5) + 0.5\cdot f(1) + 0.5\cdot f(1.5) + 0.5\cdot f(2) \\
+    &amp;= 0.5\cdot\left[f(0.5)+f(1)+f(1.5)+f(2)\right]\\
+    &amp;= 0.5\cdot\left[2.125+2.5+3.125+4\right] = \boldsymbol{5.875}
+\end{align}\]</div>
+<p>$$</p>
+<p>In this particular example, the Left Sum clearly gives an underestimate as all the rectangles’ heights are below the graph of <span class="math notranslate nohighlight">\(f(x)\)</span>, meanwhile the Right Sum gives an overestimate as all the rectangles’ heights are above it. The Midpoint Rule seems to give the least error from the figure as the height of the rectangles are closer to the value on the actual graph.<br></p>
+<p>Illustrated below the approximation using Left Sum on 6, 8, and 10 rectangles:<br>
+<a class="reference internal" href="../../../_images/5Int2AP4.png"><img alt="../../../_images/5Int2AP4.png" src="../../../_images/5Int2AP4.png" style="width: 650px;" /></a> <br></p>
+<p>Even though graphically we can see the increase in accuracy when the number of rectangle increase, how should we know the actual area?</p>
+<p>Let <span class="math notranslate nohighlight">\(n\)</span> denotes the number of rectangles, <span class="math notranslate nohighlight">\(\Delta x\)</span> denotes the width of each rectangle, and <span class="math notranslate nohighlight">\(x_1,x_2,\ldots,x_n\)</span> denotes the points in the interval <span class="math notranslate nohighlight">\([a,b]\)</span> which values on those points are used as the height of the rectangle.<br> The area approximation is then:
+$<span class="math notranslate nohighlight">\(
+A \approx \Bigl[f\left(x_1\right)+f\left(x_2\right)+\ldots+f\left(x_n\right)\Bigr] \cdot \Delta x \qquad \text{or} \qquad A \approx \sum\limits_{i=1}^n f\left(x_i\right) \cdot \Delta x
+\)</span>$</p>
+<p>The summation above is what we call <strong>Riemann Sum</strong>.</p>
+<p>Now, increasing the number of rectangles <span class="math notranslate nohighlight">\(n\)</span> gives better approximation of the area. In fact, taking limit as <span class="math notranslate nohighlight">\(n\to \infty\)</span> gives the actual area.<br>
+This limit of Riemann Sum as <span class="math notranslate nohighlight">\(n\)</span> goes to infinity is the <strong>definite integral</strong>, denoted as follow:
+$<span class="math notranslate nohighlight">\(
+\int_a^b f(x)\,dx = \lim_{n\to \infty} \sum\limits_{i=1}^n f\left(x_i\right) \cdot \Delta x
+\)</span>$</p>
+<p>For our previous example <span class="math notranslate nohighlight">\(f(x)=0.5x^2+2\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>-axis on the interval <span class="math notranslate nohighlight">\([0,2]\)</span>:<br>
+For <span class="math notranslate nohighlight">\(n\)</span> subintervals, the width of each subinterval is <span class="math notranslate nohighlight">\(\Delta x=\dfrac{2-0}{n}=\dfrac{2}{n}\)</span>, and hence the subintervals are:
+$<span class="math notranslate nohighlight">\(
+\left[0,\dfrac{2}{n}\right],\left[\dfrac{2}{n},\dfrac{4}{n}\right],\left[\dfrac{4}{n},\dfrac{6}{n}\right],\ldots,\left[\dfrac{2(i-1)}{n},\dfrac{2i}{n}\right],\ldots,\left[\dfrac{2(n-1)}{n},2\right]
+\)</span><span class="math notranslate nohighlight">\(
+As \)</span>n<span class="math notranslate nohighlight">\( is large, without lost of generality we can take the right endpoint as the height of each rectangle. The right endpoint of the \)</span>i^{\text{th}}<span class="math notranslate nohighlight">\( subinterval is \)</span>x_i=\dfrac{2i}{n}<span class="math notranslate nohighlight">\(. &lt;br&gt;
+The Riemann Sum then become:
+\)</span>$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e8ab0387-da7c-43db-90f4-c5322471a9fa">
+<span class="eqno">(32)<a class="headerlink" href="#equation-e8ab0387-da7c-43db-90f4-c5322471a9fa" title="Permalink to this equation">#</a></span>\[\begin{align}
+\sum\limits_{i=1}^n f\left(x_i\right) \cdot \Delta x 
+&amp;= \sum\limits_{i=1}^n f\left(\dfrac{2i}{n}\right)\left(\dfrac{2}{n}\right)\\
+&amp;= \sum\limits_{i=1}^n \left(0.5\left(\dfrac{2i}{n}\right)^2+2\right)\left(\dfrac{2}{n}\right)\\
+&amp;= \sum\limits_{i=1}^n \left(\dfrac{4i^2}{n^3}+\dfrac{4}{n}\right)\\
+&amp;= \dfrac{4}{n^3}\sum\limits_{i=1}^n \left(i^2\right)+\dfrac{4}{n}\sum\limits_{i=1}^n (1)\\
+&amp;= \dfrac{4}{n^3}\left(\dfrac{n(n+1)(2n+1)}{6}\right)+\dfrac{4}{n} (n)\\
+&amp;= \dfrac{16n^2+6n+2}{3n^2}\\
+&amp;= \dfrac{16}{3}+\dfrac{2}{n}+\dfrac{2}{3n^2}
+\end{align}\]</div>
+<p>$$</p>
+<p>Computing the integral:
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9be5e8cb-3098-4bf1-bb75-98d59453e364">
+<span class="eqno">(33)<a class="headerlink" href="#equation-9be5e8cb-3098-4bf1-bb75-98d59453e364" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int_0^2 0.5x^2+2\, dx 
+&amp;= \lim\limits_{n\to\infty}  \sum\limits_{i=1}^n f\left(x_i\right) \cdot \Delta x \\
+&amp;= \lim\limits_{n\to\infty} \left(\dfrac{16}{3}+\dfrac{2}{n}+\dfrac{2}{3n^2}\right) \\
+&amp;= \dfrac{16}{3}+0+0 =\boldsymbol{\dfrac{16}{3}}
+\end{align}\]</div>
+<p>$$</p>
+<p>That is certainly a tedious work even for a simple function like <span class="math notranslate nohighlight">\(f(x)=0.5x^2+2\)</span>. On the next part we will learn a simpler way to do this area calculation.<br></p>
+<p>Below is the code to calculate Riemann Sum of <span class="math notranslate nohighlight">\(f(x)\)</span> on the interval <span class="math notranslate nohighlight">\([a,b]\)</span> using <span class="math notranslate nohighlight">\(n\)</span> intervals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">riemann_sum</span><span class="p">():</span>
+    <span class="c1">#Function can be edited as needed</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+
+    <span class="c1"># Prompt the user for the type of Riemann sum</span>
+    <span class="n">sum_type</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Choose Riemann sum type (left, right, or midpoint): &quot;</span><span class="p">)</span>
+
+    <span class="c1"># Prompt the user for inputs</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the left endpoint (a): &quot;</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the right endpoint (b): &quot;</span><span class="p">))</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the number of subintervals (n): &quot;</span><span class="p">))</span>
+
+    <span class="c1"># Calculate the width of each subinterval</span>
+    <span class="n">delta_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+
+    <span class="c1"># Initialize the Riemann sum</span>
+    <span class="n">riemann_sum</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Calculate the Riemann sum based on the selected type</span>
+    <span class="k">if</span> <span class="n">sum_type</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">delta_x</span>
+            <span class="n">riemann_sum</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta_x</span>
+    <span class="k">elif</span> <span class="n">sum_type</span> <span class="o">==</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">delta_x</span>
+            <span class="n">riemann_sum</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta_x</span>
+    <span class="k">elif</span> <span class="n">sum_type</span> <span class="o">==</span> <span class="s2">&quot;midpoint&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta_x</span>
+            <span class="n">riemann_sum</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta_x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid Riemann sum type.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">riemann_sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the function to get the Riemann sum</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">riemann_sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Riemann sum is:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Choose Riemann sum type (left, right, or midpoint): left
+Enter the left endpoint (a): 0
+Enter the right endpoint (b): 1
+Enter the number of subintervals (n): 4
+The Riemann sum is: 2.109375
+</pre></div>
+</div>
+</div>
+</div>
+<section id="properties-of-definite-integral">
+<h2>Properties of Definite Integral<a class="headerlink" href="#properties-of-definite-integral" title="Permalink to this headline">#</a></h2>
+<p>Before going to the next part, familiarize yourself with the properties of the definite integral below, and think where do they came from based on the relation with the area under the curve.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{a}^{b} f(x) \,dx=-\displaystyle\int_{b}^{a} f(x)\, dx\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{a}^{a} f(x) \,dx=0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{a}^{b} cf(x) \,dx=c\displaystyle\int_{a}^{b} f(x) \,dx\)</span> for any constant <span class="math notranslate nohighlight">\(c\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{a}^{b} f(x)\pm g(x) \,dx=\displaystyle\int_{a}^{b} f(x) \,dx \pm \displaystyle\int_{a}^{b} g(x) \,dx\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{a}^{b} f(x) \,dx=\displaystyle\int_{a}^{c} f(x) \,dx + \displaystyle\int_{c}^{b} f(x) \,dx\)</span> for any constant <span class="math notranslate nohighlight">\(c\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(x)\geq g(x)\)</span> for <span class="math notranslate nohighlight">\(a\leq x \leq b\)</span> then <span class="math notranslate nohighlight">\(\displaystyle\int_{a}^{b} f(x) \,dx \geq \displaystyle\int_{a}^{b} g(x) \,dx\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Bigg\vert \displaystyle\int_{a}^{b} f(x) \,dx \; \Bigg\vert \leq \displaystyle\int_{a}^{b} \vert f(x) \vert \,dx\)</span></p></li>
+</ul>
+<br></section>
+</section>
+<section id="fundamental-theorems-of-calculus-ftc">
+<h1>5.3 Fundamental Theorems of Calculus (FTC)<a class="headerlink" href="#fundamental-theorems-of-calculus-ftc" title="Permalink to this headline">#</a></h1>
+<section id="ftc-part-1">
+<h2>FTC Part 1<a class="headerlink" href="#ftc-part-1" title="Permalink to this headline">#</a></h2>
+<p><strong>Theorem (FTC 1):</strong> For <span class="math notranslate nohighlight">\(f(t)\)</span> continuous function and <span class="math notranslate nohighlight">\(a\)</span> any constant: <span class="math notranslate nohighlight">\(\dfrac{d}{dx}\displaystyle\int_a^x f(t)\,dt=f(x)\)</span>.</p>
+<p>While many ‘resources’ said that FTC 1 “basically” shows that derivative and integral “cancel each other”, it is not actually that simple. <br>
+Motivated students are encouraged to explore the proof of FTC 1 (Hint: Use the Extreme Value Theorem).</p>
+<p><strong>Example</strong> <br>
+If <span class="math notranslate nohighlight">\(F(x)=\displaystyle\int_{-2}^x e^{3t^2}\sin^2\left(2-t^5\right)\)</span>, find <span class="math notranslate nohighlight">\(F\,'(x)\)</span>.<br></p>
+<p>By FTC 1, <span class="math notranslate nohighlight">\(F\,'(x)=\dfrac{d}{dx} F(x) \,dx = \dfrac{d}{dx} \displaystyle\int_{-2}^x e^{3t^2}\sin^2\left(2-t^5\right) \,dx = e^{3x^2}\sin^2\left(2-x^5\right)\)</span>.</p>
+<p>When the lower bound is not a constant, or if the upper bound is a more complicated function of <span class="math notranslate nohighlight">\(x\)</span>, FTC 1 can still be applied with the help of Chain Rule and integral properties.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\dfrac{d}{dx}\displaystyle\int_a^{u(x)} f(t)\,dt = u\,'(x)f(u(x))\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\dfrac{d}{dx}\displaystyle\int_{v(x)}^{u(x)} f(t)\,dt = -v\,'(x)f(v(x))+u\,'(x)f(u(x))\)</span></p></li>
+</ul>
+<p><strong>Example</strong> <br>
+<span class="math notranslate nohighlight">\(\dfrac{d}{dx}\displaystyle\int_5^{x^2} \dfrac{t^3-7}{t^2+8}\,dt = 2x \dfrac{\left(x^2\right)^3-7}{\left(x^2\right)^2+8}\)</span>.</p>
+</section>
+<section id="ftc-part-2">
+<h2>FTC Part 2<a class="headerlink" href="#ftc-part-2" title="Permalink to this headline">#</a></h2>
+<p>FTC 2 connect area problem (definite integral) with antiderivative (indefinite integral).<br>
+It provide a simpler way to calculate definite integral compared to using the limit of Riemann Sum.</p>
+<p><strong>Theorem (FTC 2):</strong> If <span class="math notranslate nohighlight">\(F(x)\)</span> is an antiderivative of <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(f(x)\)</span> is continuous on <span class="math notranslate nohighlight">\([a,b]\)</span>, then:<span class="math notranslate nohighlight">\( \displaystyle\int_a^b f(x)\,dx=F(x)\,\Big\vert_a^b = F(b) - F(a)\)</span>.</p>
+<p><strong>Example</strong><br>
+Let’s visit the example used previously when we discuss Riemann Sum: Calculate <span class="math notranslate nohighlight">\(\displaystyle\int_0^2 0.5x^2+2\, dx\)</span><br></p>
+<p>Using basic antiderivative formula (in this case, for constant and power function), we have <span class="math notranslate nohighlight">\(\displaystyle\int 0.5x^2+2\, dx = \dfrac{0.5x^3}{3}+2x\)</span>, hence by FTC 2:
+$<span class="math notranslate nohighlight">\(
+\displaystyle\int_0^2 0.5x^2+2\, dx = \left(\dfrac{0.5x^3}{3}+2x\right) \Bigg\vert_0^2 = \left(\dfrac{0.5(2)^3}{3}+2(2)\right)-\left(\dfrac{0.5(0)^3}{3}+2(0)\right) = \dfrac{4}{3} + 4 =\boldsymbol{\dfrac{16}{3}}
+\)</span>$
+This give the same answer with much lesser efforts compared to using limit of Riemann Sum.</p>
+<p>Below is an example code that prompt user for <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\([a,b]\)</span>, then return the value of <span class="math notranslate nohighlight">\(\displaystyle\int_a^b f(x)\,dx\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="k">def</span> <span class="nf">definite_integral</span><span class="p">():</span>
+    <span class="c1"># Prompt the user for the function, lower limit, and upper limit</span>
+    <span class="n">expression_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the lower limit (a): &quot;</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the upper limit (b): &quot;</span><span class="p">))</span>
+
+    <span class="c1"># Convert the input string to a sympy expression</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">expression</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">expression_str</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the definite integral</span>
+    <span class="n">integral</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">integral</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the function to get the definite integral</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">definite_integral</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The definite integral is:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter the function f(x): x**2
+Enter the lower limit (a): 0
+Enter the upper limit (b): 1
+The definite integral is: 0.333333333333333
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="k">def</span> <span class="nf">definite_integral</span><span class="p">():</span>
+    <span class="c1"># Prompt the user for the function, lower limit, and upper limit</span>
+    <span class="n">expression_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the lower limit (a): &quot;</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the upper limit (b): &quot;</span><span class="p">))</span>
+
+    <span class="c1"># Convert the input string to a sympy expression</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">expression</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">expression_str</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the definite integral</span>
+    <span class="n">integral</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">integral</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br></section>
+</section>
+<section id="improper-integrals">
+<h1>5.4 Improper Integrals<a class="headerlink" href="#improper-integrals" title="Permalink to this headline">#</a></h1>
+<p>Consider the area problem on an unbounded interval <span class="math notranslate nohighlight">\((a,\infty]\)</span> or <span class="math notranslate nohighlight">\((-\infty,b]\)</span> or <span class="math notranslate nohighlight">\((-\infty,\infty)\)</span> instead of <span class="math notranslate nohighlight">\([a,b]\)</span>. <br>
+The definite integral that corresponds to the area problem over such unbounded interval is called <strong>improper integral</strong>.</p>
+<p>To calculate improper integral, we first bound the interval to some number <span class="math notranslate nohighlight">\(N\)</span>, then take <span class="math notranslate nohighlight">\(N\to \pm\infty\)</span> as needed:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_a^{\infty} f(x)\,dx = \lim\limits_{N\to \infty} \displaystyle\int_a^N f(x)\,dx\)</span><br></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{-\infty}^b f(x)\,dx = \lim\limits_{N\to -\infty} \displaystyle\int_N^b f(x)\,dx\)</span><br></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{-\infty}^{\infty} f(x)\,dx = \displaystyle\int_{-\infty}^c f(x)\,dx+\displaystyle\int_c^{\infty} f(x)\,dx =\lim\limits_{N\to -\infty} \displaystyle\int_N^c f(x)\,dx+\lim\limits_{N\to \infty} \displaystyle\int_c^N f(x)\,dx\)</span>,  for any number <span class="math notranslate nohighlight">\(c\)</span>.</p></li>
+</ul>
+<p>Since the area is over an unbounded interval, the area is also possible to be, but not necessarily, unbounded.<br>
+If the limit exists, then we said the improper integral to be <strong>convergent</strong>. Otherwise, we said the improper integral to be <strong>divergent</strong>.</p>
+<p><strong>Example</strong><br>
+Determine if the following integrals are convergent or divergent: <span class="math notranslate nohighlight">\(\displaystyle\int_{-\infty}^{\infty} xe^{-x^2}\, dx\)</span>. <br>
+Using <span class="math notranslate nohighlight">\(u\)</span>-subs with <span class="math notranslate nohighlight">\(u=-x^2\)</span>, we have <span class="math notranslate nohighlight">\(\displaystyle\int xe^{-x^2}\, dx = -\dfrac{1}{2}e^{-x^2} + C\)</span>. Hence for the improper integral:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\int_{-\infty}^{\infty} xe^{-x^2}\, dx 
+&amp;= \int_{-\infty}^{0} xe^{-x^2}\, dx + \int_{0}^{\infty} xe^{-x^2}\, dx \\
+&amp;= \lim\limits_{N\to -\infty} \int_{N}^{0} xe^{-x^2}\, dx + \lim\limits_{N\to \infty}\int_{0}^{N} xe^{-x^2}\, dx \\
+&amp;= \lim\limits_{N\to -\infty} \left(-\dfrac{1}{2}e^{-x^2}\right)\Bigg\vert_N^0 + \lim\limits_{N\to \infty}\left(-\dfrac{1}{2}e^{-x^2}\right)\Bigg\vert_0^N\\
+&amp;= \lim\limits_{N\to -\infty} \left[\left(-\dfrac{1}{2}e^{0}\right)-\left(-\dfrac{1}{2}e^{-N^2}\right)\right] + \lim\limits_{N\to \infty}\left[\left(-\dfrac{1}{2}e^{-N^2}\right)-\left(-\dfrac{1}{2}e^{0}\right)\right]\\
+&amp;= -\dfrac{1}{2} + \dfrac{1}{2} = \boldsymbol{0}
+\end{align}
+\end{split}\]</div>
+<p>A little modification on sympy can be used to enable the code to calculate improper integral. <br>
+Below is the modified code so that user can put either <strong>-inf</strong> (for <span class="math notranslate nohighlight">\(-\infty\)</span>) or <strong>inf</strong> (for <span class="math notranslate nohighlight">\(\infty\)</span>) as the integral bounds:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">oo</span>
+
+<span class="k">def</span> <span class="nf">definite_integral</span><span class="p">():</span>
+    <span class="c1"># Prompt the user for the function and the bounds</span>
+    <span class="n">expression_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+    <span class="n">a_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the lower bound (a) or -inf for negative infinity: &quot;</span><span class="p">)</span>
+    <span class="n">b_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the upper bound (b) or inf for positive infinity: &quot;</span><span class="p">)</span>
+
+    <span class="c1"># Convert the input strings to sympy expressions</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">expression</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">expression_str</span><span class="p">)</span>
+
+    <span class="c1"># Set the lower bound</span>
+    <span class="k">if</span> <span class="n">a_str</span> <span class="o">==</span> <span class="s2">&quot;-inf&quot;</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="n">oo</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a_str</span><span class="p">)</span>
+
+    <span class="c1"># Set the upper bound</span>
+    <span class="k">if</span> <span class="n">b_str</span> <span class="o">==</span> <span class="s2">&quot;inf&quot;</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">oo</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_str</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Calculate the integral</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+
+        <span class="c1"># Check if the integral is finite</span>
+        <span class="k">if</span> <span class="n">integral</span><span class="o">.</span><span class="n">is_finite</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">integral</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;The integral diverges&quot;</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;The integral diverges&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the function to get the definite integral</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">definite_integral</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The definite integral is:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter the function f(x): x**2
+Enter the lower bound (a) or -inf for negative infinity: 0
+Enter the upper bound (b) or inf for positive infinity: 1
+The definite integral is: 0.333333333333333
+</pre></div>
+</div>
+</div>
+</div>
+<br></section>
+<section id="average-value">
+<h1>5.5 Average Value<a class="headerlink" href="#average-value" title="Permalink to this headline">#</a></h1>
+<p>When a continuous function <span class="math notranslate nohighlight">\(f(x)\)</span> is linear, the average value <span class="math notranslate nohighlight">\(f(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> is simply <span class="math notranslate nohighlight">\(\frac{f(a)+f(b)}{2}\)</span>. <br>
+How about the average value of nonlinear continous function <span class="math notranslate nohighlight">\(f(x)\)</span>?</p>
+<a class="reference internal image-reference" href="../../../_images/5Int5avg1.png"><img alt="../../../_images/5Int5avg1.png" src="../../../_images/5Int5avg1.png" style="width: 600px;" /></a>
+<p>The <strong>average value</strong> of continuous function <span class="math notranslate nohighlight">\(f(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> is given by <span class="math notranslate nohighlight">\(\dfrac{1}{b-a}\displaystyle\int_a^b f(x)\, dx\)</span>.<br></p>
+<p>Motivated students are encouraged to try proving this formula algebraically using Riemann Sum.<br>
+An easier way to look at the average value is the height <span class="math notranslate nohighlight">\(h\)</span> such that the area of rectangle with width <span class="math notranslate nohighlight">\((b-a)\)</span> and height <span class="math notranslate nohighlight">\(h\)</span> is equal to the area between <span class="math notranslate nohighlight">\(f(x)\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>-axis on <span class="math notranslate nohighlight">\([a,b]\)</span>:<br>
+<span class="math notranslate nohighlight">\(h(b-a) =\displaystyle\int_a^b f(x)\,dx \quad \Rightarrow \quad h= \dfrac{1}{b-a}\displaystyle\int_a^b f(x)\,dx\)</span><br>
+<a class="reference internal" href="../../../_images/5Int5avg2.png"><img alt="../../../_images/5Int5avg2.png" src="../../../_images/5Int5avg2.png" style="width: 300px;" /></a></p>
+<p><strong>Example</strong> <br>
+Determine the average value of <span class="math notranslate nohighlight">\(f(x)=5\cos(3x)+x\)</span> on <span class="math notranslate nohighlight">\([1,4]\)</span>. <br>
+Average value is <span class="math notranslate nohighlight">\(\dfrac{1}{4-1}\displaystyle\int_1^4 5\cos(3x)+x\, dx = \dfrac{1}{3} \left(\dfrac{5}{3}\sin(3x)+\dfrac{x^2}{2}\right)\Bigg\vert_1^4 = \dfrac{1}{3} \left[\left(\dfrac{5}{3}\sin(12)+\dfrac{16}{2}\right)-\left(\dfrac{5}{3}\sin(3)+\dfrac{1}{2}\right) \right] \approx 2.12\)</span>.</p>
+<p>If want to ask user for <span class="math notranslate nohighlight">\(f(x)\)</span> and find the average value for <span class="math notranslate nohighlight">\(f(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span>, remember to check the continuity of <span class="math notranslate nohighlight">\(f(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="k">def</span> <span class="nf">calculate_average_value</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Prompt user for function f(x) and the interval [a,b]</span>
+    <span class="n">f_x_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+    <span class="n">f_x</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">f_x_str</span><span class="p">)</span>  <span class="c1"># Evaluate the function string as a valid Python expression</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the left endpoint of the interval (a): &quot;</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the right endpoint of the interval (b): &quot;</span><span class="p">))</span>
+
+    <span class="c1"># Check if f(x) is not continuous on [a, b]</span>
+    <span class="n">is_continuous</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)):</span>
+            <span class="n">is_continuous</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">break</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_continuous</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;f(x) is not continuous on [a,b]&quot;</span>
+
+    <span class="c1"># Calculate the average value of f(x) on [a,b]</span>
+    <span class="n">avg_value</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">avg_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test the function</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">calculate_average_value</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter the function f(x): x**2
+Enter the left endpoint of the interval (a): 0
+Enter the right endpoint of the interval (b): 1
+0.333333333333333
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-mean-value-theorem-for-integrals">
+<h2>The Mean Value Theorem for Integrals<a class="headerlink" href="#the-mean-value-theorem-for-integrals" title="Permalink to this headline">#</a></h2>
+<p><strong>Theorem (MVT for Integrals):</strong> If <span class="math notranslate nohighlight">\(f(x)\)</span> is continous on <span class="math notranslate nohighlight">\([a,b]\)</span>, then there is a number <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\([a,b]\)</span> such that <span class="math notranslate nohighlight">\(\displaystyle\int_a^b f(x)\,dx=f(c)\left(b-a\right)\)</span>.</p>
+<p><strong>Example</strong><br>
+Find the number <span class="math notranslate nohighlight">\(c\)</span> that satisfies the MVT for Integrals, for <span class="math notranslate nohighlight">\(f(x)=3x^2+5x-7\)</span> on <span class="math notranslate nohighlight">\([2,4]\)</span>. <br>
+Since <span class="math notranslate nohighlight">\(f(x)=3x^2+5x-7\)</span> is a polynomial and hence is continuous on <span class="math notranslate nohighlight">\([2,4]\)</span>, apply the MVT for Integrals:
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-85d2bef1-ec43-4919-963f-8590799a4a6a">
+<span class="eqno">(34)<a class="headerlink" href="#equation-85d2bef1-ec43-4919-963f-8590799a4a6a" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int_2^4 3x^2+5x-7 \,dx &amp;= \left(3c^2+5c-7\right)(4-2) \\
+\left(x^3+\dfrac{5x^2}{2}-7x\right)\Bigg\vert_2^4 &amp;= 2\left(3c^2+5c-7\right)\\
+72 &amp;= 2\left(3c^2+5c-7\right)\\
+36 &amp;= 3c^2+5c-7\\
+0 &amp;= 3c^2+5c-43\\
+\end{align}\]</div>
+<p>$$</p>
+<p>Using quadractic formula we get <span class="math notranslate nohighlight">\(c=\dfrac{-5 \pm \sqrt{541}}{6}\)</span>, or approximately, <span class="math notranslate nohighlight">\(c\approx -4.7099, 3.0432\)</span>. <br>
+The only <span class="math notranslate nohighlight">\(c\)</span> value that is in the given interval <span class="math notranslate nohighlight">\([2,4]\)</span> is <span class="math notranslate nohighlight">\(\boldsymbol{c\approx 3.0432}\)</span>.</p>
+<p>Below is the example code that ask user for a continuous <span class="math notranslate nohighlight">\(f(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span>, and will return the value(s) of <span class="math notranslate nohighlight">\(c\)</span> that satisfy the MVT for integrals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Prompt user for interval [a, b]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the left endpoint of the interval (a): &quot;</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the right endpoint of the interval (b): &quot;</span><span class="p">))</span>
+
+<span class="c1"># Prompt user for function f(x)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f_x_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+<span class="n">f_x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">f_x_str</span><span class="p">)</span>
+
+<span class="c1"># Check if f(x) is continuous on [a, b]</span>
+<span class="n">is_continuous</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">is_continuous</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f(x) is not continuous on [a, b]&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Calculate the definite integral of f(x) from a to b</span>
+    <span class="n">integral</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+
+    <span class="c1"># Solve the equation f(c) * (b - a) = integral for c</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+    <span class="n">equation</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">f_x</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">),</span> <span class="n">integral</span><span class="p">)</span>
+    <span class="n">solutions</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+    <span class="c1"># Filter solutions within the interval [a, b]</span>
+    <span class="n">valid_solutions</span> <span class="o">=</span> <span class="p">[</span><span class="n">solution</span> <span class="k">for</span> <span class="n">solution</span> <span class="ow">in</span> <span class="n">solutions</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">solution</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">]</span>
+
+    <span class="c1"># Display the solutions</span>
+    <span class="k">if</span> <span class="n">valid_solutions</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value(s) of c that satisfy MVT for Integrals on [a,b]:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">solution</span> <span class="ow">in</span> <span class="n">valid_solutions</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No valid value of c found in the interval [a, b].&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter the left endpoint of the interval (a): 0
+Enter the right endpoint of the interval (b): 1
+Enter the function f(x): x**2
+The value(s) of c that satisfy MVT for Integrals on [a,b]:
+0.577350269189626
+</pre></div>
+</div>
+</div>
+</div>
+<br></section>
+</section>
+<section id="area-between-curves">
+<h1>5.6 Area Between Curves<a class="headerlink" href="#area-between-curves" title="Permalink to this headline">#</a></h1>
+<p>We already know that the definite integral <span class="math notranslate nohighlight">\(\displaystyle\int_a^b f(x)\,dx\)</span> gives the area between the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>-axis over interval <span class="math notranslate nohighlight">\([a,b]\)</span>. <br>
+Now we want to calculate the area between the graph of two functions.</p>
+<p>In general, the area betwen two functions over the interval <span class="math notranslate nohighlight">\([a,b]\)</span> is <span class="math notranslate nohighlight">\(A=\displaystyle\int_a^b (\text{top function})-(\text{bottom function})\,dx\)</span>.<br>
+To illustrate the idea, consider a specific case where two continuous function <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> satisfies <span class="math notranslate nohighlight">\(f(x)\geq g(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> with the diagram below.</p>
+<a class="reference internal image-reference" href="../../../_images/5Int6ABC1.png"><img alt="../../../_images/5Int6ABC1.png" src="../../../_images/5Int6ABC1.png" style="width: 800px;" /></a>
+<p>When the function <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> alternate the upper and bottom position, one common way to find the area is to separate the interval <span class="math notranslate nohighlight">\(a\leq x\leq b\)</span> into multiple subintervals where in each subinterval the top and bottom position is consistent. However, the shorter way to do it is to keep the integrand positive using absolute value:
+$<span class="math notranslate nohighlight">\(
+A=\int_a^b \Big\vert f(x) - g(x) \Big\vert \,dx
+\)</span><span class="math notranslate nohighlight">\(
+This formula holds no matter which function \)</span>f(x)<span class="math notranslate nohighlight">\( of \)</span>g(x)$ is on the top or bottom.</p>
+<p>Similarly, the area between <span class="math notranslate nohighlight">\(x=f(y)\)</span> and <span class="math notranslate nohighlight">\(x=g(y)\)</span> on the interval <span class="math notranslate nohighlight">\(c\leq y\leq d\)</span> is <span class="math notranslate nohighlight">\(A=\displaystyle\int_c^d (\text{right function})-(\text{left function})\,dx\)</span>. <br>
+In general, the formula is <span class="math notranslate nohighlight">\(A=\displaystyle\int_c^d \Big\vert f(y) - g(y) \Big\vert \,dy\)</span>.</p>
+<p>Below is an example code that ask user for <span class="math notranslate nohighlight">\(f(x)\)</span>, <span class="math notranslate nohighlight">\(g(x)\)</span>, and <span class="math notranslate nohighlight">\([a,b]\)</span>. It will return the area between the two <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> over the interval <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+
+<span class="c1"># Prompt user for interval [a, b]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the left endpoint of the interval (a): &quot;</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the right endpoint of the interval (b): &quot;</span><span class="p">))</span>
+
+<span class="c1"># Prompt user for function f(x)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f_x_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+<span class="n">f_x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">f_x_str</span><span class="p">)</span>
+
+<span class="c1"># Check if f(x) is continuous on [a, b]</span>
+<span class="n">is_f_continuous</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">is_f_continuous</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f(x) is not continuous on [a, b]&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Prompt user for function g(x)</span>
+    <span class="n">g_x_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function g(x): &quot;</span><span class="p">)</span>
+    <span class="n">g_x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">g_x_str</span><span class="p">)</span>
+
+    <span class="c1"># Check if g(x) is continuous on [a, b]</span>
+    <span class="n">is_g_continuous</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">g_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">g_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_g_continuous</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g(x) is not continuous on [a, b]&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Define the absolute difference between f(x) and g(x)</span>
+        <span class="n">abs_diff</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">f_x</span> <span class="o">-</span> <span class="n">g_x</span><span class="p">)</span>
+
+        <span class="c1"># Convert the absolute difference to a callable function</span>
+        <span class="n">abs_diff_fn</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">abs_diff</span><span class="p">)</span>
+
+        <span class="c1"># Numerically approximate the integral using quad function</span>
+        <span class="n">area</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">abs_diff_fn</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+        <span class="c1"># Display the result</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The area between f(x) and g(x) over the interval [a, b] is:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter the left endpoint of the interval (a): 0
+Enter the right endpoint of the interval (b): 1
+Enter the function f(x): x**2
+Enter the function g(x): x**3
+The area between f(x) and g(x) over the interval [a, b] is:
+0.08333333333333334
+</pre></div>
+</div>
+</div>
+</div>
+<br></section>
+<section id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
+<ol class="arabic simple">
+<li><p>Find the indefinite integral of the following functions.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=\sin\left(\cos\left(x\right)\right)\sin(x)\)</span> <br></p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x)=3x\sqrt[3]{1-2x^2}\)</span> <br></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(x)=\dfrac{3x^5+2x}{\left(x^6+2x^2\right)^3}\)</span> <br></p></li>
+<li><p><span class="math notranslate nohighlight">\(m(x)=x^5\sqrt{x^3+1}\)</span> <br>
+Hint: if doing manually, use u-subs twice in the process</p></li>
+<li><p><span class="math notranslate nohighlight">\(n(x)=x^2\cos(7x)\)</span> <br>
+Hint: if doing manually, use IBP twice in the process</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>For each of the following function at the given interval, find the Riemann Sum with <span class="math notranslate nohighlight">\(n=8\)</span>, each using Left, Midpoint, and Right Sum.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=\sin(x)\)</span> on <span class="math notranslate nohighlight">\([0,\pi]\)</span><br></p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x)=3x^3+5x-7\)</span> on <span class="math notranslate nohighlight">\([-2,6]\)</span><br></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(x)=x^5\sqrt{x^3+1}\)</span> on <span class="math notranslate nohighlight">\([2,10]\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p>Use FTC 2 to compute the following, and determine which Sum (Left/Midpoint/Right) on the previous problem gives the best approximation.<br></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_0^{\pi} \sin(x)\, dx\)</span> <br></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{-2}^{6} 3x^3+5x-7\, dx\)</span> <br></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_2^{10} x^5\sqrt{x^3+1}\, dx\)</span> <br></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Use FTC 1 to differentiate each of the following integral with respect to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_2^x 7\sin^2\left(t^3-0.2t+9\right)\,dt\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_2^{\cos(3x)} \sqrt{17-9t^6}\,dt\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{-5x}^{5x^2} e^{t}-\ln(4t)\,dt \)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="5">
+<li><p>Determine if the following integral is convergent or divergent. If convergent, calculate its value. If divergent, explain why.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_4^{\infty} \dfrac{2}{x^3}\,dx\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{-\infty}^5 e^{2x}+1\,dx\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{-\infty}^{\infty} \dfrac{x^2}{x^3+1}\,dx\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="6">
+<li><p>Find the average value of the given function on the given interval.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)=10\ln(x)+x^2\)</span> on <span class="math notranslate nohighlight">\([3,5]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(t(x)=70+950e^{-0.07x}\)</span> on <span class="math notranslate nohighlight">\([0,60]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x)=-\sin\left(\dfrac{1}{2}x\right)+\cos(2x)\)</span> on <span class="math notranslate nohighlight">\(\left[\dfrac{\pi}{2},\pi\right]\)</span></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="7">
+<li><p>Find the number <span class="math notranslate nohighlight">\(c\)</span> that satisfies the MVT for Integrals, for <span class="math notranslate nohighlight">\(f(x)=4x^2+5x+6\)</span> on <span class="math notranslate nohighlight">\([-1,5]\)</span>.</p></li>
+</ol>
+<ol class="arabic simple" start="8">
+<li><p>Find the area of the following:</p>
+<ul class="simple">
+<li><p>between <span class="math notranslate nohighlight">\(f(x)=3x\)</span> and <span class="math notranslate nohighlight">\(g(x)=x\left(\sqrt{x}+1\right)\)</span> for <span class="math notranslate nohighlight">\(0\leq x\leq 4\)</span></p></li>
+<li><p>between <span class="math notranslate nohighlight">\(f(y)=3y\)</span> and <span class="math notranslate nohighlight">\(g(y)=30y\cdot e^{-0.3y}\)</span> for <span class="math notranslate nohighlight">\(0\leq y \leq 9\)</span></p></li>
+<li><p>enclosed by <span class="math notranslate nohighlight">\(f(x)=4-x\)</span> and <span class="math notranslate nohighlight">\(g(x)=(x-1)^2\)</span><br> (Hint: find where <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> intersects)</p></li>
+</ul>
+</li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/Calculus/5int"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Sec4.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4 Derivatives</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../AppliedCalc/twocommodity.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1. Linear Systems and the 2 Commodity Model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5.1 Antiderivative and Indefinite Integrals</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-indefinite-integral">Properties of the Indefinite Integral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-antiderivative-formulas">Basic Antiderivative Formulas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-by-u-substitution">Integration by U-substitution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-by-parts-ibp">Integration by Parts (IBP)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#area-problem-and-definite-integrals">5.2 Area Problem and Definite Integrals</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-definite-integral">Properties of Definite Integral</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-theorems-of-calculus-ftc">5.3 Fundamental Theorems of Calculus (FTC)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ftc-part-1">FTC Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ftc-part-2">FTC Part 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#improper-integrals">5.4 Improper Integrals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#average-value">5.5 Average Value</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mean-value-theorem-for-integrals">The Mean Value Theorem for Integrals</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#area-between-curves">5.6 Area Between Curves</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
