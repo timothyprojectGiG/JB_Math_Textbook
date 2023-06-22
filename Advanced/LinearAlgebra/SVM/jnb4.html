@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>5. Binary Classification of Labelled Data by Support Vector Machines &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
@@ -495,13 +496,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="binary-classification-of-labelled-data-by-support-vector-machines">
+  <section class="tex2jax_ignore mathjax_ignore" id="binary-classification-of-labelled-data-by-support-vector-machines">
 <h1>5. Binary Classification of Labelled Data by Support Vector Machines<a class="headerlink" href="#binary-classification-of-labelled-data-by-support-vector-machines" title="Permalink to this headline">#</a></h1>
 <p>In this section we consider data points that are labelled as belonging to one of two classes. Our goal is to determine a line (more generally, a hyperplane) that correctly separates the data. That is, all the points in one class are on one side of the line (hyperplane), and all the points in the other class are on the other side. For example, the scatterplot in  the figure below is an example of linearly separable data, meaning that the data can be correctly separated by a line.  The scatterplot shows for each Chicago zipcode the median proportion of income spent on rent vs.\ percentage of single-parent households.  The labels indicate 1 = rent-burdened (median 12-month rent is  more than 30% of median annual income) or 0 = not rent-burdened. As such, the line <span class="math notranslate nohighlight">\(x=0.3\)</span> separates the data. Points on one side of the line  are in one class, and points on the other in the other class.</p>
 <a class="reference internal image-reference" href="../../../_images/fig13a1.png"><img alt="../../../_images/fig13a1.png" src="../../../_images/fig13a1.png" style="width: 200px;" /></a>
 <p>As shown in the  figure below, a line that does not correctly separate the labelled data will create  false positives (FP) and/or false negatives (FN). An FP is a point that the line indicates to be in class 1 but which  in fact is in class 0; an FN is a point that the line indicates to be in class 0 but which  actually in class 1.</p>
 <a class="reference internal image-reference" href="../../../_images/fig13b1.png"><img alt="../../../_images/fig13b1.png" src="../../../_images/fig13b1.png" style="width: 200px;" /></a>
-<div class="section" id="intuition-underlying-svm">
+<section id="intuition-underlying-svm">
 <h2>Intuition Underlying SVM<a class="headerlink" href="#intuition-underlying-svm" title="Permalink to this headline">#</a></h2>
 <p>For simplicity, let us consider a small number of data points  with each point labelled as belonging to one of two distinct groups indicated by a pentagon or square.  Our goal is to find a boundary line that separates the two groups.</p>
 <a class="reference internal image-reference" href="../../../_images/fig14.png"><img alt="../../../_images/fig14.png" src="../../../_images/fig14.png" style="width: 200px;" /></a>
@@ -515,15 +516,15 @@ A support vector is a vector whose terminal point  <span class="math notranslate
 In the figure above, $P_1$ and $P_2$ are support vectors. <p>The figure below shows that while the parallel separating hyperplanes <span class="math notranslate nohighlight">\(L_1\)</span>, <span class="math notranslate nohighlight">\(L_2,\)</span> and <span class="math notranslate nohighlight">\(L_3\)</span> all have the same margin, only the SVM hyperplane <span class="math notranslate nohighlight">\(L_2\)</span> is equidistant (<span class="math notranslate nohighlight">\(d_1=d_2\)</span>) from support vectors in both classes.</p>
 <a class="reference internal image-reference" href="../../../_images/fig16b.png"><img alt="../../../_images/fig16b.png" src="../../../_images/fig16b.png" style="width: 200px;" /></a>
 <p>An ideal hyperplane would separate the data most clearly, and thus we would not want the hyperplane to be very close to any of the data points.  Instead, the ideal hyperplane is as far from both classes of data as possible while continuing to separate the two groups.  Thus, we should aim to maximize the margin around the hyperplane. However, given a fixed margin, there are multiple hyperplanes that correctly separate the data, as shown in the figure above. The separating line <span class="math notranslate nohighlight">\(L_1\)</span> is  close to the star data  but well-separated from the square data.  <span class="math notranslate nohighlight">\(L_1\)</span> is not an ideal hyperplane because a small error in the star data could result in incorrectly separated points.  In order to prevent small variations in the data from affecting the grouping of points, we should look for a hyperplane that is well-separated from both classes, namely, the hyperplane that  has a maximized margin and is equidistant from support vectors in the two classes.</p>
-</div>
-<div class="section" id="mathematical-formalism">
+</section>
+<section id="mathematical-formalism">
 <h2>Mathematical Formalism<a class="headerlink" href="#mathematical-formalism" title="Permalink to this headline">#</a></h2>
 <p>Consider the binary classification of a labelled training data set consisting of <span class="math notranslate nohighlight">\(n\)</span> data points (observations). Each data point has <span class="math notranslate nohighlight">\(m\)</span> coordinates (features) and is represented by a row vector in <span class="math notranslate nohighlight">\(\mathbf{R}^m\)</span>. Binary class membership is indicated by the labels <span class="math notranslate nohighlight">\(y_i\in\{+1,-1\}.\)</span> The classification problem that we consider involves</p>
 <p>i) finding a hyperplane that separates points by their class, using a labeled training set (see table below) to supervise the classification; and
 ii) using the hyperplane to make a prediction as to the class of a new point given just its features.</p>
 <a class="reference internal image-reference" href="../../../_images/table11.png"><img alt="../../../_images/table11.png" src="../../../_images/table11.png" style="width: 300px;" /></a>
-</div>
-<div class="section" id="separating-hyperplanes">
+</section>
+<section id="separating-hyperplanes">
 <h2>Separating Hyperplanes<a class="headerlink" href="#separating-hyperplanes" title="Permalink to this headline">#</a></h2>
 <p>The goal of linear separation is to find components of a vector <span class="math notranslate nohighlight">\(\mathbf{w}=\langle w_1,\dots,w_m \rangle\)</span> and real constant <span class="math notranslate nohighlight">\(b\)</span> such that the hyperplane <span class="math notranslate nohighlight">\(\pi(\mathbf{w},b)\)</span> defined by the equation <span class="math notranslate nohighlight">\(\mathbf{w}\cdot\mathbf{x}+b=w_1 x_1 + w_2x_2 + \dots + w_mx_m+b=0\)</span> is a linear separator of the labelled training data <span class="math notranslate nohighlight">\((\mathbf{x}_1,y_1),\dots,(\mathbf{x}_n,y_n)\)</span>. That is, for all <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>:</p>
 <p><span class="math notranslate nohighlight">\(\mathbf{w}\cdot\mathbf{x}_i+b&gt;0\)</span> if <span class="math notranslate nohighlight">\(y_i=+1\)</span>, and</p>
@@ -538,8 +539,8 @@ ii) using the hyperplane to make a prediction as to the class of a new point giv
 \pi^-:&amp;x_1+x_2+x_3-1&lt;0
 \end{align*}\]</div>
 <p>The data point  <span class="math notranslate nohighlight">\(\mathbf{x}_1=(0,0,0)\)</span> with label <span class="math notranslate nohighlight">\(y=-1\)</span> is in <span class="math notranslate nohighlight">\(\pi^-\)</span>, and the data points <span class="math notranslate nohighlight">\(\mathbf{x}_2=(1,1,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_3=(1,1,1)\)</span> with label <span class="math notranslate nohighlight">\(y=1\)</span> are in <span class="math notranslate nohighlight">\(\pi^+\)</span>. The hyperplane <span class="math notranslate nohighlight">\(\pi\bigl((1,1,1),-1\bigr)\)</span> correctly separates the three labelled training points.</p>
-</div>
-<div class="section" id="signed-distance">
+</section>
+<section id="signed-distance">
 <h2>Signed Distance<a class="headerlink" href="#signed-distance" title="Permalink to this headline">#</a></h2>
 <p>The signed distance, denoted <span class="math notranslate nohighlight">\(\rho(\mathbf{x},\pi)\)</span>, from a data point (vector) <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to the hyperplane <span class="math notranslate nohighlight">\(\pi(\mathbf{w},b)\)</span> is</p>
 <div class="math notranslate nohighlight">
@@ -562,8 +563,8 @@ The (non-negative) distance <span class="math notranslate nohighlight">\(\rho(\p
 m(C_1,C_2,\pi)=\rho(C_1,\pi)+\rho(C_2,\pi).
 \]</div>
 <p>In our example,  <span class="math notranslate nohighlight">\(C_1=\{(1,1,0),(1,1,1)\}\)</span>, <span class="math notranslate nohighlight">\(C_2=\{(0,0,0)\}\)</span>,  <span class="math notranslate nohighlight">\(\rho(C_1,\pi)=2/\sqrt{3}\)</span>, and  <span class="math notranslate nohighlight">\(\rho(C_2,\pi)=1/\sqrt{3}\)</span>. The margin is therefore <span class="math notranslate nohighlight">\(m(C_1,C_2,\pi)=1/\sqrt{3}+1/\sqrt{3}=2/\sqrt{3}\)</span>.</p>
-</div>
-<div class="section" id="optimization-for-linearly-separable-data">
+</section>
+<section id="optimization-for-linearly-separable-data">
 <h2>Optimization for Linearly-Separable Data<a class="headerlink" href="#optimization-for-linearly-separable-data" title="Permalink to this headline">#</a></h2>
 <p>For classifying data points, SVM seeks a  hyperplane <span class="math notranslate nohighlight">\(\pi(\mathbf{w},b)\)</span> that</p>
 <p>i)  <span class="math notranslate nohighlight">\(\,\)</span> correctly separates the training data,</p>
@@ -582,8 +583,8 @@ minimize \, J=\frac{1}{2}\|\mathbf{w}\|^2
 <p>where <span class="math notranslate nohighlight">\(C_{1}\)</span> and  <span class="math notranslate nohighlight">\(C_{2}\)</span> are (non-empty) classes of labelled training vectors.</p>
 <p>A result from convexity theory says that there will be a unique solution if the training classes <span class="math notranslate nohighlight">\(C_1,C_2\)</span> are linearly separable, and no solution if they are not linearly separable [Aggarwal 2020]. A vector <span class="math notranslate nohighlight">\(\mathbf{x}^*\)</span> is a support vector if either <span class="math notranslate nohighlight">\(\mathbf{w}\cdot\mathbf{x}^*+ b = 1\)</span> or <span class="math notranslate nohighlight">\(\mathbf{w}\cdot\mathbf{x}^*+ b= -1\)</span>.</p>
 <p>Note that by minimizing <span class="math notranslate nohighlight">\(J = \frac{1}{2}\|\mathbf{w}\|^2\)</span>, we are maximizing <span class="math notranslate nohighlight">\(d=\frac{1}{\|\mathbf{w}\|}\)</span>. From constraint {\bf (i)}, we have <span class="math notranslate nohighlight">\(\rho(\mathbf{x}, \pi)=\frac{\mathbf{w}\cdot\mathbf{x}+b}{\|\mathbf{w}\|}\ge \frac{1}{\|\mathbf{w}\|}=d\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{x}\in C_{1}\)</span>. From constraint {\bf (ii)}, we have <span class="math notranslate nohighlight">\(\rho(\mathbf{x},\pi)=\frac{\mathbf{w}\cdot\mathbf{x}+b}{\|\mathbf{w}\|}\le \frac{-1}{\|\mathbf{w}\|}=-d\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{x}\in C_{2}\)</span>. The margin is therefore <span class="math notranslate nohighlight">\(2d\)</span>. Hence, the minimization of <span class="math notranslate nohighlight">\(J=\frac{1}{2}\|\mathbf{w}\|^2\)</span> maximizes the margin <span class="math notranslate nohighlight">\(2d=\frac{2}{\|w\|}\)</span>. For our example, using the Jupiter Notebook  at <a class="reference external" href="https://tinyurl.com/ypasckyh">https://tinyurl.com/ypasckyh</a>, the support vectors are <span class="math notranslate nohighlight">\(\langle 0,0,0 \rangle\)</span> and <span class="math notranslate nohighlight">\(\langle 1,1,0 \rangle\)</span>. This gives us the SVM separating hyperplane <span class="math notranslate nohighlight">\(\pi\bigl((1,1,0),-1\bigr) \)</span> or <span class="math notranslate nohighlight">\(x_1 + x_2 -1 = 0\)</span> with a margin of <span class="math notranslate nohighlight">\(\sqrt{2}\)</span>. This margin is indeed larger than the margin <span class="math notranslate nohighlight">\(2/\sqrt{3}\)</span> that we obtained with our previous separating hyperplane <span class="math notranslate nohighlight">\(x_1+x_2+x_3-1=0.\)</span></p>
-</div>
-<div class="section" id="optimization-for-non-separable-data">
+</section>
+<section id="optimization-for-non-separable-data">
 <h2>Optimization for Non-Separable Data<a class="headerlink" href="#optimization-for-non-separable-data" title="Permalink to this headline">#</a></h2>
 <p>In general, the training data might not be linearly separable. In this case, our goal to find a hyperplane <span class="math notranslate nohighlight">\(\mathbf \pi(\mathbf{w},b)\)</span> that classifies the labelled data is based on the following:</p>
 <p><b>SVM OPTIMIZATION PROBLEM (non-separable training data)</b></p>
@@ -602,7 +603,7 @@ minimize \, J(\mathbf{w}.b)= \frac{1}{2}\sum_{i=1}^n\max\{0,1-y_i(\mathbf{w}\cdo
 <p>-correctly predicted points which are ‘well-separated’ from the separating hyperplane (i.e. <span class="math notranslate nohighlight">\(1-y_i(\mathbf{w}\cdot\mathbf{x}_i-k)\le0\)</span>) do not contribute anything to <span class="math notranslate nohighlight">\(J\)</span>.</p>
 <p>The term <span class="math notranslate nohighlight">\(\frac{\lambda}{2}\|\mathbf{w}\|^2\)</span> relates to our previous discussion of maximizing the margin.  The regularization parameter <span class="math notranslate nohighlight">\(\lambda\)</span> adjusts whether widening the margin or making correct classifications should be weighted more heavily.</p>
 <p>Exercise 3) uses a JNB to illustrate how SVMs can be used in binary classification of facial images. Using a training set consisting of <span class="math notranslate nohighlight">\(32\times 32=1024\)</span>-dimensional vectors representing <span class="math notranslate nohighlight">\(32\times 32\)</span> pixel images of former Chicago Mayors Harold Washington and Richard M.\ Daley, an SVM hyperplane is  used to predict which mayor is depicted in a set of test images of the two mayors.</p>
-<div class="section" id="exercises">
+<section id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h3>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\,\)</span> Let <span class="math notranslate nohighlight">\(\mathbf{w}=(1,2)\in\mathbf{R}^2\)</span> and <span class="math notranslate nohighlight">\(b=-1\)</span>.</p></li>
@@ -626,15 +627,15 @@ In the case where all points in the training set are correctly classified and we
 and Washington
 <a class="reference internal" href="../../../_images/fig19b.png"><img alt="../../../_images/fig19b.png" src="../../../_images/fig19b.png" style="width: 200px;" /></a></p>
 <p>Use the JNB  to make an SVM classification of images of Michelle Obama and Hillary Clinton (both first ladies were raised in Chicago).</p>
-</div>
-</div>
-<div class="section" id="conclusion">
+</section>
+</section>
+<section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
 <p>In this chapter, we have seen how linear algebra and optimization provide a framework for four types of machine-learning data analysis: ordinary least squares (OLS) linear regression, <span class="math notranslate nohighlight">\(k\)</span>-means clustering of unlabelled data, dimensionality analysis by principal component analysis, and binary classification of labelled data by support vector machines (SVM). Aggarwal [2020] provides an extensive in-depth treatment of this subject, and Williams [2018] is a good introduction to additional ways linear algebra is useful in data analysis.</p>
 <p>Data analysis is becoming incrasingly automated with the development of machine learning tools, including Python JNBs [VanderPlas 2017]. In addition to being adept in the use of such computational tools, a key to proficiency as a data scientist is to have an inquisitive love for data as well as a good understanding of the mathematics underlying a given method of analysis.</p>
 <p>Our team also holds the view that data analysis can and should support efforts to solve pressing societal issues being tackled by organizations working in disadvantaged communities. The housing data which we used to introduce SVM, is an instructive example of applying data analysis tools to complex problems involving equitable distribution of scarce resources.  In pondering why SVM did not give the vertical line which correctly separates rent-burdened from non-rent-Chicago zipcodes, we realized that the <span class="math notranslate nohighlight">\(L_2\)</span> SVM loss function penalizes data points that are correctly classified but are too close to the line (overfitting). In this case, if the default \emph{regularization parameter} <span class="math notranslate nohighlight">\(C=1\)</span> in Python’s Support Vector Classifier SVC() were increased to <span class="math notranslate nohighlight">\(C=1000\)</span>, we would obtain  the separating vertical hyperplane. (<span class="math notranslate nohighlight">\(C\)</span> is inversely proportion to <span class="math notranslate nohighlight">\(\lambda\)</span> in the SVM loss function in {\bf Section 5.7}.)   Using the default SVM classifier with <span class="math notranslate nohighlight">\(C=1\)</span> results in misclassifications: Accuracy = 0.7 (42 out of 60 total predictions were correct), Recall = 0.75 (36 of 48 rent-burdened zipcodes were correctly predicted), Precision = 0.86 (of the 42 zipcodes predicted to be rent-burdened, 36 were correctly predicted), and F-score = 0.8 (geometric mean of accuracy and precision). If the default model were the basis for a decision whether to grant rent support, the false negatives (FN = 12) would deny support from qualified zipcodes, and  false positives (FP = 6) would result in an inequitable use of limited resources. Understanding the mathematics underlying the algorithm can help identify potential dangers in accepting the default ML output at face value.</p>
 <p>Knowledge  of the real-world context under consideration is paramount.  Although the vertical line <span class="math notranslate nohighlight">\(x=0.3\)</span> correctly separates the data and thus has 100% accuracy, recall, and precision, there are  a dozen non-rent-burdened zipcodes close to the cutoff value of 0.3.  Gentrification can result in rapid rental increases that negatively impact low-income areas by creating additional rent-burdened households. Yet, since incomes may also increase in gentrifying areas, zipcodes close to but below the threshold line might not cross over into the rent-burdened category.  Similarly, zipcodes above the  threshold might move below in spite of additional rent burden on low-income households. Those most in need of housing support might be overlooked if funding decisions are based on a superficial machine-learning analysis of aggregated data. A merely mathematical classification of such data might hide or contribute to inequity if not accompanied by a close working knowledge of the actual real-life context.</p>
-<div class="section" id="solutions">
+<section id="solutions">
 <h3>Solutions<a class="headerlink" href="#solutions" title="Permalink to this headline">#</a></h3>
 <p>1)<span class="math notranslate nohighlight">\(\,\)</span> a) <span class="math notranslate nohighlight">\(\,\)</span> The hyperplane is the line <span class="math notranslate nohighlight">\(x_1+2x_2=1\)</span></p>
 <p>b) <span class="math notranslate nohighlight">\(\,\)</span>  The two half-spaces are the half-plane  <span class="math notranslate nohighlight">\(\pi^+: x_1+2x_2&gt;1\)</span> and the half-plane <span class="math notranslate nohighlight">\(\pi^-: x_1+2x_2&lt;1.\)</span></p>
@@ -649,9 +650,9 @@ there are infinitely many parallel separating hyperplanes with the same margin f
 <ol class="arabic simple" start="3">
 <li><p>See the lab.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="references">
+</section>
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <p>Aggarwal, C. 2020. <i>Linear Algebra and Optimization for Machine Learning: A Textbook</i>. Cham, Switzerland: Springer Nature.</p>
 <p>Amdat, W.C. 2021. The Chicago Hardship Index: An Introduction to Urban Inequity. Journal of Statistics and Data Science Education. <a class="reference external" href="https://www.researchgate.net/publication/361130606_The_Chicago_Hardship_Index_An_Introduction_to_Urban_Inequity">https://www.researchgate.net/publication/361130606_The_Chicago_Hardship_Index_An_Introduction_to_Urban_Inequity</a>.</p>
@@ -662,12 +663,12 @@ there are infinitely many parallel separating hyperplanes with the same margin f
 <p>VanderPlas, J. 2017. <i>Python Data Science Handbook: Essential Tools for Working with Data</i>. Sebastopol, CA
 O’Reilly.</p>
 <p>Williams, G. 2018. <i>Linear Algebra with Applications (9e).}  Burlington, MA: Jones &amp; Bartlett. </i></p>
-<div class="section" id="acknowledgements">
+<section id="acknowledgements">
 <h3>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">#</a></h3>
 <p>The project team is grateful to UMAP Journal Editor Paul Campbell for helpful guidance as to the design and content of this chapter, and also to  anonymous referees for suggesting improvements to the original manuscript.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

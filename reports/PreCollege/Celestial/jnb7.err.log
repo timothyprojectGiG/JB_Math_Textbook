@@ -1,0 +1,77 @@
+Traceback (most recent call last):
+  File "//anaconda3/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "//anaconda3/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+Chicago_map.save("Chicagoans.html")
+Chi.to_excel('ChiRevised.xlsx')
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[8], line 2[0m
+[1;32m      1[0m Chicago_map[38;5;241m.[39msave([38;5;124m"[39m[38;5;124mChicagoans.html[39m[38;5;124m"[39m)
+[0;32m----> 2[0m [43mChi[49m[38;5;241;43m.[39;49m[43mto_excel[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mChiRevised.xlsx[39;49m[38;5;124;43m'[39;49m[43m)[49m
+
+File [0;32m//anaconda3/lib/python3.10/site-packages/pandas/core/generic.py:2252[0m, in [0;36mNDFrame.to_excel[0;34m(self, excel_writer, sheet_name, na_rep, float_format, columns, header, index, index_label, startrow, startcol, engine, merge_cells, inf_rep, freeze_panes, storage_options)[0m
+[1;32m   2239[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mio[39;00m[38;5;21;01m.[39;00m[38;5;21;01mformats[39;00m[38;5;21;01m.[39;00m[38;5;21;01mexcel[39;00m [38;5;28;01mimport[39;00m ExcelFormatter
+[1;32m   2241[0m formatter [38;5;241m=[39m ExcelFormatter(
+[1;32m   2242[0m     df,
+[1;32m   2243[0m     na_rep[38;5;241m=[39mna_rep,
+[0;32m   (...)[0m
+[1;32m   2250[0m     inf_rep[38;5;241m=[39minf_rep,
+[1;32m   2251[0m )
+[0;32m-> 2252[0m [43mformatter[49m[38;5;241;43m.[39;49m[43mwrite[49m[43m([49m
+[1;32m   2253[0m [43m    [49m[43mexcel_writer[49m[43m,[49m
+[1;32m   2254[0m [43m    [49m[43msheet_name[49m[38;5;241;43m=[39;49m[43msheet_name[49m[43m,[49m
+[1;32m   2255[0m [43m    [49m[43mstartrow[49m[38;5;241;43m=[39;49m[43mstartrow[49m[43m,[49m
+[1;32m   2256[0m [43m    [49m[43mstartcol[49m[38;5;241;43m=[39;49m[43mstartcol[49m[43m,[49m
+[1;32m   2257[0m [43m    [49m[43mfreeze_panes[49m[38;5;241;43m=[39;49m[43mfreeze_panes[49m[43m,[49m
+[1;32m   2258[0m [43m    [49m[43mengine[49m[38;5;241;43m=[39;49m[43mengine[49m[43m,[49m
+[1;32m   2259[0m [43m    [49m[43mstorage_options[49m[38;5;241;43m=[39;49m[43mstorage_options[49m[43m,[49m
+[1;32m   2260[0m [43m[49m[43m)[49m
+
+File [0;32m//anaconda3/lib/python3.10/site-packages/pandas/io/formats/excel.py:934[0m, in [0;36mExcelFormatter.write[0;34m(self, writer, sheet_name, startrow, startcol, freeze_panes, engine, storage_options)[0m
+[1;32m    930[0m     need_save [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[1;32m    931[0m [38;5;28;01melse[39;00m:
+[1;32m    932[0m     [38;5;66;03m# error: Cannot instantiate abstract class 'ExcelWriter' with abstract[39;00m
+[1;32m    933[0m     [38;5;66;03m# attributes 'engine', 'save', 'supported_extensions' and 'write_cells'[39;00m
+[0;32m--> 934[0m     writer [38;5;241m=[39m [43mExcelWriter[49m[43m([49m[43m  [49m[38;5;66;43;03m# type: ignore[abstract][39;49;00m
+[1;32m    935[0m [43m        [49m[43mwriter[49m[43m,[49m[43m [49m[43mengine[49m[38;5;241;43m=[39;49m[43mengine[49m[43m,[49m[43m [49m[43mstorage_options[49m[38;5;241;43m=[39;49m[43mstorage_options[49m
+[1;32m    936[0m [43m    [49m[43m)[49m
+[1;32m    937[0m     need_save [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[1;32m    939[0m [38;5;28;01mtry[39;00m:
+
+File [0;32m//anaconda3/lib/python3.10/site-packages/pandas/io/excel/_openpyxl.py:56[0m, in [0;36mOpenpyxlWriter.__init__[0;34m(self, path, engine, date_format, datetime_format, mode, storage_options, if_sheet_exists, engine_kwargs, **kwargs)[0m
+[1;32m     43[0m [38;5;28;01mdef[39;00m [38;5;21m__init__[39m(
+[1;32m     44[0m     [38;5;28mself[39m,
+[1;32m     45[0m     path: FilePath [38;5;241m|[39m WriteExcelBuffer [38;5;241m|[39m ExcelWriter,
+[0;32m   (...)[0m
+[1;32m     54[0m ) [38;5;241m-[39m[38;5;241m>[39m [38;5;28;01mNone[39;00m:
+[1;32m     55[0m     [38;5;66;03m# Use the openpyxl module as the Excel writer.[39;00m
+[0;32m---> 56[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mopenpyxl[39;00m[38;5;21;01m.[39;00m[38;5;21;01mworkbook[39;00m [38;5;28;01mimport[39;00m Workbook
+[1;32m     58[0m     engine_kwargs [38;5;241m=[39m combine_kwargs(engine_kwargs, kwargs)
+[1;32m     60[0m     [38;5;28msuper[39m()[38;5;241m.[39m[38;5;21m__init__[39m(
+[1;32m     61[0m         path,
+[1;32m     62[0m         mode[38;5;241m=[39mmode,
+[0;32m   (...)[0m
+[1;32m     65[0m         engine_kwargs[38;5;241m=[39mengine_kwargs,
+[1;32m     66[0m     )
+
+[0;31mModuleNotFoundError[0m: No module named 'openpyxl'
+ModuleNotFoundError: No module named 'openpyxl'
+

@@ -1,36 +1,85 @@
 Traceback (most recent call last):
-  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "//anaconda3/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
-    return loop.run_until_complete(inner)
-  File "/Users/claire/opt/miniconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "//anaconda3/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
     return future.result()
-  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/claire/opt/miniconda3/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# import libraries 
-import os, cv2
-import numpy as np
-import numpy
-import pandas as pd
-import matplotlib.pyplot as plt
+xls=pd.ExcelFile('data.xlsx')
+num=3 #number of images
+N=8  #NxN pixels
+character_collection = {}
+for i in np.arange(0,num):
+    character_collection[i]=pd.read_excel(xls,str(i))
 ------------------
-
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[10], line 2[0m
-[1;32m      1[0m [38;5;66;03m# import libraries [39;00m
-[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mos[39;00m[38;5;241m,[39m [38;5;21;01mcv2[39;00m
-[1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m
+File [0;32m//anaconda3/lib/python3.10/site-packages/pandas/compat/_optional.py:142[0m, in [0;36mimport_optional_dependency[0;34m(name, extra, errors, min_version)[0m
+[1;32m    141[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 142[0m     module [38;5;241m=[39m [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43mname[49m[43m)[49m
+[1;32m    143[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m:
 
-[0;31mModuleNotFoundError[0m: No module named 'cv2'
+File [0;32m//anaconda3/lib/python3.10/importlib/__init__.py:126[0m, in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m    125[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[0;32m--> 126[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+
+File [0;32m<frozen importlib._bootstrap>:1050[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1027[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1004[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'openpyxl'
+
+During handling of the above exception, another exception occurred:
+
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[2], line 1[0m
+[0;32m----> 1[0m xls[38;5;241m=[39m[43mpd[49m[38;5;241;43m.[39;49m[43mExcelFile[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mdata.xlsx[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m      2[0m num[38;5;241m=[39m[38;5;241m3[39m [38;5;66;03m#number of images[39;00m
+[1;32m      3[0m N[38;5;241m=[39m[38;5;241m8[39m  [38;5;66;03m#NxN pixels[39;00m
+
+File [0;32m//anaconda3/lib/python3.10/site-packages/pandas/io/excel/_base.py:1513[0m, in [0;36mExcelFile.__init__[0;34m(self, path_or_buffer, engine, storage_options)[0m
+[1;32m   1510[0m [38;5;28mself[39m[38;5;241m.[39mengine [38;5;241m=[39m engine
+[1;32m   1511[0m [38;5;28mself[39m[38;5;241m.[39mstorage_options [38;5;241m=[39m storage_options
+[0;32m-> 1513[0m [38;5;28mself[39m[38;5;241m.[39m_reader [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_engines[49m[43m[[49m[43mengine[49m[43m][49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_io[49m[43m,[49m[43m [49m[43mstorage_options[49m[38;5;241;43m=[39;49m[43mstorage_options[49m[43m)[49m
+
+File [0;32m//anaconda3/lib/python3.10/site-packages/pandas/io/excel/_openpyxl.py:548[0m, in [0;36mOpenpyxlReader.__init__[0;34m(self, filepath_or_buffer, storage_options)[0m
+[1;32m    533[0m [38;5;129m@doc[39m(storage_options[38;5;241m=[39m_shared_docs[[38;5;124m"[39m[38;5;124mstorage_options[39m[38;5;124m"[39m])
+[1;32m    534[0m [38;5;28;01mdef[39;00m [38;5;21m__init__[39m(
+[1;32m    535[0m     [38;5;28mself[39m,
+[1;32m    536[0m     filepath_or_buffer: FilePath [38;5;241m|[39m ReadBuffer[[38;5;28mbytes[39m],
+[1;32m    537[0m     storage_options: StorageOptions [38;5;241m=[39m [38;5;28;01mNone[39;00m,
+[1;32m    538[0m ) [38;5;241m-[39m[38;5;241m>[39m [38;5;28;01mNone[39;00m:
+[1;32m    539[0m [38;5;250m    [39m[38;5;124;03m"""[39;00m
+[1;32m    540[0m [38;5;124;03m    Reader using openpyxl engine.[39;00m
+[1;32m    541[0m 
+[0;32m   (...)[0m
+[1;32m    546[0m [38;5;124;03m    {storage_options}[39;00m
+[1;32m    547[0m [38;5;124;03m    """[39;00m
+[0;32m--> 548[0m     [43mimport_optional_dependency[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mopenpyxl[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[1;32m    549[0m     [38;5;28msuper[39m()[38;5;241m.[39m[38;5;21m__init__[39m(filepath_or_buffer, storage_options[38;5;241m=[39mstorage_options)
+
+File [0;32m//anaconda3/lib/python3.10/site-packages/pandas/compat/_optional.py:145[0m, in [0;36mimport_optional_dependency[0;34m(name, extra, errors, min_version)[0m
+[1;32m    143[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m:
+[1;32m    144[0m     [38;5;28;01mif[39;00m errors [38;5;241m==[39m [38;5;124m"[39m[38;5;124mraise[39m[38;5;124m"[39m:
+[0;32m--> 145[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(msg)
+[1;32m    146[0m     [38;5;28;01mreturn[39;00m [38;5;28;01mNone[39;00m
+[1;32m    148[0m [38;5;66;03m# Handle submodules: if we have submodule, grab parent module from sys.modules[39;00m
+
+[0;31mImportError[0m: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+ImportError: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
 

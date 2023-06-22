@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Hypothesis Testing for Categorical Data &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
@@ -514,31 +515,28 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">        <script type="text/javascript">
-        window.PlotlyConfig = {MathJaxConfig: 'local'};
-        if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
-        if (typeof require !== 'undefined') {
-        require.undef("plotly");
-        requirejs.config({
-            paths: {
-                'plotly': ['https://cdn.plot.ly/plotly-2.20.0.min']
-            }
-        });
-        require(['plotly'], function(Plotly) {
-            window._Plotly = Plotly;
-        });
-        }
-        </script>
-        </div></div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">scipy</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="c1"># appear to need to import the api as well as the library itself for the interpreter to find the modules</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">statsmodels</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;statsmodels&#39;
+</pre></div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="hypothesis-testing-for-categorical-data">
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-for-categorical-data">
 <h1>Hypothesis Testing for Categorical Data<a class="headerlink" href="#hypothesis-testing-for-categorical-data" title="Permalink to this headline">#</a></h1>
-<div class="section" id="statistical-decision-making-the-hypothesis-test">
+<section id="statistical-decision-making-the-hypothesis-test">
 <h2>Statistical Decision Making: The Hypothesis Test<a class="headerlink" href="#statistical-decision-making-the-hypothesis-test" title="Permalink to this headline">#</a></h2>
 <p>In the last section, we saw how probabilty theory can help us to estimate how close a sample average is to the true average of a population using a confidence interval.</p>
 <p>In this section, we will look at another important tool in the statistician’s repetoire, the statistical test of hypotheses. Hypothesis testing works much like the scientific method: we make a hypothesis about how the world works, construct an experiment to test it, gather data from the experiment, and then evaluate how closely that data fits the hypothesis.</p>
 <p>Let’s look at this process in the context of an example.</p>
-<div class="section" id="the-wellcome-global-monitor-survey">
+<section id="the-wellcome-global-monitor-survey">
 <h3>The Wellcome Global Monitor Survey<a class="headerlink" href="#the-wellcome-global-monitor-survey" title="Permalink to this headline">#</a></h3>
 <p>The Wellcome Global Monitor survey, which is part of the World Gallup Poll, asks people around the world about their views on topics related to science and health. The <a class="reference external" href="https://doi.org/10.5255/UKDA-SN-8466-2">most recent data</a>, as of writing, is from 2018 and is available under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The data consists of survey answers from over 140,000 people in 144 different countries, collected in person or by telephone.</p>
 <p>One of our goals in this chapter is to help you understand the statistical decision making process, and, through learning more, to have more confidence about how scientists move forward in their understanding. As a statistician and educator, I’m very interested in the level of trust people have in scientists and the scientific process.</p>
@@ -594,79 +592,79 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>30411</th>
-      <td>China</td>
-      <td>Not much</td>
+      <th>144197</th>
+      <td>Uruguay</td>
+      <td>A lot</td>
       <td>Some</td>
-      <td>32.0</td>
-      <td>30 to 49</td>
+      <td>71.0</td>
+      <td>50+</td>
       <td>Female</td>
-      <td>Primary</td>
-      <td>Lives in rural area or small town</td>
-      <td>3.20</td>
-      <td>Medium trust</td>
-      <td>No</td>
+      <td>Tertiary</td>
+      <td>Lives in city or suburb of city</td>
+      <td>3.6</td>
+      <td>High trust</td>
+      <td>Yes</td>
       <td>Yes</td>
     </tr>
     <tr>
-      <th>16317</th>
-      <td>Italy</td>
+      <th>139725</th>
+      <td>The Gambia</td>
       <td>A lot</td>
       <td>A lot</td>
-      <td>32.0</td>
+      <td>85.0</td>
+      <td>50+</td>
+      <td>Female</td>
+      <td>Primary</td>
+      <td>Lives in rural area or small town</td>
+      <td>3.8</td>
+      <td>High trust</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>145079</th>
+      <td>Uzbekistan</td>
+      <td>A lot</td>
+      <td>A lot</td>
+      <td>25.0</td>
+      <td>15 to 29</td>
+      <td>Female</td>
+      <td>Secondary</td>
+      <td>Lives in rural area or small town</td>
+      <td>4.0</td>
+      <td>High trust</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>17699</th>
+      <td>Poland</td>
+      <td>A lot</td>
+      <td>(Don't Know)</td>
+      <td>44.0</td>
       <td>30 to 49</td>
       <td>Male</td>
       <td>Secondary</td>
       <td>Lives in rural area or small town</td>
-      <td>3.00</td>
+      <td>3.0</td>
       <td>Medium trust</td>
       <td>Yes</td>
-      <td>Yes</td>
+      <td>(Don't Know)</td>
     </tr>
     <tr>
-      <th>102060</th>
-      <td>El Salvador</td>
-      <td>A lot</td>
-      <td>A lot</td>
+      <th>6032</th>
+      <td>Turkey</td>
+      <td>Some</td>
+      <td>Not much</td>
       <td>18.0</td>
       <td>15 to 29</td>
-      <td>Male</td>
-      <td>Secondary</td>
-      <td>Lives in rural area or small town</td>
-      <td>2.00</td>
-      <td>Low trust</td>
-      <td>Yes</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>35722</th>
-      <td>Mexico</td>
-      <td>Not at all</td>
-      <td>Not much</td>
-      <td>70.0</td>
-      <td>50+</td>
-      <td>Male</td>
-      <td>Primary</td>
-      <td>Lives in rural area or small town</td>
-      <td>2.75</td>
-      <td>Medium trust</td>
-      <td>No</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <th>141293</th>
-      <td>Tunisia</td>
-      <td>Some</td>
-      <td>Some</td>
-      <td>23.0</td>
-      <td>15 to 29</td>
       <td>Female</td>
       <td>Secondary</td>
-      <td>Lives in rural area or small town</td>
-      <td>3.00</td>
-      <td>Medium trust</td>
+      <td>Lives in city or suburb of city</td>
+      <td>1.6</td>
+      <td>Low trust</td>
       <td>Yes</td>
-      <td>Yes</td>
+      <td>No</td>
     </tr>
   </tbody>
 </table>
@@ -713,7 +711,7 @@ Name: Trust_Index, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/199bf2c4b4778ab387268db7f0ddf94964d3fcc3beb6bf63f5f3573724d7dc90.png" src="../../_images/199bf2c4b4778ab387268db7f0ddf94964d3fcc3beb6bf63f5f3573724d7dc90.png" />
+<img alt="../../_images/272ac52b262b0f1b66dbb7c95a605cab79e0de3c851c577fba7a84ad79f29e48.png" src="../../_images/272ac52b262b0f1b66dbb7c95a605cab79e0de3c851c577fba7a84ad79f29e48.png" />
 </div>
 </div>
 <p>In what follows, we are going to narrow our analysis to focus in on one country. In this case, we will look at the United States. If you’re interested in a different country, later on you’ll get a chance to repeat this analysis for a different country in the exercises. Or, if you’re using the interactive notebook, you can change the code to use a different country!</p>
@@ -765,24 +763,24 @@ Name: Trust_Index, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/993ae7fee4166ea63f4b83121a2971860289cd50b328a4356775ecd567757b84.png" src="../../_images/993ae7fee4166ea63f4b83121a2971860289cd50b328a4356775ecd567757b84.png" />
+<img alt="../../_images/459703fd3c53ff669ef97e67001ab214454473fc2d58551793fd9995b655a612.png" src="../../_images/459703fd3c53ff669ef97e67001ab214454473fc2d58551793fd9995b655a612.png" />
 </div>
 </div>
-</div>
-<div class="section" id="making-a-hypothesis">
+</section>
+<section id="making-a-hypothesis">
 <h3>Making a Hypothesis<a class="headerlink" href="#making-a-hypothesis" title="Permalink to this headline">#</a></h3>
 <p>The first step in a hypothesis test is to determine the hypotheses that we are comparing. We are comparing two opposing views of the world: either it works like this, or it doesn’t. These views are best understood in terms of <em>models</em>—a framework for understanding how the world works.</p>
 <p>For example, perhaps I think that the proportion of residents in the United States who have a high trust in scientists is large, say over 0.25. In this situation, the two models are statistical: we are hypothesizing about the proportion from a population. Either the proportion of people in our chosen country who have high trust in scientists is 0.25, or it’s more than that. In mathematical terms, we’ll write this as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-870656c4-0f5b-47e0-803c-370be677586f">
-<span class="eqno">(7)<a class="headerlink" href="#equation-870656c4-0f5b-47e0-803c-370be677586f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b2ed00da-91cb-4d58-927b-3677e2ffe474">
+<span class="eqno">(7)<a class="headerlink" href="#equation-b2ed00da-91cb-4d58-927b-3677e2ffe474" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: p = 0.25, \\
     H_1: p &gt; 0.25.
 \end{equation}\]</div>
 <p>In other words, our null hypothesis, <span class="math notranslate nohighlight">\(H_0\)</span>, is that the proportion is 0.25. Our alternative hypothesis, <span class="math notranslate nohighlight">\(H_1\)</span>, is that the proportion is greater than 0.25. Remember that the null hypothesis should always be in the form “population parameter equals something”.</p>
 <p>We can make hypotheses about other parameters, such as mean or standard deviation, but we’ll start here by working with proportions.</p>
 <p>The statistical hypothesis test is the method for making a decision between these two models. We gather data and see how well the data fits with what we would expect based on the null hypothesis.</p>
-</div>
-<div class="section" id="how-much-evidence-do-we-need">
+</section>
+<section id="how-much-evidence-do-we-need">
 <h3>How Much Evidence Do We Need?<a class="headerlink" href="#how-much-evidence-do-we-need" title="Permalink to this headline">#</a></h3>
 <p>After we have determined the hypotheses, the next step is to determine our threshold for making a decision. How much evidence do we need to reject our null hypothesis in favor of the alternative hypothesis? Another way to think about this is, how much risk are we willing to take to be wrong?</p>
 <p>In this case, there are actaully <em>two</em> ways to make the wrong conclusion: we could reject our null hypothesis when it is actually true (called a <strong>Type I error</strong>), or we could fail to reject the null hypothesis when it is actually false (a <strong>Type II error</strong>). We won’t go any deeper into Type II error at the moment, but it is just as important to consider!</p>
@@ -795,15 +793,15 @@ Name: Trust_Index, dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="the-test-statistic-using-data-to-decide">
+</section>
+<section id="the-test-statistic-using-data-to-decide">
 <h3>The Test Statistic: Using Data to Decide<a class="headerlink" href="#the-test-statistic-using-data-to-decide" title="Permalink to this headline">#</a></h3>
 <p>After determining the value of <span class="math notranslate nohighlight">\(\alpha\)</span>, the next step of a real-world study would be to gather the data we need and make a decision. In the statistics classroom, you typically have the data or summary statistics already available to you, as we do in this case.</p>
 <p>We are asking questions about the proportion of people in the United States who have high trust in scientists. It would be impossible to get an answer from every single person in the entire country! However, the Wellcome Global Monitor data gives us answers from a large representative sample of people in the USA. So we can use this data to get a statistically sound idea of what the true proportion in the entire population is.</p>
 <p>Let’s compare the proportion from the sample to what the null hypothesis says it should be. If the sample proportion is close to what the null hypothesis says it should be, that would mean that the null hypothesis is probably right. On the other hand, if it is different, perhaps the null hypothesis is wrong!</p>
 <p>We can compute the sample proportion of people with high trust in scientists by taking the total number of people in the sample with a high trust score and dividing it by the total sample size:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c5d28abb-a4dd-4d93-afa5-ab308fdcd896">
-<span class="eqno">(8)<a class="headerlink" href="#equation-c5d28abb-a4dd-4d93-afa5-ab308fdcd896" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-14819b70-c4aa-4a3b-81a0-5dc6a3734c8f">
+<span class="eqno">(8)<a class="headerlink" href="#equation-14819b70-c4aa-4a3b-81a0-5dc6a3734c8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat p = \frac{\mbox{num. of respondents with high trust in scientists}}{\mbox{num. of respondents}}.
 \end{equation}\]</div>
 <div class="cell docutils container">
@@ -835,8 +833,8 @@ Name: Trust_Index, dtype: int64
 \[ \hat{p} \sim N\left(.25, \sqrt{\frac{.25(1-.25)}{1006}} \right). \]</div>
 <p>We call this the <strong>null distribution</strong>, since it is the distribution of the sample statistic under the assumption that the null hypothesis is true.</p>
 <p>Back to the question: is the difference between the observed value of <span class="math notranslate nohighlight">\(\hat p\)</span> and the value that the null hypothesis says it should be a big difference or small difference? One way to answer that question would be to <strong>standardize</strong> by taking the difference between the sample mean and the (hypothesized) population mean and dividing by the standard deviation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4cbe4a0d-69ae-47f9-9f2b-1066cce06ee1">
-<span class="eqno">(9)<a class="headerlink" href="#equation-4cbe4a0d-69ae-47f9-9f2b-1066cce06ee1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6186af9b-c1f6-4608-90ff-e05366cb764f">
+<span class="eqno">(9)<a class="headerlink" href="#equation-6186af9b-c1f6-4608-90ff-e05366cb764f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 \end{equation}\]</div>
 <p>This gives us the standardized test statistic Z, which has a standard normal distribution (<span class="math notranslate nohighlight">\(\mu = 0, \sigma = 1\)</span>)—again assuming that the null hypothesis is true.</p>
@@ -899,13 +897,13 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2d57c4bbaed975310256550421f09ef7168df9d33fa262844009c74ff680494a.png" src="../../_images/2d57c4bbaed975310256550421f09ef7168df9d33fa262844009c74ff680494a.png" />
+<img alt="../../_images/8a53520576d6a4084ac92233a7c11035f1bc4c0029a7c78fa22b69c9ddc4ed08.png" src="../../_images/8a53520576d6a4084ac92233a7c11035f1bc4c0029a7c78fa22b69c9ddc4ed08.png" />
 </div>
 </div>
 <p>This changes our difference to units of standard deviations. In other words, the sample proportion is 2.221 standard deviations above the mean value of 0.</p>
 <p>Think about it another way: if the null hypothesis is true, then most of the time <span class="math notranslate nohighlight">\(\hat p\)</span> will be close to <span class="math notranslate nohighlight">\(p=0.25\)</span>, and hence <span class="math notranslate nohighlight">\(Z\)</span> will be close to 0. But <span class="math notranslate nohighlight">\(\hat p\)</span> varies, and hence <span class="math notranslate nohighlight">\(Z\)</span> is variable. So how likely is it that <span class="math notranslate nohighlight">\(Z\)</span> would be 2.221 standard deviations from what the null hypothesis says it should be most of the time? And how far away does it need to be before we would start to doubt the null hypothesis?</p>
-</div>
-<div class="section" id="making-a-decision">
+</section>
+<section id="making-a-decision">
 <h3>Making a Decision<a class="headerlink" href="#making-a-decision" title="Permalink to this headline">#</a></h3>
 <p>Now that we have a hypothesis and have calculated a test statistic to try to evaluate the hypothesis, we are ready to make a conclusion. Under the null hypothesis, we know the distribution of the sample statistic <span class="math notranslate nohighlight">\(\hat p\)</span>. However, we have just one observation of the sample proportion.</p>
 <p>So we ask, if the null hypothesis is true and the population proportion really is 0.25, how likely is it that we would observe the value of 0.28 or something even further away from 0.25? Or translated to <span class="math notranslate nohighlight">\(Z\)</span>-space, how likely is it to get a test statistic that is 2.221 or larger?</p>
@@ -979,7 +977,7 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bc12a521e9543a7d7af3be15a17572a89620e9bf51956b31d9c19656bdb620a2.png" src="../../_images/bc12a521e9543a7d7af3be15a17572a89620e9bf51956b31d9c19656bdb620a2.png" />
+<img alt="../../_images/b942a3904b8db88786bc6249540d6bd225fb86164dc34b8af33390c7541ef506.png" src="../../_images/b942a3904b8db88786bc6249540d6bd225fb86164dc34b8af33390c7541ef506.png" />
 </div>
 </div>
 <p>In some sense, the <span class="math notranslate nohighlight">\(P\)</span>-value quantifies the evidence you have <em>against</em> the null hypothesis. If the <span class="math notranslate nohighlight">\(P\)</span>-value is small, then that means that if the null hypothesis is really true, then it is unlikely that you would get the value of <span class="math notranslate nohighlight">\(\hat p\)</span> that you did. In other words, a small <span class="math notranslate nohighlight">\(P\)</span>-value indicates that the data is in disagreement with the statistical model given by the null hypothesis.</p>
@@ -1010,13 +1008,13 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 </div>
 </div>
 <p>As you can see, <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> gives us the same test statistic and <span class="math notranslate nohighlight">\(P\)</span>-value that we found earlier. As before, since <span class="math notranslate nohighlight">\(0.013 &lt; 0.05\)</span>, we reject the null hypothesis. Note that the output of the code doesn’t tell you what conclusion to make. Remember again that <span class="math notranslate nohighlight">\(\alpha\)</span>, the threshold for making your conclusion, is context-dependent, and the <span class="math notranslate nohighlight">\(P\)</span>-value is just one part of making a decision.</p>
-</div>
-</div>
-<div class="section" id="difference-of-two-proportions">
+</section>
+</section>
+<section id="difference-of-two-proportions">
 <h2>Difference of Two Proportions<a class="headerlink" href="#difference-of-two-proportions" title="Permalink to this headline">#</a></h2>
 <p>We can also use hypothesis testing to compare two proportions. This test is most common when you want to see if a population proportion is the same in two independent populations. For example, maybe we want to see if the proportion of men in the United States who have high trust in scientists (<span class="math notranslate nohighlight">\(p_1\)</span>) is different than the proportion of women in the United States who have high trust in scientists (<span class="math notranslate nohighlight">\(p_2\)</span>). Our two hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e6021576-8dc9-4065-8f72-6cab2b0ff66a">
-<span class="eqno">(10)<a class="headerlink" href="#equation-e6021576-8dc9-4065-8f72-6cab2b0ff66a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e94d7493-d1d4-45ad-86ed-5f85d2c60489">
+<span class="eqno">(10)<a class="headerlink" href="#equation-e94d7493-d1d4-45ad-86ed-5f85d2c60489" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: p_1 - p_2 = 0, \\
     H_1: p_1 - p_2 \neq 0.
 \end{equation}\]</div>
@@ -1072,28 +1070,28 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/43f37c2bf00f8bf00345d49536368aa8979acc5d10407e0149f2124aa42805c0.png" src="../../_images/43f37c2bf00f8bf00345d49536368aa8979acc5d10407e0149f2124aa42805c0.png" />
+<img alt="../../_images/9a4ab7b2e00cd77f94795878c67c20fff2424627eeff768f32bf2f480f771cd6.png" src="../../_images/9a4ab7b2e00cd77f94795878c67c20fff2424627eeff768f32bf2f480f771cd6.png" />
 </div>
 </div>
 <p>Overall, in our sample we see a difference of about 0.04 between the proportions of men and women who have high trust in scientists. Again we ask, is that a large difference?</p>
 <p>Recall that if our sample sizes <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span> are large enough,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-590ec64c-3a57-4eaa-98a6-c72aa5beb322">
-<span class="eqno">(11)<a class="headerlink" href="#equation-590ec64c-3a57-4eaa-98a6-c72aa5beb322" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-03df1cf7-57e7-4f31-9929-bc6e84ee2de4">
+<span class="eqno">(11)<a class="headerlink" href="#equation-03df1cf7-57e7-4f31-9929-bc6e84ee2de4" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat p_1 - \hat p_2 \sim N\left(p_1 - p_2, \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } \right).
 \end{equation}\]</div>
 <p>and hence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2402da5e-d5de-43d2-a599-b7509d1ccb92">
-<span class="eqno">(12)<a class="headerlink" href="#equation-2402da5e-d5de-43d2-a599-b7509d1ccb92" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6275a2a7-1b8d-44a2-9d64-8ad8ac41ded4">
+<span class="eqno">(12)<a class="headerlink" href="#equation-6275a2a7-1b8d-44a2-9d64-8ad8ac41ded4" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Z = \frac{\hat p_1 - \hat p_2 - (p_1 - p_2)}{ \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } } \sim N(0,1).
 \end{equation}\]</div>
 <p>The null hypothesis tells us what to fill in for <span class="math notranslate nohighlight">\(p_1-p_2\)</span>, but it doesn’t hypothesize directly about the values of <span class="math notranslate nohighlight">\(p_1\)</span> or <span class="math notranslate nohighlight">\(p_2\)</span>. However, it does hypothesize that <span class="math notranslate nohighlight">\(p_1 = p_2\)</span>, and it that is true, then our estimates <span class="math notranslate nohighlight">\(\hat p_1\)</span> and <span class="math notranslate nohighlight">\(\hat p_2\)</span> are estimating the same thing. In that case, we can combine them to estimate the variance. Define <span class="math notranslate nohighlight">\(p\)</span> to be the common value of <span class="math notranslate nohighlight">\(p_1 = p_2 = p\)</span>. Then the variance of our test statistic is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-488512a3-1c0d-4f66-8409-ab37c52ccc6a">
-<span class="eqno">(13)<a class="headerlink" href="#equation-488512a3-1c0d-4f66-8409-ab37c52ccc6a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f8132654-d054-4ce4-9925-5c46a693e37d">
+<span class="eqno">(13)<a class="headerlink" href="#equation-f8132654-d054-4ce4-9925-5c46a693e37d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  }  = \sqrt{ \frac{p(1-p)}{n_1} + \frac{p(1-p)}{n_2}  } = \sqrt{ p(1-p)\left( \frac{1}{n_1} + \frac{1}{n_2}\right)  },
 \end{equation}\]</div>
 <p>and we can estimate <span class="math notranslate nohighlight">\(p\)</span> using</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8bae5ed5-a6b9-49ea-b7c2-fd1fd4788c45">
-<span class="eqno">(14)<a class="headerlink" href="#equation-8bae5ed5-a6b9-49ea-b7c2-fd1fd4788c45" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e73ce01b-51ed-48c7-a752-66f46446b5b3">
+<span class="eqno">(14)<a class="headerlink" href="#equation-e73ce01b-51ed-48c7-a752-66f46446b5b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     p \approx \hat p = \frac{\mbox{num. of male respondents with high trust in scientists} + \mbox{num. of female respondents with high trust in scientists}}{\mbox{num. of male respondents} + \mbox{num. of female respondents}}.
 \end{equation}\]</div>
 <p>We call <span class="math notranslate nohighlight">\(\hat p\)</span> the <strong>pooled sample proportion</strong>.</p>
@@ -1201,7 +1199,7 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f9b555c1acbe5707fdcf4d89ed01001f0e8eb1ef8f3324096d22fb44be76941c.png" src="../../_images/f9b555c1acbe5707fdcf4d89ed01001f0e8eb1ef8f3324096d22fb44be76941c.png" />
+<img alt="../../_images/33524cc7a421c13f18dc674940a93bf1424d9173b8f4d243b9426356bef64837.png" src="../../_images/33524cc7a421c13f18dc674940a93bf1424d9173b8f4d243b9426356bef64837.png" />
 </div>
 </div>
 <p>Let’s see what this <span class="math notranslate nohighlight">\(P\)</span>-value is:</p>
@@ -1218,8 +1216,8 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 </div>
 <p>This <span class="math notranslate nohighlight">\(P\)</span>-value is fairly large (<span class="math notranslate nohighlight">\(&gt;0.05\)</span>), indicating that if the null hypothesis is true, it’s not unlikely that we would observe a difference of 4% in our sample. So we fail to reject the null hypothesis because we do not find evidence in our data of a difference of high trust in scientists between men and women in the United States.</p>
-</div>
-<div class="section" id="using-python-for-the-test">
+</section>
+<section id="using-python-for-the-test">
 <h2>Using Python for the test<a class="headerlink" href="#using-python-for-the-test" title="Permalink to this headline">#</a></h2>
 <p>Of course, we’re here to see how to perform these tests using Python code! The function to perform the test is the same as the one from the previous section, except this time the arguments <code class="docutils literal notranslate"><span class="pre">count</span></code> and <code class="docutils literal notranslate"><span class="pre">nobs</span></code> each take a list containing the relevant information from both of our samples. We have changed the value of the argument <code class="docutils literal notranslate"><span class="pre">alternative</span></code> to account for the fact that we are performing a <code class="docutils literal notranslate"><span class="pre">two-sided</span></code> test.</p>
 <div class="cell docutils container">
@@ -1249,10 +1247,10 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 </div>
 <p>Again, these values match up with what we did before, so the conclusion is the same!</p>
-</div>
-<div class="section" id="exercises">
+</section>
+<section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
-<div class="section" id="exercise-1">
+<section id="exercise-1">
 <h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h3>
 <p>To get some practice, we are going to look at trust in scientists in a different country.</p>
 <ol class="arabic simple">
@@ -1272,8 +1270,8 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 <li><p>Run a hypothesis test using <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p></li>
 <li><p>Write your conlcusion in a complete sentence. Be sure to report the test statistic and the <span class="math notranslate nohighlight">\(P\)</span>-value. If you found a significant result, give a confidence interval for the proportion.</p></li>
 </ol>
-</div>
-<div class="section" id="exercise-2">
+</section>
+<section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">#</a></h3>
 <ol class="arabic simple">
 <li><p>Pick a second country of interest.</p></li>
@@ -1282,9 +1280,9 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 <li><p>Run the hypothesis test using <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p></li>
 <li><p>Write your conlcusion in a complete sentence. Be sure to report the test statistic and the <span class="math notranslate nohighlight">\(P\)</span>-value. If you found a significant difference, give a confidence interval for the difference in proportions.</p></li>
 </ol>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
