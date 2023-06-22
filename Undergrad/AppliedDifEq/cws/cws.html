@@ -1,0 +1,1406 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5. CWS Model of Alzheimemer’s Disease &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedDifEq/cws/cws';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="1. Setting the Scene" href="../../../Advanced/Complex/jnb1.html" />
+    <link rel="prev" title="2. HIV-AIDS" href="../hiv/hiv.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb1.html">1 Functions- Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb8.html">8. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb9.html">9. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Celestial/jnb10.html">10. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../PreCollege/Demo.html">12. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Intropy.html">Intro to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/00_Instructor_Notes.html">Section 0: Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Calculus/Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Calculus/Sec4.html">4 Derivatives</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Linear/0intro.html">0. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear/1system.html">1. Systems of Linear Equations</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear/1_2sol.html">1.2 Solution Set of  Linear Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear/2matrix.html">2. Matrix Algebra</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear/2_1det.html">2.1 Determinant</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq/DE%20-%20Section%202.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq/DE%20-%20Section%203.html">3. First-Order Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../covid.html">1. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hiv/hiv.html">2. HIV-AIDS</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. CWS Model of Alzheimemer’s Disease</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvData.html">Advanced Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/AppliedDifEq/cws/cws.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Undergrad/AppliedDifEq/cws/cws.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5. CWS Model of Alzheimemer’s Disease</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-model-of-the-great-lakes">Simple Model of the Great Lakes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cws-model">The CWS Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-analysis">Equilibrium Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-estimation">Parameter Estimation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simplified-cws-model">A Simplified CWS Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-analysis-of-treatments">LAB Analysis of Treatments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#treatment-1">Treatment 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-treatment-2">PROBLEM: Treatment 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">SOLUTION</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cws-model-of-alzheimemers-disease">
+<h1>5. CWS Model of Alzheimemer’s Disease<a class="headerlink" href="#cws-model-of-alzheimemers-disease" title="Permalink to this headline">#</a></h1>
+<p>The global fight against Alzheimer’s Disease (AD)  and  the role of Amyloid-beta (A<span class="math notranslate nohighlight">\(\beta\)</span>) in early detection  continue to be a major research concern. AD is now projected to inflict 75 million people in 2030, with the greatest increase in developing countries (Paraskevaidi et al. 2020). Current brain diagnostic tools such as magnetic resonance imaging (MRI) and positron emission tomography (PET) continue to be invasive and expensive.</p>
+<p>One theory of how Alzheimer’s becomes progressively worse is based
+on plaques, harmful build-ups of amyloid-beta (A<span class="math notranslate nohighlight">\(\beta\)</span>) proteins in
+the brain. A<span class="math notranslate nohighlight">\(\beta\)</span> is called a biomarker since its concentration
+levels are an observable change in an AD patient’s
+physiology which might help assess the progression of the disease. A
+more familiar example of a biomarker is cholesterol level for heart
+disease [Thiess 2010]. In our case, biomarkers such as A<span class="math notranslate nohighlight">\(\beta\)</span> may
+be useful both for early detection of AD which can allow for timely
+patient care, and also as a  measure   of the efficacy of
+therapeutic <a class="reference external" href="http://treatment.As">treatment.As</a> such, a primary motivation for the CWS model introduced 2 decades ago (Craft, Wein and Selkoe 2002), namely, to analyze the use of Amyloid Beta (A<span class="math notranslate nohighlight">\(\beta\)</span>)  levels in the plasma as a biomarker to detect levels in the brain, continues to be relevant. The   CWS-model signaled a need for caution in using A<span class="math notranslate nohighlight">\(\beta\)</span>  biomarkers since plasma levels under different treatment designs did not directly correlate to brain levels in numerical analysis of the mathematical model (Isihara et al. 2013). Subsequent modeling work by Andou (2013) helped to bridge the gap between mathematical models and in vivo experiments  (Carbonell et al. 2018).  A problem encountered in clinical trials is the instability and inaccuracy of A<span class="math notranslate nohighlight">\(\beta\)</span> plasma level measurements (Park et al. 2017). Recent clinical interest in AD biomarkers goes beyond A<span class="math notranslate nohighlight">\(\beta\)</span> plasma analysis to include proposals for  eye, saliva, and urine tests. (Auso, Gomez-Vicente, and Esquiva 2020)</p>
+<p>In this section we review a few highlights of the CWS model. Interested readers
+may visit the Alzheimer’s Association web site (<a class="reference external" href="http://www.alz.org">www.alz.org</a>) for a
+more comprehensive survey of current research and patient care.</p>
+<section id="simple-model-of-the-great-lakes">
+<h2>Simple Model of the Great Lakes<a class="headerlink" href="#simple-model-of-the-great-lakes" title="Permalink to this headline">#</a></h2>
+<p>Along the border between the middle and Eastern portions of the U.S. and Canda, there are five lakes called the “Great Lakes”. Consider the flow of a pollutant (such as PCB) into, out of, and between
+the Great Lakes and how one would model the concentration at time
+<span class="math notranslate nohighlight">\(t\)</span> of pollution in any one of them (see figure below).</p>
+<p>We begin
+by letting <span class="math notranslate nohighlight">\(S(t),H(t), M(t),E(t)\)</span> and <span class="math notranslate nohighlight">\(O(t)\)</span> represent the
+respective pollution concentrations (in grams/liter) at time <span class="math notranslate nohighlight">\(t\)</span> (in
+years)
+in lakes Superior (lake 1), Huron (lake 2),Michigan (lake 3), Erie (lake 4) and Ontario (lake 5).
+Next we define the following
+rate parameters:</p>
+<p><span class="math notranslate nohighlight">\(r_{ij}\)</span>  is the transfer rate (in year<span class="math notranslate nohighlight">\(^{-1}\)</span>) of pollution
+from lake <span class="math notranslate nohighlight">\(i\)</span> to lake <span class="math notranslate nohighlight">\(j\)</span> ;</p>
+<p><span class="math notranslate nohighlight">\(k_i\)</span> is the production rate of pollution directly into lake
+<span class="math notranslate nohighlight">\(i\)</span> (in grams per liter per year); and</p>
+<p><span class="math notranslate nohighlight">\(L_i\)</span> is the rate of
+pollution purification treatment (in year<span class="math notranslate nohighlight">\(^{-1}\)</span>) in lake <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>We make the simplifying assumptions that within each
+lake (compartment) the pollution concentration is always uniform and
+also that the parameters <span class="math notranslate nohighlight">\(r_{ij}\)</span>, <span class="math notranslate nohighlight">\(k_i\)</span> and <span class="math notranslate nohighlight">\(L_i\)</span> are all constant.
+Under such assumptions, a simple linear system of ODE’s can be used
+to describe the change in pollution concentrations in each lake
+(compartments):</p>
+<a class="reference internal image-reference" href="../../../_images/gl.png"><img alt="../../../_images/gl.png" src="../../../_images/gl.png" style="width: 200px;" /></a>
+<div class="math notranslate nohighlight">
+\[
+\stackrel{.}{S}(t)=k_1  -r_{12}S - L_1 S = F_1(S,H,M,E,O)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\stackrel{.}{H}(t)= k_2 +r_{12} S + r_{32}M - r_{24} H -L_2 H = F_2(S,H,M,E,O)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\stackrel{.}{M}(t)= k_3 - r_{32} M - L_3 M= F_3(S,H,M,E,O)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\stackrel{.}{E}(t)= k_4 + r_{24}H-r_{45}E - L_4 E= F_4(S,H,M,E,O)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\stackrel{.}{O}(t)= k_5 + r_{45} E-r_{5*}O  - L_5 O= F_5(S,H,M,E,O).
+\]</div>
+<p>Consider, for example the rate of change at time <span class="math notranslate nohighlight">\(t\)</span> of
+pollution concentration in Huron  <span class="math notranslate nohighlight">\(\stackrel{.}{H}(t)\)</span> (in
+grams/liter per year).  This rate of change is equal to</p>
+<p><b>RATE-IN</b> pollution enters in directly at the rate <span class="math notranslate nohighlight">\(k_2\)</span> (g/L per year) and
+also enters in from Superior at rate <span class="math notranslate nohighlight">\(r_{12} S(t)\)</span> (g/L per year)
+and from Michigan at rate <span class="math notranslate nohighlight">\(r_{32}M(t)\)</span>   (g/L per year);</p>
+<p><b>MINUS RATE-OUT</b> pollution leaves Huron to Erie at a rate <span class="math notranslate nohighlight">\(r_{24} H(t)\)</span> (g/L per year)
+and also leaves by purification treatment at rate <span class="math notranslate nohighlight">\(L_2 H(t)\)</span> (g/L
+per year).</p>
+<p>The transfer of pollution between lakes is
+one-directional as determined by the flow of water.</p>
+<p>Standard analysis of this type of model would include:</p>
+<p><b> EQUILIBRIUM ANALYSIS </b> We determine the equilibrium point (s,h,m,e,o) which gives
+the steady-state concentration levels in each lake  by setting each
+differential equation equal to zero:
+$<span class="math notranslate nohighlight">\(
+0=k_1  -r_{12}s - L_1 s
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+0= k_2 +r_{12} s + r_{32}m - r_{24} h -L_2 h
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+0= k_3 - r_{32} m - L_3 m
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+0= k_4 + r_{24}h-r_{45}e - L_4 e
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+0= k_5 + r_{45} e-r_{5*}o  - L_5 o.
+\]</div>
+<p>Observing that the functions <span class="math notranslate nohighlight">\(F_i\)</span> are differentiable
+with respect to <span class="math notranslate nohighlight">\(S, H, M, E, O\)</span> at the equilibrium point, we utilize
+the Jacobian matrix <span class="math notranslate nohighlight">\(J\)</span> which is computed as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+J =  
+\begin{pmatrix}
+\frac{\partial F_1}{\partial S}&amp;  \frac{\partial F_1}{\partial H}&amp;\frac{\partial F_1}{\partial M}&amp;\frac{\partial F_1}{\partial E}&amp;\frac{\partial F_1}{\partial O}\\
+\frac{\partial F_2}{\partial S}&amp;  \frac{\partial F_2}{\partial H}&amp;\frac{\partial F_2}{\partial M}&amp;\frac{\partial F_2}{\partial E}&amp;\frac{\partial F_2}{\partial O}\\
+\frac{\partial F_3}{\partial S}&amp;  \frac{\partial F_3}{\partial H}&amp;\frac{\partial F_3}{\partial M}&amp;\frac{\partial F_3}{\partial E}&amp;\frac{\partial F_1}{\partial O}\\
+\frac{\partial F_4}{\partial S}&amp;  \frac{\partial F_4}{\partial H}&amp;\frac{\partial F_4}{\partial M}&amp;\frac{\partial F_4}{\partial E}&amp;\frac{\partial F_2}{\partial O}\\
+\frac{\partial F_5}{\partial S}&amp;  \frac{\partial F_5}{\partial H}&amp;\frac{\partial F_5}{\partial M}&amp;\frac{\partial F_5}{\partial E}&amp;\frac{\partial F_2}{\partial O}\\
+\end{pmatrix}=
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+-r_{12}-L_1 &amp; 0&amp;0&amp;0&amp;0 \\
+r_{12} &amp; -r_{24}-L_2&amp;r_{32}&amp;0&amp; 0 \\
+0&amp;0&amp;r_{32}-L_3&amp;0&amp;0\\
+0&amp;r_{24}&amp;0&amp;-r_{45}-L_4&amp;0\\
+0&amp;0&amp;0&amp;r_{45}&amp;-r_{5*}-L_5\\
+\end{pmatrix}
+\end{split}\]</div>
+<p>The eigenvalues of <span class="math notranslate nohighlight">\(J\)</span> determine the stability of the
+equilibrium point <span class="math notranslate nohighlight">\((s,h,m,e,o)\)</span>.  In particular, if all the
+eigenvalues are negative, the equilibrium is stable.  In this case,
+as <span class="math notranslate nohighlight">\(t\rightarrow\infty\)</span> all solutions approach their equilibrium
+values; that is, <span class="math notranslate nohighlight">\(S(t)\rightarrow s\)</span>, <span class="math notranslate nohighlight">\(H(t)\rightarrow h\)</span>
+<span class="math notranslate nohighlight">\(M(t)\rightarrow m\)</span>, <span class="math notranslate nohighlight">\(E(t)\rightarrow e\)</span> and <span class="math notranslate nohighlight">\(O(t)\rightarrow o\)</span>.</p>
+<p><b> NUMERICAL ANALYSIS</b> Assuming the rate constants can be estimated by
+direct measurements or other available data (see for example
+[Schnoor 1996]), we can use a differential equation solver to obtain
+the desired pollution concentrations levels.  If the equilibrium is
+stable, the equilibrium levels should appear in graphs of their
+respective pollution concentrations over sufficiently long time
+intervals; and</p>
+<p><b>SENSITIVITY ANALYSIS</b> By varying of one or more of
+the rate parameters, we can assess the effectiveness of methods to
+reduce the amount of pollution in a particular lake or the total
+pollution concentration in all the lakes. For example, since
+<span class="math notranslate nohighlight">\(s=\frac{k_1}{L_1+r_{12}}\)</span>, one can lower the equilibrium
+concentration in Superior by reducing <span class="math notranslate nohighlight">\(k_1\)</span> (regulating direct
+contamination), by increasing <span class="math notranslate nohighlight">\(L_1\)</span> (improving purification
+treatment), and/or by increasing <span class="math notranslate nohighlight">\(r_{12}\)</span> (increasing the outflow
+into Huron.)</p>
+</section>
+<section id="the-cws-model">
+<h2>The CWS Model<a class="headerlink" href="#the-cws-model" title="Permalink to this headline">#</a></h2>
+<p>Craft, Wein and Selkoe [2002] created a model for the amyloid-beta
+biomarker concentrations in the brain, in the cerebral spinal fluid
+(``CSF”), and in the plasma. Clinically, changes in the
+concentrations of A<span class="math notranslate nohighlight">\(\beta\)</span> in the plasma and CSF are much easier to
+measure than in the brain. Changes in the CSF and plasma may then be
+useful to estimate the change in <span class="math notranslate nohighlight">\(A\beta\)</span> concentration level in the
+brain. The CWS model helps to determine the relationship between
+changes in these three compartments under different treatment
+scenarios.</p>
+<a class="reference internal image-reference" href="../../../_images/fig19.png"><img alt="../../../_images/fig19.png" src="../../../_images/fig19.png" style="width: 400px;" /></a>
+<p>The CWS model can be viewed using compartments similar to the Great
+Lakes model, as shown in Figure \ref{cwsfig}. This model is based on
+several simplifying assumptions:</p>
+<p>A<span class="math notranslate nohighlight">\(\beta\)</span> can exist as a single molecule (monomer) or as
+a chain of molecules  (i.e. as a polymer) which connects <span class="math notranslate nohighlight">\(i\)</span>
+monomers (<span class="math notranslate nohighlight">\(i=2,3,...\)</span>);</p>
+<p>A<span class="math notranslate nohighlight">\(\beta\)</span> monomers exist in one of three disjoint
+compartments: the brain (compartment 1), cerebral-spinal fluid or
+CSF (compartment 2) and plasma (compartment 3);</p>
+<p>A<span class="math notranslate nohighlight">\(\beta\)</span> polymers of any length can exist in the brain.
+(Polymer concentrations are assumed to be negligible outside the
+brain.) Note: In  {\bf Figure \ref{cwsfig}} compartment 4 is used to
+represent the polymers. This ``meta compartment” actually represents
+an infinite number of compartments, one for each polymer of length
+<span class="math notranslate nohighlight">\(i\)</span>, (<span class="math notranslate nohighlight">\(i=2,3,...\)</span>).;</p>
+<p>each compartment has a homogeneous concentration of A<span class="math notranslate nohighlight">\(\beta\)</span>;</p>
+<p>in compartments 1,2, and 3, A<span class="math notranslate nohighlight">\(\beta\)</span> monomers can
+be created or degraded(lost);</p>
+<p>in the brain, monomers can be elongated by adjoining itself to another monomer or to a polymer of any length;</p>
+<p>in the brain, a polymer of length <span class="math notranslate nohighlight">\(i\)</span> can be elongated to a polymer of length
+<span class="math notranslate nohighlight">\(i+1\)</span>; and</p>
+<p>in the brain, a polymer of length <span class="math notranslate nohighlight">\(i\)</span> can be fragmented into a monomer and a polymer of length
+<span class="math notranslate nohighlight">\(i-1\)</span>. (For more about polymer dynamics, see [Edelstein-Keshet,
+2006].)</p>
+<p>Under these assumptions, we let <span class="math notranslate nohighlight">\(b_1(t)\)</span> denote the
+A<span class="math notranslate nohighlight">\(\beta\)</span> monomer concentration in the brain;  <span class="math notranslate nohighlight">\(c(t)\)</span> denote the
+A<span class="math notranslate nohighlight">\(\beta\)</span> monomer concentration in the CSF;  <span class="math notranslate nohighlight">\(p(t)\)</span> denote the
+A<span class="math notranslate nohighlight">\(\beta\)</span> monomer concentration in the plasma;  and <span class="math notranslate nohighlight">\(b_i(t)\)</span>
+represent the concentration of length <span class="math notranslate nohighlight">\(i\)</span> A<span class="math notranslate nohighlight">\(\beta\)</span> polymers in the
+brain. The following system of ordinary differential equations
+models  the rate of change of the A<span class="math notranslate nohighlight">\(\beta\)</span> concentrations in each of
+the compartments:</p>
+<p>Equation (1)
+$<span class="math notranslate nohighlight">\(
+\underbrace{\stackrel{.}{b}_1(t)}_{monomer}=\underbrace{k_1}_{production}+\underbrace{F\sum_{i=2}^{\infty}b_i(t)}_{fragment}-\underbrace{E
+b_1(t)(2b_1(t)+ \sum_{i=2}^{\infty}b_i(t))}_{all\,
+elongations}+\underbrace{r_{31}p(t) + r_{21}c(t)}_{monomers\,
+from\,plasma\,and\,CSF}
+-\underbrace{(r_{13}b_1(t)+r_{12}b_1(t))}_{monomers\,to\,plasma\,and\,CSF}- \hspace{.1in}\underbrace{L_1 b_1(t)}_{loss}\)</span>$</p>
+<p>Equation (2)
+$<span class="math notranslate nohighlight">\(
+\underbrace{\stackrel{.}{b}_i(t)}_{brain\_A\beta\,
+(i)-mers}=\underbrace{E
+b_1(t)b_{i-1}(t)}_{elongation}+\underbrace{Fb_{i+1}(t)}_{\text{fragmentation\,
+of\,(i+1)-mers}}-\underbrace{E b_1(t)b_i(t)}_{elongation\,of\,
+(i)-mers}
+-\underbrace{F(1-\frac{1}{2}I_{i=2})b_i(t)}_{fragmentations} 
+\)</span>$</p>
+<p>Equation (3)
+$<span class="math notranslate nohighlight">\(
+\underbrace{\stackrel{.}{c}(t)}_{\text{CSF } A\beta}=\underbrace{k_2}_{production}+\underbrace{r_{12}b_1(t)+r_{32}p(t)}_{monomers\,from\,brain\,and\,plasma}-\underbrace{(r_{21}c(t)+r_{23}c(t))}_{monomers\,to\,brain\,and\,plasma}-\underbrace{L_2c(t)}_{loss} 
+\)</span>$</p>
+<p>Equation (4)
+$<span class="math notranslate nohighlight">\(
+\underbrace{\stackrel{.}{p}(t)}_{plasma
+}A\beta=\underbrace{k_3}_{production}+\underbrace{r_{13}b_1(t)+r_{23}c(t)}_{monomers\,from\,brain\,and\,CSF}-\underbrace{(r_{31}p(t)+r_{32}p(t))}_{monomers\,to\,brain
+and\,CSF}-\underbrace{L_3p(t)}_{loss}. 
+\)</span>$</p>
+<p>Craft, Wein and Selkoe [2002] describe their model in
+the following way:</p>
+<p>In Equation (1), the A<span class="math notranslate nohighlight">\(\beta\)</span> monomers in the brain are produced
+by cleavage of the Amyloid precursor protein (APP) at a constant
+rate of <span class="math notranslate nohighlight">\(k_1\)</span>. The monomers live for <span class="math notranslate nohighlight">\(L_1^{-1}\)</span> time units before
+being lost.</p>
+<p>The same kind of production and loss occur in equations (3) and (4).</p>
+<p>In Equations (1) and (2) we assume that the
+elongation occurs only by a monomer addition to a polymer with a
+rate constant <span class="math notranslate nohighlight">\(E\)</span>. That is, <span class="math notranslate nohighlight">\(E b_1(t)b_{i-1}(t)\)</span> is the rate
+<span class="math notranslate nohighlight">\((i-1)\)</span>-mers elongate to <span class="math notranslate nohighlight">\(i\)</span>-mers.</p>
+<p>Fragmentation occurs when a monomer breaks off at a rate <span class="math notranslate nohighlight">\(F\)</span>
+(i.e., <span class="math notranslate nohighlight">\(i\)</span>-mers fragment into an <span class="math notranslate nohighlight">\((i-1)\)</span>-mer and a monomer at rate
+<span class="math notranslate nohighlight">\(F b_i(t)\)</span>).</p>
+<p>The factor of 2 in front of <span class="math notranslate nohighlight">\(b_1(t)\)</span> in equation (1) arises
+because it takes two monomers to form a dimer (polymer with length
+<span class="math notranslate nohighlight">\(i\)</span>=2).</p>
+<p>The indicator variable <span class="math notranslate nohighlight">\(I_{i=2}\)</span> equals 1 if <span class="math notranslate nohighlight">\(i=2\)</span> and equals 0
+otherwise; the factor <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> in front of <span class="math notranslate nohighlight">\(I_i=2\)</span> is due to
+the fact that a dimer can only fragment in one location, whereas
+longer <span class="math notranslate nohighlight">\(i\)</span>-mers have two possible fragmentation sites.</p>
+<section id="equilibrium-analysis">
+<h3>Equilibrium Analysis<a class="headerlink" href="#equilibrium-analysis" title="Permalink to this headline">#</a></h3>
+<p>The CWS model is an infinite system of ODEs since it describes
+changes in the concentrations of polymers of length <span class="math notranslate nohighlight">\(i=2,3,...\)</span>. As
+such, equilibrium analysis of the full, infinite system is
+non-trivial:  “performing this calculation in a straightforward
+manner leads to messy solution and no insight into the problem”
+[Craft et. al. 2002, p.6].  In presenting a more intuitive method of
+finding the equilibrium solutions based on queueing networks
+[Jackson, 1957], Craft, Wein and Selkoe omit the straightforward
+approach.  Our version of the latter approach follows.</p>
+<p>Steady state amyloid-<span class="math notranslate nohighlight">\(\beta\)</span> levels (i.e. those which do not
+change with time) are denoted as follows:</p>
+<p><span class="math notranslate nohighlight">\(i\)</span>-mer concentrations in the brain: <span class="math notranslate nohighlight">\(b_1,b_2,b_3,b_4,...,
+b_i,...\)</span>;</p>
+<p>monomer concentration in the CSF: <span class="math notranslate nohighlight">\(c\)</span>; and</p>
+<p>monomer concentration in the plasma: <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>These levels are determined by setting equal to zero
+each of the differential equations in the CWS model (Equations
+(1)-(4)):</p>
+<p>Equation (i)
+$<span class="math notranslate nohighlight">\(
+0=k_1+F(b_2+b_3+b_4+...)-Eb_1(2b_1+b_2+b_3+b_4+...)+r_{31}p+r_{21}c-(r_{13}b_1+r_{12}b_1)-L_1b_1\label{b1}
+\)</span>$</p>
+<p>Equation (ii)
+$<span class="math notranslate nohighlight">\(
+(i=2)\,  0=Eb_1^2+Fb_3-Eb_1b_2-\frac{1}{2}Fb_2\label{b2}
+\)</span>$</p>
+<p>Equation (iii)
+$<span class="math notranslate nohighlight">\(
+(i=3)\, 0=Eb_1b_2+Fb_4-Eb_1b_3-Fb_3\label{b3}
+\)</span>$</p>
+<p>Equation (iv)
+$<span class="math notranslate nohighlight">\(
+(i=4)\, 0=Eb_1b_3+Fb_5-Eb_1b_4-Fb_4\label{b4}
+\)</span>$
+etc.</p>
+<p>Equation (v)
+$<span class="math notranslate nohighlight">\(
+0=k_2+r_{12}b_1+r_{32}p-(r_{21}c+r_{23}c)-L_2c\label{c}
+\)</span>$</p>
+<p>Equation (vi)
+$<span class="math notranslate nohighlight">\(
+0=k_3+r_{13}b_1+r_{23}c-(r_{31}p+r_{32}p)-L_3p\label{p}.
+\)</span>$</p>
+<p>These equations can be solved as follows:</p>
+<p>Step 1: Use (v), (vi) to solve for <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(p\)</span> in terms of <span class="math notranslate nohighlight">\(b_1\)</span> and constants <span class="math notranslate nohighlight">\(r_{ij},k_2,k_3,L_2,\)</span> and <span class="math notranslate nohighlight">\(L_3\)</span>.</p>
+<p>In matrix form, equations  (v) and
+(vi) become</p>
+<p>Equation (vii)
+$<span class="math notranslate nohighlight">\(
+ \left( \begin{array}{cc}
+h_{2} &amp; -r_{32} \\
+-r_{23} &amp; h_{3}  \\
+\end{array} \right) \left( \begin{array}{c}
+c \\
+p \\
+\end{array} \right) = \left( \begin{array}{c}
+k_{2}+r_{12}b_1 \\
+k_{3}+r_{13}b_1  \\
+\end{array} \right),
+\label{cp}
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(h_2=r_{21}+r_{23}+L_2\)</span> and
+<span class="math notranslate nohighlight">\(h_3=r_{31}+r_{32}+L_3\)</span>.</p>
+<p>Letting <span class="math notranslate nohighlight">\(\Delta=h_2 h_3 -
+r_{23}r_{32}\)</span>, the solution to (vii) is</p>
+<div class="math notranslate nohighlight">
+\[
+ c=\frac{h_3 k_2 +r_{32}k_3}{\Delta}+\frac{r_{12}h_3+r_{32}r_{13}}{\Delta}\,b_1 = Q_1+Q_2 b_1 \label{c1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ p=\frac{r_{23}k_2+h_2k_3}{\Delta}+\frac{r_{12}r_{23} +r_{13}h_2}{\Delta}\;b_1 = Q_3 + Q_4 b_1 \label{p1}.
+\]</div>
+<p>Step 2: Use (ii),(iii),(iv)… to express <span class="math notranslate nohighlight">\(b_2,b_3,b_4,...\)</span> in terms of
+<span class="math notranslate nohighlight">\(b_1\)</span>.</p>
+<p>Adding equations (ii),(iii),(iv)… together leaves only <span class="math notranslate nohighlight">\(Eb_1^2-\frac{1}{2}Fb_2=0\)</span>, or <span class="math notranslate nohighlight">\(b_2=2b_1r\)</span> where <span class="math notranslate nohighlight">\(r=b_1\frac{E}{F}\)</span>.</p>
+<p>Substituting this expression for <span class="math notranslate nohighlight">\(b_2\)</span> into equation (ii), we obtain <span class="math notranslate nohighlight">\(b_3=2b_1r^2\)</span>. In a similar way, we can show <span class="math notranslate nohighlight">\(b_i=2b_1r^{i-1}\)</span>, for <span class="math notranslate nohighlight">\(i=2,3,...\)</span>.</p>
+<p>Hence, once we find <span class="math notranslate nohighlight">\(b_1\)</span>, we can compute <span class="math notranslate nohighlight">\(b_2,b_3,...\)</span>, <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>Step 3: Substitute <span class="math notranslate nohighlight">\(b_i=2b_1r^{i-1}\)</span> into equation  to obtain <span class="math notranslate nohighlight">\(b_1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+0=k_1+F(2b_1r^1+2b_1r^2+2b_1r^3+...)-Eb_1(2b_1+2b_1r^1+2b_1r^2+2b_1r^3+...) 
++r_{31}(Q_3+Q_4b_1)+r_{21}(Q_1+Q_2b_1)-(r_{13}+r_{12}+L_1)b_1 \Rightarrow \]</div>
+<div class="math notranslate nohighlight">
+\[
+0= k_1 +\frac{F2b_{1}r}{1-r} - \frac{2Eb_{1}^{2}}{1-r} +(r_{31}Q_3 + r_{21} Q_1) +(r_{31} Q_4 + r_{21}Q_2 -r_{13} - r_{12} -L_1)b_1 \Rightarrow 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+b_1=\frac{k_1+r_{31}Q_3+r_{21}Q_1}{-r_{31}Q_4-r_{21}Q_2+r_{13}+r_{12}+L_1}.
+\]</div>
+<p>This approach indicates:</p>
+<p>the ratio <span class="math notranslate nohighlight">\(r= b_1\frac{E}{F}\)</span> is called the <i>polymerization
+ratio</i>. This a key parameter since all the polymer concentrations can be expressed in     terms of <span class="math notranslate nohighlight">\(r\)</span> (in particular, <span class="math notranslate nohighlight">\(b_i=2b_1r^{i-1}\)</span>) and further, the total number of     polymers forms a geometric series which is  convergent if     <span class="math notranslate nohighlight">\(0\le r&lt;1\)</span> and divergent if <span class="math notranslate nohighlight">\(r\ge 1\)</span>;</p>
+<p>The steady state monomer
+concentration <span class="math notranslate nohighlight">\(b_1\)</span> is independent of the polymerization ratio <span class="math notranslate nohighlight">\(r\)</span>;
+and</p>
+<p>The total number of polymers <span class="math notranslate nohighlight">\(b=\sum_{i=2}^{\infty} b_i= 2b_1 \sum_{i=2}^{\infty}r^{i-1} = b_1 \frac{2r}{1-r}\)</span> (<span class="math notranslate nohighlight">\(r&lt;1\)</span>) varies directly with    <span class="math notranslate nohighlight">\(b_1\)</span>.</p>
+<section id="parameter-estimation">
+<h4>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h4>
+<p>Assignment of specific values for the rate constants in a model is
+important and often challenging since real world phenomena are much
+more complex than their mathematical models. Moreover, in the case
+of AD, serious ethical issues and physical restrictions limit the
+type of experimental data which can be obtained. Table 1 gives
+the values used in the CWS model (with units standardized) and the
+source of these parameter values.</p>
+<a class="reference internal image-reference" href="../../../_images/Table12.png"><img alt="../../../_images/Table12.png" src="../../../_images/Table12.png" style="width: 400px;" /></a>
+<p>Particularly interesting are the 4 parameter values “computable
+from estimated steady state values,” the latter obtained from
+experimental evidence.  Craft, Wein and Selkoe provide an elegant
+approach to obtaining equilibrium values and their relationships to
+these 4 parameters as outlined in <b>Table 2</b>.</p>
+<a class="reference internal image-reference" href="../../../_images/Table2.png"><img alt="../../../_images/Table2.png" src="../../../_images/Table2.png" style="width: 400px;" /></a>
+<p>We explain the equations in Table 2 for compartment <span class="math notranslate nohighlight">\(i=1\)</span>, the
+others being similar:</p>
+<p>the total exit rate of monomers from the brain (<span class="math notranslate nohighlight">\(h_1  =  r_{12} + r_{13} +
+L_1\)</span>) is the sum of the respective rates monomers move from brain to
+CSF (<span class="math notranslate nohighlight">\(r_{12}\)</span> ) and from brain to plasma  (<span class="math notranslate nohighlight">\(r_{13}\)</span>), these being
+added to the loss of monomers in the brain by degration (<span class="math notranslate nohighlight">\(L_1\)</span>);</p>
+<p>the survival probability that a monomer exiting the brain
+reaches the CSF (<span class="math notranslate nohighlight">\(s_{12}  =  \frac{r_{12}}{h_1}  +
+\frac{r_{13}}{h_1} s_{32}\)</span>) is the probability that an exiting brain
+monomer goes directly to the CSF (<span class="math notranslate nohighlight">\(\frac{r_{12}}{h_1}\)</span>) plus the
+probability  that a monomer first goes from brain to plasma
+and then transfers from plasma to CSF
+(<span class="math notranslate nohighlight">\(\frac{r_{13}}{h_1}s_{32}\)</span>);</p>
+<p>the effective production of monomers in the brain (<span class="math notranslate nohighlight">\(\hat{k}_1  =  k_1 + k_{2} s_{21} + k_{3}
+s_{31}\)</span>)
+is the sum of direct production (<span class="math notranslate nohighlight">\(k_1\)</span>) plus the rate monomers
+transfer in from the CSF (<span class="math notranslate nohighlight">\(k_{2} s_{21} \)</span>) and from the plasma
+(<span class="math notranslate nohighlight">\(k_{3} s_{31} \)</span>); and</p>
+<p>the effective loss of monomers in the brain  (<span class="math notranslate nohighlight">\(\hat{L}_1  =  L_1 + r_{12}(1-s_{21}) +
+r_{13}(1-s_{31})\)</span>) is due to degration <span class="math notranslate nohighlight">\(L_1\)</span> and also by transfer
+out to and non-return from the CSF (<span class="math notranslate nohighlight">\(r_{12}(1-s_{21})\)</span>) and by
+transfer out to and non-return from the plasma (<span class="math notranslate nohighlight">\(r_{13}(1-s_{31})\)</span>).</p>
+</section>
+</section>
+<section id="a-simplified-cws-model">
+<h3>A Simplified CWS Model<a class="headerlink" href="#a-simplified-cws-model" title="Permalink to this headline">#</a></h3>
+<p>The full CWS model (Equations (1)-(4)) being nonlinear
+and infinite dimensional neither has an exact solution nor can it be
+numerically integrated even with assigned parameter values. The
+infinite system must be simplified in some way to a finite system.
+One such simplification is to approximate the CWS model monomer
+dynamics by removing the polymer compartment from the CWS model. In
+other words, we assume for simplicity that the values of <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span>
+are negligible and set them both equal to zero. We keep all the
+other parameter values in Table 1 the same. The simplified CWS
+model based on only monomers being transferred takes the form of an
+autonomous linear system:</p>
+<p>Equation (L1)
+$$
+\underbrace{\stackrel{.}{b}<em>1(t)}</em>{monomer}=\underbrace{k_1}<em>{production}+\underbrace{r</em>{31}p(t)</p>
+<ul class="simple">
+<li><p>r_{21}c(t)}<em>{monomers,from,plasma,and,
+CSF}-\underbrace{(r</em>{13}b_1(t)+r_{12}b_1(t))}_{monomers,to,
+plasma,and,CSF}</p></li>
+</ul>
+<ul class="simple">
+<li><p>\underbrace{L_1 b_1(t)}_{loss} \label{slin1}
+$$</p></li>
+</ul>
+<p>Equation (L2)
+$<span class="math notranslate nohighlight">\(
+\underbrace{\stackrel{.}{c}(t)}_{CSF\,
+A\beta}=\underbrace{k_2}_{production}+\underbrace{r_{12}b_1(t)+r_{32}p(t)}_{monomers\,
+from\,brain\,and\,
+plasma}-\underbrace{(r_{21}c(t)+r_{23}c(t))}_{monomers\,to\,
+brain\,and\,
+plasma}-\underbrace{L_2c(t)}_{loss}\label{slin2}
+\)</span>$</p>
+<p>Equation (L3)
+$<span class="math notranslate nohighlight">\(
+\underbrace{\stackrel{.}{p}(t)}_{plasma
+A\,\beta}=\underbrace{k_3}_{production}+\underbrace{r_{13}b_1(t)+r_{23}c(t)}_{monomers\,
+from\, brain\, and\,
+CSF}-\underbrace{(r_{31}p(t)+r_{32}p(t))}_{monomers\,to\,brain\,
+and\,CSF}-\underbrace{L_3p(t)}_{\text{loss}}.\label{slin3}
+\)</span>$</p>
+<p>Approximating the monomer dynamics may be useful as a
+measure of the total amyloid-beta concentration  since, as we
+observed at the end of the last section, the total steady state
+polymer concentration varies directly with steady state monomer
+concentration <span class="math notranslate nohighlight">\(b_1\)</span>. (Recall that an elevated total <span class="math notranslate nohighlight">\(A\beta\)</span>
+concentration level in the brain is thought to produce senile
+plaques which may be a major factor contributing to the progression
+of AD. See [Luca <a class="reference external" href="http://et.al">et.al</a>. 2003] for mathematical modeling related to
+plaque formation.)</p>
+<p>Since we use the same parameter values given in
+Table 1 for the simplified (linear) CWS model, the respective
+equilibrium values for monomers in the brain (<span class="math notranslate nohighlight">\(b_1\sim 25,700\)</span> pM),
+CSF (<span class="math notranslate nohighlight">\(c\sim 115\)</span> pM) and plasma (<span class="math notranslate nohighlight">\(p\sim 29\)</span> pM) remain the same as
+in Table 1. The stability of these equilbria is confirmed by
+computing the (constant) Jacobian matrix of the simplified model</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+J = \left( \begin{array}{ccc}
+-r_{13}-r_{12}-L_1 &amp; r_{21}&amp;r_{31} \\
+r_{12} &amp; -r_{21}-r_{23}-L_2&amp;r_{32}  \\
+r_{13}&amp;r_{23}&amp;-r_{31}-r_{32}-L_3
+\end{array} \right)\approx \left( \begin{array}{ccc}
+-24.6566 &amp; 0&amp;3.25728 \\
+.65664 &amp; -146.88&amp;0  \\
+0&amp;146.88&amp;-582.137
+\end{array} \right),
+\end{split}\]</div>
+<p>and  finding its eigenvalues
+(<span class="math notranslate nohighlight">\(\approx\{\)</span>-582.136,-146.886,-24.652})are all negative at the
+equilibrium point <span class="math notranslate nohighlight">\((b_1,c,p)\)</span>.</p>
+<p>Craft, Wein and Selkoe took a different approach to simplifying the
+infinite dimensional system by assuming that the total polymer
+concentration remains constant (<span class="math notranslate nohighlight">\(\sum_{i=2}^{\infty} b_i(t)=S\)</span> =
+constant). It is easy to show that their assumption leads to the
+following 3 dimensional non-linear system for <span class="math notranslate nohighlight">\(b_1(t), c(t)\)</span> and
+<span class="math notranslate nohighlight">\(p(t)\)</span>:</p>
+<p>Equation NL1
+$<span class="math notranslate nohighlight">\(
+\stackrel{.}{b}_1(t)=\tilde{k}_1+r_{31}p(t) +
+r_{21}c(t)-(r_{13}b_1(t)+r_{12}b_1(t))- \tilde{L}_1 b_1(t) -2 e b_1^2(t) \label{nonlin1}
+\)</span>$</p>
+<p>Equation NL2
+$<span class="math notranslate nohighlight">\(
+\stackrel{.}{c}(t)=k_2+r_{12}b_1(t)+r_{32}p(t)-(r_{21}c(t)+r_{23}c(t))-L_2c(t)
+\)</span>$</p>
+<p>Equation NL3
+$<span class="math notranslate nohighlight">\(
+\stackrel{.}{p}(t)=k_3+r_{13}b_1(t)+r_{23}c(t)-(r_{31}p(t)+r_{32}p(t))-L_3p(t)
+\)</span>$</p>
+<p>where  <span class="math notranslate nohighlight">\(\tilde{k}_1=k_1 + f S\)</span> and <span class="math notranslate nohighlight">\(\tilde{L}_1=L_1 + e
+S\)</span>. Except for the non-linear term <span class="math notranslate nohighlight">\(-2e b_1^2\)</span> and adjusted
+parameter values <span class="math notranslate nohighlight">\(\tilde{k}_1\)</span> and <span class="math notranslate nohighlight">\(\tilde{L}_1\)</span> in (NL1),
+this system is identical to the linear system given by (L1)</p>
+<p>We found that in all cases of interest these two
+simplified systems exhibited very similar numerical solution
+behavior (solutions are strongly attracted by the equilibrium
+values) and so will only graph numerical solutions to the simplified
+CWS model (L1) - (L3).</p>
+</section>
+<section id="lab-analysis-of-treatments">
+<h3>LAB Analysis of Treatments<a class="headerlink" href="#lab-analysis-of-treatments" title="Permalink to this headline">#</a></h3>
+<p>Craft, Wein and Selkoe [2002] simulated a variety of treatment
+scenarios to assess the suitability of using <span class="math notranslate nohighlight">\(A\beta\)</span> monomer
+concentrations in the CSF and plasma to predict the <span class="math notranslate nohighlight">\(A\beta\)</span> monomer
+concentration in the brain.  To illustrate and confirm their
+findings, we use the simplified CWS model (L1) -
+(L3) to simulate two of these treatment scenarios.</p>
+<section id="treatment-1">
+<h4>Treatment 1<a class="headerlink" href="#treatment-1" title="Permalink to this headline">#</a></h4>
+<p>The first treatment scenario is to reduce the production of A<span class="math notranslate nohighlight">\(\beta\)</span>
+in the brain, that is, to lower the value of <span class="math notranslate nohighlight">\(k_1\)</span>. For such a
+treatment, a <span class="math notranslate nohighlight">\(\gamma\)</span>-secretase inhibitor is used [Craft et. al.
+2002]. (See [Das et. al. 2011] for further mathematical modelling on
+<span class="math notranslate nohighlight">\(\gamma\)</span>-secretase dynamics between the CSF and plasma.) To simulate
+the effect of the treatment, we  solve equations L1-
+L3 numerically, assuming that a symptomatic patient is
+in a pre-treatment steady state on days 0-100, and is given a
+<span class="math notranslate nohighlight">\(\gamma\)</span>-secretase inhibitor that decreases the production rate
+<span class="math notranslate nohighlight">\(k_1\)</span> by 40% on days 100-465.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">b1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
+    <span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">k3</span><span class="p">,</span> <span class="n">r12</span><span class="p">,</span><span class="n">r13</span><span class="p">,</span><span class="n">r23</span><span class="p">,</span><span class="n">r21</span><span class="p">,</span><span class="n">r31</span><span class="p">,</span><span class="n">r32</span><span class="p">,</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">L3</span> <span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
+    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">.4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="mf">.4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">465</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="p">)</span><span class="o">-</span><span class="n">L1</span><span class="o">*</span><span class="n">b1</span><span class="p">,</span>      <span class="c1"># list of dy/dt=f functions</span>
+             <span class="n">k2</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r32</span><span class="o">*</span><span class="n">p</span><span class="o">-</span><span class="p">(</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">+</span><span class="n">r23</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">L2</span><span class="o">*</span><span class="n">c</span><span class="p">,</span>
+             <span class="n">k3</span><span class="o">+</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r23</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r32</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="n">L3</span><span class="o">*</span><span class="n">p</span><span class="p">,]</span>
+    <span class="k">return</span> <span class="n">derivs</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">k1</span> <span class="o">=</span> <span class="mf">7.34</span><span class="o">*</span><span class="mi">86400</span>         
+<span class="n">L1</span> <span class="o">=</span> <span class="mi">24</span> 
+<span class="n">k2</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">L2</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">k3</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">L3</span><span class="o">=</span><span class="mf">6.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
+<span class="n">r12</span><span class="o">=</span><span class="mf">7.6</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
+<span class="n">r23</span><span class="o">=</span><span class="mf">1.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
+<span class="n">r31</span><span class="o">=</span><span class="mf">3.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
+<span class="n">r32</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">r21</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">r13</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="c1"># Initial values</span>
+<span class="n">b10</span> <span class="o">=</span> <span class="mf">25.7</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>     
+<span class="n">c0</span> <span class="o">=</span> <span class="mi">115</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="mi">29</span>
+
+<span class="c1"># Bundle parameters for ODE solver</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">k3</span><span class="p">,</span> <span class="n">r12</span><span class="p">,</span><span class="n">r13</span><span class="p">,</span><span class="n">r23</span><span class="p">,</span><span class="n">r21</span><span class="p">,</span><span class="n">r31</span><span class="p">,</span><span class="n">r32</span><span class="p">,</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">L3</span> <span class="p">]</span>
+
+<span class="c1"># Bundle initial conditions for ODE solver</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">b10</span><span class="p">,</span><span class="n">c0</span><span class="p">,</span><span class="n">p0</span><span class="p">]</span>
+
+<span class="c1"># Make time array for solution</span>
+<span class="n">tStop</span> <span class="o">=</span> <span class="mf">1000.</span>
+<span class="n">tInc</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
+
+<span class="c1"># Call the ODE solver</span>
+<span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+
+<span class="c1"># Plot results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot b1 as a function of time</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;b1&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot c as a function of time</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot p as a function of time</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;treatment1.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/e6c1ca6e9c2bd41d9eb924d8626ddd93e77a378f64f5db26a864b73a4b0c5a0f.png" src="../../../_images/e6c1ca6e9c2bd41d9eb924d8626ddd93e77a378f64f5db26a864b73a4b0c5a0f.png" />
+</div>
+</div>
+<p>Treatment 1 results in the same change Amyloid-beta levels in the brain, CSF and plasma.</p>
+</section>
+<section id="problem-treatment-2">
+<h4>PROBLEM: Treatment 2<a class="headerlink" href="#problem-treatment-2" title="Permalink to this headline">#</a></h4>
+<p>Our second treatment scenario is to change the transfer
+rate of A<span class="math notranslate nohighlight">\(\beta\)</span> between the brain and CSF.</p>
+<p>Investigate what happens when <span class="math notranslate nohighlight">\(r_{12}\)</span> is increased by 100%  on days
+100-465.</p>
+<p>Why does this caution the use of Amyloid-beta as a biomarker for Alzheimer’s Disease?</p>
+<p>Note:  Craft, Wein and Selkoe [2002] considered two other treatments:</p>
+<ul>
+<li>a fragmentation enhancer increasing
+    the fragmentation rate 100\%; and </li>
+<li>a vaccine which increases the monomer ingestion
+ rate off of polymers by 100\%.</li>
+<p>In both these cases, the dynamics in all three
+compartments were similar.</p>
+</section>
+<section id="conclusion">
+<h4>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h4>
+<p>After simulating a variety of treatment scenarios, Craft, Wein and
+Selkoe concluded the need for caution about the use of A<span class="math notranslate nohighlight">\(\beta\)</span> as a
+biomarker. As exemplified by Treatment 1 and 2, relative changes in
+the A<span class="math notranslate nohighlight">\(\beta\)</span> levels are not uniform in all three compartments under
+all treatments. How a particular treatment affects model parameters
+must therefore be understood in order to correctly interpret
+clinical changes in a patient’s  CSF and plasma A<span class="math notranslate nohighlight">\(\beta\)</span> levels.</p>
+<p>We conclude by mentioning a final interesting observation by Craft,
+Wein and Selkoe for the case where the polymerization ratio
+satisfies <span class="math notranslate nohighlight">\(r&gt;1\)</span>. Though the values in {\bf Table 1 } give <span class="math notranslate nohighlight">\(r \sim
+.84\)</span> and a total steady-state polymer concentration <span class="math notranslate nohighlight">\(S\sim
+1950\)</span>x10<span class="math notranslate nohighlight">\(^3\)</span> pM, theoretically speaking, if <span class="math notranslate nohighlight">\(r&gt;1\)</span>, the steady state
+polymer concentration <span class="math notranslate nohighlight">\(S\)</span> becomes infinite. This implies that while
+the steady state brain monomer concentration <span class="math notranslate nohighlight">\(b_1\)</span> (which is
+independent of <span class="math notranslate nohighlight">\(r\)</span>) remains finite or is even reduced by some
+treatment, the total brain polymer concentration
+<span class="math notranslate nohighlight">\(S=\sum_{i=2}^{\infty} b_i\)</span> may increase without bound as each
+polymer concentration <span class="math notranslate nohighlight">\(b_i\)</span> approaches its finite steady state level
+(see Figure 5 in [Craft et. al. 2002]).</p>
+</section>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h3>
+<p>Calhoun, M., Burgermeister, P., Phinney, A., Stalder, M.,
+Tolnay, M., Wiederhold, K.-H., Abramowski, D., Sturchler-Pierrat,
+C., Sommer, B., Staufenbiel, M. ad Jucker, M. 1999. Neurol
+overexpression of mutant amyloid pre-cursor protein results in
+prominent deposition of cerebrovascular amyloid. <i>Neurobiology</i>
+96, 14088-14093.</p>
+<p>Craft, D., Wein, L. and Selkoe,D. 2002.  Mathematical model of the
+impact of novel treatments of the A<span class="math notranslate nohighlight">\(\beta\)</span> burden in the Alzheimer’s
+brain, CSF and plasma, <i>Bulletin of Mathematical Biology</i>, 64,
+1011-1031.</p>
+<p>Das, R. et. al. 2011. Modelling effect of a <span class="math notranslate nohighlight">\(\gamma\)</span>-Secratase
+inhibitor on amyloid-<span class="math notranslate nohighlight">\(\beta\)</span> dynamics reveals significant role of an
+amyloid clearance mechanism, <i>Bulletin of Mathematical Biology</i>, 73,
+230-247.</p>
+<p>Edekstein-Keshet, L. 2006.  Simple models for polymer growth:
+implications for biopolymers, available at
+<a class="reference external" href="https://people.ok.ubc.ca/rtyson/Teaching/Math225/polymerize.pdf">https://people.ok.ubc.ca/rtyson/Teaching/Math225/polymerize.pdf</a></p>
+<p>Felsenstein, K. 2000. The next generation of AD therapeutics:
+the future is now. <i>Abstracts from the 7th annual conference on
+Alzheimer’s Disease and Related Disorders</i>, Abstract 613.</p>
+<p>Galasko, D. et. al. 1998. High cerebrospinal fluid tau and low
+amyloid <span class="math notranslate nohighlight">\(\beta42\)</span> levels in the clinical diagnosis of Alzheimer
+disease and relation to Apolipoprotein E genotype, <i>Archives of
+Neurology</i>, 55, 937-945.</p>
+<p>Ghersi-Egea, J.-F., Gorevic, P., Ghiso, J., Frangione, B.,
+Patlak, C., Fenstermacher, J. 1996. Fate of cerbral spinal
+fluid-borne amyloid <span class="math notranslate nohighlight">\(\beta\)</span>-peptide: rapid clearance into blood and
+aprepciable accumulation by cerebral arteries. <i>Journal of
+Neurochemistry</i>, 166, 880-883.</p>
+<p>Jackson, J. 1957. “Networks of waiting lines” <i>Operations
+Research</i>, 5, pp. 518-521.</p>
+<p>Johns H. and King L. 2011. “Larry King Interviews Harry Johns, President of the Alzheimer’s Association.”  in the CNN special program <i>Larry
+King Investigates Alzheimers.</i> Available at
+<a class="reference external" href="http://www.alzheimersreadingroom.com/2011/05/harry-johns-larry-king-investigates.html">http://www.alzheimersreadingroom.com/2011/05/harry-johns-larry-king-investigates.html</a></p>
+<p>Luca, M., Chavex-Ross, A, Edelestein-Keshet, L. and Mogilner A. 2003.
+Chemotactic signaling, microglia, and Alzheimer’s disease
+senile plaques: is there a connection?, <i>Bulletin of
+Mathematical Biology</i>,, 65, 693-730.</i></p>
+<p>McLean, C., Cherny, R., Fraser, F., Fuller, S., Smith, M.,
+Beyreuther, K., Bush, A., Masters, C. 1999. Soluble pool of A<span class="math notranslate nohighlight">\(\beta\)</span>
+amyloid as a determinant of severity of neurodegeneration in
+Alzheimer’s Disease. <i>Annals of Neurology</i>, 46, 860-866.</p>
+<p>N<span class="math notranslate nohighlight">\(\ddot{a}\)</span>slund, J., Haroutunian, V., Mohs, R., Davis, K.,
+Davies, P., Greengard, P., Buxbaum, J. 2000. Correlation between
+elevated levels of amyloid <span class="math notranslate nohighlight">\(\beta\)</span>-peptide in the brain and
+cognitive decline. <i>The Journal of the American Medical
+Association}, 283, 1571-1577.</i></p>
+<p>Scheuner, D. et. al. 1996. <i>Nature Medicine</i>, 2, 864-870.</p>
+<p>Schnoor, Jerald L. 1996. <i>Environmental Modeling; Fate and Transport of Pollutants
+in Water, Air, and Soil</i>, New York: John Wiley &amp; Sons.</p>
+<p>Thiess, W. 2010. Regarding ADNI Biomarkers Article from
+<i>Archives of Neurology</i> August 2010.</p>
+<p>Zlokovic, B., Ghiso, J., Mackic, J., McComb, J., Weiss, M. and
+Frangione, B. 1993. Blood-brain barrier transport of circulating
+Alzheimer’s amyloid <span class="math notranslate nohighlight">\(\beta\)</span>, <i>Biochemical and Biophysical
+Research Communications</i>, 197, 1034-1040.</p>
+<section id="solution">
+<h4>SOLUTION<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h4>
+<p>The A<span class="math notranslate nohighlight">\(\beta\)</span> concentration in the brain during treatment 2
+decreases by 2.5% while the concentrations in the CSF and plasma
+both roughly double (in agreement with Figure 6 b-d in [Craft et.
+al. 2002]).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">b1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
+    <span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">k3</span><span class="p">,</span> <span class="n">r12</span><span class="p">,</span><span class="n">r13</span><span class="p">,</span><span class="n">r23</span><span class="p">,</span><span class="n">r21</span><span class="p">,</span><span class="n">r31</span><span class="p">,</span><span class="n">r32</span><span class="p">,</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">L3</span> <span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
+    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="o">+</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">465</span><span class="p">,</span><span class="mi">0</span><span class="p">)))</span><span class="o">-</span><span class="n">L1</span><span class="o">*</span><span class="n">b1</span><span class="p">,</span>      <span class="c1"># list of dy/dt=f functions</span>
+             <span class="n">k2</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">465</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="n">r32</span><span class="o">*</span><span class="n">p</span><span class="o">-</span><span class="p">(</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">+</span><span class="n">r23</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">L2</span><span class="o">*</span><span class="n">c</span><span class="p">,</span>
+             <span class="n">k3</span><span class="o">+</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r23</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r32</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="n">L3</span><span class="o">*</span><span class="n">p</span><span class="p">,]</span>
+    <span class="k">return</span> <span class="n">derivs</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">k1</span> <span class="o">=</span> <span class="mf">7.34</span><span class="o">*</span><span class="mi">86400</span>         
+<span class="n">L1</span> <span class="o">=</span> <span class="mi">24</span> 
+<span class="n">k2</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">L2</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">k3</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">L3</span><span class="o">=</span><span class="mf">6.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
+<span class="n">r12</span><span class="o">=</span><span class="mf">7.6</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
+<span class="n">r23</span><span class="o">=</span><span class="mf">1.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
+<span class="n">r31</span><span class="o">=</span><span class="mf">3.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
+<span class="n">r32</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">r21</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">r13</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="c1"># Initial values</span>
+<span class="n">b10</span> <span class="o">=</span> <span class="mf">25.7</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>     
+<span class="n">c0</span> <span class="o">=</span> <span class="mi">115</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="mi">29</span>
+
+<span class="c1"># Bundle parameters for ODE solver</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">k3</span><span class="p">,</span> <span class="n">r12</span><span class="p">,</span><span class="n">r13</span><span class="p">,</span><span class="n">r23</span><span class="p">,</span><span class="n">r21</span><span class="p">,</span><span class="n">r31</span><span class="p">,</span><span class="n">r32</span><span class="p">,</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">L3</span> <span class="p">]</span>
+
+<span class="c1"># Bundle initial conditions for ODE solver</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">b10</span><span class="p">,</span><span class="n">c0</span><span class="p">,</span><span class="n">p0</span><span class="p">]</span>
+
+<span class="c1"># Make time array for solution</span>
+<span class="n">tStop</span> <span class="o">=</span> <span class="mf">1000.</span>
+<span class="n">tInc</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
+
+<span class="c1"># Call the ODE solver</span>
+<span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+
+<span class="c1"># Plot results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot b1 as a function of time</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;b1&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot c as a function of time</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot p as a function of time</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;treatment2.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/53bb3923452febb4442bbc647f108b688835dbfd7eef4c254a56101a99f31f10.png" src="../../../_images/53bb3923452febb4442bbc647f108b688835dbfd7eef4c254a56101a99f31f10.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/AppliedDifEq/cws"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../hiv/hiv.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2. HIV-AIDS</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../../Advanced/Complex/jnb1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1. Setting the Scene</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-model-of-the-great-lakes">Simple Model of the Great Lakes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cws-model">The CWS Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-analysis">Equilibrium Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-estimation">Parameter Estimation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simplified-cws-model">A Simplified CWS Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-analysis-of-treatments">LAB Analysis of Treatments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#treatment-1">Treatment 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-treatment-2">PROBLEM: Treatment 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">SOLUTION</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
