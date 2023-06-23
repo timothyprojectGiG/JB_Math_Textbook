@@ -1,4 +1,15 @@
 Traceback (most recent call last):
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 730, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 96, in ensure_async
+    result = await obj
+  File "//anaconda3/lib/python3.10/site-packages/jupyter_client/channels.py", line 315, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "//anaconda3/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
   File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
@@ -11,24 +22,18 @@ Traceback (most recent call last):
     return future.result()
   File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-salaries = pd.read_csv("EPL_wages_22_23.csv").drop(columns=["Rk","Notes", "Player-additional","Annual Wages"])
-salaries["Weekly Wages (GBP)"] = salaries["Weekly Wages"].str.extract('(\d+)').astype(int)
-salaries.head(n=10)
-------------------
-
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m salaries [38;5;241m=[39m [43mpd[49m[38;5;241m.[39mread_csv([38;5;124m"[39m[38;5;124mEPL_wages_22_23.csv[39m[38;5;124m"[39m)[38;5;241m.[39mdrop(columns[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mRk[39m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124mNotes[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mPlayer-additional[39m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124mAnnual Wages[39m[38;5;124m"[39m])
-[1;32m      2[0m salaries[[38;5;124m"[39m[38;5;124mWeekly Wages (GBP)[39m[38;5;124m"[39m] [38;5;241m=[39m salaries[[38;5;124m"[39m[38;5;124mWeekly Wages[39m[38;5;124m"[39m][38;5;241m.[39mstr[38;5;241m.[39mextract([38;5;124m'[39m[38;5;124m([39m[38;5;124m\[39m[38;5;124md+)[39m[38;5;124m'[39m)[38;5;241m.[39mastype([38;5;28mint[39m)
-[1;32m      3[0m salaries[38;5;241m.[39mhead(n[38;5;241m=[39m[38;5;241m10[39m)
-
-[0;31mNameError[0m: name 'pd' is not defined
-NameError: name 'pd' is not defined
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 949, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 754, in _async_poll_for_reply
+    await self._async_handle_timeout(timeout, cell)
+  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 801, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+['# Outcomes of rolling a die', 'die_outcomes = pd.DataFrame(np.arange(1, 7))', '', '# Get the average of reps samples from data with the given sample size and replacement policy', 'def get_sample_avg(data, size, reps, replace=False):']
+...
+['    paper_bgcolor = "LightSteelBlue"', ')', '', '# Display figure', 'fig.show()']
+-------------------
 
