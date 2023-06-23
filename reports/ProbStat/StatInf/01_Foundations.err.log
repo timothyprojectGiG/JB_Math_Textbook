@@ -17,34 +17,18 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# import libraries
-# Always run this cell first!
-import numpy as np
-import pandas as pd
-import math
-
-import scipy
-import statsmodels.api # appear to need to import the api as well as the library itself for the interpreter to find the modules
-import statsmodels as sm
-
-import matplotlib.pyplot as plt
-from matplotlib import ticker
-import seaborn as sns
-%matplotlib inline
-import plotly.graph_objects as go
-import plotly.offline
-plotly.offline.init_notebook_mode(connected=True) # make plotly work with Jupyter Notebook using CDN
+salaries = pd.read_csv("EPL_wages_22_23.csv").drop(columns=["Rk","Notes", "Player-additional","Annual Wages"])
+salaries["Weekly Wages (GBP)"] = salaries["Weekly Wages"].str.extract('(\d+)').astype(int)
+salaries.head(n=10)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 8[0m
-[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mmath[39;00m
-[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mscipy[39;00m
-[0;32m----> 8[0m [38;5;28;01mimport[39;00m [38;5;21;01mstatsmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m [38;5;66;03m# appear to need to import the api as well as the library itself for the interpreter to find the modules[39;00m
-[1;32m      9[0m [38;5;28;01mimport[39;00m [38;5;21;01mstatsmodels[39;00m [38;5;28;01mas[39;00m [38;5;21;01msm[39;00m
-[1;32m     11[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m salaries [38;5;241m=[39m [43mpd[49m[38;5;241m.[39mread_csv([38;5;124m"[39m[38;5;124mEPL_wages_22_23.csv[39m[38;5;124m"[39m)[38;5;241m.[39mdrop(columns[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mRk[39m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124mNotes[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mPlayer-additional[39m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124mAnnual Wages[39m[38;5;124m"[39m])
+[1;32m      2[0m salaries[[38;5;124m"[39m[38;5;124mWeekly Wages (GBP)[39m[38;5;124m"[39m] [38;5;241m=[39m salaries[[38;5;124m"[39m[38;5;124mWeekly Wages[39m[38;5;124m"[39m][38;5;241m.[39mstr[38;5;241m.[39mextract([38;5;124m'[39m[38;5;124m([39m[38;5;124m\[39m[38;5;124md+)[39m[38;5;124m'[39m)[38;5;241m.[39mastype([38;5;28mint[39m)
+[1;32m      3[0m salaries[38;5;241m.[39mhead(n[38;5;241m=[39m[38;5;241m10[39m)
 
-[0;31mModuleNotFoundError[0m: No module named 'statsmodels'
-ModuleNotFoundError: No module named 'statsmodels'
+[0;31mNameError[0m: name 'pd' is not defined
+NameError: name 'pd' is not defined
 
