@@ -17,20 +17,56 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from palmerpenguins import load_penguins
+# reference: https://matplotlib.org/stable/gallery/ticks/tick-formatters.html
+from matplotlib import ticker
 
-penguins = load_penguins()
-penguins.sample(5).head() # display 5 randomly sampled rows
+fig, ax = plt.subplots(figsize=(6.4, 0.4))
+
+# create number line by hiding unneeded elements of plot
+ax.yaxis.set_major_locator(ticker.NullLocator())
+ax.spines[['left', 'right', 'top']].set_visible(False)
+
+# set up number line limits
+ax.set_xlim(1000*((sample_mean-999)//1000), 1000*((sample_mean+1999)//1000))
+ax.set_ylim(0, 1)
+
+# set up number line tick marks
+ax.xaxis.set_major_locator(ticker.MultipleLocator(1000))
+ax.xaxis.set_minor_locator(ticker.MultipleLocator(100))
+ax.xaxis.set_ticks_position('bottom')
+
+# plot sample mean
+ax.scatter(sample_mean, 0, s = 75, clip_on=False, zorder=10)
+ax.annotate(
+    '$\overline{X}$',
+    xy = (sample_mean, 0),
+    xytext = (-4, 10),
+    textcoords = 'offset pixels',
+    fontsize = 'large',
+)
+
+# plot population mean
+ax.scatter(5500, 0, s = 75, clip_on=False, zorder=10)
+ax.annotate(
+    '$\mu$',
+    xy = (5500, 0),
+    xytext = (-4, 12),
+    textcoords = 'offset pixels',
+    fontsize = 'large',
+)
+
+ax.set_title('Sample Mean vs. Population Mean', y = 1.25);
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m<ipython-input-2-bcaa2e9b75e0>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0;32mfrom[0m [0mpalmerpenguins[0m [0;32mimport[0m [0mload_penguins[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0;34m[0m[0m
-[1;32m      3[0m [0mpenguins[0m [0;34m=[0m [0mload_penguins[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m [0mpenguins[0m[0;34m.[0m[0msample[0m[0;34m([0m[0;36m5[0m[0;34m)[0m[0;34m.[0m[0mhead[0m[0;34m([0m[0;34m)[0m [0;31m# display 5 randomly sampled rows[0m[0;34m[0m[0;34m[0m[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-4-e3ba5fa1ae43>[0m in [0;36m<module>[0;34m[0m
+[1;32m      6[0m [0;31m# create number line by hiding unneeded elements of plot[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m [0max[0m[0;34m.[0m[0myaxis[0m[0;34m.[0m[0mset_major_locator[0m[0;34m([0m[0mticker[0m[0;34m.[0m[0mNullLocator[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 8[0;31m [0max[0m[0;34m.[0m[0mspines[0m[0;34m[[0m[0;34m[[0m[0;34m'left'[0m[0;34m,[0m [0;34m'right'[0m[0;34m,[0m [0;34m'top'[0m[0;34m][0m[0;34m][0m[0;34m.[0m[0mset_visible[0m[0;34m([0m[0;32mFalse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      9[0m [0;34m[0m[0m
+[1;32m     10[0m [0;31m# set up number line limits[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mModuleNotFoundError[0m: No module named 'palmerpenguins'
-ModuleNotFoundError: No module named 'palmerpenguins'
+[0;31mTypeError[0m: unhashable type: 'list'
+TypeError: unhashable type: 'list'
 

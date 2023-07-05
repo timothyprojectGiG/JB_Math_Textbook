@@ -581,22 +581,97 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">bcaa2e9b75e0</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">palmerpenguins</span> <span class="kn">import</span> <span class="n">load_penguins</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">penguins</span> <span class="o">=</span> <span class="n">load_penguins</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">penguins</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># display 5 randomly sampled rows</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;palmerpenguins&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+      <th>sex</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>203</th>
+      <td>Gentoo</td>
+      <td>Biscoe</td>
+      <td>48.5</td>
+      <td>14.1</td>
+      <td>220.0</td>
+      <td>5300.0</td>
+      <td>male</td>
+      <td>2008</td>
+    </tr>
+    <tr>
+      <th>302</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>50.5</td>
+      <td>18.4</td>
+      <td>200.0</td>
+      <td>3400.0</td>
+      <td>female</td>
+      <td>2008</td>
+    </tr>
+    <tr>
+      <th>315</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>53.5</td>
+      <td>19.9</td>
+      <td>205.0</td>
+      <td>4500.0</td>
+      <td>male</td>
+      <td>2008</td>
+    </tr>
+    <tr>
+      <th>267</th>
+      <td>Gentoo</td>
+      <td>Biscoe</td>
+      <td>55.1</td>
+      <td>16.0</td>
+      <td>230.0</td>
+      <td>5850.0</td>
+      <td>male</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Adelie</td>
+      <td>Dream</td>
+      <td>37.6</td>
+      <td>19.3</td>
+      <td>181.0</td>
+      <td>3300.0</td>
+      <td>female</td>
+      <td>2007</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Using this data, we are going to explore the question of whether the Gentoo penguins at the Palmer Station differ significantly in body mass from the average Gentoo penguin body mass found in the scientific literature. We can find more information about the worldwide average body mass of the Gentoo penguin by using the <a class="reference external" href="https://eol.org/pages/45512076">Encyclopedia of Life</a>. Based on this page, it looks like the average body mass is 5500 grams. If we let <span class="math notranslate nohighlight">\(\mu\)</span> be the average body mass of Gentoo penguins in the Palmer Station area, our hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-62736205-ba2a-47d6-a664-cb6fec28654b">
-<span class="eqno">(15)<a class="headerlink" href="#equation-62736205-ba2a-47d6-a664-cb6fec28654b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5d6f0054-a576-4513-8b71-dd1e8d6a4b51">
+<span class="eqno">(15)<a class="headerlink" href="#equation-5d6f0054-a576-4513-8b71-dd1e8d6a4b51" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 \end{equation}\]</div>
 <p>What about the mean body mass for penguins in our sample data?</p>
@@ -605,6 +680,11 @@ H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gentoo</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="n">penguins</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Gentoo&#39;</span><span class="p">]</span>
 <span class="n">sample_mean</span> <span class="o">=</span> <span class="n">gentoo</span><span class="p">[</span><span class="s1">&#39;body_mass_g&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean Gentoo body mass in the sample data is </span><span class="si">{</span><span class="n">sample_mean</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean Gentoo body mass in the sample data is 5076.016.
 </pre></div>
 </div>
 </div>
@@ -652,6 +732,21 @@ H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sample Mean vs. Population Mean&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">1.25</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="n">e3ba5fa1ae43</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># create number line by hiding unneeded elements of plot</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">ticker</span><span class="o">.</span><span class="n">NullLocator</span><span class="p">())</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> 
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># set up number line limits</span>
+
+<span class="ne">TypeError</span>: unhashable type: &#39;list&#39;
+</pre></div>
+</div>
+<img alt="../../_images/bdc0f053528e4681b3fd9208d55a1424c015d414aad67526c14005f50307e054.png" src="../../_images/bdc0f053528e4681b3fd9208d55a1424c015d414aad67526c14005f50307e054.png" />
 </div>
 </div>
 <p>Though we could introduce a test based on the standard normal distribution—as we did in the previous section—in the case of numerical data, we are going to utilize the <strong>T-test</strong> instead. As the name suggests, this test is based on the Student’s T-distribution. We do this because the T-test will apply both to the cases when the sample size is large and to the cases when it is relatively small.</p>
@@ -1040,8 +1135,8 @@ H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 <p>We can also use the T-test to examine the difference between two population means. Typically, this is done to find out if two populations have the same mean or not.</p>
 <p>We can return to our Palmer Penguins example and look at whether the Adélie and Chinstrap penguins from this area have the same average body mass.</p>
 <p>Letting <span class="math notranslate nohighlight">\(\mu_1\)</span> be the average body mass of Adélie penguins and <span class="math notranslate nohighlight">\(\mu_2\)</span> be the average body mass of Chinstrap penguins in the Palmer station area, our hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-77be462a-058a-4db8-82d3-7a5c9a0b912c">
-<span class="eqno">(17)<a class="headerlink" href="#equation-77be462a-058a-4db8-82d3-7a5c9a0b912c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7fc072d2-34d4-4b58-8e11-18f13ebddf6c">
+<span class="eqno">(17)<a class="headerlink" href="#equation-7fc072d2-34d4-4b58-8e11-18f13ebddf6c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_0: \mu_1 - \mu_2 = 0, \\ H_1: \mu_1 - \mu_2 \neq 0.
 \end{equation}\]</div>
 <p>Let’s look at our samples:</p>
@@ -1060,18 +1155,18 @@ H_0: \mu_1 - \mu_2 = 0, \\ H_1: \mu_1 - \mu_2 \neq 0.
 <section id="the-test-statistic">
 <h3>The Test Statistic<a class="headerlink" href="#the-test-statistic" title="Permalink to this heading">#</a></h3>
 <p>When the sample sizes <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span> are large enough (typically both <span class="math notranslate nohighlight">\(n_1 \geq 30\)</span> and <span class="math notranslate nohighlight">\(n_2 \geq 30\)</span>), we have</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fbc6dcb3-175b-45f8-84ad-bae25a914078">
-<span class="eqno">(18)<a class="headerlink" href="#equation-fbc6dcb3-175b-45f8-84ad-bae25a914078" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-85d84428-8e9d-44f8-8f63-4a6640834fbf">
+<span class="eqno">(18)<a class="headerlink" href="#equation-85d84428-8e9d-44f8-8f63-4a6640834fbf" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \overline{X}_1 - \overline{X}_2 \sim N \left( \mu_1 - \mu_2, \sqrt{ \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} } \right),
 \end{equation}\]</div>
 <p>and hence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-59609525-6533-4721-9fcb-e2e9818f9f73">
-<span class="eqno">(19)<a class="headerlink" href="#equation-59609525-6533-4721-9fcb-e2e9818f9f73" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f18041ab-c1df-4c50-aa1c-ef85b2091be0">
+<span class="eqno">(19)<a class="headerlink" href="#equation-f18041ab-c1df-4c50-aa1c-ef85b2091be0" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\overline{X}_1 - \overline{X}_2 - (\mu_1 - \mu_2)}{ \sqrt{ \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} }} \sim N(0,1).
 \end{equation}\]</div>
 <p>Just as before, the null hypothesis will tell us about <span class="math notranslate nohighlight">\(\mu_1-\mu_2\)</span>, but not about <span class="math notranslate nohighlight">\(\sigma_1\)</span> and <span class="math notranslate nohighlight">\(\sigma_2\)</span>, so we’ll estimate them from the data using <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span>. Making that substitution for the standard deviations, we have a T-distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2695db66-e39b-4ab4-b903-1a8db040c299">
-<span class="eqno">(20)<a class="headerlink" href="#equation-2695db66-e39b-4ab4-b903-1a8db040c299" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dfdb88f3-f777-436a-8d29-f3b70de9b7d6">
+<span class="eqno">(20)<a class="headerlink" href="#equation-dfdb88f3-f777-436a-8d29-f3b70de9b7d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\overline{X}_1 - \overline{X}_2 - (\mu_1 - \mu_2)}{ \sqrt{ \frac{S_1^2}{n_1} + \frac{S_2^2}{n_2} }} \sim t_{\nu},
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\nu\)</span> represents the degrees of freedom. The exact value of <span class="math notranslate nohighlight">\(\nu\)</span> will be calculated by something called Welch’s method, but we can let the software handle that details of the computation. You can keep in mind the intuition that if <span class="math notranslate nohighlight">\(S_1 \approx S_2\)</span>, then <span class="math notranslate nohighlight">\(\nu\)</span> will be about <span class="math notranslate nohighlight">\(n_1 + n_2 - 2\)</span>. On the other hand, if <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> are very different, then <span class="math notranslate nohighlight">\(\nu \approx \min({n_1, n_2})\)</span>.</p>
