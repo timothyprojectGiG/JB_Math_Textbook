@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -69,7 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="3. Cholera in Haiti" href="cholera.html" />
     <link rel="prev" title="1. Logistic Growth and COVID-19" href="covid.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -172,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Vectors/vectors.html">Vectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Subsets/subsets.html">Subsets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractals/fractals.html">Fractals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Discrete/trees/trees.html">Trees</a></li>
@@ -214,6 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
 <ul class="nav bd-sidenav">
@@ -234,6 +237,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec4.html">4 Derivatives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/5int/5int.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/6parametric.html">6. Parametric Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -512,10 +516,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-basic-sir-model">
-<h1>2. The Basic SIR Model<a class="headerlink" href="#the-basic-sir-model" title="Permalink to this headline">#</a></h1>
+<h1>2. The Basic SIR Model<a class="headerlink" href="#the-basic-sir-model" title="Permalink to this heading">#</a></h1>
 <p>This section is adapted from a project by Dr. Yiheng Liang.</p>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>The SIR model is a system of three ordinary differential equations that describe epidemics, where where at time <span class="math notranslate nohighlight">\(t\)</span>,</p>
 <p><span class="math notranslate nohighlight">\(S(t)\)</span> the number of susceptible individuals,</p>
 <p><span class="math notranslate nohighlight">\(I(t)\)</span> is the number of infectious individuals,</p>
@@ -538,7 +542,7 @@ dR/dt = gamma*I
 <p>The rate of recovered people <span class="math notranslate nohighlight">\(R\)</span> is increasing at a rate proportional to the number infected <span class="math notranslate nohighlight">\(I\)</span> (with a constant of proportionality gamma.)</p>
 <p>The parameter beta&gt;0 is called the transmission rate, and the parameter gamma&gt;0 is the recovery rate.</p>
 <section id="numerical-solutions">
-<h3>Numerical Solutions<a class="headerlink" href="#numerical-solutions" title="Permalink to this headline">#</a></h3>
+<h3>Numerical Solutions<a class="headerlink" href="#numerical-solutions" title="Permalink to this heading">#</a></h3>
 <p>We now show how to use an ODE solver to obtain graphs of the solutions <span class="math notranslate nohighlight">\(S(t)\)</span>, <span class="math notranslate nohighlight">\(I(t)\)</span> and <span class="math notranslate nohighlight">\(R(t)\)</span> for the following parameter values and initial conditions:</p>
 <p><b>PARAMETER VALUES</b></p>
 <p>beta (transmission_rate) = 0.000001,</p>
@@ -564,8 +568,8 @@ dR/dt = gamma*I
     <span class="k">return</span> <span class="n">derivs</span>
 
 <span class="c1"># Parameters</span>
-<span class="n">beta</span><span class="o">=</span><span class="mf">.000001</span>
-<span class="n">gamma</span><span class="o">=</span><span class="mf">.2</span>
+<span class="n">beta</span><span class="o">=.</span><span class="mi">000001</span>
+<span class="n">gamma</span><span class="o">=.</span><span class="mi">2</span>
 <span class="c1"># Initial values</span>
 <span class="n">S0</span><span class="o">=</span><span class="mi">1000000</span>
 <span class="n">I0</span><span class="o">=</span><span class="mi">1</span>
@@ -578,7 +582,7 @@ dR/dt = gamma*I
 
 <span class="c1"># Make time array for solution</span>
 <span class="n">tStop</span> <span class="o">=</span> <span class="mi">70</span>  <span class="c1"># number of days</span>
-<span class="n">tInc</span> <span class="o">=</span> <span class="mf">.001</span>  
+<span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
 
 <span class="c1"># Call the ODE solver</span>
@@ -599,13 +603,13 @@ dR/dt = gamma*I
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c4950b55a892d55ff496a3311d3ecd07445c6be1e0a5e8eb8cbb993810fc3cbd.png" src="../../_images/c4950b55a892d55ff496a3311d3ecd07445c6be1e0a5e8eb8cbb993810fc3cbd.png" />
+<img alt="../../_images/5539c419706eaa99bc366e86120baaa5df6f58253c2652c5c3cb7f86b6d4de97.png" src="../../_images/5539c419706eaa99bc366e86120baaa5df6f58253c2652c5c3cb7f86b6d4de97.png" />
 </div>
 </div>
 <p>Note that the transmission rate is sufficiently low that allows for a full recovery of the population (end of epidemic) by roughly day 40.</p>
 </section>
 <section id="assignment">
-<h3>Assignment<a class="headerlink" href="#assignment" title="Permalink to this headline">#</a></h3>
+<h3>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Investigate how the parameter change affects the disease progression.</p></li>
 </ol>
@@ -622,7 +626,7 @@ Use simulation to justify and explain your answer.</p>
 </ol>
 <p>In the SIR model, change the equation with dI/dt to convey that not only does the number of infectives increase proportional to the number of encounters S*I between susceptibles and infectives (with a constant of proportionality beta) and decrease proportional to the number of infected individuals I present (with a constant of proportionality gamma), but the number of infectives also DECREASES proportional to the number of infectives I present (with a constant of proportionality of the mortality rate mu). Also, add an equation to convey that the number of individuals who die increases proportional to the number of infectives present (with a constant of proportionality mu). Draw a schematic on a piece of paper to summarize the movement of people between the compartments S, I, R, and V for the population in this model.</p>
 <section id="hint-for-problem-2">
-<h4>Hint for Problem 2<a class="headerlink" href="#hint-for-problem-2" title="Permalink to this headline">#</a></h4>
+<h4>Hint for Problem 2<a class="headerlink" href="#hint-for-problem-2" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -641,9 +645,9 @@ Use simulation to justify and explain your answer.</p>
     <span class="k">return</span> <span class="n">derivs</span>
 
 <span class="c1"># Parameters</span>
-<span class="n">beta</span><span class="o">=</span><span class="mf">.000001</span>
-<span class="n">gamma</span><span class="o">=</span><span class="mf">.2</span>
-<span class="n">v</span><span class="o">=</span><span class="mf">.01</span>
+<span class="n">beta</span><span class="o">=.</span><span class="mi">000001</span>
+<span class="n">gamma</span><span class="o">=.</span><span class="mi">2</span>
+<span class="n">v</span><span class="o">=.</span><span class="mi">01</span>
 <span class="c1"># Initial values</span>
 <span class="n">S0</span><span class="o">=</span><span class="mi">3000000</span>
 <span class="n">I0</span><span class="o">=</span><span class="mi">1</span>
@@ -657,7 +661,7 @@ Use simulation to justify and explain your answer.</p>
 
 <span class="c1"># Make time array for solution</span>
 <span class="n">tStop</span> <span class="o">=</span> <span class="mi">70</span>  <span class="c1"># number of days</span>
-<span class="n">tInc</span> <span class="o">=</span> <span class="mf">.001</span>  
+<span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
 
 <span class="c1"># Call the ODE solver</span>
@@ -679,7 +683,7 @@ Use simulation to justify and explain your answer.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8ad75b381ca8f4099a5b1fc57abaf019b928cf8a96af92cfa0d3d7621d1e65c6.png" src="../../_images/8ad75b381ca8f4099a5b1fc57abaf019b928cf8a96af92cfa0d3d7621d1e65c6.png" />
+<img alt="../../_images/241c9b024aee8bc998745f75d95b563d73cab13772ebbd2fe8560503f5e96572.png" src="../../_images/241c9b024aee8bc998745f75d95b563d73cab13772ebbd2fe8560503f5e96572.png" />
 </div>
 </div>
 </section>

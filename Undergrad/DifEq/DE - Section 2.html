@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -69,7 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="3. First-Order Differential Equations" href="DE%20-%20Section%203.html" />
     <link rel="prev" title="1. Overview of Chapter" href="Differential%20Equations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -172,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Vectors/vectors.html">Vectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Subsets/subsets.html">Subsets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractals/fractals.html">Fractals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Discrete/trees/trees.html">Trees</a></li>
@@ -214,6 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
 <ul class="nav bd-sidenav">
@@ -234,6 +237,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec4.html">4 Derivatives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/5int/5int.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/6parametric.html">6. Parametric Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -506,13 +510,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="introduction-to-differential-equations">
-<h1>2. Introduction to Differential Equations<a class="headerlink" href="#introduction-to-differential-equations" title="Permalink to this headline">#</a></h1>
+<h1>2. Introduction to Differential Equations<a class="headerlink" href="#introduction-to-differential-equations" title="Permalink to this heading">#</a></h1>
 <p>Differential equations form a fundamental branch of mathematics that deals with the modeling and analysis of change and variation. They play a crucial role in describing and understanding various phenomena across different fields, including physics, engineering, biology, economics, and many others. In simple terms, a differential equation is an equation that involves derivatives. It expresses a relationship between an unknown function and its derivatives, representing how the function changes with respect to one or more independent variables. These equations capture dynamic processes and allow us to study how quantities evolve and interact with each other.</p>
 <p>Differential equations arise naturally when trying to model real-world problems. Applying mathematics to practical problems often leads to a situation where it’s simpler to establish a connection between a function and its rate of change, rather than figuring out the function’s exact formula. This relationship, between an unknown function and its derivatives, essentially gives rise to a differential equation.</p>
 <p>Solving differential equations involves finding the function or functions that satisfy the equation. This task can be challenging as it often requires advanced mathematical techniques, including integration, differentiation, linear algebra, and complex analysis. Differential equations can exhibit a wide range of behaviors. Some equations have simple and explicit solutions, while others may require numerical methods or approximation techniques. Understanding the solutions to differential equations provides valuable insights into the underlying processes and helps make predictions about future behavior.</p>
 <p>Moreover, differential equations serve as a bridge between theoretical mathematics and real-world applications. They enable us to formulate mathematical models that accurately represent complex systems and phenomena, allowing us to analyze, optimize, and make informed decisions. For instance, in physics, they describe the motion of objects, the flow of fluids, and the behavior of electromagnetic fields. In biology, differential equations help us analyze population growth, the spread of diseases, and the dynamics of biological systems. Engineers rely on differential equations to study control systems, electrical circuits, and structural stability.</p>
 <section id="basic-terminology">
-<h2>2.1 Basic Terminology<a class="headerlink" href="#basic-terminology" title="Permalink to this headline">#</a></h2>
+<h2>2.1 Basic Terminology<a class="headerlink" href="#basic-terminology" title="Permalink to this heading">#</a></h2>
 <p>A <b>differential equation</b> is any equation involving an unknown function and one or more of its derivatives. Differential equations can be largely classified into two categories: ordinary differential equations and partial differential equations. When the unknown function within the equation only relies on a single variable, we label it as an <b>ordinary differential equation</b>. However, when the unknown function depends on multiple independent variables, we refer to it as a <b>partial differential equation</b>. In this latter scenario, the derivatives present in the equation are identified as partial derivatives.</p>
 <p><strong>Example</strong></p>
 <ul class="simple">
@@ -569,7 +573,7 @@ This is the derivative of f(x): -exp(-x)
 </div>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>List the type and order of each of the following differential equations. For each ordinary differential equation, determine if it is linear or nonlinear.</p>
 <ul class="simple">

@@ -1,39 +1,50 @@
 Traceback (most recent call last):
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 730, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 96, in ensure_async
-    result = await obj
-  File "//anaconda3/lib/python3.10/site-packages/jupyter_client/channels.py", line 315, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "//anaconda3/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 1112, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
-  File "//anaconda3/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/home/timothyproject/anaconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
     return future.result()
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 553, in async_execute
     await self.async_execute_cell(
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 949, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 754, in _async_poll_for_reply
-    await self._async_handle_timeout(timeout, cell)
-  File "//anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 801, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['# Outcomes of rolling a die', 'die_outcomes = pd.DataFrame(np.arange(1, 7))', '', '# Get the average of reps samples from data with the given sample size and replacement policy', 'def get_sample_avg(data, size, reps, replace=False):']
-...
-['    paper_bgcolor = "LightSteelBlue"', ')', '', '# Display figure', 'fig.show()']
--------------------
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# import libraries
+# Always run this cell first!
+import numpy as np
+import pandas as pd
+import math
+
+import scipy
+import statsmodels.api # appear to need to import the api as well as the library itself for the interpreter to find the modules
+import statsmodels as sm
+
+import matplotlib.pyplot as plt
+from matplotlib import ticker
+import seaborn as sns
+%matplotlib inline
+import plotly.graph_objects as go
+import plotly.offline
+plotly.offline.init_notebook_mode(connected=True) # make plotly work with Jupyter Notebook using CDN
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m<ipython-input-1-8cb2b0b1441f>[0m in [0;36m<module>[0;34m[0m
+[1;32m     13[0m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     14[0m [0mget_ipython[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mrun_line_magic[0m[0;34m([0m[0;34m'matplotlib'[0m[0;34m,[0m [0;34m'inline'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 15[0;31m [0;32mimport[0m [0mplotly[0m[0;34m.[0m[0mgraph_objects[0m [0;32mas[0m [0mgo[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     16[0m [0;32mimport[0m [0mplotly[0m[0;34m.[0m[0moffline[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     17[0m [0mplotly[0m[0;34m.[0m[0moffline[0m[0;34m.[0m[0minit_notebook_mode[0m[0;34m([0m[0mconnected[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m [0;31m# make plotly work with Jupyter Notebook using CDN[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'plotly'
+ModuleNotFoundError: No module named 'plotly'
 

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -69,7 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="8. Normal Distribution and Process Control" href="control.html" />
     <link rel="prev" title="6. Related Rates with Trig Functions and Football" href="football.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -172,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Vectors/vectors.html">Vectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Subsets/subsets.html">Subsets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractals/fractals.html">Fractals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Discrete/trees/trees.html">Trees</a></li>
@@ -214,6 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
 <ul class="nav bd-sidenav">
@@ -234,6 +237,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec4.html">4 Derivatives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/5int/5int.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/6parametric.html">6. Parametric Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
 <ul class="current nav bd-sidenav">
@@ -495,9 +499,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-distributions-and-drive-thrus">
-<h1>7. Probability Distributions and Drive Thrus<a class="headerlink" href="#probability-distributions-and-drive-thrus" title="Permalink to this headline">#</a></h1>
+<h1>7. Probability Distributions and Drive Thrus<a class="headerlink" href="#probability-distributions-and-drive-thrus" title="Permalink to this heading">#</a></h1>
 <p>PROBLEM  Suppose you are the owner of a fast food restaurant. Currently there is one drive up lane, but you are considering adding a second drive-up lane.  What factors need to be considered in making a decision whether to add a second drive-up lane?</p>
-<a class="reference internal image-reference" href="../../_images/drivethru.gif"><img alt="../../_images/drivethru.gif" class="align-center" src="../../_images/drivethru.gif" style="width: 750px;" /></a>
+<a class="reference internal image-reference" href="../../_images/drivethru1.gif"><img alt="../../_images/drivethru1.gif" class="align-center" src="../../_images/drivethru1.gif" style="width: 750px;" /></a>
 <h4> Introduction </h4>
 A statistical simulation model uses data of customer arrival and ordering times to re-create a scenario and explore options such as adding a second drive thru lane. (For example, see https://blog.promodel.com/2013/07/10/fast-food-drive-thru-2-lanes-faster-than-1/)<p>Calculus is used in  statistically-based simulations since probabilities are represented as areas under curves called probability distributions.</p>
 <p>This lab will focus on the use of uniform (constant) and exponential distributions to model arrival times of customers.</p>
@@ -515,11 +519,11 @@ A statistical simulation model uses data of customer arrival and ordering times 
 <span class="n">y</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">.015</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="o">.</span><span class="mi">015</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Uniform Distribution U(20,120)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mf">.005</span><span class="p">,</span><span class="s1">&#39;Shaded area = 2/3&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mf">.01</span><span class="p">,</span><span class="s1">&#39;y=1/100&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="o">.</span><span class="mi">005</span><span class="p">,</span><span class="s1">&#39;Shaded area = 2/3&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="o">.</span><span class="mi">01</span><span class="p">,</span><span class="s1">&#39;y=1/100&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Order Time t (seconds)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -528,7 +532,7 @@ A statistical simulation model uses data of customer arrival and ordering times 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Order Time t (seconds)&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/9ef5a87ef2222c2c8ce9bc9977a7066461ed93584ffd3754ffc06661d805dbb0.png" src="../../_images/9ef5a87ef2222c2c8ce9bc9977a7066461ed93584ffd3754ffc06661d805dbb0.png" />
+<img alt="../../_images/373c3ffe7c3f183b3e886b912839a325c113d2abacb1cefd1df6ae233dba3bd6.png" src="../../_images/373c3ffe7c3f183b3e886b912839a325c113d2abacb1cefd1df6ae233dba3bd6.png" />
 </div>
 </div>
 <p>Example 2a) Suppose the time to the next car arriving at the drive up is given by E(1) (i.e. k=1). What is the probability that the next arrival is within 3 minutes.</p>
@@ -546,8 +550,8 @@ A statistical simulation model uses data of customer arrival and ordering times 
 <span class="n">y1</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Exponential Distribution E(1)=e^(-t)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">.2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Shaded area = .95&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">.6</span><span class="p">,</span><span class="s1">&#39;y=e^(-t)&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-.</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Shaded area = .95&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;y=e^(-t)&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t to next arrival (seconds)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -556,7 +560,7 @@ A statistical simulation model uses data of customer arrival and ordering times 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Time t to next arrival (seconds)&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/814123fa5c9af30b930794fd8780d656ff9a93803eeece08fce68809180663c9.png" src="../../_images/814123fa5c9af30b930794fd8780d656ff9a93803eeece08fce68809180663c9.png" />
+<img alt="../../_images/14f29b98bf446ea9026e330341d9008c16f8dd919279b437a28dd3932e3d6803.png" src="../../_images/14f29b98bf446ea9026e330341d9008c16f8dd919279b437a28dd3932e3d6803.png" />
 </div>
 </div>
 <p>Example 2b) Find the value of <span class="math notranslate nohighlight">\(k\)</span> so that there is a 25% chance (probability=.25) that the next car will arrive within 1 minute.</p>

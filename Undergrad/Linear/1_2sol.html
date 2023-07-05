@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -69,7 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="2. Matrix Algebra" href="2matrix.html" />
     <link rel="prev" title="1. Systems of Linear Equations" href="1system.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -172,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Vectors/vectors.html">Vectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Subsets/subsets.html">Subsets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractals/fractals.html">Fractals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Elementary/Discrete/trees/trees.html">Trees</a></li>
@@ -214,6 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
 <ul class="nav bd-sidenav">
@@ -234,11 +237,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec4.html">4 Derivatives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/5int/5int.html">5. Integrals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Calculus/6parametric.html">6.1 Parametric Equations - Curves and Tangents</a></li>
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/6parametric.html">6. Parametric Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -514,7 +513,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="solution-set-of-linear-systems">
-<h1>1.2 Solution Set of  Linear Systems<a class="headerlink" href="#solution-set-of-linear-systems" title="Permalink to this headline">#</a></h1>
+<h1>1.2 Solution Set of  Linear Systems<a class="headerlink" href="#solution-set-of-linear-systems" title="Permalink to this heading">#</a></h1>
 <p>Linear systems can be represented by equations involving vectors and matrices. These representations enable us to analyze the properties and solution sets of linear systems.</p>
 <p>Let <span class="math notranslate nohighlight">\(n\)</span> be a positive integer and <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> be the collection of all ordered <span class="math notranslate nohighlight">\(n\)</span>-tuples of real numbers. Vectors are denoted by an <span class="math notranslate nohighlight">\(n\times 1\)</span> <strong>column matrix</strong> such as  <span class="math notranslate nohighlight">\(\vec{u} =\begin{bmatrix} u_1\\ u_2\\ \vdots\\ u_n \end{bmatrix}\)</span>. A vector whose entries are zero is called <strong>the zero vector</strong> and is denoted by <span class="math notranslate nohighlight">\(\vec{0}\)</span>.</p>
 <p>Two vectors <span class="math notranslate nohighlight">\(\vec{u} =\begin{bmatrix} u_1\\ u_2\\ \vdots\\ u_n \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\vec{v} =\begin{bmatrix} v_1\\ v_2\\ \vdots\\ v_n \end{bmatrix}\)</span> are <strong>equal</strong> if their corresponding entries are equal. That is, if for any <span class="math notranslate nohighlight">\(u_i =v_i\)</span> for all <span class="math notranslate nohighlight">\(i\leq n\)</span>.</p>
@@ -533,7 +532,7 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(c(d\vec{u})= (cv)\vec{u}\)</span></p></li>
 </ol>
 <section id="vector-equation">
-<h2>Vector Equation<a class="headerlink" href="#vector-equation" title="Permalink to this headline">#</a></h2>
+<h2>Vector Equation<a class="headerlink" href="#vector-equation" title="Permalink to this heading">#</a></h2>
 <p>A vector <span class="math notranslate nohighlight">\(\vec{y} \in \mathbb{R}^n\)</span> is called a <strong>linear combination</strong> of some vectors <span class="math notranslate nohighlight">\(\vec{u_1}, \vec{u_2}, \dots, \vec{u_p} \in \mathbb{R}^n\)</span>, if there are real numbers <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_p\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[ \vec{y} = c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_p\vec{u_p}\]</div>
@@ -621,7 +620,7 @@ v= [0 0 1]
 <p>In conclusion, <span class="math notranslate nohighlight">\(\vec{y}\)</span> is not a linear combination of <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span>.</p>
 </section>
 <section id="matrix-equation-a-vec-x-vec-b">
-<h2>Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span><a class="headerlink" href="#matrix-equation-a-vec-x-vec-b" title="Permalink to this headline">#</a></h2>
+<h2>Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span><a class="headerlink" href="#matrix-equation-a-vec-x-vec-b" title="Permalink to this heading">#</a></h2>
 <p>In above example we saw how a vector equation can be traslated into solving a linear system. In general, the vector equation</p>
 <div class="math notranslate nohighlight">
 \[
@@ -661,7 +660,7 @@ $$</p>
 </ol>
 </section>
 <section id="solution-set-of-homogenous-linear-systems">
-<h2>Solution set of homogenous linear systems<a class="headerlink" href="#solution-set-of-homogenous-linear-systems" title="Permalink to this headline">#</a></h2>
+<h2>Solution set of homogenous linear systems<a class="headerlink" href="#solution-set-of-homogenous-linear-systems" title="Permalink to this heading">#</a></h2>
 <p>We start with describing the solution set of a simpler linear systems where the right side of equalities are zeros. In matrix form, <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span>; such system is called <em>homogeneous</em>. Homogeneous systems are always consistent since <span class="math notranslate nohighlight">\(\vec{x}=\vec{0}\)</span> is always a solution. We call <span class="math notranslate nohighlight">\(\vec{0}\)</span> the trivial solution of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span>.</p>
 <p><strong>Theorem 2:</strong></p>
 <p>The homogenous system <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span> has a nontrivial solution if and only if it has a non-pivot column.</p>
@@ -793,7 +792,7 @@ y \begin{bmatrix} 0.4 \\ 1 \\ 0\end{bmatrix} + z \begin{bmatrix} 0.7 \\0\\1 \end
 <p>In other words, the solution set is <span class="math notranslate nohighlight">\(\text{span}\ (\ \begin{bmatrix} \frac{-4}{3}\\0\\1 \end{bmatrix}\ )\)</span></p>
 </section>
 <section id="solution-set-of-non-homogenoues-linear-system">
-<h2>Solution set of non-homogenoues linear system:<a class="headerlink" href="#solution-set-of-non-homogenoues-linear-system" title="Permalink to this headline">#</a></h2>
+<h2>Solution set of non-homogenoues linear system:<a class="headerlink" href="#solution-set-of-non-homogenoues-linear-system" title="Permalink to this heading">#</a></h2>
 <p><strong>Theorem 3</strong> Let <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> be a consistent system, and let <span class="math notranslate nohighlight">\(\vec{p}\)</span> be a solution. Then the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> is the set of all vectors of the form <span class="math notranslate nohighlight">\(\vec{p}+\vec{h}\)</span> where <span class="math notranslate nohighlight">\(\vec{h}\)</span> is any solution to the homogenoues system <span class="math notranslate nohighlight">\(A\vec{x}=0\)</span>.</p>
 <p><strong>Example 4</strong> Describe the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> where</p>
 <p><span class="math notranslate nohighlight">\(A=\begin{bmatrix} 3&amp; 5&amp; -4\\ -3&amp; -2&amp; 4\\ 6&amp; 1&amp; -8 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}= \begin{bmatrix} 7\\ -1\\ -4\\  \end{bmatrix}\)</span>.</p>
@@ -904,7 +903,7 @@ y \begin{bmatrix} 0.4 \\ 1 \\ 0\end{bmatrix} + z \begin{bmatrix} 0.7 \\0\\1 \end
 \[\begin{split}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ \end{bmatrix} = \begin{bmatrix} -1 + \frac{4}{3} x_3\\ 2\\ x_3\end{bmatrix} = \begin{bmatrix} -1 \\ 2 \\ 0 \end{bmatrix} + x_3 \begin{bmatrix} \frac{4}{3} \\ 0 \\ 1 \end{bmatrix}\end{split}\]</div>
 </section>
 <section id="linear-independency">
-<h2>Linear Independency:<a class="headerlink" href="#linear-independency" title="Permalink to this headline">#</a></h2>
+<h2>Linear Independency:<a class="headerlink" href="#linear-independency" title="Permalink to this heading">#</a></h2>
 <p>The homogeneous system defined above can be described as vector equations.</p>
 <p>An index set of vectors <span class="math notranslate nohighlight">\(\{\vec{v_1}, \vec{v_2}, \dots \vec{v_p}\}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is called a <em>linearly independet set</em> if the vector equation:</p>
 <div class="math notranslate nohighlight">
@@ -958,8 +957,8 @@ $<span class="math notranslate nohighlight">\(
 <ol class="arabic simple" start="3">
 <li><p>Is $\left\lbrace\ \  \begin{bmatrix} 1 \ 2  \3 \end{bmatrix},</p></li>
 </ol>
-<div class="amsmath math notranslate nohighlight" id="equation-120f427a-400c-4fea-b94f-614adf179a9a">
-<span class="eqno">(42)<a class="headerlink" href="#equation-120f427a-400c-4fea-b94f-614adf179a9a" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 4 \\ 5  \\6 \end{bmatrix}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-9a0ccea3-fd28-49d7-8d61-d9819f15a318">
+<span class="eqno">(42)<a class="headerlink" href="#equation-9a0ccea3-fd28-49d7-8d61-d9819f15a318" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 4 \\ 5  \\6 \end{bmatrix}\]</div>
 <ol class="arabic simple" start="4">
 <li><p>Explain why a set 4 vectors must be linearly DEPENDENT in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>.</p></li>
 </ol>

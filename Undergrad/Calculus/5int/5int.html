@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
@@ -66,10 +67,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Calculus/5int/5int';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="1. Linear Systems and the 2 Commodity Model" href="../../AppliedCalc/twocommodity.html" />
+    <link rel="next" title="6. Parametric Equations" href="../6parametric.html" />
     <link rel="prev" title="4 Derivatives" href="../Sec4.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -172,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../../Elementary/Vectors/vectors.html">Vectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Elementary/Subsets/subsets.html">Subsets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Elementary/Fractals/fractals.html">Fractals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Elementary/Discrete/trees/trees.html">Trees</a></li>
@@ -214,6 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
 <ul class="nav bd-sidenav">
@@ -234,6 +237,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Sec3.html">3. Limits, Continuity, and Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Sec4.html">4 Derivatives</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6parametric.html">6. Parametric Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -527,7 +531,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="integrals">
-<h1>5. Integrals<a class="headerlink" href="#integrals" title="Permalink to this headline">#</a></h1>
+<h1>5. Integrals<a class="headerlink" href="#integrals" title="Permalink to this heading">#</a></h1>
 <p>Below is the list of topics that are covered in this section:</p>
 <ul class="simple">
 <li><p>Antiderivative and Indefinite Integrals</p></li>
@@ -538,7 +542,7 @@ document.write(`
 <li><p>Area Between Curves</p></li>
 </ul>
 <section id="antiderivative-and-indefinite-integrals">
-<h2>5.1 Antiderivative and Indefinite Integrals<a class="headerlink" href="#antiderivative-and-indefinite-integrals" title="Permalink to this headline">#</a></h2>
+<h2>5.1 Antiderivative and Indefinite Integrals<a class="headerlink" href="#antiderivative-and-indefinite-integrals" title="Permalink to this heading">#</a></h2>
 <p>In the previous section we worked with derivatives. One easy example with power rule is that <strong>the</strong> derivative of <span class="math notranslate nohighlight">\(f(x)=x^2\)</span> is <span class="math notranslate nohighlight">\(f\,'(x)=2x\)</span>.<br>
 What if we would like to reverse this process? What is a function <span class="math notranslate nohighlight">\(f(x)\)</span> that has derivative <span class="math notranslate nohighlight">\(2x\)</span>? <br>
 Note that <span class="math notranslate nohighlight">\(x^2\)</span> is not the only such function as <span class="math notranslate nohighlight">\(x^2+3, x^2-5, x^2+66, x^2-\pi\)</span>, in general <span class="math notranslate nohighlight">\(x^2+C\)</span> for any constant <span class="math notranslate nohighlight">\(C\)</span>, are all derived into <span class="math notranslate nohighlight">\(2x\)</span>.</p>
@@ -559,7 +563,7 @@ such that <span class="math notranslate nohighlight">\(F\,'(x)=f(x)\)</span>.<br
 </ul>
 <p>In this case we say we are <strong>integrating <span class="math notranslate nohighlight">\(\boldsymbol{f(x)}\)</span> with respect to (w.r.t.) <span class="math notranslate nohighlight">\(x\)</span></strong>.</p>
 <section id="properties-of-the-indefinite-integral">
-<h3>Properties of the Indefinite Integral<a class="headerlink" href="#properties-of-the-indefinite-integral" title="Permalink to this headline">#</a></h3>
+<h3>Properties of the Indefinite Integral<a class="headerlink" href="#properties-of-the-indefinite-integral" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Constant multiple can be factored out the indefinite integral</p></li>
 </ul>
@@ -576,7 +580,7 @@ such that <span class="math notranslate nohighlight">\(F\,'(x)=f(x)\)</span>.<br
 \]</div>
 </section>
 <section id="basic-antiderivative-formulas">
-<h3>Basic Antiderivative Formulas<a class="headerlink" href="#basic-antiderivative-formulas" title="Permalink to this headline">#</a></h3>
+<h3>Basic Antiderivative Formulas<a class="headerlink" href="#basic-antiderivative-formulas" title="Permalink to this heading">#</a></h3>
 <p>Antiderivative formulas for some basic integrands:</p>
 <ul class="simple">
 <li><p>Constant</p></li>
@@ -629,7 +633,7 @@ such that <span class="math notranslate nohighlight">\(F\,'(x)=f(x)\)</span>.<br
 \]</div>
 </section>
 <section id="integration-by-u-substitution">
-<h3>Integration by U-substitution<a class="headerlink" href="#integration-by-u-substitution" title="Permalink to this headline">#</a></h3>
+<h3>Integration by U-substitution<a class="headerlink" href="#integration-by-u-substitution" title="Permalink to this heading">#</a></h3>
 <p>On the Derivative section, we already see how Chain Rule is used to find the derivative of a composition of two functions.<br>
 Similarly, there is a tool that can be used to find an antiderivative of certain functions involving composition of functions. <br></p>
 <p><strong>Rule:</strong></p>
@@ -669,7 +673,7 @@ Determine <span class="math notranslate nohighlight">\(\displaystyle\int 6x^2\le
 \]</div>
 </section>
 <section id="integration-by-parts-ibp">
-<h3>Integration by Parts (IBP)<a class="headerlink" href="#integration-by-parts-ibp" title="Permalink to this headline">#</a></h3>
+<h3>Integration by Parts (IBP)<a class="headerlink" href="#integration-by-parts-ibp" title="Permalink to this heading">#</a></h3>
 <p>On the Derivative section, we already see how Product Rule is used to find the derivative of a product of two functions.<br>
 Similarly, there is a tool that can be used to find an antiderivative of certain functions involving product of two functions.</p>
 <p><strong>Rule</strong></p>
@@ -747,36 +751,26 @@ dv=e^{3x} \Rightarrow \int e^{3x}\,dx = \dfrac{e^{3x}}{3}
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">e6399b08dba9</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Run the function to find the antiderivative</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">antiderivative</span> <span class="o">=</span> <span class="n">find_antiderivative</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Print the general antiderivative</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;General Antiderivative:&quot;</span><span class="p">)</span>
 
-<span class="nn">Cell In[1], line 5,</span> in <span class="ni">find_antiderivative</span><span class="nt">()</span>
+<span class="nn">&lt;ipython-input-1-7462626903df&gt;</span> in <span class="ni">find_antiderivative</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">find_antiderivative</span><span class="p">():</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1"># Prompt the user for the function f(x)</span>
 <span class="ne">----&gt; </span><span class="mi">5</span>     <span class="n">function_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the function f(x): &quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="c1"># Define the variable and function using sympy</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 
-<span class="nn">File //anaconda3/lib/python3.10/site-packages/ipykernel/kernelbase.py:1172,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1165</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Forward raw_input to frontends</span>
-<span class="g g-Whitespace">   </span><span class="mi">1166</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1167</span><span class="sd"> Raises</span>
-<span class="g g-Whitespace">   </span><span class="mi">1168</span><span class="sd"> ------</span>
-<span class="g g-Whitespace">   </span><span class="mi">1169</span><span class="sd"> StdinNotImplementedError if active frontend doesn&#39;t support stdin.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1170</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1171</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1172</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1173</span>         <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1174</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1175</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1176</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1177</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parent_ident</span><span class="p">[</span><span class="s2">&quot;shell&quot;</span><span class="p">],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1179</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1180</span> <span class="p">)</span>
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/ipykernel/kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span><span class="s2">         if not self._allow_stdin:</span>
+<span class="ne">--&gt; </span><span class="mi">857</span><span class="s2">             raise StdinNotImplementedError(</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span><span class="s2">             )</span>
 
 <span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
 </pre></div>
@@ -786,7 +780,7 @@ dv=e^{3x} \Rightarrow \int e^{3x}\,dx = \dfrac{e^{3x}}{3}
 </section>
 </section>
 <section id="area-problem-and-definite-integrals">
-<h2>5.2 Area Problem and Definite Integrals<a class="headerlink" href="#area-problem-and-definite-integrals" title="Permalink to this headline">#</a></h2>
+<h2>5.2 Area Problem and Definite Integrals<a class="headerlink" href="#area-problem-and-definite-integrals" title="Permalink to this heading">#</a></h2>
 <p>Unlike indefinite integrals, definite integrals don’t come from reversing the process of evaluating derivative. Definite integrals comes from <strong>Area Problem</strong>. <br>
 Analogically, the area problems to definite integrals is just like RoC problems to derivatives.</p>
 <p>The goal of the area problem is to find the area of the region between the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>-axis. If that region has a common two-dimensional shapes, then it is enough to use basic geometry to find the area.<br></p>
@@ -805,8 +799,8 @@ As their name suggests, the <strong>Left Sum, Middle Sum (Midpoint Rule)</strong
 <p>Since this example divides the interval <span class="math notranslate nohighlight">\([0,2]\)</span> into 4 subintervals, then the width of each rectangle is <span class="math notranslate nohighlight">\(\frac{2-0}{4}=0.5\)</span>. <br>
 Let <span class="math notranslate nohighlight">\(A_L,A_M,\)</span>and <span class="math notranslate nohighlight">\(A_R\)</span> denotes the area approximation using the Left, Middle, and Right sum, respectively. Then: <br>
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ede12e28-9f00-41b2-80da-375715672f80">
-<span class="eqno">(29)<a class="headerlink" href="#equation-ede12e28-9f00-41b2-80da-375715672f80" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-afe6c1ff-adea-4c09-8783-1a04782cebdf">
+<span class="eqno">(29)<a class="headerlink" href="#equation-afe6c1ff-adea-4c09-8783-1a04782cebdf" title="Permalink to this equation">#</a></span>\[\begin{align}
 A_L &amp;= 0.5\cdot f(0) + 0.5\cdot f(0.5) + 0.5\cdot f(1) + 0.5\cdot f(1.5)\\
     &amp;= 0.5\cdot\left[f(0)+f(0.5)+f(1)+f(1.5)\right] \\
     &amp;= 0.5\cdot\left[2+2.125+2.5+3.125\right] = \boldsymbol{4.875}\\[2mm]
@@ -840,8 +834,8 @@ For <span class="math notranslate nohighlight">\(n\)</span> subintervals, the wi
 \]</div>
 <p>As <span class="math notranslate nohighlight">\(n\)</span> is large, without lost of generality we can take the right endpoint as the height of each rectangle. The right endpoint of the <span class="math notranslate nohighlight">\(i^{\text{th}}\)</span> subinterval is <span class="math notranslate nohighlight">\(x_i=\dfrac{2i}{n}\)</span>. <br>
 The Riemann Sum then become:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b0fb1477-d480-4aa6-a6a7-b6ec3e806cd1">
-<span class="eqno">(30)<a class="headerlink" href="#equation-b0fb1477-d480-4aa6-a6a7-b6ec3e806cd1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8439d091-10da-48f9-8922-d7c16bc80220">
+<span class="eqno">(30)<a class="headerlink" href="#equation-8439d091-10da-48f9-8922-d7c16bc80220" title="Permalink to this equation">#</a></span>\[\begin{align}
 \sum\limits_{i=1}^n f\left(x_i\right) \cdot \Delta x 
 &amp;= \sum\limits_{i=1}^n f\left(\dfrac{2i}{n}\right)\left(\dfrac{2}{n}\right)\\
 &amp;= \sum\limits_{i=1}^n \left(0.5\left(\dfrac{2i}{n}\right)^2+2\right)\left(\dfrac{2}{n}\right)\\
@@ -852,8 +846,8 @@ The Riemann Sum then become:</p>
 &amp;= \dfrac{16}{3}+\dfrac{2}{n}+\dfrac{2}{3n^2}
 \end{align}\]</div>
 <p>Computing the integral:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b66b1fff-6e26-4ed8-8e67-4f07146f1571">
-<span class="eqno">(31)<a class="headerlink" href="#equation-b66b1fff-6e26-4ed8-8e67-4f07146f1571" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a5956061-61ca-41bc-8521-8f5d26c07118">
+<span class="eqno">(31)<a class="headerlink" href="#equation-a5956061-61ca-41bc-8521-8f5d26c07118" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_0^2 0.5x^2+2\, dx 
 &amp;= \lim\limits_{n\to\infty}  \sum\limits_{i=1}^n f\left(x_i\right) \cdot \Delta x \\
 &amp;= \lim\limits_{n\to\infty} \left(\dfrac{16}{3}+\dfrac{2}{n}+\dfrac{2}{3n^2}\right) \\
@@ -921,7 +915,7 @@ The Riemann sum is: 2.109375
 </div>
 </div>
 <section id="properties-of-definite-integral">
-<h3>Properties of Definite Integral<a class="headerlink" href="#properties-of-definite-integral" title="Permalink to this headline">#</a></h3>
+<h3>Properties of Definite Integral<a class="headerlink" href="#properties-of-definite-integral" title="Permalink to this heading">#</a></h3>
 <p>Before going to the next part, familiarize yourself with the properties of the definite integral below, and think where do they came from based on the relation with the area under the curve.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\displaystyle\int_{a}^{b} f(x) \,dx=-\displaystyle\int_{b}^{a} f(x)\, dx\)</span></p></li>
@@ -935,9 +929,9 @@ The Riemann sum is: 2.109375
 <br></section>
 </section>
 <section id="fundamental-theorems-of-calculus-ftc">
-<h2>5.3 Fundamental Theorems of Calculus (FTC)<a class="headerlink" href="#fundamental-theorems-of-calculus-ftc" title="Permalink to this headline">#</a></h2>
+<h2>5.3 Fundamental Theorems of Calculus (FTC)<a class="headerlink" href="#fundamental-theorems-of-calculus-ftc" title="Permalink to this heading">#</a></h2>
 <section id="ftc-part-1">
-<h3>FTC Part 1<a class="headerlink" href="#ftc-part-1" title="Permalink to this headline">#</a></h3>
+<h3>FTC Part 1<a class="headerlink" href="#ftc-part-1" title="Permalink to this heading">#</a></h3>
 <p><strong>Theorem (FTC 1):</strong> For <span class="math notranslate nohighlight">\(f(t)\)</span> continuous function and <span class="math notranslate nohighlight">\(a\)</span> any constant: <span class="math notranslate nohighlight">\(\dfrac{d}{dx}\displaystyle\int_a^x f(t)\,dt=f(x)\)</span>.</p>
 <p>While many ‘resources’ said that FTC 1 “basically” shows that derivative and integral “cancel each other”, it is not actually that simple. <br>
 Motivated students are encouraged to explore the proof of FTC 1 (Hint: Use the Extreme Value Theorem).</p>
@@ -953,7 +947,7 @@ If <span class="math notranslate nohighlight">\(F(x)=\displaystyle\int_{-2}^x e^
 <span class="math notranslate nohighlight">\(\dfrac{d}{dx}\displaystyle\int_5^{x^2} \dfrac{t^3-7}{t^2+8}\,dt = 2x \dfrac{\left(x^2\right)^3-7}{\left(x^2\right)^2+8}\)</span>.</p>
 </section>
 <section id="ftc-part-2">
-<h3>FTC Part 2<a class="headerlink" href="#ftc-part-2" title="Permalink to this headline">#</a></h3>
+<h3>FTC Part 2<a class="headerlink" href="#ftc-part-2" title="Permalink to this heading">#</a></h3>
 <p>FTC 2 connect area problem (definite integral) with antiderivative (indefinite integral).<br>
 It provide a simpler way to calculate definite integral compared to using the limit of Riemann Sum.</p>
 <p><strong>Theorem (FTC 2):</strong> If <span class="math notranslate nohighlight">\(F(x)\)</span> is an antiderivative of <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(f(x)\)</span> is continuous on <span class="math notranslate nohighlight">\([a,b]\)</span>, then:<span class="math notranslate nohighlight">\( \displaystyle\int_a^b f(x)\,dx=F(x)\,\Big\vert_a^b = F(b) - F(a)\)</span>.</p>
@@ -1007,7 +1001,7 @@ The definite integral is: 0.250000000000000
 </section>
 </section>
 <section id="improper-integrals">
-<h2>5.4 Improper Integrals<a class="headerlink" href="#improper-integrals" title="Permalink to this headline">#</a></h2>
+<h2>5.4 Improper Integrals<a class="headerlink" href="#improper-integrals" title="Permalink to this heading">#</a></h2>
 <p>Consider the area problem on an unbounded interval <span class="math notranslate nohighlight">\((a,\infty]\)</span> or <span class="math notranslate nohighlight">\((-\infty,b]\)</span> or <span class="math notranslate nohighlight">\((-\infty,\infty)\)</span> instead of <span class="math notranslate nohighlight">\([a,b]\)</span>. <br>
 The definite integral that corresponds to the area problem over such unbounded interval is called <strong>improper integral</strong>.</p>
 <p>To calculate improper integral, we first bound the interval to some number <span class="math notranslate nohighlight">\(N\)</span>, then take <span class="math notranslate nohighlight">\(N\to \pm\infty\)</span> as needed:</p>
@@ -1095,7 +1089,7 @@ The definite integral is: The integral diverges
 </div>
 <br></section>
 <section id="average-value">
-<h2>5.5 Average Value<a class="headerlink" href="#average-value" title="Permalink to this headline">#</a></h2>
+<h2>5.5 Average Value<a class="headerlink" href="#average-value" title="Permalink to this heading">#</a></h2>
 <p>When a continuous function <span class="math notranslate nohighlight">\(f(x)\)</span> is linear, the average value <span class="math notranslate nohighlight">\(f(x)\)</span> on <span class="math notranslate nohighlight">\([a,b]\)</span> is simply <span class="math notranslate nohighlight">\(\frac{f(a)+f(b)}{2}\)</span>. <br>
 How about the average value of nonlinear continous function <span class="math notranslate nohighlight">\(f(x)\)</span>?</p>
 <a class="reference internal image-reference" href="../../../_images/5Int5avg1.png"><img alt="../../../_images/5Int5avg1.png" src="../../../_images/5Int5avg1.png" style="width: 600px;" /></a>
@@ -1156,14 +1150,14 @@ Enter the right endpoint of the interval (b): 1
 </div>
 </div>
 <section id="the-mean-value-theorem-for-integrals">
-<h3>The Mean Value Theorem for Integrals<a class="headerlink" href="#the-mean-value-theorem-for-integrals" title="Permalink to this headline">#</a></h3>
+<h3>The Mean Value Theorem for Integrals<a class="headerlink" href="#the-mean-value-theorem-for-integrals" title="Permalink to this heading">#</a></h3>
 <p><strong>Theorem (MVT for Integrals):</strong> If <span class="math notranslate nohighlight">\(f(x)\)</span> is continous on <span class="math notranslate nohighlight">\([a,b]\)</span>, then there is a number <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\([a,b]\)</span> such that <span class="math notranslate nohighlight">\(\displaystyle\int_a^b f(x)\,dx=f(c)\left(b-a\right)\)</span>.</p>
 <p><strong>Example</strong><br>
 Find the number <span class="math notranslate nohighlight">\(c\)</span> that satisfies the MVT for Integrals, for <span class="math notranslate nohighlight">\(f(x)=3x^2+5x-7\)</span> on <span class="math notranslate nohighlight">\([2,4]\)</span>. <br>
 Since <span class="math notranslate nohighlight">\(f(x)=3x^2+5x-7\)</span> is a polynomial and hence is continuous on <span class="math notranslate nohighlight">\([2,4]\)</span>, apply the MVT for Integrals:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-46503b2e-d5e5-4f32-9306-e8beb238dfc7">
-<span class="eqno">(32)<a class="headerlink" href="#equation-46503b2e-d5e5-4f32-9306-e8beb238dfc7" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-da187ed5-a93d-4f12-b571-798011259fcd">
+<span class="eqno">(32)<a class="headerlink" href="#equation-da187ed5-a93d-4f12-b571-798011259fcd" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_2^4 3x^2+5x-7 \,dx &amp;= \left(3c^2+5c-7\right)(4-2) \\
 \left(x^3+\dfrac{5x^2}{2}-7x\right)\Bigg\vert_2^4 &amp;= 2\left(3c^2+5c-7\right)\\
 72 &amp;= 2\left(3c^2+5c-7\right)\\
@@ -1226,7 +1220,7 @@ The value(s) of c that satisfy MVT for Integrals on [a,b]:
 <br></section>
 </section>
 <section id="area-between-curves">
-<h2>5.6 Area Between Curves<a class="headerlink" href="#area-between-curves" title="Permalink to this headline">#</a></h2>
+<h2>5.6 Area Between Curves<a class="headerlink" href="#area-between-curves" title="Permalink to this heading">#</a></h2>
 <p>We already know that the definite integral <span class="math notranslate nohighlight">\(\displaystyle\int_a^b f(x)\,dx\)</span> gives the area between the graph of <span class="math notranslate nohighlight">\(f(x)\)</span> and the <span class="math notranslate nohighlight">\(x\)</span>-axis over interval <span class="math notranslate nohighlight">\([a,b]\)</span>. <br>
 Now we want to calculate the area between the graph of two functions.</p>
 <p>In general, the area betwen two functions over the interval <span class="math notranslate nohighlight">\([a,b]\)</span> is <span class="math notranslate nohighlight">\(A=\displaystyle\int_a^b (\text{top function})-(\text{bottom function})\,dx\)</span>.<br>
@@ -1287,7 +1281,7 @@ In general, the formula is <span class="math notranslate nohighlight">\(A=\displ
 </div>
 <br></section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Find the indefinite integral of the following functions.</p>
 <ul class="simple">
@@ -1402,11 +1396,11 @@ Hint: if doing manually, use IBP twice in the process</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="../../AppliedCalc/twocommodity.html"
+       href="../6parametric.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1. Linear Systems and the 2 Commodity Model</p>
+        <p class="prev-next-title">6. Parametric Equations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

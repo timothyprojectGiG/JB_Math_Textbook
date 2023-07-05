@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -67,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -170,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Elementary/Vectors/vectors.html">Vectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Elementary/Subsets/subsets.html">Subsets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Elementary/Fractals/fractals.html">Fractals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Elementary/Discrete/trees/trees.html">Trees</a></li>
@@ -212,6 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
 <ul class="nav bd-sidenav">
@@ -232,6 +235,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Undergrad/Calculus/Sec3.html">3. Limits, Continuity, and Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Undergrad/Calculus/Sec4.html">4 Derivatives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Undergrad/Calculus/5int/5int.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Undergrad/Calculus/6parametric.html">6. Parametric Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -493,7 +497,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="random-number-approximation-of-pi">
-<h1>Random Number Approximation of Pi<a class="headerlink" href="#random-number-approximation-of-pi" title="Permalink to this headline">#</a></h1>
+<h1>Random Number Approximation of Pi<a class="headerlink" href="#random-number-approximation-of-pi" title="Permalink to this heading">#</a></h1>
 <h3> In this lab we will use random numbers to estimate $\pi\approx 3.14$.</h3><ol class="arabic simple">
 <li><p>Let’s look at the library matplotlib! The matplotlib (mpl) library has a sub-library called pyplot (plt).  We can access the functions in pyplot by executing the next cell.</p></li>
 </ol>
@@ -517,10 +521,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1156a8bb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7baf933701c0&gt;
 </pre></div>
 </div>
-<img alt="../_images/7d851d7d3fae3a42b1b4ee90b693f07dba7650ffaafe580944979c86dd713102.png" src="../_images/7d851d7d3fae3a42b1b4ee90b693f07dba7650ffaafe580944979c86dd713102.png" />
+<img alt="../_images/0bf93e0f38daa69e6242fa59958224860669ebbfdca1f6b5d3cd3556735845e7.png" src="../_images/0bf93e0f38daa69e6242fa59958224860669ebbfdca1f6b5d3cd3556735845e7.png" />
 </div>
 </div>
 <p>Question 1:  How are the 100 random numbers represented in this graph?</p>
@@ -531,15 +535,15 @@ document.write(`
 <span class="n">N</span><span class="o">=</span><span class="mi">100</span>
 <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x11591d390&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7baf92ac0d90&gt;
 </pre></div>
 </div>
-<img alt="../_images/e5919c7eb41d42d86fe22013caeac2af00e5eee66dc2462ee37522f695c986e9.png" src="../_images/e5919c7eb41d42d86fe22013caeac2af00e5eee66dc2462ee37522f695c986e9.png" />
+<img alt="../_images/130253ece51dfe15878504b00944cc535f33810729f99ff6bbcd10fa4e847db2.png" src="../_images/130253ece51dfe15878504b00944cc535f33810729f99ff6bbcd10fa4e847db2.png" />
 </div>
 </div>
 <p>Q2. How were random numbers used to generate the plot above?</p>
@@ -577,16 +581,14 @@ document.write(`
     <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in callback &lt;function flush_figures at 0x1156312d0&gt; (for post_execute):
-</pre></div>
-</div>
+<img alt="../_images/a1a1a5fa8feb3b7f26baf830889f9ad1361ae4fd3e94babdaf684778e23419fb.png" src="../_images/a1a1a5fa8feb3b7f26baf830889f9ad1361ae4fd3e94babdaf684778e23419fb.png" />
 </div>
 </div>
 <p>Q4. What is the shape of the points in blue?</p>
@@ -603,10 +605,10 @@ document.write(`
     <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
         <span class="n">blue</span><span class="o">=</span><span class="n">blue</span><span class="o">+</span><span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
         <span class="n">red</span><span class="o">=</span><span class="n">red</span><span class="o">+</span><span class="mi">1</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Percentage of Blue Points=&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">blue</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimate of Pi=&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span> <span class="p">(</span><span class="n">blue</span><span class="o">/</span><span class="n">N</span><span class="p">))</span>
@@ -618,7 +620,7 @@ document.write(`
 Estimate of Pi= 3.2
 </pre></div>
 </div>
-<img alt="../_images/4d99e0011c767ac21d02c6a05dbab4fe859914ed4728572b54a5c09e298ca3d6.png" src="../_images/4d99e0011c767ac21d02c6a05dbab4fe859914ed4728572b54a5c09e298ca3d6.png" />
+<img alt="../_images/5d4d158be841215b550ddab3f00e50535227fa4fc882d52462c930015d3034d9.png" src="../_images/5d4d158be841215b550ddab3f00e50535227fa4fc882d52462c930015d3034d9.png" />
 </div>
 </div>
 <p>STEP SEVEN: Let’s see what happens if we use <span class="math notranslate nohighlight">\(N=1000\)</span> and <span class="math notranslate nohighlight">\(N=10,000\)</span>.</p>
@@ -632,10 +634,10 @@ Estimate of Pi= 3.2
     <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
         <span class="n">blue</span><span class="o">=</span><span class="n">blue</span><span class="o">+</span><span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
         <span class="n">red</span><span class="o">=</span><span class="n">red</span><span class="o">+</span><span class="mi">1</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Percentage of Blue Points=&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">blue</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimate of Pi=&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span> <span class="p">(</span><span class="n">blue</span><span class="o">/</span><span class="n">N</span><span class="p">))</span>
@@ -647,7 +649,7 @@ Estimate of Pi= 3.2
 Estimate of Pi= 3.172
 </pre></div>
 </div>
-<img alt="../_images/9b8b1d437c200a49f59b5eb3771d62af51c344dcc5009c67e1f31b1bcef1e669.png" src="../_images/9b8b1d437c200a49f59b5eb3771d62af51c344dcc5009c67e1f31b1bcef1e669.png" />
+<img alt="../_images/64e6903b7ac7653c753e362a13ae0397a3ace5916e3d198db11f6bf6b28ae455.png" src="../_images/64e6903b7ac7653c753e362a13ae0397a3ace5916e3d198db11f6bf6b28ae455.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -660,10 +662,10 @@ Estimate of Pi= 3.172
     <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
         <span class="n">blue</span><span class="o">=</span><span class="n">blue</span><span class="o">+</span><span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
         <span class="n">red</span><span class="o">=</span><span class="n">red</span><span class="o">+</span><span class="mi">1</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Percentage of Blue Points=&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">blue</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimate of Pi=&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span> <span class="p">(</span><span class="n">blue</span><span class="o">/</span><span class="n">N</span><span class="p">))</span>
@@ -671,11 +673,81 @@ Estimate of Pi= 3.172
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percentage of Blue Points= 78.66
-Estimate of Pi= 3.1464
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mi">1</span><span class="n">fdefedf3fbd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="k">if</span> <span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">9</span>         <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="n">blue</span><span class="o">=</span><span class="n">blue</span><span class="o">+</span><span class="mi">1</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/pyplot.py</span> in <span class="ni">scatter</span><span class="nt">(x, y, s, c, marker, cmap, norm, vmin, vmax, alpha, linewidths, verts, edgecolors, plotnonfinite, data, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2888</span>         <span class="n">verts</span><span class="o">=</span><span class="n">cbook</span><span class="o">.</span><span class="n">deprecation</span><span class="o">.</span><span class="n">_deprecated_parameter</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2889</span>         <span class="n">edgecolors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">plotnonfinite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">2890</span>     <span class="n">__ret</span> <span class="o">=</span> <span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2891</span>         <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2892</span>         <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="n">linewidths</span><span class="p">,</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/__init__.py</span> in <span class="ni">inner</span><span class="nt">(ax, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1445</span>     <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1446</span>         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1447</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">sanitize_sequence</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1448</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1449</span>         <span class="n">bound</span> <span class="o">=</span> <span class="n">new_sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/cbook/deprecation.py</span> in <span class="ni">wrapper</span><span class="nt">(*inner_args, **inner_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span>                          <span class="k">else</span> <span class="n">deprecation_addendum</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span>                 <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">411</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">inner_args</span><span class="p">,</span> <span class="o">**</span><span class="n">inner_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span> 
+<span class="g g-Whitespace">    </span><span class="mi">413</span>     <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_axes.py</span> in <span class="ni">scatter</span><span class="nt">(self, x, y, s, c, marker, cmap, norm, vmin, vmax, alpha, linewidths, verts, edgecolors, plotnonfinite, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4515</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">set_ymargin</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4516</span> 
+<span class="ne">-&gt; </span><span class="mi">4517</span>         <span class="bp">self</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4518</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_request_autoscale_view</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">4519</span> 
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">add_collection</span><span class="nt">(self, collection, autolim)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1932</span>             <span class="c1"># Make sure viewLim is not stale (mostly to match</span>
+<span class="g g-Whitespace">   </span><span class="mi">1933</span>             <span class="c1"># pre-lazy-autoscale behavior, which is not really better).</span>
+<span class="ne">-&gt; </span><span class="mi">1934</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_unstale_viewLim</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1935</span>             <span class="bp">self</span><span class="o">.</span><span class="n">update_datalim</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">get_datalim</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transData</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1936</span> 
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">_unstale_viewLim</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">645</span>             <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shared_y_axes</span><span class="o">.</span><span class="n">get_siblings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">646</span>                 <span class="n">ax</span><span class="o">.</span><span class="n">_stale_viewlim_y</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="ne">--&gt; </span><span class="mi">647</span>             <span class="bp">self</span><span class="o">.</span><span class="n">autoscale_view</span><span class="p">(</span><span class="n">scalex</span><span class="o">=</span><span class="n">scalex</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="n">scaley</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">648</span> 
+<span class="g g-Whitespace">    </span><span class="mi">649</span>     <span class="nd">@property</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">autoscale_view</span><span class="nt">(self, tight, scalex, scaley)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2580</span>             <span class="n">scalex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoscaleXon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shared_x_axes</span><span class="p">,</span> <span class="s1">&#39;intervalx&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2581</span>             <span class="s1">&#39;minposx&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xaxis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xmargin</span><span class="p">,</span> <span class="n">x_stickies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_xbound</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2582</span>         <span class="n">handle_single_axis</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2583</span>             <span class="n">scaley</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoscaleYon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shared_y_axes</span><span class="p">,</span> <span class="s1">&#39;intervaly&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2584</span>             <span class="s1">&#39;minposy&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaxis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ymargin</span><span class="p">,</span> <span class="n">y_stickies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_ybound</span><span class="p">)</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">handle_single_axis</span><span class="nt">(scale, autoscaleon, shared_axes, interval, minpos, axis, margin, stickies, set_bound)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2523</span>                 <span class="c1"># if finite limits exist for at least one axis (and the</span>
+<span class="g g-Whitespace">   </span><span class="mi">2524</span>                 <span class="c1"># other is infinite), restore the finite limits</span>
+<span class="ne">-&gt; </span><span class="mi">2525</span>                 <span class="n">x_finite</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dl</span>
+<span class="g g-Whitespace">   </span><span class="mi">2526</span>                             <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">intervalx</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span>
+<span class="g g-Whitespace">   </span><span class="mi">2527</span>                                 <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">finite_dl</span><span class="p">))]</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2524</span>                 <span class="c1"># other is infinite), restore the finite limits</span>
+<span class="g g-Whitespace">   </span><span class="mi">2525</span>                 <span class="n">x_finite</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dl</span>
+<span class="ne">-&gt; </span><span class="mi">2526</span>                             <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">intervalx</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span>
+<span class="g g-Whitespace">   </span><span class="mi">2527</span>                                 <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">finite_dl</span><span class="p">))]</span>
+<span class="g g-Whitespace">   </span><span class="mi">2528</span>                 <span class="n">y_finite</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dl</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
-<img alt="../_images/dd655426555708e3343cbccb53c6eef28f9dd1548d8595863f0cb5b43c3b53f2.png" src="../_images/dd655426555708e3343cbccb53c6eef28f9dd1548d8595863f0cb5b43c3b53f2.png" />
 </div>
 </div>
 <p>Q7) What is happening to the percentage of blue points as we increase <span class="math notranslate nohighlight">\(N\)</span> from 100 to 1000 to 10,000?</p>
