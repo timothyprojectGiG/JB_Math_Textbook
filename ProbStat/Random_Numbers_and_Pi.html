@@ -521,7 +521,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7baf933701c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7cf93efa91c0&gt;
 </pre></div>
 </div>
 <img alt="../_images/0bf93e0f38daa69e6242fa59958224860669ebbfdca1f6b5d3cd3556735845e7.png" src="../_images/0bf93e0f38daa69e6242fa59958224860669ebbfdca1f6b5d3cd3556735845e7.png" />
@@ -540,7 +540,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7baf92ac0d90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7cf93e6f7df0&gt;
 </pre></div>
 </div>
 <img alt="../_images/130253ece51dfe15878504b00944cc535f33810729f99ff6bbcd10fa4e847db2.png" src="../_images/130253ece51dfe15878504b00944cc535f33810729f99ff6bbcd10fa4e847db2.png" />
@@ -725,25 +725,18 @@ Estimate of Pi= 3.172
 <span class="g g-Whitespace">    </span><span class="mi">649</span>     <span class="nd">@property</span>
 
 <span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">autoscale_view</span><span class="nt">(self, tight, scalex, scaley)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2580</span>             <span class="n">scalex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoscaleXon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shared_x_axes</span><span class="p">,</span> <span class="s1">&#39;intervalx&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2581</span>             <span class="s1">&#39;minposx&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xaxis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xmargin</span><span class="p">,</span> <span class="n">x_stickies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_xbound</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2582</span>         <span class="n">handle_single_axis</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2583</span>             <span class="n">scaley</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoscaleYon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shared_y_axes</span><span class="p">,</span> <span class="s1">&#39;intervaly&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2584</span>             <span class="s1">&#39;minposy&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaxis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ymargin</span><span class="p">,</span> <span class="n">y_stickies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_ybound</span><span class="p">)</span>
-
-<span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">handle_single_axis</span><span class="nt">(scale, autoscaleon, shared_axes, interval, minpos, axis, margin, stickies, set_bound)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2523</span>                 <span class="c1"># if finite limits exist for at least one axis (and the</span>
-<span class="g g-Whitespace">   </span><span class="mi">2524</span>                 <span class="c1"># other is infinite), restore the finite limits</span>
-<span class="ne">-&gt; </span><span class="mi">2525</span>                 <span class="n">x_finite</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dl</span>
-<span class="g g-Whitespace">   </span><span class="mi">2526</span>                             <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">intervalx</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span>
-<span class="g g-Whitespace">   </span><span class="mi">2527</span>                                 <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">finite_dl</span><span class="p">))]</span>
+<span class="nn">   2500                     for artist</span> in <span class="ni">ax.get_children</span><span class="nt">()]))</span>
+<span class="g g-Whitespace">   </span><span class="mi">2501</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ymargin</span> <span class="ow">and</span> <span class="n">scaley</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoscaleYon</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2502</span>                 <span class="n">y_stickies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+<span class="g g-Whitespace">   </span><span class="mi">2503</span>                     <span class="n">artist</span><span class="o">.</span><span class="n">sticky_edges</span><span class="o">.</span><span class="n">y</span>
+<span class="nn">   2504                     for ax</span> in <span class="ni">self._shared_y_axes.get_siblings</span><span class="nt">(self)</span>
 
 <span class="nn">~/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2524</span>                 <span class="c1"># other is infinite), restore the finite limits</span>
-<span class="g g-Whitespace">   </span><span class="mi">2525</span>                 <span class="n">x_finite</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dl</span>
-<span class="ne">-&gt; </span><span class="mi">2526</span>                             <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">intervalx</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span>
-<span class="g g-Whitespace">   </span><span class="mi">2527</span>                                 <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">finite_dl</span><span class="p">))]</span>
-<span class="g g-Whitespace">   </span><span class="mi">2528</span>                 <span class="n">y_finite</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dl</span>
+<span class="g g-Whitespace">   </span><span class="mi">2501</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ymargin</span> <span class="ow">and</span> <span class="n">scaley</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoscaleYon</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2502</span>                 <span class="n">y_stickies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+<span class="ne">-&gt; </span><span class="mi">2503</span>                     <span class="n">artist</span><span class="o">.</span><span class="n">sticky_edges</span><span class="o">.</span><span class="n">y</span>
+<span class="nn">   2504                     for ax</span> in <span class="ni">self._shared_y_axes.get_siblings</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2505</span>                     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s2">&quot;lines&quot;</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>

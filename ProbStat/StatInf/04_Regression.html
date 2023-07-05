@@ -618,8 +618,8 @@ document.write(`
 <section id="simple-linear-regression">
 <h2>Simple linear regression<a class="headerlink" href="#simple-linear-regression" title="Permalink to this heading">#</a></h2>
 <p>Simple linear regression is the method we have of modeling the linear association between two variables. You may have learned in algebra that one common way to write the equation of a line is through <em>slope-intercept form</em> <span class="math notranslate nohighlight">\(b + mx\)</span>, where <span class="math notranslate nohighlight">\(b\)</span> indicates that the line passes through the point <span class="math notranslate nohighlight">\((0,b)\)</span>, called the intercept of the line, and <span class="math notranslate nohighlight">\(m\)</span> is the slope. However, these points don’t exactly fit a line, but seem to have some random deviations around a general trend line. We can write this <em>line-plus-random-error</em> idea using the mathematical equation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1f360803-1709-458c-a631-31bcccacb383">
-<span class="eqno">(21)<a class="headerlink" href="#equation-1f360803-1709-458c-a631-31bcccacb383" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6d8ec993-8728-45e4-b917-9d96e9495eeb">
+<span class="eqno">(21)<a class="headerlink" href="#equation-6d8ec993-8728-45e4-b917-9d96e9495eeb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y = \alpha + \beta x + \varepsilon.
 \end{equation}\]</div>
 <p>This is another type of statistical model, called a linear regression model. It says that the value of (the random variable) <span class="math notranslate nohighlight">\(Y\)</span> is just the value along the line <span class="math notranslate nohighlight">\(\alpha + \beta x\)</span> plus a random error <span class="math notranslate nohighlight">\(\varepsilon\)</span>. If we knew the slope <span class="math notranslate nohighlight">\(\beta\)</span> and intercept <span class="math notranslate nohighlight">\(\alpha\)</span> of the line, then we could plug in the value of <span class="math notranslate nohighlight">\(x\)</span> to get a good guess for <span class="math notranslate nohighlight">\(Y\)</span>, though off by some error.</p>
@@ -671,8 +671,8 @@ Y = \alpha + \beta x + \varepsilon.
 </div>
 <p>The better trend line has overall smaller residuals, so we might think that it would help  to pick the line that minimizes the sum of the residuals.</p>
 <p>However, the worse line has only negative residuals! So in fact the sum of the residuals is a negative number that will be smaller. It turns out we don’t care about the sign of the residual, only it’s magnitude! To solve this issue, we square each of the residuals and take the sum to form a <strong>sum of squared errors (SSE)</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-2fa26fd5-45da-4ef5-a5ab-54b86d218b11">
-<span class="eqno">(22)<a class="headerlink" href="#equation-2fa26fd5-45da-4ef5-a5ab-54b86d218b11" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-74327f8a-6075-40cb-b972-9c95c59c43b4">
+<span class="eqno">(22)<a class="headerlink" href="#equation-74327f8a-6075-40cb-b972-9c95c59c43b4" title="Permalink to this equation">#</a></span>\[\begin{equation}
     SSE = \sum_{i=1}^n (y_i - \hat y_i)^2
 \end{equation}\]</div>
 <p>In the end, we want to find the slope and intercept of the line that minimizes this quantity. Since we are minimizing the sum of squared errors, this best-fit line also goes by the name <strong>least-squares regression</strong> line. Solving this problem looks like it could be tricky, but it turns out that the solution is straightforward when we employ the help of a little bit of calculus. Or, even nicer (in the author’s opinion) is to use a little algebra <strong>(link to algebra chapter)</strong>. We do need to assume that the random error <span class="math notranslate nohighlight">\(\varepsilon\)</span> is normally distributed, but we will gloss over this for now. You can read more about how to find the line of best fit elsewhere if you’re interested, but here we’ll simply find the solution using code.</p>
@@ -709,8 +709,8 @@ Y = \alpha + \beta x + \varepsilon.
 </div>
 </div>
 <p>Wow! There is a lot of information here, most of which we’ll explain later on. For now, let’s see how to get the information about the slope and the intercept of the line. You can find these values in the second table under the column heading “coef”. From this, we can see that the intercept (<code class="docutils literal notranslate"><span class="pre">const</span></code>) is 6.6714, and the slope associated with the primary school completion rate is 0.8615. We can write that as the line</p>
-<div class="amsmath math notranslate nohighlight" id="equation-983cfce9-fabf-427d-8d8f-58b38018cf59">
-<span class="eqno">(23)<a class="headerlink" href="#equation-983cfce9-fabf-427d-8d8f-58b38018cf59" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-03036004-fbb0-448c-811d-b6ba69962af1">
+<span class="eqno">(23)<a class="headerlink" href="#equation-03036004-fbb0-448c-811d-b6ba69962af1" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat y = 6.6714 + 0.8615 x
 \end{equation}\]</div>
 <p>Now that we have this line, how can we understand how to use it? First, the slope tells us how the changes in <span class="math notranslate nohighlight">\(x\)</span> are connected to changes in <span class="math notranslate nohighlight">\(\hat y\)</span>. Here, an increase of 1% in the primary school completion rate (<span class="math notranslate nohighlight">\(x\)</span>) is associated with an average increase of about .865% in the literacy rate (<span class="math notranslate nohighlight">\(y\)</span>).</p>
@@ -760,16 +760,16 @@ Y = \alpha + \beta x + \varepsilon.
 <section id="inference-on-model-parameters">
 <h2>Inference on model parameters<a class="headerlink" href="#inference-on-model-parameters" title="Permalink to this heading">#</a></h2>
 <p>Now that we know how to find the line of best fit, we want to know how good our estimates of the slope and intercept are. We began by assuming that there was a linear model describing the relationship between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0c1d7a02-dbf1-40f6-99f2-418a0b1d0422">
-<span class="eqno">(24)<a class="headerlink" href="#equation-0c1d7a02-dbf1-40f6-99f2-418a0b1d0422" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8bcf18aa-c546-4c09-8670-78ae5bbd0187">
+<span class="eqno">(24)<a class="headerlink" href="#equation-8bcf18aa-c546-4c09-8670-78ae5bbd0187" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y = \alpha + \beta x + \varepsilon.
 \end{equation}\]</div>
 <p>Because we only have limited data on the relationship between these two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, we can’t calculate <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> exactly, but only estimate them with our least squares estimates <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. How can we know how good these estimates actually are? We again turn to our statistical inference tools of the confidence interval and hypothesis test.</p>
 <section id="a-test-of-hypothesis-for-beta-0">
 <h3>A test of hypothesis for <span class="math notranslate nohighlight">\(\beta = 0\)</span>.<a class="headerlink" href="#a-test-of-hypothesis-for-beta-0" title="Permalink to this heading">#</a></h3>
 <p>A big question in linear regression is whether knowing the value of <span class="math notranslate nohighlight">\(x\)</span> makes a difference in our estimation of <span class="math notranslate nohighlight">\(Y\)</span>. If it didn’t, the slope value in the model would actually be 0. If it does, it would be something different from 0. But <span class="math notranslate nohighlight">\(\beta\)</span> is a parameter of the model, which we estimated by calculating <span class="math notranslate nohighlight">\(b\)</span>. We can use our hypothesis testing skills to decide if <span class="math notranslate nohighlight">\(\beta = 0\)</span> or not!</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b5033f01-556c-4472-b1b8-6a25f75fe8d2">
-<span class="eqno">(25)<a class="headerlink" href="#equation-b5033f01-556c-4472-b1b8-6a25f75fe8d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5228e79b-10b0-4b0b-b73d-8aed0b036a2c">
+<span class="eqno">(25)<a class="headerlink" href="#equation-5228e79b-10b0-4b0b-b73d-8aed0b036a2c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: \beta = 0, \\ H_1: \beta \neq 0.
 \end{equation}\]</div>
 <p>We can show that the test statistic for this hypothesis test is a T random variable, and the value is given in the model summary readout. Look for the column <code class="docutils literal notranslate"><span class="pre">t</span></code>, just two columns to the right of where you found the coefficients. And just next to that is the <span class="math notranslate nohighlight">\(P\)</span>-value for the test.</p>
@@ -790,8 +790,8 @@ Y = \alpha + \beta x + \varepsilon.
 <p>These last two assumptions were not explicitly stated, but are needed to make the regression interpretations work. And when we make assumptions like this, we need to check to see if these are reasonable! Here, we will show how to visually evaluate these assumptions using graphs.</p>
 <p>The first question of the relationship between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> can be easily evaluated through the scatter plot we made at the beginning of the section. If the scatter plot isn’t clear, then the correlation coefficient can help!</p>
 <p>We can evaluate the next two claims by examining the residuals. The residuals are related to the random error since according to the model,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5dbf8197-07f8-42a5-a805-7ed81dd561ec">
-<span class="eqno">(26)<a class="headerlink" href="#equation-5dbf8197-07f8-42a5-a805-7ed81dd561ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9de8da53-6bad-4d27-88ae-8675259dbfe4">
+<span class="eqno">(26)<a class="headerlink" href="#equation-9de8da53-6bad-4d27-88ae-8675259dbfe4" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y_i - \hat y_i =  y_i - (a + b x_i) \approx y_i - (\alpha + \beta x_i) = \varepsilon_i.
 \end{equation}\]</div>
 <p>Plotting the residuals will give us an idea about the distribution of the <span class="math notranslate nohighlight">\(\varepsilon\)</span>, but we need two different types of plots to examine the assumptions.</p>
