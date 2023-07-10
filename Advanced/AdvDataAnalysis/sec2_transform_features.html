@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+    <title>2. About Text Data &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
   
@@ -301,6 +301,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec1_preprocessing.html">1. Preprocessing</a></li>
 </ul>
 
     </div>
@@ -484,7 +486,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>2. About Text Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -493,9 +495,9 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">2.1 Transformation</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -506,8 +508,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <h1>2. About Text Data</h1>
-<h2>2.1 Transformation</h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="about-text-data">
+<h1>2. About Text Data<a class="headerlink" href="#about-text-data" title="Permalink to this heading">#</a></h1>
+<section id="transformation">
+<h2>2.1 Transformation<a class="headerlink" href="#transformation" title="Permalink to this heading">#</a></h2>
 <p>ML algorithms of any kind expect numerical features with fixed dimensions. This is especially the case for supervised learning algorithms such as classification algorithms, which is what we will be using to classify our texts into the UN SDG categories.</p>
 <p>In a documents, raw text data is semi-structured with uneven length and varied contents. As such, text data is semi-structured, with uneven length and varied contents. This poses a problem for ML methods as they typically operate on numerical vectors of equal length.</p>
 <p>Therefore, once we have our preprocessed text data, our next job is to transform it, and the main way we do this is to <i>vectorize</i>, or transform a body of text into numerical vectors. When we map documents into vectors, we can use several techniques, which we will discuss later:</p>
@@ -518,17 +522,70 @@ document.write(`
 </ul>
 <p>Vectorization, and transformation of textual data as a whole, depends on tokenization, and carefully chosen preprocessing steps could help reduce complexity and increase ML model accuracy.</p>
 <h3>2.1.1 Vectorizations</h3>
+<h4>Bag of Words</h4>
 <p>The <b>bag of words</b> approach treats a text or document almost literally as a bag of words; i.e., it ignores the order of the words and simply collects all the words together in one big set. All the words are then treated as features, with one feature for each word. We then set a fixed number of words to be considered, and our bag of words becomes the vocabulary we work with.</p>
+<p>Let’s analyze the vocabulary of our UN SDG dataset. We use <span class="math notranslate nohighlight">\(\texttt{CountVectorizer()}\)</span> to create our bag of words, then look at the length of our vocabulary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span> 
+<span class="nb">len</span><span class="p">(</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">dbd8f911f9c0</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">len</span><span class="p">(</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;text_df&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exericse 2.1</b>: Use <span class="math notranslate nohighlight">\(\texttt{count\_vectorizer.vocabulary\_}\)</span> to get the amount of each word in our vocabulary. What words are the most common?</p>
+<p>Note that the stop words are not removed by default, so we will get a lot of generic words like “the”. Fortunately, we can easily modify our code to remove stop words:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span> 
+<span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\texttt{CountVectorizer()}\)</span> also has an easy way to retrieve the stop words, so we can easily see which words we are removing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_stop_words</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 2.2</b>: Find the length of the vocabulary without stop words, and also find the length of the list of stop words. Is the difference between our original vocabulary and our stop word removed vocabulary equal to the number of stop words? If not, why not?</p>
+<h4>One-Hot Vectors</h4>
 <p>Another vectorization approach is to treat a text as a <b>one-hot vector</b>. This approach lines up all words in the vocabulary and labels them <span class="math notranslate nohighlight">\(1, …, V\)</span>. It then forms a vector</p>
 <p><span class="math notranslate nohighlight">\(\overrightarrow{w} = (0, 0, …, 0, 1, 0, 0, …, 0)\)</span> ,</p>
 <p>with only one 1 in the vector and the rest of the numbers being zeroes. The 1 is at the position that indexes the word in our vocabulary, and the order of occurrence is ignored, so it does not matter if a certain word is indexed before another one. Because all of the words in our vocabulary are unique, there are no similarity notions among the vectors.</p>
+<h4>Numeric Count Vectors</h4>
 <p>A third vectorization approach is to make a numeric vector of counts. This approach counts the occurence of the words in the document and lines up the counts of words in a row for each document.</p>
+<h4>Term-Document Matrices</h4>
 <p>One final vectorization approach we will introduce here is to form a document-term matrix. To form this matrix, we define the matrix’s columns to be tokens (such as terms or phrases), the matrix’s rows to be the documents in the collection, and the value of each entry to be frequency of each token occuring in the document. Additionally, the values in each entry are weighted frequencies; one weighting method we use is TF-IDF, or term frequency (TF) times inverse document frequency (IDF). TF refers to the frequency of the word in the document, while IDF refers to the inverse of the number of documents containing the word divided by number of documents. TF-IDF is discussed later in this section.</p>
-<p>The below figure provides a simple term-document matrix in unigram form. While the unigram does provide context for each word, NLP tasks built on such simple model would be disadvantaged.</p>
+<p>The below figure provides a simple term-document matrix in unigram (one-word token) form. While the unigram does provide context for each word, NLP tasks built on such simple model would be disadvantaged.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/sec2_unigram.png&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">count_vector</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span> 
+<span class="n">count_vector_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">count_vector</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="n">term_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="n">count_vector_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;freq&quot;</span> <span class="p">:</span> <span class="n">count_vector_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)})</span>
+<span class="n">count_vector_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">125</span><span class="p">,</span><span class="n">term_freq</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;freq&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">term</span><span class="p">]</span> <span class="c1"># take a portion</span>
 </pre></div>
 </div>
 </div>
@@ -536,7 +593,7 @@ document.write(`
 <img alt="../../_images/ca518a77276fd9aba0a75b526faa94b8ec9ef1d6688a38e75484ea0a752f9550.png" src="../../_images/ca518a77276fd9aba0a75b526faa94b8ec9ef1d6688a38e75484ea0a752f9550.png" />
 </div>
 </div>
-<p><b>Exercise 2.1</b>: Look at document 118.</p>
+<p><b>Exercise 2.3</b>: Look at document 118.</p>
 <ol>
 <li>What are the most frequent words for this document?</li>
 <li>Refer to the UN SDGs. What is your best guess as to which goal this document describes?</b>
@@ -544,8 +601,37 @@ document.write(`
 <p>An n-gram is a contiguous sequence of <span class="math notranslate nohighlight">\(n\)</span> items from a text. Items in an n-gram are tokens we choose to include through preprocessing, but these items can also include markers we add to the data to serve the NLP tasks at hand.</p>
 <p>For example, if we were to find what words are often used at the beginning or end of a sentence, we would add &lt;s&gt; and &lt;/s&gt; as markers for the beginnings and ends of sentences, to denote the sentence boundaries. We would then build bigrams <span class="math notranslate nohighlight">\((n=2)\)</span>; for the sentence “I built an AI machine”, we would get the items
 (&lt;s&gt; I), (I built), (built an), (an AI), (AI machine), and (machine &lt;/s&gt;). We then count the frequency of bigrams. specifically of the form (&lt;s&gt; *) and (* &lt;/s&gt;), where * represents any other token.</p>
+<p>In the previous subsection, we looked at a term-document matrix of unigrams. We can check the total number of unigrams with the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">term_freq</span><span class="o">.</span><span class="n">freq</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then compare this to the total frequency of terms (without stop word removal) of our entire document corpus:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that stop word removal alone reduced the number of terms by around 40%. Next, we can check the bi-grams for our document corpus:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span> 
+<span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span> 
+<span class="nb">len</span><span class="p">(</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 2.4</b>: Notice that with stop word removal and bi-gram formation, we get fewer terms. Why might this be the case?</p>
+<p><b>Exercise 2.5</b>: Modify the above code to get the counts of the tri-grams. Are there more or fewer tri-grams than bi-grams? Why might this be the case?</p>
 <h3>2.1.3 Probabilistic Language Modeling</h3>
-<p>Typically, a language model analyzes a body of text data and produces a model to compute the following:</p>
+<p>So far, we have worked with clearly defined texts and sequences of words. But sometimes, the texts we get are incomplete, or we might want to reduce computational time by only giving portions of the text. As such, we might turn to probabilistic language modeling. Typically, a probabilistic language model analyzes a body of text data and computes the following based on that body of text data:</p>
 <ul class="simple">
 <li><p>the probability of a sentence or sequence of words occurring, <span class="math notranslate nohighlight">\(P(w_1, w_2, w_3, … , w_n)\)</span>,</p></li>
 <li><p>the probability of the next word given <span class="math notranslate nohighlight">\(k\)</span> words, <span class="math notranslate nohighlight">\(P(w_n | w_{(n-k)}, w_{(n-(k-1))}, … , w_{(n-1)})\)</span>.</p></li>
@@ -566,13 +652,14 @@ P(w_1)P(w_2|w_1)P(w_3|w_1,w_2)...P(w_n|w_1, …, w_{(n-1)})\)</span>.</p>
 <p>and we can similarly extend this process to trigrams, 4-grams, 5-grams, or any n-gram.</p>
 <p>However, no matter how many <span class="math notranslate nohighlight">\(n\)</span> we consider, we still will not arrive at a sufficient model; language has long-distance dependencies that require extremely large <span class="math notranslate nohighlight">\(n\)</span> that can even extend to previous sentences and/or documents. To truly determine if our n-gram is sufficient, we extrinsically evaluate it by putting our model to tasks. For example, if we only want to deal with spell correction, a unigram be sufficient, but for machine translation, we might need to work with very long sentences. Google’s recent speech model features 20B sentences (<a class="reference external" href="https://arxiv.org/abs/2303.01037?utm_source=substack&amp;amp;utm_medium=email">https://arxiv.org/abs/2303.01037?utm_source=substack&amp;utm_medium=email</a>).</p>
 <h3>2.1.4 Natural Language Generation</h3>
-<p><b>Exercise 2.2:</b> Use the Allen NLP Language Modeling demo: <a class="reference external" href="https://demo.allennlp.org/next-token-lm">https://demo.allennlp.org/next-token-lm</a> to try and predict the next word for incomplete sentences.</p>
+<p>Natural Language Generation (NLG) is a similar offshoot of Probabilistic Language Modeling, with it mainly being used to complete sentences, giving the next few words based on a short incomplete sentence.</p>
+<p><b>Exercise 2.6:</b> Use the Allen NLP Language Modeling demo: <a class="reference external" href="https://demo.allennlp.org/next-token-lm">https://demo.allennlp.org/next-token-lm</a> to try and predict the next word for incomplete sentences.</p>
 <ol>
-<li>Try “The Israel Oceanographic and Limnological Research station monitors the quantity and quality of”. What was the most likely predicted completion?</li>
+<li>Try “The Israel Oceanographic and Limnological Research station monitors the quantity and quality of ”. What was the most likely predicted completion?</li>
 </ol>
 <p>The real sentence from Exercise 1 is: ‘The Israel Oceanographic and Limnological Research station monitors the quantity and quality of water along the coastline of the Mediterranean Sea.’ So these language models are not perfect, but especially with recent developments in AI, they are improving.</p>
-<p>One such improvement comes in the form of the NLG, whose main role is automatic summarization of a text. The NLG has the ability to perform extractive summarization (extracting meaning from a text), or abstractive summarization (constructing an abstract from a text). The NLG can also be used for topic modeling to identify the main topics of the text, or as an advanced machine translation tool.</p>
-<p>Another such improvement is the Generative Pre-trained Transformer (GPT). The GPT is a text generation deep learning model trained on massive datasets, including internet data, book data, github data, and more. GPTs, including the famous ChatGPT, can take thousands of words as input and have been trained on billions of different parameters.</p>
+<p>The main role of NLG is automatic summarization of a text. The NLG has the ability to perform extractive summarization (extracting meaning from a text), or abstractive summarization (constructing an abstract from a text). The NLG can also be used for topic modeling to identify the main topics of the text, or as an advanced machine translation tool.</p>
+<p>An even more advanced natural language generator is the Generative Pre-trained Transformer (GPT), mainly pioneered by the startup OpenAI. The GPT is a text generation deep learning model trained on massive datasets, including internet data, book data, Github data, and more. GPTs, including the famous ChatGPT, can take thousands of words as input and have been trained on billions of different parameters.</p>
 <h2>2.2 Features</h2>
 <h3>2.2.1 TF-IDF (Term Frequency, Inverse Document Frequency)</h3>
 <p>In the document-term matrix previously discussed, we represented columns as tokens, rows as documents, and the entry values as the number of occurrences of that token in the document. In our computation of the matrix cell <span class="math notranslate nohighlight">\((d,t)\)</span> with document as row and term as column, we compute the following:</p>
@@ -589,16 +676,6 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">.</span><span class="n">feature_extraction</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">TfidfVectorizer</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">3345915</span><span class="n">f3ace</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">.</span><span class="n">feature_extraction</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">TfidfVectorizer</span>
-
-<span class="ne">NameError</span>: name &#39;scikit&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -671,6 +748,8 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <p>Your function should also contain a parameter <span class="math notranslate nohighlight">\(\texttt{stop\_word}\)</span> with its default set to “None”, which does not remove stop words.</p>
 <p><b>Exercise 2.6</b>: Run your function from Exercise 2.5 on the documents labeled with SDG 8. Give the output.</p>
 <p><b>Exercise 2.7</b>: Run your function from Exercise 2.5 on the entire UN SDG corpus, once with stop removal and once without. Describe the similarities and differences in the outputs when this parameter is changed.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -720,9 +799,9 @@ number of documents containing term <span class="math notranslate nohighlight">\
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">2.1 Transformation</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

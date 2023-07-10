@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+    <title>1. Preprocessing &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
   
@@ -62,11 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/AdvDataAnalysis/sec1_preprocessing';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="&lt;no title&gt;" href="sec3_doc_embedding.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="sec0_data.html" />
+    <link rel="prev" title="0. Before Reading" href="sec0_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -299,8 +301,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Complex/model.html">Fischer-Calo Contaminant Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Preprocessing</a></li>
 </ul>
 
     </div>
@@ -484,7 +488,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>1. Preprocessing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -493,9 +497,19 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levels-of-processing">1.2 Levels of Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedures">1.3 Procedures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">1.3.1 Stemming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translation">1.3.2 Translation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parts-of-speech">1.3.3 Parts of Speech</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizers">1.3.4 Tokenizers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">1.3.5 Named Entity Recognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-operations">1.3.6 String Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">1.4 More Exercises</a></li>
 </ul>
-
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -506,7 +520,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <h1>1. Preprocessing</h1><p>Usually, natural language processors (NLP) refer to both speech data and textual data. There are several components necessary to understand the structure and meaning of human language.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="preprocessing">
+<h1>1. Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this heading">#</a></h1>
+<p>Usually, natural language processors (NLP) refer to both speech data and textual data. There are several components necessary to understand the structure and meaning of human language.</p>
 <p>From a linguistics perspective, it is important to look at the following:</p>
 <ul class="simple">
 <li><p>syntax, the actual rules that define how words are combined to form understandable sentences;</p></li>
@@ -539,7 +555,47 @@ Within the realm of preprocessing textual data, we first must perform certain de
 <ol>
 <li>Try some of the provided example sentences, and give the probabilities for the sentences with the highest score. </li>
 </ol>
-<h2>1.2 Levels of Processing</h2>
+<p>Looking at the UN SDG dataset, we find that it includes positive or negative labels. Since each text is classified with a single goal, positive labels indicate the agreement of that text with the goal, while negative labels indicate disagreement. We use \texttt{sum()}$ to sum the negative labels and the positive labels:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="o">.</span><span class="n">labels_negative</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">text_df</span><span class="o">.</span><span class="n">labels_positive</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">6</span><span class="n">c2f4cb11d03</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">text_df</span><span class="o">.</span><span class="n">labels_negative</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">text_df</span><span class="o">.</span><span class="n">labels_positive</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;text_df&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>You may notice that the sum of the positively and negatively labeled texts does not equal the full amount of texts imported from the dataset. Hence, this provides some beginning rationale for the necessity of preprocessing.</p>
+<p>Data preprocessing for textual data includes some specific tasks, but it also includes some work that can be done on datasets in general. For our UN SDG dataset, it is useful to remove the columns that we don’t need, which for this dataset are the columns with zeroes in all entries. We do this by the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is also a good idea to check our data for any discrepancies, especially N/A values and incorrect entries.</p>
+<p><b>Exercise 1.3</b>: Check the data for any N/A values. Is it good to remove those entries with N/A values?</p>
+<p>For our UN SDG dataset, we want texts that are clearly classified into a single goal. We also will want to select for only the positively labeled texts as this indicates higher agreement with the labeled goal, so our filtering will remove the rows with labeling agreement less than 0.5 and the rows where the positive labels minus the negative labels is less than 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 1.4</b>: Use <span class="math notranslate nohighlight">\(\texttt{text\_df.info()}\)</span> to examine information about the dataset after running the preprocessing in this section. What columns are included? What data types are there, and how many entries? Does this seem like a reasonable size of data to work with?</p>
+<section id="levels-of-processing">
+<h2>1.2 Levels of Processing<a class="headerlink" href="#levels-of-processing" title="Permalink to this heading">#</a></h2>
 <p>In (almost) any language, there are distinct levels of a text we can focus on: <b>characters</b> are strung together to form <b>words</b>, which are put together into <b>sentences</b>, then <b>paragraphs</b>, <b>documents</b>, and a whole set of documents, or a <b>corpus</b>. In all these cases, we put multiples together to make the next level, and decisions in preprocessing at one level will inherently impact the next level.</p>
 <p>We will not be focusing on using algorithms to process whole documents or anything above that level, so we can look at preprocessing at the remaining levels: characters, words, sentences, and paragraphs.</p>
 <p><b>For characters</b>, we typically process textual data by removing special characters, punctuations, and normalizations. However, this is not necessarily the case for every NLP approach. In some cases, taking away these special characters, punctuations, and normalizations will completely alter the meaning of higher levels of text.</p>
@@ -562,8 +618,11 @@ change cases</li>
 </ol>
 <p>Many of these steps may be unfamiliar - that is perfectly fine, as they will be covered later in this section.</p>
 <p>It is commonly accepted that preprocessing text helps improve accuracy, so it is critical to perform good, appropriate preprocessing.</p>
-<h2>1.3 Procedures</h2>
-<h3>1.3.1 Stemming </h3>
+</section>
+<section id="procedures">
+<h2>1.3 Procedures<a class="headerlink" href="#procedures" title="Permalink to this heading">#</a></h2>
+<section id="stemming">
+<h3>1.3.1 Stemming<a class="headerlink" href="#stemming" title="Permalink to this heading">#</a></h3>
 <p>Developed by Martin Porter in 1980, the <b>Porter Stemmer</b> is the oldest and most commonly used stemming algorithm in many languages. It is slightly time consuming, so another stemming algorithm that can be used is the Lancaster stemmer. This stemmer is very aggressive, however, and is especially harmful for short tokens, where the token itself may become unclear or altered to a point where it loses meaning.</p>
 <p>As mentioned previously, stemming is performed to help normalize our textual data; this is done so that we do not end up with many different words with very similar meaning. For example, stemming turns “watch”, “watched”, “watching”, and “watches” into “watch”. To do this, the algorithm accesses a database where known word forms, such as the various forms of “watch”, are grouped together, then analyzes the text for all instances of these forms and turns them all into the root word. Stemmers also typically perform preprocessing tasks like turning words not at the beginning of a sentence into lowercase and removing stop words, which are common words like “the” and “that” which show up in a variety of contexts and typically do not change meaning across these contexts.</p>
 <p>However, there are always irregularities when using any stemming algorithm. Take the following examples:</p>
@@ -572,7 +631,29 @@ change cases</li>
 <li>"I watched <i>The Who</i>" => remove stop words => "I watched": Here, the stemming algorithm removed the stop words "the" and "who", but this again changed the meaning of the sentence. Here, instead of watching the TV show <i>The Who</i>, the speaker has now watched something unspecified.</li> 
 <li>"Take that!" => remove stop words => "Take": Like the above example, the stemming algorithm removed a stop word, "that". However, the sentence now loses all meaning: it is no longer a complete sentence, and without the "that" which served to add a violent, fighting intent to the original sentence, this emotion and intent is completely gone.
 </ul>
-<h3>1.3.2 Translation</h3>
+<p>Let’s try these stemmers, as well as a third type, the Snowball Stemmer, on some tokens:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">stem</span>
+
+<span class="n">tokens</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;narrative&#39;</span><span class="p">,</span> <span class="s1">&#39;comprehensives&#39;</span><span class="p">,</span> <span class="s1">&#39;publicised&#39;</span><span class="p">,</span> <span class="s1">&#39;moderately&#39;</span><span class="p">,</span> <span class="s1">&#39;prosperous&#39;</span><span class="p">,</span> <span class="s1">&#39;legitimizes&#39;</span><span class="p">,</span> <span class="s1">&#39;according&#39;</span><span class="p">,</span> <span class="s1">&#39;glorifies&#39;</span><span class="p">]</span> 
+
+<span class="n">porter</span> <span class="o">=</span> <span class="n">stem</span><span class="o">.</span><span class="n">porter</span><span class="o">.</span><span class="n">PorterStemmer</span><span class="p">()</span> <span class="c1"># Porter stemmer</span>
+<span class="n">snowball</span> <span class="o">=</span> <span class="n">stem</span><span class="o">.</span><span class="n">snowball</span><span class="o">.</span><span class="n">EnglishStemmer</span><span class="p">()</span> <span class="c1"># Snowball stemmer</span>
+<span class="n">lancaster</span> <span class="o">=</span> <span class="n">stem</span><span class="o">.</span><span class="n">lancaster</span><span class="o">.</span><span class="n">LancasterStemmer</span><span class="p">()</span> <span class="c1"># Lancaster stemmer</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Porter Stemmer:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">porter</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Snowball Stemmer:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">snowball</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lancaster Stemmer:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">lancaster</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 1.5</b>: How do the different stemmers compare for the list of words given to it in the above example? Which one might have the most trouble on a larger set of tokens&gt;</p>
+<p><b>Exercise 1.6</b>: Modify the above code to stem your own tokens. What words seem to be removed as stop words? How are words commonly shortened, and what types of words seem to cause the most trouble for the stemmers?</p>
+</section>
+<section id="translation">
+<h3>1.3.2 Translation<a class="headerlink" href="#translation" title="Permalink to this heading">#</a></h3>
 <p>Language detection is easy using pre-existing algorithms, including Google Translate, which can be downloaded and installed for use in Python with the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -580,14 +661,6 @@ change cases</li>
 <span class="n">pip</span>  <span class="n">install</span> <span class="n">googletrans</span><span class="o">==</span><span class="mf">3.1</span><span class="o">.</span><span class="mi">0</span><span class="n">a0</span>
 <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">langdetect</span> 
 <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">spacy_langdetect</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-1-5f7e1dae72e8&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-    <span class="n">conda</span> <span class="n">install</span> <span class="n">fasttext</span>
-          <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
 </div>
@@ -613,35 +686,86 @@ change cases</li>
 </div>
 </div>
 </div>
-<p><b>Exercise 1.3:</b> Run the previous lines of code.</p>
+<p>We can also use <span class="math notranslate nohighlight">\(\texttt{langdetect}\)</span> to detect languages as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langdetect</span> <span class="kn">import</span> <span class="n">detect</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s2">&quot;War doesn&#39;t show who&#39;s right, just who&#39;s left.&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s2">&quot;Ein, zwei, drei, vier&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s1">&#39;四个和尚没水喝&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s1">&#39;今一はお前さん&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 1.5:</b> Run the previous lines of code.</p>
 <ol>
 <li>What are the matching languages for the provided example sentences?</li>
 <li>How confident is the translator in the predicted language for the final sentence?</li>
-</ol><h3>1.3.3 Parts of Speech</h3>
+</ol>
+<p>Now that we have an algorithm for predicting language, let’s try adding language as a column to our UN SDG dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">detect</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 1.6</b>: Use <span class="math notranslate nohighlight">\(\texttt{text\_df.lang.value\_counts()}\)</span> to count the number of texts for each language in our UN SDG dataset thus far. How many texts are there for each language?</p>
+<p>Our dataset includes some non-English texts, which is understandable: while English is a widely spoken language and is the dominant language on the Internet, there are thousands of other languages. However, English is the most common language in the dataset, so we should consider: do we need to remove the non-English texts?</p>
+<p><b>Exercise 1.7</b>: Use <span class="math notranslate nohighlight">\(\texttt{text\_df.query(&quot;lang == 'fr'&quot;)[&quot;text&quot;]}\)</span> to output the texts written in French. Examine the output of these sentences. Does it make sense to remove them? If so, write the necessary code to do so.</p>
+</section>
+<section id="parts-of-speech">
+<h3>1.3.3 Parts of Speech<a class="headerlink" href="#parts-of-speech" title="Permalink to this heading">#</a></h3>
 <p>In addition to splitting sentences and texts into tokens, it is also important to add the appropriate part of speech to tokens within the text.</p>
 <p>For the example sentence “The dog ate the bone”, we can first split the sentence into a noun phrase (NP), “the dog”, and a verb phrase (VP), “ate the bone”. The first NP can be split into a determinant (D) “the”, and a noun (N) “dog”. The VP can be split into a verb “ate”, and another NP “the bone”, which then gest split in a similar manner. Hence was have labeled every word with its appropriate part of speech.</p>
-<p><b>Exercise 1.4:</b> Perform this similar breakdown and labeling with the following sentences.</p>
+<p><b>Exercise 1.8:</b> Perform this similar breakdown and labeling with the following sentences.</p>
 <ol>
 <li>“This is a sentence.”</li>
 <li>"Er lebt mit seinen Eltern und seiner Schwester in Berlin." (use a translator for help)</li>
-<li>“In China today, President Xi Jinping…”</li>
+<li>“In China today, President Xi Jinping’s new grand narrative is framed by the widely publicised ‘four comprehensives’.”</li>
 </ol>
-<p>Now use the provided code to see how the computer labels these words. How are they similar or different from your labeling?</p>
-<h3>1.3.4 Tokenizers</h3>
+<p>The library <span class="math notranslate nohighlight">\(\texttt{spaCy}\)</span> is used to tag parts of speech via computer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">import</span> <span class="nn">en_core_web_sm</span>
+<span class="kn">from</span> <span class="nn">spacy_langdetect</span> <span class="kn">import</span> <span class="n">LanguageDetector</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">en_core_web_sm</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;This is a sentence.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
+<span class="n">text_content</span> <span class="o">=</span> <span class="s2">&quot;Er lebt mit seinen Eltern und seiner Schwester in Berlin.&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text_content</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">([(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 1.9</b>: Modify the above code to tag the parts of speech for the last sentence in Exercise 1.y.</p>
+</section>
+<section id="tokenizers">
+<h3>1.3.4 Tokenizers<a class="headerlink" href="#tokenizers" title="Permalink to this heading">#</a></h3>
 <p>The primary goal of a tokenizer is to break text into tokens. This is highly language dependent; in English, we use white space and punctuations to as word and token separators, but this may not work in some languages.</p>
 <p>For the purposes of building ML models, there are several things that tokenizers track in addition to creating the tokens themselves. Tokenizers track <i>features</i>, or the frequency of occurrence of each individual token (normalized or not). They also produce a <i>sample</i>, or a vector of all the token frequencies for a given document.</p>
 <p>When a tokenizer vectorizes a corpus, it counts the occurrences of tokens in each document, normalizes and weights these occurrences, and constructs an n-gram, which is discussed in the next section.</p>
-<h3>1.3.5 Named Entity Recognition</h3>
+</section>
+<section id="named-entity-recognition">
+<h3>1.3.5 Named Entity Recognition<a class="headerlink" href="#named-entity-recognition" title="Permalink to this heading">#</a></h3>
 <p>The purpose of named entity recognition (NER) is self-explanatory; it extracts entities from data.</p>
-<p><b>Exercise 1.5:</b> Try the Allen NLP NER demo found at <a class="reference external" href="https://demo.allennlp.org/named-entity-recognition/named-entity-recognition">https://demo.allennlp.org/named-entity-recognition/named-entity-recognition</a>.</p>
+<p><b>Exercise 1.10:</b> Try the Allen NLP NER demo found at <a class="reference external" href="https://demo.allennlp.org/named-entity-recognition/named-entity-recognition">https://demo.allennlp.org/named-entity-recognition/named-entity-recognition</a>.</p>
 <ol>
 <li>Use the below sentence in the demo. Which phrases are labeled as named entities? </li>
 <p>‘The Israel Oceanographic and Limnological Research station monitors the quantity and quality of water along the coastline of the Mediterranean Sea. The Nature and Parks Authority (NPA) monitors water quality in rivers on behalf of the MoEP. Mekorot and local authorities monitor drinking water quality under the supervision of the Ministry of Health. The Ministry of Health monitors effluent quality prior to its use in the agricultural sector.’</p>
 <li>Now use text.lower() to make the entire sentence lowercase and use that as an input into the Allen NLP NER. Which phrases are now labeled as named entities?</li>
 <p>‘the israel oceanographic and limnological research station monitors the quantity and quality of water along the coastline of the mediterranean sea. the nature and parks authority (npa) monitors water quality in rivers on behalf of the moep. mekorot and local authorities monitor drinking water quality under the supervision of the ministry of health. the ministry of health monitors effluent quality prior to its use in the agricultural sector.’</p>
 </ol>
-<h3>1.3.6 String Operations</h3>
-<p>Now that we know about various preprocessing techniques, we can review some basic string operations. These will also be important in identifying various sentences and tokens within our dataset in case we would like to focus on specific words, or it can help in identifying cases, numeric characters, and other tests that we might need to conduct.</p>
+</section>
+<section id="string-operations">
+<h3>1.3.6 String Operations<a class="headerlink" href="#string-operations" title="Permalink to this heading">#</a></h3>
+<p>Now that we know about various preprocessing techniques, we can review some basic string operations. These will also be important in identifying various sentences and tokens within our dataset in case we would like to focus on specific words, or it can help in identifying cases, numeric characters, and other tests that we might need to conduct. A few are given below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c1">#test if s starts with t</span>
@@ -657,7 +781,49 @@ change cases</li>
 </div>
 </div>
 </div>
-<h2>1.4 More Exercises</h2>
+<p>As an example to work through, let’s take the Chinese phrase ‘四个全面’ and see if we can locate it in the texts. This phrase, anglicized as “sigequanmian” and roughly translating to “four comprehensives”, was publicized by Chinese President Xi Jinping as a set of goals for China.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;四个全面&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One possible string operation is comparison, as given below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;四个全面&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t1</span> <span class="o">==</span> <span class="n">text_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">18009</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t1</span> <span class="ow">is</span> <span class="n">text_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">18009</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t1</span> <span class="o">==</span> <span class="n">text_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">18009</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">text_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">18009</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that Python takes uses strict comparisons, meaning that the two sentences will not be equal unless the cases (capital and lowercase) are matched.</p>
+<p>Note that in the above example, the <span class="math notranslate nohighlight">\(\texttt{.lower()}\)</span> and <span class="math notranslate nohighlight">\(\texttt{.casefold()}\)</span> yielded equal results. However, this is not the case for all languages. Take the German letter ß:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;groß&#39;</span>
+
+<span class="c1"># convert text to lowercase using casefold()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Using casefold():&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span> 
+
+<span class="c1"># convert text to lowercase using lower()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Using lower():&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The German word “groß” translates as large or big, and this meaning is kept using <span class="math notranslate nohighlight">\(\texttt{.lower()}\)</span>. However, when using <span class="math notranslate nohighlight">\(\texttt{.casefold()}\)</span>, it becomes “gross”, which is used in English to indicate disgust. It is up to you to decide which of these to use when converting to lowercase; however, it is best to keep this consistent across all your code so as to avoid potential problems such as this.</p>
+</section>
+<section id="more-exercises">
+<h3>1.4 More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -695,7 +861,7 @@ change cases</li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">0. Before Reading</p>
       </div>
     </a>
     <a class="right-next"
@@ -724,9 +890,19 @@ change cases</li>
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levels-of-processing">1.2 Levels of Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedures">1.3 Procedures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">1.3.1 Stemming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translation">1.3.2 Translation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parts-of-speech">1.3.3 Parts of Speech</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizers">1.3.4 Tokenizers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">1.3.5 Named Entity Recognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-operations">1.3.6 String Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">1.4 More Exercises</a></li>
 </ul>
-
+</li>
+</ul>
   </nav></div>
 
 </div></div>

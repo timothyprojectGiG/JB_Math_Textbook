@@ -303,6 +303,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec1_preprocessing.html">1. Preprocessing</a></li>
 </ul>
 
     </div>
@@ -508,8 +510,52 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <h1>4. Classification Algorithms</h1>
-<h2>4.1 The Perceptron</h2>
+  <h1>4. Classification of Texts</h1>
+<p>Now that we have gone through the arduous process of preprocessing, transforming, and embedding our text data, we can finally get into some of the was we can work with it, most prominent of which is classification. In the case of our UN SDG dataset, our goal is to classify documents by the goal they match with. In this subsection, we will briefly review the general process of machine learning before going into some of the methods by which text data are commonly classified.</p>
+<h2>4.1 A Machine Learning Overview</h2>
+<p>Machine learning of any kind can be boiled down to the process by which we train a machine to make the most effective predictions. When we train a machine to make numerical predictions, we perform <b>regression</b>; if we train a machine to categorize data into categories, we perform <b>classification</b>. Since our UN SDG dataset is classified into the categories of the goals, we will focus on classification.</p>
+<p>There are two main types of machine learning: <b>supervised</b> and <b>unsupervised</b>. Supervised learning means that the data we give the machine is already labeled with the “correct” value or category, while unsupervised learning means that the data is unlabeled and there is no “correct” value or category. Here, since our UN SDG data is already labeled with the goal it aligns most with, we consider it supervised. As such, the goal for the machine is to match the “correct” labels of the data we give it.</p>
+<p>Machine learning starts with a dataset; with modern advances in data collection and storage, machine learning datasets typically involve thousands of data points, while some industry machine learning projects have access to more powerful computers and can use datasets with millions of data points. This dataset is split into a <b>training set</b> and a <b>testing set</b>. The training set consists of the data fed to the machine for it to build its model, while the testing set consists of data kept separate to evaluate the model’s performance. Typically, the training set consists of more data than the testing set; it is common to split the main set 70/30 (70% training, 30% testing) or 80/20.</p>
+<p>When a machine builds it predictive model, we need to understand that no machine is perfect at predicting (though some can get pretty close). As such, the main goal of an algorithm when given the training set is to <b>minimize error</b>. The process of error minimization varies between algorithms; one common process is gradient descent, which aims to find a minimum for the error function (a function which determines the error based on the function’s internal parameters).</p>
+<p>However, to truly judge the efficacy of the algorithm, we must use data that the algorithm has not yet seen. Hence, the testing set is used to evaluate the algorithm’s performance on data similar (but different) from the training set. As data scientists, our goal would be to maximize the performance on the testing set, and we do so by several means discussed in section 5.</p>
+<p>For working with all the algorithms, we will use the same train/test split of 66/33:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">35</span><span class="n">f64e883ce5</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">categories</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;text_df&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then vectorize using TF-IDF from the previous section; for this, we are using bi-grams. Unigrams will be given as exercises throughout the section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">stop_words</span> <span class="o">=</span> <span class="s2">&quot;english&quot;</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">X_train_tfidf_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_train_tfidf_vector</span> <span class="o">=</span> <span class="n">X_train_tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_tfidf_vector</span> <span class="o">=</span> <span class="n">X_train_tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<h2>4.2 The Algorithms</h2>
+<p>Many algorithms exist for machine learning predictions. Some, like the Support Vector Machine and Linear/Multiple Regression, have existed for a long time and are applicable to a wide range of problems, while others are more recent and are meant to be high-performance on more specific problems. Here, we present three algorithms most commonly used to classify text data.</p>
+<h3>4.2.1 The Perceptron</h3>
 In 1943, McCulloch & Pitts developed the first Perceptron, called the Neuron Model. This model was first used in 1958 by Frank Rosenblatt, who formed the classical perceptron model, and in 1969, Minsky and Papert published extensive research on the perceptron model. 
 <p>The single perceptron is a binary classifier and takes each input <span class="math notranslate nohighlight">\(x_i\)</span> and multiplies it by some corresponding weight <span class="math notranslate nohighlight">\(w_i\)</span>. These are then added for all <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(w\)</span>, or <span class="math notranslate nohighlight">\(\sum_{i=1}^{N} x_iw_i\)</span>. This sum is compared to a threshold <span class="math notranslate nohighlight">\(T\)</span>, producing an output of 0 if below <span class="math notranslate nohighlight">\(T\)</span> or 1 if above <span class="math notranslate nohighlight">\(T\)</span>.</p>
 <div class="cell docutils container">
@@ -523,7 +569,7 @@ In 1943, McCulloch & Pitts developed the first Perceptron, called the Neuron Mod
 <img alt="../../_images/a2abeda5fb08450fe77e30bfd4ffe40711f03037543b9f1dc7b81f174f93c567.png" src="../../_images/a2abeda5fb08450fe77e30bfd4ffe40711f03037543b9f1dc7b81f174f93c567.png" />
 </div>
 </div>
-<p>This kind of function is called an activation function; alternative activation functions include logistic regression (below middle) or the rectified linear unit (ReLU) (below right), with the perceptron at bottom left for reference.</p>
+<p>This kind of function is called an activation function, which generally involve a value of 0  or -1 until a threshold <span class="math notranslate nohighlight">\(O\)</span> is reached, after which the function stays at 1 or increases. Alternative activation functions include logistic regression (below middle) or the rectified linear unit (ReLU) (below right), with the perceptron at bottom left for reference.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/sec3_activ_funcs.png&#39;</span><span class="p">)</span>
@@ -537,8 +583,20 @@ In 1943, McCulloch & Pitts developed the first Perceptron, called the Neuron Mod
 <p>It was proven relatively quickly that in addition to only being a binary classifier, the perceptron can only handle linearly separable data. These problems can be fixed by using a multilayer perceptron.</p>
 <p>Multilayer perceptrons combine several perceptrons in at least one hidden layer, each layer feeding the results of the neurons to next layer; the components of the final hidden layer then go on to form the output. Unlike single perceptrons, multilayer perceptrons can handle non-linear data and represent arbitrary decision boundaries.</p>
 <p>To calculate the weights for each layer, we first compute the errors at the output layer with a cost function.  These errors are then distributed backwards from each layer to the previous layer. Then we use gradient descent on the error functions to adjust weight at the layer, so we need all functions differentiable; the weights that minimize the error function form the solution to the weights for the perceptron.</p>
-<h2>4.2 Naive Bayes Algorithms</h2>
-<p>Recall Bayes’ Theorem, which states that</p>
+<p>Once we have our vectorized data ready to go, we can easily apply <span class="math notranslate nohighlight">\(\texttt{MLPClassifier()}\)</span> to our training set then evaluate it on the testing set. Our libraries already have built-in functions to report various metrics, which are expanded more in the next section. For now, we only need to look at accuracy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_mlp_clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf_vector</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tfidf_mlp_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf_vector</span><span class="p">)</span>
+<span class="n">tfidf_mlp_clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test_tfidf_vector</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 4.1</b>: Repeat the above classification on unigrams and report the accuracy.</p>
+<h3>4.2.2 Naive Bayes Algorithms</h3>
+<p>Naive Bayes Algorithms are so called as they rely on Bayes’ Theorem and assume high levels of independence (naive). Bayes’ Theorem states that</p>
 <p><span class="math notranslate nohighlight">\(P(y|X) = \frac{P(X|y) * P(y)}{P(X)}\)</span>.</p>
 <p>In terms of Bayesian Probability, <span class="math notranslate nohighlight">\(P(y|X)\)</span> is called the <i>posterior</i>, <span class="math notranslate nohighlight">\(P(X|y)\)</span> is called the <i>data likelihood</i>, <span class="math notranslate nohighlight">\(P(y)\)</span> is the <i>prior</i>, and <span class="math notranslate nohighlight">\(P(X)\)</span> is the <i>normalization</i>. In the context of NLP classification, we define <span class="math notranslate nohighlight">\(X\)</span> to be the document features and <span class="math notranslate nohighlight">\(y\)</span> to be the document’s class label. We also assume conditional independence, which means that the class label of one document does not depend on the class label of another document.</p>
 <p>We define <span class="math notranslate nohighlight">\(\underset{a}{\arg \max} f\)</span> to be the value of <span class="math notranslate nohighlight">\(a\)</span> such that the function <span class="math notranslate nohighlight">\(f\)</span> is maximized. Then, Naive Bayes Algorithms classify a document into a class <span class="math notranslate nohighlight">\(\hat{y}\)</span> by calculating</p>
@@ -546,16 +604,41 @@ In 1943, McCulloch & Pitts developed the first Perceptron, called the Neuron Mod
 <p>Note that when using Naive Bayes, we have the assumption that features are independent given class. This allows us to compute</p>
 <p><span class="math notranslate nohighlight">\(P(x_1, x_2, …, x_n |y) = \Pi_{i=1}^{n} P(x_i|y)\)</span></p>
 <p>We can estimate either side of this equation with training data, but estimating the right hand side <span class="math notranslate nohighlight">\(\Pi_{i=1}^{n} P(x_i|y)\)</span> leads to a much greater reduction of computation.</p>
-<h2>4.3 Ridge Classification</h2>
+<p>Similar to the perceptron, we fit the Naive Bayes algorithm to our training and testing set and report metrics:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_multinomialNB_clf</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf_vector</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tfidf_multinomialNB_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf_vector</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 4.2</b>: Repeat the above classifications on unigrams and report the accuracy.</p>
+<h3>4.2.3 Ridge Classification</h3>
 <p>Ridge Classification was designed with the original intent of a restriction on basic multiple linear regression; in essence, it adds an additional penalty for extremely large errors, so ridge regression minimizes more than just the least square residuals. However, ridge algorithms can also be used for classification, and in the context of NLP tasks, ridge classifications have been found to perform very well.</p>
 <p>In the binary case, ridge converts the two classes to either 1 or -1 and then treats the problem as a regression problem. This can then be generalized to multiple classes with a One vs. Rest approach, where we make an algorithm to determine if an item is in one specific class or any of the rest of the classes; this is then repeated until any item can be classified into a single class.</p>
 <p>More on the ways ridge regression is performed and calculated for classification can be found on the scikit-learn explanation: <a class="reference external" href="https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression">https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression</a>.</p>
-<h2>4.4 More Exercises</h2>
-<p><b>Exercise 4.1</b>: Write a function that takes a document corpus, processed like in the exercises in Section 1, splits the set into a training and testing set, and runs a classifier on the training set then reports metrics on the testing set.</p>
+<p>Again, similar to previous classification methods, we run a ridge classification as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifier</span>
+
+<span class="n">tfidf_ridge_clf</span> <span class="o">=</span> <span class="n">RidgeClassifier</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;sparse_cg&quot;</span><span class="p">)</span>
+<span class="n">tfidf_ridge_clf</span> <span class="o">=</span> <span class="n">tfidf_ridge_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf_vector</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tfidf_ridge_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf_vector</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 4.3</b>: Repeat the above classification on unigrams and report the accuracy.</p>
+<h2>4.3 More Exercises</h2>
+<p><b>Exercise 4.4</b>: Write a function that takes a document corpus, processed like in the exercises in Section 1, splits the set into a training and testing set, and runs a classifier on the training set then reports metrics on the testing set.</p>
 <ul class="simple">
 <li><p>Your function should take a parameter <span class="math notranslate nohighlight">\(\texttt{classifier\_algorithm}\)</span> that specifies the algorithm to use as well as the parameters necessary for that algorithm.</p></li>
 </ul>
-<p><b>Exercise 4.2</b>: Run your function on the SDG corpus using Multinomial Naive Bayes, Multilayer Perceptron (<span class="math notranslate nohighlight">\(\texttt{sklearn.neural\_network.MLPClassifier}\)</span>), and Ridge Regression (<span class="math notranslate nohighlight">\(\texttt{sklearn.linear\_model.Ridge}\)</span>).</p>
+<p><b>Exercise 4.5</b>: Run your function on the SDG corpus using Multinomial Naive Bayes, Multilayer Perceptron, and Ridge Regression.</p>
 <ul class="simple">
 <li><p>Use <span class="math notranslate nohighlight">\(\texttt{min\_df}\)</span> to modify the computation time for Multilayer Perceptron; this will reduce the amount of time it takes to run.</p></li>
 </ul>

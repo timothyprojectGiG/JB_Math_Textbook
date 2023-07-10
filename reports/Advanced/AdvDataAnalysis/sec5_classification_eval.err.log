@@ -17,19 +17,27 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-docs = text_df.text
-count_vectorizer = CountVectorizer()
-count_vectorizer.fit(docs) 
-len(count_vectorizer.vocabulary_)
+docs = text_df.embedding.tolist()
+scaler = preprocessing.MinMaxScaler().fit(docs)
+X = scaler.transform(docs)
+y = text_df.sdg
+X_train, X_test, y_train, y_test = \
+    train_test_split(X, y, test_size=0.33, random_state=7)
+ridge_clf = RidgeClassifier(tol=1e-2, solver="sparse_cg")
+ridge_clf = ridge_clf.fit(X_train, y_train)
+y_pred = ridge_clf.predict(X_test)
+print(metrics.classification_report(y_test,y_pred, digits = 4))
+ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-1-dbd8f911f9c0>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mdocs[0m [0;34m=[0m [0mtext_df[0m[0;34m.[0m[0mtext[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0mcount_vectorizer[0m [0;34m=[0m [0mCountVectorizer[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m [0mcount_vectorizer[0m[0;34m.[0m[0mfit[0m[0;34m([0m[0mdocs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m [0mlen[0m[0;34m([0m[0mcount_vectorizer[0m[0;34m.[0m[0mvocabulary_[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m<ipython-input-1-3f2753b9715f>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mdocs[0m [0;34m=[0m [0mtext_df[0m[0;34m.[0m[0membedding[0m[0;34m.[0m[0mtolist[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0mscaler[0m [0;34m=[0m [0mpreprocessing[0m[0;34m.[0m[0mMinMaxScaler[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mfit[0m[0;34m([0m[0mdocs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0mX[0m [0;34m=[0m [0mscaler[0m[0;34m.[0m[0mtransform[0m[0;34m([0m[0mdocs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0my[0m [0;34m=[0m [0mtext_df[0m[0;34m.[0m[0msdg[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mX_train[0m[0;34m,[0m [0mX_test[0m[0;34m,[0m [0my_train[0m[0;34m,[0m [0my_test[0m [0;34m=[0m[0;31m [0m[0;31m\[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mNameError[0m: name 'text_df' is not defined
 NameError: name 'text_df' is not defined
