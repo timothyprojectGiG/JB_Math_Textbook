@@ -17,56 +17,20 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# reference: https://matplotlib.org/stable/gallery/ticks/tick-formatters.html
-from matplotlib import ticker
-
-fig, ax = plt.subplots(figsize=(6.4, 0.4))
-
-# create number line by hiding unneeded elements of plot
-ax.yaxis.set_major_locator(ticker.NullLocator())
-ax.spines[['left', 'right', 'top']].set_visible(False)
-
-# set up number line limits
-ax.set_xlim(1000*((sample_mean-999)//1000), 1000*((sample_mean+1999)//1000))
-ax.set_ylim(0, 1)
-
-# set up number line tick marks
-ax.xaxis.set_major_locator(ticker.MultipleLocator(1000))
-ax.xaxis.set_minor_locator(ticker.MultipleLocator(100))
-ax.xaxis.set_ticks_position('bottom')
-
-# plot sample mean
-ax.scatter(sample_mean, 0, s = 75, clip_on=False, zorder=10)
-ax.annotate(
-    '$\overline{X}$',
-    xy = (sample_mean, 0),
-    xytext = (-4, 10),
-    textcoords = 'offset pixels',
-    fontsize = 'large',
-)
-
-# plot population mean
-ax.scatter(5500, 0, s = 75, clip_on=False, zorder=10)
-ax.annotate(
-    '$\mu$',
-    xy = (5500, 0),
-    xytext = (-4, 12),
-    textcoords = 'offset pixels',
-    fontsize = 'large',
-)
-
-ax.set_title('Sample Mean vs. Population Mean', y = 1.25);
+# works for versions of scipy >= 1.10.0
+confidence_level = 0.95
+(lower_ci, upper_ci) = result.confidence_interval(confidence_level) # use the result object from the t-test
+print(f"95% confidence interval is ({lower_ci:.3f}, {upper_ci:.3f}).")
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mTypeError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-4-e3ba5fa1ae43>[0m in [0;36m<module>[0;34m[0m
-[1;32m      6[0m [0;31m# create number line by hiding unneeded elements of plot[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      7[0m [0max[0m[0;34m.[0m[0myaxis[0m[0;34m.[0m[0mset_major_locator[0m[0;34m([0m[0mticker[0m[0;34m.[0m[0mNullLocator[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 8[0;31m [0max[0m[0;34m.[0m[0mspines[0m[0;34m[[0m[0;34m[[0m[0;34m'left'[0m[0;34m,[0m [0;34m'right'[0m[0;34m,[0m [0;34m'top'[0m[0;34m][0m[0;34m][0m[0;34m.[0m[0mset_visible[0m[0;34m([0m[0;32mFalse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      9[0m [0;34m[0m[0m
-[1;32m     10[0m [0;31m# set up number line limits[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+[0;32m<ipython-input-13-8f2590c13fce>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;31m# works for versions of scipy >= 1.10.0[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0mconfidence_level[0m [0;34m=[0m [0;36m0.95[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 3[0;31m [0;34m([0m[0mlower_ci[0m[0;34m,[0m [0mupper_ci[0m[0;34m)[0m [0;34m=[0m [0mresult[0m[0;34m.[0m[0mconfidence_interval[0m[0;34m([0m[0mconfidence_level[0m[0;34m)[0m [0;31m# use the result object from the t-test[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0mprint[0m[0;34m([0m[0;34mf"95% confidence interval is ({lower_ci:.3f}, {upper_ci:.3f})."[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mTypeError[0m: unhashable type: 'list'
-TypeError: unhashable type: 'list'
+[0;31mAttributeError[0m: 'Ttest_1sampResult' object has no attribute 'confidence_interval'
+AttributeError: 'Ttest_1sampResult' object has no attribute 'confidence_interval'
 

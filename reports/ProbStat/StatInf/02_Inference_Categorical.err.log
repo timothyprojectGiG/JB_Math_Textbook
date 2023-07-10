@@ -18,12 +18,12 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 # create dataframe from counts of "Trust_Index" values
-levels = wgm_usa["Trust_Index"].value_counts().reset_index(name="Count").rename(columns={"Trust_Index": "Trust_Level"})
+levels = wgm["Trust_Index"].value_counts().reset_index(name="Count")
 
 # create bar plot
 ax = sns.barplot(
     data = levels,
-    x = "Trust_Level",
+    x = "Trust_Index",
     y = "Count",
     order = ["No score", "Low trust", "Medium trust", "High trust"]
 )
@@ -34,17 +34,17 @@ for container in ax.containers:
 
 # set axis labels and title
 ax.set_xlabel("")
-ax.set_title("Trust in Scientists Index for the United States");
+ax.set_title("Trust in Scientists Index, Worldwide");
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mValueError[0m                                Traceback (most recent call last)
-[0;32m<ipython-input-6-398d9a8ec9a7>[0m in [0;36m<module>[0;34m[0m
+[0;32m<ipython-input-4-8bd869634078>[0m in [0;36m<module>[0;34m[0m
 [1;32m      3[0m [0;34m[0m[0m
 [1;32m      4[0m [0;31m# create bar plot[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 5[0;31m ax = sns.barplot(
 [0m[1;32m      6[0m     [0mdata[0m [0;34m=[0m [0mlevels[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      7[0m     [0mx[0m [0;34m=[0m [0;34m"Trust_Level"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m     [0mx[0m [0;34m=[0m [0;34m"Trust_Index"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/anaconda3/lib/python3.8/site-packages/seaborn/_decorators.py[0m in [0;36minner_f[0;34m(*args, **kwargs)[0m
 [1;32m     44[0m             )
@@ -74,6 +74,6 @@ ax.set_title("Trust in Scientists Index for the United States");
 [0m[1;32m    154[0m [0;34m[0m[0m
 [1;32m    155[0m             [0;31m# Figure out the plotting orientation[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mValueError[0m: Could not interpret input 'Trust_Level'
-ValueError: Could not interpret input 'Trust_Level'
+[0;31mValueError[0m: Could not interpret input 'Trust_Index'
+ValueError: Could not interpret input 'Trust_Index'
 
