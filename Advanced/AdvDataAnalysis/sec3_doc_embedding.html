@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+    <title>3. Document Embedding &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
   
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/AdvDataAnalysis/sec3_doc_embedding';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="sec4_classification_algos.html" />
+    <link rel="next" title="4. Classification of Texts" href="sec4_classification_algos.html" />
     <link rel="prev" title="1. Preprocessing" href="sec1_preprocessing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -301,10 +301,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Complex/model.html">Fischer-Calo Contaminant Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec0_data.html">0. Before Reading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec5_classification_eval.html">5. Evaluating Classification</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sec6_applications.html">6. Applications</a></li>
 </ul>
 
     </div>
@@ -488,7 +493,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>3. Document Embedding</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -497,9 +502,11 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-sentence-encoder">3.1 Universal Sentence Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-sne">3.2 t-SNE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">3.3 More Exercises</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -510,13 +517,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <h1>3. Document Embedding</h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="document-embedding">
+<h1>3. Document Embedding<a class="headerlink" href="#document-embedding" title="Permalink to this heading">#</a></h1>
 <p>In the previous section, we represented variable length texts as fixed length numeric vectors; the approach we have used so far is the traditional approach of Bag of Words (BoW), which tokenizes a text into words (tokens), ignoring orders of tokens but may reserve the count. This approach is high dimension, and very sparse; this may result in over fitting and high time complexity.</p>
 <p>A more modern text vectorization approach is word embedding (also called simply embedding), relying on neural representations. This approach takes distributional semantics into account; that is, a word’s meaning is given by the words that frequently appear close-by. Hence, we can construct a word’s context by using the set of words that appear nearby within a fixed-sized window.</p>
 <p>Semantically similar texts, then, would appear closer to each other in the vector space. We could also possibly capture semantic operations by operations in the vector space; for example, similarity between texts could be measured by vector dot product. We could also perform algebraic operations; for example,</p>
 <p><span class="math notranslate nohighlight">\(\text{vector(”King”)} - \text{vector(”Man”)} + \text{vector(”Woman”)} \sim \text{vector(“Queen”)}\)</span>.</p>
 <p>Modern-day representations are typically learned from vast body of texts, often with deep neural networks, and they typically result in pre-trained models.</p>
-<h2>3.1 Universal Sentence Encoder</h2>
+<section id="universal-sentence-encoder">
+<h2>3.1 Universal Sentence Encoder<a class="headerlink" href="#universal-sentence-encoder" title="Permalink to this heading">#</a></h2>
 <p>The Universal Sentence Encoder (USE) was first published by Google around 2018. It maps a sentence, word, or short paragraph to a fixed length (typically 512) numeric vector. This approach would mean semantically similar sentences would be placed closer to each other in the embedding space.</p>
 <p>Embeddings are typically the result of using raw text, so no pre-processing would be involved. This sentence embedding can then be used for downstream applications,
 e.g., classification, clustering, and language prediction.</p>
@@ -551,11 +560,17 @@ e.g., classification, clustering, and language prediction.</p>
 </div>
 </div>
 <p>Note that the first time you run this, it may take some time (5+ minutes) to complete the process.</p>
-<h2>3.2 t-SNE</h2>
+</section>
+<section id="t-sne">
+<h2>3.2 t-SNE<a class="headerlink" href="#t-sne" title="Permalink to this heading">#</a></h2>
 <p>t-distributed Stochastic Neighbor Embedding (t-SNE) is best used to scale text features to the same scale. In short, it is a method of dimension reduction (like PCA). t-SNE associates probabilities on a Student’s t-distribution with each point; it then uses some randomization (hence Stochastic) to embed, paying particular attention to the neighbors of each point.</p>
 <p>While t-SNE will not be discussed further as to its specific methods, it can nonetheless be used for document embedding. More explanations on t-SNE can be found on the <span class="math notranslate nohighlight">\(\texttt{scikit\_learn}\)</span> website, <a class="reference external" href="https://scikit-learn.org/stable/modules/manifold.html#t-sne">https://scikit-learn.org/stable/modules/manifold.html#t-sne</a>.</p>
-<h2>3.3 More Exercises</h2>
+</section>
+<section id="more-exercises">
+<h2>3.3 More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h2>
 <p><b>Exercise 3.1</b>: Take two documents, one labeled as SDG 1 and the other as SDG 8. Segment these into sentences, compute the embedding, and find the dot product between the embeddings.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -602,7 +617,7 @@ e.g., classification, clustering, and language prediction.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">4. Classification of Texts</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -623,9 +638,11 @@ e.g., classification, clustering, and language prediction.</p>
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-sentence-encoder">3.1 Universal Sentence Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-sne">3.2 t-SNE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">3.3 More Exercises</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
