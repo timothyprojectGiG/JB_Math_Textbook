@@ -560,7 +560,92 @@ Within the realm of preprocessing textual data, we first must perform certain de
 <ol>
 <li>Try some of the provided example sentences, and give the probabilities for the sentences with the highest score. </li>
 </ol>
-<p>Looking at the UN SDG dataset, we find that it includes positive or negative labels. Since each text is classified with a single goal, positive labels indicate the agreement of that text with the goal, while negative labels indicate disagreement. We use \texttt{sum()}$ to sum the negative labels and the positive labels:</p>
+<p>Looking at the UN SDG dataset, we find that it includes positive or negative labels. Since each text is classified with a single goal, positive labels indicate the agreement of that text with the goal, while negative labels indicate disagreement. We use <span class="math notranslate nohighlight">\(\texttt{sum()}\)</span> to sum the negative labels and the positive labels:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/Users/yingli/Downloads/osdg-community-data-v2023-01-01.csv&quot;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
+<span class="c1">#text_df[&quot;lang&quot;] = text_df[&quot;text&quot;].apply(lambda x: detect(x))</span>
+<span class="c1">#text_df = text_df.query(&quot;lang == &#39;en&#39;&quot;)# language detection cost extra time, do it after other filterings to minimize cost</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">29</span><span class="n">f31d3cde2b</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/Users/yingli/Downloads/osdg-community-data-v2023-01-01.csv&quot;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span> 
+<span class="ne">--&gt; </span><span class="mi">610</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span> 
+<span class="g g-Whitespace">    </span><span class="mi">612</span> 
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span> 
+<span class="g g-Whitespace">    </span><span class="mi">461</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">462</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span> 
+<span class="g g-Whitespace">    </span><span class="mi">464</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span> 
+<span class="ne">--&gt; </span><span class="mi">819</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span> 
+<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span>             <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1050</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1051</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1052</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1866</span>         <span class="c1"># open handles</span>
+<span class="ne">-&gt; </span><span class="mi">1867</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1868</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1869</span>         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="s2">&quot;compression&quot;</span><span class="p">):</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1360</span>         <span class="n">Let</span> <span class="n">the</span> <span class="n">readers</span> <span class="nb">open</span> <span class="n">IOHanldes</span> <span class="n">after</span> <span class="n">they</span> <span class="n">are</span> <span class="n">done</span> <span class="k">with</span> <span class="n">their</span> <span class="n">potential</span> <span class="n">raises</span><span class="o">.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1361</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1362</span><span class="s2">         self.handles = get_handle(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1363</span><span class="s2">             src,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1364</span><span class="s2">             &quot;r&quot;,</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">640</span><span class="s2">                 errors = &quot;replace&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span><span class="s2">             # Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">642</span><span class="s2">             handle = open(</span>
+<span class="g g-Whitespace">    </span><span class="mi">643</span><span class="s2">                 handle,</span>
+<span class="g g-Whitespace">    </span><span class="mi">644</span><span class="s2">                 ioargs.mode,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/yingli/Downloads/osdg-community-data-v2023-01-01.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="o">.</span><span class="n">labels_negative</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">text_df</span><span class="o">.</span><span class="n">labels_positive</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -569,11 +654,18 @@ Within the realm of preprocessing textual data, we first must perform certain de
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">6</span><span class="n">c2f4cb11d03</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">6</span><span class="n">c2f4cb11d03</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">text_df</span><span class="o">.</span><span class="n">labels_negative</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">text_df</span><span class="o">.</span><span class="n">labels_positive</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
-<span class="ne">NameError</span>: name &#39;text_df&#39; is not defined
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">__getattr__</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5463</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_info_axis</span><span class="o">.</span><span class="n">_can_hold_identifiers_and_holds_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5464</span>                 <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">5465</span>             <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5466</span> 
+<span class="g g-Whitespace">   </span><span class="mi">5467</span>     <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="ne">AttributeError</span>: &#39;DataFrame&#39; object has no attribute &#39;labels_negative&#39;
 </pre></div>
 </div>
 </div>
