@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>0. Before Reading &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+    <title>&lt;no title&gt; &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
   
@@ -208,7 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Intro to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">Introduction to Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
@@ -302,9 +302,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Complex/model.html">Fischer-Calo Contaminant Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">0. Before Reading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec1_preprocessing.html">1. Preprocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec3_doc_embedding.html">3. Document Embedding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec4_classification_algos.html">4. Classification of Texts</a></li>
@@ -481,7 +480,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -492,11 +493,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>0. Before Reading</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -506,27 +515,91 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="before-reading">
-<h1>0. Before Reading<a class="headerlink" href="#before-reading" title="Permalink to this heading">#</a></h1>
+  <h1>0. Before Reading</h1>
 <p>The dataset used in the exercises for this section is from a citizen science project. It consists of 40067 text excerptslabeled with 16 United Nations Sustainable Development Goals (UN SDG) categories and can be found at <a class="reference external" href="https://zenodo.org/record/7540165#.ZAF10uzMKfU">https://zenodo.org/record/7540165#.ZAF10uzMKfU</a>. As of now, all the exercises use the 2023.01 version of the dataset, which is the version used when designing the exercises and the content for this section. Please be aware that the data file format has gone through significant changes since the first version, 2021.09.</p>
 <p>The UN SDG framework is a UN 2030 thematic framework for world development. Adopted in 2015, it has 17 comprehensive goals, with 169 targets and 232 indicators. The UN SDGs are universal, being accepted and adopted by countries all over the globe, and represents a proxy of an ideal future.</p>
-<a class="reference internal image-reference" href="../../_images/unsdg.png"><img alt="../../_images/unsdg.png" src="../../_images/unsdg.png" style="width: 600px;" /></a>
+<div class="cell tag_&quot;tags&quot;:_[&quot;hide-input&quot;,] docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/unsdg.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/91b6e5e6b4e46ab51b48464762e7763840de17a6f88242055f65e4d3e879cb1a.png" src="../../_images/91b6e5e6b4e46ab51b48464762e7763840de17a6f88242055f65e4d3e879cb1a.png" />
+</div>
+</div>
+<p>We recommend creating a new Python environment for this section; you can do this in the terminal by running the following code chunk:</p>
+<p>conda deactivate
+conda create -n nlp
+conda activate nlp
+conda install -c conda-forge spacy
+conda install -c conda-forge scikit-learn
+conda install ipykernel
+conda install seaborn</p>
 <p>The libraries for this section include:
 <span class="math notranslate nohighlight">\(\texttt{scikit-learn}\)</span>,
 <span class="math notranslate nohighlight">\(\texttt{nltk}\)</span>,
 <span class="math notranslate nohighlight">\(\texttt{fasttext}\)</span>,
 <span class="math notranslate nohighlight">\(\texttt{googletrans}\)</span>,
 <span class="math notranslate nohighlight">\(\texttt{spaCy}\)</span>, and
-<span class="math notranslate nohighlight">\(\texttt{huggingface}\)</span>.</p>
-<p>We recommend creating a new Python environment for this section; you can do this in the terminal by running the following code chunk:</p>
-<p>conda deactivate</p>
-<p>conda create -n nlp</p>
-<p>conda activate nlp</p>
-<p>conda install -c conda-forge spacy</p>
-<p>conda install -c conda-forge scikit-learn</p>
-<p>conda install ipykernel</p>
-<p>conda install seaborn</p>
-</section>
+<span class="math notranslate nohighlight">\(\texttt{huggingface}\)</span>, as well as some sub-packages in these libraries.
+Use the following code to import the necessary libraries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Most importantly, it is necessary to download the full dataset and put it in the same directory as this notebook.</p>
+<p>We can then load the dataset as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 40062 entries, 0 to 40061
+Data columns (total 8 columns):
+ #   Column                                                          Non-Null Count  Dtype  
+---  ------                                                          --------------  -----  
+ 0   doi	text_id	text	sdg	labels_negative	labels_positive	agreement  40062 non-null  object 
+ 1   doi                                                             40062 non-null  object 
+ 2   text_id                                                         40062 non-null  object 
+ 3   text                                                            40062 non-null  object 
+ 4   sdg                                                             40062 non-null  int64  
+ 5   labels_negative                                                 40062 non-null  int64  
+ 6   labels_positive                                                 40062 non-null  int64  
+ 7   agreement                                                       40062 non-null  float64
+dtypes: float64(1), int64(3), object(4)
+memory usage: 2.4+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<p>This provides the framework for the rest of the examples and exercises we will use throughout this section.</p>
 
     <script type="text/x-thebe-config">
     {
@@ -586,6 +659,20 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
