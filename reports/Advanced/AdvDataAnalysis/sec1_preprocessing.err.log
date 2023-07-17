@@ -15,14 +15,26 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import pandas as pd
+from nltk import stem
+
+tokens =  ['narrative', 'comprehensives', 'publicised', 'moderately', 'prosperous', 'legitimizes', 'according', 'glorifies'] 
+
+porter = stem.porter.PorterStemmer() # Porter stemmer
+snowball = stem.snowball.EnglishStemmer() # Snowball stemmer
+lancaster = stem.lancaster.LancasterStemmer() # Lancaster stemmer
+
+print('Porter Stemmer:', [porter.stem(i) for i in tokens])
+print('Snowball Stemmer:', [snowball.stem(i) for i in tokens])
+print('Lancaster Stemmer:', [lancaster.stem(i) for i in tokens])
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
+Cell [0;32mIn[6], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mnltk[39;00m [38;5;28;01mimport[39;00m stem
+[1;32m      3[0m tokens [38;5;241m=[39m  [[38;5;124m'[39m[38;5;124mnarrative[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mcomprehensives[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mpublicised[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mmoderately[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mprosperous[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mlegitimizes[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124maccording[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mglorifies[39m[38;5;124m'[39m] 
+[1;32m      5[0m porter [38;5;241m=[39m stem[38;5;241m.[39mporter[38;5;241m.[39mPorterStemmer() [38;5;66;03m# Porter stemmer[39;00m
 
-[0;31mModuleNotFoundError[0m: No module named 'pandas'
+[0;31mModuleNotFoundError[0m: No module named 'nltk'
 

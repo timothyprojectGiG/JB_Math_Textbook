@@ -551,20 +551,22 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import libraries</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># Always run this cell first!</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">scipy</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="c1"># appear to need to import the api as well as the library itself for the interpreter to find the modules</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
-</div>
-</div>
+<div class="output text_html">        <script type="text/javascript">
+        window.PlotlyConfig = {MathJaxConfig: 'local'};
+        if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+        if (typeof require !== 'undefined') {
+        require.undef("plotly");
+        requirejs.config({
+            paths: {
+                'plotly': ['https://cdn.plot.ly/plotly-2.24.1.min']
+            }
+        });
+        require(['plotly'], function(Plotly) {
+            window._Plotly = Plotly;
+        });
+        }
+        </script>
+        </div></div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-for-categorical-data">
 <h1>Hypothesis Testing for Categorical Data<a class="headerlink" href="#hypothesis-testing-for-categorical-data" title="Permalink to this heading">#</a></h1>
@@ -620,34 +622,34 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>113047</th>
-      <td>Kuwait</td>
+      <th>7724</th>
+      <td>Pakistan</td>
+      <td>Male</td>
+      <td>Medium trust</td>
+    </tr>
+    <tr>
+      <th>134998</th>
+      <td>Slovakia</td>
       <td>Female</td>
       <td>Medium trust</td>
     </tr>
     <tr>
-      <th>119165</th>
-      <td>Macedonia</td>
-      <td>Female</td>
+      <th>58465</th>
+      <td>Botswana</td>
+      <td>Male</td>
       <td>Medium trust</td>
     </tr>
     <tr>
-      <th>69758</th>
-      <td>Afghanistan</td>
-      <td>Female</td>
+      <th>135131</th>
+      <td>Slovenia</td>
+      <td>Male</td>
       <td>Medium trust</td>
     </tr>
     <tr>
-      <th>93277</th>
-      <td>Chad</td>
+      <th>47488</th>
+      <td>South Africa</td>
       <td>Male</td>
       <td>Low trust</td>
-    </tr>
-    <tr>
-      <th>28342</th>
-      <td>China</td>
-      <td>Female</td>
-      <td>High trust</td>
     </tr>
   </tbody>
 </table>
@@ -661,11 +663,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Medium trust    77137
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trust_Index
+Medium trust    77137
 Low trust       28460
 High trust      26161
 No score        17256
-Name: Trust_Index, dtype: int64
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -694,7 +697,53 @@ Name: Trust_Index, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/01cfbc6f305fbeb68333a5d2adb5570f89cd21c1d3f159b4c424f285002bcc32.png" src="../../_images/01cfbc6f305fbeb68333a5d2adb5570f89cd21c1d3f159b4c424f285002bcc32.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">levels</span> <span class="o">=</span> <span class="n">wgm</span><span class="p">[</span><span class="s2">&quot;Trust_Index&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># create bar plot</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">levels</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;Count&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;No score&quot;</span><span class="p">,</span> <span class="s2">&quot;Low trust&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium trust&quot;</span><span class="p">,</span> <span class="s2">&quot;High trust&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="c1"># label each bar with the corresponding value</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
+
+<span class="nn">File ~/.local/lib/python3.9/site-packages/seaborn/categorical.py:2755,</span> in <span class="ni">barplot</span><span class="nt">(data, x, y, hue, order, hue_order, estimator, errorbar, n_boot, units, seed, orient, color, palette, saturation, width, errcolor, errwidth, capsize, dodge, ci, ax, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2752</span> <span class="k">if</span> <span class="n">estimator</span> <span class="ow">is</span> <span class="nb">len</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2753</span>     <span class="n">estimator</span> <span class="o">=</span> <span class="s2">&quot;size&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">2755</span> <span class="n">plotter</span> <span class="o">=</span> <span class="n">_BarPlotter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">hue</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">hue_order</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2756</span>                       <span class="n">estimator</span><span class="p">,</span> <span class="n">errorbar</span><span class="p">,</span> <span class="n">n_boot</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2757</span>                       <span class="n">orient</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">palette</span><span class="p">,</span> <span class="n">saturation</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2758</span>                       <span class="n">width</span><span class="p">,</span> <span class="n">errcolor</span><span class="p">,</span> <span class="n">errwidth</span><span class="p">,</span> <span class="n">capsize</span><span class="p">,</span> <span class="n">dodge</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2760</span> <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2761</span>     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="nn">File ~/.local/lib/python3.9/site-packages/seaborn/categorical.py:1530,</span> in <span class="ni">_BarPlotter.__init__</span><span class="nt">(self, x, y, hue, data, order, hue_order, estimator, errorbar, n_boot, units, seed, orient, color, palette, saturation, width, errcolor, errwidth, capsize, dodge)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1525</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">hue</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">hue_order</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1526</span>              <span class="n">estimator</span><span class="p">,</span> <span class="n">errorbar</span><span class="p">,</span> <span class="n">n_boot</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1527</span>              <span class="n">orient</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">palette</span><span class="p">,</span> <span class="n">saturation</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1528</span>              <span class="n">errcolor</span><span class="p">,</span> <span class="n">errwidth</span><span class="p">,</span> <span class="n">capsize</span><span class="p">,</span> <span class="n">dodge</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1529</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Initialize the plotter.&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1530</span>     <span class="bp">self</span><span class="o">.</span><span class="n">establish_variables</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">hue</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">orient</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1531</span>                              <span class="n">order</span><span class="p">,</span> <span class="n">hue_order</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1532</span>     <span class="bp">self</span><span class="o">.</span><span class="n">establish_colors</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">palette</span><span class="p">,</span> <span class="n">saturation</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1533</span>     <span class="bp">self</span><span class="o">.</span><span class="n">estimate_statistic</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">errorbar</span><span class="p">,</span> <span class="n">n_boot</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.9/site-packages/seaborn/categorical.py:541,</span> in <span class="ni">_CategoricalPlotter.establish_variables</span><span class="nt">(self, x, y, hue, data, orient, order, hue_order, units)</span>
+<span class="g g-Whitespace">    </span><span class="mi">539</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">540</span>         <span class="n">err</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Could not interpret input &#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">541</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">543</span> <span class="c1"># Figure out the plotting orientation</span>
+<span class="g g-Whitespace">    </span><span class="mi">544</span> <span class="n">orient</span> <span class="o">=</span> <span class="n">infer_orient</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">545</span>     <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">orient</span><span class="p">,</span> <span class="n">require_numeric</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">require_numeric</span>
+<span class="g g-Whitespace">    </span><span class="mi">546</span> <span class="p">)</span>
+
+<span class="ne">ValueError</span>: Could not interpret input &#39;index&#39;
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -781,8 +830,8 @@ Name: Trust_Index, dtype: int64
 <h3>Making a Hypothesis<a class="headerlink" href="#making-a-hypothesis" title="Permalink to this heading">#</a></h3>
 <p>The first step in a hypothesis test is to determine the hypotheses that we are comparing. We are comparing two opposing views of the world: either it works like this, or it doesn’t. These views are best understood in terms of <em>models</em>—a framework for understanding how the world works.</p>
 <p>For example, perhaps I think that the proportion of residents in the United States who have a high trust in scientists is large, say over 0.25. In this situation, the two models are statistical: we are hypothesizing about the proportion from a population. Either the proportion of people in our chosen country who have high trust in scientists is 0.25, or it’s more than that. In mathematical terms, we’ll write this as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f9752d75-9b77-4de6-a240-bcaa642b8f98">
-<span class="eqno">(7)<a class="headerlink" href="#equation-f9752d75-9b77-4de6-a240-bcaa642b8f98" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-40d9f578-d7a6-4178-950f-859171f75283">
+<span class="eqno">(7)<a class="headerlink" href="#equation-40d9f578-d7a6-4178-950f-859171f75283" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: p = 0.25, \\
     H_1: p &gt; 0.25.
 \end{equation}\]</div>
@@ -810,8 +859,8 @@ Name: Trust_Index, dtype: int64
 <p>We are asking questions about the proportion of people in the United States who have high trust in scientists. It would be impossible to get an answer from every single person in the entire country! However, the Wellcome Global Monitor data gives us answers from a large representative sample of people in the USA. So we can use this data to get a statistically sound idea of what the true proportion in the entire population is.</p>
 <p>Let’s compare the proportion from the sample to what the null hypothesis says it should be. If the sample proportion is close to what the null hypothesis says it should be, that would mean that the null hypothesis is probably right. On the other hand, if it is different, perhaps the null hypothesis is wrong!</p>
 <p>We can compute the sample proportion of people with high trust in scientists by taking the total number of people in the sample with a high trust score and dividing it by the total sample size:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ca02888-6dfd-4bf4-8ada-1a71c880932d">
-<span class="eqno">(8)<a class="headerlink" href="#equation-7ca02888-6dfd-4bf4-8ada-1a71c880932d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-356c960e-1520-4952-ad64-2bbbf7eb07ce">
+<span class="eqno">(8)<a class="headerlink" href="#equation-356c960e-1520-4952-ad64-2bbbf7eb07ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat p = \frac{\mbox{num. of respondents with high trust in scientists}}{\mbox{num. of respondents}}.
 \end{equation}\]</div>
 <div class="cell docutils container">
@@ -843,8 +892,8 @@ Name: Trust_Index, dtype: int64
 \[ \hat{p} \sim N\left(.25, \sqrt{\frac{.25(1-.25)}{1006}} \right). \]</div>
 <p>We call this the <strong>null distribution</strong>, since it is the distribution of the sample statistic under the assumption that the null hypothesis is true.</p>
 <p>Back to the question: is the difference between the observed value of <span class="math notranslate nohighlight">\(\hat p\)</span> and the value that the null hypothesis says it should be a big difference or small difference? One way to answer that question would be to <strong>standardize</strong> by taking the difference between the sample mean and the (hypothesized) population mean and dividing by the standard deviation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0bf6f48c-6b07-4732-a54b-b9513f6413f1">
-<span class="eqno">(9)<a class="headerlink" href="#equation-0bf6f48c-6b07-4732-a54b-b9513f6413f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bc4216ae-9159-4a78-8944-a9a0ac27efd6">
+<span class="eqno">(9)<a class="headerlink" href="#equation-bc4216ae-9159-4a78-8944-a9a0ac27efd6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 \end{equation}\]</div>
 <p>This gives us the standardized test statistic Z, which has a standard normal distribution (<span class="math notranslate nohighlight">\(\mu = 0, \sigma = 1\)</span>)—again assuming that the null hypothesis is true.</p>
@@ -1023,8 +1072,8 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 <section id="difference-of-two-proportions">
 <h2>Difference of Two Proportions<a class="headerlink" href="#difference-of-two-proportions" title="Permalink to this heading">#</a></h2>
 <p>We can also use hypothesis testing to compare two proportions. This test is most common when you want to see if a population proportion is the same in two independent populations. For example, maybe we want to see if the proportion of men in the United States who have high trust in scientists (<span class="math notranslate nohighlight">\(p_1\)</span>) is different than the proportion of women in the United States who have high trust in scientists (<span class="math notranslate nohighlight">\(p_2\)</span>). Our two hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3f34da0a-d96d-44cb-89d4-5ee31d565c49">
-<span class="eqno">(10)<a class="headerlink" href="#equation-3f34da0a-d96d-44cb-89d4-5ee31d565c49" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9c40816d-a038-4af9-825b-f04ebef8961a">
+<span class="eqno">(10)<a class="headerlink" href="#equation-9c40816d-a038-4af9-825b-f04ebef8961a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: p_1 - p_2 = 0, \\
     H_1: p_1 - p_2 \neq 0.
 \end{equation}\]</div>
@@ -1085,23 +1134,23 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 <p>Overall, in our sample we see a difference of about 0.04 between the proportions of men and women who have high trust in scientists. Again we ask, is that a large difference?</p>
 <p>Recall that if our sample sizes <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span> are large enough,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-63abe9ee-afb4-4032-8259-6fb231bb5a48">
-<span class="eqno">(11)<a class="headerlink" href="#equation-63abe9ee-afb4-4032-8259-6fb231bb5a48" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1eeb12e6-6625-45b3-8c91-203c0f0579cd">
+<span class="eqno">(11)<a class="headerlink" href="#equation-1eeb12e6-6625-45b3-8c91-203c0f0579cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat p_1 - \hat p_2 \sim N\left(p_1 - p_2, \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } \right).
 \end{equation}\]</div>
 <p>and hence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c12348ec-18e8-4e37-9c2d-6ec432d5a571">
-<span class="eqno">(12)<a class="headerlink" href="#equation-c12348ec-18e8-4e37-9c2d-6ec432d5a571" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5b3bd503-a90a-4431-8fdc-531e198241ad">
+<span class="eqno">(12)<a class="headerlink" href="#equation-5b3bd503-a90a-4431-8fdc-531e198241ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Z = \frac{\hat p_1 - \hat p_2 - (p_1 - p_2)}{ \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } } \sim N(0,1).
 \end{equation}\]</div>
 <p>The null hypothesis tells us what to fill in for <span class="math notranslate nohighlight">\(p_1-p_2\)</span>, but it doesn’t hypothesize directly about the values of <span class="math notranslate nohighlight">\(p_1\)</span> or <span class="math notranslate nohighlight">\(p_2\)</span>. However, it does hypothesize that <span class="math notranslate nohighlight">\(p_1 = p_2\)</span>, and it that is true, then our estimates <span class="math notranslate nohighlight">\(\hat p_1\)</span> and <span class="math notranslate nohighlight">\(\hat p_2\)</span> are estimating the same thing. In that case, we can combine them to estimate the variance. Define <span class="math notranslate nohighlight">\(p\)</span> to be the common value of <span class="math notranslate nohighlight">\(p_1 = p_2 = p\)</span>. Then the variance of our test statistic is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-36876e75-ff4c-4e24-98dd-ce7577f527f2">
-<span class="eqno">(13)<a class="headerlink" href="#equation-36876e75-ff4c-4e24-98dd-ce7577f527f2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1f2aaee4-e5e1-4aea-b5ce-615ff1a42af0">
+<span class="eqno">(13)<a class="headerlink" href="#equation-1f2aaee4-e5e1-4aea-b5ce-615ff1a42af0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  }  = \sqrt{ \frac{p(1-p)}{n_1} + \frac{p(1-p)}{n_2}  } = \sqrt{ p(1-p)\left( \frac{1}{n_1} + \frac{1}{n_2}\right)  },
 \end{equation}\]</div>
 <p>and we can estimate <span class="math notranslate nohighlight">\(p\)</span> using</p>
-<div class="amsmath math notranslate nohighlight" id="equation-83dfcb8d-daa6-4b89-817e-0d8b02bf6b8d">
-<span class="eqno">(14)<a class="headerlink" href="#equation-83dfcb8d-daa6-4b89-817e-0d8b02bf6b8d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-47f55267-bebd-4516-b3d2-d7c5c47e64d5">
+<span class="eqno">(14)<a class="headerlink" href="#equation-47f55267-bebd-4516-b3d2-d7c5c47e64d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
     p \approx \hat p = \frac{\mbox{num. of male respondents with high trust in scientists} + \mbox{num. of female respondents with high trust in scientists}}{\mbox{num. of male respondents} + \mbox{num. of female respondents}}.
 \end{equation}\]</div>
 <p>We call <span class="math notranslate nohighlight">\(\hat p\)</span> the <strong>pooled sample proportion</strong>.</p>

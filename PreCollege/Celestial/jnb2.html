@@ -528,17 +528,292 @@ Let's read in up to 100,000 rows of COVID data for Chicago from the Chicago Data
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">rawCOVID</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;https://data.cityofchicago.org/resource/yhhz-zm2v.json?$limit=100000&#39;</span><span class="p">)</span> <span class="c1">#Import data directly from data portal</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>zip_code</th>
+      <th>week_number</th>
+      <th>week_start</th>
+      <th>week_end</th>
+      <th>cases_weekly</th>
+      <th>cases_cumulative</th>
+      <th>case_rate_weekly</th>
+      <th>case_rate_cumulative</th>
+      <th>tests_weekly</th>
+      <th>tests_cumulative</th>
+      <th>...</th>
+      <th>death_rate_weekly</th>
+      <th>death_rate_cumulative</th>
+      <th>population</th>
+      <th>row_id</th>
+      <th>zip_code_location</th>
+      <th>:@computed_region_rpca_8um6</th>
+      <th>:@computed_region_vrxf_vc4k</th>
+      <th>:@computed_region_6mkv_f3dw</th>
+      <th>:@computed_region_bdys_3d7i</th>
+      <th>:@computed_region_43wa_7qmu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>60601</td>
+      <td>17</td>
+      <td>2020-04-19T00:00:00.000</td>
+      <td>2020-04-25T00:00:00.000</td>
+      <td>7.0</td>
+      <td>45.0</td>
+      <td>47.7</td>
+      <td>306.6</td>
+      <td>35.0</td>
+      <td>198</td>
+      <td>...</td>
+      <td>6.8</td>
+      <td>13.6</td>
+      <td>14675</td>
+      <td>60601-2020-17</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>60601</td>
+      <td>12</td>
+      <td>2021-03-21T00:00:00.000</td>
+      <td>2021-03-27T00:00:00.000</td>
+      <td>29.0</td>
+      <td>1003.0</td>
+      <td>197.6</td>
+      <td>6834.8</td>
+      <td>616.0</td>
+      <td>23059</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-12</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>60601</td>
+      <td>13</td>
+      <td>2021-03-28T00:00:00.000</td>
+      <td>2021-04-03T00:00:00.000</td>
+      <td>20.0</td>
+      <td>1023.0</td>
+      <td>136.3</td>
+      <td>6971.0</td>
+      <td>864.0</td>
+      <td>23923</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-13</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>60601</td>
+      <td>14</td>
+      <td>2021-04-04T00:00:00.000</td>
+      <td>2021-04-10T00:00:00.000</td>
+      <td>17.0</td>
+      <td>1040.0</td>
+      <td>115.8</td>
+      <td>7086.9</td>
+      <td>800.0</td>
+      <td>24723</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-14</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>60601</td>
+      <td>17</td>
+      <td>2021-04-25T00:00:00.000</td>
+      <td>2021-05-01T00:00:00.000</td>
+      <td>11.0</td>
+      <td>1085.0</td>
+      <td>75.0</td>
+      <td>7393.5</td>
+      <td>854.0</td>
+      <td>27136</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-17</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>60601</td>
+      <td>18</td>
+      <td>2021-05-02T00:00:00.000</td>
+      <td>2021-05-08T00:00:00.000</td>
+      <td>5.0</td>
+      <td>1090.0</td>
+      <td>34.1</td>
+      <td>7427.6</td>
+      <td>780.0</td>
+      <td>27916</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-18</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>60601</td>
+      <td>19</td>
+      <td>2021-05-09T00:00:00.000</td>
+      <td>2021-05-15T00:00:00.000</td>
+      <td>10.0</td>
+      <td>1100.0</td>
+      <td>68.1</td>
+      <td>7495.7</td>
+      <td>578.0</td>
+      <td>28494</td>
+      <td>...</td>
+      <td>6.8</td>
+      <td>81.8</td>
+      <td>14675</td>
+      <td>60601-2021-19</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>60601</td>
+      <td>2</td>
+      <td>2021-01-10T00:00:00.000</td>
+      <td>2021-01-16T00:00:00.000</td>
+      <td>32.0</td>
+      <td>852.0</td>
+      <td>218.1</td>
+      <td>5805.8</td>
+      <td>643.0</td>
+      <td>16605</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>14675</td>
+      <td>60601-2021-2</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>60601</td>
+      <td>20</td>
+      <td>2021-05-16T00:00:00.000</td>
+      <td>2021-05-22T00:00:00.000</td>
+      <td>5.0</td>
+      <td>1105.0</td>
+      <td>34.1</td>
+      <td>7529.8</td>
+      <td>532.0</td>
+      <td>29026</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>81.8</td>
+      <td>14675</td>
+      <td>60601-2021-20</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>60601</td>
+      <td>21</td>
+      <td>2021-05-23T00:00:00.000</td>
+      <td>2021-05-29T00:00:00.000</td>
+      <td>3.0</td>
+      <td>1108.0</td>
+      <td>20.4</td>
+      <td>7550.3</td>
+      <td>475.0</td>
+      <td>29501</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>81.8</td>
+      <td>14675</td>
+      <td>60601-2021-21</td>
+      <td>{'type': 'Point', 'coordinates': [-87.622844, ...</td>
+      <td>42.0</td>
+      <td>38.0</td>
+      <td>14309.0</td>
+      <td>580.0</td>
+      <td>36.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 26 columns</p>
+</div></div></div>
 </div>
 <p>We’ll list the 26 column names</p>
 <div class="cell docutils container">
@@ -548,7 +823,7 @@ Let's read in up to 100,000 rows of COVID data for Chicago from the Chicago Data
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8280, 26)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10500, 26)
 </pre></div>
 </div>
 </div>
@@ -560,32 +835,32 @@ Let's read in up to 100,000 rows of COVID data for Chicago from the Chicago Data
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;:@computed_region_43wa_7qmu&#39;,
- &#39;:@computed_region_6mkv_f3dw&#39;,
- &#39;:@computed_region_bdys_3d7i&#39;,
- &#39;:@computed_region_rpca_8um6&#39;,
- &#39;:@computed_region_vrxf_vc4k&#39;,
- &#39;case_rate_cumulative&#39;,
- &#39;case_rate_weekly&#39;,
- &#39;cases_cumulative&#39;,
- &#39;cases_weekly&#39;,
- &#39;death_rate_cumulative&#39;,
- &#39;death_rate_weekly&#39;,
- &#39;deaths_cumulative&#39;,
- &#39;deaths_weekly&#39;,
- &#39;percent_tested_positive_cumulative&#39;,
- &#39;percent_tested_positive_weekly&#39;,
- &#39;population&#39;,
- &#39;row_id&#39;,
- &#39;test_rate_cumulative&#39;,
- &#39;test_rate_weekly&#39;,
- &#39;tests_cumulative&#39;,
- &#39;tests_weekly&#39;,
- &#39;week_end&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;zip_code&#39;,
  &#39;week_number&#39;,
  &#39;week_start&#39;,
- &#39;zip_code&#39;,
- &#39;zip_code_location&#39;]
+ &#39;week_end&#39;,
+ &#39;cases_weekly&#39;,
+ &#39;cases_cumulative&#39;,
+ &#39;case_rate_weekly&#39;,
+ &#39;case_rate_cumulative&#39;,
+ &#39;tests_weekly&#39;,
+ &#39;tests_cumulative&#39;,
+ &#39;test_rate_weekly&#39;,
+ &#39;test_rate_cumulative&#39;,
+ &#39;percent_tested_positive_weekly&#39;,
+ &#39;percent_tested_positive_cumulative&#39;,
+ &#39;deaths_weekly&#39;,
+ &#39;deaths_cumulative&#39;,
+ &#39;death_rate_weekly&#39;,
+ &#39;death_rate_cumulative&#39;,
+ &#39;population&#39;,
+ &#39;row_id&#39;,
+ &#39;zip_code_location&#39;,
+ &#39;:@computed_region_rpca_8um6&#39;,
+ &#39;:@computed_region_vrxf_vc4k&#39;,
+ &#39;:@computed_region_6mkv_f3dw&#39;,
+ &#39;:@computed_region_bdys_3d7i&#39;,
+ &#39;:@computed_region_43wa_7qmu&#39;]
 </pre></div>
 </div>
 </div>
@@ -630,143 +905,143 @@ Let's streamline the data to just 4 columns, drop rows with missing data,  simpl
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>0</td>
-      <td>60603</td>
+      <td>2</td>
+      <td>14675</td>
+      <td>198</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>0</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>23059</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>1</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>23923</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>4</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>24723</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>10</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>27136</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>16</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>27916</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>19</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>28494</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>22</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>16605</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>35</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>29026</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>42</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>29501</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>50</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>29883</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>64</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>30303</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>71</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>30765</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>90</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>31245</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>100</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>40228</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>114</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>51343</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>124</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>52920</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>148</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>17680</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>168</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>54804</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>199</td>
-      <td>60603</td>
+      <td>12</td>
+      <td>14675</td>
+      <td>55890</td>
+      <td>60601</td>
     </tr>
   </tbody>
 </table>
@@ -782,10 +1057,10 @@ Let's check how many rows have data in each column</h3><div class="cell docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deaths        8280
-population    8280
-tests         8280
-zip           8280
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deaths        10500
+population    10500
+tests         10500
+zip           10500
 dtype: int64
 </pre></div>
 </div>
@@ -801,67 +1076,68 @@ Let's find out how many times each zip code appears.<div class="cell docutils co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60634      138
-60630      138
-60666      138
-60610      138
-60827      138
-60657      138
-60622      138
-60625      138
-60633      138
-60606      138
-60607      138
-60632      138
-60659      138
-60661      138
-60612      138
-60642      138
-60636      138
-60616      138
-60629      138
-60637      138
-60605      138
-Unknown    138
-60646      138
-60618      138
-60620      138
-60647      138
-60608      138
-60643      138
-60617      138
-60602      138
-60640      138
-60660      138
-60639      138
-60649      138
-60707      138
-60611      138
-60655      138
-60619      138
-60651      138
-60613      138
-60654      138
-60615      138
-60624      138
-60652      138
-60621      138
-60609      138
-60645      138
-60614      138
-60628      138
-60638      138
-60601      138
-60603      138
-60626      138
-60641      138
-60631      138
-60656      138
-60623      138
-60604      138
-60653      138
-60644      138
-Name: zip, dtype: int64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zip
+60601      175
+60602      175
+60634      175
+60636      175
+60637      175
+60638      175
+60639      175
+60640      175
+60641      175
+60642      175
+60643      175
+60644      175
+60645      175
+60646      175
+60647      175
+60649      175
+60651      175
+60652      175
+60653      175
+60654      175
+60655      175
+60656      175
+60657      175
+60659      175
+60661      175
+60827      175
+60707      175
+60666      175
+60660      175
+60633      175
+60632      175
+60631      175
+60615      175
+60603      175
+60604      175
+60605      175
+60606      175
+60607      175
+60608      175
+60609      175
+60610      175
+60611      175
+60612      175
+60613      175
+60614      175
+60616      175
+60630      175
+60617      175
+60618      175
+60619      175
+60620      175
+60621      175
+60622      175
+60623      175
+60624      175
+60625      175
+60626      175
+60628      175
+60629      175
+Unknown    175
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -902,38 +1178,38 @@ Let's make a copy of the COVID dataframe and display the first 5 rows.<div class
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>0</td>
-      <td>60603</td>
+      <td>2</td>
+      <td>14675</td>
+      <td>198</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>0</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>23059</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>1</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>23923</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>4</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>24723</td>
+      <td>60601</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
-      <td>1174</td>
-      <td>10</td>
-      <td>60603</td>
+      <td>11</td>
+      <td>14675</td>
+      <td>27136</td>
+      <td>60601</td>
     </tr>
   </tbody>
 </table>
@@ -975,38 +1251,38 @@ Let's make a copy of the COVID dataframe and display the first 5 rows.<div class
   </thead>
   <tbody>
     <tr>
-      <th>952</th>
-      <td>2</td>
-      <td>32426</td>
-      <td>2076</td>
-      <td>60611</td>
-    </tr>
-    <tr>
-      <th>953</th>
-      <td>2</td>
-      <td>32426</td>
-      <td>2476</td>
-      <td>60611</td>
-    </tr>
-    <tr>
-      <th>954</th>
-      <td>2</td>
-      <td>32426</td>
-      <td>2842</td>
-      <td>60611</td>
-    </tr>
-    <tr>
-      <th>955</th>
-      <td>2</td>
-      <td>32426</td>
-      <td>3354</td>
-      <td>60611</td>
-    </tr>
-    <tr>
-      <th>956</th>
+      <th>469</th>
       <td>3</td>
       <td>32426</td>
-      <td>3827</td>
+      <td>9391</td>
+      <td>60611</td>
+    </tr>
+    <tr>
+      <th>470</th>
+      <td>3</td>
+      <td>32426</td>
+      <td>10229</td>
+      <td>60611</td>
+    </tr>
+    <tr>
+      <th>471</th>
+      <td>4</td>
+      <td>32426</td>
+      <td>11000</td>
+      <td>60611</td>
+    </tr>
+    <tr>
+      <th>472</th>
+      <td>4</td>
+      <td>32426</td>
+      <td>11777</td>
+      <td>60611</td>
+    </tr>
+    <tr>
+      <th>473</th>
+      <td>4</td>
+      <td>32426</td>
+      <td>12470</td>
       <td>60611</td>
     </tr>
   </tbody>
@@ -1020,8 +1296,9 @@ Let's make a copy of the COVID dataframe and display the first 5 rows.<div class
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60611    138
-Name: zip, dtype: int64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zip
+60611    175
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -1036,7 +1313,7 @@ Let's find the largest value in the 'tests' column for zip '60611'.<div class="c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>366842
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>413824
 </pre></div>
 </div>
 </div>
@@ -1051,7 +1328,7 @@ Let's find the largest value in the 'tests' column for zip '60611'.<div class="c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>330
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>334
 </pre></div>
 </div>
 </div>
@@ -1097,7 +1374,7 @@ We can instruct the computer to give us the number COVID tests for any Chicago z
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zip code:  60637
-number tested is  366842
+number tested is  413824
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Enter a different zip code if you wish.&#39;
@@ -1126,6 +1403,16 @@ number tested is  366842
 <h3> Assignment </h3><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyCOVID2</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="s2">&quot;60619&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zip code:  60619
+number tested is  366440
+number of deaths is  239
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Enter a different zip code if you wish.&#39;
 </pre></div>
 </div>
 </div>
@@ -1177,11 +1464,29 @@ number tested is  366842
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zip code:  60625
+number tested is  490436
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Enter a different zip code if you wish.&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Q2b)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MyCOVID</span><span class="p">(</span><span class="n">COVID</span><span class="p">,</span><span class="s1">&#39;60637&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zip code:  60637
+number tested is  413824
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Enter a different zip code if you wish.&#39;
 </pre></div>
 </div>
 </div>
