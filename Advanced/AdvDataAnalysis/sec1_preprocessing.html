@@ -671,14 +671,9 @@ change cases</li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">stem</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">tokens</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;narrative&#39;</span><span class="p">,</span> <span class="s1">&#39;comprehensives&#39;</span><span class="p">,</span> <span class="s1">&#39;publicised&#39;</span><span class="p">,</span> <span class="s1">&#39;moderately&#39;</span><span class="p">,</span> <span class="s1">&#39;prosperous&#39;</span><span class="p">,</span> <span class="s1">&#39;legitimizes&#39;</span><span class="p">,</span> <span class="s1">&#39;according&#39;</span><span class="p">,</span> <span class="s1">&#39;glorifies&#39;</span><span class="p">]</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">porter</span> <span class="o">=</span> <span class="n">stem</span><span class="o">.</span><span class="n">porter</span><span class="o">.</span><span class="n">PorterStemmer</span><span class="p">()</span> <span class="c1"># Porter stemmer</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;nltk&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Porter Stemmer: [&#39;narr&#39;, &#39;comprehens&#39;, &#39;publicis&#39;, &#39;moder&#39;, &#39;prosper&#39;, &#39;legitim&#39;, &#39;accord&#39;, &#39;glorifi&#39;]
+Snowball Stemmer: [&#39;narrat&#39;, &#39;comprehens&#39;, &#39;publicis&#39;, &#39;moder&#39;, &#39;prosper&#39;, &#39;legitim&#39;, &#39;accord&#39;, &#39;glorifi&#39;]
+Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mod&#39;, &#39;prosp&#39;, &#39;legitim&#39;, &#39;accord&#39;, &#39;glor&#39;]
 </pre></div>
 </div>
 </div>
@@ -688,17 +683,11 @@ change cases</li>
 </section>
 <section id="translation">
 <h3>1.3.2 Translation<a class="headerlink" href="#translation" title="Permalink to this heading">#</a></h3>
-<p>Language detection is easy using pre-existing algorithms, including Google Translate, which can be downloaded and installed for use in Python with the following:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">fasttext</span>
-<span class="n">pip</span>  <span class="n">install</span> <span class="n">googletrans</span><span class="o">==</span><span class="mf">3.1.0</span><span class="n">a0</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">langdetect</span> 
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">spacy_langdetect</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>Language detection is easy using pre-existing algorithms, including Google Translate, which can be downloaded and installed for use in Python with the following in the command lone:</p>
+<p>pip install fasttext</p>
+<p>pip  install googletrans==3.1.0a0</p>
+<p>pip install langdetect</p>
+<p>pip install spacy_langdetect</p>
 <p>To use the translation service, we can run the following code to import and load the model, then use it to predict languages:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -716,6 +705,34 @@ change cases</li>
 <span class="kn">from</span> <span class="nn">googletrans</span> <span class="kn">import</span> <span class="n">Translator</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">Translator</span><span class="p">()</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="s2">&quot;四个和尚&quot;</span><span class="p">)</span>
 <span class="n">t</span><span class="o">.</span><span class="n">lang</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning : `load_model` does not return WordVectorModel or SupervisedModel any more, but a `FastText` object which is very similar.
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">fasttext</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;lid.176.ftz&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s1">&#39;الشمس تشرق&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># top 2 matching languages</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;影響包含對氣候的變化以及自然資源的枯竭程度&quot;</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># top 2 matching languages</span>
+
+<span class="nn">File ~/.local/lib/python3.9/site-packages/fasttext/FastText.py:441,</span> in <span class="ni">load_model</span><span class="nt">(path)</span>
+<span class="g g-Whitespace">    </span><span class="mi">439</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Load a model given a filepath and return a model object.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">440</span> <span class="n">eprint</span><span class="p">(</span><span class="s2">&quot;Warning : `load_model` does not return WordVectorModel or SupervisedModel any more, but a `FastText` object which is very similar.&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">441</span> <span class="k">return</span> <span class="n">_FastText</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.9/site-packages/fasttext/FastText.py:98,</span> in <span class="ni">_FastText.__init__</span><span class="nt">(self, model_path, args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">fasttext</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span> <span class="k">if</span> <span class="n">model_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">98</span>     <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">loadModel</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span> <span class="bp">self</span><span class="o">.</span><span class="n">_words</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="ne">ValueError</span>: lid.176.ftz cannot be opened for loading!
 </pre></div>
 </div>
 </div>
