@@ -684,7 +684,7 @@ Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mo
 <section id="translation">
 <h3>1.3.2 Translation<a class="headerlink" href="#translation" title="Permalink to this heading">#</a></h3>
 <p>Language detection is easy using pre-existing algorithms, including Google Translate, which can be downloaded and installed for use in Python with the following in the command lone:</p>
-<p>pip install fasttext</p>
+<p>pip install fastText</p>
 <p>pip  install googletrans==3.1.0a0</p>
 <p>pip install langdetect</p>
 <p>pip install spacy_langdetect</p>
@@ -695,7 +695,7 @@ Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mo
 <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;lid.176.ftz&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s1">&#39;الشمس تشرق&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># top 2 matching languages</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;影響包含對氣候的變化以及自然資源的枯竭程度&quot;</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># top 2 matching languages</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="c1">#print(model.predict(t1, k=3))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s1">&#39;四个全面&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="kn">from</span> <span class="nn">langdetect</span> <span class="kn">import</span> <span class="n">detect</span><span class="p">,</span> <span class="n">DetectorFactory</span>
@@ -709,30 +709,15 @@ Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mo
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;__label__ar&#39;, &#39;__label__fa&#39;), array([0.98124713, 0.01265871]))
+((&#39;__label__zh&#39;, &#39;__label__fr&#39;), array([9.99575794e-01, 2.11721170e-04]))
+((&#39;__label__zh&#39;, &#39;__label__ja&#39;), array([0.68349081, 0.31656581]))
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning : `load_model` does not return WordVectorModel or SupervisedModel any more, but a `FastText` object which is very similar.
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">fasttext</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;lid.176.ftz&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s1">&#39;الشمس تشرق&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># top 2 matching languages</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;影響包含對氣候的變化以及自然資源的枯竭程度&quot;</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># top 2 matching languages</span>
-
-<span class="nn">File ~/.local/lib/python3.9/site-packages/fasttext/FastText.py:441,</span> in <span class="ni">load_model</span><span class="nt">(path)</span>
-<span class="g g-Whitespace">    </span><span class="mi">439</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Load a model given a filepath and return a model object.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">440</span> <span class="n">eprint</span><span class="p">(</span><span class="s2">&quot;Warning : `load_model` does not return WordVectorModel or SupervisedModel any more, but a `FastText` object which is very similar.&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">441</span> <span class="k">return</span> <span class="n">_FastText</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
-
-<span class="nn">File ~/.local/lib/python3.9/site-packages/fasttext/FastText.py:98,</span> in <span class="ni">_FastText.__init__</span><span class="nt">(self, model_path, args)</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">fasttext</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">97</span> <span class="k">if</span> <span class="n">model_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">98</span>     <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">loadModel</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">99</span> <span class="bp">self</span><span class="o">.</span><span class="n">_words</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">100</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="ne">ValueError</span>: lid.176.ftz cannot be opened for loading!
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;zh-CN&#39;, 1)
 </pre></div>
 </div>
 </div>
@@ -745,6 +730,14 @@ Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mo
 <span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s2">&quot;Ein, zwei, drei, vier&quot;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s1">&#39;四个和尚没水喝&#39;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s1">&#39;今一はお前さん&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>en
+de
+zh-cn
+ja
 </pre></div>
 </div>
 </div>
@@ -762,6 +755,57 @@ Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mo
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>doi</th>
+      <th>text_id</th>
+      <th>text</th>
+      <th>sdg</th>
+      <th>labels_negative</th>
+      <th>labels_positive</th>
+      <th>agreement</th>
+      <th>lang</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10.6027/9789289342698-7-en</td>
+      <td>00021941702cd84171ff33962197ca1f</td>
+      <td>"From a gender perspective, Paulgaard points o...</td>
+      <td>5</td>
+      <td>1</td>
+      <td>8</td>
+      <td>0.777778</td>
+      <td>en</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p><b>Exercise 1.6</b>: Use <span class="math notranslate nohighlight">\(\texttt{text\_df.lang.value\_counts()}\)</span> to count the number of texts for each language in our UN SDG dataset thus far. How many texts are there for each language?</p>
 <p>Our dataset includes some non-English texts, which is understandable: while English is a widely spoken language and is the dominant language on the Internet, there are thousands of other languages. However, English is the most common language in the dataset, so we should consider: do we need to remove the non-English texts?</p>
 <p><b>Exercise 1.7</b>: Use <span class="math notranslate nohighlight">\(\texttt{text\_df.query(&quot;lang == 'fr'&quot;)[&quot;text&quot;]}\)</span> to output the texts written in French. Examine the output of these sentences. Does it make sense to remove them? If so, write the necessary code to do so.</p>
@@ -777,6 +821,21 @@ Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mo
 <li>“In China today, President Xi Jinping’s new grand narrative is framed by the widely publicised ‘four comprehensives’.”</li>
 </ol>
 <p>The library <span class="math notranslate nohighlight">\(\texttt{spaCy}\)</span> is used to tag parts of speech via computer:</p>
+<p>Use the commandline to run the following:</p>
+<p>pip install spacy</p>
+<p>python -m spacy dowload en_core_web_sm</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>spacy<span class="w"> </span>download<span class="w"> </span>en_core_web_sm
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/bin/python: No module named spacy
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
@@ -791,6 +850,19 @@ Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mo
 <span class="nb">print</span><span class="p">([(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
 <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">([(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">spacy</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">en_core_web_sm</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">spacy_langdetect</span> <span class="kn">import</span> <span class="n">LanguageDetector</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;en_core_web_sm&#39;
 </pre></div>
 </div>
 </div>

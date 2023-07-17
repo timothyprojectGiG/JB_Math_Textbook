@@ -15,45 +15,28 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import fasttext
-model = fasttext.load_model('lid.176.ftz')
-print(model.predict('الشمس تشرق', k=2))  # top 2 matching languages
-print(model.predict("影響包含對氣候的變化以及自然資源的枯竭程度",k=2))  # top 2 matching languages
-print(model.predict(t1, k=3))
-print(model.predict('四个全面', k=3))
-
-from langdetect import detect, DetectorFactory
-DetectorFactory.seed = 0
-detect('四个和尚没水喝'), detect('今一はお前さん')
-
-from googletrans import Translator
-t = Translator().detect("四个和尚")
-t.lang, t.confidence
+import spacy
+import en_core_web_sm
+from spacy_langdetect import LanguageDetector
+nlp = spacy.load("en_core_web_sm")
+nlp = en_core_web_sm.load()
+doc = nlp("This is a sentence.")
+print([(w.text, w.pos_) for w in doc])
+text_content = "Er lebt mit seinen Eltern und seiner Schwester in Berlin."
+doc = nlp(text_content) 
+print([(w.text, w.pos_) for w in doc])
+doc = nlp(t1)
+print([(w.text, w.pos_) for w in doc])
 ------------------
 
------ stderr -----
-Warning : `load_model` does not return WordVectorModel or SupervisedModel any more, but a `FastText` object which is very similar.
-------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mValueError[0m                                Traceback (most recent call last)
-Cell [0;32mIn[7], line 2[0m
-[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mfasttext[39;00m
-[0;32m----> 2[0m model [38;5;241m=[39m [43mfasttext[49m[38;5;241;43m.[39;49m[43mload_model[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mlid.176.ftz[39;49m[38;5;124;43m'[39;49m[43m)[49m
-[1;32m      3[0m [38;5;28mprint[39m(model[38;5;241m.[39mpredict([38;5;124m'[39m[38;5;124mالشمس تشرق[39m[38;5;124m'[39m, k[38;5;241m=[39m[38;5;241m2[39m))  [38;5;66;03m# top 2 matching languages[39;00m
-[1;32m      4[0m [38;5;28mprint[39m(model[38;5;241m.[39mpredict([38;5;124m"[39m[38;5;124m影響包含對氣候的變化以及自然資源的枯竭程度[39m[38;5;124m"[39m,k[38;5;241m=[39m[38;5;241m2[39m))  [38;5;66;03m# top 2 matching languages[39;00m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[12], line 2[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mspacy[39;00m
+[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01men_core_web_sm[39;00m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mspacy_langdetect[39;00m [38;5;28;01mimport[39;00m LanguageDetector
+[1;32m      4[0m nlp [38;5;241m=[39m spacy[38;5;241m.[39mload([38;5;124m"[39m[38;5;124men_core_web_sm[39m[38;5;124m"[39m)
 
-File [0;32m~/.local/lib/python3.9/site-packages/fasttext/FastText.py:441[0m, in [0;36mload_model[0;34m(path)[0m
-[1;32m    439[0m [38;5;250m[39m[38;5;124;03m"""Load a model given a filepath and return a model object."""[39;00m
-[1;32m    440[0m eprint([38;5;124m"[39m[38;5;124mWarning : `load_model` does not return WordVectorModel or SupervisedModel any more, but a `FastText` object which is very similar.[39m[38;5;124m"[39m)
-[0;32m--> 441[0m [38;5;28;01mreturn[39;00m [43m_FastText[49m[43m([49m[43mmodel_path[49m[38;5;241;43m=[39;49m[43mpath[49m[43m)[49m
-
-File [0;32m~/.local/lib/python3.9/site-packages/fasttext/FastText.py:98[0m, in [0;36m_FastText.__init__[0;34m(self, model_path, args)[0m
-[1;32m     96[0m [38;5;28mself[39m[38;5;241m.[39mf [38;5;241m=[39m fasttext[38;5;241m.[39mfasttext()
-[1;32m     97[0m [38;5;28;01mif[39;00m model_path [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-[0;32m---> 98[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mf[49m[38;5;241;43m.[39;49m[43mloadModel[49m[43m([49m[43mmodel_path[49m[43m)[49m
-[1;32m     99[0m [38;5;28mself[39m[38;5;241m.[39m_words [38;5;241m=[39m [38;5;28;01mNone[39;00m
-[1;32m    100[0m [38;5;28mself[39m[38;5;241m.[39m_labels [38;5;241m=[39m [38;5;28;01mNone[39;00m
-
-[0;31mValueError[0m: lid.176.ftz cannot be opened for loading!
+[0;31mModuleNotFoundError[0m: No module named 'en_core_web_sm'
 
