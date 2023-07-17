@@ -1,0 +1,98 @@
+Traceback (most recent call last):
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.9/dist-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+def f(y, t, params):
+    b1, c,p = y      # unpack current values of y
+    k1,k2,k3, r12,r13,r23,r21,r31,r32,L1,L2,L3 = params  # unpack parameters
+    derivs = [k1*(1-.4*np.heaviside(t-100,0)+.4*np.heaviside(t-465,0))+r31*p+r21*c-(r13*b1+r12*b1)-L1*b1,      # list of dy/dt=f functions
+             k2+r12*b1+r32*p-(r21*c+r23*c)-L2*c,
+             k3+r13*b1+r23*c-(r31*p+r32*p)-L3*p,]
+    return derivs
+
+# Parameters
+k1 = 7.34*86400         
+L1 = 24 
+k2=0
+L2=0
+k3=0
+L3=6.7*10**(-3)*86400   
+r12=7.6*10**(-6)*86400   
+r23=1.7*10**(-3)*86400   
+r31=3.7*10**(-5)*86400   
+r32=0
+r21=0
+r13=0
+
+# Initial values
+b10 = 25.7*(10**3)     
+c0 = 115
+p0 = 29
+
+# Bundle parameters for ODE solver
+params = [k1,k2,k3, r12,r13,r23,r21,r31,r32,L1,L2,L3 ]
+
+# Bundle initial conditions for ODE solver
+y0 = [b10,c0,p0]
+
+# Make time array for solution
+tStop = 1000.
+tInc = 0.05
+t = np.arange(0., tStop, tInc)
+
+# Call the ODE solver
+psoln = odeint(f, y0, t, args=(params,))
+
+# Plot results
+fig = plt.figure(1, figsize=(8,8))
+
+# Plot b1 as a function of time
+ax1 = fig.add_subplot(311)
+ax1.plot(t, psoln[:,0])
+ax1.set_xlabel('time')
+ax1.set_ylabel('b1')
+
+# Plot c as a function of time
+ax2 = fig.add_subplot(312)
+ax2.plot(t, psoln[:,1])
+ax2.set_xlabel('time')
+ax2.set_ylabel('c')
+
+# Plot p as a function of time
+ax3 = fig.add_subplot(313)
+ax3.plot(t, psoln[:,2])
+ax3.set_xlabel('time')
+ax3.set_ylabel('p')
+plt.savefig("treatment1.png")
+plt.tight_layout()
+plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 2[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mintegrate[39;00m [38;5;28;01mimport[39;00m odeint
+[1;32m      5[0m [38;5;28;01mdef[39;00m [38;5;21mf[39m(y, t, params):
+
+[0;31mModuleNotFoundError[0m: No module named 'matplotlib'
+

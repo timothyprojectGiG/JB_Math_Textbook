@@ -1,0 +1,84 @@
+Traceback (most recent call last):
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.9/dist-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+def f(y, t, params):
+    T, T1,T2, V = y      # unpack current values of y
+    s,r,Tmax,muT,mub,muV,k1,k2,N= params  # unpack parameters
+    derivs = [s+r*T*(1-(T+T1+T2)/Tmax)-muT*T-k1*T*V,   # list of dy/dt=f functions
+             k1*T*V-muT*T1-k2*T1,
+             k2*T1-mub*T2,
+             N*mub*T2-k1*T*V-muV*V]
+    return derivs
+
+# Parameters
+s=10
+r=.03
+Tmax=1500
+muT=.02
+mub=.24
+muV=2.4
+k1 = 2.4*10**(-5)       
+k2=3*10**(-3)
+N=1800
+
+# Initial values
+T0=1000
+T10=0
+T20=0
+V0=10**(-3)
+
+# Bundle parameters for ODE solver
+params = [s,r,Tmax,muT,mub,muV,k1,k2,N]
+
+# Bundle initial conditions for ODE solver
+y0 = [T0,T10,T20,V0]
+
+# Make time array for solution
+tStop = 1501
+tInc = 0.05
+t = np.arange(0., tStop, tInc)
+
+# Call the ODE solver
+psoln = odeint(f, y0, t, args=(params,))
+
+# Plot results
+fig = plt.figure(1, figsize=(5,3))
+plt.plot(t, psoln[:,0],label='Healthy T-Cell')
+plt.plot(t, psoln[:,3],label='Free Virus')
+plt.legend()
+plt.xlabel('time')
+plt.ylabel('Concentration')
+plt.savefig("HIV1.png")
+plt.tight_layout()
+plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 2[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mintegrate[39;00m [38;5;28;01mimport[39;00m odeint
+[1;32m      5[0m [38;5;28;01mdef[39;00m [38;5;21mf[39m(y, t, params):
+
+[0;31mModuleNotFoundError[0m: No module named 'matplotlib'
+

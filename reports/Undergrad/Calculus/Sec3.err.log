@@ -1,0 +1,58 @@
+Traceback (most recent call last):
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.9/dist-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/timothyprojectinfo/.local/lib/python3.9/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from scipy.optimize import fsolve
+
+# Prompt the user to input the function f(x)
+#expression_str = input("Enter the function f(x): ")
+#f_x = lambda x: eval(expression_str)
+f_x = lambda x: x**3+x-.0015
+
+# Prompt the user to input the interval [a, b]
+#a = float(input("Enter the lower bound of the interval (a): "))
+a=-1
+#b = float(input("Enter the upper bound of the interval (b): "))
+b=1
+
+# Define a function to check if a value is within the interval [a, b]
+def within_interval(x):
+    return a <= x <= b
+
+# Find all the zeros of the function within the interval [a, b]
+zeros = set()
+tolerance = 1e-6  # Adjust the tolerance as needed
+for x0 in range(int(a), int(b)+1):
+    zero = fsolve(f_x, x0)
+    if within_interval(zero) and abs(zero) > tolerance:
+        zeros.add(round(zero[0], 3))  # Round to three decimal places
+
+# Print the zeros within the interval
+print("Zeros of the function within the interval [a, b]:", zeros)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[3], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01moptimize[39;00m [38;5;28;01mimport[39;00m fsolve
+[1;32m      3[0m [38;5;66;03m# Prompt the user to input the function f(x)[39;00m
+[1;32m      4[0m [38;5;66;03m#expression_str = input("Enter the function f(x): ")[39;00m
+[1;32m      5[0m [38;5;66;03m#f_x = lambda x: eval(expression_str)[39;00m
+[1;32m      6[0m f_x [38;5;241m=[39m [38;5;28;01mlambda[39;00m x: x[38;5;241m*[39m[38;5;241m*[39m[38;5;241m3[39m[38;5;241m+[39mx[38;5;241m-[39m[38;5;241m.0015[39m
+
+[0;31mModuleNotFoundError[0m: No module named 'scipy'
+

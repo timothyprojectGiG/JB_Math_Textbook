@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>5. CWS Model of Alzheimemer’s Disease &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -1036,7 +1036,7 @@ in a pre-treatment steady state on days 0-100, and is given a
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
     <span class="n">b1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
     <span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">k3</span><span class="p">,</span> <span class="n">r12</span><span class="p">,</span><span class="n">r13</span><span class="p">,</span><span class="n">r23</span><span class="p">,</span><span class="n">r21</span><span class="p">,</span><span class="n">r31</span><span class="p">,</span><span class="n">r32</span><span class="p">,</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">L3</span> <span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
-    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-.</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">+.</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">465</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="p">)</span><span class="o">-</span><span class="n">L1</span><span class="o">*</span><span class="n">b1</span><span class="p">,</span>      <span class="c1"># list of dy/dt=f functions</span>
+    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">.4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="mf">.4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">465</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="p">)</span><span class="o">-</span><span class="n">L1</span><span class="o">*</span><span class="n">b1</span><span class="p">,</span>      <span class="c1"># list of dy/dt=f functions</span>
              <span class="n">k2</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r32</span><span class="o">*</span><span class="n">p</span><span class="o">-</span><span class="p">(</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">+</span><span class="n">r23</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">L2</span><span class="o">*</span><span class="n">c</span><span class="p">,</span>
              <span class="n">k3</span><span class="o">+</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r23</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r32</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="n">L3</span><span class="o">*</span><span class="n">p</span><span class="p">,]</span>
     <span class="k">return</span> <span class="n">derivs</span>
@@ -1101,7 +1101,17 @@ in a pre-treatment steady state on days 0-100, and is given a
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/8f6e899280df5049efcd675e60c716460974684e9ead71d94c21538d9a0dc21d.png" src="../../../_images/8f6e899280df5049efcd675e60c716460974684e9ead71d94c21538d9a0dc21d.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
 </div>
 </div>
 <p>Treatment 1 results in the same change Amyloid-beta levels in the brain, CSF and plasma.</p>
@@ -1283,7 +1293,7 @@ al. 2002]).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/895ba82d400af11e42ba4a8f31b7abf83b03cf1efd66a84c533322cac74192ad.png" src="../../../_images/895ba82d400af11e42ba4a8f31b7abf83b03cf1efd66a84c533322cac74192ad.png" />
+<img alt="../../../_images/53bb3923452febb4442bbc647f108b688835dbfd7eef4c254a56101a99f31f10.png" src="../../../_images/53bb3923452febb4442bbc647f108b688835dbfd7eef4c254a56101a99f31f10.png" />
 </div>
 </div>
 </section>

@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>11. Integral Test and Income Streams &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -208,7 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Intro to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">Introduction to Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
@@ -304,7 +304,6 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
@@ -518,6 +517,19 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">math</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <h4>Integral Test</h4>
 <p>The integral test is one of the standard tests for convergence/divergence of an infinite series.  The basic idea of the test is that for a continous function <span class="math notranslate nohighlight">\(f(x)\)</span> defined on the interval <span class="math notranslate nohighlight">\(1\le x &lt; \infty\)</span>, the infinite series</p>
@@ -542,20 +554,20 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="o">.</span><span class="mi">0001</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mf">.0001</span><span class="p">)</span>
 <span class="n">y</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">x_left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.2</span><span class="p">,</span><span class="mf">.3</span><span class="p">,</span><span class="mf">.4</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="mf">.6</span><span class="p">,</span><span class="mf">.7</span><span class="p">,</span><span class="mf">.8</span><span class="p">,</span><span class="mf">.9</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_left</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">x_left</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Divergence of the Harmonic Series&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">2.3</span><span class="p">,</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;1/2&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.3</span><span class="p">,</span><span class="o">.</span><span class="mi">33</span><span class="p">,</span><span class="s1">&#39;1/3&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">4.3</span><span class="p">,</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span><span class="s1">&#39;1/4&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.3</span><span class="p">,</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;1/5&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">2.3</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="s1">&#39;1/2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.3</span><span class="p">,</span><span class="mf">.33</span><span class="p">,</span><span class="s1">&#39;1/3&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">4.3</span><span class="p">,</span><span class="mf">.25</span><span class="p">,</span><span class="s1">&#39;1/4&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.3</span><span class="p">,</span><span class="mf">.2</span><span class="p">,</span><span class="s1">&#39;1/5&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.1</span><span class="p">))</span> 
@@ -566,7 +578,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ea8316a2b1893dc33e0c076f220e740eb8d8243823b1b715e3b0e0248671fa65.png" src="../../_images/ea8316a2b1893dc33e0c076f220e740eb8d8243823b1b715e3b0e0248671fa65.png" />
+<img alt="../../_images/4b8ca20633af6b12a52adcb535f35c80745cc84628370a4956d09d296212f3b8.png" src="../../_images/4b8ca20633af6b12a52adcb535f35c80745cc84628370a4956d09d296212f3b8.png" />
 </div>
 </div>
 <p>On the other hand, a <span class="math notranslate nohighlight">\(p\)</span>-series with <span class="math notranslate nohighlight">\(p=2\)</span> series must converge as shown by a convergent improper integral
@@ -579,16 +591,16 @@ in comparison with inscribed rectangles representing the tail of the series</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="o">.</span><span class="mi">0001</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mf">.0001</span><span class="p">)</span>
 <span class="n">y</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">x_right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.2</span><span class="p">,</span><span class="mf">.3</span><span class="p">,</span><span class="mf">.4</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="mf">.6</span><span class="p">,</span><span class="mf">.7</span><span class="p">,</span><span class="mf">.8</span><span class="p">,</span><span class="mf">.9</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_right</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">x_right</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Convergence of a p-Series with p=2&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span><span class="s1">&#39;1/2^2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mf">.25</span><span class="p">,</span><span class="s1">&#39;1/2^2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;1/3^2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">16</span><span class="p">,</span><span class="s1">&#39;1/4^2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">4.</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">25</span><span class="p">,</span><span class="s1">&#39;1/5^2&#39;</span><span class="p">)</span>
@@ -602,7 +614,7 @@ in comparison with inscribed rectangles representing the tail of the series</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/172ab37bd09f01dae9182d93885333c83a045118672606f1d0d08e5ca9d7864b.png" src="../../_images/172ab37bd09f01dae9182d93885333c83a045118672606f1d0d08e5ca9d7864b.png" />
+<img alt="../../_images/dd25835c0575c320c56bd75dbfeabb9fd8592c35ed03c09dd22456c6c6b4afa0.png" src="../../_images/dd25835c0575c320c56bd75dbfeabb9fd8592c35ed03c09dd22456c6c6b4afa0.png" />
 </div>
 </div>
 <h4> Income Streams</h4><p>If <span class="math notranslate nohighlight">\(P\)</span> dollars is invested into an account with interest compounded continously with annual interest rate <span class="math notranslate nohighlight">\(r=.05\)</span> (i.e 5%), then after <span class="math notranslate nohighlight">\(t\)</span> years the amount <span class="math notranslate nohighlight">\(P\)</span> grows to <span class="math notranslate nohighlight">\(Pe^{rt}=Pe^{.05t}\)</span>.</p>
@@ -615,7 +627,7 @@ in comparison with inscribed rectangles representing the tail of the series</p>
 \[A_1+A_2+A_3 &lt; \int_1^3 (200+10t)e^{.05(3-t)}.\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="p">(</span><span class="mi">200</span><span class="o">+</span><span class="mi">10</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="o">.</span><span class="mi">05</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="p">(</span><span class="mi">200</span><span class="o">+</span><span class="mi">10</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="mf">.05</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># Use n*N+1 points to plot the function smoothly</span>
 <span class="c1">#right endpoint rule</span>
@@ -635,7 +647,7 @@ in comparison with inscribed rectangles representing the tail of the series</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t investment of 200+10t dollars with interest&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value of investment at t=3&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">232.5</span><span class="p">,</span><span class="s2">&quot;f(t)=(200+10t)e^{.05(3-t)}&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="mi">232</span><span class="p">,</span><span class="s2">&quot;A_1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">.3</span><span class="p">,</span><span class="mi">232</span><span class="p">,</span><span class="s2">&quot;A_1&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.3</span><span class="p">,</span><span class="mi">231</span><span class="p">,</span><span class="s2">&quot;A_2&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">2.3</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="s2">&quot;A_3&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">225</span><span class="p">,</span> <span class="mi">233</span><span class="p">))</span> 
@@ -646,7 +658,7 @@ in comparison with inscribed rectangles representing the tail of the series</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a9739fb31545f04cf844eef6aa9b8e79be6e5b86054f8316d4a8cc3844a09a23.png" src="../../_images/a9739fb31545f04cf844eef6aa9b8e79be6e5b86054f8316d4a8cc3844a09a23.png" />
+<img alt="../../_images/a0cb8a91a03925b4c4e277bf9c00fb077dae285e05c57aed606cb2ebfc88f8b6.png" src="../../_images/a0cb8a91a03925b4c4e277bf9c00fb077dae285e05c57aed606cb2ebfc88f8b6.png" />
 </div>
 </div>
 <h3>Lab</h3>
@@ -674,7 +686,7 @@ in comparison with inscribed rectangles representing the tail of the series</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem 2)</span>
 
-<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="p">(</span><span class="mi">10000</span><span class="o">+</span><span class="mi">500</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="o">.</span><span class="mi">05</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="p">(</span><span class="mi">10000</span><span class="o">+</span><span class="mi">500</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="mf">.05</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># Use n*N+1 points to plot the function smoothly</span>
 <span class="c1">#right endpoint rule</span>
@@ -694,7 +706,7 @@ in comparison with inscribed rectangles representing the tail of the series</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t investment of 10,000+500t dollars with interest&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value of investment at t=4&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12300</span><span class="p">,</span><span class="s2">&quot;f(t)=(10,000+500t)e^{.05(4-t)}&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="mi">11800</span><span class="p">,</span><span class="s2">&quot;A_1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">.3</span><span class="p">,</span><span class="mi">11800</span><span class="p">,</span><span class="s2">&quot;A_1&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.3</span><span class="p">,</span><span class="mi">11800</span><span class="p">,</span><span class="s2">&quot;A_2&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">2.3</span><span class="p">,</span><span class="mi">11800</span><span class="p">,</span><span class="s2">&quot;A_3&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.3</span><span class="p">,</span><span class="mi">11800</span><span class="p">,</span><span class="s2">&quot;A_4&quot;</span><span class="p">)</span>
@@ -706,7 +718,7 @@ in comparison with inscribed rectangles representing the tail of the series</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e3e6be9594df8db7e0ec0855ec0750ec6abfe706eebc6650da39a99ed380e995.png" src="../../_images/e3e6be9594df8db7e0ec0855ec0750ec6abfe706eebc6650da39a99ed380e995.png" />
+<img alt="../../_images/12e47ab72fcaf3dfdaa9f1c6f92030aa0a7dbbd8ae8131a376356598ff17ebad.png" src="../../_images/12e47ab72fcaf3dfdaa9f1c6f92030aa0a7dbbd8ae8131a376356598ff17ebad.png" />
 </div>
 </div>
 <ol class="arabic simple" start="3">
