@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>9. Simulating Formula One &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -609,8 +609,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create car objects</span>
-<span class="n">c1</span><span class="o">=</span><span class="n">car</span><span class="p">(</span><span class="mf">.43</span><span class="p">,</span><span class="mf">.15</span><span class="p">,</span><span class="s1">&#39;car1.png&#39;</span><span class="p">,</span><span class="mf">.14</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">c2</span><span class="o">=</span><span class="n">car</span><span class="p">(</span><span class="mf">.02</span><span class="p">,</span><span class="mf">.01</span><span class="p">,</span><span class="s1">&#39;car2.png&#39;</span><span class="p">,</span><span class="mf">.12</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">c1</span><span class="o">=</span><span class="n">car</span><span class="p">(</span><span class="o">.</span><span class="mi">43</span><span class="p">,</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;car1.png&#39;</span><span class="p">,</span><span class="o">.</span><span class="mi">14</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">c2</span><span class="o">=</span><span class="n">car</span><span class="p">(</span><span class="o">.</span><span class="mi">02</span><span class="p">,</span><span class="o">.</span><span class="mi">01</span><span class="p">,</span><span class="s1">&#39;car2.png&#39;</span><span class="p">,</span><span class="o">.</span><span class="mi">12</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">simulate</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -681,9 +681,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -730,7 +728,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -741,8 +738,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -765,13 +761,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -791,12 +781,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -846,10 +831,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -865,53 +850,30 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
-        'dblclick',
-        on_mouse_event_closure('dblclick')
-    );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -939,7 +901,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -1094,7 +1056,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -1143,14 +1120,11 @@ mpl.figure.prototype.updated_canvas_event = function () {
 mpl.figure.prototype._make_on_message_function = function (fig) {
     return function socket_on_message(evt) {
         if (evt.data instanceof Blob) {
-            var img = evt.data;
-            if (img.type !== 'image/png') {
-                /* FIXME: We get "Resource interpreted as Image but
-                 * transferred with MIME type text/plain:" errors on
-                 * Chrome.  But how to set the MIME type?  It doesn't seem
-                 * to be part of the websocket stream */
-                img.type = 'image/png';
-            }
+            /* FIXME: We get "Resource interpreted as Image but
+             * transferred with MIME type text/plain:" errors on
+             * Chrome.  But how to set the MIME type?  It doesn't seem
+             * to be part of the websocket stream */
+            evt.data.type = 'image/png';
 
             /* Free the memory for the previous frames */
             if (fig.imageObj.src) {
@@ -1160,7 +1134,7 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
             }
 
             fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
-                img
+                evt.data
             );
             fig.updated_canvas_event();
             fig.waiting = false;
@@ -1206,27 +1180,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
-function getModifiers(event) {
-    var mods = [];
-    if (event.ctrlKey) {
-        mods.push('ctrl');
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
     }
-    if (event.altKey) {
-        mods.push('alt');
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
     }
-    if (event.shiftKey) {
-        mods.push('shift');
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
     }
-    if (event.metaKey) {
-        mods.push('meta');
-    }
-    return mods;
-}
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -1238,25 +1220,29 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
         y: y,
         button: event.button,
         step: event.step,
-        modifiers: getModifiers(event),
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -1267,10 +1253,10 @@ mpl.figure.prototype._key_event_extra = function (_event, _name) {
 mpl.figure.prototype.key_event = function (event, name) {
     // Prevent repeat events
     if (name === 'key_press') {
-        if (event.key === this._key) {
+        if (event.which === this._key) {
             return;
         } else {
-            this._key = event.key;
+            this._key = event.which;
         }
     }
     if (name === 'key_release') {
@@ -1278,17 +1264,18 @@ mpl.figure.prototype.key_event = function (event, name) {
     }
 
     var value = '';
-    if (event.ctrlKey && event.key !== 'Control') {
+    if (event.ctrlKey && event.which !== 17) {
         value += 'ctrl+';
     }
-    else if (event.altKey && event.key !== 'Alt') {
+    if (event.altKey && event.which !== 18) {
         value += 'alt+';
     }
-    else if (event.shiftKey && event.key !== 'Shift') {
+    if (event.shiftKey && event.which !== 16) {
         value += 'shift+';
     }
 
-    value += 'k' + event.key;
+    value += 'k';
+    value += event.which.toString();
 
     this._key_event_extra(event, name);
 
@@ -1311,9 +1298,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -1322,19 +1309,6 @@ var comm_websocket_adapter = function (comm) {
     // object with the appropriate methods. Currently this is a non binary
     // socket, so there is still some room for performance tuning.
     var ws = {};
-
-    ws.binaryType = comm.kernel.ws.binaryType;
-    ws.readyState = comm.kernel.ws.readyState;
-    function updateReadyState(_event) {
-        if (comm.kernel.ws) {
-            ws.readyState = comm.kernel.ws.readyState;
-        } else {
-            ws.readyState = 3; // Closed state.
-        }
-    }
-    comm.kernel.ws.addEventListener('open', updateReadyState);
-    comm.kernel.ws.addEventListener('close', updateReadyState);
-    comm.kernel.ws.addEventListener('error', updateReadyState);
 
     ws.close = function () {
         comm.close();
@@ -1346,14 +1320,8 @@ var comm_websocket_adapter = function (comm) {
     // Register the callback with on_msg.
     comm.on_msg(function (msg) {
         //console.log('receiving', msg['content']['data'], msg);
-        var data = msg['content']['data'];
-        if (data['blob'] !== undefined) {
-            data = {
-                data: new Blob(msg['buffers'], { type: data['blob'] }),
-            };
-        }
         // Pass the mpl event to the overridden (by mpl) onmessage function.
-        ws.onmessage(data);
+        ws.onmessage(msg['content']['data']);
     });
     return ws;
 };
@@ -1545,6 +1513,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -1590,15 +1563,15 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='23e4b21f-1229-4cbe-8cbb-636e13f5f309'></div></div></div>
+</script><div class="output text_html"><div id='e5e67011-6136-4a1e-b4a8-1d0ced106751'></div></div></div>
 </div>
 <ol class="arabic simple" start="2">
 <li><p>We’ll use the go method to move the yellow car foreward.</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">speed</span><span class="o">=</span><span class="mf">.8</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="mf">.2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">speed</span><span class="o">=.</span><span class="mi">8</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">simulate</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1669,9 +1642,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -1718,7 +1689,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -1729,8 +1699,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -1753,13 +1722,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -1779,12 +1742,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -1834,10 +1792,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -1853,53 +1811,30 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
-        'dblclick',
-        on_mouse_event_closure('dblclick')
-    );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -1927,7 +1862,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -2082,7 +2017,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -2131,14 +2081,11 @@ mpl.figure.prototype.updated_canvas_event = function () {
 mpl.figure.prototype._make_on_message_function = function (fig) {
     return function socket_on_message(evt) {
         if (evt.data instanceof Blob) {
-            var img = evt.data;
-            if (img.type !== 'image/png') {
-                /* FIXME: We get "Resource interpreted as Image but
-                 * transferred with MIME type text/plain:" errors on
-                 * Chrome.  But how to set the MIME type?  It doesn't seem
-                 * to be part of the websocket stream */
-                img.type = 'image/png';
-            }
+            /* FIXME: We get "Resource interpreted as Image but
+             * transferred with MIME type text/plain:" errors on
+             * Chrome.  But how to set the MIME type?  It doesn't seem
+             * to be part of the websocket stream */
+            evt.data.type = 'image/png';
 
             /* Free the memory for the previous frames */
             if (fig.imageObj.src) {
@@ -2148,7 +2095,7 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
             }
 
             fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
-                img
+                evt.data
             );
             fig.updated_canvas_event();
             fig.waiting = false;
@@ -2194,27 +2141,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
-function getModifiers(event) {
-    var mods = [];
-    if (event.ctrlKey) {
-        mods.push('ctrl');
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
     }
-    if (event.altKey) {
-        mods.push('alt');
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
     }
-    if (event.shiftKey) {
-        mods.push('shift');
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
     }
-    if (event.metaKey) {
-        mods.push('meta');
-    }
-    return mods;
-}
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -2226,25 +2181,29 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
         y: y,
         button: event.button,
         step: event.step,
-        modifiers: getModifiers(event),
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -2255,10 +2214,10 @@ mpl.figure.prototype._key_event_extra = function (_event, _name) {
 mpl.figure.prototype.key_event = function (event, name) {
     // Prevent repeat events
     if (name === 'key_press') {
-        if (event.key === this._key) {
+        if (event.which === this._key) {
             return;
         } else {
-            this._key = event.key;
+            this._key = event.which;
         }
     }
     if (name === 'key_release') {
@@ -2266,17 +2225,18 @@ mpl.figure.prototype.key_event = function (event, name) {
     }
 
     var value = '';
-    if (event.ctrlKey && event.key !== 'Control') {
+    if (event.ctrlKey && event.which !== 17) {
         value += 'ctrl+';
     }
-    else if (event.altKey && event.key !== 'Alt') {
+    if (event.altKey && event.which !== 18) {
         value += 'alt+';
     }
-    else if (event.shiftKey && event.key !== 'Shift') {
+    if (event.shiftKey && event.which !== 16) {
         value += 'shift+';
     }
 
-    value += 'k' + event.key;
+    value += 'k';
+    value += event.which.toString();
 
     this._key_event_extra(event, name);
 
@@ -2299,9 +2259,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -2310,19 +2270,6 @@ var comm_websocket_adapter = function (comm) {
     // object with the appropriate methods. Currently this is a non binary
     // socket, so there is still some room for performance tuning.
     var ws = {};
-
-    ws.binaryType = comm.kernel.ws.binaryType;
-    ws.readyState = comm.kernel.ws.readyState;
-    function updateReadyState(_event) {
-        if (comm.kernel.ws) {
-            ws.readyState = comm.kernel.ws.readyState;
-        } else {
-            ws.readyState = 3; // Closed state.
-        }
-    }
-    comm.kernel.ws.addEventListener('open', updateReadyState);
-    comm.kernel.ws.addEventListener('close', updateReadyState);
-    comm.kernel.ws.addEventListener('error', updateReadyState);
 
     ws.close = function () {
         comm.close();
@@ -2334,14 +2281,8 @@ var comm_websocket_adapter = function (comm) {
     // Register the callback with on_msg.
     comm.on_msg(function (msg) {
         //console.log('receiving', msg['content']['data'], msg);
-        var data = msg['content']['data'];
-        if (data['blob'] !== undefined) {
-            data = {
-                data: new Blob(msg['buffers'], { type: data['blob'] }),
-            };
-        }
         // Pass the mpl event to the overridden (by mpl) onmessage function.
-        ws.onmessage(data);
+        ws.onmessage(msg['content']['data']);
     });
     return ws;
 };
@@ -2533,6 +2474,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -2578,16 +2524,16 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='1fcdf67f-5a0c-446d-a4ad-92bbb32e5713'></div></div></div>
+</script><div class="output text_html"><div id='0920c798-34c3-4032-ae1c-0cb97ce48653'></div></div></div>
 </div>
 <ol class="arabic simple" start="3">
 <li><p>We’ll show the yellow car after it turns the corner.</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">speed</span><span class="o">=</span><span class="mf">.9</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="n">c1</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="mf">.9</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="mf">.2</span><span class="p">,</span><span class="mf">.15</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">speed</span><span class="o">=.</span><span class="mi">9</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="n">c1</span><span class="o">.</span><span class="n">size</span><span class="o">*.</span><span class="mi">9</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="o">.</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">c1</span><span class="o">.</span><span class="n">image</span><span class="o">=</span><span class="s2">&quot;car1left.png&quot;</span>
 <span class="n">simulate</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -2659,9 +2605,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -2708,7 +2652,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -2719,8 +2662,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -2743,13 +2685,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -2769,12 +2705,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -2824,10 +2755,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -2843,53 +2774,30 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
-        'dblclick',
-        on_mouse_event_closure('dblclick')
-    );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -2917,7 +2825,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -3072,7 +2980,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -3121,14 +3044,11 @@ mpl.figure.prototype.updated_canvas_event = function () {
 mpl.figure.prototype._make_on_message_function = function (fig) {
     return function socket_on_message(evt) {
         if (evt.data instanceof Blob) {
-            var img = evt.data;
-            if (img.type !== 'image/png') {
-                /* FIXME: We get "Resource interpreted as Image but
-                 * transferred with MIME type text/plain:" errors on
-                 * Chrome.  But how to set the MIME type?  It doesn't seem
-                 * to be part of the websocket stream */
-                img.type = 'image/png';
-            }
+            /* FIXME: We get "Resource interpreted as Image but
+             * transferred with MIME type text/plain:" errors on
+             * Chrome.  But how to set the MIME type?  It doesn't seem
+             * to be part of the websocket stream */
+            evt.data.type = 'image/png';
 
             /* Free the memory for the previous frames */
             if (fig.imageObj.src) {
@@ -3138,7 +3058,7 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
             }
 
             fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
-                img
+                evt.data
             );
             fig.updated_canvas_event();
             fig.waiting = false;
@@ -3184,27 +3104,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
-function getModifiers(event) {
-    var mods = [];
-    if (event.ctrlKey) {
-        mods.push('ctrl');
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
     }
-    if (event.altKey) {
-        mods.push('alt');
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
     }
-    if (event.shiftKey) {
-        mods.push('shift');
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
     }
-    if (event.metaKey) {
-        mods.push('meta');
-    }
-    return mods;
-}
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -3216,25 +3144,29 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
         y: y,
         button: event.button,
         step: event.step,
-        modifiers: getModifiers(event),
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -3245,10 +3177,10 @@ mpl.figure.prototype._key_event_extra = function (_event, _name) {
 mpl.figure.prototype.key_event = function (event, name) {
     // Prevent repeat events
     if (name === 'key_press') {
-        if (event.key === this._key) {
+        if (event.which === this._key) {
             return;
         } else {
-            this._key = event.key;
+            this._key = event.which;
         }
     }
     if (name === 'key_release') {
@@ -3256,17 +3188,18 @@ mpl.figure.prototype.key_event = function (event, name) {
     }
 
     var value = '';
-    if (event.ctrlKey && event.key !== 'Control') {
+    if (event.ctrlKey && event.which !== 17) {
         value += 'ctrl+';
     }
-    else if (event.altKey && event.key !== 'Alt') {
+    if (event.altKey && event.which !== 18) {
         value += 'alt+';
     }
-    else if (event.shiftKey && event.key !== 'Shift') {
+    if (event.shiftKey && event.which !== 16) {
         value += 'shift+';
     }
 
-    value += 'k' + event.key;
+    value += 'k';
+    value += event.which.toString();
 
     this._key_event_extra(event, name);
 
@@ -3289,9 +3222,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -3300,19 +3233,6 @@ var comm_websocket_adapter = function (comm) {
     // object with the appropriate methods. Currently this is a non binary
     // socket, so there is still some room for performance tuning.
     var ws = {};
-
-    ws.binaryType = comm.kernel.ws.binaryType;
-    ws.readyState = comm.kernel.ws.readyState;
-    function updateReadyState(_event) {
-        if (comm.kernel.ws) {
-            ws.readyState = comm.kernel.ws.readyState;
-        } else {
-            ws.readyState = 3; // Closed state.
-        }
-    }
-    comm.kernel.ws.addEventListener('open', updateReadyState);
-    comm.kernel.ws.addEventListener('close', updateReadyState);
-    comm.kernel.ws.addEventListener('error', updateReadyState);
 
     ws.close = function () {
         comm.close();
@@ -3324,14 +3244,8 @@ var comm_websocket_adapter = function (comm) {
     // Register the callback with on_msg.
     comm.on_msg(function (msg) {
         //console.log('receiving', msg['content']['data'], msg);
-        var data = msg['content']['data'];
-        if (data['blob'] !== undefined) {
-            data = {
-                data: new Blob(msg['buffers'], { type: data['blob'] }),
-            };
-        }
         // Pass the mpl event to the overridden (by mpl) onmessage function.
-        ws.onmessage(data);
+        ws.onmessage(msg['content']['data']);
     });
     return ws;
 };
@@ -3523,6 +3437,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -3568,7 +3487,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='82ce9719-96b5-4d2f-8e5b-e52179eab395'></div></div></div>
+</script><div class="output text_html"><div id='e11fca8d-1b0f-4a06-88ea-e96277701cf0'></div></div></div>
 </div>
 <ol class="arabic simple" start="4">
 <li><p>Now let’s put the three pictures together into an animation “F1.gif”</p></li>
@@ -3599,8 +3518,8 @@ if (IPython.notebook.kernel !== null) {
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create car objects</span>
-<span class="n">c1</span><span class="o">=</span><span class="n">car</span><span class="p">(</span><span class="mf">.43</span><span class="p">,</span><span class="mf">.15</span><span class="p">,</span><span class="s1">&#39;car1.png&#39;</span><span class="p">,</span><span class="mf">.14</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">c2</span><span class="o">=</span><span class="n">car</span><span class="p">(</span><span class="mf">.235</span><span class="p">,</span><span class="mf">.15</span><span class="p">,</span><span class="s1">&#39;car2.png&#39;</span><span class="p">,</span><span class="mf">.11</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">c1</span><span class="o">=</span><span class="n">car</span><span class="p">(</span><span class="o">.</span><span class="mi">43</span><span class="p">,</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;car1.png&#39;</span><span class="p">,</span><span class="o">.</span><span class="mi">14</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">c2</span><span class="o">=</span><span class="n">car</span><span class="p">(</span><span class="o">.</span><span class="mi">235</span><span class="p">,</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;car2.png&#39;</span><span class="p">,</span><span class="o">.</span><span class="mi">11</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">simulate</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3671,9 +3590,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -3720,7 +3637,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -3731,8 +3647,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -3755,13 +3670,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -3781,12 +3690,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -3836,10 +3740,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -3855,53 +3759,30 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
-        'dblclick',
-        on_mouse_event_closure('dblclick')
-    );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -3929,7 +3810,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -4084,7 +3965,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -4133,14 +4029,11 @@ mpl.figure.prototype.updated_canvas_event = function () {
 mpl.figure.prototype._make_on_message_function = function (fig) {
     return function socket_on_message(evt) {
         if (evt.data instanceof Blob) {
-            var img = evt.data;
-            if (img.type !== 'image/png') {
-                /* FIXME: We get "Resource interpreted as Image but
-                 * transferred with MIME type text/plain:" errors on
-                 * Chrome.  But how to set the MIME type?  It doesn't seem
-                 * to be part of the websocket stream */
-                img.type = 'image/png';
-            }
+            /* FIXME: We get "Resource interpreted as Image but
+             * transferred with MIME type text/plain:" errors on
+             * Chrome.  But how to set the MIME type?  It doesn't seem
+             * to be part of the websocket stream */
+            evt.data.type = 'image/png';
 
             /* Free the memory for the previous frames */
             if (fig.imageObj.src) {
@@ -4150,7 +4043,7 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
             }
 
             fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
-                img
+                evt.data
             );
             fig.updated_canvas_event();
             fig.waiting = false;
@@ -4196,27 +4089,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
-function getModifiers(event) {
-    var mods = [];
-    if (event.ctrlKey) {
-        mods.push('ctrl');
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
     }
-    if (event.altKey) {
-        mods.push('alt');
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
     }
-    if (event.shiftKey) {
-        mods.push('shift');
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
     }
-    if (event.metaKey) {
-        mods.push('meta');
-    }
-    return mods;
-}
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -4228,25 +4129,29 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
         y: y,
         button: event.button,
         step: event.step,
-        modifiers: getModifiers(event),
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -4257,10 +4162,10 @@ mpl.figure.prototype._key_event_extra = function (_event, _name) {
 mpl.figure.prototype.key_event = function (event, name) {
     // Prevent repeat events
     if (name === 'key_press') {
-        if (event.key === this._key) {
+        if (event.which === this._key) {
             return;
         } else {
-            this._key = event.key;
+            this._key = event.which;
         }
     }
     if (name === 'key_release') {
@@ -4268,17 +4173,18 @@ mpl.figure.prototype.key_event = function (event, name) {
     }
 
     var value = '';
-    if (event.ctrlKey && event.key !== 'Control') {
+    if (event.ctrlKey && event.which !== 17) {
         value += 'ctrl+';
     }
-    else if (event.altKey && event.key !== 'Alt') {
+    if (event.altKey && event.which !== 18) {
         value += 'alt+';
     }
-    else if (event.shiftKey && event.key !== 'Shift') {
+    if (event.shiftKey && event.which !== 16) {
         value += 'shift+';
     }
 
-    value += 'k' + event.key;
+    value += 'k';
+    value += event.which.toString();
 
     this._key_event_extra(event, name);
 
@@ -4301,9 +4207,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -4312,19 +4218,6 @@ var comm_websocket_adapter = function (comm) {
     // object with the appropriate methods. Currently this is a non binary
     // socket, so there is still some room for performance tuning.
     var ws = {};
-
-    ws.binaryType = comm.kernel.ws.binaryType;
-    ws.readyState = comm.kernel.ws.readyState;
-    function updateReadyState(_event) {
-        if (comm.kernel.ws) {
-            ws.readyState = comm.kernel.ws.readyState;
-        } else {
-            ws.readyState = 3; // Closed state.
-        }
-    }
-    comm.kernel.ws.addEventListener('open', updateReadyState);
-    comm.kernel.ws.addEventListener('close', updateReadyState);
-    comm.kernel.ws.addEventListener('error', updateReadyState);
 
     ws.close = function () {
         comm.close();
@@ -4336,14 +4229,8 @@ var comm_websocket_adapter = function (comm) {
     // Register the callback with on_msg.
     comm.on_msg(function (msg) {
         //console.log('receiving', msg['content']['data'], msg);
-        var data = msg['content']['data'];
-        if (data['blob'] !== undefined) {
-            data = {
-                data: new Blob(msg['buffers'], { type: data['blob'] }),
-            };
-        }
         // Pass the mpl event to the overridden (by mpl) onmessage function.
-        ws.onmessage(data);
+        ws.onmessage(msg['content']['data']);
     });
     return ws;
 };
@@ -4535,6 +4422,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -4580,14 +4472,14 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='45ef7325-1456-4810-a106-9e78ea1bfedd'></div></div></div>
+</script><div class="output text_html"><div id='e0669071-9c82-472c-b76a-eebd27a1c8db'></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">speed</span><span class="o">=</span><span class="mf">.8</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="mf">.2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">c2</span><span class="o">.</span><span class="n">speed</span><span class="o">=</span><span class="mf">.8</span>
-<span class="n">c2</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="mf">.2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">speed</span><span class="o">=.</span><span class="mi">8</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">speed</span><span class="o">=.</span><span class="mi">8</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">simulate</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -4658,9 +4550,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -4707,7 +4597,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -4718,8 +4607,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -4742,13 +4630,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -4768,12 +4650,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -4823,10 +4700,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -4842,53 +4719,30 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
-        'dblclick',
-        on_mouse_event_closure('dblclick')
-    );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -4916,7 +4770,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -5071,7 +4925,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -5120,14 +4989,11 @@ mpl.figure.prototype.updated_canvas_event = function () {
 mpl.figure.prototype._make_on_message_function = function (fig) {
     return function socket_on_message(evt) {
         if (evt.data instanceof Blob) {
-            var img = evt.data;
-            if (img.type !== 'image/png') {
-                /* FIXME: We get "Resource interpreted as Image but
-                 * transferred with MIME type text/plain:" errors on
-                 * Chrome.  But how to set the MIME type?  It doesn't seem
-                 * to be part of the websocket stream */
-                img.type = 'image/png';
-            }
+            /* FIXME: We get "Resource interpreted as Image but
+             * transferred with MIME type text/plain:" errors on
+             * Chrome.  But how to set the MIME type?  It doesn't seem
+             * to be part of the websocket stream */
+            evt.data.type = 'image/png';
 
             /* Free the memory for the previous frames */
             if (fig.imageObj.src) {
@@ -5137,7 +5003,7 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
             }
 
             fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
-                img
+                evt.data
             );
             fig.updated_canvas_event();
             fig.waiting = false;
@@ -5183,27 +5049,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
-function getModifiers(event) {
-    var mods = [];
-    if (event.ctrlKey) {
-        mods.push('ctrl');
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
     }
-    if (event.altKey) {
-        mods.push('alt');
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
     }
-    if (event.shiftKey) {
-        mods.push('shift');
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
     }
-    if (event.metaKey) {
-        mods.push('meta');
-    }
-    return mods;
-}
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -5215,25 +5089,29 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
         y: y,
         button: event.button,
         step: event.step,
-        modifiers: getModifiers(event),
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -5244,10 +5122,10 @@ mpl.figure.prototype._key_event_extra = function (_event, _name) {
 mpl.figure.prototype.key_event = function (event, name) {
     // Prevent repeat events
     if (name === 'key_press') {
-        if (event.key === this._key) {
+        if (event.which === this._key) {
             return;
         } else {
-            this._key = event.key;
+            this._key = event.which;
         }
     }
     if (name === 'key_release') {
@@ -5255,17 +5133,18 @@ mpl.figure.prototype.key_event = function (event, name) {
     }
 
     var value = '';
-    if (event.ctrlKey && event.key !== 'Control') {
+    if (event.ctrlKey && event.which !== 17) {
         value += 'ctrl+';
     }
-    else if (event.altKey && event.key !== 'Alt') {
+    if (event.altKey && event.which !== 18) {
         value += 'alt+';
     }
-    else if (event.shiftKey && event.key !== 'Shift') {
+    if (event.shiftKey && event.which !== 16) {
         value += 'shift+';
     }
 
-    value += 'k' + event.key;
+    value += 'k';
+    value += event.which.toString();
 
     this._key_event_extra(event, name);
 
@@ -5288,9 +5167,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -5299,19 +5178,6 @@ var comm_websocket_adapter = function (comm) {
     // object with the appropriate methods. Currently this is a non binary
     // socket, so there is still some room for performance tuning.
     var ws = {};
-
-    ws.binaryType = comm.kernel.ws.binaryType;
-    ws.readyState = comm.kernel.ws.readyState;
-    function updateReadyState(_event) {
-        if (comm.kernel.ws) {
-            ws.readyState = comm.kernel.ws.readyState;
-        } else {
-            ws.readyState = 3; // Closed state.
-        }
-    }
-    comm.kernel.ws.addEventListener('open', updateReadyState);
-    comm.kernel.ws.addEventListener('close', updateReadyState);
-    comm.kernel.ws.addEventListener('error', updateReadyState);
 
     ws.close = function () {
         comm.close();
@@ -5323,14 +5189,8 @@ var comm_websocket_adapter = function (comm) {
     // Register the callback with on_msg.
     comm.on_msg(function (msg) {
         //console.log('receiving', msg['content']['data'], msg);
-        var data = msg['content']['data'];
-        if (data['blob'] !== undefined) {
-            data = {
-                data: new Blob(msg['buffers'], { type: data['blob'] }),
-            };
-        }
         // Pass the mpl event to the overridden (by mpl) onmessage function.
-        ws.onmessage(data);
+        ws.onmessage(msg['content']['data']);
     });
     return ws;
 };
@@ -5522,6 +5382,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -5567,17 +5432,17 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='e7e428d7-4cb0-4e6b-b40d-09c6ee184266'></div></div></div>
+</script><div class="output text_html"><div id='841740de-ac9d-4d0d-afb0-bd4fcf78dc3c'></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">speed</span><span class="o">=</span><span class="mf">.9</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="n">c1</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="mf">.9</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="mf">.2</span><span class="p">,</span><span class="mf">.15</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="o">.</span><span class="n">speed</span><span class="o">=.</span><span class="mi">9</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="n">c1</span><span class="o">.</span><span class="n">size</span><span class="o">*.</span><span class="mi">9</span>
+<span class="n">c1</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="o">.</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">c1</span><span class="o">.</span><span class="n">image</span><span class="o">=</span><span class="s2">&quot;car1left.png&quot;</span>
 <span class="n">c2</span><span class="o">.</span><span class="n">speed</span><span class="o">=</span><span class="mf">1.6</span>
-<span class="n">c2</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="n">c2</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="mf">.9</span>
-<span class="n">c2</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="mf">.2</span><span class="p">,</span><span class="mf">.05</span><span class="p">)</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="n">c2</span><span class="o">.</span><span class="n">size</span><span class="o">*.</span><span class="mi">9</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="o">.</span><span class="mi">05</span><span class="p">)</span>
 <span class="n">c2</span><span class="o">.</span><span class="n">image</span><span class="o">=</span><span class="s2">&quot;car2left.png&quot;</span>
 <span class="n">simulate</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -5649,9 +5514,7 @@ mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
         fig.send_message('supports_binary', { value: fig.supports_binary });
         fig.send_message('send_image_mode', {});
         if (fig.ratio !== 1) {
-            fig.send_message('set_device_pixel_ratio', {
-                device_pixel_ratio: fig.ratio,
-            });
+            fig.send_message('set_dpi_ratio', { dpi_ratio: fig.ratio });
         }
         fig.send_message('refresh', {});
     };
@@ -5698,7 +5561,6 @@ mpl.figure.prototype._init_canvas = function () {
     var fig = this;
 
     var canvas_div = (this.canvas_div = document.createElement('div'));
-    canvas_div.setAttribute('tabindex', '0');
     canvas_div.setAttribute(
         'style',
         'border: 1px solid #ddd;' +
@@ -5709,8 +5571,7 @@ mpl.figure.prototype._init_canvas = function () {
             'outline: 0;' +
             'overflow: hidden;' +
             'position: relative;' +
-            'resize: both;' +
-            'z-index: 2;'
+            'resize: both;'
     );
 
     function on_keyboard_event_closure(name) {
@@ -5733,13 +5594,7 @@ mpl.figure.prototype._init_canvas = function () {
 
     var canvas = (this.canvas = document.createElement('canvas'));
     canvas.classList.add('mpl-canvas');
-    canvas.setAttribute(
-        'style',
-        'box-sizing: content-box;' +
-            'pointer-events: none;' +
-            'position: relative;' +
-            'z-index: 0;'
-    );
+    canvas.setAttribute('style', 'box-sizing: content-box;');
 
     this.context = canvas.getContext('2d');
 
@@ -5759,12 +5614,7 @@ mpl.figure.prototype._init_canvas = function () {
     ));
     rubberband_canvas.setAttribute(
         'style',
-        'box-sizing: content-box;' +
-            'left: 0;' +
-            'pointer-events: none;' +
-            'position: absolute;' +
-            'top: 0;' +
-            'z-index: 1;'
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
     );
 
     // Apply a ponyfill if ResizeObserver is not implemented by browser.
@@ -5814,10 +5664,10 @@ mpl.figure.prototype._init_canvas = function () {
                 canvas.setAttribute('width', width * fig.ratio);
                 canvas.setAttribute('height', height * fig.ratio);
             }
-            /* This rescales the canvas back to display pixels, so that it
-             * appears correct on HiDPI screens. */
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
 
             rubberband_canvas.setAttribute('width', width);
             rubberband_canvas.setAttribute('height', height);
@@ -5833,53 +5683,30 @@ mpl.figure.prototype._init_canvas = function () {
     this.resizeObserverInstance.observe(canvas_div);
 
     function on_mouse_event_closure(name) {
-        /* User Agent sniffing is bad, but WebKit is busted:
-         * https://bugs.webkit.org/show_bug.cgi?id=144526
-         * https://bugs.webkit.org/show_bug.cgi?id=181818
-         * The worst that happens here is that they get an extra browser
-         * selection when dragging, if this check fails to catch them.
-         */
-        var UA = navigator.userAgent;
-        var isWebKit = /AppleWebKit/.test(UA) && !/Chrome/.test(UA);
-        if(isWebKit) {
-            return function (event) {
-                /* This prevents the web browser from automatically changing to
-                 * the text insertion cursor when the button is pressed. We
-                 * want to control all of the cursor setting manually through
-                 * the 'cursor' event from matplotlib */
-                event.preventDefault()
-                return fig.mouse_event(event, name);
-            };
-        } else {
-            return function (event) {
-                return fig.mouse_event(event, name);
-            };
-        }
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
     }
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousedown',
         on_mouse_event_closure('button_press')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseup',
         on_mouse_event_closure('button_release')
     );
-    canvas_div.addEventListener(
-        'dblclick',
-        on_mouse_event_closure('dblclick')
-    );
     // Throttle sequential mouse events to 1 every 20ms.
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mousemove',
         on_mouse_event_closure('motion_notify')
     );
 
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseenter',
         on_mouse_event_closure('figure_enter')
     );
-    canvas_div.addEventListener(
+    rubberband_canvas.addEventListener(
         'mouseleave',
         on_mouse_event_closure('figure_leave')
     );
@@ -5907,7 +5734,7 @@ mpl.figure.prototype._init_canvas = function () {
     };
 
     // Disable right mouse context menu.
-    canvas_div.addEventListener('contextmenu', function (_e) {
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
         event.preventDefault();
         return false;
     });
@@ -6062,7 +5889,22 @@ mpl.figure.prototype.handle_figure_label = function (fig, msg) {
 };
 
 mpl.figure.prototype.handle_cursor = function (fig, msg) {
-    fig.canvas_div.style.cursor = msg['cursor'];
+    var cursor = msg['cursor'];
+    switch (cursor) {
+        case 0:
+            cursor = 'pointer';
+            break;
+        case 1:
+            cursor = 'default';
+            break;
+        case 2:
+            cursor = 'crosshair';
+            break;
+        case 3:
+            cursor = 'move';
+            break;
+    }
+    fig.rubberband_canvas.style.cursor = cursor;
 };
 
 mpl.figure.prototype.handle_message = function (fig, msg) {
@@ -6111,14 +5953,11 @@ mpl.figure.prototype.updated_canvas_event = function () {
 mpl.figure.prototype._make_on_message_function = function (fig) {
     return function socket_on_message(evt) {
         if (evt.data instanceof Blob) {
-            var img = evt.data;
-            if (img.type !== 'image/png') {
-                /* FIXME: We get "Resource interpreted as Image but
-                 * transferred with MIME type text/plain:" errors on
-                 * Chrome.  But how to set the MIME type?  It doesn't seem
-                 * to be part of the websocket stream */
-                img.type = 'image/png';
-            }
+            /* FIXME: We get "Resource interpreted as Image but
+             * transferred with MIME type text/plain:" errors on
+             * Chrome.  But how to set the MIME type?  It doesn't seem
+             * to be part of the websocket stream */
+            evt.data.type = 'image/png';
 
             /* Free the memory for the previous frames */
             if (fig.imageObj.src) {
@@ -6128,7 +5967,7 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
             }
 
             fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
-                img
+                evt.data
             );
             fig.updated_canvas_event();
             fig.waiting = false;
@@ -6174,27 +6013,35 @@ mpl.figure.prototype._make_on_message_function = function (fig) {
     };
 };
 
-function getModifiers(event) {
-    var mods = [];
-    if (event.ctrlKey) {
-        mods.push('ctrl');
+// from http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
     }
-    if (event.altKey) {
-        mods.push('alt');
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
     }
-    if (event.shiftKey) {
-        mods.push('shift');
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
     }
-    if (event.metaKey) {
-        mods.push('meta');
-    }
-    return mods;
-}
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
 
 /*
  * return a copy of an object with only non-object keys
  * we need this to avoid circular references
- * https://stackoverflow.com/a/24161582/3208463
+ * http://stackoverflow.com/a/24161582/3208463
  */
 function simpleKeys(original) {
     return Object.keys(original).reduce(function (obj, key) {
@@ -6206,25 +6053,29 @@ function simpleKeys(original) {
 }
 
 mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
     if (name === 'button_press') {
         this.canvas.focus();
         this.canvas_div.focus();
     }
 
-    // from https://stackoverflow.com/q/1114465
-    var boundingRect = this.canvas.getBoundingClientRect();
-    var x = (event.clientX - boundingRect.left) * this.ratio;
-    var y = (event.clientY - boundingRect.top) * this.ratio;
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
 
     this.send_message(name, {
         x: x,
         y: y,
         button: event.button,
         step: event.step,
-        modifiers: getModifiers(event),
         guiEvent: simpleKeys(event),
     });
 
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
     return false;
 };
 
@@ -6235,10 +6086,10 @@ mpl.figure.prototype._key_event_extra = function (_event, _name) {
 mpl.figure.prototype.key_event = function (event, name) {
     // Prevent repeat events
     if (name === 'key_press') {
-        if (event.key === this._key) {
+        if (event.which === this._key) {
             return;
         } else {
-            this._key = event.key;
+            this._key = event.which;
         }
     }
     if (name === 'key_release') {
@@ -6246,17 +6097,18 @@ mpl.figure.prototype.key_event = function (event, name) {
     }
 
     var value = '';
-    if (event.ctrlKey && event.key !== 'Control') {
+    if (event.ctrlKey && event.which !== 17) {
         value += 'ctrl+';
     }
-    else if (event.altKey && event.key !== 'Alt') {
+    if (event.altKey && event.which !== 18) {
         value += 'alt+';
     }
-    else if (event.shiftKey && event.key !== 'Shift') {
+    if (event.shiftKey && event.which !== 16) {
         value += 'shift+';
     }
 
-    value += 'k' + event.key;
+    value += 'k';
+    value += event.which.toString();
 
     this._key_event_extra(event, name);
 
@@ -6279,9 +6131,9 @@ mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
 ///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
 // prettier-ignore
 var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
-mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o", "download"]];
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
 
-mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif", "webp"];
+mpl.extensions = ["eps", "jpeg", "pdf", "png", "ps", "raw", "svg", "tif"];
 
 mpl.default_extension = "png";/* global mpl */
 
@@ -6290,19 +6142,6 @@ var comm_websocket_adapter = function (comm) {
     // object with the appropriate methods. Currently this is a non binary
     // socket, so there is still some room for performance tuning.
     var ws = {};
-
-    ws.binaryType = comm.kernel.ws.binaryType;
-    ws.readyState = comm.kernel.ws.readyState;
-    function updateReadyState(_event) {
-        if (comm.kernel.ws) {
-            ws.readyState = comm.kernel.ws.readyState;
-        } else {
-            ws.readyState = 3; // Closed state.
-        }
-    }
-    comm.kernel.ws.addEventListener('open', updateReadyState);
-    comm.kernel.ws.addEventListener('close', updateReadyState);
-    comm.kernel.ws.addEventListener('error', updateReadyState);
 
     ws.close = function () {
         comm.close();
@@ -6314,14 +6153,8 @@ var comm_websocket_adapter = function (comm) {
     // Register the callback with on_msg.
     comm.on_msg(function (msg) {
         //console.log('receiving', msg['content']['data'], msg);
-        var data = msg['content']['data'];
-        if (data['blob'] !== undefined) {
-            data = {
-                data: new Blob(msg['buffers'], { type: data['blob'] }),
-            };
-        }
         // Pass the mpl event to the overridden (by mpl) onmessage function.
-        ws.onmessage(data);
+        ws.onmessage(msg['content']['data']);
     });
     return ws;
 };
@@ -6513,6 +6346,11 @@ mpl.figure.prototype._canvas_extra_style = function (el) {
 };
 
 mpl.figure.prototype._key_event_extra = function (event, _name) {
+    var manager = IPython.notebook.keyboard_manager;
+    if (!manager) {
+        manager = IPython.keyboard_manager;
+    }
+
     // Check for shift+enter
     if (event.shiftKey && event.which === 13) {
         this.canvas_div.blur();
@@ -6558,7 +6396,7 @@ if (IPython.notebook.kernel !== null) {
         mpl.mpl_figure_comm
     );
 }
-</script><div class="output text_html"><div id='c0b52435-e175-46d2-ae66-f4043773ac96'></div></div></div>
+</script><div class="output text_html"><div id='c242695d-1eb9-415c-825f-8fd6d35170df'></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
