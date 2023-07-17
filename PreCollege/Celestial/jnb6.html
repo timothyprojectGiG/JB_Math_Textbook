@@ -556,74 +556,51 @@ Use pandas (pd) to read in the Excel file with the words of the chorus "I have t
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">File ~/.local/lib/python3.9/site-packages/pandas/compat/_optional.py:142,</span> in <span class="ni">import_optional_dependency</span><span class="nt">(name, extra, errors, min_version)</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">142</span>     <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File /usr/lib/python3.9/importlib/__init__.py:127,</span> in <span class="ni">import_module</span><span class="nt">(name, package)</span>
-<span class="g g-Whitespace">    </span><span class="mi">126</span>         <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="ne">--&gt; </span><span class="mi">127</span> <span class="k">return</span> <span class="n">_bootstrap</span><span class="o">.</span><span class="n">_gcd_import</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">level</span><span class="p">:],</span> <span class="n">package</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1030,</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
-
-<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1007,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
-
-<span class="nn">File &lt;frozen importlib._bootstrap&gt;:984,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;openpyxl&#39;
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">joy</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;joy.xlsx&quot;</span><span class="p">)</span>  <span class="c1">#read in the Excel file with the words</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">joy</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1">#Display the first 5 rows.</span>
-
-<span class="nn">File ~/.local/lib/python3.9/site-packages/pandas/io/excel/_base.py:478,</span> in <span class="ni">read_excel</span><span class="nt">(io, sheet_name, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, parse_dates, date_parser, date_format, thousands, decimal, comment, skipfooter, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">ExcelFile</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="n">should_close</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="ne">--&gt; </span><span class="mi">478</span>     <span class="n">io</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">479</span> <span class="k">elif</span> <span class="n">engine</span> <span class="ow">and</span> <span class="n">engine</span> <span class="o">!=</span> <span class="n">io</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">481</span>         <span class="s2">&quot;Engine should not be specified when passing &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">482</span>         <span class="s2">&quot;an ExcelFile - ExcelFile already has the engine set&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="p">)</span>
-
-<span class="nn">File ~/.local/lib/python3.9/site-packages/pandas/io/excel/_base.py:1513,</span> in <span class="ni">ExcelFile.__init__</span><span class="nt">(self, path_or_buffer, engine, storage_options)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1510</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span>
-<span class="g g-Whitespace">   </span><span class="mi">1511</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_options</span> <span class="o">=</span> <span class="n">storage_options</span>
-<span class="ne">-&gt; </span><span class="mi">1513</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engines</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">_io</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">)</span>
-
-<span class="nn">File ~/.local/lib/python3.9/site-packages/pandas/io/excel/_openpyxl.py:548,</span> in <span class="ni">OpenpyxlReader.__init__</span><span class="nt">(self, filepath_or_buffer, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">533</span> <span class="nd">@doc</span><span class="p">(</span><span class="n">storage_options</span><span class="o">=</span><span class="n">_shared_docs</span><span class="p">[</span><span class="s2">&quot;storage_options&quot;</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">534</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">535</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="n">filepath_or_buffer</span><span class="p">:</span> <span class="n">FilePath</span> <span class="o">|</span> <span class="n">ReadBuffer</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">537</span>     <span class="n">storage_options</span><span class="p">:</span> <span class="n">StorageOptions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">538</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">539</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">540</span><span class="sd">     Reader using openpyxl engine.</span>
-<span class="g g-Whitespace">    </span><span class="mi">541</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">546</span><span class="sd">     {storage_options}</span>
-<span class="g g-Whitespace">    </span><span class="mi">547</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">548</span>     <span class="n">import_optional_dependency</span><span class="p">(</span><span class="s2">&quot;openpyxl&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">549</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">)</span>
-
-<span class="nn">File ~/.local/lib/python3.9/site-packages/pandas/compat/_optional.py:145,</span> in <span class="ni">import_optional_dependency</span><span class="nt">(name, extra, errors, min_version)</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">144</span>     <span class="k">if</span> <span class="n">errors</span> <span class="o">==</span> <span class="s2">&quot;raise&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">145</span>         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="k">return</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">148</span> <span class="c1"># Handle submodules: if we have submodule, grab parent module from sys.modules</span>
-
-<span class="ne">ImportError</span>: Missing optional dependency &#39;openpyxl&#39;.  Use pip or conda to install openpyxl.
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WORDS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>I</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>have</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>the</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>joy</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>joy</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Q2. What word is in row 4?</p>
 <hr>
@@ -635,19 +612,20 @@ Get the frequencies of each word<div class="cell docutils container">
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>joy      8
-in       5
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WORDS
+joy      8
 down     5
+in       5
 heart    5
-where    3
 my       3
+where    3
 I        2
-my       2
 have     2
 the      2
+my       2
 to       1
 stay     1
-Name: WORDS, dtype: int64
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -673,7 +651,7 @@ Add the text joy to the word cloud at position .3,.5 in color 'red' and fontsize
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/facaf1dbdc71e478625207a8d152d98c26fa6055ea73daf5b682646886d2b806.png" src="../../_images/facaf1dbdc71e478625207a8d152d98c26fa6055ea73daf5b682646886d2b806.png" />
+<img alt="../../_images/d6926781ef748c5109c7b9960c901b482dd5014810eb9d8b77a2339e6a124542.png" src="../../_images/d6926781ef748c5109c7b9960c901b482dd5014810eb9d8b77a2339e6a124542.png" />
 </div>
 </div>
 <p>Q4. What command is used to include the word joy?</p>
@@ -687,20 +665,26 @@ Data scientists have created functions to make word clouds so we don't have to e
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wordcloud in /home/timothyproject/anaconda3/lib/python3.8/site-packages (1.9.2)
-Requirement already satisfied: numpy&gt;=1.6.1 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from wordcloud) (1.20.1)
-Requirement already satisfied: matplotlib in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from wordcloud) (3.7.2)
-Requirement already satisfied: pillow in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from wordcloud) (10.0.0)
-Requirement already satisfied: cycler&gt;=0.10 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from matplotlib-&gt;wordcloud) (0.10.0)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from matplotlib-&gt;wordcloud) (2.8.1)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from matplotlib-&gt;wordcloud) (1.1.0)
-Requirement already satisfied: importlib-resources&gt;=3.2.0 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from matplotlib-&gt;wordcloud) (5.12.0)
-Requirement already satisfied: packaging&gt;=20.0 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from matplotlib-&gt;wordcloud) (20.9)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from matplotlib-&gt;wordcloud) (4.40.0)
-Requirement already satisfied: pyparsing&lt;3.1,&gt;=2.3.1 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from matplotlib-&gt;wordcloud) (2.4.7)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from matplotlib-&gt;wordcloud) (1.3.1)
-Requirement already satisfied: six in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from cycler&gt;=0.10-&gt;matplotlib-&gt;wordcloud) (1.15.0)
-Requirement already satisfied: zipp&gt;=3.1.0 in /home/timothyproject/anaconda3/lib/python3.8/site-packages (from importlib-resources&gt;=3.2.0-&gt;matplotlib-&gt;wordcloud) (3.4.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wordcloud in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (1.9.2)
+Requirement already satisfied: numpy&gt;=1.6.1 in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from wordcloud) (1.24.3)
+Requirement already satisfied: pillow in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from wordcloud) (10.0.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: matplotlib in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from wordcloud) (3.7.2)
+Requirement already satisfied: importlib-resources&gt;=3.2.0 in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from matplotlib-&gt;wordcloud) (6.0.0)
+Requirement already satisfied: pyparsing&lt;3.1,&gt;=2.3.1 in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from matplotlib-&gt;wordcloud) (3.0.9)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from matplotlib-&gt;wordcloud) (1.1.0)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/lib/python3.9/dist-packages (from matplotlib-&gt;wordcloud) (2.8.2)
+Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.9/dist-packages (from matplotlib-&gt;wordcloud) (23.1)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from matplotlib-&gt;wordcloud) (1.4.4)
+Requirement already satisfied: cycler&gt;=0.10 in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from matplotlib-&gt;wordcloud) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /home/timothyprojectinfo/.local/lib/python3.9/site-packages (from matplotlib-&gt;wordcloud) (4.41.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: zipp&gt;=3.1.0 in /usr/local/lib/python3.9/dist-packages (from importlib-resources&gt;=3.2.0-&gt;matplotlib-&gt;wordcloud) (3.16.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;wordcloud) (1.16.0)
 </pre></div>
 </div>
 </div>
@@ -720,7 +704,7 @@ Check how fast the computer can read the text file with the lyrics to All I Need
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.000637054443359375
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0053157806396484375
 </pre></div>
 </div>
 </div>
@@ -786,7 +770,7 @@ Make the word cloud by executing the next cell.  Then modify the calculate_frequ
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e1ee14293629eb9bac697fc29f23cc016a299455af6cfba0d6a158a57924aed4.png" src="../../_images/e1ee14293629eb9bac697fc29f23cc016a299455af6cfba0d6a158a57924aed4.png" />
+<img alt="../../_images/ef8aac96169095d8261b255a7148620709e175f5f0996e7f0bc466a4ccfc9f5d.png" src="../../_images/ef8aac96169095d8261b255a7148620709e175f5f0996e7f0bc466a4ccfc9f5d.png" />
 </div>
 </div>
 <p>Q8. What is the name of the file with the word cloud image for the I have a dream speech?</p>
@@ -821,7 +805,7 @@ Create word cloud of a famous speech, poem, song etc. Then edit out all the unin
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/78d9d45411b81321cf1904a1ff356a53540251ff16bd4dfadee95fd4a9bdd9bf.png" src="../../_images/78d9d45411b81321cf1904a1ff356a53540251ff16bd4dfadee95fd4a9bdd9bf.png" />
+<img alt="../../_images/be88aee11444d8a8d858019ff59b9b18c2420bb11e7bc6d2bde66149e41720a3.png" src="../../_images/be88aee11444d8a8d858019ff59b9b18c2420bb11e7bc6d2bde66149e41720a3.png" />
 </div>
 </div>
 </section>
