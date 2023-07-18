@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4. Classification of Texts" href="sec4_classification_algos.html" />
-    <link rel="prev" title="1. Preprocessing" href="sec1_preprocessing.html" />
+    <link rel="prev" title="2. About Text Data" href="sec2_transform_features.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -225,7 +225,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Section 0: Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
@@ -279,6 +280,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE%20-%20Section%202.html">2. Introduction to Differential Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE%20-%20Section%203.html">3. First-Order Differential Equations</a></li>
@@ -304,11 +306,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec0_data.html">0. Before Reading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec2_transform_features.html">2. About Text Data</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Document Embedding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec4_classification_algos.html">4. Classification of Texts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec5_classification_eval.html">5. Evaluating Classification</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="sec6_applications.html">6. Applications</a></li>
 </ul>
 
@@ -480,9 +483,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -498,16 +499,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-sentence-encoder">3.1 Universal Sentence Encoder</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-sne">3.2 t-SNE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">3.3 More Exercises</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -517,15 +508,166 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="document-embedding">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#libraries and data import - needed for later code, will figure out to try and hide this later</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/data/&quot;</span>
+
+<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;sdg == 8 or sdg == 16 or sdg == 4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="document-embedding">
 <h1>3. Document Embedding<a class="headerlink" href="#document-embedding" title="Permalink to this heading">#</a></h1>
+<p><b>NOTE: The tensorflow package is very finicky and does not like working on Python 3.11.3 to our knowledge, or on computers that are not so powerful. However, it is the only available package (that we know of) for document embedding, and document embedding is nonetheless and important part of natural language processing. We plan on working around this problem for later editions of the book, but for now, any of the code can be skipped, and later sections will not depend on code from this one.</b></p>
 <p>In the previous section, we represented variable length texts as fixed length numeric vectors; the approach we have used so far is the traditional approach of Bag of Words (BoW), which tokenizes a text into words (tokens), ignoring orders of tokens but may reserve the count. This approach is high dimension, and very sparse; this may result in over fitting and high time complexity.</p>
 <p>A more modern text vectorization approach is word embedding (also called simply embedding), relying on neural representations. This approach takes distributional semantics into account; that is, a word’s meaning is given by the words that frequently appear close-by. Hence, we can construct a word’s context by using the set of words that appear nearby within a fixed-sized window.</p>
 <p>Semantically similar texts, then, would appear closer to each other in the vector space. We could also possibly capture semantic operations by operations in the vector space; for example, similarity between texts could be measured by vector dot product. We could also perform algebraic operations; for example,</p>
 <p><span class="math notranslate nohighlight">\(\text{vector(”King”)} - \text{vector(”Man”)} + \text{vector(”Woman”)} \sim \text{vector(“Queen”)}\)</span>.</p>
 <p>Modern-day representations are typically learned from vast body of texts, often with deep neural networks, and they typically result in pre-trained models.</p>
-<section id="universal-sentence-encoder">
-<h2>3.1 Universal Sentence Encoder<a class="headerlink" href="#universal-sentence-encoder" title="Permalink to this heading">#</a></h2>
+<p>To get embeddings, we use the <span class="math notranslate nohighlight">\(\texttt{tensorflow}\)</span> library, installed and imported as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#the below two lines should be run in the terminal to install</span>
+<span class="c1">#pip install tensorflow</span>
+<span class="c1">#pip install tensorflow_hub</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
+
+<span class="n">embed_url</span> <span class="o">=</span> <span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot;</span> <span class="c1"># &quot;https://tfhub.dev/google/universal-sentence-encoder-large/5&quot;</span>
+<span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">embed_url</span><span class="p">)</span> <span class="c1"># print (&quot;module %s loaded&quot; % module_url)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-07-17 05:17:22.112447: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">embed_url</span> <span class="o">=</span> <span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot;</span> <span class="c1"># &quot;https://tfhub.dev/google/universal-sentence-encoder-large/5&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">embed_url</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/envs/nlp2/lib/python3.9/site-packages/tensorflow_hub/module_v2.py:107,</span> in <span class="ni">load</span><span class="nt">(handle, tags, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="n">saved_model_pbtxt_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">as_bytes</span><span class="p">(</span><span class="n">module_path</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span>     <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">as_bytes</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PBTXT</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">saved_model_path</span><span class="p">)</span> <span class="ow">and</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span>     <span class="ow">not</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">saved_model_pbtxt_path</span><span class="p">)):</span>
+<span class="ne">--&gt; </span><span class="mi">107</span>   <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Trying to load a model of incompatible/unknown type. &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span>                    <span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; contains neither &#39;</span><span class="si">%s</span><span class="s2">&#39; nor &#39;</span><span class="si">%s</span><span class="s2">&#39;.&quot;</span> <span class="o">%</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span>                    <span class="p">(</span><span class="n">module_path</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PB</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">110</span>                     <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PBTXT</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span> <span class="k">if</span> <span class="n">options</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span>   <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="s2">&quot;saved_model&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;LoadOptions&quot;</span><span class="p">):</span>
+
+<span class="ne">ValueError</span>: Trying to load a model of incompatible/unknown type. &#39;/var/folders/px/b7vc3nh913zb_m0x36ncftj00000gn/T/tfhub_modules/063d866c06683311b44b4992fd46003be952409c&#39; contains neither &#39;saved_model.pb&#39; nor &#39;saved_model.pbtxt&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re also going to use the tokenizer found in the <span class="math notranslate nohighlight">\(\texttt{nltk.data}\)</span> library:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk.data</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">word_tokenize</span><span class="p">,</span> <span class="n">sent_tokenize</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt/english.pickle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to
+[nltk_data]     /Users/jonathanzhu/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+<p>To start, we first need to break our document corpus into sentences:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df_sentence</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">text_df_sdg</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">sdg</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span><span class="p">)):</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> 
+    <span class="n">text_df_sentence</span> <span class="o">=</span> <span class="n">text_df_sentence</span> <span class="o">+</span> <span class="n">sentence</span>
+    <span class="n">text_df_sdg</span> <span class="o">=</span> <span class="n">text_df_sdg</span> <span class="o">+</span> <span class="p">[</span><span class="n">sdg</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+<span class="n">sentence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text_df_sentence</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="n">text_df_sdg</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Exercise 3.1</b>: What are the dimensions of the <span class="math notranslate nohighlight">\(\texttt{text\_df}\)</span> and <span class="math notranslate nohighlight">\(\texttt{sentence\_df}\)</span> dataframes? What do each of the dimension numbers represent?</p>
+<p><b>Exercise 3.2</b>: Verify that the dimensions of the sentence dataframe are correct by breaking the original text dataframe into sentences and then determining the length.</p>
+<p>An important question to ask is how many sentences each document has; in other words, what is the distribution of the number of sentences in each text? We can determine that as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;num_sent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;num_sent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3     19649
+4     12018
+5      3723
+6      2601
+2       959
+7       622
+8       191
+1       154
+9        45
+10       22
+12       18
+13       10
+15       10
+11        8
+14        8
+16        5
+19        4
+17        3
+21        3
+20        2
+25        2
+18        1
+22        1
+24        1
+31        1
+40        1
+Name: num_sent, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that the vast majority of the documents have less than 10 sentences, with most being only 3 or 4 sentences. This type of sentence embedding can help us with further NLP tasks down the line.</p>
+<h2>3.1 Universal Sentence Encoder</h2>
 <p>The Universal Sentence Encoder (USE) was first published by Google around 2018. It maps a sentence, word, or short paragraph to a fixed length (typically 512) numeric vector. This approach would mean semantically similar sentences would be placed closer to each other in the embedding space.</p>
 <p>Embeddings are typically the result of using raw text, so no pre-processing would be involved. This sentence embedding can then be used for downstream applications,
 e.g., classification, clustering, and language prediction.</p>
@@ -539,37 +681,114 @@ e.g., classification, clustering, and language prediction.</p>
 <p>To install USE, run the following code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">tensorflow</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">tensorflow_hub</span>
-
-<span class="n">module_url</span> <span class="o">=</span> <span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot;</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">module_url</span> <span class="o">=</span> <span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot;</span> 
 <span class="n">model</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">module_url</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;module </span><span class="si">%s</span><span class="s2"> loaded&quot;</span> <span class="o">%</span> <span class="n">module_url</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">embed</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
-<span class="k">return</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-1-5bc537e7fd1b&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">tensorflow</span>
-        <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module https://tfhub.dev/google/universal-sentence-encoder/4 loaded
 </pre></div>
 </div>
 </div>
 </div>
 <p>Note that the first time you run this, it may take some time (5+ minutes) to complete the process.</p>
-</section>
-<section id="t-sne">
-<h2>3.2 t-SNE<a class="headerlink" href="#t-sne" title="Permalink to this heading">#</a></h2>
-<p>t-distributed Stochastic Neighbor Embedding (t-SNE) is best used to scale text features to the same scale. In short, it is a method of dimension reduction (like PCA). t-SNE associates probabilities on a Student’s t-distribution with each point; it then uses some randomization (hence Stochastic) to embed, paying particular attention to the neighbors of each point.</p>
-<p>While t-SNE will not be discussed further as to its specific methods, it can nonetheless be used for document embedding. More explanations on t-SNE can be found on the <span class="math notranslate nohighlight">\(\texttt{scikit\_learn}\)</span> website, <a class="reference external" href="https://scikit-learn.org/stable/modules/manifold.html#t-sne">https://scikit-learn.org/stable/modules/manifold.html#t-sne</a>.</p>
-</section>
-<section id="more-exercises">
-<h2>3.3 More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h2>
+<h2>3.2 t-SNE</h2>
+<p>t-distributed Stochastic Neighbor Embedding (t-SNE) is best used to scale text features to the same scale. In short, it is a method of dimension reduction (like PCA). t-SNE associates probabilities on a Student’s t-distribution with each point; it then uses some randomization (hence Stochastic) to embed, paying particular attention to the neighbors of each point. While t-SNE will not be discussed further as to its specific mathematical methods, it can nonetheless be used for document embedding. More explanations on t-SNE can be found on the <span class="math notranslate nohighlight">\(\texttt{scikit\_learn}\)</span> website, <a class="reference external" href="https://scikit-learn.org/stable/modules/manifold.html#t-sne">https://scikit-learn.org/stable/modules/manifold.html#t-sne</a>.</p>
+<p>To demonstrate t-SNE, we will first start by running a classification algorithm called the Multilayer Perceptron on our UN SDG data</p>
+<p>When using t-SNE in Python, we can start with the following code. Note that t-SNE can take a long time to run; to help with this, the t-SNE documentation suggests using <span class="math notranslate nohighlight">\(\texttt{MinMixScaler}\)</span> so as to make everything the same scale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">sdg</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">X_train_use_vector</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">X_test_use_vector</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-06-25 00:07:31.471784: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor &#39;inputs&#39; with dtype string
+	 [[{{node inputs}}]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
+<span class="n">X_train_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
+<span class="n">X_test_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_use_vector</span><span class="p">)</span>
+
+<span class="n">use_mlp_clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_use_vector_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">use_mlp_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_use_vector_scaled</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           1     0.3882    0.3780    0.3830      3249
+           2     0.4008    0.3763    0.3882      2899
+           3     0.5543    0.5545    0.5544      3118
+           4     0.5398    0.5539    0.5468      4432
+           5     0.5175    0.5159    0.5167      5119
+           6     0.4194    0.4277    0.4235      3283
+           7     0.4496    0.4652    0.4573      3710
+           8     0.1851    0.1860    0.1856      1747
+           9     0.3030    0.2583    0.2789      1827
+          10     0.2375    0.2569    0.2468      1857
+          11     0.3870    0.3606    0.3733      2718
+          12     0.2664    0.2869    0.2763      1328
+          13     0.3829    0.3981    0.3903      2517
+          14     0.4420    0.4012    0.4206      1386
+          15     0.3332    0.3847    0.3571      1861
+          16     0.7680    0.7593    0.7636      8783
+
+    accuracy                         0.4786     49834
+   macro avg     0.4109    0.4102    0.4102     49834
+weighted avg     0.4797    0.4786    0.4789     49834
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
+<span class="n">X_train_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
+<span class="n">X_test_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_use_vector</span><span class="p">)</span>
+
+<span class="n">tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">perplexity</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">tsne_proj</span> <span class="o">=</span> <span class="n">tsne</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_test_use_vector_scaled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">X_train_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">X_test_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_use_vector</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;X_train_use_vector&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<h2>3.3 More Exercises</h2>
 <p><b>Exercise 3.1</b>: Take two documents, one labeled as SDG 1 and the other as SDG 8. Segment these into sentences, compute the embedding, and find the dot product between the embeddings.</p>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -604,12 +823,12 @@ e.g., classification, clustering, and language prediction.</p>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="sec1_preprocessing.html"
+       href="sec2_transform_features.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1. Preprocessing</p>
+        <p class="prev-next-title">2. About Text Data</p>
       </div>
     </a>
     <a class="right-next"
@@ -631,22 +850,6 @@ e.g., classification, clustering, and language prediction.</p>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-sentence-encoder">3.1 Universal Sentence Encoder</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-sne">3.2 t-SNE</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">3.3 More Exercises</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
             
           </div>
           <footer class="bd-footer-content">
@@ -656,7 +859,7 @@ e.g., classification, clustering, and language prediction.</p>
   <div class="footer-item">
     
 <p class="component-author">
-By Paul Isihara and Thomas VanDrunen, Editors
+By Paul Isihara, Thomas VanDrunen and Claire Wagner, Editors
 </p>
 
   </div>
@@ -665,7 +868,7 @@ By Paul Isihara and Thomas VanDrunen, Editors
     
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2923.
       <br/>
     
   </p>

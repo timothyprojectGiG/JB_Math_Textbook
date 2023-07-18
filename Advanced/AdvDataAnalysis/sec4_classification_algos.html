@@ -225,7 +225,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Section 0: Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
@@ -279,6 +280,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE%20-%20Section%202.html">2. Introduction to Differential Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE%20-%20Section%203.html">3. First-Order Differential Equations</a></li>
@@ -304,11 +306,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec0_data.html">0. Before Reading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec2_transform_features.html">2. About Text Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec3_doc_embedding.html">3. Document Embedding</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Classification of Texts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec5_classification_eval.html">5. Evaluating Classification</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="sec6_applications.html">6. Applications</a></li>
 </ul>
 
@@ -480,9 +483,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -498,21 +499,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-machine-learning-overview">4.1 A Machine Learning Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-algorithms">4.2 The Algorithms</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-perceptron">4.2.1 The Perceptron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-algorithms">4.2.2 Naive Bayes Algorithms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-classification">4.2.3 Ridge Classification</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">4.3 More Exercises</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -522,11 +508,65 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="classification-of-texts">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#libraries and data import - needed for later code, will figure out to try and hide this later</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/data/&quot;</span>
+
+<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#preprocessing - will hide later</span>
+<span class="kn">from</span> <span class="nn">googletrans</span> <span class="kn">import</span> <span class="n">Translator</span>
+<span class="kn">from</span> <span class="nn">langdetect</span> <span class="kn">import</span> <span class="n">detect</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">detect</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;heavy&#39;</span><span class="p">,</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,}</span>
+
+<span class="k">def</span> <span class="nf">most_informative_feature_for_class</span><span class="p">(</span><span class="n">vectorizer</span><span class="p">,</span> <span class="n">classifier</span><span class="p">,</span> <span class="n">classlabel</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">labelid</span> <span class="ow">in</span> <span class="n">classlabel</span><span class="p">:</span>
+        <span class="n">feature_names</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+        <span class="n">top_n</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_log_prob_</span><span class="p">[</span><span class="n">labelid</span><span class="p">],</span> <span class="n">feature_names</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">coef</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">top_n</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SDG </span><span class="si">{}</span><span class="s2"> : </span><span class="si">{:30}</span><span class="s2">  </span><span class="si">{:.6}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">labelid</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">coef</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_top_n_features</span><span class="p">(</span><span class="n">vectorizer</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">class_labels</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Prints features with the highest coefficient values, per class&quot;&quot;&quot;</span>
+    <span class="n">feature_names</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">class_label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_labels</span><span class="p">):</span>
+        <span class="n">top_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">feature_log_prob_</span><span class="p">[</span><span class="n">i</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="n">n</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">class_label</span><span class="p">,</span>
+              <span class="s2">&quot; || &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">feature_names</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">top_n</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="classification-of-texts">
 <h1>4. Classification of Texts<a class="headerlink" href="#classification-of-texts" title="Permalink to this heading">#</a></h1>
 <p>Now that we have gone through the arduous process of preprocessing, transforming, and embedding our text data, we can finally get into some of the was we can work with it, most prominent of which is classification. In the case of our UN SDG dataset, our goal is to classify documents by the goal they match with. In this subsection, we will briefly review the general process of machine learning before going into some of the methods by which text data are commonly classified.</p>
-<section id="a-machine-learning-overview">
-<h2>4.1 A Machine Learning Overview<a class="headerlink" href="#a-machine-learning-overview" title="Permalink to this heading">#</a></h2>
+<h2>4.1 A Machine Learning Overview</h2>
 <p>Machine learning of any kind can be boiled down to the process by which we train a machine to make the most effective predictions. When we train a machine to make numerical predictions, we perform <b>regression</b>; if we train a machine to categorize data into categories, we perform <b>classification</b>. Since our UN SDG dataset is classified into the categories of the goals, we will focus on classification.</p>
 <p>There are two main types of machine learning: <b>supervised</b> and <b>unsupervised</b>. Supervised learning means that the data we give the machine is already labeled with the “correct” value or category, while unsupervised learning means that the data is unlabeled and there is no “correct” value or category. Here, since our UN SDG data is already labeled with the goal it aligns most with, we consider it supervised. As such, the goal for the machine is to match the “correct” labels of the data we give it.</p>
 <p>Machine learning starts with a dataset; with modern advances in data collection and storage, machine learning datasets typically involve thousands of data points, while some industry machine learning projects have access to more powerful computers and can use datasets with millions of data points. This dataset is split into a <b>training set</b> and a <b>testing set</b>. The training set consists of the data fed to the machine for it to build its model, while the testing set consists of data kept separate to evaluate the model’s performance. Typically, the training set consists of more data than the testing set; it is common to split the main set 70/30 (70% training, 30% testing) or 80/20.</p>
@@ -542,19 +582,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">35</span><span class="n">f64e883ce5</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">categories</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;text_df&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 <p>We then vectorize using TF-IDF from the previous section; for this, we are using bi-grams. Unigrams will be given as exercises throughout the section.</p>
 <div class="cell docutils container">
@@ -567,17 +594,33 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="the-algorithms">
-<h2>4.2 The Algorithms<a class="headerlink" href="#the-algorithms" title="Permalink to this heading">#</a></h2>
+<h2>4.2 The Algorithms</h2>
 <p>Many algorithms exist for machine learning predictions. Some, like the Support Vector Machine and Linear/Multiple Regression, have existed for a long time and are applicable to a wide range of problems, while others are more recent and are meant to be high-performance on more specific problems. Here, we present three algorithms most commonly used to classify text data.</p>
-<section id="the-perceptron">
-<h3>4.2.1 The Perceptron<a class="headerlink" href="#the-perceptron" title="Permalink to this heading">#</a></h3>
-<p>In 1943, McCulloch &amp; Pitts developed the first Perceptron, called the Neuron Model. This model was first used in 1958 by Frank Rosenblatt, who formed the classical perceptron model, and in 1969, Minsky and Papert published extensive research on the perceptron model.</p>
+<h3>4.2.1 The Perceptron</h3>
+In 1943, McCulloch & Pitts developed the first Perceptron, called the Neuron Model. This model was first used in 1958 by Frank Rosenblatt, who formed the classical perceptron model, and in 1969, Minsky and Papert published extensive research on the perceptron model. 
 <p>The single perceptron is a binary classifier and takes each input <span class="math notranslate nohighlight">\(x_i\)</span> and multiplies it by some corresponding weight <span class="math notranslate nohighlight">\(w_i\)</span>. These are then added for all <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(w\)</span>, or <span class="math notranslate nohighlight">\(\sum_{i=1}^{N} x_iw_i\)</span>. This sum is compared to a threshold <span class="math notranslate nohighlight">\(T\)</span>, producing an output of 0 if below <span class="math notranslate nohighlight">\(T\)</span> or 1 if above <span class="math notranslate nohighlight">\(T\)</span>.</p>
-<a class="reference internal image-reference" href="../../_images/sec3_perceptron.png"><img alt="../../_images/sec3_perceptron.png" src="../../_images/sec3_perceptron.png" style="width: 600px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/sec3_perceptron.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a2abeda5fb08450fe77e30bfd4ffe40711f03037543b9f1dc7b81f174f93c567.png" src="../../_images/a2abeda5fb08450fe77e30bfd4ffe40711f03037543b9f1dc7b81f174f93c567.png" />
+</div>
+</div>
 <p>This kind of function is called an activation function, which generally involve a value of 0  or -1 until a threshold <span class="math notranslate nohighlight">\(O\)</span> is reached, after which the function stays at 1 or increases. Alternative activation functions include logistic regression (below middle) or the rectified linear unit (ReLU) (below right), with the perceptron at bottom left for reference.</p>
-<a class="reference internal image-reference" href="../../_images/sec3_activ_funcs.png"><img alt="../../_images/sec3_activ_funcs.png" src="../../_images/sec3_activ_funcs.png" style="width: 800px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/sec3_activ_funcs.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/98c1e237643eb243ce1de521c52551cb546f117778564d126a1fd69947df5f4d.png" src="../../_images/98c1e237643eb243ce1de521c52551cb546f117778564d126a1fd69947df5f4d.png" />
+</div>
+</div>
 <p>It was proven relatively quickly that in addition to only being a binary classifier, the perceptron can only handle linearly separable data. These problems can be fixed by using a multilayer perceptron.</p>
 <p>Multilayer perceptrons combine several perceptrons in at least one hidden layer, each layer feeding the results of the neurons to next layer; the components of the final hidden layer then go on to form the output. Unlike single perceptrons, multilayer perceptrons can handle non-linear data and represent arbitrary decision boundaries.</p>
 <p>To calculate the weights for each layer, we first compute the errors at the output layer with a cost function.  These errors are then distributed backwards from each layer to the previous layer. Then we use gradient descent on the error functions to adjust weight at the layer, so we need all functions differentiable; the weights that minimize the error function form the solution to the weights for the perceptron.</p>
@@ -591,11 +634,35 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           1       0.78      0.74      0.76       481
+           2       0.50      0.68      0.58       316
+           3       0.77      0.84      0.81       674
+           4       0.84      0.83      0.83       863
+           5       0.81      0.85      0.83       920
+           6       0.80      0.82      0.81       465
+           7       0.78      0.81      0.80       730
+           8       0.54      0.38      0.45       353
+           9       0.54      0.56      0.55       328
+          10       0.51      0.47      0.49       256
+          11       0.65      0.67      0.66       462
+          12       0.67      0.51      0.58       217
+          13       0.77      0.74      0.76       443
+          14       0.68      0.66      0.67       263
+          15       0.76      0.68      0.72       313
+          16       0.94      0.93      0.93      1057
+
+    accuracy                           0.76      8141
+   macro avg       0.71      0.70      0.70      8141
+weighted avg       0.76      0.76      0.76      8141
+</pre></div>
+</div>
+</div>
 </div>
 <p><b>Exercise 4.1</b>: Repeat the above classification on unigrams and report the accuracy.</p>
-</section>
-<section id="naive-bayes-algorithms">
-<h3>4.2.2 Naive Bayes Algorithms<a class="headerlink" href="#naive-bayes-algorithms" title="Permalink to this heading">#</a></h3>
+<h3>4.2.2 Naive Bayes Algorithms</h3>
 <p>Naive Bayes Algorithms are so called as they rely on Bayes’ Theorem and assume high levels of independence (naive). Bayes’ Theorem states that</p>
 <p><span class="math notranslate nohighlight">\(P(y|X) = \frac{P(X|y) * P(y)}{P(X)}\)</span>.</p>
 <p>In terms of Bayesian Probability, <span class="math notranslate nohighlight">\(P(y|X)\)</span> is called the <i>posterior</i>, <span class="math notranslate nohighlight">\(P(X|y)\)</span> is called the <i>data likelihood</i>, <span class="math notranslate nohighlight">\(P(y)\)</span> is the <i>prior</i>, and <span class="math notranslate nohighlight">\(P(X)\)</span> is the <i>normalization</i>. In the context of NLP classification, we define <span class="math notranslate nohighlight">\(X\)</span> to be the document features and <span class="math notranslate nohighlight">\(y\)</span> to be the document’s class label. We also assume conditional independence, which means that the class label of one document does not depend on the class label of another document.</p>
@@ -613,11 +680,35 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           1       0.74      0.74      0.74       481
+           2       0.85      0.44      0.58       316
+           3       0.82      0.84      0.83       674
+           4       0.68      0.90      0.78       863
+           5       0.63      0.89      0.74       920
+           6       0.86      0.81      0.83       465
+           7       0.61      0.89      0.72       730
+           8       0.81      0.11      0.19       353
+           9       0.83      0.23      0.37       328
+          10       0.87      0.23      0.36       256
+          11       0.78      0.61      0.68       462
+          12       0.93      0.29      0.44       217
+          13       0.78      0.74      0.76       443
+          14       0.93      0.35      0.51       263
+          15       0.91      0.50      0.64       313
+          16       0.68      0.98      0.80      1057
+
+    accuracy                           0.71      8141
+   macro avg       0.79      0.60      0.62      8141
+weighted avg       0.75      0.71      0.68      8141
+</pre></div>
+</div>
+</div>
 </div>
 <p><b>Exercise 4.2</b>: Repeat the above classifications on unigrams and report the accuracy.</p>
-</section>
-<section id="ridge-classification">
-<h3>4.2.3 Ridge Classification<a class="headerlink" href="#ridge-classification" title="Permalink to this heading">#</a></h3>
+<h3>4.2.3 Ridge Classification</h3>
 <p>Ridge Classification was designed with the original intent of a restriction on basic multiple linear regression; in essence, it adds an additional penalty for extremely large errors, so ridge regression minimizes more than just the least square residuals. However, ridge algorithms can also be used for classification, and in the context of NLP tasks, ridge classifications have been found to perform very well.</p>
 <p>In the binary case, ridge converts the two classes to either 1 or -1 and then treats the problem as a regression problem. This can then be generalized to multiple classes with a One vs. Rest approach, where we make an algorithm to determine if an item is in one specific class or any of the rest of the classes; this is then repeated until any item can be classified into a single class.</p>
 <p>More on the ways ridge regression is performed and calculated for classification can be found on the scikit-learn explanation: <a class="reference external" href="https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression">https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression</a>.</p>
@@ -633,12 +724,35 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           1     0.7160    0.7651    0.7397       481
+           2     0.6542    0.6646    0.6593       316
+           3     0.8196    0.8427    0.8310       674
+           4     0.7558    0.8714    0.8095       863
+           5     0.8287    0.8728    0.8502       920
+           6     0.8239    0.8151    0.8195       465
+           7     0.7995    0.8247    0.8119       730
+           8     0.5738    0.3853    0.4610       353
+           9     0.5801    0.5518    0.5656       328
+          10     0.5990    0.4492    0.5134       256
+          11     0.7111    0.6926    0.7018       462
+          12     0.7073    0.5346    0.6089       217
+          13     0.7817    0.7923    0.7870       443
+          14     0.7445    0.6426    0.6898       263
+          15     0.7857    0.6677    0.7219       313
+          16     0.8920    0.9612    0.9253      1057
+
+    accuracy                         0.7732      8141
+   macro avg     0.7358    0.7084    0.7185      8141
+weighted avg     0.7670    0.7732    0.7676      8141
+</pre></div>
+</div>
+</div>
 </div>
 <p><b>Exercise 4.3</b>: Repeat the above classification on unigrams and report the accuracy.</p>
-</section>
-</section>
-<section id="more-exercises">
-<h2>4.3 More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h2>
+<h2>4.3 More Exercises</h2>
 <p><b>Exercise 4.4</b>: Write a function that takes a document corpus, processed like in the exercises in Section 1, splits the set into a training and testing set, and runs a classifier on the training set then reports metrics on the testing set.</p>
 <ul class="simple">
 <li><p>Your function should take a parameter <span class="math notranslate nohighlight">\(\texttt{classifier\_algorithm}\)</span> that specifies the algorithm to use as well as the parameters necessary for that algorithm.</p></li>
@@ -647,7 +761,6 @@ document.write(`
 <ul class="simple">
 <li><p>Use <span class="math notranslate nohighlight">\(\texttt{min\_df}\)</span> to modify the computation time for Multilayer Perceptron; this will reduce the amount of time it takes to run.</p></li>
 </ul>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -709,27 +822,6 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-machine-learning-overview">4.1 A Machine Learning Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-algorithms">4.2 The Algorithms</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-perceptron">4.2.1 The Perceptron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-algorithms">4.2.2 Naive Bayes Algorithms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-classification">4.2.3 Ridge Classification</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">4.3 More Exercises</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
             
           </div>
           <footer class="bd-footer-content">
@@ -739,7 +831,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By Paul Isihara and Thomas VanDrunen, Editors
+By Paul Isihara, Thomas VanDrunen and Claire Wagner, Editors
 </p>
 
   </div>
@@ -748,7 +840,7 @@ By Paul Isihara and Thomas VanDrunen, Editors
     
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2923.
       <br/>
     
   </p>
