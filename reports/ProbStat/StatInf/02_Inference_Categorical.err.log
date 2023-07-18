@@ -1,0 +1,79 @@
+Traceback (most recent call last):
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/timothyproject/anaconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 553, in async_execute
+    await self.async_execute_cell(
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# create dataframe from counts of "Trust_Index" values
+levels = wgm["Trust_Index"].value_counts().reset_index(name="Count")
+
+# create bar plot
+ax = sns.barplot(
+    data = levels,
+    x = "Trust_Index",
+    y = "Count",
+    order = ["No score", "Low trust", "Medium trust", "High trust"]
+)
+
+# label each bar with the corresponding value
+for container in ax.containers:
+    ax.bar_label(container)
+
+# set axis labels and title
+ax.set_xlabel("")
+ax.set_title("Trust in Scientists Index, Worldwide");
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m<ipython-input-4-8bd869634078>[0m in [0;36m<module>[0;34m[0m
+[1;32m      3[0m [0;34m[0m[0m
+[1;32m      4[0m [0;31m# create bar plot[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 5[0;31m ax = sns.barplot(
+[0m[1;32m      6[0m     [0mdata[0m [0;34m=[0m [0mlevels[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m     [0mx[0m [0;34m=[0m [0;34m"Trust_Index"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/site-packages/seaborn/_decorators.py[0m in [0;36minner_f[0;34m(*args, **kwargs)[0m
+[1;32m     44[0m             )
+[1;32m     45[0m         [0mkwargs[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0;34m{[0m[0mk[0m[0;34m:[0m [0marg[0m [0;32mfor[0m [0mk[0m[0;34m,[0m [0marg[0m [0;32min[0m [0mzip[0m[0;34m([0m[0msig[0m[0;34m.[0m[0mparameters[0m[0;34m,[0m [0margs[0m[0;34m)[0m[0;34m}[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 46[0;31m         [0;32mreturn[0m [0mf[0m[0;34m([0m[0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     47[0m     [0;32mreturn[0m [0minner_f[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     48[0m [0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/site-packages/seaborn/categorical.py[0m in [0;36mbarplot[0;34m(x, y, hue, data, order, hue_order, estimator, ci, n_boot, units, seed, orient, color, palette, saturation, errcolor, errwidth, capsize, dodge, ax, **kwargs)[0m
+[1;32m   3177[0m ):
+[1;32m   3178[0m [0;34m[0m[0m
+[0;32m-> 3179[0;31m     plotter = _BarPlotter(x, y, hue, data, order, hue_order,
+[0m[1;32m   3180[0m                           [0mestimator[0m[0;34m,[0m [0mci[0m[0;34m,[0m [0mn_boot[0m[0;34m,[0m [0munits[0m[0;34m,[0m [0mseed[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   3181[0m                           [0morient[0m[0;34m,[0m [0mcolor[0m[0;34m,[0m [0mpalette[0m[0;34m,[0m [0msaturation[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/site-packages/seaborn/categorical.py[0m in [0;36m__init__[0;34m(self, x, y, hue, data, order, hue_order, estimator, ci, n_boot, units, seed, orient, color, palette, saturation, errcolor, errwidth, capsize, dodge)[0m
+[1;32m   1582[0m                  errwidth, capsize, dodge):
+[1;32m   1583[0m         [0;34m"""Initialize the plotter."""[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1584[0;31m         self.establish_variables(x, y, hue, data, orient,
+[0m[1;32m   1585[0m                                  order, hue_order, units)
+[1;32m   1586[0m         [0mself[0m[0;34m.[0m[0mestablish_colors[0m[0;34m([0m[0mcolor[0m[0;34m,[0m [0mpalette[0m[0;34m,[0m [0msaturation[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/site-packages/seaborn/categorical.py[0m in [0;36mestablish_variables[0;34m(self, x, y, hue, data, orient, order, hue_order, units)[0m
+[1;32m    151[0m                 [0;32mif[0m [0misinstance[0m[0;34m([0m[0mvar[0m[0;34m,[0m [0mstr[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    152[0m                     [0merr[0m [0;34m=[0m [0;34m"Could not interpret input '{}'"[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0mvar[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 153[0;31m                     [0;32mraise[0m [0mValueError[0m[0;34m([0m[0merr[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    154[0m [0;34m[0m[0m
+[1;32m    155[0m             [0;31m# Figure out the plotting orientation[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mValueError[0m: Could not interpret input 'Trust_Index'
+ValueError: Could not interpret input 'Trust_Index'
+
