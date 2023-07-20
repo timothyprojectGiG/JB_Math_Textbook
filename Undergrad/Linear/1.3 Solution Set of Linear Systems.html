@@ -1,0 +1,1060 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1.3 Solution set of linear Systems. &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Linear/1.3 Solution Set of Linear Systems';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.3 Answers to Exercises" href="1.4%20Answers%20to%20Exercises.html" />
+    <link rel="prev" title="1. Systems of Linear Equations" href="1.1%20Linear%20Systems.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BLACKBOARD MATH PUZZLES</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../elementary.html">Math on a Blackboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/arithmetic.html">Arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/pascal.html">Pascal’s Triangle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractions/fractions.html">Fractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Vectors/vectors.html">Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Subsets/subsets.html">Subsets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractals/fractals.html">Fractals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Discrete/trees/trees.html">Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Circuits/circuits.html">Circuits</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED WITH JNBS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb1.html">1 Functions- Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb8.html">8. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb9.html">9. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb10.html">10. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">11. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">Introduction to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/2Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec4.html">4 Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/5int/5int.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/6parametric.html">6. Parametric Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.1%20Linear%20Systems.html">1. Systems of Linear Equations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.3 Solution set of linear Systems.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.4%20Answers%20to%20Exercises.html">1.3 Answers to Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2.1%20Matrix%20Algebra.html">2. Matrix Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.3%20Determinant.html">2.1 Determinant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.1%20Subspaces%20of%20R%5En.html">3.1 Subspaces of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.4%20Change%20of%20Basis.html">3.4 Change of basis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.1%20Eigenvalues.html">4.1 Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.2%20Diagonalization.html">4.2 Diagonalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.1%20Inner%20product%20and%20Orthogonality.html">5.1 Inner product and Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.2%20Orthogonal%20Projection.html">5. 2 Orthogonal Projection</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="5.4%20Least-Squares%20Problems.html">5.4 Least-Squares Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.5%20Answer%20to%20Exercises.html">5.1 Inner product and Orthogonality</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DifEq/DE%20-%20Section%202.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DifEq/DE%20-%20Section%203.html">3. First-Order Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/covid.html">1. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/hiv/hiv.html">4. HIV-AIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/cws/cws.html">5. CWS Model of Alzheimemer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/gravity/gravity.html">6. Gravity Fed Water Delivery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">2. About Text Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">5. Evaluating Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">6. Applications</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/Linear/1.3 Solution Set of Linear Systems.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Undergrad/Linear/1.3 Solution Set of Linear Systems.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.3 Solution set of linear Systems.</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homogenous-linear-systems">Homogenous Linear Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-case-the-solution-set-of-non-homogenoues-linear-system">General Case: the solution set of non-homogenoues linear system:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="solution-set-of-linear-systems">
+<h1>1.3 Solution set of linear Systems.<a class="headerlink" href="#solution-set-of-linear-systems" title="Permalink to this heading">#</a></h1>
+<p>In this section, we study and analyze the solution set of linear systems.</p>
+<section id="homogenous-linear-systems">
+<h2>Homogenous Linear Systems<a class="headerlink" href="#homogenous-linear-systems" title="Permalink to this heading">#</a></h2>
+<p>We start with describing the solution set of a simpler linear systems where the right side of equalities are zeros. In matrix form, <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span>; such system is called <strong>homogeneous</strong>. Homogeneous systems are always consistent since <span class="math notranslate nohighlight">\(\vec{x}=\vec{0}\)</span> is always a solution. We call <span class="math notranslate nohighlight">\(\vec{0}\)</span> the trivial solution of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span>.</p>
+<p><strong>Theorem 2:</strong></p>
+<p>The homogenous system <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span> has a nontrivial solution if and only if it has a non-pivot column.</p>
+<p>Non-pivot columns correspond to <strong>free variables</strong>; all other variables can be expressed in terms of free variables.</p>
+<p><strong>Example 1</strong></p>
+<p>Describe the solution set of <span class="math notranslate nohighlight">\(10x -4y+ 7z=0\)</span></p>
+<p><strong>Solution</strong>: consider the augmented matrix of the system: <span class="math notranslate nohighlight">\( \begin{bmatrix} 10&amp; -4&amp; 7&amp;&amp; 0\\ \end{bmatrix}\)</span>. There is only one pivot columns and y and z are free variables.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{x} = \begin{bmatrix} x \\ y \\z \end{bmatrix} = \begin{bmatrix} 0.4y - 0.7z \\y\\z \end{bmatrix}= \begin{bmatrix} 0.4y \\ y \\0 \end{bmatrix} + \begin{bmatrix} - 0.7z \\ 0 \\ z \end{bmatrix}= 
+y \begin{bmatrix} 0.4 \\ 1 \\ 0\end{bmatrix} + z \begin{bmatrix} 0.7 \\0\\1 \end{bmatrix}
+\end{split}\]</div>
+<p>Thus, the solution set is span ( <span class="math notranslate nohighlight">\(\ \begin{bmatrix} 0.4 \\ 1 \\ 0\end{bmatrix},\, \begin{bmatrix} 0.7 \\0\\1 \end{bmatrix}\ \)</span>)</p>
+<p><strong>Example 2</strong></p>
+<p>Determine if the following system has a nontrivial solution. Then describe the solution set.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+3x +5y - 4z &amp;= 0 \\
+-3x -2y +4z &amp;= 0 \\
+6x + y -8 z &amp;= 0
+\end{align*}
+\end{split}\]</div>
+<p>We first setup the augmented matrix, and then, we find its REF:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">A</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3,  5, -4,  0],
+       [-3, -2,  4,  0],
+       [ 6,  1, -8,  0]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Swap two rows</span>
+
+<span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">):</span>
+    
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+  
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">,:]</span>
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">,:]</span>
+    
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+
+
+<span class="c1"># Multiple all entries in a row by a nonzero number</span>
+
+
+<span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">scalar</span><span class="o">*</span><span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span>  
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+
+<span class="c1"># Replacing a row1 by the sum of itself and a multiple of row2 </span>
+
+<span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">]</span><span class="o">+</span> <span class="n">scalar</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">]</span> 
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_1</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">A_1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.,  5., -4.,  0.],
+       [ 0.,  3.,  0.,  0.],
+       [ 6.,  1., -8.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_2</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A_1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A_2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.,  5., -4.,  0.],
+       [ 0.,  3.,  0.,  0.],
+       [ 0., -9.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_3</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A_2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">A_3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.,  5., -4.,  0.],
+       [ 0.,  3.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that the third column is a non-pivot column and therefore <span class="math notranslate nohighlight">\(z\)</span> is a free variable. Thus, <span class="math notranslate nohighlight">\(A\vec{x}=0\)</span> has (infinitely many) one for each choice of <span class="math notranslate nohighlight">\(z\)</span>. To find the solution set we write back the linear system coresponding to REF of A:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+3x +5y - 4z &amp;= 0 \\
+3y &amp;= 0 \\
+ 0&amp;= 0
+\end{align*}
+\end{split}\]</div>
+<p>Therefore, <span class="math notranslate nohighlight">\(x= \frac{-4}{3}z\)</span>, and the slution set contains vectors of the foloowing form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{x} = \begin{bmatrix} x\\y\\z \end{bmatrix} = \begin{bmatrix} \frac{-4}{3}z\\0\\z \end{bmatrix}= z \begin{bmatrix} \frac{-4}{3}\\0\\1 \end{bmatrix}
+\end{split}\]</div>
+<p>for <span class="math notranslate nohighlight">\(z\in \mathbb{R}\)</span>.</p>
+<p>In other words, the solution set is <span class="math notranslate nohighlight">\(\text{span}\ (\ \begin{bmatrix} \frac{-4}{3}\\0\\1 \end{bmatrix}\ )\)</span></p>
+<p>We can represnt a linear independence equation</p>
+<div class="math notranslate nohighlight">
+\[ x_1 \vec{v_1} + x_2 \vec{v_2} + \dots + x_p \vec{v_p} = 0\]</div>
+<p>by a homogenous system <span class="math notranslate nohighlight">\(A\vec{x} = 0\)</span> where <span class="math notranslate nohighlight">\(A\)</span> is a matrix whose columns are <span class="math notranslate nohighlight">\(\vec{v_i}s\)</span>. In fact, we have:</p>
+<p><strong>Theorem 3</strong></p>
+<p>The columns of a matrix <span class="math notranslate nohighlight">\(A\)</span> form a linearly independent set if and only if <span class="math notranslate nohighlight">\(A\vec{x}=0\)</span> has only trivial solution.</p>
+<p><strong>Example 3</strong></p>
+<p>Determine if the columns of the matrix <span class="math notranslate nohighlight">\(A = \begin{bmatrix} 2 &amp; 3 &amp; 5\\ -1 &amp; 1 &amp; 1\\ 5 &amp; 4 &amp; 5    \end{bmatrix}\)</span> form a linearly independent set.</p>
+<p><strong>Solution:</strong></p>
+<p>We show <span class="math notranslate nohighlight">\(A\vec{x}= 0\)</span> has a nontrivial solution, and therefore, by Theorem 3, the columns of <span class="math notranslate nohighlight">\(A\)</span> are linearly indendent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2,  3,  5,  0],
+       [-1,  1,  1,  0],
+       [ 5,  4,  5,  0]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> 
+<span class="n">A1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1.,  1.,  1.,  0.],
+       [ 2.,  3.,  5.,  0.],
+       [ 5.,  4.,  5.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">A1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1., -1., -0.],
+       [ 2.,  3.,  5.,  0.],
+       [ 5.,  4.,  5.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1., -1., -0.],
+       [ 0.,  5.,  7.,  0.],
+       [ 5.,  4.,  5.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A4</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">A4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1., -1., -0.],
+       [ 0.,  5.,  7.,  0.],
+       [ 0.,  9., 10.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A5</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">A5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1. , -1. , -1. , -0. ],
+       [ 0. ,  1. ,  1.4,  0. ],
+       [ 0. ,  9. , 10. ,  0. ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A6</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">A6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1. , -1. , -1. , -0. ],
+       [ 0. ,  1. ,  1.4,  0. ],
+       [ 0. ,  0. , -2.6,  0. ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Representing this as a linear system, the last row of <span class="math notranslate nohighlight">\(A_6\)</span> shows that <span class="math notranslate nohighlight">\(z = 0\)</span>, and thefore, <span class="math notranslate nohighlight">\(y = x= 0\)</span>. In other words, the only solution to this system is zero.</p>
+</section>
+<section id="general-case-the-solution-set-of-non-homogenoues-linear-system">
+<h2>General Case: the solution set of non-homogenoues linear system:<a class="headerlink" href="#general-case-the-solution-set-of-non-homogenoues-linear-system" title="Permalink to this heading">#</a></h2>
+<p><strong>Theorem 3</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> be a consistent system, and let <span class="math notranslate nohighlight">\(\vec{p}\)</span> be a solution. Then the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> is the set of all vectors of the form <span class="math notranslate nohighlight">\(\vec{p}+\vec{h}\)</span> where <span class="math notranslate nohighlight">\(\vec{h}\)</span> is any solution to the homogenoues system <span class="math notranslate nohighlight">\(A\vec{x}=0\)</span>.</p>
+<p><strong>Example 4</strong> Describe the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> where</p>
+<p><span class="math notranslate nohighlight">\(A=\begin{bmatrix} 3&amp; 5&amp; -4\\ -3&amp; -2&amp; 4\\ 6&amp; 1&amp; -8 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}= \begin{bmatrix} 7\\ -1\\ -4\\  \end{bmatrix}\)</span>.</p>
+<p><strong>Solution</strong> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up the augemented matrix [A|b]</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3,  5, -4,  7],
+       [-3, -2,  4, -1],
+       [ 6,  1, -8, -4]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Row reduce the augmented matrix to reduced echelon form:</span>
+
+<span class="n">A1</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.,  5., -4.,  7.],
+       [ 0.,  3.,  0.,  6.],
+       [ 6.,  1., -8., -4.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  3.,   5.,  -4.,   7.],
+       [  0.,   3.,   0.,   6.],
+       [  0.,  -9.,   0., -18.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">A3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.,  5., -4.,  7.],
+       [ 0.,  3.,  0.,  6.],
+       [ 0.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A4</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.,  0., -4., -3.],
+       [ 0.,  3.,  0.,  6.],
+       [ 0.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A5</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        ,  0.        , -1.33333333, -1.        ],
+       [ 0.        ,  3.        ,  0.        ,  6.        ],
+       [ 0.        ,  0.        ,  0.        ,  0.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A6</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">A5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        ,  0.        , -1.33333333, -1.        ],
+       [ 0.        ,  1.        ,  0.        ,  2.        ],
+       [ 0.        ,  0.        ,  0.        ,  0.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can express each dependent variable in terms of free variables:</p>
+<p>We have <span class="math notranslate nohighlight">\(x_1 - \frac{4}{3} x_3 = -1\)</span>, <span class="math notranslate nohighlight">\(x_2= 2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span> is free. As a vector, the general solution of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ \end{bmatrix} = \begin{bmatrix} -1 + \frac{4}{3} x_3\\ 2\\ x_3\end{bmatrix} = \begin{bmatrix} -1 \\ 2 \\ 0 \end{bmatrix} + x_3 \begin{bmatrix} \frac{4}{3} \\ 0 \\ 1 \end{bmatrix}\end{split}\]</div>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Is $\left\lbrace\ \  \begin{bmatrix} 1 \ 2  \3 \end{bmatrix},</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight" id="equation-a807ff82-6d7e-4f8d-8b0f-0654bd62e084">
+<span class="eqno">(39)<a class="headerlink" href="#equation-a807ff82-6d7e-4f8d-8b0f-0654bd62e084" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 4 \\ 5  \\6 \end{bmatrix}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Describe the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> where</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix}
+1 &amp; 4 &amp; 7 \\
+2 &amp; 5 &amp; 8 \\
+3 &amp; 6 &amp; 9 \\
+\end{bmatrix},
+\quad
+\vec{b} = \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix},
+\end{split}\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/Linear"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1.1%20Linear%20Systems.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. Systems of Linear Equations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1.4%20Answers%20to%20Exercises.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1.3 Answers to Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homogenous-linear-systems">Homogenous Linear Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-case-the-solution-set-of-non-homogenoues-linear-system">General Case: the solution set of non-homogenoues linear system:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Thomas VanDrunen and Claire Wagner, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
