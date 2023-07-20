@@ -1,0 +1,927 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Second-Order Differential Equations &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/DifEq/DE4';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. Systems of First-Order Differential Equations" href="DE5.html" />
+    <link rel="prev" title="3. First-Order Differential Equations" href="DE3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BLACKBOARD MATH PUZZLES</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../elementary.html">Math on a Blackboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/arithmetic.html">Arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/pascal.html">Pascal’s Triangle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractions/fractions.html">Fractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Vectors/vectors.html">Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Subsets/subsets.html">Subsets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractals/fractals.html">Fractals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Discrete/trees/trees.html">Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Circuits/circuits.html">Circuits</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED WITH JNBS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb1.html">1 Functions- Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb8.html">8. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb9.html">9. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb10.html">10. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">11. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">Introduction to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/2Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec4.html">4 Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/5int/5int.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/6parametric.html">6. Parametric Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/0.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/1.1.html">1.1 Systems of Linear Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/1.2.html">1.2 Matrix Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/1.3.html">1.3 Solution Set of Linear Systems.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/1.4.html">Answers to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/2.1.html">2.1 Matrix Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/2.2.html">2.2 Transpose, Inverse and Trace of Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/2.3.html">2.3 Determinant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/2.4.html">Answers to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/3.1.html">3.1 Subspaces of R^n</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/3.2.html">3.2  Introduction to Linear Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/3.3.html">3.3 Kernel and Image of linear transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/3.4.html">3.4 Change of basis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/3.5.html">Answers to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/4.1.html">4.1 Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/4.2.html">4.2 Diagonalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/4.3.html">4.3 Discrete Dynamical Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/4.4.html">Answers to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/5.1.html">5.1 Inner product and Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/5.2.html">5.2 Orthogonal Projection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/5.3.html">5. 3 The Gram–Schmidt Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/5.4.html">5.4 Least-Squares Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Linear/5.5.html">Answers to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DE2.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DE3.html">3. First-Order Differential Equations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Second-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DE5.html">5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DE6.html">6. Laplace Transforms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/covid.html">1. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/hiv/hiv.html">4. HIV-AIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/cws/cws.html">5. CWS Model of Alzheimemer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/gravity/gravity.html">6. Gravity Fed Water Delivery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">2. About Text Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">5. Evaluating Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">6. Applications</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/DifEq/DE4.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Undergrad/DifEq/DE4.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4. Second-Order Differential Equations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-theory">4.1 General Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-homogeneous-differential-equations-with-constant-coefficients">4.2 Linear Homogeneous Differential Equations with Constant Coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonhomogeneous-linear-equations-and-undetermined-coefficients">4.3 Nonhomogeneous Linear Equations and Undetermined Coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="second-order-differential-equations">
+<h1>4. Second-Order Differential Equations<a class="headerlink" href="#second-order-differential-equations" title="Permalink to this heading">#</a></h1>
+<p>In this section, we will start with some general theory of <span class="math notranslate nohighlight">\(n\)</span>th-order linear differential equations to motivate the techniques used for solving second-order differential equations. Second-order differential equations play a critical role in mathematical physics and engineering disciplines due to their ubiquity in modelling natural phenomena. They are differential equations in which the highest order derivative is of the second order. Specifically, a second-order differential equation can be written as <span class="math notranslate nohighlight">\(\frac{d^2x}{dt^2} = f(t, x, \frac{dx}{dt})\)</span> where <span class="math notranslate nohighlight">\(x\)</span> is the unknown function we are interested in, <span class="math notranslate nohighlight">\(t\)</span> is the independent variable, <span class="math notranslate nohighlight">\(\frac{dx}{dt}\)</span> is the first derivative of <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(\frac{d^2x}{dt^2}\)</span> is the second derivative of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Examples of the practical applications of second-order differential equations include but are not limited to: modeling the motion of a spring (harmonic oscillator), predicting the population dynamics in ecology, and describing the behavior of electric circuits. They are also widely used in the fields of physics, economics, and engineering to create mathematical models of real-world situations. One reason for the importance of second-order equations is that if <span class="math notranslate nohighlight">\(x(t)\)</span> represents the position of an object at time <span class="math notranslate nohighlight">\(t\)</span>, then <span class="math notranslate nohighlight">\(x'(t)\)</span> is its instantaneous velocity and <span class="math notranslate nohighlight">\(x''(t)\)</span> is its acceleration; thus, real-world problems from the physical sciences often lead to equations of this type.</p>
+<p>Solving second-order differential equations can be quite complex and may involve techniques such as characteristic equations, method of undetermined coefficients, and variation of parameters, among others. The nature of the solution can widely vary depending on the form of the equation. For instance, solutions can be real or complex, periodic or exponential, convergent, or divergent. Some special types of second-order differential equations, like the Cauchy-Euler equation or the Bessel’s equation, have their own dedicated methods of solutions due to their unique structure.</p>
+<p>As we explore the world of second-order differential equations, we uncover a variety of mathematical landscapes with significant implications for understanding the world around us. Through these equations, we can dive deep into the patterns and behaviors that underscore numerous phenomena, both natural and man-made.</p>
+<p>Recall a general linear <span class="math notranslate nohighlight">\(n\)</span>th-order initial-value problem is of the form $<span class="math notranslate nohighlight">\(a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=g(x)\)</span><span class="math notranslate nohighlight">\( where \)</span>y(x_0)=y_0<span class="math notranslate nohighlight">\(, \)</span>y’(x_0)=y_1<span class="math notranslate nohighlight">\(, \)</span>\dots<span class="math notranslate nohighlight">\(, \)</span>y{(n-1)}(x_0)=y_{n-1}<span class="math notranslate nohighlight">\(. Recall the number of initial conditions must match the order of the differential equation and they must have the same input \)</span>x_0<span class="math notranslate nohighlight">\(. We call a linear differential equation **homogeneous** if \)</span>g(x)=0<span class="math notranslate nohighlight">\(, or in other words, if it can be written as \)</span><span class="math notranslate nohighlight">\(a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=0.\)</span>$</p>
+<section id="general-theory">
+<h2>4.1 General Theory<a class="headerlink" href="#general-theory" title="Permalink to this heading">#</a></h2>
+<p>One of the most important principles for homogeneous equations is the <strong>Superposition Principle</strong> which states that if <span class="math notranslate nohighlight">\(y_1, y_2 \dots, y_n\)</span> are solutions to the homogeneous linear <span class="math notranslate nohighlight">\(n\)</span>th-order differential equation <span class="math notranslate nohighlight">\(a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=0\)</span> on an interval <span class="math notranslate nohighlight">\(I\)</span>. Then the linear combination <span class="math notranslate nohighlight">\(y(x)= c_1y_1(x) + c_2y_2(x) + \dots + c_ny_n(x)\)</span> where <span class="math notranslate nohighlight">\(c_k\)</span> is an arbitrary constant for each <span class="math notranslate nohighlight">\(k\)</span> is also a solution on <span class="math notranslate nohighlight">\(I\)</span>. In other words, we can build new solutions from existing solutions. This idea is critical in solving second-order differential equations.</p>
+<p>Some nice consequences of the Superposition Principle are</p>
+<ol class="arabic simple">
+<li><p>If <span class="math notranslate nohighlight">\(y\)</span> is a solution to a homogeneous differential equation, then so is <span class="math notranslate nohighlight">\(cy\)</span> for any constant <span class="math notranslate nohighlight">\(c\)</span>. In other words, we can scale every solution to produce another solution.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y=0\)</span> is a solution to every homogeneous differential equation. This comes from setting <span class="math notranslate nohighlight">\(c_k=0\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ol>
+<p><strong>Example</strong> Consider the differential equation <span class="math notranslate nohighlight">\(y''-4y=0\)</span>. Verify that <span class="math notranslate nohighlight">\(y(x)=e^{2x}\)</span> and <span class="math notranslate nohighlight">\(y(x)=e^{-2x}\)</span>. Use the Superposition Principle to conclude that <span class="math notranslate nohighlight">\(y(x) = Ae^{2x}+Be^{-2x}\)</span> is also a solution for any constants <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check that y=e^{2x} is a solution </span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="c1">#Define f(x)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is the function f(x):&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="c1">#Define f&#39;(x)</span>
+<span class="n">dfdx</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is the derivative of f(x):&#39;</span><span class="p">,</span> <span class="n">dfdx</span><span class="p">)</span>
+
+<span class="c1">#Define f&#39;&#39;(x)</span>
+<span class="n">dfdxx</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">dfdx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is the second derivative of f(x):&#39;</span><span class="p">,</span> <span class="n">dfdxx</span><span class="p">)</span>
+
+<span class="c1">#See if f(x) is a solution to the differential equation. If it outputs True, f(x) is a solution.</span>
+<span class="n">dfdxx</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">f</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the function f(x): exp(2*x)
+This is the derivative of f(x): 2*exp(2*x)
+This is the second derivative of f(x): 4*exp(2*x)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check that y=e^{-2x} is a solution </span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="c1">#Define f(x)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is the function f(x):&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="c1">#Define f&#39;(x)</span>
+<span class="n">dfdx</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is the derivative of f(x):&#39;</span><span class="p">,</span> <span class="n">dfdx</span><span class="p">)</span>
+
+<span class="c1">#Define f&#39;&#39;(x)</span>
+<span class="n">dfdxx</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">dfdx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is the second derivative of f(x):&#39;</span><span class="p">,</span> <span class="n">dfdxx</span><span class="p">)</span>
+
+<span class="c1">#See if f(x) is a solution to the differential equation. If it outputs True, f(x) is a solution.</span>
+<span class="n">dfdxx</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">f</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the function f(x): exp(-2*x)
+This is the derivative of f(x): -2*exp(-2*x)
+This is the second derivative of f(x): 4*exp(-2*x)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Superposition Principle tells us that we can build new solutions by taking linear combinations of known solutions. This means that <span class="math notranslate nohighlight">\(y(x)=Ae^{2x}+Be^{-2x}\)</span> is a solution since <span class="math notranslate nohighlight">\(y(x)=e^{2x}\)</span> and <span class="math notranslate nohighlight">\(y(x)=e^{-2x}\)</span> are known solutions.</p>
+</section>
+<section id="linear-homogeneous-differential-equations-with-constant-coefficients">
+<h2>4.2 Linear Homogeneous Differential Equations with Constant Coefficients<a class="headerlink" href="#linear-homogeneous-differential-equations-with-constant-coefficients" title="Permalink to this heading">#</a></h2>
+<p>We expect solutions of an <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous differential equation with constant coefficients <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)} + \dots + a_1x' + a_0x = 0\)</span> to be of the form <span class="math notranslate nohighlight">\(x(t) = e^{kt}\)</span> for some constant <span class="math notranslate nohighlight">\(k\)</span>. We also know that if <span class="math notranslate nohighlight">\(x_1(t)=e^{k_1t}\)</span> and <span class="math notranslate nohighlight">\(x_2(t) = e^{k_2t}\)</span> are both solutions, then <span class="math notranslate nohighlight">\(x(t) = c_1e^{k_1t}+c_2e^{k_2t}\)</span>, where <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> are any constants, is also a solution by the Superposition Principle.</p>
+<p><strong>Motivating Example</strong> Find all solutions to <span class="math notranslate nohighlight">\(x'' - 7x' +12x =0\)</span>.</p>
+<p>Suppose <span class="math notranslate nohighlight">\(x(t)=e^{kt}\)</span> is a solution. This means it satisfies our differential equation. Since <span class="math notranslate nohighlight">\(x'(t) = ke^{kt}\)</span> and <span class="math notranslate nohighlight">\(x''(t) = k^2e^{kt}\)</span>, we know</p>
+<p><span class="math notranslate nohighlight">\(x'' - 7x' +12x = k^2e^{kt} -7ke^{kt}+12e^{kt} = e^{kt}(k^2-7k+12)=0\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(e^{kt} \neq 0\)</span>, we know that <span class="math notranslate nohighlight">\(k^2-7k+12=0\)</span> when <span class="math notranslate nohighlight">\(e^{kt}\)</span> is a solution. We call the equation <span class="math notranslate nohighlight">\(k^2-7k+12=0\)</span> the <strong>characteristic equation</strong> of the differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k^2-7k+12=(k-3)(k-4)=0\)</span>. Thus, <span class="math notranslate nohighlight">\(k=3\)</span> or <span class="math notranslate nohighlight">\(k=4\)</span> meaning that <span class="math notranslate nohighlight">\(x(t)=e^{3t}\)</span> and <span class="math notranslate nohighlight">\(x(t)=e^{4t}\)</span> are both solutions to the differential equation. Moreover, by the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1e^{3t} + c_2e^{4t}\)</span> are also solutions for all constants <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span>.</p>
+<p>So a natural question is did we find all solutions? We found an infinite family of solutions, but how do we know there are not any other solutions? We will be exploring this question next.</p>
+<p>A set of functions is said to be <strong>linearly dependent</strong> if one function can be written as a linear combination of the others. This means that a set of function <span class="math notranslate nohighlight">\(\{f_1(t), f_2(t), \dots, f_n(t)\}\)</span> is linearly dependent if there exist constants <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_n\)</span> <strong>not all zero</strong> such that <span class="math notranslate nohighlight">\(c_1f_1(t)+c_2f_2(t)+\dots+c_nf_n(t)=0\)</span>. A set of functions is said to be <strong>linearly independent</strong> if the only way <span class="math notranslate nohighlight">\(c_1f_1(t)+c_2f_2(t)+\dots+c_nf_n(t)=0\)</span> is true is if all of the <span class="math notranslate nohighlight">\(c_i\)</span> are zero.</p>
+<p><strong>Example</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\{1, t, 4t+2\}\)</span> is a linearly dependent set of functions because 2(1)+4(t)-(4t+2)=0.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{1, x, x^2\}\)</span> is a linearly independent set of functions because c_1+c_2x+c_3x^2=0 only when c_1=c_2=c_3=0.</p></li>
+</ul>
+<p>It turns out that this idea of linearly dependent/independent set of functions allows us to precisely answer the earlier question of “Did we find all solutions?” through the following theorem.</p>
+<p><strong>Theorem</strong>: Every <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equations has a set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent solutions; this is called a <strong>fundamental set of solutions</strong>. Let <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> be a fundamental set of solutions of an <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equation. By the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1x_1(t)+c_2x_2(t)+\dots+c_nx_n(t)\)</span> is also a solutions; we call this the <strong>general solution</strong>.</p>
+<p>Let’s now return to our motivating example.</p>
+<p><strong>Motivating Example</strong> Find all solutions to <span class="math notranslate nohighlight">\(x'' - 7x' +12x =0\)</span>.</p>
+<p>Recall previously we found that <span class="math notranslate nohighlight">\(x(t)=e^{3t}\)</span> and <span class="math notranslate nohighlight">\(x(t)=e^{4t}\)</span> are both solutions to the differential equation. Moreover, by the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1e^{3t} + c_2e^{4t}\)</span> are also solutions for all constants <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span>.</p>
+<p>Since this differential equation is second-order, we know that the fundamental set of solutions contains two linearly independent solutions. Notice that <span class="math notranslate nohighlight">\(e^{3t}\)</span> and <span class="math notranslate nohighlight">\(e^{4t}\)</span> are linearly independent as <span class="math notranslate nohighlight">\(c_1e^{3t}+c_2e^{4t}=0\)</span> only when <span class="math notranslate nohighlight">\(c_1=c_2=0\)</span>. This means that <span class="math notranslate nohighlight">\(\{e^{3t},e^{4t}\}\)</span> <em>is</em> the fundamental set of solutions and thus, the general solution <span class="math notranslate nohighlight">\(x(t)= c_1e^{3t} + c_2e^{4t}\)</span> does capture <em>all</em> solutions of this differential equation.</p>
+<p>We will now look at two other examples that will ultimately motivate our strategy for these second-order differential equations.</p>
+<p><strong>Example</strong> Find all solutions to <span class="math notranslate nohighlight">\(x'' - 6x' +9x =0\)</span>.</p>
+<p>Suppose <span class="math notranslate nohighlight">\(x(t)=e^{kt}\)</span> is a solution. This means it satisfies our differential equation. Since <span class="math notranslate nohighlight">\(x'(t) = ke^{kt}\)</span> and <span class="math notranslate nohighlight">\(x''(t) = k^2e^{kt}\)</span>, we know</p>
+<p><span class="math notranslate nohighlight">\(x'' - 6x' +9x = k^2e^{kt} -6ke^{kt}+9e^{kt} = e^{kt}(k^2-6k+9)=0\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(e^{kt} \neq 0\)</span>, we know that <span class="math notranslate nohighlight">\(k^2-6k+9=0\)</span> when <span class="math notranslate nohighlight">\(e^{kt}\)</span> is a solution. Thus, <span class="math notranslate nohighlight">\(k^2-6k+9=0\)</span> is the <strong>characteristic equation</strong> of this differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k^2-6k+9=(k-3)(k-3)=0\)</span>. Thus, <span class="math notranslate nohighlight">\(k=3\)</span> meaning that <span class="math notranslate nohighlight">\(x(t)=e^{3t}\)</span> is a solution to the differential equation. But, since this differential equation is second-order, we know that the fundamental set of solutions contains two linearly independent solutions. This means we are missing one.</p>
+<p>We will now guess a second solution that is linearly independent from the first solution. Our guess is <span class="math notranslate nohighlight">\(y(t)=te^{3t}\)</span>. The motivation for the guess is that we expect the solution to look “like” <span class="math notranslate nohighlight">\(x(t)=e^{3t}\)</span> and be linearly independent from it. But now we need to verify that our guess is actually a solution. If <span class="math notranslate nohighlight">\(y(t)=te^{3t}\)</span> is a solution, then it satisfies our differential equation. Since <span class="math notranslate nohighlight">\(y'(t) = 3te^{3t}+e^{3t}\)</span> and <span class="math notranslate nohighlight">\(y''(t) = 9te^{3t}+6e^{3t}\)</span>, we know  <span class="math notranslate nohighlight">\(x'' - 6x' +9x = (9te^{3t}+6e^{3t}) -6(3te^{3t}+e^{3t})+9(te^{3t}) =0\)</span>. Thus, <span class="math notranslate nohighlight">\(y(t)=te^{3t}\)</span> is a solution.</p>
+<p>This means that <span class="math notranslate nohighlight">\(\{e^{3t},te^{3t}\}\)</span> <em>is</em> the fundamental set of solutions and thus, the general solution <span class="math notranslate nohighlight">\(x(t)= c_1e^{3t} + c_2te^{3t}\)</span> does capture <em>all</em> solutions of this differential equation.</p>
+<p><strong>Example</strong> Find the <em>real-valued</em> general solution to <span class="math notranslate nohighlight">\(x'' +9x =0\)</span>.</p>
+<p>Suppose <span class="math notranslate nohighlight">\(x(t)=e^{kt}\)</span> is a solution. This means it satisfies our differential equation. Since <span class="math notranslate nohighlight">\(x'(t) = ke^{kt}\)</span> and <span class="math notranslate nohighlight">\(x''(t) = k^2e^{kt}\)</span>, we know</p>
+<p><span class="math notranslate nohighlight">\(x''+9x = k^2e^{kt} +9e^{kt} = e^{kt}(k^2+9)=0\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(e^{kt} \neq 0\)</span>, we know that <span class="math notranslate nohighlight">\(k^2+9=0\)</span> when <span class="math notranslate nohighlight">\(e^{kt}\)</span> is a solution. Thus, <span class="math notranslate nohighlight">\(k^2+9=0\)</span> is the <strong>characteristic equation</strong> of this differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k^2+9=0\)</span>. Thus, <span class="math notranslate nohighlight">\(k=\pm3i\)</span> meaning that <span class="math notranslate nohighlight">\(x_1(t)=e^{3it}\)</span> and <span class="math notranslate nohighlight">\(x_2(t)=e^{-3it}\)</span> are solutions to the differential equation. But, these are not <em>real-valued</em> solutions.</p>
+<p>Recall Euler’s formula which says that <span class="math notranslate nohighlight">\(e^{i\theta} = \cos(\theta)+i\sin(\theta)\)</span>. Using Euler’s formula we can rewrite <span class="math notranslate nohighlight">\(x_1(t)=e^{3it} = \cos(3t)+i\sin(3t)\)</span> and <span class="math notranslate nohighlight">\(x_2(t)=e^{-3it} = \cos(-3t)+i\sin(-3t)\)</span>. Moreover, since cosine is an even function, we know <span class="math notranslate nohighlight">\(\cos(-\theta) = \cos(\theta)\)</span> and since sine is an odd function, we know <span class="math notranslate nohighlight">\(\sin(-\theta) = -\sin(\theta)\)</span>. Thus, <span class="math notranslate nohighlight">\(x_2(t) = \cos(3t)-i\sin(3t)\)</span>.</p>
+<p>Recall that any linear combination of <span class="math notranslate nohighlight">\(x_1, x_2\)</span> is also a solution by the superposition principle. This means that <span class="math notranslate nohighlight">\(y_1(t) = \frac{x_1(t)+x_2(t)}{2} = \cos(3t)\)</span> is a solution <em>and</em> <span class="math notranslate nohighlight">\(y_2(t) = \frac{x_1(t)-x_2(t)}{2i} = \sin(3t)\)</span> is also a solution. Note that <span class="math notranslate nohighlight">\(y_1(t)\)</span> and <span class="math notranslate nohighlight">\(y_2(t)\)</span> are still linearly independent and they are real-vlaued.</p>
+<p>This means that <span class="math notranslate nohighlight">\(\{\cos(3t),\sin(3t)\}\)</span> <em>is</em> the fundamental set of solutions and thus, the general solution <span class="math notranslate nohighlight">\(x(t)= c_1\cos(3t) + c_2\sin(3t)\)</span> does capture <em>all</em> solutions of this differential equation.</p>
+<p><strong>Summary</strong></p>
+<p>Consider the differential equation <span class="math notranslate nohighlight">\(ax''+bx'+cx=0\)</span>.</p>
+<ol class="arabic simple">
+<li><p>The characteristic equation is <span class="math notranslate nohighlight">\(ak^2+bk+c=0\)</span>.</p></li>
+<li><p>The possible solutions to the characteristic equation are <span class="math notranslate nohighlight">\(k = \frac{-b \pm \sqrt{b^2-4ac}}{2a}\)</span>. There are three cases for what the roots of the characteristic equation can look like.</p>
+<ul class="simple">
+<li><p>Case 1: <span class="math notranslate nohighlight">\(b^2-4ac &gt;0\)</span>. In this case the characteristic equation, has two distinct real roots.</p></li>
+<li><p>Case 2: <span class="math notranslate nohighlight">\(b^2-4ac =0\)</span>. In this case the characteristic equation, has one real root with multiplicity two.</p></li>
+<li><p>Case 3: <span class="math notranslate nohighlight">\(b^2-4ac &lt;0\)</span>. In this case the characteristic equation, has two complex roots.</p></li>
+</ul>
+</li>
+<li><p>Based on 2, we can write down the possible forms of solutions to the differential equation.</p>
+<ul class="simple">
+<li><p>Case 1: <span class="math notranslate nohighlight">\(b^2-4ac &gt;0\)</span>. Let <span class="math notranslate nohighlight">\(k_1, k_2\)</span> be the distinct real roots. Then the general solution to the differential equation is <span class="math notranslate nohighlight">\(x(t)=c_1e^{k_1t}+c_2e^{k_2t}\)</span>.</p></li>
+<li><p>Case 2: <span class="math notranslate nohighlight">\(b^2-4ac =0\)</span>. Let <span class="math notranslate nohighlight">\(k\)</span> be the repeated root. Then the general solution to the differential equation is <span class="math notranslate nohighlight">\(x(t)=c_1e^{kt}+c_2te^{kt}\)</span>.</p></li>
+<li><p>Case 3: <span class="math notranslate nohighlight">\(b^2-4ac &lt;0\)</span>. Let <span class="math notranslate nohighlight">\(k_1=\alpha+i\beta, k_2=\alpha-i\beta\)</span> be the complex roots. Then the general solution to the differential equation is <span class="math notranslate nohighlight">\(x(t)=c_1e^{\alpha t}\cos(\beta t)+c_2e^{\alpha t}\sin(\beta t)\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="nonhomogeneous-linear-equations-and-undetermined-coefficients">
+<h2>4.3 Nonhomogeneous Linear Equations and Undetermined Coefficients<a class="headerlink" href="#nonhomogeneous-linear-equations-and-undetermined-coefficients" title="Permalink to this heading">#</a></h2>
+<p>This goal of this subsection is to discuss how to solve differential equations of the form <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=f(t)\)</span> for some “nice” functions <span class="math notranslate nohighlight">\(f(t)\)</span>.</p>
+<p>Any function <span class="math notranslate nohighlight">\(x_p\)</span> <em>that has no unknown parameters</em> and is a solution to <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=f(t)\)</span> is called a <strong>particular solution</strong>. We should note that particular solutions are not unique.</p>
+<p>Given a particular solution, <span class="math notranslate nohighlight">\(x_p\)</span> to <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=f(t)\)</span> and the fundamental set of solutions, {x_1, x_2, \dots, x_n}, to the corresponding homogeneous differential equation <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=0\)</span>, we can produce the general solution to <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=f(t)\)</span>. In particular, the general solution is <span class="math notranslate nohighlight">\(x(t) = c_1x_1(t)+c_2x_2(t)+\dots+c_nx_n(t)+x_p(t)\)</span> where <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_n\)</span> are arbitrary constants. In other words, we simply need to add the solution to the associated homogeneous differential equation to a particular solution.</p>
+<p><strong>Motivating Example</strong> Consider the second order linear differential equation <span class="math notranslate nohighlight">\(x''+2x'+x=e^{-5t}\)</span>. Find <em>one</em> solution.</p>
+<p>First we will try to guess a particular solution. We know that <span class="math notranslate nohighlight">\(f(t)=e^{-5t}\)</span> in this case. So we will guess a particular solution that looks similar, <span class="math notranslate nohighlight">\(x_p(t)=Ce^{-5t}\)</span>. Now we want to figure out what value of <span class="math notranslate nohighlight">\(C\)</span> (if any) makes <span class="math notranslate nohighlight">\(x_p(t)\)</span> a solution”</p>
+<p>The method of undetermined coefficients is a technique used to solve certain types of non-homogeneous second-order differential equations. Specifically, this method is suitable for equations where the non-homogeneous term (the term not involving the function or its derivatives) is a simple function like a polynomial, exponential, sine, cosine, or a combination of these.</p>
+<p>The overall process of the method of undetermined coefficients involves several steps:</p>
+<ol class="arabic simple">
+<li><p>Homogeneous Solution: First, solve the homogeneous version of the given differential equation (i.e., set the non-homogeneous term equal to zero). This gives the homogeneous solution, often denoted as <span class="math notranslate nohighlight">\(x_h\)</span>.</p></li>
+<li><p>Particular Solution: Next, make an educated guess (using the table below) about the form of the particular solution <span class="math notranslate nohighlight">\(x_p\)</span>, which corresponds to the non-homogeneous term of the differential equation. The guessed form should match the non-homogeneous term but must include arbitrary constants (the “undetermined coefficients”). One important aspect to note is that if a term in the guessed <span class="math notranslate nohighlight">\(x_p\)</span> is already a solution to the corresponding homogeneous equation, this term must be multiplied by <span class="math notranslate nohighlight">\(t\)</span> to ensure linear independence. This is often referred to as the rule of “modification of trial functions”.</p></li>
+<li><p>Substitution: Substitute the guessed <span class="math notranslate nohighlight">\(x_p\)</span> and its derivatives into the original non-homogeneous differential equation. This will yield an equation in terms of the undetermined coefficients.</p></li>
+<li><p>Determine Coefficients: Solve the resulting equation from the previous step to determine the values of the undetermined coefficients. <strong>Note: The undetermine coefficients depend on the differential equation and not any initial conditions. This means that we can always solve for the undetermined coefficients.</strong></p></li>
+<li><p>General Solution: The general solution to the original non-homogeneous differential equation is then the sum of the homogeneous solution <span class="math notranslate nohighlight">\(x_h\)</span> and the particular solution <span class="math notranslate nohighlight">\(x_p\)</span>.</p></li>
+</ol>
+<p>While the method of undetermined coefficients is a powerful tool, it is not universal; its applicability is limited to differential equations with constant coefficients and fairly simple non-homogeneous terms. For more complex scenarios, other methods such as the method of variation of parameters may be needed.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p><span class="math notranslate nohighlight">\(f(t)\)</span></p></th>
+<th class="text-left head"><p><span class="math notranslate nohighlight">\(x_p(t) \text{ (These are your guesses)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(a_nt^n + a_{n-1}t^{n-1} + \dots + a_0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(b_nt^n + b_{n-1}t^{n-1} + \dots + b_0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(e^{at}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(Ce^{at}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\sin(bt)\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(c_1\sin(bt)+c_2\cos(bt)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\cos(bt)\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(c_1\sin(bt)+c_2\cos(bt)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(e^t + t\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(Ce^t + (b_1t+b_0)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(t^2\cos(t)\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((b_2x^2+b_1x+b_0)(c_1\sin(bt)+c_2\cos(bt))\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong> Solve the initial value problem <span class="math notranslate nohighlight">\(x'' + 5x = -15\)</span>, <span class="math notranslate nohighlight">\(x(0)=0\)</span> and <span class="math notranslate nohighlight">\(x'(0)=1\)</span>.</p>
+<p>Step 1: Solve the homogeneous differential equation.</p>
+<div class="math notranslate nohighlight">
+\[x'' +5x=0.\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(k^2+5=0\)</span> is the <strong>characteristic equation</strong> of this differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k=\pm\sqrt{5}i\)</span>. Thus, <span class="math notranslate nohighlight">\(x_h(t)=c_1\cos(\sqrt{5}t)+c_2\sin(\sqrt(\sqrt{5}t)\)</span> is the general solution to the homogeneous differential equation.</p>
+<p>Step 2: Guess <span class="math notranslate nohighlight">\(x_p\)</span>.</p>
+<p>Note in this case <span class="math notranslate nohighlight">\(f(t)=-15\)</span>, which is a degree 1 polynomial. Using the table above our guess is <span class="math notranslate nohighlight">\(x_p(t)=b_0\)</span>. Notice that this guess for <span class="math notranslate nohighlight">\(x_p\)</span> is linearly independent from <span class="math notranslate nohighlight">\(x_h\)</span> so we do not need to adjust our guess.</p>
+<p>Step 3: Solve the guess.</p>
+<div class="math notranslate nohighlight">
+\[x_p(t) = b_0, \quad x_p'(t) = 0, \quad x_p''(t) = 0\]</div>
+<p>Plugging this back into <span class="math notranslate nohighlight">\(x'' + 5x = -15\)</span>, we find that <span class="math notranslate nohighlight">\(0 + 5b_0 = -15\)</span>. Thus, <span class="math notranslate nohighlight">\(b_0=-3\)</span>.</p>
+<p>Step 4: General Solution</p>
+<p>This means that <span class="math notranslate nohighlight">\(x(t) = x_h(t)+x_p(t) = c_1\cos(\sqrt{5}t)+c_2\sin(\sqrt(\sqrt{5}t)-3\)</span>.</p>
+<p>Step 5: Find <span class="math notranslate nohighlight">\(c_1\)</span>, <span class="math notranslate nohighlight">\(c_2\)</span> using the initial conditions.</p>
+<p>Since <span class="math notranslate nohighlight">\(x(0)=0\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[ 0 = c_1\cos(0)+c_2\sin(0)-3\]</div>
+<div class="math notranslate nohighlight">
+\[ 0 = c_1 - 3\]</div>
+<div class="math notranslate nohighlight">
+\[ c_1 = 3.\]</div>
+<p>Since <span class="math notranslate nohighlight">\(x'(t) = -\sqrt{5}c_1\sin(\sqrt{5}t) + \sqrt{5}c_2\cos(\sqrt{5}t)\)</span> and <span class="math notranslate nohighlight">\(x'(0)=1\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[1 = -\sqrt{5}c_1\sin(0) + \sqrt{5}c_2\cos(0)\]</div>
+<div class="math notranslate nohighlight">
+\[1 = \sqrt{5}c_2\]</div>
+<div class="math notranslate nohighlight">
+\[c_2 = \dfrac{1}{\sqrt{5}}\]</div>
+<p>Step 6: State the final solution.</p>
+<p>This means the final solution to the initial value problem is <span class="math notranslate nohighlight">\(x(t) = -3\cos(\sqrt{5}t)+\dfrac{1}{\sqrt{5}}\sin(\sqrt{5}t)-3\)</span>.</p>
+<p>Now that we have the solution we can generate a plot of it to see how the solution behaves.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the time array</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Define the function x(t)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
+
+<span class="c1"># Plot the function</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot of the function x(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f8a125c3c03734964735ccefb61dcffa3c926f0ff2a4c2dac0f892bfe402fee6.png" src="../../_images/f8a125c3c03734964735ccefb61dcffa3c926f0ff2a4c2dac0f892bfe402fee6.png" />
+</div>
+</div>
+<p>It turns out that the <strong>Superposition Principle</strong> holds for nonhomogeneous equations as well. In particular, suppose <span class="math notranslate nohighlight">\(y_k\)</span> is a particular solution to $<span class="math notranslate nohighlight">\(a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=f_k(x).\)</span><span class="math notranslate nohighlight">\( Then the linear combination \)</span>y(x)= y_1(x) + y_2(x) + \dots + y_n(x)<span class="math notranslate nohighlight">\( is a particular solution to \)</span><span class="math notranslate nohighlight">\(a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=f_1(x)+f_2(x)+\dots+f_n(t).\)</span>$</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Find all solutions to <span class="math notranslate nohighlight">\(x''+x'-6x=0\)</span>.</p></li>
+<li><p>Use your answer to 1 to find the general solution to the differential equation <span class="math notranslate nohighlight">\(x''+x'-6x=\sin(3t)\)</span>.</p></li>
+<li><p>Use your answer to 1 to find the general solution to the differential equation <span class="math notranslate nohighlight">\(x''+x'-6x=5e^{4t}\)</span>.</p></li>
+<li><p>Use your answer to 1 to find the general solution to the differential equation <span class="math notranslate nohighlight">\(x''+x'-6x=5e^{2t}\)</span>. Hint: Think about why changing the exponent from <span class="math notranslate nohighlight">\(4t\)</span> to <span class="math notranslate nohighlight">\(2t\)</span> adds an extra step to the problem.</p></li>
+<li><p>Use your answer to 2 and 3 to find the general solution of the differential equation <span class="math notranslate nohighlight">\(x''+x'-6x = 5e^{4t}+\sin(3t)\)</span>. Hint: What does the Superposition Principle tell us?</p></li>
+<li><p>Find the form of the particular solution of the following differential equations. Note you do not need to solve for the undetermined coefficients.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x''-6x'+9x = 3t+10\cos(t)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x''-9x=te^{3t}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(2x''+x'+4x = 3t^2\sin(2t)\)</span></p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/DifEq"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="DE3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3. First-Order Differential Equations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="DE5.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5. Systems of First-Order Differential Equations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-theory">4.1 General Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-homogeneous-differential-equations-with-constant-coefficients">4.2 Linear Homogeneous Differential Equations with Constant Coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonhomogeneous-linear-equations-and-undetermined-coefficients">4.3 Nonhomogeneous Linear Equations and Undetermined Coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Thomas VanDrunen and Claire Wagner, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
