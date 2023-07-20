@@ -521,7 +521,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rough-draft-notes">Rough draft notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-chapter">About this Chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-packages-in-python">Statistics Packages in Python</a></li>
 </ul>
             </nav>
         </div>
@@ -535,13 +536,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-and-instructor-notes">
 <h1>Introduction and Instructor Notes<a class="headerlink" href="#introduction-and-instructor-notes" title="Permalink to this heading">#</a></h1>
-<section id="rough-draft-notes">
-<h2>Rough draft notes<a class="headerlink" href="#rough-draft-notes" title="Permalink to this heading">#</a></h2>
-<p><em>Not all of the sections are 100% complete, but the structure and ideas we want to use are all there. We would like to fill it out a little more with some illustrations explaining P-values, a wider selection of exercises and examples, and a bit more explanation of the actual code used. We also need to finish the last section on linear regression! We can change plotting from seaborn to matplotlib if needed.</em></p>
-<hr class="docutils" />
+<section id="about-this-chapter">
+<h2>About this Chapter<a class="headerlink" href="#about-this-chapter" title="Permalink to this heading">#</a></h2>
 <p>In this chapter we introduce the basic tools of statistical inference: confidence intervals, hypothesis tests, and linear regression. Our goal is to show how each of these can be more fully understood using the computational tools of Python and Jupyter notebooks.</p>
 <p>We have chosen to write the following sections as an interactive demonstration of the tools of statistical inference for students. Rather than a simple guide to the statistical inference tools in Python, we provide code and plots which show how you can illustrate the theory in your classroom and use the tools to solve relevant problems. We have strived as much as possible to come up with examples that are interesting to students and relevant to an international audience, but you might choose to make some changes to the examples to suit your own context and audience.</p>
-<p>The main Python packages that provide statistics functions are <code class="docutils literal notranslate"><span class="pre">scipy</span></code> and <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>. Unfortunately, at the time of writing there is no single package that provides all the functionality we need, so we must use a mix of these. These are loaded into the Python environment through the following commands, which appear at the top of each of the interactive notebooks.</p>
+</section>
+<section id="statistics-packages-in-python">
+<h2>Statistics Packages in Python<a class="headerlink" href="#statistics-packages-in-python" title="Permalink to this heading">#</a></h2>
+<p>The main Python packages that provide statistics tools are <code class="docutils literal notranslate"><span class="pre">scipy</span></code> and <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>. Unfortunately, at the time of writing there is no single package that provides all the functionality we need, so we must use a mix of these. These are loaded into the Python environment through the following commands, which appear at the top of each of the interactive notebooks. These commands will only run if you have the packages installed in your environment. You can find instructions for how to do that in the introductory sections of this book.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span>
@@ -551,23 +553,43 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Using <code class="docutils literal notranslate"><span class="pre">scipy</span></code>’s <code class="docutils literal notranslate"><span class="pre">stats</span></code> modules, one can access the features related to random variables and distributions, e.g., <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code> for the normal distribution. From there you can randomly sample from the distribution, calculate probabilities with the <code class="docutils literal notranslate"><span class="pre">.cdf(...)</span></code> command, and even get the density function using <code class="docutils literal notranslate"><span class="pre">.pdf(...)</span></code>. Each of these are illustrated in the text. We also use <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> for <strong>(fill in later when finished)</strong>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> library provides a range of functionality in very high level statistics, but here we only make use of a few of its functions. <strong>(fill in later when finished)</strong>.</p>
-<p>For static plots, we are primarily using <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, while for interactive plots we use the <code class="docutils literal notranslate"><span class="pre">plotly</span></code> package. You can find more information on plotting and statistical graphs using Python in <strong>(link to other section in book)</strong>. We import those in the following way.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">scipy</span></code>’s <code class="docutils literal notranslate"><span class="pre">stats</span></code> modules, one can access the features related to random variables and distributions, e.g., <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code> for the normal distribution. From there you can randomly sample from the distribution, calculate probabilities with the <code class="docutils literal notranslate"><span class="pre">.cdf(...)</span></code> command, and even get the density function using <code class="docutils literal notranslate"><span class="pre">.pdf(...)</span></code>. Each of these are illustrated later in the text. We also use <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> for calculating confidence intervals with the normal distribution, and one sample T-tests.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> library provides a range of functionality for high level statistics, but here we only make use of a few of its functions. We use the <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> library for hypothesis tests about a population proportion, for two-sample T-tests, and for linear regression.</p>
+<p>For static plots, we are primarily using <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. You can find more information on plotting and statistical graphs using Python earlier in this book.</p>
+<p>Some plots and figures in the text are mostly for teaching and illustrating the theory, rather than demonstrating a statistician’s actual work process, and you will find that the code for these plots is hidden by default. A number of these plots are interactive, generated using the <code class="docutils literal notranslate"><span class="pre">plotly</span></code> package.</p>
+<p>We import the graphics libraries in the following way.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">ticker</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
+
 <span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
 <span class="kn">import</span> <span class="nn">plotly.offline</span>
 <span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">        <script type="text/javascript">
+        window.PlotlyConfig = {MathJaxConfig: 'local'};
+        if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+        if (typeof require !== 'undefined') {
+        require.undef("plotly");
+        requirejs.config({
+            paths: {
+                'plotly': ['https://cdn.plot.ly/plotly-2.20.0.min']
+            }
+        });
+        require(['plotly'], function(Plotly) {
+            window._Plotly = Plotly;
+        });
+        }
+        </script>
+        </div></div>
 </div>
-<p>Finally, we also make use of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">math</span></code> libaries in different ways. You can find more information on these libraries in <strong>(link to other parts of the book)</strong>.</p>
+<p>Finally, we also make use of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">math</span></code> libaries, and assume the reader is familiar with these. You can find more information on these libraries in the Introduction to Python sections earlier in the book.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
@@ -649,7 +671,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rough-draft-notes">Rough draft notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-chapter">About this Chapter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-packages-in-python">Statistics Packages in Python</a></li>
 </ul>
   </nav></div>
 
