@@ -1,0 +1,897 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4.3 Discrete Dynamical Systems &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Linear/4.3';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.4 Answers to Exercises" href="4.4.html" />
+    <link rel="prev" title="4.2 Diagonalization" href="4.2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BLACKBOARD MATH PUZZLES</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../elementary.html">Math on a Blackboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/arithmetic.html">Arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/pascal.html">Pascal’s Triangle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractions/fractions.html">Fractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Vectors/vectors.html">Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Subsets/subsets.html">Subsets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Polar/polar.html">Polar Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Cylindrical/cylindrical.html">Cylindrical Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Symmetry/alphabet.html">Symmetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Fractals/fractals.html">Fractals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Discrete/trees/trees.html">Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Circuits/circuits.html">Circuits</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">GETTING STARTED WITH JNBS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/start.html">0. Getting Started with Jupyter Notebooks (JNBs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/Functions.html">1. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/numpy.html">2 The Numerical Python (numpy) Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/pandas.html">3 Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/matplotlib.html">4 Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/if.html">5. if Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/for.html">6. For Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/dataframes.html">7. Dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE STEAM OUTREACH Paul Isihara</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DD.html">Data Detectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Celestial.html">Celestial Ministries  Outreach Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb1.html">1 Functions- Michael Jordan’s Highest Scoring Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb2.html">2 How bad is COVID by Chicago Zipcode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb3.html">3. Pixel Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb4.html">4. Random Number Approximation of Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb5.html">5. Name That Tune!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb6.html">6. Word Clouds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb7.html">7. Mapping Famous Chicagoans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb8.html">8. Predicting Exemplary K-8 Chicago Schools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb9.html">9. Simulating Formula One</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/jnb10.html">10. It’s Christmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">11. After School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">Introduction to Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY MODELS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/2Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/Sec4.html">4 Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/5int/5int.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/6parametric.html">6. Parametric Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/design.html">3. Max/Min and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.1.html">1. Systems of Linear Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.2.html">1.2 Matrix Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.3.html">1.3 Solution set of linear Systems.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.4.html">1.4 Answers to Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2.1.html">2. Matrix Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.2.html">2.2 Transpose, Inverse and Trace of Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.3.html">2.3 Determinant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.4.html">2.4 Answers to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.1.html">3.1 Subspaces of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.2.html">3.2  Introduction to Linear Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.3.html">3.3 Kernel and Image of linear transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.4.html">3.4 Change of basis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.5.html">3.5  Answers to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.1.html">4.1 Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.2.html">4.2 Diagonalization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.3 Discrete Dynamical Systems</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="4.4.html">4.4 Answers to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.1.html">5.1 Inner product and Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.2.html">5.2 Orthogonal Projection</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="5.3.html">5. 3 The Gram–Schmidt Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.4.html">5.4 Least-Squares Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.5.html">5.5 Answers to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DifEq/DE%20-%20Section%202.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DifEq/DE%20-%20Section%203.html">3. First-Order Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/covid.html">1. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/hiv/hiv.html">4. HIV-AIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/cws/cws.html">5. CWS Model of Alzheimemer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/gravity/gravity.html">6. Gravity Fed Water Delivery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">2. About Text Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">5. Evaluating Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">6. Applications</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUndergrad/Linear/4.3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Undergrad/Linear/4.3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4.3 Discrete Dynamical Systems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4.3 Discrete Dynamical Systems</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-dynamical-systems-as-sequence-of-linear-systems">Modeling Dynamical Systems as sequence of linear systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-behavior-of-dynamical-systems">Long-term behavior of dynamical systems</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise:</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="discrete-dynamical-systems">
+<h1>4.3 Discrete Dynamical Systems<a class="headerlink" href="#discrete-dynamical-systems" title="Permalink to this heading">#</a></h1>
+<p>In this section, we will explore the application of diagonalization to discrete dynamical systems, focusing on their long-term behavior.</p>
+<section id="modeling-dynamical-systems-as-sequence-of-linear-systems">
+<h2>Modeling Dynamical Systems as sequence of linear systems<a class="headerlink" href="#modeling-dynamical-systems-as-sequence-of-linear-systems" title="Permalink to this heading">#</a></h2>
+<p>In many fields (e.g., ecology, biology, economics, etc.), we wish to mathematically model and study a dynamic system that changes over time. We are usually given several feature of the system that are measured at (discrete) different time intervals which can be viewd as a sequence of vectors</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{x_0}, \vec{x_1}, \vec{x_2}, \dots 
+\]</div>
+<p>We interpret <span class="math notranslate nohighlight">\(\vec{x_i}\)</span> as the state of system at time <span class="math notranslate nohighlight">\(t = i\)</span>. We also assume that there is a matrix <span class="math notranslate nohighlight">\(A\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{x_n} = A\vec{x_{n-1}} \quad \forall n = 1, 2, 3, \dots   \quad (*)
+\]</div>
+<p>Our goal is to develop a formula for <span class="math notranslate nohighlight">\(x_n\)</span> and describe what can happen when <span class="math notranslate nohighlight">\(n\)</span> approaches to infinity.</p>
+<p>Lets consider the movement of populations or groups of people from one region to another. We want a simple model that considers the changes in the population of a city and its surrounding suburbs over a period of years. Let’s say the intial year is 2020 and denote the population of of the city and suburbs by <span class="math notranslate nohighlight">\(c_0\)</span> and <span class="math notranslate nohighlight">\(s_0\)</span>, respectievely. Now we can form the intial <em>vector population</em> <span class="math notranslate nohighlight">\(\vec{x_0} = \begin{bmatrix} c_0\\ r_0\\ \end{bmatrix}\)</span>. Similarly, for 2021 and subsequent years, denote the populations of the city and suburbs by the vectors</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{x_1} = \begin{bmatrix} c_1\\ s_1\\ \end{bmatrix}, \ \vec{x_2} = \begin{bmatrix} c_2\\ s_2\\ \end{bmatrix}, \ \vec{x_3} = \begin{bmatrix} c_3\\ s_3\\ \end{bmatrix}, \  \dots
+\end{split}\]</div>
+<p><strong>How can be these vectors mathematically related?</strong></p>
+<p>Suppose demographic studies show that each year about <span class="math notranslate nohighlight">\(5\%\)</span> of the city’s population moves to the suburbs (and <span class="math notranslate nohighlight">\(95\%\)</span> remains in the city), while <span class="math notranslate nohighlight">\(3\%\)</span> of the suburban population moves to the city (and <span class="math notranslate nohighlight">\(97\%\)</span> remains in the suburbs). With this information we can find the vector population <span class="math notranslate nohighlight">\(\vec{x_1}\)</span> based on the intial population <span class="math notranslate nohighlight">\(\vec{x_0}\)</span>. After the first year <span class="math notranslate nohighlight">\(c_0 95\%\)</span> remain in the city and <span class="math notranslate nohighlight">\(c_0 0.05\)</span> move to suburb. Additionally <span class="math notranslate nohighlight">\(s_0.97\%\)</span> remain to in suburbs and <span class="math notranslate nohighlight">\(s_0 0.03\)</span> move to city. Therefore,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} c_1\\ s_1\\ \end{bmatrix} = c_0\begin{bmatrix} 0.95\\ 0.05\\ \end{bmatrix} + s_0\begin{bmatrix} 0.03\\ 0.97\\ \end{bmatrix} = \begin{bmatrix} 0.95  &amp; 0.03 \\ 0.97 &amp; 0.05 \\ \end{bmatrix} \begin{bmatrix} c_0\\ s_0\\ \end{bmatrix}.
+\end{split}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(M = \begin{bmatrix} 0.95  &amp; 0.03 \\ 0.97 &amp; 0.05 \\ \end{bmatrix}\)</span> is called the <strong>migration matrix</strong>. Consequently, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{x_n} = M\vec{x_{n-1}} \quad \forall n = 1, 2, 3, \dots 
+\]</div>
+<p>and the sequence
+$<span class="math notranslate nohighlight">\(
+\vec{x_0}, \vec{x_1}, \vec{x_2}, \dots 
+\)</span>$
+describe the population of city/suburbs over a period of years.</p>
+<p><strong>Example 1</strong></p>
+<p>Compute the population of the region just described for the years 2021 and 2022, given that the intial population in 2020 was <span class="math notranslate nohighlight">\(600,000\)</span> in the city and <span class="math notranslate nohighlight">\(40,000\)</span> in suburbs.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># migration matrix</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">]</span> <span class="p">,[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.097</span><span class="p">]])</span>
+
+
+<span class="c1"># initial population vector x_0</span>
+<span class="n">x_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">600000</span><span class="p">,</span> <span class="mi">40000</span><span class="p">])</span>
+
+<span class="c1"># population vector x_1</span>
+<span class="n">x_1</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">x_0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the population of city in 2021 was = &#39;</span><span class="p">,</span> <span class="n">x_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the population of suburbs in 2021 was = &#39;</span><span class="p">,</span> <span class="n">x_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># population vector x_2</span>
+
+<span class="n">x_2</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">x_1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the population of the city in 2022 was = &#39;</span><span class="p">,</span> <span class="n">x_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the population of suburbs in 2022 was = &#39;</span><span class="p">,</span> <span class="n">x_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the population of city in 2021 was =  571200.0 
+
+the population of suburbs in 2021 was =  33880.0 
+
+
+the population of the city in 2022 was =  543656.4 
+
+the population of suburbs in 2022 was =  33880.0 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="long-term-behavior-of-dynamical-systems">
+<h2>Long-term behavior of dynamical systems<a class="headerlink" href="#long-term-behavior-of-dynamical-systems" title="Permalink to this heading">#</a></h2>
+<p>Here’s a revised version with minor improvements:</p>
+<p>Eigenvalues and eigenvectors can be used to understand the long-term behavior or evolution of a dynamical system described by an equation in the form of <span class="math notranslate nohighlight">\(\vec{x}_{k+1} = A \vec{x}_{k}\)</span>. We assume that <span class="math notranslate nohighlight">\(A\)</span> is diagonalizable with <span class="math notranslate nohighlight">\(n\)</span> linearly independent eigenvectors <span class="math notranslate nohighlight">\(\{\vec{v_1}, \vec{v}_2, \dots, \vec{v}_n\}\)</span> and corresponding eigenvalues <span class="math notranslate nohighlight">\(\lambda_1, \lambda_2, \dots, \lambda_n\)</span>. For convenience, let’s assume the eigenvectors are arranged such that <span class="math notranslate nohighlight">\(|\lambda_1| \geq |\lambda_2| \geq \dots \geq |\lambda_n|\)</span>. Since <span class="math notranslate nohighlight">\(\{\vec{v_1}, \vec{v}_2, \dots, \vec{v}_n\}\)</span> forms a basis for <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, any initial vector <span class="math notranslate nohighlight">\(\vec{x}_0\)</span> can be expressed uniquely as:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{x}_0 = c_1\vec{v_1} + c_{2}\vec{v_{2}} + \dots + c_n\vec{v_n}
+\]</div>
+<p>By applying <span class="math notranslate nohighlight">\(A\)</span> to both sides, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{x}_1 = A \vec{x}_{0} = c_1\lambda_1\vec{v_1} + c_{2}\lambda_2\vec{v_{2}} + \dots + c_n\lambda_n\vec{v_n}
+\]</div>
+<p>And in general:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{x}_k = A \vec{x}_{k-1} = c_1(\lambda_1)^{k}\vec{v_1} + c_{2}(\lambda_2)^{k}\vec{v_{2}} + \dots + c_n(\lambda_n)^{k}\vec{v_n} \quad (**)
+\]</div>
+<p>The above equation represents the evolution of the system over time. It shows that each component of the vector <span class="math notranslate nohighlight">\(\vec{x}_k\)</span> is a linear combination of the eigenvectors <span class="math notranslate nohighlight">\(\vec{v_i}\)</span>, scaled by the corresponding eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> raised to the power of <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>As an example, let’s consider a predator-prey system involving owls and wood rats. The population vectors <span class="math notranslate nohighlight">\(\vec{x}_k\)</span> at time <span class="math notranslate nohighlight">\(k\)</span> are given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{x}_k = \begin{bmatrix} O_k \\ R_k \end{bmatrix}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(O_k\)</span> is the population of owls and <span class="math notranslate nohighlight">\(R_k\)</span> is the population of rats (measured in thousands). The populations evolve according to the following equations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+O_{k+1} &amp;= (0.5) O_k + (0.4) R_k \\
+R_{k+1} &amp;= -p O_k + (1.1) R_k \\
+\end{align*}
+\end{split}\]</div>
+<p>Here, the coefficient <span class="math notranslate nohighlight">\(0.5\)</span> in the first equation says that, without wood rats for food, only half of the owls will survive each month. The coefficient <span class="math notranslate nohighlight">\(1.1\)</span> in the second equation says that, in the absence of owls as predators, the rat population will grow by 10% each month. The parameter <span class="math notranslate nohighlight">\(p\)</span> is a positive value to be specified.</p>
+<p>To determine the evolution of this system, we can compute the eigenvalues and eigenvectors of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span>, and then apply equation <span class="math notranslate nohighlight">\((**)\)</span>. For <span class="math notranslate nohighlight">\(p = 0.104\)</span>, lets find the evolution of this system:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># coefficient matrix</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.104</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">]])</span>
+
+<span class="c1"># Computing the eigenvalues and eigenvectors of A</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.58, 1.02])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that <span class="math notranslate nohighlight">\(|\lambda_1| \leq 1\)</span> and <span class="math notranslate nohighlight">\(|\lambda_2| \geq 1\)</span>. A straightforward calculation shows that the corresponding eigenvectors are <span class="math notranslate nohighlight">\(\vec{v_1} = \begin{bmatrix} 5\\1 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\vec{v_2} = \begin{bmatrix}10 \\ 13 \end{bmatrix}\)</span>, respectively. The initial vector <span class="math notranslate nohighlight">\(\vec{x_0}\)</span> can be expressed as a linear combination of the eigenvectors:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{x_0} = d_1 \vec{v_1} + d_2 \vec{v_2} = [\vec{v_1}, \vec{v_2}]\begin{bmatrix} d_1\\ d_2\end{bmatrix}
+\end{split}\]</div>
+<p>Therefore, according to equation <span class="math notranslate nohighlight">\((**)\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{x_k} = d_1 (\lambda_1)^{k} \vec{v_1} + d_2 (\lambda_2)^{k}\vec{v_2}
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(k \to \infty\)</span>, the term <span class="math notranslate nohighlight">\((\lambda_1)^{k} \vec{v_1}\)</span> approaches zero, allowing us to approximate:</p>
+<div class="math notranslate nohighlight">
+\[
+x_k \approx d_2 (\lambda_2)^{k}\vec{v_2}
+\]</div>
+<p>Furthermore, observe that:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{k+1} \approx d_2 (\lambda_2)^{k+1}\vec{v_2} = \lambda_2 \vec{x_k} = 1.02 \vec{x_k}
+\]</div>
+<p>The above approximation shows that both the number of owls and rats grow by an approximate factor of 1.02 each month.</p>
+<p>let’s calculate some population vectors, assuming the initial population vector is <span class="math notranslate nohighlight">\(\begin{bmatrix} 10\\20 \end{bmatrix}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># A matrix whose columns are eigenvectors</span>
+<span class="n">evectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">]])</span>
+
+<span class="c1"># Initial vector</span>
+<span class="n">x_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Solving the equation for d_1 and d_2</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">evectors</span><span class="p">,</span> <span class="n">x_0</span><span class="p">)</span>
+
+<span class="c1"># Extracting d_2</span>
+<span class="n">d_2</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Eigenvalues corresponding to the eigenvectors</span>
+<span class="n">evalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>  <span class="c1"># Replace with the actual eigenvalues</span>
+
+<span class="c1"># Iterating over the range</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># Calculating the population using the eigenvalues, eigenvectors, and d_2</span>
+    <span class="n">population</span> <span class="o">=</span> <span class="n">d_2</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">evalues</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">evectors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;At month&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;the owl population is&#39;</span><span class="p">,</span> <span class="n">population</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39; and &#39;</span><span class="p">,</span> <span class="s1">&#39;the rat population is&#39;</span><span class="p">,</span> <span class="n">population</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At month 1 the owl population is 3.2727272727272725  and  the rat population is 42.54545454545454 
+
+At month 2 the owl population is 65.45454545454545  and  the rat population is 850.9090909090909 
+
+At month 3 the owl population is 1309.090909090909  and  the rat population is 17018.181818181816 
+
+At month 4 the owl population is 26181.81818181818  and  the rat population is 340363.63636363635 
+
+At month 5 the owl population is 523636.36363636365  and  the rat population is 6807272.7272727275 
+
+At month 6 the owl population is 10472727.272727273  and  the rat population is 136145454.54545456 
+
+At month 7 the owl population is 209454545.45454547  and  the rat population is 2722909090.909091 
+
+At month 8 the owl population is 4189090909.090909  and  the rat population is 54458181818.181816 
+
+At month 9 the owl population is 83781818181.81818  and  the rat population is 1089163636363.6362 
+
+At month 10 the owl population is 1675636363636.3635  and  the rat population is 21783272727272.727 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that if the absolute values of both eigenvalues are less than 1, then both populations will tend towards zero for large values of <span class="math notranslate nohighlight">\(k\)</span>. If <span class="math notranslate nohighlight">\(\lambda_1 = 1\)</span> and <span class="math notranslate nohighlight">\(\lambda2 &lt; 1\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+x_k \approx d_1 (\lambda_1)\vec{v_1} 
+\]</div>
+<p>Finally, if <span class="math notranslate nohighlight">\(\lambda_1 = 1\)</span> and <span class="math notranslate nohighlight">\(\lambda2 \geq 1\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+x_k = d_1 (\lambda_1)\vec{v_1} + d_2 (\lambda_2)^{k}\vec{v_2}
+\]</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exercise">
+<h1>Exercise:<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Let <span class="math notranslate nohighlight">\(A\)</span> be a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix with eigenvalues <span class="math notranslate nohighlight">\(5\)</span> and <span class="math notranslate nohighlight">\(\frac{1}{5}\)</span> and corresponding eigenvectors <span class="math notranslate nohighlight">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Let <span class="math notranslate nohighlight">\(\vec{x}_k\)</span> be a solution of <span class="math notranslate nohighlight">\(\vec{x}_{k+1} = A \vec{x}_{k}\)</span>, <span class="math notranslate nohighlight">\(\vec{x}_0 = \begin{bmatrix} 9 \\ 1 \end{bmatrix}\)</span> .</p></li>
+</ol>
+<p>a. Compute <span class="math notranslate nohighlight">\(\vec{x}_1 = A\vec{x}_0\)</span></p>
+<p>b. Find a formula for <span class="math notranslate nohighlight">\(\vec{x}_k\)</span> involving <span class="math notranslate nohighlight">\(k\)</span> and the eigenvectors of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>c. Describe what happens when <span class="math notranslate nohighlight">\(k\to \infty\)</span>.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Undergrad/Linear"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4.2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4.2 Diagonalization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4.4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.4 Answers to Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4.3 Discrete Dynamical Systems</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-dynamical-systems-as-sequence-of-linear-systems">Modeling Dynamical Systems as sequence of linear systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-behavior-of-dynamical-systems">Long-term behavior of dynamical systems</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise:</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Thomas VanDrunen and Claire Wagner, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
