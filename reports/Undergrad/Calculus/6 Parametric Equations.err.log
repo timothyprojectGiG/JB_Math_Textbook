@@ -1,0 +1,69 @@
+Traceback (most recent call last):
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/timothyproject/anaconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 553, in async_execute
+    await self.async_execute_cell(
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/timothyproject/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import sympy as sp
+import matplotlib.pyplot as plt
+
+# Prompt the user for x(t), y(t), and the interval [a,b]
+x_t = input("Enter the parametric equation x(t): ")
+y_t = input("Enter the parametric equation y(t): ")
+a = float(input("Enter the left endpoint of the interval (a): "))
+b = float(input("Enter the right endpoint of the interval (b): "))
+
+# Define the parameter t as a symbol
+t = sp.symbols('t')
+
+# Define the parametric equations
+x_expr = sp.sympify(x_t)
+y_expr = sp.sympify(y_t)
+
+# Evaluate x(t) and y(t) for the given parameter range
+t_vals = np.linspace(a, b, 100)
+x_vals = [x_expr.subs(t, val) for val in t_vals]
+y_vals = [y_expr.subs(t, val) for val in t_vals]
+
+# Plot the parametric equations
+plt.plot(x_vals, y_vals)
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Parametric Equations: x(t) = {}, y(t) = {}'.format(x_t, y_t))
+plt.grid(True)
+plt.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
+[0;32m<ipython-input-1-57ab3c65065d>[0m in [0;36m<module>[0;34m[0m
+[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m [0;31m# Prompt the user for x(t), y(t), and the interval [a,b][0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 6[0;31m [0mx_t[0m [0;34m=[0m [0minput[0m[0;34m([0m[0;34m"Enter the parametric equation x(t): "[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      7[0m [0my_t[0m [0;34m=[0m [0minput[0m[0;34m([0m[0;34m"Enter the parametric equation y(t): "[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      8[0m [0ma[0m [0;34m=[0m [0mfloat[0m[0;34m([0m[0minput[0m[0;34m([0m[0;34m"Enter the left endpoint of the interval (a): "[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/site-packages/ipykernel/kernelbase.py[0m in [0;36mraw_input[0;34m(self, prompt)[0m
+[1;32m    855[0m         """
+[1;32m    856[0m         [0;32mif[0m [0;32mnot[0m [0mself[0m[0;34m.[0m[0m_allow_stdin[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 857[0;31m             raise StdinNotImplementedError(
+[0m[1;32m    858[0m                 [0;34m"raw_input was called, but this frontend does not support input requests."[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    859[0m             )
+
+[0;31mStdinNotImplementedError[0m: raw_input was called, but this frontend does not support input requests.
+StdinNotImplementedError: raw_input was called, but this frontend does not support input requests.
+
