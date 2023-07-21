@@ -332,6 +332,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="sec2_transform_features.html">2. About Text Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec3_doc_embedding.html">3. Document Embedding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec4_classification_algos.html">4. Classification of Texts</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Evaluating Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec6_applications.html">6. Applications</a></li>
 </ul>
@@ -504,7 +505,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -520,6 +523,19 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-roc-curve">5.1 The ROC Curve</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-rest">5.2.1 One vs Rest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-one">5.2.2 One vs One</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">5.3 More Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -533,19 +549,28 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">RocCurveDisplay</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelBinarizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
 <span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
-
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="kn">import</span> <span class="n">OneVsRestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
 
 <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/data/&quot;</span>
 
@@ -555,15 +580,14 @@ document.write(`
 <span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
 <span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1">#preprocessing - will hide later</span>
-<span class="kn">from</span> <span class="nn">googletrans</span> <span class="kn">import</span> <span class="n">Translator</span>
-<span class="kn">from</span> <span class="nn">langdetect</span> <span class="kn">import</span> <span class="n">detect</span>
-<span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">detect</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-
 <span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;heavy&#39;</span><span class="p">,</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,}</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;tab20&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">colors</span><span class="p">)</span>
+
+<span class="n">file_name</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/sdg_names_definitions.csv&quot;</span>
+<span class="n">sdg_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<span class="n">sdg_names</span>
 
 <span class="k">def</span> <span class="nf">most_informative_feature_for_class</span><span class="p">(</span><span class="n">vectorizer</span><span class="p">,</span> <span class="n">classifier</span><span class="p">,</span> <span class="n">classlabel</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">labelid</span> <span class="ow">in</span> <span class="n">classlabel</span><span class="p">:</span>
@@ -579,6 +603,43 @@ document.write(`
         <span class="n">top_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">feature_log_prob_</span><span class="p">[</span><span class="n">i</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="n">n</span><span class="p">]</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">class_label</span><span class="p">,</span>
               <span class="s2">&quot; || &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">feature_names</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">top_n</span><span class="p">)))</span>
+        
+<span class="k">def</span> <span class="nf">get_text_df</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+    <span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+    <span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
+    <span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
+    <span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/px/b7vc3nh913zb_m0x36ncftj00000gn/T/ipykernel_73547/3280906689.py:37: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
+  colors = list(cm.get_cmap(&#39;tab20&#39;).colors)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
+
+<span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/universal-sentence-encoder_4&quot;</span><span class="p">)</span>
+
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">get_text_df</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">)</span>
+<span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;embedding&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">embed</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-07-18 20:45:18.975424: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-07-18 20:45:43.233008: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor &#39;inputs&#39; with dtype string
+	 [[{{node inputs}}]]
 </pre></div>
 </div>
 </div>
@@ -590,23 +651,16 @@ document.write(`
 <p>For this section, we’re going to focus on the results from our ridge classification in the previous section. Notice that we get the specific results for each goal on its own, in addition to a confusion matrix for the specific results on the testing set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
-<span class="n">categories</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
-    <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="n">X_train_tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">stop_words</span> <span class="o">=</span> <span class="s2">&quot;english&quot;</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">X_train_tfidf_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_train_tfidf_vector</span> <span class="o">=</span> <span class="n">X_train_tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_test_tfidf_vector</span> <span class="o">=</span> <span class="n">X_train_tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifier</span>
-
-<span class="n">tfidf_ridge_clf</span> <span class="o">=</span> <span class="n">RidgeClassifier</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;sparse_cg&quot;</span><span class="p">)</span>
-<span class="n">tfidf_ridge_clf</span> <span class="o">=</span> <span class="n">tfidf_ridge_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf_vector</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tfidf_ridge_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf_vector</span><span class="p">)</span>
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">ridge_clf</span> <span class="o">=</span> <span class="n">RidgeClassifier</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;sparse_cg&quot;</span><span class="p">)</span>
+<span class="n">ridge_clf</span> <span class="o">=</span> <span class="n">ridge_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">ridge_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">))</span>
-
 <span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -614,240 +668,69 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           1     0.7160    0.7651    0.7397       481
-           2     0.6542    0.6646    0.6593       316
-           3     0.8196    0.8427    0.8310       674
-           4     0.7558    0.8714    0.8095       863
-           5     0.8287    0.8728    0.8502       920
-           6     0.8239    0.8151    0.8195       465
-           7     0.7995    0.8247    0.8119       730
-           8     0.5738    0.3853    0.4610       353
-           9     0.5801    0.5518    0.5656       328
-          10     0.5990    0.4492    0.5134       256
-          11     0.7111    0.6926    0.7018       462
-          12     0.7073    0.5346    0.6089       217
-          13     0.7817    0.7923    0.7870       443
-          14     0.7445    0.6426    0.6898       263
-          15     0.7857    0.6677    0.7219       313
-          16     0.8920    0.9612    0.9253      1057
+           1     0.7340    0.7401    0.7371       481
+           2     0.7529    0.8291    0.7892       316
+           3     0.9084    0.9125    0.9104       674
+           4     0.8607    0.9525    0.9043       863
+           5     0.8723    0.9359    0.9030       920
+           6     0.8478    0.8624    0.8550       465
+           7     0.8171    0.8753    0.8452       730
+           8     0.6942    0.4759    0.5647       353
+           9     0.7310    0.6463    0.6861       328
+          10     0.7006    0.4297    0.5327       256
+          11     0.7747    0.7965    0.7855       462
+          12     0.8841    0.5622    0.6873       217
+          13     0.7468    0.7923    0.7689       443
+          14     0.8849    0.8479    0.8660       263
+          15     0.8576    0.8083    0.8322       313
+          16     0.9004    0.9499    0.9245      1057
 
-    accuracy                         0.7732      8141
-   macro avg     0.7358    0.7084    0.7185      8141
-weighted avg     0.7670    0.7732    0.7676      8141
+    accuracy                         0.8312      8141
+   macro avg     0.8105    0.7761    0.7870      8141
+weighted avg     0.8276    0.8312    0.8257      8141
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x12d169d50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x14ed10310&gt;
 </pre></div>
 </div>
-<img alt="../../_images/3bb08b7e48a69a54db3840ef859e8946440fcc5c9432ffa785c39df933ee1f6d.png" src="../../_images/3bb08b7e48a69a54db3840ef859e8946440fcc5c9432ffa785c39df933ee1f6d.png" />
+<img alt="../../_images/0e1516ecebd3095e3c8ed79357908a1d32addb4c5a9357fc2450321ca5e8ba85.png" src="../../_images/0e1516ecebd3095e3c8ed79357908a1d32addb4c5a9357fc2450321ca5e8ba85.png" />
 </div>
 </div>
-<h2>5.1 The ROC Curve</h2>
+<section id="the-roc-curve">
+<h2>5.1 The ROC Curve<a class="headerlink" href="#the-roc-curve" title="Permalink to this heading">#</a></h2>
 <p>The goal of any classifier is to maximize true positive rate (TPR) while minimizing false positive rate (FPR). The ROC curve is then determined as follows: for any given threshold, we line up the points, with TPR on the Y-axis and FPR on the X-axis. Points at the top left corner of the plot imply an FPR of 0 and a TPR of 1 (i.e., perfect classification).</p>
 <p>A model can be evaluating qualitatively by judging the “steepness” of its ROC curve; this evaluation can be made quantitative by finding the Area Under the Curve (AUC). A larger AUC implies a steeper curve and is <i>usually</i> better.</p>
 <p>For binary classification, each point on the ROC curve represents a different threshold and can be a choice for the final classifier to be used; the choice made typically depends on the business requirements and constraints.</p>
 <h2>5.2 Multiclass Classifiers</h2>
 <p>In any multiclass classification problem, there are multiple class labels <span class="math notranslate nohighlight">\((c_1, c_2, …, c_k)\)</span> in the data, and each training sample is labeled as belonging to one class only. The strategies used with binary classifiers can be taken in multiclass classifiers by reducing the problem to binary classification. There are two strategies typically taken to do this, those being One vs. Rest (OvR) and One vs. One (OvO).</p>
-<h3>5.2.1 One vs Rest</h3>
-The OvR method of evaluation judges the model ability to determine if a given item belongs to a given class or if it is in one of the other classes. For each class label $c$ in $(c_1, c_2, …, c_k)$, we say that the <i>positive samples</i> are those that are labeled as class $c$, and the <i>negative samples</i> are all the rest of the samples. We then fit and predict for class $c$.
+<section id="one-vs-rest">
+<h3>5.2.1 One vs Rest<a class="headerlink" href="#one-vs-rest" title="Permalink to this heading">#</a></h3>
+<p>The OvR method of evaluation judges the model ability to determine if a given item belongs to a given class or if it is in one of the other classes. For each class label <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\((c_1, c_2, …, c_k)\)</span>, we say that the <i>positive samples</i> are those that are labeled as class <span class="math notranslate nohighlight">\(c\)</span>, and the <i>negative samples</i> are all the rest of the samples. We then fit and predict for class <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <p>For scoring each sample, we simply take the highest probable score (i.e., highest score) of the <span class="math notranslate nohighlight">\(k\)</span> classifiers as the class for the sample.</p>
 <p>When looking at the ROC curve for the OvR strategy on our classification, we get the following graphic:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_name</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/sdg_names_definitions.csv&quot;</span>
-<span class="n">sdg_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-<span class="n">sdg_names</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>sdg</th>
-      <th>sdg_name</th>
-      <th>sdg_definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>No Poverty</td>
-      <td>End poverty in all its forms everywhere</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Zero Hunger</td>
-      <td>End hunger, achieve food security and improved...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Good Health and Well Being</td>
-      <td>Ensure healthy lives and promote well-being fo...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>Quality Education</td>
-      <td>Ensure inclusive and equitable quality educati...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>Gender Equality</td>
-      <td>Achieve gender equality and empower all women ...</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>6</td>
-      <td>Clean Water and Sanitation</td>
-      <td>Ensure availability and sustainable management...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>7</td>
-      <td>Affordable and Clean Energy</td>
-      <td>Ensure access to affordable, reliable, sustain...</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>8</td>
-      <td>Decent Work and Economic Growth</td>
-      <td>Promote sustained, inclusive and sustainable e...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>9</td>
-      <td>Industry, Innovation and Infrastructure</td>
-      <td>Build resilient infrastructure, promote inclus...</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>10</td>
-      <td>Reduced Inequalities</td>
-      <td>Reduce inequality within and among countries</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>11</td>
-      <td>Sustainable Cities and Communities</td>
-      <td>Make cities and human settlements inclusive, s...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>12</td>
-      <td>Responsible Consumption and Production</td>
-      <td>Ensure sustainable consumption and production ...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>13</td>
-      <td>Climate Action</td>
-      <td>Take urgent action to combat climate change an...</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>14</td>
-      <td>Life Below Water</td>
-      <td>Conserve and sustainably use the oceans, seas ...</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>15</td>
-      <td>Life on Land</td>
-      <td>Protect, restore and promote sustainable use o...</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>16</td>
-      <td>Peace, Justice and Strong Institutions</td>
-      <td>Promote peaceful and inclusive societies for s...</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>17</td>
-      <td>Partnerships for the Goals</td>
-      <td>Strengthen the means of implementation and rev...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelBinarizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
-<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
-<span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="kn">import</span> <span class="n">OneVsRestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">stop_words</span> <span class="o">=</span> <span class="s2">&quot;english&quot;</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">X_tfidf_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
-
-<span class="n">X_tfidf_vector</span> <span class="o">=</span> <span class="n">X_train_tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span> 
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span>
+
 <span class="n">label_binarizer</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">y_onehot</span> <span class="o">=</span> <span class="n">label_binarizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_binarizer</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
 <span class="n">class_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">sdg_names</span><span class="p">[</span><span class="n">sdg_names</span><span class="p">[</span><span class="s2">&quot;sdg&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">label_binarizer</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">sdg_name</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> \
                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">)]</span>
 
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_tfidf_vector</span><span class="p">,</span> <span class="n">y_onehot</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=.</span><span class="mi">33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1">#ovr_mlp_clf = OneVsRestClassifier(MLPClassifier(random_state=0, max_iter=300)).fit(X_train,y_train)</span>
-<span class="c1">#y_score = ovr_mlp_clf.predict_proba(X_test)</span>
-
-<span class="c1">#ovr_svm_clf = OneVsRestClassifier(svm.SVC(kernel=&#39;linear&#39;, probability=True, random_state=0))</span>
-<span class="c1">#ovr_svm_clf.fit(X_train, y_train)</span>
-<span class="c1">#y_score = ovr_svm_clf.decision_function(X_test)</span>
-
-<span class="n">ovr_ridge_clf</span> <span class="o">=</span> <span class="n">OneVsRestClassifier</span><span class="p">(</span><span class="n">tfidf_ridge_clf</span><span class="p">)</span>
-<span class="n">ovr_ridge_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_score</span> <span class="o">=</span> <span class="n">ovr_ridge_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_onehot</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=.</span><span class="mi">33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ovr_mlp_clf</span> <span class="o">=</span> <span class="n">OneVsRestClassifier</span><span class="p">(</span><span class="n">MLPClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_score</span> <span class="o">=</span> <span class="n">ovr_mlp_clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;tab20&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">colors</span><span class="p">)</span>
-
-<span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_binarizer</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
-<span class="c1">#class_names = [sdg_names[sdg_names[&quot;sdg&quot;] == label_binarizer.classes_[i]].sdg_name.item() \</span>
-               <span class="c1">#for i in range(n_classes)]</span>
-
-<span class="n">fpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="n">tpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="n">roc_auc</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">class_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">):</span>
@@ -870,129 +753,42 @@ The OvR method of evaluation judges the model ability to determine if a given it
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/px/b7vc3nh913zb_m0x36ncftj00000gn/T/ipykernel_67158/1797440257.py:2: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
-  colors = list(cm.get_cmap(&#39;tab20&#39;).colors)
-</pre></div>
-</div>
-<img alt="../../_images/a3bf223153c67be68e5a6a451c3b9ee92cab20a6db60e31c38696f469007975b.png" src="../../_images/a3bf223153c67be68e5a6a451c3b9ee92cab20a6db60e31c38696f469007975b.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ovr_ridge_clf = OneVsRestClassifier(tfidf_ridge_clf)</span>
-<span class="c1">#y_score = ovr_ridge_clf.predict_proba(X_test)</span>
-
-
-
-<span class="c1">#sdg_names = pd.read_excel(&quot;Digital Science SDG training set searches.xlsx&quot;)</span>
-<span class="c1">#sdg_names = sdg_names.drop([0,1,2], axis=0)</span>
-<span class="c1">#sdg_names = sdg_names.set_axis([&quot;sdg&quot;, &quot;sdg_name&quot;, &quot;sdg_definition&quot;],axis=1, copy=False)</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span>
-<span class="n">label_binarizer</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_binarizer</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
-<span class="c1">#class_names = [sdg_names[sdg_names[&quot;sdg&quot;] == label_binarizer.classes_[i]].sdg_name.item() \</span>
-               <span class="c1">#for i in range(n_classes)]</span>
-
-<span class="n">fpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="n">tpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="n">roc_auc</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">class_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">):</span>
-    <span class="n">fpr</span><span class="p">[</span><span class="n">class_id</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">class_id</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">[:,</span> <span class="n">class_id</span><span class="p">],</span> <span class="n">y_score</span><span class="p">[:,</span> <span class="n">class_id</span><span class="p">])</span> <span class="c1"># roc_curve works on binary</span>
-    <span class="n">roc_auc</span><span class="p">[</span><span class="n">class_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="n">class_id</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">class_id</span><span class="p">])</span>
-
-<span class="k">for</span> <span class="n">class_id</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">),</span> <span class="n">colors</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="n">class_id</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">class_id</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> 
-             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SDG </span><span class="si">{0}</span><span class="s1"> - </span><span class="si">{1}</span><span class="s1"> (AUC = </span><span class="si">{2:0.2f}</span><span class="s1">)&#39;</span>
-             <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">class_id</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_names</span><span class="p">[</span><span class="n">class_id</span><span class="p">],</span> <span class="n">roc_auc</span><span class="p">[</span><span class="n">class_id</span><span class="p">]))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ROC for SDG multiclass classifier&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_binarizer</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">class_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">sdg_names</span><span class="p">[</span><span class="n">sdg_names</span><span class="p">[</span><span class="s2">&quot;sdg&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">label_binarizer</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">sdg_name</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> \
-<span class="g g-Whitespace">      </span><span class="mi">8</span>                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">)]</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_onehot</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=.</span><span class="mi">33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">ovr_mlp_clf</span> <span class="o">=</span> <span class="n">OneVsRestClassifier</span><span class="p">(</span><span class="n">MLPClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">y_score</span> <span class="o">=</span> <span class="n">ovr_mlp_clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/nlp/lib/python3.11/site-packages/sklearn/model_selection/_split.py:2559,</span> in <span class="ni">train_test_split</span><span class="nt">(test_size, train_size, random_state, shuffle, stratify, *arrays)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2556</span> <span class="k">if</span> <span class="n">n_arrays</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2557</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;At least one array required as input&quot;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2559</span> <span class="n">arrays</span> <span class="o">=</span> <span class="n">indexable</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2561</span> <span class="n">n_samples</span> <span class="o">=</span> <span class="n">_num_samples</span><span class="p">(</span><span class="n">arrays</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">   </span><span class="mi">2562</span> <span class="n">n_train</span><span class="p">,</span> <span class="n">n_test</span> <span class="o">=</span> <span class="n">_validate_shuffle_split</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2563</span>     <span class="n">n_samples</span><span class="p">,</span> <span class="n">test_size</span><span class="p">,</span> <span class="n">train_size</span><span class="p">,</span> <span class="n">default_test_size</span><span class="o">=</span><span class="mf">0.25</span>
-<span class="g g-Whitespace">   </span><span class="mi">2564</span> <span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/nlp/lib/python3.11/site-packages/sklearn/utils/validation.py:443,</span> in <span class="ni">indexable</span><span class="nt">(*iterables)</span>
-<span class="g g-Whitespace">    </span><span class="mi">424</span> <span class="sd">&quot;&quot;&quot;Make arrays indexable for cross-validation.</span>
-<span class="g g-Whitespace">    </span><span class="mi">425</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">426</span><span class="sd"> Checks consistent length, passes through None, and ensures that everything</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">439</span><span class="sd">     sparse matrix, or dataframe) or `None`.</span>
-<span class="g g-Whitespace">    </span><span class="mi">440</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">442</span> <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">_make_indexable</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">iterables</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">443</span> <span class="n">check_consistent_length</span><span class="p">(</span><span class="o">*</span><span class="n">result</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">444</span> <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">File /opt/anaconda3/envs/nlp/lib/python3.11/site-packages/sklearn/utils/validation.py:394,</span> in <span class="ni">check_consistent_length</span><span class="nt">(*arrays)</span>
-<span class="g g-Whitespace">    </span><span class="mi">383</span> <span class="k">def</span> <span class="nf">check_consistent_length</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">384</span>     <span class="sd">&quot;&quot;&quot;Check that all arrays have consistent first dimensions.</span>
-<span class="g g-Whitespace">    </span><span class="mi">385</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">386</span><span class="sd">     Checks whether all objects in arrays have the same shape or length.</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">391</span><span class="sd">         Objects that will be checked for consistent length.</span>
-<span class="g g-Whitespace">    </span><span class="mi">392</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">394</span>     <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="n">_num_samples</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">arrays</span> <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">395</span>     <span class="n">uniques</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">396</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniques</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-
-<span class="nn">File /opt/anaconda3/envs/nlp/lib/python3.11/site-packages/sklearn/utils/validation.py:394,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">    </span><span class="mi">383</span> <span class="k">def</span> <span class="nf">check_consistent_length</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">384</span>     <span class="sd">&quot;&quot;&quot;Check that all arrays have consistent first dimensions.</span>
-<span class="g g-Whitespace">    </span><span class="mi">385</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">386</span><span class="sd">     Checks whether all objects in arrays have the same shape or length.</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">391</span><span class="sd">         Objects that will be checked for consistent length.</span>
-<span class="g g-Whitespace">    </span><span class="mi">392</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">394</span>     <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="n">_num_samples</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">arrays</span> <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">395</span>     <span class="n">uniques</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">396</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniques</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-
-<span class="nn">File /opt/anaconda3/envs/nlp/lib/python3.11/site-packages/sklearn/utils/validation.py:335,</span> in <span class="ni">_num_samples</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">    </span><span class="mi">333</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;shape&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">334</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">335</span>         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">336</span>             <span class="s2">&quot;Singleton array </span><span class="si">%r</span><span class="s2"> cannot be considered a valid collection.&quot;</span> <span class="o">%</span> <span class="n">x</span>
-<span class="g g-Whitespace">    </span><span class="mi">337</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">338</span>     <span class="c1"># Check that shape is returning an integer or default to len</span>
-<span class="g g-Whitespace">    </span><span class="mi">339</span>     <span class="c1"># Dask dataframes may not return numeric shape[0] value</span>
-<span class="g g-Whitespace">    </span><span class="mi">340</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
-
-<span class="ne">TypeError</span>: Singleton array array(TfidfVectorizer(min_df=5, ngram_range=(2, 2), stop_words=&#39;english&#39;),
-      <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">considered</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">collection</span><span class="o">.</span>
-</pre></div>
-</div>
+<img alt="../../_images/bc5fac0d24049744d88f87d61d65352a2f47a104ad4791b4f267e6ccd3c1569b.png" src="../../_images/bc5fac0d24049744d88f87d61d65352a2f47a104ad4791b4f267e6ccd3c1569b.png" />
 </div>
 </div>
 <p>We can see that each of the goals, aside from goal 17, gets its own curve, and our program is able to report the AUC score for each one.</p>
 <p><b>Exercise 5.1</b>: Create a similar ROC curve plot for your Naive Bayes classification and Multilayer Perceptron classification from the previous section.</p>
-<h3>5.2.2 One vs One</h3>
+</section>
+<section id="one-vs-one">
+<h3>5.2.2 One vs One<a class="headerlink" href="#one-vs-one" title="Permalink to this heading">#</a></h3>
 <p>The OvO approach compares each class to another single class for all possible pairs of classes. For each class label <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\((c_1, c_2, …, c_k)\)</span>, and for each pair <span class="math notranslate nohighlight">\((c, c_j)\)</span>, with <span class="math notranslate nohighlight">\(c_j \neq c\)</span>, we say that the <i>positive samples</i> are those that are labeled as class <span class="math notranslate nohighlight">\(c\)</span>, and the <i>negative samples</i> are those that are labeled as class <span class="math notranslate nohighlight">\(c_j\)</span>.</p>
 <p>For each sample to be scored, it gets <span class="math notranslate nohighlight">\(k-1\)</span> classification results, and we then vote by majority to determine the class for the sample.</p>
 <p>Similar to the OvR strategy, we can produce an ROC curve for the OvO strategy as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">logit_clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;liblinear&quot;</span><span class="p">)</span>
+<span class="n">logit_clf</span> <span class="o">=</span> <span class="n">logit_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># metrics.roc_auc_score work on binary and multiclass</span>
+<span class="n">y_score</span> <span class="o">=</span> <span class="n">logit_clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_score</span><span class="p">,</span> <span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9830440625522275
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_binarizer</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -1033,24 +829,19 @@ The OvR method of evaluation judges the model ability to determine if a given it
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">label_binarizer</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">y_onehot_test</span> <span class="o">=</span> <span class="n">label_binarizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-
-<span class="ne">NameError</span>: name &#39;y&#39; is not defined
-</pre></div>
-</div>
+<img alt="../../_images/3cbef101063fe22ca560e6989ab4363c12897f4a1de552cc3142f4bf9cb1c41a.png" src="../../_images/3cbef101063fe22ca560e6989ab4363c12897f4a1de552cc3142f4bf9cb1c41a.png" />
 </div>
 </div>
 <p>Here, we identified two classes that which we wanted to specifically examine, and these two are the only curves that are present on the plot. Note that the AUC for these goals we picked are different from those in the OvR strategy.</p>
 <p><b>Exercise 5.2</b>: Create another ROC curve plot for three additional goals of your choosing.</p>
 <p><b>Exercise 5.3</b>: Using SDGs 8 and 16, recreate the ROC curve plot using your Naive Bayes and Multilayer Perceptron classifications from the previous sections.</p>
-<h2>5.3 More Exercises</h2>
+</section>
+</section>
+<section id="more-exercises">
+<h2>5.3 More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h2>
 <p><b>Exercise 5.4</b>: Modify your function from Exercise 3.1 to now output the test set metrics for the classification you run. Be sure to include precision, recall, f1, and accuracy.</p>
 <p><b>Exercise 5.5</b>: What does a point on the ROC curve at (1,1) indicate about the corresponding model? Similarly, what does a point at (0,0) on the curve indicate about the model?</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1111,6 +902,25 @@ The OvR method of evaluation judges the model ability to determine if a given it
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-roc-curve">5.1 The ROC Curve</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-rest">5.2.1 One vs Rest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-one">5.2.2 One vs One</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">5.3 More Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

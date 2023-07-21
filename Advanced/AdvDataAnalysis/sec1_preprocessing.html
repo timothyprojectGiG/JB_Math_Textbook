@@ -332,6 +332,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="sec2_transform_features.html">2. About Text Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec3_doc_embedding.html">3. Document Embedding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec4_classification_algos.html">4. Classification of Texts</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="sec5_classification_eval.html">5. Evaluating Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec6_applications.html">6. Applications</a></li>
 </ul>
@@ -504,7 +505,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -520,6 +523,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks">1.1 Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levels-of-processing">1.2 Levels of Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedures">1.3 Procedures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">1.3.1 Stemming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizers">1.3.2 Tokenizers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">3.3 Named Entity Recognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-operations">1.3.4 String Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">1.4 More Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -574,8 +594,9 @@ document.write(`
 <li>Choose either of the two sentiment analysis algorithms and use any of the provided example sentences. Look under CLI Output. How do the algorithms take the example input sentence and transform it?</li>
 <li> Look under Model Interpretations and Model Attacks, which visualize the most important words in the sentence. Which words seem to be important, and which ones are often removed? </li>
 <li>Try some of your own sentences. Does the algorithm seem to be accurate?</li>
-</ol><h2>1.1 Tasks</h2>
-Within the realm of preprocessing textual data, we first must perform certain detections and tasks; this ensures that we have textual data that makes sense and is meaningful. The following all help at ensuring data cleanliness:
+</ol><section id="tasks">
+<h2>1.1 Tasks<a class="headerlink" href="#tasks" title="Permalink to this heading">#</a></h2>
+<p>Within the realm of preprocessing textual data, we first must perform certain detections and tasks; this ensures that we have textual data that makes sense and is meaningful. The following all help at ensuring data cleanliness:</p>
 <ul class="simple">
 <li><p><b>Syntactic analysis:</b> Does the grammar make sense? Is the text gramatically correct?</p></li>
 <li><p><b>Semantic analysis:</b> Are we aware of the meaning of the words in context?  Do we understand the structure, word interaction, and related concepts of the text?</p></li>
@@ -628,7 +649,9 @@ Within the realm of preprocessing textual data, we first must perform certain de
 </div>
 </div>
 <p><b>Exercise 1.4</b>: Use <span class="math notranslate nohighlight">\(\texttt{text\_df.info()}\)</span> to examine information about the dataset after running the preprocessing in this section. What columns are included? What data types are there, and how many entries? Does this seem like a reasonable size of data to work with?</p>
-<h2>1.2 Levels of Processing</h2>
+</section>
+<section id="levels-of-processing">
+<h2>1.2 Levels of Processing<a class="headerlink" href="#levels-of-processing" title="Permalink to this heading">#</a></h2>
 <p>In (almost) any language, there are distinct levels of a text we can focus on: <b>characters</b> are strung together to form <b>words</b>, which are put together into <b>sentences</b>, then <b>paragraphs</b>, <b>documents</b>, and a whole set of documents, or a <b>corpus</b>. In all these cases, we put multiples together to make the next level, and decisions in preprocessing at one level will inherently impact the next level.</p>
 <p>We will not be focusing on using algorithms to process whole documents or anything above that level, so we can look at preprocessing at the remaining levels: characters, words, sentences, and paragraphs.</p>
 <p><b>For characters</b>, we typically process textual data by removing special characters, punctuations, and normalizations. However, this is not necessarily the case for every NLP approach. In some cases, taking away these special characters, punctuations, and normalizations will completely alter the meaning of higher levels of text.</p>
@@ -651,8 +674,11 @@ change cases</li>
 </ol>
 <p>Many of these steps may be unfamiliar - that is perfectly fine, as they will be covered later in this section.</p>
 <p>It is commonly accepted that preprocessing text helps improve accuracy, so it is critical to perform good, appropriate preprocessing.</p>
-<h2>1.3 Procedures</h2>
-<h3>1.3.1 Stemming </h3>
+</section>
+<section id="procedures">
+<h2>1.3 Procedures<a class="headerlink" href="#procedures" title="Permalink to this heading">#</a></h2>
+<section id="stemming">
+<h3>1.3.1 Stemming<a class="headerlink" href="#stemming" title="Permalink to this heading">#</a></h3>
 <p>Developed by Martin Porter in 1980, the <b>Porter Stemmer</b> is the oldest and most commonly used stemming algorithm in many languages. It is slightly time consuming, so another stemming algorithm that can be used is the Lancaster stemmer. This stemmer is very aggressive, however, and is especially harmful for short tokens, where the token itself may become unclear or altered to a point where it loses meaning.</p>
 <p>As mentioned previously, stemming is performed to help normalize our textual data; this is done so that we do not end up with many different words with very similar meaning. For example, stemming turns “watch”, “watched”, “watching”, and “watches” into “watch”. To do this, the algorithm accesses a database where known word forms, such as the various forms of “watch”, are grouped together, then analyzes the text for all instances of these forms and turns them all into the root word. Stemmers also typically perform preprocessing tasks like turning words not at the beginning of a sentence into lowercase and removing stop words, which are common words like “the” and “that” which show up in a variety of contexts and typically do not change meaning across these contexts.</p>
 <p>However, there are always irregularities when using any stemming algorithm. Take the following examples:</p>
@@ -688,75 +714,15 @@ Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mo
 </div>
 <p><b>Exercise 1.5</b>: How do the different stemmers compare for the list of words given to it in the above example? Which one might have the most trouble on a larger set of tokens&gt;</p>
 <p><b>Exercise 1.6</b>: Modify the above code to stem your own tokens. What words seem to be removed as stop words? How are words commonly shortened, and what types of words seem to cause the most trouble for the stemmers?</p>
-<h3>1.3.2 Translation</h3>
-<p>Language detection is easy using pre-existing algorithms, including Google Translate and <span class="math notranslate nohighlight">\(\texttt{langdetect}\)</span> (also by Google), which can be downloaded and installed for use in Python with the following:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span>  <span class="n">install</span> <span class="n">googletrans</span><span class="o">==</span><span class="mf">3.1</span><span class="o">.</span><span class="mi">0</span><span class="n">a0</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">langdetect</span> 
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">spacy_langdetect</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<p>To use the translation service, we can run the following code to import and load the model, then use it to predict languages as such:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Google Translate</span>
-<span class="kn">from</span> <span class="nn">googletrans</span> <span class="kn">import</span> <span class="n">Translator</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">Translator</span><span class="p">()</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="s2">&quot;四个和尚&quot;</span><span class="p">)</span>
-<span class="n">t</span><span class="o">.</span><span class="n">lang</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;zh-CN&#39;, 1)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#langdetect</span>
-<span class="kn">from</span> <span class="nn">langdetect</span> <span class="kn">import</span> <span class="n">detect</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s2">&quot;War doesn&#39;t show who&#39;s right, just who&#39;s left.&quot;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s2">&quot;Ein, zwei, drei, vier&quot;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s1">&#39;四个和尚没水喝&#39;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="s1">&#39;今一はお前さん&#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>en
-de
-zh-cn
-ja
-</pre></div>
-</div>
-</div>
-</div>
-<p><b>Exercise 1.5:</b> Run the previous lines of code.</p>
-<ol>
-<li>What are the matching languages for the provided example sentences?</li>
-<li>How confident is the Google Translate in the predicted language?</li>
-<li>Try some of your own sentences. How accurate do both systems seem to be?</li>
-</ol>
-<p>Now that we have an algorithm for predicting language, let’s try adding language as a column to our UN SDG dataset.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">detect</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><b>Exercise 1.6</b>: Use <span class="math notranslate nohighlight">\(\texttt{text\_df.lang.value\_counts()}\)</span> to count the number of texts for each language in our UN SDG dataset thus far. How many texts are there for each language?</p>
-<p>Our dataset includes some non-English texts, which is understandable: while English is a widely spoken language and is the dominant language on the Internet, there are thousands of other languages. However, English is the most common language in the dataset, so we should consider: do we need to remove the non-English texts?</p>
-<p><b>Exercise 1.7</b>: Use <span class="math notranslate nohighlight">\(\texttt{text\_df.query(&quot;lang == 'fr'&quot;)[&quot;text&quot;]}\)</span> to output the texts written in French. Examine the output of these sentences. Does it make sense to remove them? If so, write the necessary code to do so.</p>
-<h3>1.3.3 Tokenizers</h3>
+</section>
+<section id="tokenizers">
+<h3>1.3.2 Tokenizers<a class="headerlink" href="#tokenizers" title="Permalink to this heading">#</a></h3>
 <p>The primary goal of a tokenizer is to break text into tokens. This is highly language dependent; in English, we use white space and punctuations to as word and token separators, but this may not work in some languages.</p>
 <p>For the purposes of building ML models, there are several things that tokenizers track in addition to creating the tokens themselves. Tokenizers track <i>features</i>, or the frequency of occurrence of each individual token (normalized or not). They also produce a <i>sample</i>, or a vector of all the token frequencies for a given document.</p>
 <p>When a tokenizer vectorizes a corpus, it counts the occurrences of tokens in each document, normalizes and weights these occurrences, and constructs an n-gram, which is discussed in the next section.</p>
-<h3>1.3.4 Named Entity Recognition</h3>
+</section>
+<section id="named-entity-recognition">
+<h3>3.3 Named Entity Recognition<a class="headerlink" href="#named-entity-recognition" title="Permalink to this heading">#</a></h3>
 <p>The purpose of named entity recognition (NER) is self-explanatory; it extracts entities from data.</p>
 <p><b>Exercise 1.10:</b> Try the Allen NLP NER demo found at <a class="reference external" href="https://demo.allennlp.org/named-entity-recognition/named-entity-recognition">https://demo.allennlp.org/named-entity-recognition/named-entity-recognition</a>.</p>
 <ol>
@@ -765,7 +731,9 @@ ja
 <li>Now use text.lower() to make the entire sentence lowercase and use that as an input into the Allen NLP NER. Which phrases are now labeled as named entities?</li>
 <p>‘the israel oceanographic and limnological research station monitors the quantity and quality of water along the coastline of the mediterranean sea. the nature and parks authority (npa) monitors water quality in rivers on behalf of the moep. mekorot and local authorities monitor drinking water quality under the supervision of the ministry of health. the ministry of health monitors effluent quality prior to its use in the agricultural sector.’</p>
 </ol>
-<h3>1.3.6 String Operations</h3>
+</section>
+<section id="string-operations">
+<h3>1.3.4 String Operations<a class="headerlink" href="#string-operations" title="Permalink to this heading">#</a></h3>
 <p>Now that we know about various preprocessing techniques, we can review some basic string operations. These will also be important in identifying various sentences and tokens within our dataset in case we would like to focus on specific words, or it can help in identifying cases, numeric characters, and other tests that we might need to conduct. A few are given below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -838,7 +806,12 @@ Using lower(): groß
 </div>
 </div>
 <p>The German word “groß” translates as large or big, and this meaning is kept using <span class="math notranslate nohighlight">\(\texttt{.lower()}\)</span>. However, when using <span class="math notranslate nohighlight">\(\texttt{.casefold()}\)</span>, it becomes “gross”, which is used in English to indicate disgust. It is up to you to decide which of these to use when converting to lowercase; however, it is best to keep this consistent across all your code so as to avoid potential problems such as this.</p>
-<h2>1.4 More Exercises</h2></section>
+</section>
+</section>
+<section id="more-exercises">
+<h2>1.4 More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -898,6 +871,29 @@ Using lower(): groß
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks">1.1 Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levels-of-processing">1.2 Levels of Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedures">1.3 Procedures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">1.3.1 Stemming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizers">1.3.2 Tokenizers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">3.3 Named Entity Recognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-operations">1.3.4 String Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">1.4 More Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

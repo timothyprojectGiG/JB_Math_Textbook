@@ -332,6 +332,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="sec2_transform_features.html">2. About Text Data</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Document Embedding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec4_classification_algos.html">4. Classification of Texts</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="sec5_classification_eval.html">5. Evaluating Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec6_applications.html">6. Applications</a></li>
 </ul>
@@ -504,7 +505,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -520,6 +523,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-sentence-encoder">3.1 Universal Sentence Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">3.2 More Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -555,7 +567,6 @@ document.write(`
 <span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
 <span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;sdg == 8 or sdg == 16 or sdg == 4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -578,37 +589,21 @@ document.write(`
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
 
-<span class="n">embed_url</span> <span class="o">=</span> <span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot;</span> <span class="c1"># &quot;https://tfhub.dev/google/universal-sentence-encoder-large/5&quot;</span>
-<span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">embed_url</span><span class="p">)</span> <span class="c1"># print (&quot;module %s loaded&quot; % module_url)</span>
+<span class="c1">#embed_url = &quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot; # &quot;https://tfhub.dev/google/universal-sentence-encoder-large/5&quot;</span>
+<span class="c1">#embed = hub.load(embed_url) # print (&quot;module %s loaded&quot; % module_url)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-07-17 05:17:22.112447: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-07-18 22:39:35.751494: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">embed_url</span> <span class="o">=</span> <span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot;</span> <span class="c1"># &quot;https://tfhub.dev/google/universal-sentence-encoder-large/5&quot;</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">embed_url</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/nlp2/lib/python3.9/site-packages/tensorflow_hub/module_v2.py:107,</span> in <span class="ni">load</span><span class="nt">(handle, tags, options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="n">saved_model_pbtxt_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">as_bytes</span><span class="p">(</span><span class="n">module_path</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">104</span>     <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">as_bytes</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PBTXT</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">saved_model_path</span><span class="p">)</span> <span class="ow">and</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span>     <span class="ow">not</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">saved_model_pbtxt_path</span><span class="p">)):</span>
-<span class="ne">--&gt; </span><span class="mi">107</span>   <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Trying to load a model of incompatible/unknown type. &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span>                    <span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; contains neither &#39;</span><span class="si">%s</span><span class="s2">&#39; nor &#39;</span><span class="si">%s</span><span class="s2">&#39;.&quot;</span> <span class="o">%</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span>                    <span class="p">(</span><span class="n">module_path</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PB</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span>                     <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PBTXT</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span> <span class="k">if</span> <span class="n">options</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span>   <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="s2">&quot;saved_model&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;LoadOptions&quot;</span><span class="p">):</span>
-
-<span class="ne">ValueError</span>: Trying to load a model of incompatible/unknown type. &#39;/var/folders/px/b7vc3nh913zb_m0x36ncftj00000gn/T/tfhub_modules/063d866c06683311b44b4992fd46003be952409c&#39; contains neither &#39;saved_model.pb&#39; nor &#39;saved_model.pbtxt&#39;.
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/universal-sentence-encoder_4&quot;</span><span class="p">)</span> <span class="c1"># print (&quot;module %s loaded&quot; % module_url)</span>
 </pre></div>
 </div>
 </div>
@@ -688,7 +683,8 @@ Name: num_sent, dtype: int64
 </div>
 </div>
 <p>Notice that the vast majority of the documents have less than 10 sentences, with most being only 3 or 4 sentences. This type of sentence embedding can help us with further NLP tasks down the line.</p>
-<h2>3.1 Universal Sentence Encoder</h2>
+<section id="universal-sentence-encoder">
+<h2>3.1 Universal Sentence Encoder<a class="headerlink" href="#universal-sentence-encoder" title="Permalink to this heading">#</a></h2>
 <p>The Universal Sentence Encoder (USE) was first published by Google around 2018. It maps a sentence, word, or short paragraph to a fixed length (typically 512) numeric vector. This approach would mean semantically similar sentences would be placed closer to each other in the embedding space.</p>
 <p>Embeddings are typically the result of using raw text, so no pre-processing would be involved. This sentence embedding can then be used for downstream applications,
 e.g., classification, clustering, and language prediction.</p>
@@ -702,8 +698,8 @@ e.g., classification, clustering, and language prediction.</p>
 <p>To install USE, run the following code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">module_url</span> <span class="o">=</span> <span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot;</span> 
-<span class="n">model</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">module_url</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#module_url = &quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot; </span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/universal-sentence-encoder_4&quot;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;module </span><span class="si">%s</span><span class="s2"> loaded&quot;</span> <span class="o">%</span> <span class="n">module_url</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">embed</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
@@ -717,99 +713,11 @@ e.g., classification, clustering, and language prediction.</p>
 </div>
 </div>
 <p>Note that the first time you run this, it may take some time (5+ minutes) to complete the process.</p>
-<h2>3.2 t-SNE</h2>
-<p>t-distributed Stochastic Neighbor Embedding (t-SNE) is best used to scale text features to the same scale. In short, it is a method of dimension reduction (like PCA). t-SNE associates probabilities on a Student’s t-distribution with each point; it then uses some randomization (hence Stochastic) to embed, paying particular attention to the neighbors of each point. While t-SNE will not be discussed further as to its specific mathematical methods, it can nonetheless be used for document embedding. More explanations on t-SNE can be found on the <span class="math notranslate nohighlight">\(\texttt{scikit\_learn}\)</span> website, <a class="reference external" href="https://scikit-learn.org/stable/modules/manifold.html#t-sne">https://scikit-learn.org/stable/modules/manifold.html#t-sne</a>.</p>
-<p>To demonstrate t-SNE, we will first start by running a classification algorithm called the Multilayer Perceptron on our UN SDG data</p>
-<p>When using t-SNE in Python, we can start with the following code. Note that t-SNE can take a long time to run; to help with this, the t-SNE documentation suggests using <span class="math notranslate nohighlight">\(\texttt{MinMixScaler}\)</span> so as to make everything the same scale.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">text</span>
-<span class="n">categories</span> <span class="o">=</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">sdg</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
-    <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="n">X_train_use_vector</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-<span class="n">X_test_use_vector</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-06-25 00:07:31.471784: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor &#39;inputs&#39; with dtype string
-	 [[{{node inputs}}]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
-<span class="n">X_train_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
-<span class="n">X_test_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_use_vector</span><span class="p">)</span>
-
-<span class="n">use_mlp_clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_use_vector_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">use_mlp_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_use_vector_scaled</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
-
-           1     0.3882    0.3780    0.3830      3249
-           2     0.4008    0.3763    0.3882      2899
-           3     0.5543    0.5545    0.5544      3118
-           4     0.5398    0.5539    0.5468      4432
-           5     0.5175    0.5159    0.5167      5119
-           6     0.4194    0.4277    0.4235      3283
-           7     0.4496    0.4652    0.4573      3710
-           8     0.1851    0.1860    0.1856      1747
-           9     0.3030    0.2583    0.2789      1827
-          10     0.2375    0.2569    0.2468      1857
-          11     0.3870    0.3606    0.3733      2718
-          12     0.2664    0.2869    0.2763      1328
-          13     0.3829    0.3981    0.3903      2517
-          14     0.4420    0.4012    0.4206      1386
-          15     0.3332    0.3847    0.3571      1861
-          16     0.7680    0.7593    0.7636      8783
-
-    accuracy                         0.4786     49834
-   macro avg     0.4109    0.4102    0.4102     49834
-weighted avg     0.4797    0.4786    0.4789     49834
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
-<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
-<span class="n">X_train_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
-<span class="n">X_test_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_use_vector</span><span class="p">)</span>
-
-<span class="n">tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">perplexity</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">tsne_proj</span> <span class="o">=</span> <span class="n">tsne</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_test_use_vector_scaled</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">X_train_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_use_vector</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">X_test_use_vector_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_use_vector</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;X_train_use_vector&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<h2>3.3 More Exercises</h2>
+</section>
+<section id="more-exercises">
+<h2>3.2 More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h2>
 <p><b>Exercise 3.1</b>: Take two documents, one labeled as SDG 1 and the other as SDG 8. Segment these into sentences, compute the embedding, and find the dot product between the embeddings.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -870,6 +778,21 @@ weighted avg     0.4797    0.4786    0.4789     49834
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-sentence-encoder">3.1 Universal Sentence Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">3.2 More Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

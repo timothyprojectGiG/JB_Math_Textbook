@@ -332,6 +332,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. About Text Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec3_doc_embedding.html">3. Document Embedding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec4_classification_algos.html">4. Classification of Texts</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="sec5_classification_eval.html">5. Evaluating Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec6_applications.html">6. Applications</a></li>
 </ul>
@@ -504,7 +505,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -520,6 +523,25 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">2.1 Transformation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorizations">2.1.1 Vectorizations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-grams">2.1.2 N-Grams</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-language-modeling">2.1.3 Probabilistic Language Modeling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">2.2 Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-term-frequency-inverse-document-frequency">2.2.1 TF-IDF (Term Frequency, Inverse Document Frequency)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-effectiveness">2.2.2 Feature Effectiveness</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">2.3 More Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -574,7 +596,8 @@ document.write(`
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="about-text-data">
 <h1>2. About Text Data<a class="headerlink" href="#about-text-data" title="Permalink to this heading">#</a></h1>
-<h2>2.1 Transformation</h2>
+<section id="transformation">
+<h2>2.1 Transformation<a class="headerlink" href="#transformation" title="Permalink to this heading">#</a></h2>
 <p>ML algorithms of any kind expect numerical features with fixed dimensions. This is especially the case for supervised learning algorithms such as classification algorithms, which is what we will be using to classify our texts into the UN SDG categories.</p>
 <p>In a documents, raw text data is semi-structured with uneven length and varied contents. As such, text data is semi-structured, with uneven length and varied contents. This poses a problem for ML methods as they typically operate on numerical vectors of equal length.</p>
 <p>Therefore, once we have our preprocessed text data, our next job is to transform it, and the main way we do this is to <i>vectorize</i>, or transform a body of text into numerical vectors. When we map documents into vectors, we can use several techniques, which we will discuss later:</p>
@@ -584,7 +607,8 @@ document.write(`
 <li>word embedding</li>
 </ul>
 <p>Vectorization, and transformation of textual data as a whole, depends on tokenization, and carefully chosen preprocessing steps could help reduce complexity and increase ML model accuracy.</p>
-<h3>2.1.1 Vectorizations</h3>
+<section id="vectorizations">
+<h3>2.1.1 Vectorizations<a class="headerlink" href="#vectorizations" title="Permalink to this heading">#</a></h3>
 <h4>Bag of Words</h4>
 <p>The <b>bag of words</b> approach treats a text or document almost literally as a bag of words; i.e., it ignores the order of the words and simply collects all the words together in one big set. All the words are then treated as features, with one feature for each word. We then set a fixed number of words to be considered, and our bag of words becomes the vocabulary we work with.</p>
 <p>Let’s analyze the vocabulary of our UN SDG dataset. We use <span class="math notranslate nohighlight">\(\texttt{CountVectorizer()}\)</span> to create our bag of words, then look at the length of our vocabulary:</p>
@@ -1299,7 +1323,9 @@ document.write(`
 <ol>
 <li>What are the most frequent words for this document?</li>
 <li>Refer to the UN SDGs. What is your best guess as to which goal this document describes?</b>
-</ol><h3>2.1.2 N-Grams</h3>
+</ol></section>
+<section id="n-grams">
+<h3>2.1.2 N-Grams<a class="headerlink" href="#n-grams" title="Permalink to this heading">#</a></h3>
 <p>An n-gram is a contiguous sequence of <span class="math notranslate nohighlight">\(n\)</span> items from a text. Items in an n-gram are tokens we choose to include through preprocessing, but these items can also include markers we add to the data to serve the NLP tasks at hand.</p>
 <p>For example, if we were to find what words are often used at the beginning or end of a sentence, we would add &lt;s&gt; and &lt;/s&gt; as markers for the beginnings and ends of sentences, to denote the sentence boundaries. We would then build bigrams <span class="math notranslate nohighlight">\((n=2)\)</span>; for the sentence “I built an AI machine”, we would get the items
 (&lt;s&gt; I), (I built), (built an), (an AI), (AI machine), and (machine &lt;/s&gt;). We then count the frequency of bigrams. specifically of the form (&lt;s&gt; *) and (* &lt;/s&gt;), where * represents any other token.</p>
@@ -1347,7 +1373,9 @@ document.write(`
 </div>
 <p><b>Exercise 2.4</b>: Notice that with stop word removal and bi-gram formation, we get fewer terms. Why might this be the case?</p>
 <p><b>Exercise 2.5</b>: Modify the above code to get the counts of the tri-grams. Are there more or fewer tri-grams than bi-grams? Why might this be the case?</p>
-<h3>2.1.3 Probabilistic Language Modeling</h3>
+</section>
+<section id="probabilistic-language-modeling">
+<h3>2.1.3 Probabilistic Language Modeling<a class="headerlink" href="#probabilistic-language-modeling" title="Permalink to this heading">#</a></h3>
 <p>So far, we have worked with clearly defined texts and sequences of words. But sometimes, the texts we get are incomplete, or we might want to reduce computational time by only giving portions of the text. As such, we might turn to probabilistic language modeling. Typically, a probabilistic language model analyzes a body of text data and computes the following based on that body of text data:</p>
 <ul class="simple">
 <li><p>the probability of a sentence or sequence of words occurring, <span class="math notranslate nohighlight">\(P(w_1, w_2, w_3, … , w_n)\)</span>,</p></li>
@@ -1377,8 +1405,12 @@ P(w_1)P(w_2|w_1)P(w_3|w_1,w_2)...P(w_n|w_1, …, w_{(n-1)})\)</span>.</p>
 <p>The real sentence from Exercise 1 is: ‘The Israel Oceanographic and Limnological Research station monitors the quantity and quality of water along the coastline of the Mediterranean Sea.’ So these language models are not perfect, but especially with recent developments in AI, they are improving.</p>
 <p>The main role of NLG is automatic summarization of a text. The NLG has the ability to perform extractive summarization (extracting meaning from a text), or abstractive summarization (constructing an abstract from a text). The NLG can also be used for topic modeling to identify the main topics of the text, or as an advanced machine translation tool.</p>
 <p>An even more advanced natural language generator is the Generative Pre-trained Transformer (GPT), mainly pioneered by the startup OpenAI. The GPT is a text generation deep learning model trained on massive datasets, including internet data, book data, Github data, and more. GPTs, including the famous ChatGPT, can take thousands of words as input and have been trained on billions of different parameters.</p>
-<h2>2.2 Features</h2>
-<h3>2.2.1 TF-IDF (Term Frequency, Inverse Document Frequency)</h3>
+</section>
+</section>
+<section id="features">
+<h2>2.2 Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
+<section id="tf-idf-term-frequency-inverse-document-frequency">
+<h3>2.2.1 TF-IDF (Term Frequency, Inverse Document Frequency)<a class="headerlink" href="#tf-idf-term-frequency-inverse-document-frequency" title="Permalink to this heading">#</a></h3>
 <p>In the document-term matrix previously discussed, we represented columns as tokens, rows as documents, and the entry values as the number of occurrences of that token in the document. In our computation of the matrix cell <span class="math notranslate nohighlight">\((d,t)\)</span> with document as row and term as column, we compute the following:</p>
 <ul class="simple">
 <li><p>TF: term frequency of term <span class="math notranslate nohighlight">\(t\)</span> in the document <span class="math notranslate nohighlight">\(d\)</span> =
@@ -1398,7 +1430,9 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <li><p><span class="math notranslate nohighlight">\(\texttt{stop\_words}\)</span>:  usually set to “english” for removing  English stop words.</p></li>
 </ul>
 <p>Note that when using logarithmic form for term frequency, the weighted TF is transformed into <span class="math notranslate nohighlight">\(1 + \log \text{TF}\)</span>; if <span class="math notranslate nohighlight">\(\text{TF} &gt; 0\)</span>, then <span class="math notranslate nohighlight">\(\text{TF} = 0\)</span>; otherwise, we use <span class="math notranslate nohighlight">\(\log\frac{N}{\text{df}}\)</span> for IDF to dampen the effect of <span class="math notranslate nohighlight">\(\frac{N}{\text{df}}\)</span>.</p>
-<h3>2.2.2 Feature Effectiveness</h3>
+</section>
+<section id="feature-effectiveness">
+<h3>2.2.2 Feature Effectiveness<a class="headerlink" href="#feature-effectiveness" title="Permalink to this heading">#</a></h3>
 <p>In examining how to evaluate the effectiveness of features in the context of NLP tasks, we will mainly use the task of document classification and classifying our texts into SDG categories as mentioned in the preface of this section.</p>
 <p>When looking at document classification, we can use a confusion matrix and get <span class="math notranslate nohighlight">\(tp, fn, fp, tn\)</span>; these can be used to calculate the precision, recall, and f1 measures as follows:</p>
 <ul class="simple">
@@ -1441,7 +1475,10 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <li><p><span class="math notranslate nohighlight">\(fn = 83\)</span> (calculated by summing horizontally to the right of 398).</p></li>
 </ul>
 <p><b>Exercise 2.3</b>: Use the above values and formulas to calculate precision, recall, and f1 for SDG 1.</p>
-<h2> 2.3 More Exercises</h2>
+</section>
+</section>
+<section id="more-exercises">
+<h2>2.3 More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h2>
 <p><b>Exercise 2.4</b>: Using the UN SDG dataset, begin working with some of the <span class="math notranslate nohighlight">\(\texttt{scikit-learn}\)</span> NLP capabilities, such as the following code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1473,6 +1510,7 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <p>Your function should also contain a parameter <span class="math notranslate nohighlight">\(\texttt{stop\_word}\)</span> with its default set to “None”, which does not remove stop words.</p>
 <p><b>Exercise 2.6</b>: Run your function from Exercise 2.5 on the documents labeled with SDG 8. Give the output.</p>
 <p><b>Exercise 2.7</b>: Run your function from Exercise 2.5 on the entire UN SDG corpus, once with stop removal and once without. Describe the similarities and differences in the outputs when this parameter is changed.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1533,6 +1571,31 @@ number of documents containing term <span class="math notranslate nohighlight">\
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">2.1 Transformation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorizations">2.1.1 Vectorizations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-grams">2.1.2 N-Grams</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-language-modeling">2.1.3 Probabilistic Language Modeling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">2.2 Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-term-frequency-inverse-document-frequency">2.2.1 TF-IDF (Term Frequency, Inverse Document Frequency)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-effectiveness">2.2.2 Feature Effectiveness</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">2.3 More Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
