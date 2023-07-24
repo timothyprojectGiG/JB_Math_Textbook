@@ -241,26 +241,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Intro.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/2Functions.html">2. Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Calculus/4%20Derivatives.html">4.1 Derivatives and Derivative Notations</a></li>
-
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/4%20Derivatives.html">4. Derivatives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/5int/5int.html">5. Integrals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Calculus/6%20Parametric%20Equations.html">6.1 Parametric Equations - Curves and Tangents</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../Calculus/7%20Sequences%20and%20Series.html">7.1 Sequences</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/6%20Parametric%20Equations.html">6. Parametric Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/7%20Sequences%20and%20Series.html">7. Sequences and Series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Solution%20to%20Calculus%20Exercises.html">Solution to Calculus Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
@@ -547,12 +531,24 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="linear-systems-and-the-2-commodity-model">
-<h1>1. Linear Systems and the 2 Commodity Model<a class="headerlink" href="#linear-systems-and-the-2-commodity-model" title="Permalink to this heading">#</a></h1>
+  <div class="admonition-preview admonition">
+<p class="admonition-title">Preview</p>
 <h4> Introduction</h4>
-Calculus as we know it today would not have been developed without the Cartesian coordinate system and analytric geometry. Isaac Newton (1642-1727) attributed his success to "standing on the shoulders of giants" such as Descartes (1596-1650). In this section we explore how a concept as simple as graphing straight lines in a Cartesian plane is helpful in analyzing a budgeting problem called the "Two Commodity Model" [Vali 2014]. The simple idea that changing the coefficients in a linear relation will affect its graph (a simple example of "sensitivity analysis")  becomes important in when considering changes in unit prices and lso in total budget amounts.
+Calculus as we know it today would not have been developed without the Cartesian coordinate system and analytric geometry. Isaac Newton (1642-1727) attributed his success to "standing on the shoulders of giants" such as Descartes (1596-1650). In this section we explore how a concept as simple as graphing straight lines in a Cartesian plane is helpful in analyzing a budgeting problem called the "Two Commodity Model" [Vali 2014]. The simple idea that changing the coefficients in a linear relation will affect its graph (a simple example of "sensitivity analysis")  becomes important in when considering changes in unit prices and also in total budget amounts.
 <p>Reference:
 Vali, Shapor, 2014. Principles of Mathematical Economics. Paris: Atlantis Press.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="linear-systems-and-the-2-commodity-model">
+<h1>1. Linear Systems and the 2 Commodity Model<a class="headerlink" href="#linear-systems-and-the-2-commodity-model" title="Permalink to this heading">#</a></h1>
 <h4> Two-commodity model</h4>
 Suppose a household consumer is budgeting for two types of goods, necessities and luxuries.  Let $X$ denote the units of necessities and $Y$ denote the units of luxuries. We let $c_X$ denote the cost per unit of necessity and $c_Y$ the cost per unit of luxury.  If the total monthly budget is $B$, then the budget equation is
 $$
@@ -571,10 +567,7 @@ $<span class="math notranslate nohighlight">\(    10X+100Y=11000 \Rightarrow   Y
 <p>Here we plot the original budget constraint line and income consumption path.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">cx</span><span class="o">=</span><span class="mi">10</span>  <span class="c1">#unit price for necessities</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cx</span><span class="o">=</span><span class="mi">10</span>  <span class="c1">#unit price for necessities</span>
 <span class="n">cy</span><span class="o">=</span><span class="mi">100</span>  <span class="c1">#unit price for luxuries</span>
 <span class="n">B</span><span class="o">=</span><span class="mi">11000</span> <span class="c1">#budget</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
@@ -602,28 +595,29 @@ $<span class="math notranslate nohighlight">\(    10X+100Y=11000 \Rightarrow   Y
 <p>A <i>sensitivity analysis</i> examines how a model is affected when one or more of its parameters are changed. For example, suppose due to inflation the cost per unit of necessity (<span class="math notranslate nohighlight">\(C_X=10\)</span>) and luxury <span class="math notranslate nohighlight">\(C_Y=100\)</span> both increase by 10%. Then the new budget equation is <span class="math notranslate nohighlight">\(11X+110Y=11000\)</span>    and the new equilibrium bundle is approximately (909,9.1).  This makes sense since higher unit prices mean less units of each type of item can be purchased.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1200.</span><span class="p">)</span>
-<span class="n">cx</span><span class="o">=</span><span class="mi">10</span>
-<span class="n">cy</span><span class="o">=</span><span class="mi">100</span>
-<span class="n">B</span><span class="o">=</span><span class="mi">11000</span>
-<span class="n">y_budget</span><span class="o">=</span> <span class="p">(</span><span class="n">B</span><span class="o">-</span><span class="n">cx</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">cy</span>
-<span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">100</span>
-<span class="n">y_consump</span><span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">x</span>
-<span class="n">cx1</span><span class="o">=</span><span class="mi">11</span>  <span class="c1">#10% increase in necessity unit price</span>
-<span class="n">cy1</span><span class="o">=</span><span class="mi">110</span> <span class="c1">#10% increase in luxury unit price</span>
-<span class="n">y_budget1a</span><span class="o">=</span> <span class="p">(</span><span class="n">B</span><span class="o">-</span><span class="n">cx1</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">cy1</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y_budget</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Original budget&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y_budget1a</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-.&quot;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;10</span><span class="si">% i</span><span class="s2">ncrease in unit prices&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y_consump</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Income consumption path&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1200.</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">60.</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x=Units of Necessities&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y=Units of Luxuries&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;budget.png&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = np.linspace(0,1200.)
+cx=10
+cy=100
+B=11000
+y_budget= (B-cx*x)/cy
+r=1/100
+y_consump= r*x
+cx1=11  #10% increase in necessity unit price
+cy1=110 #10% increase in luxury unit price
+y_budget1a= (B-cx1*x)/cy1
+plt.figure(figsize=(8, 4))
+plt.plot(x,y_budget,color=&#39;k&#39;,label = &quot;Original budget&quot;)
+plt.plot(x,y_budget1a,color=&#39;b&#39;,linestyle=&quot;-.&quot;,label = &quot;10% increase in unit prices&quot;)
+plt.plot(x,y_consump,color=&#39;r&#39;,linestyle=&quot;:&quot;,label=&quot;Income consumption path&quot;)
+plt.xlim((0.,1200.))
+plt.ylim((0,60.))
+plt.xlabel(&quot;x=Units of Necessities&quot;)
+plt.ylabel(&quot;y=Units of Luxuries&quot;)
+plt.legend()
+plt.grid()
+plt.savefig(&quot;budget.png&quot;)
+plt.show()
+```
 </pre></div>
 </div>
 </div>
@@ -631,8 +625,9 @@ $<span class="math notranslate nohighlight">\(    10X+100Y=11000 \Rightarrow   Y
 <img alt="../../_images/ce5381dbd5dbb6c7caaafb28a7976a3015973d1dcb908229943446fe367e0039.png" src="../../_images/ce5381dbd5dbb6c7caaafb28a7976a3015973d1dcb908229943446fe367e0039.png" />
 </div>
 </div>
-<h4> Lab </h4>
-<p>This lab will compare the effect of increasing the budget vs. decreasing unit prices and also decreasing the budget vs. increasing the unit prices.  Suppose that the monthly budget is $4,000 and the unit price for necessities is $30 and for luxuries it is $100.</p>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p>The following questions will compare the effect of increasing the budget vs. decreasing unit prices and also decreasing the budget vs. increasing the unit prices.  Suppose that the monthly budget is $4,000 and the unit price for necessities is $30 and for luxuries it is $100.</p>
 <ol class="arabic simple">
 <li><p>Determine the equilibrium bundle if the ratio of necessities to luxuries is 10 to 1.</p></li>
 <li><p>Which has the greater impact on the bundle:  A 10% decline in budget or a 10% increase in unit prices?</p></li>
@@ -641,6 +636,7 @@ $<span class="math notranslate nohighlight">\(    10X+100Y=11000 \Rightarrow   Y
 </ol>
 <p>Reference
 Vali, Shapor, 2014. Principles of Mathematical Economics. Paris: Atlantis Press.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1200.</span><span class="p">)</span>
@@ -682,9 +678,6 @@ Vali, Shapor, 2014. Principles of Mathematical Economics. Paris: Atlantis Press.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/0972d1c2636015aa2c8437d07c9ef64a7cdb1480005fb46080825e77ddb83c95.png" src="../../_images/0972d1c2636015aa2c8437d07c9ef64a7cdb1480005fb46080825e77ddb83c95.png" />
 </div>
 </div>
 </section>
