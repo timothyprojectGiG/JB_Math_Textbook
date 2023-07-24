@@ -551,9 +551,10 @@ document.write(`
 <p>In this chapter, we will explore the fundamentals of Laplace Transforms, beginning with its definition and properties. We’ll investigate how to apply Laplace Transforms to linear ordinary differential equations, including initial and boundary value problems. We will also study the Inverse Laplace Transform, a crucial technique for reclaiming our original function after performing operations in the Laplace domain. By leveraging Laplace Transforms, we can tackle systems that would be otherwise intimidating or intractable, such as those involving discontinuous or impulsive forces. This method is extensively used in various fields, including engineering, physics, and mathematics, to solve real-world problems ranging from electric circuit analysis to modeling population growth or decay.</p>
 <section id="introduction-to-laplace-transforms">
 <h2>6.1 Introduction to Laplace Transforms<a class="headerlink" href="#introduction-to-laplace-transforms" title="Permalink to this heading">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(f(t)\)</span> be a function and consider the integeral
-$<span class="math notranslate nohighlight">\(\mathcal{L}(f(t)) = \int_{0}^{\infty} e^{-st}f(t) \mathrm{d}t \equiv F(s).\)</span><span class="math notranslate nohighlight">\(
-If this integral is finite, then \)</span>\mathcal{L}(f(t))<span class="math notranslate nohighlight">\( (also denoted \)</span>F(s)<span class="math notranslate nohighlight">\() is called the **Laplace transform**of \)</span>f(t)$. Note that not all function have Laplace transforms.</p>
+<p>Let <span class="math notranslate nohighlight">\(f(t)\)</span> be a function and consider the integeral</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(f(t)) = \int_{0}^{\infty} e^{-st}f(t) \mathrm{d}t \equiv F(s).\]</div>
+<p>If this integral is finite, then <span class="math notranslate nohighlight">\(\mathcal{L}(f(t))\)</span> (also denoted <span class="math notranslate nohighlight">\(F(s)\)</span>) is called the <strong>Laplace transform</strong>of <span class="math notranslate nohighlight">\(f(t)\)</span>. Note that not all function have Laplace transforms.</p>
 <p><strong>Example</strong> Find the Laplace transform of <span class="math notranslate nohighlight">\(f(t)=1\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(1) = \int_{0}^{\infty} e^{-st} \mathrm{d}t\]</div>
@@ -658,26 +659,44 @@ $<span class="math notranslate nohighlight">\(\mathcal{L}(af(t)+bg(t)) = a \math
 </section>
 <section id="the-inverse-laplace-transform">
 <h2>6.2 The Inverse Laplace Transform<a class="headerlink" href="#the-inverse-laplace-transform" title="Permalink to this heading">#</a></h2>
-<p><strong>Example</strong> Consider the linear initial value problem
-$<span class="math notranslate nohighlight">\(x'+4x = e^{-5t}, \quad x(0)=1.\)</span><span class="math notranslate nohighlight">\(
-Find the Laplace transform of the solution \)</span>x(t)$.</p>
+<p><strong>Example</strong> Consider the linear initial value problem</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(x' + 4x) = \mathcal{L}(e^{-5t})\]</div>
+\[
+x'+4x = e^{-5t}, \quad x(0)=1.
+\]</div>
+<p>Find the Laplace transform of the solution <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(x') + 4\mathcal{L}(x) = \mathcal{L}(e^{-5t})\]</div>
+\[
+\mathcal{L}(x' + 4x) = \mathcal{L}(e^{-5t})
+\]</div>
 <div class="math notranslate nohighlight">
-\[s\mathcal{L}(x)-x(0)+4\mathcal{L}(x) = \dfrac{1}{s+5}\]</div>
+\[
+\mathcal{L}(x') + 4\mathcal{L}(x) = \mathcal{L}(e^{-5t})
+\]</div>
 <div class="math notranslate nohighlight">
-\[(s+4)\mathcal{L}(x)-1 = \dfrac{1}{s+5}\]</div>
+\[
+s\mathcal{L}(x)-x(0)+4\mathcal{L}(x) = \dfrac{1}{s+5}
+\]</div>
 <div class="math notranslate nohighlight">
-\[(s+4)\mathcal{L}(x) = \dfrac{1}{s+5}+ \dfrac{s+5}{s+5}\]</div>
+\[
+(s+4)\mathcal{L}(x)-1 = \dfrac{1}{s+5}
+\]</div>
 <div class="math notranslate nohighlight">
-\[(s+4)\mathcal{L}(x) = \dfrac{s+6}{s+5}\]</div>
+\[
+(s+4)\mathcal{L}(x) = \dfrac{1}{s+5}+ \dfrac{s+5}{s+5}
+\]</div>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}\]</div>
+\[
+(s+4)\mathcal{L}(x) = \dfrac{s+6}{s+5}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}
+\]</div>
 <p>Now we want to know, what function <span class="math notranslate nohighlight">\(x(t)\)</span> has <span class="math notranslate nohighlight">\(\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}\)</span>?</p>
-<p>The function <span class="math notranslate nohighlight">\(f(t)\)</span> which has Laplace transform <span class="math notranslate nohighlight">\(F(s)\)</span> is called the <strong>inverse Laplace transform of</strong> <span class="math notranslate nohighlight">\(F(s)\)</span>. So long as all of the functions are piecewise continuous of exponential order, this transformation is unique, except possibly at the points of discontinuity. Moreover, the inverse Laplace transform is a linear operator. That is,
-$<span class="math notranslate nohighlight">\( \mathcal{L}^{-1}(aF(s)+bG(s)) = a \mathcal{L}^{-1}(F(s))+b \mathcal{L}^{-1}(G(s)).\)</span>$</p>
+<p>The function <span class="math notranslate nohighlight">\(f(t)\)</span> which has Laplace transform <span class="math notranslate nohighlight">\(F(s)\)</span> is called the <strong>inverse Laplace transform of</strong> <span class="math notranslate nohighlight">\(F(s)\)</span>. So long as all of the functions are piecewise continuous of exponential order, this transformation is unique, except possibly at the points of discontinuity. Moreover, the inverse Laplace transform is a linear operator. That is,</p>
+<div class="math notranslate nohighlight">
+\[ \mathcal{L}^{-1}(aF(s)+bG(s)) = a \mathcal{L}^{-1}(F(s))+b \mathcal{L}^{-1}(G(s)).\]</div>
 <p><strong>Example (continued)</strong> Find the inverse Laplace transform for <span class="math notranslate nohighlight">\(\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}\)</span>.</p>
 <p>First, we can use partial fractions to split this into more reasonable pieces.
 $<span class="math notranslate nohighlight">\(\dfrac{s+6}{(s+5)(s+4)} = \dfrac{A}{s+5} + \dfrac{B}{s+4}\)</span><span class="math notranslate nohighlight">\(
@@ -690,9 +709,10 @@ If <span class="math notranslate nohighlight">\(s=-5\)</span>, then <span class=
 <p><em>Step 2</em>: Enter initial conditions (if needed)</p>
 <p><em>Step 3</em>: Solve the equation algebraically for the transform <span class="math notranslate nohighlight">\(\mathcal{L}(X)\)</span>, which we will now denote <span class="math notranslate nohighlight">\(X(s)\)</span>, of the unknown function <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
 <p><em>Step 4</em>: Invert <span class="math notranslate nohighlight">\(X(s)\)</span> to find <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
-<p><strong>Example</strong> Consider the linear initial value problem
-$<span class="math notranslate nohighlight">\(x''+4x = 8, \quad x(0)=0, \quad x'(0)=0.\)</span><span class="math notranslate nohighlight">\(
-Find the Laplace transform of the solution \)</span>x(t)$.</p>
+<p><strong>Example</strong> Consider the linear initial value problem</p>
+<div class="math notranslate nohighlight">
+\[x''+4x = 8, \quad x(0)=0, \quad x'(0)=0.\]</div>
+<p>Find the Laplace transform of the solution <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(x'' + 4x) = \mathcal{L}(8)\]</div>
 <div class="math notranslate nohighlight">
@@ -890,9 +910,11 @@ Find \)</span>\mathcal{L}(f(t))$.</p>
 $<span class="math notranslate nohighlight">\(x'' + 4x'+3x = 10\cos(t), \quad x(0)=2, \quad x'(0)=3.\)</span>$</p></li>
 <li><p>Solve the initial value problem
 $<span class="math notranslate nohighlight">\(x'' + 2x'+3x = 9t, \quad x(0)=1, \quad x'(0)=2.\)</span>$</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(f(t) = \begin{cases} t &amp; \text{ if } 0 \leq t \leq 2 \\ 0 &amp; \text{ if } t&gt;2 \end{cases}\)</span>. Solve the initial value problem
-$<span class="math notranslate nohighlight">\(x'' + x = f(t), \quad x(0)=0, \quad x'(0)=0.\)</span><span class="math notranslate nohighlight">\( *Hint: First rewrite \)</span>f(t)$ using the Heaviside function so that you can take the Laplace transform of both sides.*</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(f(t) = \begin{cases} t &amp; \text{ if } 0 \leq t \leq 2 \\ 0 &amp; \text{ if } t&gt;2 \end{cases}\)</span>. Solve the initial value problem</p></li>
 </ol>
+<div class="math notranslate nohighlight">
+\[x'' + x = f(t), \quad x(0)=0, \quad x'(0)=0.\]</div>
+<p><em>Hint: First rewrite <span class="math notranslate nohighlight">\(f(t)\)</span> using the Heaviside function so that you can take the Laplace transform of both sides.</em></p>
 </section>
 </section>
 
