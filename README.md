@@ -3,7 +3,7 @@
 This repository contains the files for An Introduction to Python Jupyter Notebooks for College Math Teachers.
 The book is currently undergoing editing, but we expect a final copy to be available sometime in Spring 2024.
 
-Book Editors: Paul Isihara, Thomas VanDrunen
+Book Editors: Paul Isihara, Peter Jantsch, homas VanDrunen
 
 Technical Editor: Claire Wagner
 
