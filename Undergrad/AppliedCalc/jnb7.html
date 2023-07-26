@@ -217,7 +217,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/chapter%20probability%20gross%20and%20liang_2023_06_08.html">Introduction</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/drivethru.html">Random Number Simulation of a Drive Thru</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Laura Gross, Yiheng Liang</span></p>
 <ul class="nav bd-sidenav">
@@ -506,7 +505,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -522,6 +523,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions">Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-of-random-numbers">Use of Random Numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-length-of-time-before-next-arrival">A=Length of time before next arrival</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-length-of-time-to-place-an-order">O=length of time to place an order</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -533,15 +549,22 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-distributions-and-drive-thrus">
 <h1>7. Probability Distributions and Drive Thrus<a class="headerlink" href="#probability-distributions-and-drive-thrus" title="Permalink to this heading">#</a></h1>
-<p>PROBLEM  Suppose you are the owner of a fast food restaurant. Currently there is one drive up lane, but you are considering adding a second drive-up lane.  What factors need to be considered in making a decision whether to add a second drive-up lane?</p>
-<a class="reference internal image-reference" href="../../_images/drivethru1.gif"><img alt="../../_images/drivethru1.gif" class="align-center" src="../../_images/drivethru1.gif" style="width: 750px;" /></a>
-<h4> Introduction </h4>
-A statistical simulation model uses data of customer arrival and ordering times to re-create a scenario and explore options such as adding a second drive thru lane. (For example, see https://blog.promodel.com/2013/07/10/fast-food-drive-thru-2-lanes-faster-than-1/)<p>Calculus is used in  statistically-based simulations since probabilities are represented as areas under curves called probability distributions.</p>
-<p>This lab will focus on the use of uniform (constant) and exponential distributions to model arrival times of customers.</p>
-<h4> Example</h4>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<div class="admonition-introduction admonition">
+<p class="admonition-title">Introduction</p>
+<p>In the section, we show how random numbers are used to simulate a fast food restaurant with a drive thru order window  as illustrated in the animation below. (For an explanation how to create this animation, see the section on object oriented programming in the chapter Overview of Python Programming.)</p>
+</div>
+<a class="reference internal image-reference" href="../../_images/drivethru.gif"><img alt="../../_images/drivethru.gif" class="align-center" src="../../_images/drivethru.gif" style="width: 750px;" /></a>
+<p>A statistical simulation model uses data of customer arrival and ordering times to re-create a scenario and explore options such as adding a second drive thru lane. (For example, see <a class="reference external" href="https://blog.promodel.com/2013/07/10/fast-food-drive-thru-2-lanes-faster-than-1/">https://blog.promodel.com/2013/07/10/fast-food-drive-thru-2-lanes-faster-than-1/</a>)</p>
+<p>Calculus is used in  statistically-based simulations since probabilities are represented as areas under curves called probability distributions.</p>
+<p>Here we will focus on the use of uniform (constant) and exponential distributions to model arrival times of customers.</p>
+</section>
+<section id="distributions">
+<h2>Distributions<a class="headerlink" href="#distributions" title="Permalink to this heading">#</a></h2>
 <p>A computer simulation of 1 versus 2 drive up lanes uses probabilities computed using definite integrals. The probability that some timed event <span class="math notranslate nohighlight">\(X\)</span> occurs between <span class="math notranslate nohighlight">\(t=a\)</span> and <span class="math notranslate nohighlight">\(t=b\)</span> is given by</p>
 <p><span class="math notranslate nohighlight">\(prob(a\le X \le b) =\int_a^b f(t)\, dt\)</span></p>
-<p>Example 1 Suppose the time to place an  order is given by U(20,120)=<span class="math notranslate nohighlight">\(\frac{1}{100}\)</span> meaning there is equal likelihood that the time will be between 20 and 120 seconds. Find the probability that the length of the next order is between 25 and 35 seconds.</p>
+<p>Example 1 Suppose the time to place an  order is given by U(20,80)=<span class="math notranslate nohighlight">\(\frac{1}{100}\)</span> meaning there is equal likelihood that the time will be between 20 and 100 seconds. Find the probability that the length of the next order is between 25 and 35 seconds.</p>
 <p>Solution: probability=<span class="math notranslate nohighlight">\(\int_{25}^{35} f(t) dt = \int_{25}^{35} \frac{1}{100} dt = \frac{t}{100}\mid_{25}^{35}=\frac{35}{100}-\frac{25}{100}=\frac{10}{100}=\frac{1}{10}. \)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -567,7 +590,7 @@ A statistical simulation model uses data of customer arrival and ordering times 
 </div>
 </div>
 </div>
-<p>Example 2a) Suppose the time to the next car arriving at the drive up is given by E(1) (i.e. k=1). What is the probability that the next arrival is within 3 minutes.</p>
+<p>Example 2a) An exponential distribution has the form <span class="math notranslate nohighlight">\(f(t)=ke^{kt}\)</span> (<span class="math notranslate nohighlight">\(0\le t \le \infty\)</span>) where the parmeter <span class="math notranslate nohighlight">\(k\)</span> is such that the mean is <span class="math notranslate nohighlight">\(1/k\)</span>. Suppose the time to the next car arriving at the drive up is given by E(1) (i.e. k=1 so the mean is 1 minute). What is the probability that the next arrival is within 3 minutes.</p>
 <p>Solution.  probability = <span class="math notranslate nohighlight">\(\int_0^3 e^{-t}\,dt= - e^{-t}\mid_0^3= -e^{-3}+e^0=1-e^{-3}\approx .95.\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -603,22 +626,247 @@ A statistical simulation model uses data of customer arrival and ordering times 
 <p>Example 3b) Use your function in part a) to find the probability that the next car will arrive within 2 minutes.</p>
 <p>Solution<br />
 <span class="math notranslate nohighlight">\(F(2)=1-e^{-.29(2)}=1-e^{-.58}\approx .44\)</span></p>
-<h4> LAB ON THE EXPONENTIAL DISTRIBUTION</H4>
-<p>An important probability function called the exponential distribution has the form</p>
+</section>
+<section id="use-of-random-numbers">
+<h2>Use of Random Numbers<a class="headerlink" href="#use-of-random-numbers" title="Permalink to this heading">#</a></h2>
+<p>We will explain how a value <span class="math notranslate nohighlight">\(r\)</span> generated by a PRNG (pseudo random numbe generator) can be converted into values of random variables such as</p>
+<ul>
+    <li> A=length of time before the next car arrives at the parking lot</li>
+    <li> O=length of time to place an order</li>
+    <li> P=length of time to pay for the food</li>
+    <li> F=length of time to pick up food</li>
+    </ul>
+<section id="a-length-of-time-before-next-arrival">
+<h3>A=Length of time before next arrival<a class="headerlink" href="#a-length-of-time-before-next-arrival" title="Permalink to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable giving the length of time (in minutes) until the next car arrives at the parking lot.
+We assume <span class="math notranslate nohighlight">\(X\)</span> is exponential distribution with mean <span class="math notranslate nohighlight">\(1/k=1\)</span>. In this case, the probability density function (pdf) is</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=ke^{-kx}=e^{-x}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">f</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#standard (unit) normal distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Probability Density Function f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1f78d5de45887fef8848fdd85d09f284251ae957accaa7f2a435ab0d0ca5bf51.png" src="../../_images/1f78d5de45887fef8848fdd85d09f284251ae957accaa7f2a435ab0d0ca5bf51.png" />
+</div>
+</div>
+<p>The corresponding cumulative distribution function (cdf) is</p>
+<div class="math notranslate nohighlight">
+\[
+F(t) = prob(0\le X \le t) = \int_0^t k e^{-kx}\,dx = - e^{-kx}\mid_0^t= -e^{-kt}+1=-e^{-t}+1.
+\]</div>
+<p>Here is a graph of this cdf:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">F</span><span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#standard (unit) normal distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative Distribution F(t)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;A=time to next arrival (in minutes)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bd8d782afee49ac72f2b2ba46f243566438e8efbe63d10951312d0fa5e48e344.png" src="../../_images/bd8d782afee49ac72f2b2ba46f243566438e8efbe63d10951312d0fa5e48e344.png" />
+</div>
+</div>
+<p>Note that the <span class="math notranslate nohighlight">\(F(t)=1-e^{-t}\)</span> is an increasing function with a value of 0 at <span class="math notranslate nohighlight">\(t=0\)</span> and a range <span class="math notranslate nohighlight">\([0,1)\)</span>.
+As such, each random number <span class="math notranslate nohighlight">\(r\)</span> <span class="math notranslate nohighlight">\((0\le r &lt;1)\)</span>  corresponds to a unique value of <span class="math notranslate nohighlight">\(A\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+r=1-e^{-kA}\,\, \Rightarrow
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+e^{-kA}=1-r\,\, \Rightarrow 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+-kA = \ln (1-r) \,\,\Rightarrow 
+ \]</div>
+<div class="math notranslate nohighlight">
+\[
+A=-\frac{1}{k}\ln(1-r)=-\ln(1-r).
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">F</span><span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#standard (unit) normal distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative Distribution F(t)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-.</span><span class="mi">15</span><span class="p">,</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-.</span><span class="mi">7</span><span class="p">)</span><span class="o">-.</span><span class="mi">07</span><span class="p">,</span><span class="o">-.</span><span class="mi">05</span><span class="p">,</span><span class="s2">&quot;A=-ln(1-r)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">.</span><span class="mi">3</span><span class="p">),</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">.</span><span class="mi">3</span><span class="p">)],[</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;A=time to next arrival (in minutes)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04cd5c6e6178eb17cb4822d0c03f34496a6710d60b413796da7dffd90fdbd7f8.png" src="../../_images/04cd5c6e6178eb17cb4822d0c03f34496a6710d60b413796da7dffd90fdbd7f8.png" />
+</div>
+</div>
+</section>
+<section id="o-length-of-time-to-place-an-order">
+<h3>O=length of time to place an order<a class="headerlink" href="#o-length-of-time-to-place-an-order" title="Permalink to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable giving the length of time (in seconds) to place an order.
+We assume <span class="math notranslate nohighlight">\(X\)</span> is uniformly distributed on the interval [15,45] (denoted U(30,15) where 30 is the length of the interval and 15 is the minimum value for <span class="math notranslate nohighlight">\(X\)</span>.) In this case, the probability density function (pdf) is</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=\frac{1}{30}\,\,(15\le x \le 45)
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">f</span><span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">45</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>   <span class="c1">#standard (unit) normal distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Probability Density Function f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="o">.</span><span class="mi">05</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/70b0a0eb9345e60330a9b271031ba926d77a7eab63ceb6fe7927229b2a9bad4a.png" src="../../_images/70b0a0eb9345e60330a9b271031ba926d77a7eab63ceb6fe7927229b2a9bad4a.png" />
+</div>
+</div>
+<p>The the cumulative distribution function (cdf) is</p>
+<div class="math notranslate nohighlight">
+\[
+F(t) = prob(15\le X \le t) = \int_0^t \frac{1}{30}\,dx = - \frac{1}{30}x\mid_{15}^t= \frac{t}{30}-\frac{15}{30}=\frac{t-15}{30}
+\]</div>
+<p>Here is a graph of this cdf:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">F</span><span class="o">=</span> <span class="p">((</span><span class="n">t</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">#U(30,15)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative Distribution F(t)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">15</span><span class="p">,</span><span class="mi">45</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;O=time to place order (in seconds)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/948d13875bd2e194540a435bf2b1aa52d5408326da2678b8fbb14cd702cdc07b.png" src="../../_images/948d13875bd2e194540a435bf2b1aa52d5408326da2678b8fbb14cd702cdc07b.png" />
+</div>
+</div>
+<p>As before, the <span class="math notranslate nohighlight">\(F(t)=\frac{t-15}{30}\)</span>  <span class="math notranslate nohighlight">\(\,(15 \le t \le 45\)</span>) is an increasing function with a value of 0 at <span class="math notranslate nohighlight">\(t=15\)</span> and a range <span class="math notranslate nohighlight">\([0,1)\)</span>.</p>
+<p>As such, each random number <span class="math notranslate nohighlight">\(r\)</span> <span class="math notranslate nohighlight">\((0\le r &lt;1)\)</span>  corresponds to a unique value of <span class="math notranslate nohighlight">\(O\)</span>  where <span class="math notranslate nohighlight">\(\,15 \le O\le 45\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+r=\frac{O-15}{30}\,\, \Rightarrow
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+O-15=30r\,\, \Rightarrow 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+O=15+30r.
+ \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">F</span><span class="o">=</span> <span class="p">((</span><span class="n">t</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># U(30,15)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative Distribution F(t)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">15</span><span class="p">,</span><span class="mi">45</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">15</span><span class="o">-.</span><span class="mi">5</span><span class="p">,</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">15</span><span class="o">+</span><span class="mi">30</span><span class="o">*.</span><span class="mi">7</span><span class="p">,</span><span class="o">-.</span><span class="mi">05</span><span class="p">,</span><span class="s2">&quot;O=15+30r&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="o">+</span><span class="mi">30</span><span class="o">*.</span><span class="mi">7</span><span class="p">,</span><span class="mi">15</span><span class="o">+</span><span class="mi">30</span><span class="o">*.</span><span class="mi">7</span><span class="p">],[</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;O=time to place order (in seconds)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/30e5f10a74c61a71cf8245e5763a4d18e0dd2b0562e9912c78051c60999cf901.png" src="../../_images/30e5f10a74c61a71cf8245e5763a4d18e0dd2b0562e9912c78051c60999cf901.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>An important probability function called the exponential distribution has the form</p></li>
+</ol>
 <div class="math notranslate nohighlight">
 \[f(t) = k e^{-kt}  \hspace{.2in} (t \ge 0 \hspace{.1in} and \hspace{.1in} k&gt;0).\]</div>
 <p>The exponential distribution is used to describe the amount of time until some event occurs such as the time to the next arrival of a car at a drive through window.  More specifically, the probability that the next car arrives somewhere between <span class="math notranslate nohighlight">\(t=a\)</span> and <span class="math notranslate nohighlight">\(t=b\)</span> minutes is given by the definite integral</p>
 <div class="math notranslate nohighlight">
 \[
 Prob(a\le t \le b) = \int_a^b f(t) dt  =  \int_a^b k e^{-kt}  \hspace{.05in} dt.\]</div>
-<ol class="arabic simple">
-<li><p>Suppose <span class="math notranslate nohighlight">\(k=1\)</span>.  Find the probability that the next car will arrive at the drive through within 2 minutes.</p></li>
-<li><p>Using <span class="math notranslate nohighlight">\(k=1\)</span>, show that the probability that the next car will arrive between 0 and <span class="math notranslate nohighlight">\(\infty\)</span> minutes is equal to 1 (i.e. there is a 100% chance another car will arrive some time)</p></li>
-<li><p>Find the value of <span class="math notranslate nohighlight">\(k\)</span> such that there is a 50% chance (i.e. probability = .5) that the next car will arrive in one minute.</p></li>
-<li><p>Using your answer to problem 3, find a function <span class="math notranslate nohighlight">\(F(x)\)</span> which gives the probability that the next car will arrive within <span class="math notranslate nohighlight">\(x\)</span> minutes.
-(In general, given a probability distribution function <span class="math notranslate nohighlight">\(f(t)\)</span> defined on an interval <span class="math notranslate nohighlight">\(a\le x \le b\)</span>, the cumulative distribution function <span class="math notranslate nohighlight">\(F(x)\)</span> is obtained by the definite integral <span class="math notranslate nohighlight">\(\int_a^x f(t) \hspace{.1in} dt\)</span>).</p></li>
-<li><p>se your answer to d) to find the probability that the next car will arrive within 3 minutes.</p></li>
+<p>a) Suppose <span class="math notranslate nohighlight">\(k=1\)</span>.  Find the probability that the next car will arrive at the drive through within 2 minutes.
+b) Using <span class="math notranslate nohighlight">\(k=1\)</span>, show that the probability that the next car will arrive between 0 and <span class="math notranslate nohighlight">\(\infty\)</span> minutes is equal to 1 (i.e. there is a 100% chance another car will arrive some time)
+c) Find the value of <span class="math notranslate nohighlight">\(k\)</span> such that there is a 50% chance (i.e. probability = .5) that the next car will arrive in one minute.
+d) Using your answer to part c), find a function <span class="math notranslate nohighlight">\(F(x)\)</span> which gives the probability that the next car will arrive within <span class="math notranslate nohighlight">\(x\)</span> minutes. (In general, given a probability distribution function <span class="math notranslate nohighlight">\(f(t)\)</span> defined on an interval <span class="math notranslate nohighlight">\(a\le x \le b\)</span>, the cumulative distribution function <span class="math notranslate nohighlight">\(F(x)\)</span> is obtained by the definite integral <span class="math notranslate nohighlight">\(\int_a^x f(t) \hspace{.1in} dt\)</span>).
+e) Use your answer to d) to find the probability that the next car will arrive within 3 minutes.</p>
+<ol class="arabic simple" start="2">
+<li><p>Let P=length of time to pay for an order of food.</p></li>
 </ol>
+<p>a) Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable giving the length of time (in seconds) to pay for an order using cash. We assume <span class="math notranslate nohighlight">\(X\)</span> is uniformly distributed on the interval [5,35] (denoted U(30,5) where 30 is the length of the interval and 5 is the minimum value for <span class="math notranslate nohighlight">\(X\)</span> in seconds.) Explain how to use a pseudo random number to give a valuefor <span class="math notranslate nohighlight">\(P\)</span>.</p>
+<p>b)  Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable giving the length of time (in seconds) to pay for an order using credit card. We assume <span class="math notranslate nohighlight">\(X\)</span> is uniformly distributed on the interval [5,20] (denoted U(15,5) where 15 is the length of the interval and 5 is the minimum value for <span class="math notranslate nohighlight">\(X\)</span> in seconds.) Explain how to use a pseudo random number to give a value for <span class="math notranslate nohighlight">\(P\)</span>.</p>
+<ol class="arabic simple" start="3">
+<li><p>Let <span class="math notranslate nohighlight">\(F\)</span> be the length of time to pick up food. Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable giving the length of time (in seconds) to pick up an order. We assume <span class="math notranslate nohighlight">\(X\)</span> is uniformly distributed on the interval [30,90] (denoted U(60,30) where 60 is the length of the interval and 30 is the minimum value for <span class="math notranslate nohighlight">\(X\)</span> in seconds.) Show how to use a pseudo random number to generate a value for <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p>Use random numbers to simulate arrivals at a one lane drive-thru. For simplicity, assume that:</p></li>
+</ol>
+<p>the time <span class="math notranslate nohighlight">\(A\)</span> between arrivals is exponentially distributed with mean <span class="math notranslate nohighlight">\(k\)</span>=1 (in minutes);</p>
+<p>the order time <span class="math notranslate nohighlight">\(O\)</span> is uniformly distributed on the interval <span class="math notranslate nohighlight">\([15,45]\)</span> (in seconds);</p>
+<p>the pay time <span class="math notranslate nohighlight">\(P\)</span> is unformly distributed on the interval <span class="math notranslate nohighlight">\([5,25]\)</span> (in seconds); and</p>
+<p>the food pick-up time <span class="math notranslate nohighlight">\(F\)</span> is uniformly distributed on the interval <span class="math notranslate nohighlight">\([30,60]\)</span> in seconds.</p>
+<p>Find the mean total time to enter and be processed through the order-pay-pickup system.</p>
+<p>Be sure to convert the time between arrivals to seconds and give the final mean total time in minutes.</p>
+<p>Explore how the mean total time depends on system paramters.  For example you might vary the paramter <span class="math notranslate nohighlight">\(k\)</span> in the arrival time from k=.1 (6 seconds) to 2 (2 mintes) in increments of .1</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -679,6 +927,27 @@ Prob(a\le t \le b) = \int_a^b f(t) dt  =  \int_a^b k e^{-kt}  \hspace{.05in} dt.
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions">Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-of-random-numbers">Use of Random Numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-length-of-time-before-next-arrival">A=Length of time before next arrival</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-length-of-time-to-place-an-order">O=length of time to place an order</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
