@@ -64,10 +64,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Linear/1.1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Linear/1';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.2 Matrix Equations" href="1.2.html" />
+    <link rel="next" title="2.2 Transpose, Inverse and Trace of Matrices" href="2.2.html" />
     <link rel="prev" title="Introduction" href="0.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -266,10 +266,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.html">Introduction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Linear Systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1.2.html">1.2 Matrix Equations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1.3.html">1.3 Solution Set of Linear Systems.</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1.4.html">Answers to Exercises</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2.1.html">2.1 Matrix Algebra</a></li>
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="2.2.html">2.2 Transpose, Inverse and Trace of Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2.3.html">2.3 Determinant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2.4.html">Answers to Exercises</a></li>
@@ -406,7 +410,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FUndergrad/Linear/1.1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FUndergrad/Linear/1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -436,7 +440,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/Undergrad/Linear/1.1.ipynb" target="_blank"
+      <li><a href="../../_sources/Undergrad/Linear/1.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -528,13 +532,52 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Linear Systems</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systems-of-linear-equations">1.1 Systems of Linear Equations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear Systems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-a-linear-system">Solving a Linear System</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-equations">1.2 Matrix Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-equation">Vector Equation</a></li>
 </ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#swap-two-rows">Swap two rows</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-all-entries-in-a-row-by-a-nonzero-number">Multiple all entries in a row by a nonzero number</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#replacing-a-row1-by-the-sum-of-itself-and-a-multiple-of-row2">Replacing a row1 by the sum of itself and a multiple of row2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-equation-a-vec-x-vec-b">Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercises:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-set-of-linear-systems">1.3 Solution Set of Linear Systems.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homogenous-linear-systems">Homogenous Linear Systems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Swap two rows</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Multiple all entries in a row by a nonzero number</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Replacing a row1 by the sum of itself and a multiple of row2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-case-the-solution-set-of-non-homogenoues-linear-system">General Case: the solution set of non-homogenoues linear system:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-augemented-matrix-a-b">set up the augemented matrix [A|b]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#row-reduce-the-augmented-matrix-to-reduced-echelon-form">Row reduce the augmented matrix to reduced echelon form:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#answers-to-exercises">Answers to Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.1 Linear Systems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elementry-row-operations">Elementry row operations:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Swap two rows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Multiple all entries in a row by a nonzero number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1.2 Solution set of linear systems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.3 Solution set of linear Systems.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -558,8 +601,8 @@ document.write(`
 a_1 x_1 + a_2 x_2 + \dots + a_n x_n = b
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> are variables, and <span class="math notranslate nohighlight">\(b\)</span> and the coefficients <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n\)</span> are real numbers. A <em>system of linear equations</em> is a collection of linear equations in the same set of variables. For example, a system of <span class="math notranslate nohighlight">\(m\)</span> equations in <span class="math notranslate nohighlight">\(n\)</span> variables <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> can be represented as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-259d512b-4310-4acc-85d4-5fdbca0172b0">
-<span class="eqno">(38)<a class="headerlink" href="#equation-259d512b-4310-4acc-85d4-5fdbca0172b0" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-40e8e80b-7f3a-49b5-b55d-a01b5dd04cc0">
+<span class="eqno">(38)<a class="headerlink" href="#equation-40e8e80b-7f3a-49b5-b55d-a01b5dd04cc0" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n &amp;= b_1 \\
 a_{21} x_1 + a_{22} x_2 + \dots + a_{2n} x_n &amp;= b_2 \\
 &amp;\vdots \\
@@ -684,8 +727,8 @@ x + 2y + 3z &amp;= 9 \\
 \end{split}\]</div>
 <p>is the following matrix:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f641947c-e9ea-4b5b-b6da-bffcb0569b1c">
-<span class="eqno">(39)<a class="headerlink" href="#equation-f641947c-e9ea-4b5b-b6da-bffcb0569b1c" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 9 \\ 2 &amp; -1 &amp; 1 &amp; 8 \\ 3 &amp; 0 &amp; -1 &amp; 3 \end{bmatrix}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-76c23c73-6e13-4958-adcb-d1aaf998c5fa">
+<span class="eqno">(39)<a class="headerlink" href="#equation-76c23c73-6e13-4958-adcb-d1aaf998c5fa" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 9 \\ 2 &amp; -1 &amp; 1 &amp; 8 \\ 3 &amp; 0 &amp; -1 &amp; 3 \end{bmatrix}\]</div>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}In the augmented matrix, each row represents an equation in the system. We can define the same operations for matrices, by simply replacing &quot;equation&quot; with &quot;row&quot; in their definitions. Moreover, we say that two matrices A and B are __row equivalent__ if one can be transformed into the other using the elementary row operations mentioned above.\\The goal is to convert the augmented matrix to another matrix form that is easier to solve. This easier form is called __echelon form__. This new matrix form corresponds to a linear system that is simpler to deal with and is equivalent to the original system.\\To formally define the echelon form, we need to introduce the following concepts:\\__Zero Row__: a row containing only zero entries.\\__Leading Entry__: the leftmost nonzero entry in a nonzero row.\\A rectangular matrix is in row echelon form (REF) if:\\1. All non-zero rows are above any zero row.
 2. Every leading term of a row is in a column to the right of the leading entry.
@@ -1042,6 +1085,753 @@ x + y &amp;= 4 \\
 </ol>
 </div>
 </section>
+<section id="matrix-equations">
+<h2>1.2 Matrix Equations<a class="headerlink" href="#matrix-equations" title="Permalink to this heading">#</a></h2>
+<p>Linear systems can be represented by equations involving vectors and matrices. In this section we use such representations to study and analyze linear systems.</p>
+<p>Let <span class="math notranslate nohighlight">\(n\)</span> be a positive integer, and <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> be the collection of all ordered <span class="math notranslate nohighlight">\(n\)</span>-tuples of real numbers. An element of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, denoted by an <span class="math notranslate nohighlight">\(n\times 1\)</span> <strong>column matrix</strong>, and is called a vector.
+For example,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}\end{split}\]</div>
+<p>A vector whose entries are all zero is called <strong>the zero vector</strong> and is denoted by <span class="math notranslate nohighlight">\(\vec{0}\)</span>. When there is no risk of confusion we sometimes omit the arrow and use simply <span class="math notranslate nohighlight">\(0\)</span></p>
+<p>Two vectors <span class="math notranslate nohighlight">\(\vec{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}\)</span> are <strong>equal</strong> if their corresponding entries are equal, that is, if <span class="math notranslate nohighlight">\(u_i = v_i\)</span> for all <span class="math notranslate nohighlight">\(i \leq n\)</span>.</p>
+<p>Given a vector <span class="math notranslate nohighlight">\(\vec{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}\)</span> and a real number <span class="math notranslate nohighlight">\(c\)</span>, the <strong>scalar product</strong> of <span class="math notranslate nohighlight">\(\vec{u}\)</span> by <span class="math notranslate nohighlight">\(c\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}c\vec{u} = \begin{bmatrix} cu_1 \\ cu_2 \\ \vdots \\ cu_n \end{bmatrix}\end{split}\]</div>
+<p><strong>Theorem 1</strong> (properties of sum and scalar product)</p>
+<p>Suppose <span class="math notranslate nohighlight">\(\vec{u}\)</span>, <span class="math notranslate nohighlight">\(\vec{v}\)</span>, <span class="math notranslate nohighlight">\(\vec{w}\)</span> are in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span> are real numbers:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{u} + \vec{v} = \vec{v} + \vec{u}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{u} + \vec{0} = \vec{0} + \vec{u} = \vec{u}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{u} + (-\vec{u}) = \vec{0}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c(\vec{u} + \vec{v}) = c\vec{u} + c\vec{v}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((c+d)\vec{u} = c\vec{u} + d\vec{u}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c(d\vec{u}) = (cd)\vec{u}\)</span></p></li>
+</ol>
+<section id="vector-equation">
+<h3>Vector Equation<a class="headerlink" href="#vector-equation" title="Permalink to this heading">#</a></h3>
+<p>A vector <span class="math notranslate nohighlight">\(\vec{y} \in \mathbb{R}^n\)</span> is called a <strong>linear combination</strong> of some vectors <span class="math notranslate nohighlight">\(\vec{u_1}, \vec{u_2}, \dots, \vec{u_p} \in \mathbb{R}^n\)</span>, if there are real numbers <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_p\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[ \vec{y} = c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_p\vec{u_p}\]</div>
+<p>The <strong>span</strong> of vectors <span class="math notranslate nohighlight">\(\vec{u_1}, \vec{u_2}, \dots, \vec{u_p}\)</span>, denoted by <span class="math notranslate nohighlight">\(span\ (\vec{u_1}, \vec{u_2}, \dots, \vec{u_p})\)</span>, is the set of all possible linear combinations:</p>
+<div class="math notranslate nohighlight">
+\[
+span\ (\vec{u_1}, \vec{u_2}, \dots, \vec{u_p})= \{c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_p\vec{u_p}: \,\, c_1,c_2, \dots, c_p \in \mathbb{R}\}
+\]</div>
+<p>In other words, the span represents all the vectors that can be formed by scaling and adding the given vectors <span class="math notranslate nohighlight">\(\vec{u_1}, \vec{u_2}, \dots, \vec{u_p}\)</span>.</p>
+<p><strong>Example 1:</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(\vec{y}=\begin{bmatrix} 7 \\ -4  \\3 \end{bmatrix}\)</span>, <span class="math notranslate nohighlight">\(\vec{u}= \begin{bmatrix} 2 \\ -3\\-5 \end{bmatrix}\)</span>, and <span class="math notranslate nohighlight">\(\vec{v} =\begin{bmatrix} 0 \\ 0  \\1 \end{bmatrix}\)</span>.</p>
+<p>a. Compute <span class="math notranslate nohighlight">\(2 \vec{u} - 3 \vec{v}\)</span>.
+b. Determine if <span class="math notranslate nohighlight">\(\vec{y}\)</span> is a linear combination of <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p>(a).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+2 \vec{u} - 3 \vec{v} = 2 \begin{bmatrix} 2 \\ -3\\-5 \end{bmatrix} - 3 \begin{bmatrix} 0 \\ 0  \\1 \end{bmatrix} = \begin{bmatrix} 4 \\ -6 \\ -10 \end{bmatrix} - \begin{bmatrix} 0 \\ 0  \\3 \end{bmatrix} = \begin{bmatrix} 4 \\ -6 \\ -7 \end{bmatrix}
+\end{split}\]</div>
+<p>Let’s use Python to double check our solution. A vector is a numpy array of a list.</p>
+<p>import numpy as np</p>
+<p>y = np.array([[7,-4,3]])
+print(“y = “, y)</p>
+<p>u=np.array([[2,-3,-5]])
+print(“u = “, u)</p>
+<p>v=np.array([[0,0,1]])
+print(“v = “, v)</p>
+<p>#(a). Compute 2u-3v</p>
+<p>2<em>u+3</em>v</p>
+<p>(b). To determine if <span class="math notranslate nohighlight">\(\vec{y}\)</span> is a linear combination of <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span>, we need to check if there exist real numbers <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{y} = c_1 \vec{u} + c_2 \vec{v}
+\]</div>
+<p>Substituting the given values, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 7  \\ -4  \\ 3 \end{bmatrix} = c_1 \begin{bmatrix} 2 \\ -3 \\ -5 \end{bmatrix} + c_2 \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+\end{split}\]</div>
+<p>Which is the same as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix} 7 \\ -4  \\3 \end{bmatrix}= \begin{bmatrix} 2x_1 + 0\\ -3c_1 + 0\\-5c_1+c_2 \end{bmatrix}\end{split}\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+ 2c_1 &amp;= 7 \\
+-3c_1 &amp;= -4 \\
+-5c_1+ c_2 &amp;= 3 
+\end{align*}
+\end{split}\]</div>
+<p>This equation cannot be satisfied because there are no values of <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> that can make the left-hand side equal to the right-hand side. Therefore, <span class="math notranslate nohighlight">\(\vec{y}\)</span> is not a linear combination of <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span>.</p>
+<p>In Example 2, to solve a vector equation we converted into a linear system. In general, the vector equation</p>
+<div class="math notranslate nohighlight">
+\[
+x_1\vec{u_1} + x_2\vec{u_1}+ \dots + x_p\vec{u_p} = \vec{y}
+\]</div>
+<p>has the same solution set as the linear system whose augmented matrix is</p>
+<div class="math notranslate nohighlight">
+\[
+[\vec{u_1}, \vec{u_2}, \dots, \vec{u_p}| \vec{y}] \quad (*)
+\]</div>
+<p>Note that for brevity, we represented the augmented matrix by its columns.</p>
+<p>An indexed set of vectors <span class="math notranslate nohighlight">\(\{\vec{v_1}, \vec{v_2}, \dots \vec{v_p}\}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is called a <strong>linearly independet</strong> set if the vector equation:</p>
+<div class="math notranslate nohighlight">
+\[ x_1 \vec{v_1} + x_2 \vec{v_2} + \dots + x_p \vec{v_p} = 0\]</div>
+<p>has only the trivial solution. The set is called <strong>linearly dependent</strong> if there are real numbers <span class="math notranslate nohighlight">\(c_1,c_2, \dots c_p\)</span>, not all zero, such that</p>
+<div class="math notranslate nohighlight">
+\[ c_1 \vec{v_1} + c_2 \vec{v_2} + \dots + c_p \vec{v_p} = 0\]</div>
+<p><strong>Theorem 2</strong></p>
+<ol class="arabic simple">
+<li><p>A set of vectors containing the zero vector is linearly dependent.</p></li>
+<li><p>A set of two vectors is linearly dependent if and only if one is a multiple of the other.</p></li>
+</ol>
+<p><strong>Example 2:</strong></p>
+<p>Determine if the following vectors form a linearly independent set:</p>
+<p><span class="math notranslate nohighlight">\(\vec{u} = \begin{bmatrix} 1\\2\\3 \end{bmatrix} \,\,  \vec{v} = \begin{bmatrix} 4\\5\\6 \end{bmatrix}, \,\,  \vec{w} = \begin{bmatrix} 7\\8\\9 \end{bmatrix}\)</span></p>
+<p><strong>Solution:</strong></p>
+<p>We convert the augmented matrix in <span class="math notranslate nohighlight">\((*)\)</span> into its REF:</p>
+<p>A = np.array([[1,4,7, 0], [2,5,8,0], [3,6,9,0]])
+A</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="swap-two-rows">
+<h1>Swap two rows<a class="headerlink" href="#swap-two-rows" title="Permalink to this heading">#</a></h1>
+<p>def swap(matrix, row1, row2):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>copy_matrix=np.copy(matrix).astype(&#39;float64&#39;) 
+
+copy_matrix[row1,:] = matrix[row2,:]
+copy_matrix[row2,:] = matrix[row1,:]
+
+return copy_matrix
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="multiple-all-entries-in-a-row-by-a-nonzero-number">
+<h1>Multiple all entries in a row by a nonzero number<a class="headerlink" href="#multiple-all-entries-in-a-row-by-a-nonzero-number" title="Permalink to this heading">#</a></h1>
+<p>def scale(matrix, row, scalar):
+copy_matrix=np.copy(matrix).astype(‘float64’)
+copy_matrix[row,:] = scalar*matrix[row,:]<br />
+return copy_matrix</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="replacing-a-row1-by-the-sum-of-itself-and-a-multiple-of-row2">
+<h1>Replacing a row1 by the sum of itself and a multiple of row2<a class="headerlink" href="#replacing-a-row1-by-the-sum-of-itself-and-a-multiple-of-row2" title="Permalink to this heading">#</a></h1>
+<p>def replace(matrix, row1, row2, scalar):
+copy_matrix=np.copy(matrix).astype(‘float64’)
+copy_matrix[row1] = matrix[row1]+ scalar * matrix[row2]
+return copy_matrix</p>
+<p>A1 = replace(A, 1, 0, -2)
+A1</p>
+<p>A2 = replace(A1, 2, 0, -3)
+A2</p>
+<p>A3 = replace(A2, 2, 1, -2)
+A3</p>
+<p>A4 = scale(A3, 1, -1/3)
+A4</p>
+<p>Writing this matrix as a linear system, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\begin{align*}
+x+ y + 7z =&amp; 0\\
+y +2z =&amp; 0\
+\end{align*}
+\end{split}\]</div>
+<p>From this, it is clear that <span class="math notranslate nohighlight">\(\{\vec{u}, \vec{v}, \vec{w}\}\)</span> is not linearly independent becuase for any nonzero choice of <span class="math notranslate nohighlight">\(z\)</span>, we get a non-trivial solution. For example, if <span class="math notranslate nohighlight">\(z= 1\)</span>, then <span class="math notranslate nohighlight">\(( -5, -2 , 1)\)</span> is a non-trivial solution.</p>
+<section id="matrix-equation-a-vec-x-vec-b">
+<h2>Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span><a class="headerlink" href="#matrix-equation-a-vec-x-vec-b" title="Permalink to this heading">#</a></h2>
+<p>Similarly, we can translate a linear system into a matrix equation of the form <span class="math notranslate nohighlight">\(A\vec{x} = \vec{b}\)</span>. To that end, we need to define the product on the left hand side of equality.</p>
+<p>Let A be an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix (a rectangular array) with columns <span class="math notranslate nohighlight">\(\vec{a_1}, \vec{a_2}, \dots, \vec{a_n}\)</span>, and <span class="math notranslate nohighlight">\(\vec{x}\in \mathbb{R}^n\)</span>. We can define the product of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(\vec{x}\)</span>, denoted by <span class="math notranslate nohighlight">\(A\vec{x}\)</span>, as the linear combination of the columns of <span class="math notranslate nohighlight">\(A\)</span> where the coefficients are the components of <span class="math notranslate nohighlight">\(\vec{x}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}A\vec{x}=[\vec{a_1},\  \vec{a_2},\  \dots,\ \vec{a_n}]\, \begin{bmatrix} x_1 \\ x_2\\ \vdots \\ x_n \end{bmatrix}\, := x_1 \vec{a_1} + x_2\vec{a_2} + \dots + x_n \vec{a_n}$$. \end{split}\\
+Note that $A\vec{x}$ is defined only if the number of columns of A equals to the numbers entries of $\vec{x}$\\__Theorem 2__ (properties of the product of A and $\vec{x}$) Suppose $A$ is an $m\times n$ matrix, $\vec{u}$ and $\vec{v}$ are in $\mathbb{R}^n$ and $c$ is a scalar. Then \\1. $A(\vec{u}+ \vec{v})= A \vec{u} + A \vec{v}$
+2. $A(c\vec{u})= c A\vec{u}$\\
+Now let us discuss how to represent a linear system by a matrix equation. Consider:\end{aligned}\end{align} \]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-42c685c2-9d58-4625-8b5e-a73013324ea9">
+<span class="eqno">(40)<a class="headerlink" href="#equation-42c685c2-9d58-4625-8b5e-a73013324ea9" title="Permalink to this equation">#</a></span>\[\begin{align}
+   a_{11} x_1 + a_{12} x_2 +&amp; \dots a_{1n} x_n = \,b_1 \\ 
+   a_{21} x_1 + a_{22} x_2 +&amp; \dots a_{2n} x_n = \,b_2 \\ 
+    &amp;\vdots\\
+   a_{m1} x_1 + a_{n2} x_2 +&amp; \dots a_{mn} x_n = \,b_m \\ 
+\end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[and let   \]</div>
+<p>A= \begin{bmatrix} a_{11} &amp;  a_{12} &amp;\dots &amp; a_{1n}\ a_{21} &amp;  a_{22} &amp; \dots &amp; a_{2n}\ \vdots&amp; \vdots&amp; \vdots  \  a_{m1}&amp; a_{m2} &amp;\dots &amp;  a_{mn}\
+\end{bmatrix}
+$$</p>
+<p>and <span class="math notranslate nohighlight">\(\ \vec{x}= \begin{bmatrix} x_1 \\ x_2\\ \vdots \\ x_n \end{bmatrix}\ \)</span> and  <span class="math notranslate nohighlight">\(\ \vec{b}= \begin{bmatrix} b_1 \\ b_2\\ \vdots \\ b_m \end{bmatrix}\ \)</span>. The matrix A is called the <strong>coefficient matrix</strong>. Then we can rewrite the above linear system as: <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}.\)</span></p>
+<p>The next theorem discribes when a matrix equation has at least a solution.</p>
+<p><strong>Theorem 3</strong> Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix. The following statements are logically equivalent:</p>
+<ol class="arabic simple">
+<li><p>For any <span class="math notranslate nohighlight">\(\vec{b}\in \mathbb{R}^m\)</span>, the equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> has a solution.</p></li>
+<li><p>Each <span class="math notranslate nohighlight">\(\vec{b}\in \mathbb{R}^m\)</span> is a linear combination of columns of <span class="math notranslate nohighlight">\(A\)</span></p></li>
+<li><p>The columns of <span class="math notranslate nohighlight">\(A\)</span> span <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span></p></li>
+<li><p>A has a pivot poisition in every row.</p></li>
+</ol>
+<p><strong>Example 3</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a matrix whose columns are <span class="math notranslate nohighlight">\(\vec{u}\)</span>, <span class="math notranslate nohighlight">\(\vec{v}\)</span>, <span class="math notranslate nohighlight">\(\vec{w}\)</span> from Example 2. Find vectors <span class="math notranslate nohighlight">\(\vec{b}, \vec{c} \in \mathbb{R}^3\)</span> such that <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> has a solution and <span class="math notranslate nohighlight">\(A\vec{x}=\vec{c}\)</span> does not.</p>
+<p><strong>Solution:</strong></p>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix}
+1 &amp; 4 &amp; 7 \\
+2 &amp; 5 &amp; 8 \\
+3 &amp; 6 &amp; 9 \\
+\end{bmatrix},
+\quad
+\vec{b} = \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix},
+\quad
+\vec{c} = \begin{bmatrix}
+1 \\
+2 \\
+4 \\
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Now, let’s form the augmented matrix of equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span>:
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-17b2e352-93c3-41f6-a7e7-1134a9ecbff8">
+<span class="eqno">(41)<a class="headerlink" href="#equation-17b2e352-93c3-41f6-a7e7-1134a9ecbff8" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+1 &amp; 4 &amp; 7 &amp;&amp; 1 \\
+2 &amp; 5 &amp; 8 &amp;&amp; 2 \\
+3 &amp; 6 &amp; 9 &amp;&amp; 3 \\
+\end{bmatrix}\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}Now we can perform row operations to verify that it has a solution:\\Ab = np.array([[1,4,7,1],[2,5,8,2],[3,6,9,3]])
+Ab\\B1 = replace(Ab, 1 , 0, -2)
+B1\\B2 = replace(B1, 2 , 0, -3)
+B2\\B3 = replace(B2, 2, 1 , -2)
+B3\\B4 = scale(B3, 1 , -1/3)
+B4\\From this we see that for any $z \in \mathbb{R}$ we have a unique solution. For example if $z = 0$\end{aligned}\end{align} \]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-8c786d6a-a1ad-4b2d-b8ef-fe7af03118b5">
+<span class="eqno">(42)<a class="headerlink" href="#equation-8c786d6a-a1ad-4b2d-b8ef-fe7af03118b5" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} x \\ y \\ z \end{bmatrix}\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}So the equation $A\vec{x}=\vec{b}$ has a solution. \\
+Now, we solve the equation $A\vec{x}=\vec{c}$ to verify that it does not have a solution. Let's form the augmented matrix $[A|\vec{c}]$:\end{aligned}\end{align} \]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-4497c096-a18b-45fb-9eb8-cd5bbdf14def">
+<span class="eqno">(43)<a class="headerlink" href="#equation-4497c096-a18b-45fb-9eb8-cd5bbdf14def" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+1 &amp; 4 &amp; 7 &amp;&amp; 1 \\
+2 &amp; 5 &amp; 8 &amp;&amp; 2 \\
+3 &amp; 6 &amp; 9 &amp;&amp; 4 \\
+\end{bmatrix}\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}Now we can perform row operations to verify that it does not has a solution\\Ac = np.array([[1,4,7,1],[2,5,8,2],[3,6,9,4]])
+Ac\\C1 = replace(Ac, 1 , 0, -2)
+C1\\C2 = replace(C1, 2 , 0, -3)
+C2\\C3 = scale(C2, 1 , -1/3)
+C3\\C4 = replace(C3, 2 , 1, 6)
+C4\\Form this, we can see that the last row corresponds to the equation:\end{aligned}\end{align} \]</div>
+<p>0 = 1
+$$</p>
+<p>Which is not possible. So <span class="math notranslate nohighlight">\(A\vec{x} = \vec{c}\)</span> does not have a solution.</p>
+</section>
+<section id="id2">
+<h2>Exercises:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>Given the system of equations:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+3x + 2y &amp;= 1 \\
+x - 2y + z &amp;= 5 \\
+2x - z &amp;= 0
+\end{align*}
+\end{split}\]</div>
+<p>Write this system as a vector equation and then a matrix equation.</p>
+<ol class="arabic" start="2">
+<li><p>True or False?</p>
+<p>(a). <span class="math notranslate nohighlight">\(\vec{0} \in \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(b). <span class="math notranslate nohighlight">\(\vec{v}_1 \in \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(c). <span class="math notranslate nohighlight">\(\text{span} \{\vec{v}_1, \vec{v}_2\} \subseteq \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(d). A set 4 vectors must be linearly DEPENDENT in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>.</p>
+</li>
+</ol>
+</div>
+</section>
+<section id="solution-set-of-linear-systems">
+<h2>1.3 Solution Set of Linear Systems.<a class="headerlink" href="#solution-set-of-linear-systems" title="Permalink to this heading">#</a></h2>
+<p>In this section, we study and analyze the solution set of linear systems.</p>
+<section id="homogenous-linear-systems">
+<h3>Homogenous Linear Systems<a class="headerlink" href="#homogenous-linear-systems" title="Permalink to this heading">#</a></h3>
+<p>We start with describing the solution set of a simpler linear systems where the right side of equalities are zeros. In matrix form, <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span>; such system is called <strong>homogeneous</strong>. Homogeneous systems are always consistent since <span class="math notranslate nohighlight">\(\vec{x}=\vec{0}\)</span> is always a solution. We call <span class="math notranslate nohighlight">\(\vec{0}\)</span> the trivial solution of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span>.</p>
+<p><strong>Theorem 2:</strong></p>
+<p>The homogenous system <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span> has a nontrivial solution if and only if it has a non-pivot column.</p>
+<p>Non-pivot columns correspond to <strong>free variables</strong>; all other variables can be expressed in terms of free variables.</p>
+<p><strong>Example 1</strong></p>
+<p>Describe the solution set of <span class="math notranslate nohighlight">\(10x -4y+ 7z=0\)</span></p>
+<p><strong>Solution</strong>: consider the augmented matrix of the system: <span class="math notranslate nohighlight">\( \begin{bmatrix} 10&amp; -4&amp; 7&amp;&amp; 0\\ \end{bmatrix}\)</span>. There is only one pivot columns and y and z are free variables.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{x} = \begin{bmatrix} x \\ y \\z \end{bmatrix} = \begin{bmatrix} 0.4y - 0.7z \\y\\z \end{bmatrix}= \begin{bmatrix} 0.4y \\ y \\0 \end{bmatrix} + \begin{bmatrix} - 0.7z \\ 0 \\ z \end{bmatrix}= 
+y \begin{bmatrix} 0.4 \\ 1 \\ 0\end{bmatrix} + z \begin{bmatrix} 0.7 \\0\\1 \end{bmatrix}
+\end{split}\]</div>
+<p>Thus, the solution set is span ( <span class="math notranslate nohighlight">\(\ \begin{bmatrix} 0.4 \\ 1 \\ 0\end{bmatrix},\, \begin{bmatrix} 0.7 \\0\\1 \end{bmatrix}\ \)</span>)</p>
+<p><strong>Example 2</strong></p>
+<p>Determine if the following system has a nontrivial solution. Then describe the solution set.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+3x +5y - 4z &amp;= 0 \\
+-3x -2y +4z &amp;= 0 \\
+6x + y -8 z &amp;= 0
+\end{align*}
+\end{split}\]</div>
+<p>We first setup the augmented matrix, and then, we find its REF:</p>
+<p>import numpy as np</p>
+<p>A= np.array([[3,5,-4, 0], [-3, -2, 4, 0], [6, 1, -8, 0]])
+A</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1>Swap two rows<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h1>
+<p>def swap(matrix, row1, row2):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>copy_matrix=np.copy(matrix).astype(&#39;float64&#39;) 
+
+copy_matrix[row1,:] = matrix[row2,:]
+copy_matrix[row2,:] = matrix[row1,:]
+
+return copy_matrix
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id4">
+<h1>Multiple all entries in a row by a nonzero number<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h1>
+<p>def scale(matrix, row, scalar):
+copy_matrix=np.copy(matrix).astype(‘float64’)
+copy_matrix[row,:] = scalar*matrix[row,:]<br />
+return copy_matrix</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1>Replacing a row1 by the sum of itself and a multiple of row2<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h1>
+<p>def replace(matrix, row1, row2, scalar):
+copy_matrix=np.copy(matrix).astype(‘float64’)
+copy_matrix[row1] = matrix[row1]+ scalar * matrix[row2]
+return copy_matrix</p>
+<p>A_1 = replace(A, 1,0, 1)
+A_1</p>
+<p>A_2 = replace(A_1, 2,0, -2)
+A_2</p>
+<p>A_3 = replace(A_2, 2, 1, 3)
+A_3</p>
+<p>We can see that the third column is a non-pivot column and therefore <span class="math notranslate nohighlight">\(z\)</span> is a free variable. Thus, <span class="math notranslate nohighlight">\(A\vec{x}=0\)</span> has (infinitely many) one for each choice of <span class="math notranslate nohighlight">\(z\)</span>. To find the solution set we write back the linear system coresponding to REF of A:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+3x +5y - 4z &amp;= 0 \\
+3y &amp;= 0 \\
+ 0&amp;= 0
+\end{align*}
+\end{split}\]</div>
+<p>Therefore, <span class="math notranslate nohighlight">\(x= \frac{-4}{3}z\)</span>, and the slution set contains vectors of the foloowing form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{x} = \begin{bmatrix} x\\y\\z \end{bmatrix} = \begin{bmatrix} \frac{-4}{3}z\\0\\z \end{bmatrix}= z \begin{bmatrix} \frac{-4}{3}\\0\\1 \end{bmatrix}
+\end{split}\]</div>
+<p>for <span class="math notranslate nohighlight">\(z\in \mathbb{R}\)</span>.</p>
+<p>In other words, the solution set is <span class="math notranslate nohighlight">\(\text{span}\ (\ \begin{bmatrix} \frac{-4}{3}\\0\\1 \end{bmatrix}\ )\)</span></p>
+<p>We can represnt a linear independence equation</p>
+<div class="math notranslate nohighlight">
+\[ x_1 \vec{v_1} + x_2 \vec{v_2} + \dots + x_p \vec{v_p} = 0\]</div>
+<p>by a homogenous system <span class="math notranslate nohighlight">\(A\vec{x} = 0\)</span> where <span class="math notranslate nohighlight">\(A\)</span> is a matrix whose columns are <span class="math notranslate nohighlight">\(\vec{v_i}s\)</span>. In fact, we have:</p>
+<p><strong>Theorem 3</strong></p>
+<p>The columns of a matrix <span class="math notranslate nohighlight">\(A\)</span> form a linearly independent set if and only if <span class="math notranslate nohighlight">\(A\vec{x}=0\)</span> has only trivial solution.</p>
+<p><strong>Example 3</strong></p>
+<p>Determine if the columns of the matrix <span class="math notranslate nohighlight">\(A = \begin{bmatrix} 2 &amp; 3 &amp; 5\\ -1 &amp; 1 &amp; 1\\ 5 &amp; 4 &amp; 5    \end{bmatrix}\)</span> form a linearly independent set.</p>
+<p><strong>Solution:</strong></p>
+<p>We show <span class="math notranslate nohighlight">\(A\vec{x}= 0\)</span> has a nontrivial solution, and therefore, by Theorem 3, the columns of <span class="math notranslate nohighlight">\(A\)</span> are linearly indendent.</p>
+<p>A = np.array([[2,3,5,0], [-1,1,1,0], [5, 4, 5,0]])
+A</p>
+<p>A1 = swap(A, 1,0)
+A1</p>
+<p>A2 = scale(A1 , 0, -1)
+A2</p>
+<p>A3 = replace(A2, 1,0,-2)
+A3</p>
+<p>A4 = replace(A3, 2,0,-5)
+A4</p>
+<p>A5 = scale(A4, 1, 1/5)
+A5</p>
+<p>A6 = replace(A5, 2,1, -9)
+A6</p>
+<p>Representing this as a linear system, the last row of <span class="math notranslate nohighlight">\(A_6\)</span> shows that <span class="math notranslate nohighlight">\(z = 0\)</span>, and thefore, <span class="math notranslate nohighlight">\(y = x= 0\)</span>. In other words, the only solution to this system is zero.</p>
+<section id="general-case-the-solution-set-of-non-homogenoues-linear-system">
+<h2>General Case: the solution set of non-homogenoues linear system:<a class="headerlink" href="#general-case-the-solution-set-of-non-homogenoues-linear-system" title="Permalink to this heading">#</a></h2>
+<p><strong>Theorem 3</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> be a consistent system, and let <span class="math notranslate nohighlight">\(\vec{p}\)</span> be a solution. Then the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> is the set of all vectors of the form <span class="math notranslate nohighlight">\(\vec{p}+\vec{h}\)</span> where <span class="math notranslate nohighlight">\(\vec{h}\)</span> is any solution to the homogenoues system <span class="math notranslate nohighlight">\(A\vec{x}=0\)</span>.</p>
+<p><strong>Example 4</strong> Describe the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> where</p>
+<p><span class="math notranslate nohighlight">\(A=\begin{bmatrix} 3&amp; 5&amp; -4\\ -3&amp; -2&amp; 4\\ 6&amp; 1&amp; -8 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}= \begin{bmatrix} 7\\ -1\\ -4\\  \end{bmatrix}\)</span>.</p>
+<p><strong>Solution</strong> :</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="set-up-the-augemented-matrix-a-b">
+<h1>set up the augemented matrix [A|b]<a class="headerlink" href="#set-up-the-augemented-matrix-a-b" title="Permalink to this heading">#</a></h1>
+<p>A = np.array([[3,5,-4,7], [-3,-2, 4,-1], [6,1,-8,-4]])
+A</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="row-reduce-the-augmented-matrix-to-reduced-echelon-form">
+<h1>Row reduce the augmented matrix to reduced echelon form:<a class="headerlink" href="#row-reduce-the-augmented-matrix-to-reduced-echelon-form" title="Permalink to this heading">#</a></h1>
+<p>A1 = replace(A, 1,0,1)
+A1</p>
+<p>A2 = replace(A1, 2, 0, -2)
+A2</p>
+<p>A3 = replace(A2, 2, 1, 3)
+A3</p>
+<p>A4 = replace(A3, 0, 1, -5/3)
+A4</p>
+<p>A5 = scale(A4, 0, 1/3)
+A5</p>
+<p>A6 = scale(A5, 1, 1/3)
+A6</p>
+<p>Now we can express each dependent variable in terms of free variables:</p>
+<p>We have <span class="math notranslate nohighlight">\(x_1 - \frac{4}{3} x_3 = -1\)</span>, <span class="math notranslate nohighlight">\(x_2= 2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span> is free. As a vector, the general solution of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ \end{bmatrix} = \begin{bmatrix} -1 + \frac{4}{3} x_3\\ 2\\ x_3\end{bmatrix} = \begin{bmatrix} -1 \\ 2 \\ 0 \end{bmatrix} + x_3 \begin{bmatrix} \frac{4}{3} \\ 0 \\ 1 \end{bmatrix}\end{split}\]</div>
+<section id="id6">
+<h2>Exercises<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>Is</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}\
+left\lbrace\ \  \begin{bmatrix} 1 \\ 2  \\3 \end{bmatrix},  
+\begin{bmatrix} 4 \\ 5  \\6 \end{bmatrix}, \begin{bmatrix} 7 \\ 8 \\9 \end{bmatrix}\ \ \right\rbrace
+\end{split}\]</div>
+<p>linearly independent or dependent?</p>
+<ol class="arabic simple" start="2">
+<li><p>Describe the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> where</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix}
+1 &amp; 4 &amp; 7 \\
+2 &amp; 5 &amp; 8 \\
+3 &amp; 6 &amp; 9 \\
+\end{bmatrix},
+\quad
+\vec{b} = \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix},
+\end{split}\]</div>
+</div>
+</section>
+<section id="answers-to-exercises">
+<h2>Answers to Exercises<a class="headerlink" href="#answers-to-exercises" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h3>1.1 Linear Systems<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Find a linear system containing two equations in two unknowns that has infinitely many solutions. Verify your answer by plotting the lines of these equations on the same plane.</p></li>
+</ol>
+<p><strong>Solution</strong>:</p>
+<p>The following system is consistent and has infinitely many solutions:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    2x_1 - x_2 &amp;= 1 \\ 
+    4x_1 - 2x_2 &amp;= 2 \\ 
+\end{align*}\]</div>
+<p>We expect that the graph of these two lines coincide. Lets plot the graph of these lines on the same plane:</p>
+<p>import matplotlib.pyplot as plt
+import numpy as np</p>
+<p><strong>Data for plotting</strong></p>
+<p>x = range(-5, 5)
+y1 = [ 2<em>k-1 for k in x]
+y2 = [ 2</em>k-1 for k in x]</p>
+<p>fig, ax = plt.subplots()</p>
+<p><strong>Specify the length of each axis</strong>
+ax.set_xlim(-5,5)
+ax.set_ylim(-5,5)</p>
+<p>#Plot x and y1 using blue color
+ax.plot(x, y1, color = ‘b’)
+ax.text(-4,-4.5,‘<span class="math notranslate nohighlight">\(2x_1 - x_2 = 1\)</span>’, color = ‘b’)</p>
+<p>#Plot x and y2 using red color
+ax.plot(x, y2, color = ‘r’)
+ax.text(3,4,‘<span class="math notranslate nohighlight">\(2x_1 -4x_2 = 2\)</span>’, color = ‘r’)</p>
+<p><strong>Add labels and a title to the graph</strong>
+ax.set(xlabel=’ x’, ylabel=‘y’,
+title=’ This linear system is consistent’)
+ax.grid()</p>
+<p>plt.show()</p>
+<ol class="arabic simple" start="2">
+<li><p>Find a linear system that is equivalent to the linear system in Example 1.</p></li>
+</ol>
+<p><strong>Solution:</strong></p>
+<p>Any system that has the same solution set as the linear system in Example 1 is considered equivalent. Since the solution set is <span class="math notranslate nohighlight">\(\{(0, -1)\}\)</span>, the following system is an example of such a system:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    x_1 &amp;= 0 \\ 
+    x_2 &amp;= -1 \\ 
+\end{align*}\]</div>
+<p>** Data for plotting **</p>
+<p>r = range(-5, 5)
+x1 = [ 0 for k in r]
+y1 = [-1 for k in r]</p>
+<p>fig, ax = plt.subplots()</p>
+<p>** Specify the length of each axis **
+ax.set_xlim(-4,4)
+ax.set_ylim(-4,4)</p>
+<p>#Plot x and y1 using blue color
+ax.plot(x1, r, color = ‘b’)
+ax.text(-1.2,-3,‘<span class="math notranslate nohighlight">\(x_1 = 0\)</span>’, color = ‘b’)</p>
+<p>#Plot x and y2 using red color
+ax.plot(x, y1, color = ‘r’)
+ax.text(0.5,-0.5, ‘<span class="math notranslate nohighlight">\(x_2 = -1\)</span>’, color = ‘r’)</p>
+<p>** Add labels and a title to the graph **
+ax.set(xlabel=’ x’, ylabel=‘y’,
+title=’ This linear system is consistent’)
+ax.grid()</p>
+<p>plt.show()</p>
+<ol class="arabic simple" start="3">
+<li><p>Determine which of the following matrices are in REF. For those that are, identify their pivot columns. Are any in RREF?</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(A = \begin{bmatrix} 0 &amp; 0 &amp; 4 &amp;-1 &amp;&amp; 0\\ 0 &amp; 0 &amp; 0 &amp;0 &amp;&amp; 0 \\ 0 &amp; 0&amp; 0 &amp; 0 &amp;&amp;3\end{bmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(B = \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp;&amp; 1\\  0 &amp; 1 &amp; 1 &amp;&amp;0\\ 0 &amp; 0 &amp; 1 &amp;&amp;1 \end{bmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(C = \begin{bmatrix} 1 &amp; 0 &amp; 3 &amp;&amp; 0\\  0 &amp; 1 &amp; 0 &amp;&amp;0\\ 0 &amp; 0 &amp; 0 &amp;&amp;1 \end{bmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(D = \begin{bmatrix} 0 &amp; 1 &amp; 2\\ 1 &amp; 0 &amp; 3\\ 4 &amp; -3 &amp; 8 \end{bmatrix}\)</span></p>
+<p>A matrix is in row echelon form (REF) if it satisfies the following conditions:</p>
+<ol class="arabic simple">
+<li><p>The rows with all zeros must be at the bottom.</p></li>
+<li><p>Every leading term of a row must be in a column to the right of the leading entry.</p></li>
+<li><p>Entries below a leading entry must be zero.</p></li>
+</ol>
+<p>Let’s analyze each matrix and determine if they are in REF:</p>
+<ul class="simple">
+<li><p>Matrix A is not in REF because it does not satisfy the first condition (rows with all zeros must be at the bottom).</p></li>
+<li><p>Matrix B is in REF as it satisfies all the conditions.</p></li>
+<li><p>Matrix C is in REF as it satisfies all the conditions.</p></li>
+</ul>
+<p>None of the matrices A, B, or C are in reduced row echelon form (RREF) because the conditions for RREF include having a pivot of 1 in every row, and both matrix A and matrix C have nonzero pivots other than 1.</p>
+<ol class="arabic simple" start="4">
+<li><p>For the above matrices, write the corresponding linear systems and find their solutions.</p></li>
+</ol>
+<p><strong>Solution:</strong></p>
+<p><span class="math notranslate nohighlight">\(A:\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    4x_3 - 5x_4 &amp;= 0 \\ 
+    0 &amp;= 0 \\
+    0 &amp;= 3 \\
+\end{align*}\]</div>
+<p>Clearly, because of the last equation, this system is inconsistent.</p>
+<p><span class="math notranslate nohighlight">\(B:\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    x_1 + x_2 &amp;= 1 \\ 
+    x_2 + x_3 &amp;= 0 \\
+    x_3 &amp;= 1 \\
+\end{align*}\]</div>
+<p>By back substitution, we can see that <span class="math notranslate nohighlight">\(x_1 = -x_2 = x_3 = 1\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(C:\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    x_1 + 3x_3 &amp;= 0 \\ 
+    x_2 &amp;= 0 \\
+    0 &amp;= 1 \\
+\end{align*}\]</div>
+<p>Clearly, because of the last equation, this system is inconsistent.</p>
+<ol class="arabic simple" start="5">
+<li><p>Find the REF of <span class="math notranslate nohighlight">\(D = \begin{bmatrix} 0 &amp; 1 &amp; 2\\ 1 &amp; 0 &amp; 3\\ 4 &amp; -3 &amp; 8 \end{bmatrix}\)</span>.</p></li>
+</ol>
+<p><strong>Solution</strong></p>
+<p>D = np.array([[0,1,2],[1,0,3],[4,-3,8]])</p>
+</section>
+<section id="elementry-row-operations">
+<h3>Elementry row operations:<a class="headerlink" href="#elementry-row-operations" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="id8">
+<h3>Swap two rows<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>def swap(matrix, row1, row2):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>copy_matrix=np.copy(matrix).astype(&#39;float64&#39;) 
+
+copy_matrix[row1,:] = matrix[row2,:]
+copy_matrix[row2,:] = matrix[row1,:]
+
+return copy_matrix
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h3>Multiple all entries in a row by a nonzero number<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>def scale(matrix, row, scalar):
+copy_matrix=np.copy(matrix).astype(‘float64’)
+copy_matrix[row,:] = scalar*matrix[row,:]<br />
+return copy_matrix</p>
+<p>**Replacing a row by the sum of itself and a multiple of another **</p>
+<p>def replace(matrix, row1, row2, scalar):
+copy_matrix=np.copy(matrix).astype(‘float64’)
+copy_matrix[row1] = matrix[row1]+ scalar * matrix[row2]
+return copy_matrix</p>
+<p>D1 = swap(D, 0, 1)
+D1</p>
+<p>D2 = replace(D1, 2, 0, -4)
+D2</p>
+<p>D3 = replace(D2, 2, 1, 3)
+D3</p>
+</section>
+<section id="id10">
+<h3>1.2 Solution set of linear systems<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Given the system of equations:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+3x + 2y &amp;= 1 \\
+x - 2y + z &amp;= 5 \\
+2x - z &amp;= 0
+\end{align*}\]</div>
+<p>Write this system as:</p>
+<ol class="arabic simple">
+<li><p>a vector equation.</p></li>
+<li><p>a matrix equation.</p></li>
+</ol>
+<p><strong>Solution:</strong></p>
+<p>-Vector Equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x\begin{bmatrix} 3 \\ 1 \\ 2 \end{bmatrix} + y \begin{bmatrix} 2 \\ -2 \\ 0 \end{bmatrix} + z \begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix} =  \begin{bmatrix} 1 \\ 5 \\ 0 \end{bmatrix}
+\end{split}\]</div>
+<p>-Matrix Equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 3 &amp; 2 &amp; 0 \\ 1 &amp; -2 &amp; 1 \\ 2 &amp; 0 &amp; -1 \\\end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} 1 \\ 5 \\ 0 \end{bmatrix}
+\end{split}\]</div>
+<ol class="arabic" start="2">
+<li><p>True or False?</p>
+<p>(a). <span class="math notranslate nohighlight">\(\vec{0} \in \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(b). <span class="math notranslate nohighlight">\(\vec{v}_1 \in \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(c). <span class="math notranslate nohighlight">\(\text{span} \{\vec{v}_1, \vec{v}_2\} \subseteq \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(d). A set 4 vectors must be linearly DEPENDENT in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>.</p>
+</li>
+</ol>
+<p><strong>Solution:</strong></p>
+<p>(a)</p>
+<p>True. The zero vector is always in the span of any set of vectors. This is because the span of a set of vectors includes all possible linear combinations of those vectors, and</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{0} = 0\vec{v_1} + 0 \vec{v_2} + 0\vec{v_3}
+\]</div>
+<p>is a linear combination of <span class="math notranslate nohighlight">\(\vec{v_1}, \vec{v_2}\)</span> and <span class="math notranslate nohighlight">\(\vec{v_3}\)</span>.</p>
+<p>(b)</p>
+<p><span class="math notranslate nohighlight">\(\vec{v}_1 \in \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>:</p>
+<p>True. Since <span class="math notranslate nohighlight">\(\vec{v}_1\)</span> is a linear combination of  <span class="math notranslate nohighlight">\(\vec{v}_1, \vec{v}_2\)</span> and  <span class="math notranslate nohighlight">\(\vec{v}_3\}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{v_1} = 1\vec{v_1} + 0 \vec{v_2} + 0\vec{v_3}
+\]</div>
+<p>(c)</p>
+<p><span class="math notranslate nohighlight">\(\text{span} \{\vec{v}_1, \vec{v}_2\} \subseteq \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>:</p>
+<p>True. Any linear combination of <span class="math notranslate nohighlight">\(\vec{v}_1\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_2\)</span> is also a linear combination of <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>, <span class="math notranslate nohighlight">\(\vec{v}_2\)</span>, and <span class="math notranslate nohighlight">\(\vec{v}_3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+c_1 \vec{v_1} + c_2 \vec{v_2} = c_1 \vec{v_1} + c_2 \vec{v_2} + 0 \vec{v_3} \in span{\vec{v_1}, \vec{v_2}, \vec{v_3}}
+\]</div>
+<p>(d)</p>
+<p>A set of 4 vectors must be linearly dependent in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>:</p>
+<p>True. If we use the four vectors as columns of a matrix <span class="math notranslate nohighlight">\(A\)</span>, then <span class="math notranslate nohighlight">\(A\)</span> will be <span class="math notranslate nohighlight">\(3 \times 4\)</span> which cannot have a pivot in every column. So the homogeneous system <span class="math notranslate nohighlight">\(A\vec{x}= 0\)</span> has nontrivial solutions making the columns DEPENDENT</p>
+</section>
+<section id="id11">
+<h3>1.3 Solution set of linear Systems.<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Is $\left\lbrace\ \  \begin{bmatrix} 1 \ 2  \3 \end{bmatrix},</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight" id="equation-612fb0db-d0b0-4d65-8344-fcc34a6d2c9e">
+<span class="eqno">(44)<a class="headerlink" href="#equation-612fb0db-d0b0-4d65-8344-fcc34a6d2c9e" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 4 \\ 5  \\6 \end{bmatrix}\]</div>
+<p><strong>Solution:</strong></p>
+<p>Let’s denote the given vectors as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{v}_1 = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}, \quad \vec{v}_2 = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}, \quad \vec{v}_3 = \begin{bmatrix} 7 \\ 8 \\ 9 \end{bmatrix}
+\end{split}\]</div>
+<p>Now, we’ll set up the following linear combination and solve for the coefficients:</p>
+<div class="math notranslate nohighlight">
+\[
+c_1 \vec{v}_1 + c_2 \vec{v}_2 + c_3 \vec{v}_3 = \vec{0}
+\]</div>
+<p>Substituting the given vectors and equating the resulting components to zero, we have the following linear system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+c_1 + 4c_2 + 7c_3 &amp;= 0 \\
+2c_1 + 5c_2 + 8c_3 &amp;= 0 \\
+3c_1 + 6c_2 + 9c_3 &amp;= 0
+\end{align*}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\{\vec{v_1}, \vec{v_2} \vec{v_3}\}\)</span> is a linearly independent set is and only if this system has only the trivial solution. To verify this we set up the augmented matrix of this system and apply the row operations:</p>
+<p>import numpy as np</p>
+<p>A = np.array([[1, 4, 7, 0], [2, 5, 8, 0], [3, 6, 9, 0]])
+A</p>
+<p>A1 = replace(A, 1, 0, -2)
+A1</p>
+<p>A2 = replace(A1, 2, 0, -3)
+A2</p>
+<p>A3 = replace(A2, 2, 1, -2)
+A3</p>
+<p>A4 = scale(A3, 1, -1/3)
+A4</p>
+<p>From see this we can see that <span class="math notranslate nohighlight">\(c_3\)</span> is a free variable and the system has infinitely many solutions, and thus, <span class="math notranslate nohighlight">\(\{\vec{v_1}, \vec{v_2} \vec{v_3}\}\)</span> is linearly dependent.</p>
+<ol class="arabic simple" start="2">
+<li><p>Describe the solution set of <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> where</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix}
+1 &amp; 4 &amp; 7 \\
+2 &amp; 5 &amp; 8 \\
+3 &amp; 6 &amp; 9 \\
+\end{bmatrix},
+\quad
+\vec{b} = \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix},
+\end{split}\]</div>
+<p><strong>Solution:</strong></p>
+<p>Ab = np.array([[1,4,7,1],[2,5,8,2],[3,6,9,3]])
+Ab</p>
+<p><strong>Swap two rows</strong></p>
+<p>def swap(matrix, row1, row2):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>copy_matrix=np.copy(matrix).astype(&#39;float64&#39;) 
+
+copy_matrix[row1,:] = matrix[row2,:]
+copy_matrix[row2,:] = matrix[row1,:]
+
+return copy_matrix
+</pre></div>
+</div>
+<p>** Multiple all entries in a row by a nonzero number **</p>
+<p>def scale(matrix, row, scalar):
+copy_matrix=np.copy(matrix).astype(‘float64’)
+copy_matrix[row,:] = scalar*matrix[row,:]<br />
+return copy_matrix</p>
+<p>** Replacing a row1 by the sum of itself and a multiple of row2 **</p>
+<p>def replace(matrix, row1, row2, scalar):
+copy_matrix=np.copy(matrix).astype(‘float64’)
+copy_matrix[row1] = matrix[row1]+ scalar * matrix[row2]
+return copy_matrix</p>
+<p>B1 = replace(Ab, 1 , 0, -2)
+B1</p>
+<p>B2 = replace(B1, 2 , 0, -3)
+B2</p>
+<p>B3 = replace(B2, 2, 1 , -2)
+B3</p>
+<p>B4 = scale(B3, 1 , -1/3)
+B4</p>
+<p>From this we see that for any <span class="math notranslate nohighlight">\(z \in \mathbb{R}\)</span> we have a unique solution. A general solution for this system is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix}  1 + z\\ -2 z \\ z \end{bmatrix} = \begin{bmatrix}  1 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix}   z\\ -2 z \\ z \end{bmatrix} = \begin{bmatrix}  1 \\ 0 \\ 0 \end{bmatrix} + z \begin{bmatrix}   1\\ -2  \\ 1 \end{bmatrix} 
+\end{split}\]</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1085,11 +1875,11 @@ x + y &amp;= 4 \\
       </div>
     </a>
     <a class="right-next"
-       href="1.2.html"
+       href="2.2.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1.2 Matrix Equations</p>
+        <p class="prev-next-title">2.2 Transpose, Inverse and Trace of Matrices</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1111,13 +1901,52 @@ x + y &amp;= 4 \\
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Linear Systems</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systems-of-linear-equations">1.1 Systems of Linear Equations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear Systems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-a-linear-system">Solving a Linear System</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-equations">1.2 Matrix Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-equation">Vector Equation</a></li>
 </ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#swap-two-rows">Swap two rows</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-all-entries-in-a-row-by-a-nonzero-number">Multiple all entries in a row by a nonzero number</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#replacing-a-row1-by-the-sum-of-itself-and-a-multiple-of-row2">Replacing a row1 by the sum of itself and a multiple of row2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-equation-a-vec-x-vec-b">Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercises:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-set-of-linear-systems">1.3 Solution Set of Linear Systems.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homogenous-linear-systems">Homogenous Linear Systems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Swap two rows</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Multiple all entries in a row by a nonzero number</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Replacing a row1 by the sum of itself and a multiple of row2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-case-the-solution-set-of-non-homogenoues-linear-system">General Case: the solution set of non-homogenoues linear system:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-augemented-matrix-a-b">set up the augemented matrix [A|b]</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#row-reduce-the-augmented-matrix-to-reduced-echelon-form">Row reduce the augmented matrix to reduced echelon form:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#answers-to-exercises">Answers to Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.1 Linear Systems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elementry-row-operations">Elementry row operations:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Swap two rows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Multiple all entries in a row by a nonzero number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1.2 Solution set of linear systems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.3 Solution set of linear Systems.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
