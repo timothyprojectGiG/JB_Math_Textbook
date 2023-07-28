@@ -263,6 +263,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.html">Introduction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Linear Systems</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="2.html">2. Matrices</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
@@ -505,6 +506,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Linear Systems</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systems-of-linear-equations">1.1 Systems of Linear Equations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear Systems</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">Example 1</a></li>
@@ -520,6 +522,15 @@ document.write(`
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-equation">1.2. Matrix Equation.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-equation">Vector Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-equation-a-vec-x-vec-b">Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercises:</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -551,8 +562,8 @@ document.write(`
 a_1 x_1 + a_2 x_2 + \dots + a_n x_n = b
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> are variables, and <span class="math notranslate nohighlight">\(b\)</span> and the coefficients <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n\)</span> are real numbers. A <em>system of linear equations</em> is a collection of linear equations in the same set of variables. For example, a system of <span class="math notranslate nohighlight">\(m\)</span> equations in <span class="math notranslate nohighlight">\(n\)</span> variables <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> can be represented as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b0f481b2-c6f7-47a1-805c-9dd34c825acc">
-<span class="eqno">(38)<a class="headerlink" href="#equation-b0f481b2-c6f7-47a1-805c-9dd34c825acc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-88a67caf-fbf9-4706-b3f8-65db05b219bd">
+<span class="eqno">(38)<a class="headerlink" href="#equation-88a67caf-fbf9-4706-b3f8-65db05b219bd" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n &amp;= b_1 \\
 a_{21} x_1 + a_{22} x_2 + \dots + a_{2n} x_n &amp;= b_2 \\
 &amp;\vdots \\
@@ -1020,6 +1031,549 @@ x + y &amp;= 4 \\
 </section>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="matrix-equation">
+<h1>1.2. Matrix Equation.<a class="headerlink" href="#matrix-equation" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Linear systems can be represented by equations involving vectors and matrices. In this section we use such representations to study and analyze linear systems.</p>
+</div>
+<p>Let <span class="math notranslate nohighlight">\(n\)</span> be a positive integer, and <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> be the collection of all ordered <span class="math notranslate nohighlight">\(n\)</span>-tuples of real numbers. An element of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, denoted by an <span class="math notranslate nohighlight">\(n\times 1\)</span> <strong>column matrix</strong>, and is called a vector.
+For example,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}\end{split}\]</div>
+<p>A vector whose entries are all zero is called <strong>the zero vector</strong> and is denoted by <span class="math notranslate nohighlight">\(\vec{0}\)</span>. When there is no risk of confusion we sometimes omit the arrow and use simply <span class="math notranslate nohighlight">\(0\)</span></p>
+<p>Two vectors <span class="math notranslate nohighlight">\(\vec{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}\)</span> are <strong>equal</strong> if their corresponding entries are equal, that is, if <span class="math notranslate nohighlight">\(u_i = v_i\)</span> for all <span class="math notranslate nohighlight">\(i \leq n\)</span>.</p>
+<p>Given a vector <span class="math notranslate nohighlight">\(\vec{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}\)</span> and a real number <span class="math notranslate nohighlight">\(c\)</span>, the <strong>scalar product</strong> of <span class="math notranslate nohighlight">\(\vec{u}\)</span> by <span class="math notranslate nohighlight">\(c\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}c\vec{u} = \begin{bmatrix} cu_1 \\ cu_2 \\ \vdots \\ cu_n \end{bmatrix}\end{split}\]</div>
+<div class="admonition-theorem-1-properties-of-sum-and-scalar-product admonition">
+<p class="admonition-title">Theorem 1 (properties of sum and scalar product)</p>
+<p>Suppose <span class="math notranslate nohighlight">\(\vec{u}\)</span>, <span class="math notranslate nohighlight">\(\vec{v}\)</span>, <span class="math notranslate nohighlight">\(\vec{w}\)</span> are in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span> are real numbers:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{u} + \vec{v} = \vec{v} + \vec{u}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{u} + \vec{0} = \vec{0} + \vec{u} = \vec{u}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{u} + (-\vec{u}) = \vec{0}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c(\vec{u} + \vec{v}) = c\vec{u} + c\vec{v}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((c+d)\vec{u} = c\vec{u} + d\vec{u}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c(d\vec{u}) = (cd)\vec{u}\)</span></p></li>
+</ol>
+</div>
+<section id="vector-equation">
+<h2>Vector Equation<a class="headerlink" href="#vector-equation" title="Permalink to this heading">#</a></h2>
+<p>A vector <span class="math notranslate nohighlight">\(\vec{y} \in \mathbb{R}^n\)</span> is called a <strong>linear combination</strong> of some vectors <span class="math notranslate nohighlight">\(\vec{u_1}, \vec{u_2}, \dots, \vec{u_p} \in \mathbb{R}^n\)</span>, if there are real numbers <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_p\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[ \vec{y} = c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_p\vec{u_p}\]</div>
+<p>The <strong>span</strong> of vectors <span class="math notranslate nohighlight">\(\vec{u_1}, \vec{u_2}, \dots, \vec{u_p}\)</span>, denoted by <span class="math notranslate nohighlight">\(span\ (\vec{u_1}, \vec{u_2}, \dots, \vec{u_p})\)</span>, is the set of all possible linear combinations:</p>
+<div class="math notranslate nohighlight">
+\[
+span\ (\vec{u_1}, \vec{u_2}, \dots, \vec{u_p})= \{c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_p\vec{u_p}: \,\, c_1,c_2, \dots, c_p \in \mathbb{R}\}
+\]</div>
+<p>In other words, the span represents all the vectors that can be formed by scaling and adding the given vectors <span class="math notranslate nohighlight">\(\vec{u_1}, \vec{u_2}, \dots, \vec{u_p}\)</span>.</p>
+<div class="highlight-{admonition}{Example notranslate"><div class="highlight"><pre><span></span>
+Let $\vec{y}=\begin{bmatrix} 7 \\ -4  \\3 \end{bmatrix}$, $\vec{u}= \begin{bmatrix} 2 \\ -3\\-5 \end{bmatrix}$, and $\vec{v} =\begin{bmatrix} 0 \\ 0  \\1 \end{bmatrix}$.
+
+a. Compute $2 \vec{u} - 3 \vec{v}$.
+b. Determine if $\vec{y}$ is a linear combination of $\vec{u}$ and $\vec{v}$.
+
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>(a).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+2 \vec{u} - 3 \vec{v} = 2 \begin{bmatrix} 2 \\ -3\\-5 \end{bmatrix} - 3 \begin{bmatrix} 0 \\ 0  \\1 \end{bmatrix} = \begin{bmatrix} 4 \\ -6 \\ -10 \end{bmatrix} - \begin{bmatrix} 0 \\ 0  \\3 \end{bmatrix} = \begin{bmatrix} 4 \\ -6 \\ -7 \end{bmatrix}
+\end{split}\]</div>
+<p>Let’s use Python to double check our solution. A vector is a numpy array of a list.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y = &quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">u</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;u = &quot;</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+
+<span class="n">v</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;v = &quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y =  [[ 7 -4  3]]
+u =  [[ 2 -3 -5]]
+v =  [[0 0 1]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(a). Compute 2u-3v</span>
+
+<span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 4, -6, -7]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>(b). To determine if <span class="math notranslate nohighlight">\(\vec{y}\)</span> is a linear combination of <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span>, we need to check if there exist real numbers <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{y} = c_1 \vec{u} + c_2 \vec{v}
+\]</div>
+<p>Substituting the given values, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 7  \\ -4  \\ 3 \end{bmatrix} = c_1 \begin{bmatrix} 2 \\ -3 \\ -5 \end{bmatrix} + c_2 \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+\end{split}\]</div>
+<p>Which is the same as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix} 7 \\ -4  \\3 \end{bmatrix}= \begin{bmatrix} 2x_1 + 0\\ -3c_1 + 0\\-5c_1+c_2 \end{bmatrix}\end{split}\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+ 2c_1 &amp;= 7 \\
+-3c_1 &amp;= -4 \\
+-5c_1+ c_2 &amp;= 3 
+\end{align*}
+\end{split}\]</div>
+<p>This equation cannot be satisfied because there are no values of <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> that can make the left-hand side equal to the right-hand side. Therefore, <span class="math notranslate nohighlight">\(\vec{y}\)</span> is not a linear combination of <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span>.</p>
+<p>In Example 2, to solve a vector equation we converted into a linear system. In general, the vector equation</p>
+<div class="math notranslate nohighlight">
+\[
+x_1\vec{u_1} + x_2\vec{u_1}+ \dots + x_p\vec{u_p} = \vec{y}
+\]</div>
+<p>has the same solution set as the linear system whose augmented matrix is</p>
+<div class="math notranslate nohighlight">
+\[
+[\vec{u_1}, \vec{u_2}, \dots, \vec{u_p}| \vec{y}] \quad (*)
+\]</div>
+<p>Note that for brevity, we represented the augmented matrix by its columns.</p>
+<p>An indexed set of vectors <span class="math notranslate nohighlight">\(\{\vec{v_1}, \vec{v_2}, \dots \vec{v_p}\}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is called a <strong>linearly independet</strong> set if the vector equation:</p>
+<div class="math notranslate nohighlight">
+\[ x_1 \vec{v_1} + x_2 \vec{v_2} + \dots + x_p \vec{v_p} = 0\]</div>
+<p>has only the trivial solution. The set is called <strong>linearly dependent</strong> if there are real numbers <span class="math notranslate nohighlight">\(c_1,c_2, \dots c_p\)</span>, not all zero, such that</p>
+<div class="math notranslate nohighlight">
+\[ c_1 \vec{v_1} + c_2 \vec{v_2} + \dots + c_p \vec{v_p} = 0\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 2</p>
+<ol class="arabic simple">
+<li><p>A set of vectors containing the zero vector is linearly dependent.</p></li>
+<li><p>A set of two vectors is linearly dependent if and only if one is a multiple of the other.</p></li>
+</ol>
+</div>
+<div class="admonition-example-2 admonition">
+<p class="admonition-title">Example 2</p>
+<p>Determine if the following vectors form a linearly independent set:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{u} = \begin{bmatrix} 1\\2\\3 \end{bmatrix} \,\,  \vec{v} = \begin{bmatrix} 4\\5\\6 \end{bmatrix}, \,\,  \vec{w} = \begin{bmatrix} 7\\8\\9 \end{bmatrix}
+\end{split}\]</div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>We convert the augmented matrix in <span class="math notranslate nohighlight">\((*)\)</span> into its REF:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 4, 7, 0],
+       [2, 5, 8, 0],
+       [3, 6, 9, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Swap two rows</span>
+
+<span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">):</span>
+    
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+  
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">,:]</span>
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">,:]</span>
+    
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+
+
+<span class="c1"># Multiple all entries in a row by a nonzero number</span>
+
+
+<span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">scalar</span><span class="o">*</span><span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span>  
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+
+<span class="c1"># Replacing a row1 by the sum of itself and a multiple of row2 </span>
+
+<span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">]</span><span class="o">+</span> <span class="n">scalar</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">]</span> 
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  4.,  7.,  0.],
+       [ 0., -3., -6.,  0.],
+       [ 3.,  6.,  9.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  1.,   4.,   7.,   0.],
+       [  0.,  -3.,  -6.,   0.],
+       [  0.,  -6., -12.,   0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  4.,  7.,  0.],
+       [ 0., -3., -6.,  0.],
+       [ 0.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A4</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">A3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  4.,  7.,  0.],
+       [-0.,  1.,  2., -0.],
+       [ 0.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Writing this matrix as a linear system, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\begin{align*}
+x+ y + 7z =&amp; 0\\
+y +2z =&amp; 0\
+\end{align*}
+\end{split}\]</div>
+<p>From this, it is clear that <span class="math notranslate nohighlight">\(\{\vec{u}, \vec{v}, \vec{w}\}\)</span> is not linearly independent becuase for any nonzero choice of <span class="math notranslate nohighlight">\(z\)</span>, we get a non-trivial solution. For example, if <span class="math notranslate nohighlight">\(z= 1\)</span>, then <span class="math notranslate nohighlight">\(( -5, -2 , 1)\)</span> is a non-trivial solution.</p>
+</section>
+<section id="matrix-equation-a-vec-x-vec-b">
+<h2>Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span><a class="headerlink" href="#matrix-equation-a-vec-x-vec-b" title="Permalink to this heading">#</a></h2>
+<p>Similarly, we can translate a linear system into a matrix equation of the form <span class="math notranslate nohighlight">\(A\vec{x} = \vec{b}\)</span>. To that end, we need to define the product on the left hand side of equality.</p>
+<p>Let A be an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix (a rectangular array) with columns <span class="math notranslate nohighlight">\(\vec{a_1}, \vec{a_2}, \dots, \vec{a_n}\)</span>, and <span class="math notranslate nohighlight">\(\vec{x}\in \mathbb{R}^n\)</span>. We can define the product of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(\vec{x}\)</span>, denoted by <span class="math notranslate nohighlight">\(A\vec{x}\)</span>, as the linear combination of the columns of <span class="math notranslate nohighlight">\(A\)</span> where the coefficients are the components of <span class="math notranslate nohighlight">\(\vec{x}\)</span>:</p>
+<p>$<span class="math notranslate nohighlight">\(A\vec{x}=[\vec{a_1},\  \vec{a_2},\  \dots,\ \vec{a_n}]\, \begin{bmatrix} x_1 \\ x_2\\ \vdots \\ x_n \end{bmatrix}\, := x_1 \vec{a_1} + x_2\vec{a_2} + \dots + x_n \vec{a_n}\)</span>$.</p>
+<p>Note that <span class="math notranslate nohighlight">\(A\vec{x}\)</span> is defined only if the number of columns of A equals to the numbers entries of <span class="math notranslate nohighlight">\(\vec{x}\)</span></p>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 3  (properties of the product of A and <span class="math notranslate nohighlight">\(\vec{x}\)</span>)</p>
+<p>Suppose <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix, <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span> are in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(c\)</span> is a scalar. Then</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(A(\vec{u}+ \vec{v})= A \vec{u} + A \vec{v}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A(c\vec{u})= c A\vec{u}\)</span></p></li>
+</ol>
+</div>
+<p>Now let us discuss how to represent a linear system by a matrix equation. Consider:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+   a_{11} x_1 + a_{12} x_2 +&amp; \dots a_{1n} x_n = \,b_1 \\ 
+   a_{21} x_1 + a_{22} x_2 +&amp; \dots a_{2n} x_n = \,b_2 \\ 
+    &amp;\vdots\\
+   a_{m1} x_1 + a_{n2} x_2 +&amp; \dots a_{mn} x_n = \,b_m \\ 
+\end{align}
+\end{split}\]</div>
+<p>and let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A= \begin{bmatrix} a_{11} &amp;  a_{12} &amp;\dots &amp; a_{1n}\\ a_{21} &amp;  a_{22} &amp; \dots &amp; a_{2n}\\ \vdots&amp; \vdots&amp; \vdots  \\  a_{m1}&amp; a_{m2} &amp;\dots &amp;  a_{mn}\\
+\end{bmatrix}
+\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\(\ \vec{x}= \begin{bmatrix} x_1 \\ x_2\\ \vdots \\ x_n \end{bmatrix}\ \)</span> and  <span class="math notranslate nohighlight">\(\ \vec{b}= \begin{bmatrix} b_1 \\ b_2\\ \vdots \\ b_m \end{bmatrix}\ \)</span>. The matrix A is called the <strong>coefficient matrix</strong>. Then we can rewrite the above linear system as: <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}.\)</span></p>
+<p>The next theorem discribes when a matrix equation has at least a solution.</p>
+<div class="admonition-example-3 admonition">
+<p class="admonition-title">Example 3</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a matrix whose columns are <span class="math notranslate nohighlight">\(\vec{u}\)</span>, <span class="math notranslate nohighlight">\(\vec{v}\)</span>, <span class="math notranslate nohighlight">\(\vec{w}\)</span> from Example 2. Find vectors <span class="math notranslate nohighlight">\(\vec{b}, \vec{c} \in \mathbb{R}^3\)</span> such that <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> has a solution and <span class="math notranslate nohighlight">\(A\vec{x}=\vec{c}\)</span> does not.</p>
+</div>
+<p><strong>Solution:</strong></p>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix}
+1 &amp; 4 &amp; 7 \\
+2 &amp; 5 &amp; 8 \\
+3 &amp; 6 &amp; 9 \\
+\end{bmatrix},
+\quad
+\vec{b} = \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix},
+\quad
+\vec{c} = \begin{bmatrix}
+1 \\
+2 \\
+4 \\
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Now, let’s form the augmented matrix of equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span>:
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c06afa8b-8c1b-4432-9012-4db91c5b7316">
+<span class="eqno">(39)<a class="headerlink" href="#equation-c06afa8b-8c1b-4432-9012-4db91c5b7316" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+1 &amp; 4 &amp; 7 &amp;&amp; 1 \\
+2 &amp; 5 &amp; 8 &amp;&amp; 2 \\
+3 &amp; 6 &amp; 9 &amp;&amp; 3 \\
+\end{bmatrix}\]</div>
+<p>$$</p>
+<p>Now we can perform row operations to verify that it has a solution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">Ab</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 4, 7, 1],
+       [2, 5, 8, 2],
+       [3, 6, 9, 3]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B1</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">Ab</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">B1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  4.,  7.,  1.],
+       [ 0., -3., -6.,  0.],
+       [ 3.,  6.,  9.,  3.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B2</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">B1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">B2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  1.,   4.,   7.,   1.],
+       [  0.,  -3.,  -6.,   0.],
+       [  0.,  -6., -12.,   0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B3</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">B2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">B3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  4.,  7.,  1.],
+       [ 0., -3., -6.,  0.],
+       [ 0.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B4</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">B3</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">B4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  4.,  7.,  1.],
+       [-0.,  1.,  2., -0.],
+       [ 0.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>From this we see that for any <span class="math notranslate nohighlight">\(z \in \mathbb{R}\)</span> we have a unique solution. For example if <span class="math notranslate nohighlight">\(z = 0\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix}  1 \\ 0 \\ 0 \end{bmatrix}
+\end{split}\]</div>
+<p>So the equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> has a solution.</p>
+<p>Now, we solve the equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{c}\)</span> to verify that it does not have a solution. Let’s form the augmented matrix <span class="math notranslate nohighlight">\([A|\vec{c}]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 4 &amp; 7 &amp;&amp; 1 \\
+2 &amp; 5 &amp; 8 &amp;&amp; 2 \\
+3 &amp; 6 &amp; 9 &amp;&amp; 4 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Now we can perform row operations to verify that it does not has a solution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">Ac</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 4, 7, 1],
+       [2, 5, 8, 2],
+       [3, 6, 9, 4]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C1</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">Ac</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">C1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  4.,  7.,  1.],
+       [ 0., -3., -6.,  0.],
+       [ 3.,  6.,  9.,  4.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C2</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">C2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  1.,   4.,   7.,   1.],
+       [  0.,  -3.,  -6.,   0.],
+       [  0.,  -6., -12.,   1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C3</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">C2</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">C3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  1.,   4.,   7.,   1.],
+       [ -0.,   1.,   2.,  -0.],
+       [  0.,  -6., -12.,   1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C4</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">C3</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">C4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  4.,  7.,  1.],
+       [-0.,  1.,  2., -0.],
+       [ 0.,  0.,  0.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Form this, we can see that the last row corresponds to the equation:</p>
+<div class="math notranslate nohighlight">
+\[
+0 = 1
+\]</div>
+<p>Which is not possible. So <span class="math notranslate nohighlight">\(A\vec{x} = \vec{c}\)</span> does not have a solution.</p>
+</section>
+<section id="id3">
+<h2>Exercises:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>Given the system of equations:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+3x + 2y &amp;= 1 \\
+x - 2y + z &amp;= 5 \\
+2x - z &amp;= 0
+\end{align*}
+\end{split}\]</div>
+<p>Write this system as a vector equation and then a matrix equation.</p>
+<ol class="arabic" start="2">
+<li><p>True or False?</p>
+<p>(a). <span class="math notranslate nohighlight">\(\vec{0} \in \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(b). <span class="math notranslate nohighlight">\(\vec{v}_1 \in \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(c). <span class="math notranslate nohighlight">\(\text{span} \{\vec{v}_1, \vec{v}_2\} \subseteq \text{span} \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\)</span>.</p>
+<p>(d). A set 4 vectors must be linearly DEPENDENT in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>.</p>
+</li>
+</ol>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1088,6 +1642,7 @@ x + y &amp;= 4 \\
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Linear Systems</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systems-of-linear-equations">1.1 Systems of Linear Equations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear Systems</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">Example 1</a></li>
@@ -1103,6 +1658,15 @@ x + y &amp;= 4 \\
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-equation">1.2. Matrix Equation.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-equation">Vector Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-equation-a-vec-x-vec-b">Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercises:</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
