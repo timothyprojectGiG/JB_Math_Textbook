@@ -562,6 +562,13 @@ document.write(`
 <li><p>Function Operations, Compositions, and Inverse</p></li>
 </ul>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="function-definition-and-terminology">
 <h2>2.1 Function Definition and Terminology<a class="headerlink" href="#function-definition-and-terminology" title="Permalink to this heading">#</a></h2>
 <p>A <strong>function</strong> is a <em>rule</em> that assigns exactly one output to each input. </br>
@@ -594,8 +601,23 @@ When a function <span class="math notranslate nohighlight">\(f\)</span> has inpu
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter input value x =1
-The output is f(x) = 4.0
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">a1ad107e3cc0</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Ask for user input</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">user_input</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter input value x =&quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Call the function with the user input</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/ipykernel/kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span><span class="s2">         if not self._allow_stdin:</span>
+<span class="ne">--&gt; </span><span class="mi">857</span><span class="s2">             raise StdinNotImplementedError(</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span><span class="s2">             )</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
 </pre></div>
 </div>
 </div>
@@ -608,12 +630,15 @@ The domain and range of a function often depend on the specific characteristics 
 </section>
 <section id="example-2">
 <h3>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
+<div class="admonition-example-2 admonition">
+<p class="admonition-title">Example 2</p>
+<p>Given <span class="math notranslate nohighlight">\(f(x)=\frac{1}{\sqrt{x}}\)</span>. </br>
+Excluding the zeroes of denominator and negative number inside the square root, the domain of <span class="math notranslate nohighlight">\(f(x)\)</span> is <span class="math notranslate nohighlight">\(\left(0,\infty\right)\)</span>. The range of <span class="math notranslate nohighlight">\(f(x)\)</span> hence also <span class="math notranslate nohighlight">\(\left(0,\infty\right)\)</span>.</p>
+</div>
 <p>Code example for <span class="math notranslate nohighlight">\(f(x)\)</span> is given below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
-
-<span class="c1"># Define the function symbolically</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the function symbolically</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
@@ -674,7 +699,12 @@ between point <span class="math notranslate nohighlight">\((x_1,y_1)\)</span> an
 </ul>
 <p>To find the <span class="math notranslate nohighlight">\(x\)</span>-intercept, set <span class="math notranslate nohighlight">\(y = 0\)</span> in the equation <span class="math notranslate nohighlight">\(f(x)=mx+b\)</span> and solve for <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p>Below is the code prompting user to input the constants <span class="math notranslate nohighlight">\(m\)</span>, and <span class="math notranslate nohighlight">\(b\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -713,6 +743,7 @@ between point <span class="math notranslate nohighlight">\((x_1,y_1)\)</span> an
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter the value for the slope (m): 2
 Enter the value for the y-intercept (b): 4
