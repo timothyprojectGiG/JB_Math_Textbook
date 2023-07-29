@@ -265,7 +265,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="1.html">1. Linear Systems</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Matrices and Determinants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3.html">3. Linear Transformations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4.html">4. Eigenvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.html">4. Eigenvalues and Eigenvectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5.html">5. Orthogonality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Solutions.html">Solutions to Exercises</a></li>
 </ul>
@@ -553,8 +553,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-of-square-matrices">Trace of Square Matrices</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determinant">2.1 Determinant</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cofactor-expansion">Cofactor expansion</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determinant">2.3 Determinant</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cofactor-expansion">Cofactor expansion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determinants-as-area-or-volume">Determinants as Area or Volume</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Numerical Note</a></li>
 </ul>
@@ -1782,7 +1782,7 @@ Tr(ABC) = Tr(BCA) = Tr(CAB).
 </section>
 </section>
 <section id="determinant">
-<h2>2.1 Determinant<a class="headerlink" href="#determinant" title="Permalink to this heading">#</a></h2>
+<h2>2.3 Determinant<a class="headerlink" href="#determinant" title="Permalink to this heading">#</a></h2>
 <p>This section introduces the determinant of matrices and explores some of their properties, applications, and computation methods. The determinant of a square matrix is a useful concept in linear algebra and have many theoretical and practical roles, including:</p>
 <ol class="arabic simple">
 <li><p>Determining the invertibility of a matrix.</p></li>
@@ -1792,9 +1792,8 @@ Tr(ABC) = Tr(BCA) = Tr(CAB).
 <li><p>Finding the inverse of an invertible matrix.</p></li>
 </ol>
 <p>Note that applications (4) and (5) are based on Cramer’s rule, which is a theoretical tool but not an efficient computational method. We won’t discuss Cramer’s rule.</p>
-</section>
 <section id="cofactor-expansion">
-<h2>Cofactor expansion<a class="headerlink" href="#cofactor-expansion" title="Permalink to this heading">#</a></h2>
+<h3>Cofactor expansion<a class="headerlink" href="#cofactor-expansion" title="Permalink to this heading">#</a></h3>
 <p>In the previous section, we defined the determinant of a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix as <span class="math notranslate nohighlight">\(det(A) = ad-bc\)</span>, where <span class="math notranslate nohighlight">\(A = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\)</span>. To extend this definition to larger matrices, we follow a recursive approach. For example, to find the determinant of a <span class="math notranslate nohighlight">\(3\times 3\)</span> matrix, we can use <span class="math notranslate nohighlight">\(2\times 2\)</span> determinants.</p>
 <p>Let <span class="math notranslate nohighlight">\(A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; a_{13} \\ a_{21} &amp; a_{22} &amp; a_{23} \\ a_{31} &amp; a_{32} &amp; a_{33} \end{bmatrix}\)</span> be a general <span class="math notranslate nohighlight">\(3\times 3\)</span> matrix. For any entry <span class="math notranslate nohighlight">\(a_{ij}\)</span>, let <span class="math notranslate nohighlight">\(A_{ij}\)</span> denote a <span class="math notranslate nohighlight">\(2\times 2\)</span> submatrix of <span class="math notranslate nohighlight">\(A\)</span> defined by removing the row and column of <span class="math notranslate nohighlight">\(A\)</span> that contain <span class="math notranslate nohighlight">\(a_{ij}\)</span>. For example, <span class="math notranslate nohighlight">\(A_{12} = \begin{bmatrix} a_{21} &amp; a_{23} \\ a_{31} &amp; a_{33} \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(A_{23} = \begin{bmatrix} a_{11} &amp; a_{13} \\ a_{31} &amp; a_{33} \end{bmatrix}\)</span>.</p>
 <div class="admonition-example-1 admonition">
@@ -2135,6 +2134,7 @@ det \begin{bmatrix} 0 &amp; 1 &amp; 2\\ 1 &amp; 0 &amp; 3\\ 4 &amp; -3 &amp; 8 \
 </div>
 <div class="admonition-theorem-11 admonition">
 <p class="admonition-title">Theorem 11</p>
+<p>:class: tip</p>
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be two square matrices of the same size. Then:</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\text{det}(A^T) = \text{det}(A)\)</span>.</p></li>
@@ -2179,6 +2179,7 @@ B = \begin{bmatrix} 1 &amp; 1 &amp; 2\\ 2 &amp; 0 &amp; 3\\ 5 &amp; -3 &amp; 8 \
 </div>
 </div>
 </div>
+</section>
 <section id="determinants-as-area-or-volume">
 <h3>Determinants as Area or Volume<a class="headerlink" href="#determinants-as-area-or-volume" title="Permalink to this heading">#</a></h3>
 <div class="tip admonition">
@@ -2386,8 +2387,8 @@ A = \begin{bmatrix} 1 &amp; 1 &amp; 2 \\ 2 &amp; 0 &amp; 3 \\ 5 &amp; -3 &amp; 8
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-of-square-matrices">Trace of Square Matrices</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determinant">2.1 Determinant</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cofactor-expansion">Cofactor expansion</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determinant">2.3 Determinant</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cofactor-expansion">Cofactor expansion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determinants-as-area-or-volume">Determinants as Area or Volume</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Numerical Note</a></li>
 </ul>
