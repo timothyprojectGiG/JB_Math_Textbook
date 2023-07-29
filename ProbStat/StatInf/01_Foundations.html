@@ -264,6 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/0.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/1.html">1. Linear Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/2.html">2. Matrices and Determinants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/3.html">3. Linear Transformations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
@@ -854,8 +855,8 @@ document.write(`
 </div>
 <p>Now let’s compare this to the theory. What does the Central Limit Theorem tell us?</p>
 <p>If the sample size is “large enough”, then the sample mean, considered as a random variable, is approximately normally distributed with the same mean as the population and with standard deviation equal to the population standard deviation divided by the sample size. In mathematical language,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-72ff1378-92f8-489e-a5af-94bd3b8a9444">
-<span class="eqno">(4)<a class="headerlink" href="#equation-72ff1378-92f8-489e-a5af-94bd3b8a9444" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-246c315f-26d1-4f52-9052-330550c3b603">
+<span class="eqno">(4)<a class="headerlink" href="#equation-246c315f-26d1-4f52-9052-330550c3b603" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \displaystyle \overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right),
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\overline{X}\)</span> is the sample mean, <span class="math notranslate nohighlight">\(\mu\)</span> is the population mean, <span class="math notranslate nohighlight">\(\sigma\)</span> is the population standard deviation, and <span class="math notranslate nohighlight">\(n\)</span> is the sample size.</p>
@@ -1117,13 +1118,13 @@ if (outputEl) {{
 </div>
 </div>
 <p>Now we know where <span class="math notranslate nohighlight">\(\overline X\)</span> is likely to fall in relation to <span class="math notranslate nohighlight">\(\mu\)</span>. We can express what we see in the graph as a probability:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ae23a13e-0933-4b95-8d6d-a3ac48637398">
-<span class="eqno">(5)<a class="headerlink" href="#equation-ae23a13e-0933-4b95-8d6d-a3ac48637398" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-082d8096-5dbb-44c8-b572-cac71c7d77ed">
+<span class="eqno">(5)<a class="headerlink" href="#equation-082d8096-5dbb-44c8-b572-cac71c7d77ed" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P\left(\mu-1.96 \frac{\sigma}{\sqrt{n}} \le \overline X \le \mu + 1.96  \frac{\sigma}{\sqrt{n}}\right) = .95.
 \end{equation}\]</div>
 <p>With a little bit of algebraic manipulation, we can write this as an interval for <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bf77644e-75f6-47c0-afdf-39945ba5fe8f">
-<span class="eqno">(6)<a class="headerlink" href="#equation-bf77644e-75f6-47c0-afdf-39945ba5fe8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-03a61404-8e42-4e8b-827a-86448849f639">
+<span class="eqno">(6)<a class="headerlink" href="#equation-03a61404-8e42-4e8b-827a-86448849f639" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P\left(\overline{X}-1.96 \frac{\sigma}{\sqrt{n}} \le \mu \le \overline{X} + 1.96  \frac{\sigma}{\sqrt{n}}\right) = .95.
 \end{equation}\]</div>
 <p>In the real world, we’ll have a value of <span class="math notranslate nohighlight">\(\overline{X}\)</span>, and we want to know where <span class="math notranslate nohighlight">\(\mu\)</span> is. This second interval gives us exactly this! Look at what’s on the upper and lower side of the interval: (almost) all things we can calculate from the data, like <span class="math notranslate nohighlight">\(\overline X\)</span> and <span class="math notranslate nohighlight">\(n\)</span> (we’ll discuss how to handle the <span class="math notranslate nohighlight">\(\sigma\)</span> in a moment). This gives an interval for <span class="math notranslate nohighlight">\(\mu\)</span>, the population mean that we can’t calculate but want to know.</p>
