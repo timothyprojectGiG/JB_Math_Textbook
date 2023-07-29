@@ -17,28 +17,47 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-#define the function f(x)
-def f(x): 
-    return x+3
+# Prompt the user to input the slope and y-intercept
+m = float(input("Enter the value for the slope (m): "))
+b = float(input("Enter the value for the y-intercept (b): "))
 
-# Ask for user input
-user_input = float(input("Enter input value x =")) 
+# Define the linear function
+def linear_function(x):
+    return m * x + b
 
-# Call the function with the user input
-output = f(user_input) 
+# Generate a range of x values for plotting
+x = np.linspace(-10, 10, 100)
 
-# Print the output
-print("The output is f(x) =", output) 
+# Compute the corresponding y values using the linear function
+y = linear_function(x)
+
+# Plot the linear function
+plt.plot(x, y, label='f(x) = mx + b')
+
+# Plot the x-axis and y-axis lines
+plt.axhline(0, color='black', linewidth=0.5)  # x-axis
+plt.axvline(0, color='black', linewidth=0.5)  # y-axis
+
+# Set plot labels and title
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Linear Function')
+
+# Add a legend
+plt.legend()
+
+# Display the plot
+plt.show()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
-[0;32m<ipython-input-2-a1ad107e3cc0>[0m in [0;36m<module>[0;34m[0m
+[0;32m<ipython-input-4-4594bf52a55e>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;31m# Prompt the user to input the slope and y-intercept[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0mm[0m [0;34m=[0m [0mfloat[0m[0;34m([0m[0minput[0m[0;34m([0m[0;34m"Enter the value for the slope (m): "[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0mb[0m [0;34m=[0m [0mfloat[0m[0;34m([0m[0minput[0m[0;34m([0m[0;34m"Enter the value for the y-intercept (b): "[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      4[0m [0;34m[0m[0m
-[1;32m      5[0m [0;31m# Ask for user input[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 6[0;31m [0muser_input[0m [0;34m=[0m [0mfloat[0m[0;34m([0m[0minput[0m[0;34m([0m[0;34m"Enter input value x ="[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      7[0m [0;34m[0m[0m
-[1;32m      8[0m [0;31m# Call the function with the user input[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;31m# Define the linear function[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/anaconda3/lib/python3.8/site-packages/ipykernel/kernelbase.py[0m in [0;36mraw_input[0;34m(self, prompt)[0m
 [1;32m    855[0m         """
