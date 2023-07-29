@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Matrices and Determinants &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+    <title>2. Matrices and Determinants &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
   
   
@@ -263,7 +263,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1.html">1. Linear Systems</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Matrices and Determinants</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Matrices and Determinants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Solutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
@@ -527,7 +527,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Matrices and Determinants</h1>
+    <h1>2. Matrices and Determinants</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -544,6 +544,18 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-note">Numerical Note</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose-inverse-and-trace-of-matrices">2.2 Transpose, Inverse and Trace of matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose-of-a-matrix">Transpose of a matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-of-a-square-matrix">Inverse of a square matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-of-square-matrices">Trace of Square Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determinant">2.1 Determinant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cofactor-expansion">Cofactor expansion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determinants-as-area-or-volume">Determinants as Area or Volume</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Numerical Note</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -555,8 +567,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="matrices-and-determinants">
-<h1>Matrices and Determinants<a class="headerlink" href="#matrices-and-determinants" title="Permalink to this heading">#</a></h1>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="matrices-and-determinants">
+<h1>2. Matrices and Determinants<a class="headerlink" href="#matrices-and-determinants" title="Permalink to this heading">#</a></h1>
 <section id="matrix-algebra">
 <h2>2.1 Matrix Algebra<a class="headerlink" href="#matrix-algebra" title="Permalink to this heading">#</a></h2>
 <p>This section focuses on matrix algebra and its properties. We will also explore how operations involving matrices are connected to linear systems.</p>
@@ -832,7 +851,7 @@ A = \begin{bmatrix} 0 &amp; 2 &amp; -1\\ 2 &amp; 3 &amp; 1 \end{bmatrix}.
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#2.</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">A</span> <span class="o">+</span> <span class="n">C</span>
 
@@ -869,9 +888,7 @@ $$.</p>
 <p><span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(2 \times 3\)</span> and B is a <span class="math notranslate nohighlight">\(3 \times 2\)</span> matrix; so the product is defined. In Python we use the sympol <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> to compute the matrix product</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="c1">#A</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#A</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
 
 <span class="c1">#B</span>
@@ -932,7 +949,7 @@ C = \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 4 &amp; 5 &amp; 6 &amp; 7 \end{
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Compute AC</span>
 <span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">AC</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">C</span>
@@ -982,9 +999,7 @@ C = \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 4 &amp; 5 &amp; 6 &amp; 7 \end{
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span>
 
 <span class="n">A2</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">A</span>
 <span class="n">A2</span>
@@ -1116,7 +1131,7 @@ C = \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 4 &amp; 5 &amp; 6 &amp; 7 \end{
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># C@D is not defined for vectors</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> A@B = </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">C</span> <span class="o">@</span> <span class="n">D</span><span class="p">)</span>
 
@@ -1150,7 +1165,7 @@ C = \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 4 &amp; 5 &amp; 6 &amp; 7 \end{
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># If one argument is a real number  @ and matmul are not defined </span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="mi">2</span> <span class="o">@</span> <span class="n">B</span>
 
@@ -1168,7 +1183,7 @@ C = \begin{bmatrix} 1 &amp; 2 &amp; 3 &amp; 4 \\ 4 &amp; 5 &amp; 6 &amp; 7 \end{
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 
 <span class="ne">ValueError</span>: matmul: Input operand 0 does not have enough dimensions (has 0, gufunc core with signature (n?,k),(k,m?)-&gt;(n?,m?) requires 1)
@@ -1214,6 +1229,1074 @@ A= \begin{bmatrix}
 1 &amp; 2 \\ 1&amp; 2 \end{bmatrix}$, find a nonzero matrix  $C$ for which $AC= \begin{bmatrix}
 0 &amp; 0 \\ 0 &amp; 0
 \end{bmatrix}.
+\end{split}\]</div>
+</div>
+</section>
+</section>
+<section id="transpose-inverse-and-trace-of-matrices">
+<h2>2.2 Transpose, Inverse and Trace of matrices<a class="headerlink" href="#transpose-inverse-and-trace-of-matrices" title="Permalink to this heading">#</a></h2>
+<p>In this section, we will continue studying the basic operators on the set of matrices, focusing on the transpose, inverse, and trace of a square matrix.</p>
+<section id="transpose-of-a-matrix">
+<h3>Transpose of a matrix<a class="headerlink" href="#transpose-of-a-matrix" title="Permalink to this heading">#</a></h3>
+<p>Given an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>, the transpose of <span class="math notranslate nohighlight">\(A\)</span> is the <span class="math notranslate nohighlight">\(n\times m\)</span> matrix denoted by <span class="math notranslate nohighlight">\(A^T\)</span>, whose columns are the corresponding rows of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="admonition-example-1 admonition">
+<p class="admonition-title">Example 1</p>
+<p>If</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6 \end{bmatrix},
+\end{split}\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M^T = \begin{bmatrix} 1 &amp; 3 &amp; 5 \\ 2 &amp; 4 &amp; 6 \end{bmatrix}.
+\end{split}\]</div>
+</div>
+<p>In Python we can either use<code class="docutils literal notranslate"><span class="pre">narray.T</span></code> or <code class="docutils literal notranslate"><span class="pre">narray.transpose()</span></code> to find the transpose of a matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+
+<span class="c1">#Compute the the transpose of M</span>
+<span class="n">M_T</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;M = &quot;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s2">&quot;M_T = &quot;</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">M_T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M =  
+ [[1 2]
+ [3 4]
+ [5 6]] 
+
+ M_T =  
+ [[1 3 5]
+ [2 4 6]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Compute the the transpose of M</span>
+<span class="n">M_transpose</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;M = &quot;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s2">&quot;M_T = &quot;</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">M_transpose</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M =  
+ [[1 2]
+ [3 4]
+ [5 6]] 
+
+ M_T =  
+ [[1 3 5]
+ [2 4 6]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">transpose</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code> both have different effect on a list and a list of lists:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># transpose of a list of lists</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1],
+       [2],
+       [3]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># does not effect 1D array</span>
+<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inverse-of-a-square-matrix">
+<h3>Inverse of a square matrix<a class="headerlink" href="#inverse-of-a-square-matrix" title="Permalink to this heading">#</a></h3>
+<p>An <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is called invertible if there exists an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(B\)</span> such that <span class="math notranslate nohighlight">\(AB = BA = I_n\)</span>. In this case, <span class="math notranslate nohighlight">\(B\)</span> is referred to as the inverse of <span class="math notranslate nohighlight">\(A\)</span>, denoted as <span class="math notranslate nohighlight">\(A^{-1}\)</span>. It is important to note that not all matrices are invertible.</p>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 3</p>
+<p>Let <span class="math notranslate nohighlight">\(A= \begin{bmatrix} a &amp; b \\ c &amp; d\\ \end{bmatrix}\)</span>. If <span class="math notranslate nohighlight">\(ad-bc \neq 0\)</span>, then <span class="math notranslate nohighlight">\(A\)</span> is invertible, and its inverse is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A^{-1}= \frac{1}{ad-bc}\begin{bmatrix} d &amp; -b \\ -c &amp; a\\ \end{bmatrix}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(ad-bc\)</span> is called the <strong>determinant</strong> of matrix A. The determinant plays a crucial role in determining the invertibility of a square matrix. If the determinant is zero, i.e., <span class="math notranslate nohighlight">\(ad-bc = 0\)</span>, then matrix A is not invertible. Determinants of matrices will be discussed in the next section, where we will explore their properties and computation methods.</p>
+</div>
+<div class="admonition-example-2 admonition">
+<p class="admonition-title">Example 2</p>
+<ol class="arabic simple">
+<li><p>Find the inverse of <span class="math notranslate nohighlight">\(M= \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{bmatrix}\)</span>.</p></li>
+<li><p>Find the inverse of <span class="math notranslate nohighlight">\(N= \begin{bmatrix} 1 &amp; 2 \\ 2 &amp; 4\\ \end{bmatrix}\)</span>.</p></li>
+</ol>
+</div>
+<p><strong>Solution:</strong></p>
+<p>Let’s write a Python code that computes the inverse of a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+
+<span class="c1"># Compute the inverse</span>
+<span class="k">def</span> <span class="nf">inverse_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">det</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">d</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">c</span>
+
+    <span class="k">if</span> <span class="n">det</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="s2">&quot;is not invertible&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">det</span>    
+        <span class="n">inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">inverse</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">D</span> <span class="o">*</span> <span class="n">d</span>
+        <span class="n">inverse</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">D</span> <span class="o">*</span> <span class="n">b</span>
+        <span class="n">inverse</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">D</span> <span class="o">*</span> <span class="n">c</span>
+        <span class="n">inverse</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">D</span> <span class="o">*</span> <span class="n">a</span>
+
+        <span class="k">return</span><span class="p">(</span><span class="n">inverse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inverse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2. ,  1. ],
+       [ 1.5, -0.5]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inverse_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 2]
+ [2 4]] is not invertible
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 4 (properties of the inverse matrix)</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be two invertible <span class="math notranslate nohighlight">\(n\times n\)</span> matrices.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\((A^{-1})^{-1} = A\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((AB)^{-1} = B^{-1}A^{-1}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((A^{T})^{-1} = (A^{-1})^{T}\)</span></p></li>
+</ol>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 5 (computing the inverse of a square matrix)</p>
+<p>An <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is invertible if and only if it is row equivalent to the identity matrix <span class="math notranslate nohighlight">\(I_n\)</span>.</p>
+</div>
+<p>We can use this theorem to find the inverse of a matrix using the row reduction method: set up the augmented matrix <span class="math notranslate nohighlight">\([A|I_n]\)</span> and perform row operations until the left side of the augmented matrix becomes the identity matrix <span class="math notranslate nohighlight">\(I_n\)</span>. If this is achieved, then the right side of the augmented matrix will be the inverse of <span class="math notranslate nohighlight">\(A\)</span>. Otherwise, if the left side does not become <span class="math notranslate nohighlight">\(I_n\)</span>, then the matrix <span class="math notranslate nohighlight">\(A\)</span> is not invertible.</p>
+<div class="admonition-example-3 admonition">
+<p class="admonition-title">Example 3</p>
+<p>Find the inverse of <span class="math notranslate nohighlight">\(M= \begin{bmatrix} 0 &amp; 1 &amp; 2\\ 1 &amp; 0 &amp; 3\\ 4 &amp; -3 &amp; 8 \end{bmatrix}\)</span>.</p>
+</div>
+<p><strong>Solution</strong> Lets set up the augmented matrix and find its RREF:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+[M|I_3]= \begin{bmatrix} 0 &amp; 1 &amp; 2 &amp;&amp; 1 &amp; 0 &amp; 0\\ 1 &amp; 0 &amp; 3 &amp;&amp;  0 &amp; 0 &amp; 1 \\ 4 &amp; -3 &amp; 8 &amp;&amp; 0 &amp; 0 &amp; 1\end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># matrix M</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
+<span class="n">M</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  1,  2],
+       [ 1,  0,  3],
+       [ 4, -3,  8]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># identity matrix I_3</span>
+
+<span class="n">I3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">I3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Augmented matrix [A,I_3]</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">I3</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.,  1.,  2.,  1.,  0.,  0.],
+       [ 1.,  0.,  3.,  0.,  1.,  0.],
+       [ 4., -3.,  8.,  0.,  0.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now lets call row operations</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Elementry row operations:</span>
+
+<span class="c1"># Swap two rows</span>
+
+<span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">):</span>
+    
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+  
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">,:]</span>
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">,:]</span>
+    
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+
+
+<span class="c1"># Multiple all entries in a row by a nonzero number</span>
+
+
+<span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">scalar</span><span class="o">*</span><span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span>  
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+
+<span class="c1"># Replacing a row by the sum of itself and a multiple of another </span>
+
+<span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">]</span><span class="o">+</span> <span class="n">scalar</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">]</span> 
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_1</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">A_1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  3.,  0.,  1.,  0.],
+       [ 0.,  1.,  2.,  1.,  0.,  0.],
+       [ 4., -3.,  8.,  0.,  0.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_2</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A_1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">A_2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  3.,  0.,  1.,  0.],
+       [ 0.,  1.,  2.,  1.,  0.,  0.],
+       [ 0., -3., -4.,  0., -4.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_3</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A_2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">A_3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  3.,  0.,  1.,  0.],
+       [ 0.,  1.,  2.,  1.,  0.,  0.],
+       [ 0.,  0.,  2.,  3., -4.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_4</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">A_3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A_4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1. ,  0. ,  3. ,  0. ,  1. ,  0. ],
+       [ 0. ,  1. ,  2. ,  1. ,  0. ,  0. ],
+       [ 0. ,  0. ,  1. ,  1.5, -2. ,  0.5]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_5</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A_4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A_5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1. ,  0. ,  3. ,  0. ,  1. ,  0. ],
+       [ 0. ,  1. ,  0. , -2. ,  4. , -1. ],
+       [ 0. ,  0. ,  1. ,  1.5, -2. ,  0.5]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_6</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">A_5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A_6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1. ,  0. ,  0. , -4.5,  7. , -1.5],
+       [ 0. ,  1. ,  0. , -2. ,  4. , -1. ],
+       [ 0. ,  0. ,  1. ,  1.5, -2. ,  0.5]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that the resulting matrix is in the form <span class="math notranslate nohighlight">\([I_3, B]\)</span>. Thus, <span class="math notranslate nohighlight">\(B= \begin{bmatrix} -4.5 &amp; 7 &amp; -1.5\\ -2 &amp;  4 &amp; -1 \\ 1.5 &amp; -2 &amp; 0.5 \\ \end{bmatrix}\)</span> is the inverse of <span class="math notranslate nohighlight">\(M\)</span>.</p>
+<p><strong>Remark</strong> We can also use an <code class="docutils literal notranslate"><span class="pre">np.linalg.inv()</span></code> function, from NumPy linear algebra submodule, to find an inverse of a matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-4.5,  7. , -1.5],
+       [-2. ,  4. , -1. ],
+       [ 1.5, -2. ,  0.5]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 6 (The Invertible Matrix Theorem)</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix. The following statements are equivalent:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is an invertible matrix.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is row equivalent to <span class="math notranslate nohighlight">\(I_n\)</span>.</p></li>
+<li><p>The equation <span class="math notranslate nohighlight">\(A\vec{x}=0\)</span> has only the trivial solution (<span class="math notranslate nohighlight">\(\vec{x} = \mathbf{0}\)</span>).</p></li>
+<li><p>The columns of <span class="math notranslate nohighlight">\(A\)</span> form a linearly independent set.</p></li>
+<li><p>The equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> has a unique solution (<span class="math notranslate nohighlight">\(\vec{x} = A^{-1}\vec{b}\)</span>).</p></li>
+<li><p>The columns of <span class="math notranslate nohighlight">\(A\)</span> span <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p></li>
+</ol>
+</div>
+<div class="admonition-example-4 admonition">
+<p class="admonition-title">Example 4</p>
+<p>Find the solution set of the following linear systems:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(M\vec{x}=0\)</span>, where <span class="math notranslate nohighlight">\(M\)</span> is the matrix from Example 7.</p></li>
+<li><p><span class="math notranslate nohighlight">\(M\vec{x}=\vec{b}\)</span>, where <span class="math notranslate nohighlight">\(M\)</span> is the matrix from Example 7 and <span class="math notranslate nohighlight">\(\vec{b}=\begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}\)</span>.</p></li>
+</ol>
+</div>
+<p><strong>Solution:</strong></p>
+<ol class="arabic simple">
+<li><p>Since <span class="math notranslate nohighlight">\(M\)</span> is invertible, by the Invertible Matrix Theorem part (3), the only solution to <span class="math notranslate nohighlight">\(M\vec{x}=0\)</span> is the zero vector <span class="math notranslate nohighlight">\(\vec{x}=\mathbf{0}\)</span>.</p></li>
+<li><p>By IMT part (5), the only solution to <span class="math notranslate nohighlight">\(M\vec{x}=\vec{b}\)</span> is <span class="math notranslate nohighlight">\(\vec{x}=M^{-1}\vec{b}\)</span>. In Example 7, we computed the inverse of <span class="math notranslate nohighlight">\(M\)</span>:</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(A^{-1} = \begin{bmatrix} -4.5 &amp; 7 &amp; -1.5 \\ -2 &amp; 4 &amp; -1 \\ 1.5 &amp; -2 &amp; 0.5 \end{bmatrix}\)</span></p>
+<p>In the following cell, we use <span class="math notranslate nohighlight">\(B\)</span> to represent <span class="math notranslate nohighlight">\(A^{-1}\)</span> to simplify notation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+
+<span class="c1">#compute Bb</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">b</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 5.],
+       [ 3.],
+       [-1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+
+<span class="c1">#compute Mx</span>
+
+<span class="n">Mx</span><span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">x</span>
+<span class="n">Mx</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.],
+       [2.],
+       [3.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>which is <span class="math notranslate nohighlight">\(\vec{b}\)</span>.</p>
+</section>
+<section id="trace-of-square-matrices">
+<h3>Trace of Square Matrices<a class="headerlink" href="#trace-of-square-matrices" title="Permalink to this heading">#</a></h3>
+<p>The trace of an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>, denoted by <span class="math notranslate nohighlight">\(Tr(A)\)</span> or <span class="math notranslate nohighlight">\(tr(A)\)</span>, is defined as the sum of the elements on its main diagonal:</p>
+<div class="math notranslate nohighlight">
+\[
+Tr(A) = a_{11} + a_{22} + \dots + a_{nn} = \sum^{n}_{i=1} a_{ii}
+\]</div>
+<div class="admonition-theorem-7-properties-of-the-trace admonition">
+<p class="admonition-title">Theorem 7 (properties of the trace)</p>
+<p>:class: tip</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices, and <span class="math notranslate nohighlight">\(c \in \mathbb{R}\)</span>. Then we have the following:</p>
+<ol class="arabic simple">
+<li><p><strong>Trace of sum:</strong> <span class="math notranslate nohighlight">\(Tr(A + B) = Tr(A) + Tr(B)\)</span></p></li>
+<li><p><strong>Trace of scalar product:</strong> <span class="math notranslate nohighlight">\(Tr(cA) = c \cdot Tr(A)\)</span></p></li>
+<li><p><strong>Trace of identity matrix:</strong> <span class="math notranslate nohighlight">\(Tr(I_n) = n\)</span></p></li>
+<li><p><strong>Trace of product:</strong> <span class="math notranslate nohighlight">\(Tr(AB) = Tr(BA)\)</span></p></li>
+</ol>
+</div>
+<p>The trace can also be seen as a function from the set of <span class="math notranslate nohighlight">\(n\times n\)</span> matrices to real numbers. It can be shown that there is only one function that satisfies the above conditions.</p>
+<div class="admonition-example-5 admonition">
+<p class="admonition-title">Example 5</p>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M = \begin{bmatrix} 0 &amp; 1 &amp; 2\\ 1 &amp; 0 &amp; 3\\ 4 &amp; -3 &amp; 8 \end{bmatrix}.
+\end{split}\]</div>
+<p>Then:</p>
+<div class="math notranslate nohighlight">
+\[
+Tr(M) = 0 + 0 + 8 = 8.
+\]</div>
+</div>
+<p>For large matrices, we can use <code class="docutils literal notranslate"><span class="pre">numpy.trace()</span></code> to compute the trace. The following code generates a random <span class="math notranslate nohighlight">\(5\times 5\)</span> matrix and computes its trace:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate a 5x5 matrix</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+
+<span class="c1">#compute the trace</span>
+<span class="n">Tr_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Tr(A) = &#39;</span><span class="p">,</span> <span class="n">Tr_A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.34123286 0.3788517  0.62749816 0.49779428 0.85625537]
+ [0.49841636 0.64059001 0.97192421 0.82065731 0.73171872]
+ [0.93029465 0.82685801 0.34255562 0.22621385 0.40893711]
+ [0.20730845 0.35221413 0.95709886 0.62781555 0.49836643]
+ [0.75311689 0.22947177 0.40015054 0.20169886 0.86231891]]
+
+ Tr(A) =  2.814512956289748
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>Suppose</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A= \begin{bmatrix}
+1 &amp; 2 \\
+0 &amp; -1 \\
+3 &amp; 0
+\end{bmatrix}.
+\end{split}\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(a) Compute $A^T$.
+
+(b) Is $AA^T$ invertible? 
+
+(c) Is $A^TA$ invertible?
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>The trace is invariant under cyclic permutations, i.e., for three matrices we have <span class="math notranslate nohighlight">\(Tr(ABC) = Tr(BCA) = Tr(CAB)\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(n\times p\)</span> matrix, <span class="math notranslate nohighlight">\(B\)</span> is a <span class="math notranslate nohighlight">\(p\times m\)</span> matrix, and <span class="math notranslate nohighlight">\(C\)</span> is an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix. Using Example 9, generate three matrices <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> such that the product <span class="math notranslate nohighlight">\(ABC\)</span> makes sense, and verify that:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+Tr(ABC) = Tr(BCA) = Tr(CAB).
+\]</div>
+</div>
+</section>
+</section>
+<section id="determinant">
+<h2>2.1 Determinant<a class="headerlink" href="#determinant" title="Permalink to this heading">#</a></h2>
+<p>This section introduces the determinant of matrices and explores some of their properties, applications, and computation methods. The determinant of a square matrix is a useful concept in linear algebra and have many theoretical and practical roles, including:</p>
+<ol class="arabic simple">
+<li><p>Determining the invertibility of a matrix.</p></li>
+<li><p>Determining the linear dependency of a set of vectors.</p></li>
+<li><p>Computing the area of parallelograms or the volume of parallelepipeds.</p></li>
+<li><p>Solving linear systems (Cramer’s rule).</p></li>
+<li><p>Finding the inverse of an invertible matrix.</p></li>
+</ol>
+<p>Note that applications (4) and (5) are based on Cramer’s rule, which is a theoretical tool but not an efficient computational method. We won’t discuss Cramer’s rule.</p>
+</section>
+<section id="cofactor-expansion">
+<h2>Cofactor expansion<a class="headerlink" href="#cofactor-expansion" title="Permalink to this heading">#</a></h2>
+<p>In the previous section, we defined the determinant of a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix as <span class="math notranslate nohighlight">\(det(A) = ad-bc\)</span>, where <span class="math notranslate nohighlight">\(A = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\)</span>. To extend this definition to larger matrices, we follow a recursive approach. For example, to find the determinant of a <span class="math notranslate nohighlight">\(3\times 3\)</span> matrix, we can use <span class="math notranslate nohighlight">\(2\times 2\)</span> determinants.</p>
+<p>Let <span class="math notranslate nohighlight">\(A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; a_{13} \\ a_{21} &amp; a_{22} &amp; a_{23} \\ a_{31} &amp; a_{32} &amp; a_{33} \end{bmatrix}\)</span> be a general <span class="math notranslate nohighlight">\(3\times 3\)</span> matrix. For any entry <span class="math notranslate nohighlight">\(a_{ij}\)</span>, let <span class="math notranslate nohighlight">\(A_{ij}\)</span> denote a <span class="math notranslate nohighlight">\(2\times 2\)</span> submatrix of <span class="math notranslate nohighlight">\(A\)</span> defined by removing the row and column of <span class="math notranslate nohighlight">\(A\)</span> that contain <span class="math notranslate nohighlight">\(a_{ij}\)</span>. For example, <span class="math notranslate nohighlight">\(A_{12} = \begin{bmatrix} a_{21} &amp; a_{23} \\ a_{31} &amp; a_{33} \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(A_{23} = \begin{bmatrix} a_{11} &amp; a_{13} \\ a_{31} &amp; a_{33} \end{bmatrix}\)</span>.</p>
+<div class="admonition-example-1 admonition">
+<p class="admonition-title">Example 1</p>
+<p>Write a Python code that prints all submatrices of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M = \begin{bmatrix} 1 &amp; 2 &amp; 3\\ 4 &amp; 5 &amp; 6\\ 7 &amp; 8 &amp; 9 \end{bmatrix}.
+\end{split}\]</div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="n">M</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">submatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span> <span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">j</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39; </span><span class="se">\n</span><span class="s1"> M(&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;) = </span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">submatrix</span><span class="p">)</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="mi">30</span><span class="o">*</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 
+ M( 0 0 ) = 
+ 
+ [[5 6]
+ [8 9]]
+******************************
+ 
+ M( 1 0 ) = 
+ 
+ [[2 3]
+ [8 9]]
+******************************
+ 
+ M( 2 0 ) = 
+ 
+ [[2 3]
+ [5 6]]
+******************************
+ 
+ M( 0 1 ) = 
+ 
+ [[4 6]
+ [7 9]]
+******************************
+ 
+ M( 1 1 ) = 
+ 
+ [[1 3]
+ [7 9]]
+******************************
+ 
+ M( 2 1 ) = 
+ 
+ [[1 3]
+ [4 6]]
+******************************
+ 
+ M( 0 2 ) = 
+ 
+ [[4 5]
+ [7 8]]
+******************************
+ 
+ M( 1 2 ) = 
+ 
+ [[1 2]
+ [7 8]]
+******************************
+ 
+ M( 2 2 ) = 
+ 
+ [[1 2]
+ [4 5]]
+******************************
+</pre></div>
+</div>
+</div>
+</div>
+<p>The determinant of <span class="math notranslate nohighlight">\(A\)</span>, expanded over the first row, is defined as:</p>
+<div class="math notranslate nohighlight">
+\[ det(A) = \sum_{k=1}^{3} (-1)^{1+k} a_{1k}|A_{1k}| = a_{11}|A_{11}| - a_{12}|A_{12}| + a_{13}|A_{13}|\]</div>
+<p>Here <span class="math notranslate nohighlight">\(|A_{ij}|\)</span> represents the determinant of the <span class="math notranslate nohighlight">\(A_{ij}\)</span>. Note that choosing a different row or column would give the same value. For example, using the second row:</p>
+<div class="math notranslate nohighlight">
+\[ det(A) = \sum_{k=1}^{3} (-1)^{2+k} a_{2k}|A_{2k}| = -a_{21}|A_{21}| + a_{22}|A_{22}| - a_{23}|A_{23}|\]</div>
+<p>Similarly, using the second column:</p>
+<div class="math notranslate nohighlight">
+\[ det(A) = \sum_{k=1}^{3} (-1)^{k+2} a_{k2}|A_{k2}| = -a_{12}|A_{12}| + a_{22}|A_{22}| - a_{32}|A_{32}|\]</div>
+<div class="admonition-example-2 admonition">
+<p class="admonition-title">Example 2</p>
+<p>Compute the determinent of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M= \begin{bmatrix} 0 &amp; 1 &amp; 2\\ 1 &amp; 0 &amp; 3\\ 4 &amp; -3 &amp; 8 \end{bmatrix}.
+\end{split}\]</div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>Lets write a Python code that computes the determinant of a <span class="math notranslate nohighlight">\(3\times 3\)</span> matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Computes a 2x2 determinant</span>
+<span class="k">def</span> <span class="nf">det2</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please enter a 2x2 matrix&quot;</span><span class="p">)</span>
+
+<span class="c1"># Computes the 3x3 determinat over a given row</span>
+
+<span class="k">def</span> <span class="nf">det3</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">det</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">submatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row</span> <span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">j</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>   
+            <span class="n">det</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">det2</span><span class="p">(</span><span class="n">submatrix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">det</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The input matrix is not 3x3 or the row is not chosen in the right range&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">det3</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can observe that selecting a different row does not affect the value of the determinant:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">det3</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2
+</pre></div>
+</div>
+</div>
+</div>
+<p>The determinant of an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix A can be defined the same way recursievely:</p>
+<div class="math notranslate nohighlight">
+\[
+det(A) = \sum^{n}_{i=1} (-1)^{1+i} a_{1i} det(A_{1i})
+\]</div>
+<p>This formula is called <strong>a cofactor expansion across the first row</strong> of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Let’s write a Python code that computes the determinant of a square matrix of an arbitary size:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Computes the determinant of an nxn matrix.</span>
+
+<span class="k">def</span> <span class="nf">det</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">det</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">submatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">j</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>   
+            <span class="n">det</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">0</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">det2</span><span class="p">(</span><span class="n">submatrix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">det</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># determinant of matrix M</span>
+<span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s discuss the properties of determinants:</p>
+<p>If <span class="math notranslate nohighlight">\(A = \begin{bmatrix} a &amp; 0 \\ c &amp; d \end{bmatrix}\)</span>, then <span class="math notranslate nohighlight">\(det(A) = ad\)</span>. We can generalize this observation using induction:</p>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 8</p>
+<p>The determinant of a triangular matrix is the product of its diagonal entries.</p>
+</div>
+<p>Next, we will explore the impact of row operations on determinants.</p>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 9</p>
+<ol class="arabic simple">
+<li><p>If a multiple of one row of matrix <span class="math notranslate nohighlight">\(A\)</span> is added to another row to produce matrix <span class="math notranslate nohighlight">\(B\)</span>, then <span class="math notranslate nohighlight">\(det(A) = det(B)\)</span>.</p></li>
+<li><p>If two rows are interchanged to produce matrix <span class="math notranslate nohighlight">\(B\)</span>, then <span class="math notranslate nohighlight">\(det(A) = -det(B)\)</span>.</p></li>
+<li><p>If one row is multiplied by a scalar <span class="math notranslate nohighlight">\(k\)</span> to produce matrix <span class="math notranslate nohighlight">\(B\)</span>, then <span class="math notranslate nohighlight">\(det(A) = k \cdot det(B)\)</span>.</p></li>
+</ol>
+<p>Consequently, if a square matrix <span class="math notranslate nohighlight">\(A\)</span> is reduced to <span class="math notranslate nohighlight">\(U\)</span> using only row replacements and <span class="math notranslate nohighlight">\(r\)</span> row swaps, then</p>
+<div class="math notranslate nohighlight">
+\[
+det(A) = (-1)^r \cdot det(U)
+\]</div>
+</div>
+<p>By combining <strong>Theorem 8</strong> and <strong>Theorem 9</strong>, we can compute determinants effectively.</p>
+<div class="admonition-example-3 admonition">
+<p class="admonition-title">Example 3</p>
+<p>Compute</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+det \begin{bmatrix} 0 &amp; 1 &amp; 2\\ 1 &amp; 0 &amp; 3\\ 4 &amp; -3 &amp; 8 \end{bmatrix}.
+\end{split}\]</div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>We first convert the matrix to its row echelon form (REF) and then use Theorem 1 to find the determinant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+
+<span class="c1"># Elementry row operations:</span>
+
+<span class="c1"># Swap two rows</span>
+
+<span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">):</span>
+    
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+  
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">,:]</span>
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">,:]</span>
+    
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+
+
+<span class="c1"># Multiple all entries in a row by a nonzero number</span>
+
+
+<span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">scalar</span><span class="o">*</span><span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span>  
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+
+<span class="c1"># Replacing a row by the sum of itself and a multiple of another </span>
+
+<span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">copy_matrix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+    <span class="n">copy_matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row1</span><span class="p">]</span><span class="o">+</span> <span class="n">scalar</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">]</span> 
+    <span class="k">return</span> <span class="n">copy_matrix</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M1</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">M1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  3.],
+       [ 0.,  1.,  2.],
+       [ 4., -3.,  8.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M2</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">M2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  3.],
+       [ 0.,  1.,  2.],
+       [ 0., -3., -4.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M3</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">M3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1., 0., 3.],
+       [0., 1., 2.],
+       [0., 0., 2.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we used only one row swap, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{det}(M) = - \text{det}(M_3)
+\]</div>
+<p>Using Theorem 9, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{det}(M) = - \text{det}(M_3) = -2
+\]</div>
+<p>As mentioned in the introduction, the determinant can be used to check the invertibility of matrices.</p>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 10 (Determinants and Invertibility)</p>
+<p>A square matrix <span class="math notranslate nohighlight">\(A\)</span> is invertible if and only if <span class="math notranslate nohighlight">\(\text{det}(A) \neq 0\)</span>.</p>
+</div>
+<div class="admonition-theorem-11 admonition">
+<p class="admonition-title">Theorem 11</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be two square matrices of the same size. Then:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\text{det}(A^T) = \text{det}(A)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{det}(AB) = \text{det}(A) \cdot \text{det}(B)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A\)</span> is invertible, then <span class="math notranslate nohighlight">\(\text{det}(A)^{-1} = \frac{1}{\text{det}(A)}\)</span>.</p></li>
+</ol>
+</div>
+<div class="admonition-example-4 admonition">
+<p class="admonition-title">Example 4</p>
+<p>Compute</p>
+<div class="math notranslate nohighlight">
+\[
+\text{det}(B^4),
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+B = \begin{bmatrix} 1 &amp; 1 &amp; 2\\ 2 &amp; 0 &amp; 3\\ 5 &amp; -3 &amp; 8 \end{bmatrix}.
+\end{split}\]</div>
+</div>
+<p><strong>Solution:</strong> Using Theorem 11 part 2, it’s easy to see that</p>
+<div class="math notranslate nohighlight">
+\[
+\text{det}(B^4) = (\text{det}(B))^4.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+
+<span class="c1">#compute det(B)</span>
+<span class="n">det</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+<span class="c1">#using Theorem 4 to compute det(B)^4</span>
+
+<span class="n">det</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">**</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>256
+</pre></div>
+</div>
+</div>
+</div>
+<section id="determinants-as-area-or-volume">
+<h3>Determinants as Area or Volume<a class="headerlink" href="#determinants-as-area-or-volume" title="Permalink to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">Theorem 12</p>
+<ol class="arabic simple">
+<li><p>If <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrix, then <span class="math notranslate nohighlight">\(|\text{det}(A)|\)</span> is the area of the parallelogram determined by the columns of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(3 \times 3\)</span> matrix, then <span class="math notranslate nohighlight">\(|\text{det}(A)|\)</span> is the volume of the parallelepiped determined by the columns of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+</div>
+<p>In particular, three points <span class="math notranslate nohighlight">\(\vec{u}, \vec{v}, \vec{w}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> are coplanar ( i.e., they lie on the same plane) if and only if <span class="math notranslate nohighlight">\(\text{det}([\vec{u}, \vec{v}, \vec{w}]) = 0\)</span>.</p>
+<p>The theorem is obviously true for diagonal matrices.</p>
+<div class="admonition-example-5 admonition">
+<p class="admonition-title">Example 5</p>
+<ol class="arabic simple">
+<li><p>Let</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix} 3 &amp; 0 \\ 0 &amp; -2 \end{bmatrix}.
+\end{split}\]</div>
+<p>The area of the parallelogram determined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} a \\ 0 \end{bmatrix}$ and $\begin{bmatrix} 0 \\ d \end{bmatrix} 
+\end{split}\]</div>
+<p>is $|-6| = 6.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define x and y values for the lines</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+
+<span class="c1"># Plot the lines on the same plane</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add labels to the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Show the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fb677eb3a366e759cf564371d36bed87393eac9c8484e9560a75e4dc815cf122.png" src="../../_images/fb677eb3a366e759cf564371d36bed87393eac9c8484e9560a75e4dc815cf122.png" />
+</div>
+</div>
+<div class="admonition-example-6 admonition">
+<p class="admonition-title">Example 6</p>
+<p>Determine if the following points are coplaner.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 1 \\ 0  \\2 \end{bmatrix},  
+\begin{bmatrix} 4 \\ 3  \\5 \end{bmatrix}, \begin{bmatrix} 3 \\ 4 \\6 \end{bmatrix}
+\end{split}\]</div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>To determine if the above points are coplanar, we check whether or not <span class="math notranslate nohighlight">\(det \left(\ \begin{bmatrix} 1 &amp; 0 &amp; 2 \\ 4 &amp; 3 &amp; 5 \\ 3 &amp; 4 &amp; 6 \end{bmatrix}\ \right) = 0\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+
+<span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since <span class="math notranslate nohighlight">\(det(A)\neq 0\)</span>, the mentioned points are not coplanar. In fact they form a parrallelopiped of volume 12.</p>
+</section>
+<section id="id1">
+<h3>Numerical Note<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>In this section, we discussed two different ways to compute the determinant of a square matrix: cofactor expansion and row operations.</p>
+<p>While cofactor expansion is a straightforward approach, it becomes computationally impossible for large matrices. In fact, cofactor expansion requires <span class="math notranslate nohighlight">\(n!\)</span> multiplications for an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix. If a computer can perform a trillion multiplications per second, computing the determinant of a <span class="math notranslate nohighlight">\(25 \times 25\)</span> matrix would take approximately <span class="math notranslate nohighlight">\(500 \times 500\)</span> years!</p>
+<p>On the other hand, evaluating the determinant of an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix using row operations involves about <span class="math notranslate nohighlight">\(\frac{2n^3}{3}\)</span> arithmetic operations. Using this method, the determinant of a <span class="math notranslate nohighlight">\(25 \times 25\)</span> matrix can be computed in a fraction of a second on most microcomputers.</p>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix such that <span class="math notranslate nohighlight">\(A^2 = I_n\)</span>. Show that <span class="math notranslate nohighlight">\(det(A) = \pm 1\)</span>.</p></li>
+<li><p>Find the determinant of</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix} 1 &amp; 1 &amp; 2 \\ 2 &amp; 0 &amp; 3 \\ 5 &amp; -3 &amp; 8 \end{bmatrix}
+\end{split}\]</div>
+<p>using the row reduction method.</p>
+<ol class="arabic simple" start="3">
+<li><p>Use determinants to decide if the set</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\lbrace \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}, \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix}, \begin{bmatrix} 7 \\ 8 \\ 9 \end{bmatrix} \right\rbrace
+\end{split}\]</div>
+<p>is linearly independent.</p>
+<ol class="arabic" start="4">
+<li><p>Suppose <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(P\)</span> are <span class="math notranslate nohighlight">\(n\times n\)</span> matrices, <span class="math notranslate nohighlight">\(P\)</span> is invertible, and <span class="math notranslate nohighlight">\(r\)</span> is a real number. Mark True or False:</p>
+<p>a. <span class="math notranslate nohighlight">\(det(A+B) = det(A) + det(B)\)</span>.</p>
+<p>b. <span class="math notranslate nohighlight">\(det(rA) = r \cdot det(A)\)</span>.</p>
+<p>c. <span class="math notranslate nohighlight">\(det(PAP^{-1}) = det(A)\)</span>.</p>
+</li>
+<li><p>Determine if the following points are coplanar (i.e., they lie on the same plane):</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 1 \\ 0 \\ 2 \end{bmatrix}, \begin{bmatrix} 4 \\ 3 \\ 5 \end{bmatrix}, \begin{bmatrix} 3 \\ 0 \\ 6 \end{bmatrix}
 \end{split}\]</div>
 </div>
 </section>
@@ -1292,6 +2375,18 @@ A= \begin{bmatrix}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-algebraic-operations">Basic Algebraic Operations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-product">Matrix Product</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-note">Numerical Note</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose-inverse-and-trace-of-matrices">2.2 Transpose, Inverse and Trace of matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose-of-a-matrix">Transpose of a matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-of-a-square-matrix">Inverse of a square matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trace-of-square-matrices">Trace of Square Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determinant">2.1 Determinant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cofactor-expansion">Cofactor expansion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determinants-as-area-or-volume">Determinants as Area or Volume</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Numerical Note</a></li>
 </ul>
 </li>
 </ul>
