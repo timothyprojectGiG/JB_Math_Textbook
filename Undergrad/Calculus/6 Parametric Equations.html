@@ -241,7 +241,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="5%20Integrals.html">5. Integrals</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Parametric Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="7%20Sequences%20and%20Series.html">7. Sequences and Series</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Solution%20to%20Calculus%20Exercises.html">Solution to Calculus Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Solution%20to%20Calculus%20Exercises.html">2. Functions</a></li>
+
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -1240,6 +1245,65 @@ Note that the use of <span class="math notranslate nohighlight">\(t\)</span> ins
     - $r=\cos(\theta)+\sin(3\theta)$ for $0\leq \theta \leq \dfrac{2\pi}{3}$
 </pre></div>
 </div>
+<div class="admonition-jnb-supplement admonition">
+<p class="admonition-title">JNB Supplement</p>
+<p>JNBs can be used to create  .gif animations of paramtric curves.  For example, the code below is used to an animate a cycloid curve traced by a point on the rim of a wheel.</p>
+</div>
+<a class="reference internal image-reference" href="../../_images/cycloid.gif"><img alt="../../_images/cycloid.gif" class="align-center" src="../../_images/cycloid.gif" style="width: 500px;" /></a>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+<span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="o">%</span><span class="k">matplotlib</span> notebook
+<span class="n">frames</span><span class="o">=</span><span class="mi">50</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+    <span class="c1">#---Plot the Cycloid--------</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+    <span class="n">xt</span><span class="o">=</span><span class="n">t</span><span class="o">/</span><span class="mi">2</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>      
+    <span class="n">yt</span><span class="o">=.</span><span class="mi">5</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="c1">#----Plot the Wheel-----------      </span>
+    <span class="n">circle</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">frames</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
+    <span class="c1">#Plot the point on the rim of the wheel</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">frames</span> <span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">frames</span><span class="p">),</span> <span class="o">.</span><span class="mi">5</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">frames</span><span class="p">),</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+       
+<span class="c1">#----- Save the Animation as cycloid.gif</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
+    <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;=Image.open(&quot;&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&quot;)&#39;</span><span class="p">)</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+<span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;cycloid.gif&#39;</span><span class="p">,</span>
+               <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">append_images</span><span class="o">=</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+               <span class="n">duration</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+               <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="admonition-jnb-exercise admonition">
+<p class="admonition-title">JNB Exercise</p>
+<p>A hypocycloid curve is formed by a point on a circle rotating along the inside rim of another circle. The parametric equations are</p>
+<p><span class="math notranslate nohighlight">\(x(t) = (a-b) \cos t + b \cos(\frac{a-b}{b}t)\)</span></p>
+<p><span class="math notranslate nohighlight">\(y(t) = (a-b) \sin t - b \sin(\frac{a-b}{b}t)\)</span></p>
+<p>Create an animation of a hypocycloid curve for the case <span class="math notranslate nohighlight">\(a=1\)</span>, <span class="math notranslate nohighlight">\(b=1/4\)</span>.</p>
+</div>
+<a class="reference internal image-reference" href="../../_images/hypocycloid.gif"><img alt="../../_images/hypocycloid.gif" class="align-center" src="../../_images/hypocycloid.gif" style="width: 500px;" /></a>
 </section>
 </section>
 
