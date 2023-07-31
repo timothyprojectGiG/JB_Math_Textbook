@@ -557,11 +557,23 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="second-order-differential-equations">
 <h1>4. Second-Order Differential Equations<a class="headerlink" href="#second-order-differential-equations" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In this section, we will start with some general theory of <span class="math notranslate nohighlight">\(n\)</span>th-order linear differential equations to motivate the techniques used for solving second-order differential equations. Second-order differential equations play a critical role in mathematical physics and engineering disciplines due to their ubiquity in modelling natural phenomena. They are differential equations in which the highest order derivative is of the second order. Specifically, a second-order differential equation can be written as <span class="math notranslate nohighlight">\(\frac{d^2x}{dt^2} = f(t, x, \frac{dx}{dt})\)</span> where <span class="math notranslate nohighlight">\(x\)</span> is the unknown function we are interested in, <span class="math notranslate nohighlight">\(t\)</span> is the independent variable, <span class="math notranslate nohighlight">\(\frac{dx}{dt}\)</span> is the first derivative of <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(\frac{d^2x}{dt^2}\)</span> is the second derivative of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p>Examples of the practical applications of second-order differential equations include but are not limited to: modeling the motion of a spring (harmonic oscillator), predicting the population dynamics in ecology, and describing the behavior of electric circuits. They are also widely used in the fields of physics, economics, and engineering to create mathematical models of real-world situations. One reason for the importance of second-order equations is that if <span class="math notranslate nohighlight">\(x(t)\)</span> represents the position of an object at time <span class="math notranslate nohighlight">\(t\)</span>, then <span class="math notranslate nohighlight">\(x'(t)\)</span> is its instantaneous velocity and <span class="math notranslate nohighlight">\(x''(t)\)</span> is its acceleration; thus, real-world problems from the physical sciences often lead to equations of this type.</p>
 <p>Solving second-order differential equations can be quite complex and may involve techniques such as characteristic equations, method of undetermined coefficients, and variation of parameters, among others. The nature of the solution can widely vary depending on the form of the equation. For instance, solutions can be real or complex, periodic or exponential, convergent, or divergent. Some special types of second-order differential equations, like the Cauchy-Euler equation or the Bessel’s equation, have their own dedicated methods of solutions due to their unique structure.</p>
 <p>As we explore the world of second-order differential equations, we uncover a variety of mathematical landscapes with significant implications for understanding the world around us. Through these equations, we can dive deep into the patterns and behaviors that underscore numerous phenomena, both natural and man-made.</p>
-<p>Recall a general linear <span class="math notranslate nohighlight">\(n\)</span>th-order initial-value problem is of the form $<span class="math notranslate nohighlight">\(a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=g(x)\)</span><span class="math notranslate nohighlight">\( where \)</span>y(x_0)=y_0<span class="math notranslate nohighlight">\(, \)</span>y’(x_0)=y_1<span class="math notranslate nohighlight">\(, \)</span>\dots<span class="math notranslate nohighlight">\(, \)</span>y{(n-1)}(x_0)=y_{n-1}<span class="math notranslate nohighlight">\(. Recall the number of initial conditions must match the order of the differential equation and they must have the same input \)</span>x_0<span class="math notranslate nohighlight">\(. We call a linear differential equation **homogeneous** if \)</span>g(x)=0<span class="math notranslate nohighlight">\(, or in other words, if it can be written as \)</span><span class="math notranslate nohighlight">\(a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=0.\)</span>$</p>
+</div>
+<p>Recall a general linear <span class="math notranslate nohighlight">\(n\)</span>th-order initial-value problem is of the form</p>
+<div class="math notranslate nohighlight">
+\[
+a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=g(x)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(y(x_0)=y_0\)</span>, <span class="math notranslate nohighlight">\(y'(x_0)=y_1\)</span>, <span class="math notranslate nohighlight">\(\dots\)</span>, <span class="math notranslate nohighlight">\(y{(n-1)}(x_0)=y_{n-1}\)</span>. Recall the number of initial conditions must match the order of the differential equation and they must have the same input <span class="math notranslate nohighlight">\(x_0\)</span>. We call a linear differential equation <strong>homogeneous</strong> if <span class="math notranslate nohighlight">\(g(x)=0\)</span>, or in other words, if it can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=0.
+\]</div>
 <section id="general-theory">
 <h2>4.1 General Theory<a class="headerlink" href="#general-theory" title="Permalink to this heading">#</a></h2>
 <p>One of the most important principles for homogeneous equations is the <strong>Superposition Principle</strong> which states that if <span class="math notranslate nohighlight">\(y_1, y_2 \dots, y_n\)</span> are solutions to the homogeneous linear <span class="math notranslate nohighlight">\(n\)</span>th-order differential equation <span class="math notranslate nohighlight">\(a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=0\)</span> on an interval <span class="math notranslate nohighlight">\(I\)</span>. Then the linear combination <span class="math notranslate nohighlight">\(y(x)= c_1y_1(x) + c_2y_2(x) + \dots + c_ny_n(x)\)</span> where <span class="math notranslate nohighlight">\(c_k\)</span> is an arbitrary constant for each <span class="math notranslate nohighlight">\(k\)</span> is also a solution on <span class="math notranslate nohighlight">\(I\)</span>. In other words, we can build new solutions from existing solutions. This idea is critical in solving second-order differential equations.</p>
@@ -570,8 +582,16 @@ document.write(`
 <li><p>If <span class="math notranslate nohighlight">\(y\)</span> is a solution to a homogeneous differential equation, then so is <span class="math notranslate nohighlight">\(cy\)</span> for any constant <span class="math notranslate nohighlight">\(c\)</span>. In other words, we can scale every solution to produce another solution.</p></li>
 <li><p><span class="math notranslate nohighlight">\(y=0\)</span> is a solution to every homogeneous differential equation. This comes from setting <span class="math notranslate nohighlight">\(c_k=0\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
 </ol>
-<p><strong>Example</strong> Consider the differential equation <span class="math notranslate nohighlight">\(y''-4y=0\)</span>. Verify that <span class="math notranslate nohighlight">\(y(x)=e^{2x}\)</span> and <span class="math notranslate nohighlight">\(y(x)=e^{-2x}\)</span>. Use the Superposition Principle to conclude that <span class="math notranslate nohighlight">\(y(x) = Ae^{2x}+Be^{-2x}\)</span> is also a solution for any constants <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p>
-<div class="cell docutils container">
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Consider the differential equation <span class="math notranslate nohighlight">\(y''-4y=0\)</span>. Verify that <span class="math notranslate nohighlight">\(y(x)=e^{2x}\)</span> and <span class="math notranslate nohighlight">\(y(x)=e^{-2x}\)</span>. Use the Superposition Principle to conclude that <span class="math notranslate nohighlight">\(y(x) = Ae^{2x}+Be^{-2x}\)</span> is also a solution for any constants <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check that y=e^{2x} is a solution </span>
 <span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
@@ -594,6 +614,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the function f(x): exp(2*x)
 This is the derivative of f(x): 2*exp(2*x)
@@ -605,7 +626,12 @@ This is the second derivative of f(x): 4*exp(2*x)
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check that y=e^{-2x} is a solution </span>
 <span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
@@ -628,6 +654,7 @@ This is the second derivative of f(x): 4*exp(2*x)
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is the function f(x): exp(-2*x)
 This is the derivative of f(x): -2*exp(-2*x)
@@ -644,38 +671,56 @@ This is the second derivative of f(x): 4*exp(-2*x)
 <section id="linear-homogeneous-differential-equations-with-constant-coefficients">
 <h2>4.2 Linear Homogeneous Differential Equations with Constant Coefficients<a class="headerlink" href="#linear-homogeneous-differential-equations-with-constant-coefficients" title="Permalink to this heading">#</a></h2>
 <p>We expect solutions of an <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous differential equation with constant coefficients <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)} + \dots + a_1x' + a_0x = 0\)</span> to be of the form <span class="math notranslate nohighlight">\(x(t) = e^{kt}\)</span> for some constant <span class="math notranslate nohighlight">\(k\)</span>. We also know that if <span class="math notranslate nohighlight">\(x_1(t)=e^{k_1t}\)</span> and <span class="math notranslate nohighlight">\(x_2(t) = e^{k_2t}\)</span> are both solutions, then <span class="math notranslate nohighlight">\(x(t) = c_1e^{k_1t}+c_2e^{k_2t}\)</span>, where <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> are any constants, is also a solution by the Superposition Principle.</p>
-<p><strong>Motivating Example</strong> Find all solutions to <span class="math notranslate nohighlight">\(x'' - 7x' +12x =0\)</span>.</p>
+<div class="admonition-motivating-example admonition">
+<p class="admonition-title">Motivating Example</p>
+<p>Find all solutions to <span class="math notranslate nohighlight">\(x'' - 7x' +12x =0\)</span>.</p>
 <p>Suppose <span class="math notranslate nohighlight">\(x(t)=e^{kt}\)</span> is a solution. This means it satisfies our differential equation. Since <span class="math notranslate nohighlight">\(x'(t) = ke^{kt}\)</span> and <span class="math notranslate nohighlight">\(x''(t) = k^2e^{kt}\)</span>, we know</p>
 <p><span class="math notranslate nohighlight">\(x'' - 7x' +12x = k^2e^{kt} -7ke^{kt}+12e^{kt} = e^{kt}(k^2-7k+12)=0\)</span>.</p>
 <p>Since <span class="math notranslate nohighlight">\(e^{kt} \neq 0\)</span>, we know that <span class="math notranslate nohighlight">\(k^2-7k+12=0\)</span> when <span class="math notranslate nohighlight">\(e^{kt}\)</span> is a solution. We call the equation <span class="math notranslate nohighlight">\(k^2-7k+12=0\)</span> the <strong>characteristic equation</strong> of the differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k^2-7k+12=(k-3)(k-4)=0\)</span>. Thus, <span class="math notranslate nohighlight">\(k=3\)</span> or <span class="math notranslate nohighlight">\(k=4\)</span> meaning that <span class="math notranslate nohighlight">\(x(t)=e^{3t}\)</span> and <span class="math notranslate nohighlight">\(x(t)=e^{4t}\)</span> are both solutions to the differential equation. Moreover, by the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1e^{3t} + c_2e^{4t}\)</span> are also solutions for all constants <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span>.</p>
 <p>So a natural question is did we find all solutions? We found an infinite family of solutions, but how do we know there are not any other solutions? We will be exploring this question next.</p>
+</div>
 <p>A set of functions is said to be <strong>linearly dependent</strong> if one function can be written as a linear combination of the others. This means that a set of function <span class="math notranslate nohighlight">\(\{f_1(t), f_2(t), \dots, f_n(t)\}\)</span> is linearly dependent if there exist constants <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_n\)</span> <strong>not all zero</strong> such that <span class="math notranslate nohighlight">\(c_1f_1(t)+c_2f_2(t)+\dots+c_nf_n(t)=0\)</span>. A set of functions is said to be <strong>linearly independent</strong> if the only way <span class="math notranslate nohighlight">\(c_1f_1(t)+c_2f_2(t)+\dots+c_nf_n(t)=0\)</span> is true is if all of the <span class="math notranslate nohighlight">\(c_i\)</span> are zero.</p>
-<p><strong>Example</strong></p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\{1, t, 4t+2\}\)</span> is a linearly dependent set of functions because 2(1)+4(t)-(4t+2)=0.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\{1, x, x^2\}\)</span> is a linearly independent set of functions because c_1+c_2x+c_3x^2=0 only when c_1=c_2=c_3=0.</p></li>
 </ul>
+</div>
 <p>It turns out that this idea of linearly dependent/independent set of functions allows us to precisely answer the earlier question of “Did we find all solutions?” through the following theorem.</p>
-<p><strong>Theorem</strong>: Every <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equations has a set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent solutions; this is called a <strong>fundamental set of solutions</strong>. Let <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> be a fundamental set of solutions of an <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equation. By the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1x_1(t)+c_2x_2(t)+\dots+c_nx_n(t)\)</span> is also a solutions; we call this the <strong>general solution</strong>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Theorem</p>
+<p>Every <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equations has a set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent solutions; this is called a <strong>fundamental set of solutions</strong>. Let <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> be a fundamental set of solutions of an <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equation. By the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1x_1(t)+c_2x_2(t)+\dots+c_nx_n(t)\)</span> is also a solutions; we call this the <strong>general solution</strong>.</p>
+</div>
 <p>Let’s now return to our motivating example.</p>
-<p><strong>Motivating Example</strong> Find all solutions to <span class="math notranslate nohighlight">\(x'' - 7x' +12x =0\)</span>.</p>
+<div class="admonition-motivating-example-continued admonition">
+<p class="admonition-title">Motivating Example (continued)</p>
+<p>Find all solutions to <span class="math notranslate nohighlight">\(x'' - 7x' +12x =0\)</span>.</p>
 <p>Recall previously we found that <span class="math notranslate nohighlight">\(x(t)=e^{3t}\)</span> and <span class="math notranslate nohighlight">\(x(t)=e^{4t}\)</span> are both solutions to the differential equation. Moreover, by the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1e^{3t} + c_2e^{4t}\)</span> are also solutions for all constants <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span>.</p>
 <p>Since this differential equation is second-order, we know that the fundamental set of solutions contains two linearly independent solutions. Notice that <span class="math notranslate nohighlight">\(e^{3t}\)</span> and <span class="math notranslate nohighlight">\(e^{4t}\)</span> are linearly independent as <span class="math notranslate nohighlight">\(c_1e^{3t}+c_2e^{4t}=0\)</span> only when <span class="math notranslate nohighlight">\(c_1=c_2=0\)</span>. This means that <span class="math notranslate nohighlight">\(\{e^{3t},e^{4t}\}\)</span> <em>is</em> the fundamental set of solutions and thus, the general solution <span class="math notranslate nohighlight">\(x(t)= c_1e^{3t} + c_2e^{4t}\)</span> does capture <em>all</em> solutions of this differential equation.</p>
+</div>
 <p>We will now look at two other examples that will ultimately motivate our strategy for these second-order differential equations.</p>
-<p><strong>Example</strong> Find all solutions to <span class="math notranslate nohighlight">\(x'' - 6x' +9x =0\)</span>.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Find all solutions to <span class="math notranslate nohighlight">\(x'' - 6x' +9x =0\)</span>.</p>
 <p>Suppose <span class="math notranslate nohighlight">\(x(t)=e^{kt}\)</span> is a solution. This means it satisfies our differential equation. Since <span class="math notranslate nohighlight">\(x'(t) = ke^{kt}\)</span> and <span class="math notranslate nohighlight">\(x''(t) = k^2e^{kt}\)</span>, we know</p>
 <p><span class="math notranslate nohighlight">\(x'' - 6x' +9x = k^2e^{kt} -6ke^{kt}+9e^{kt} = e^{kt}(k^2-6k+9)=0\)</span>.</p>
 <p>Since <span class="math notranslate nohighlight">\(e^{kt} \neq 0\)</span>, we know that <span class="math notranslate nohighlight">\(k^2-6k+9=0\)</span> when <span class="math notranslate nohighlight">\(e^{kt}\)</span> is a solution. Thus, <span class="math notranslate nohighlight">\(k^2-6k+9=0\)</span> is the <strong>characteristic equation</strong> of this differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k^2-6k+9=(k-3)(k-3)=0\)</span>. Thus, <span class="math notranslate nohighlight">\(k=3\)</span> meaning that <span class="math notranslate nohighlight">\(x(t)=e^{3t}\)</span> is a solution to the differential equation. But, since this differential equation is second-order, we know that the fundamental set of solutions contains two linearly independent solutions. This means we are missing one.</p>
 <p>We will now guess a second solution that is linearly independent from the first solution. Our guess is <span class="math notranslate nohighlight">\(y(t)=te^{3t}\)</span>. The motivation for the guess is that we expect the solution to look “like” <span class="math notranslate nohighlight">\(x(t)=e^{3t}\)</span> and be linearly independent from it. But now we need to verify that our guess is actually a solution. If <span class="math notranslate nohighlight">\(y(t)=te^{3t}\)</span> is a solution, then it satisfies our differential equation. Since <span class="math notranslate nohighlight">\(y'(t) = 3te^{3t}+e^{3t}\)</span> and <span class="math notranslate nohighlight">\(y''(t) = 9te^{3t}+6e^{3t}\)</span>, we know  <span class="math notranslate nohighlight">\(x'' - 6x' +9x = (9te^{3t}+6e^{3t}) -6(3te^{3t}+e^{3t})+9(te^{3t}) =0\)</span>. Thus, <span class="math notranslate nohighlight">\(y(t)=te^{3t}\)</span> is a solution.</p>
 <p>This means that <span class="math notranslate nohighlight">\(\{e^{3t},te^{3t}\}\)</span> <em>is</em> the fundamental set of solutions and thus, the general solution <span class="math notranslate nohighlight">\(x(t)= c_1e^{3t} + c_2te^{3t}\)</span> does capture <em>all</em> solutions of this differential equation.</p>
-<p><strong>Example</strong> Find the <em>real-valued</em> general solution to <span class="math notranslate nohighlight">\(x'' +9x =0\)</span>.</p>
+</div>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Find the <em>real-valued</em> general solution to <span class="math notranslate nohighlight">\(x'' +9x =0\)</span>.</p>
 <p>Suppose <span class="math notranslate nohighlight">\(x(t)=e^{kt}\)</span> is a solution. This means it satisfies our differential equation. Since <span class="math notranslate nohighlight">\(x'(t) = ke^{kt}\)</span> and <span class="math notranslate nohighlight">\(x''(t) = k^2e^{kt}\)</span>, we know</p>
 <p><span class="math notranslate nohighlight">\(x''+9x = k^2e^{kt} +9e^{kt} = e^{kt}(k^2+9)=0\)</span>.</p>
 <p>Since <span class="math notranslate nohighlight">\(e^{kt} \neq 0\)</span>, we know that <span class="math notranslate nohighlight">\(k^2+9=0\)</span> when <span class="math notranslate nohighlight">\(e^{kt}\)</span> is a solution. Thus, <span class="math notranslate nohighlight">\(k^2+9=0\)</span> is the <strong>characteristic equation</strong> of this differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k^2+9=0\)</span>. Thus, <span class="math notranslate nohighlight">\(k=\pm3i\)</span> meaning that <span class="math notranslate nohighlight">\(x_1(t)=e^{3it}\)</span> and <span class="math notranslate nohighlight">\(x_2(t)=e^{-3it}\)</span> are solutions to the differential equation. But, these are not <em>real-valued</em> solutions.</p>
 <p>Recall Euler’s formula which says that <span class="math notranslate nohighlight">\(e^{i\theta} = \cos(\theta)+i\sin(\theta)\)</span>. Using Euler’s formula we can rewrite <span class="math notranslate nohighlight">\(x_1(t)=e^{3it} = \cos(3t)+i\sin(3t)\)</span> and <span class="math notranslate nohighlight">\(x_2(t)=e^{-3it} = \cos(-3t)+i\sin(-3t)\)</span>. Moreover, since cosine is an even function, we know <span class="math notranslate nohighlight">\(\cos(-\theta) = \cos(\theta)\)</span> and since sine is an odd function, we know <span class="math notranslate nohighlight">\(\sin(-\theta) = -\sin(\theta)\)</span>. Thus, <span class="math notranslate nohighlight">\(x_2(t) = \cos(3t)-i\sin(3t)\)</span>.</p>
 <p>Recall that any linear combination of <span class="math notranslate nohighlight">\(x_1, x_2\)</span> is also a solution by the superposition principle. This means that <span class="math notranslate nohighlight">\(y_1(t) = \frac{x_1(t)+x_2(t)}{2} = \cos(3t)\)</span> is a solution <em>and</em> <span class="math notranslate nohighlight">\(y_2(t) = \frac{x_1(t)-x_2(t)}{2i} = \sin(3t)\)</span> is also a solution. Note that <span class="math notranslate nohighlight">\(y_1(t)\)</span> and <span class="math notranslate nohighlight">\(y_2(t)\)</span> are still linearly independent and they are real-vlaued.</p>
 <p>This means that <span class="math notranslate nohighlight">\(\{\cos(3t),\sin(3t)\}\)</span> <em>is</em> the fundamental set of solutions and thus, the general solution <span class="math notranslate nohighlight">\(x(t)= c_1\cos(3t) + c_2\sin(3t)\)</span> does capture <em>all</em> solutions of this differential equation.</p>
-<p><strong>Summary</strong></p>
+</div>
+<div class="admonition-summary admonition">
+<p class="admonition-title">Summary</p>
 <p>Consider the differential equation <span class="math notranslate nohighlight">\(ax''+bx'+cx=0\)</span>.</p>
 <ol class="arabic simple">
 <li><p>The characteristic equation is <span class="math notranslate nohighlight">\(ak^2+bk+c=0\)</span>.</p></li>
@@ -694,14 +739,18 @@ This is the second derivative of f(x): 4*exp(-2*x)
 </ul>
 </li>
 </ol>
+</div>
 </section>
 <section id="nonhomogeneous-linear-equations-and-undetermined-coefficients">
 <h2>4.3 Nonhomogeneous Linear Equations and Undetermined Coefficients<a class="headerlink" href="#nonhomogeneous-linear-equations-and-undetermined-coefficients" title="Permalink to this heading">#</a></h2>
 <p>This goal of this subsection is to discuss how to solve differential equations of the form <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=f(t)\)</span> for some “nice” functions <span class="math notranslate nohighlight">\(f(t)\)</span>.</p>
 <p>Any function <span class="math notranslate nohighlight">\(x_p\)</span> <em>that has no unknown parameters</em> and is a solution to <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=f(t)\)</span> is called a <strong>particular solution</strong>. We should note that particular solutions are not unique.</p>
 <p>Given a particular solution, <span class="math notranslate nohighlight">\(x_p\)</span> to <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=f(t)\)</span> and the fundamental set of solutions, {x_1, x_2, \dots, x_n}, to the corresponding homogeneous differential equation <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=0\)</span>, we can produce the general solution to <span class="math notranslate nohighlight">\(a_nx^{(n)} + a_{n-1}x^{(n-1)}+\dots + a_1x'+a_0x=f(t)\)</span>. In particular, the general solution is <span class="math notranslate nohighlight">\(x(t) = c_1x_1(t)+c_2x_2(t)+\dots+c_nx_n(t)+x_p(t)\)</span> where <span class="math notranslate nohighlight">\(c_1, c_2, \dots, c_n\)</span> are arbitrary constants. In other words, we simply need to add the solution to the associated homogeneous differential equation to a particular solution.</p>
-<p><strong>Motivating Example</strong> Consider the second order linear differential equation <span class="math notranslate nohighlight">\(x''+2x'+x=e^{-5t}\)</span>. Find <em>one</em> solution.</p>
+<div class="admonition-motivating-example admonition">
+<p class="admonition-title">Motivating Example</p>
+<p>Consider the second order linear differential equation <span class="math notranslate nohighlight">\(x''+2x'+x=e^{-5t}\)</span>. Find <em>one</em> solution.</p>
 <p>First we will try to guess a particular solution. We know that <span class="math notranslate nohighlight">\(f(t)=e^{-5t}\)</span> in this case. So we will guess a particular solution that looks similar, <span class="math notranslate nohighlight">\(x_p(t)=Ce^{-5t}\)</span>. Now we want to figure out what value of <span class="math notranslate nohighlight">\(C\)</span> (if any) makes <span class="math notranslate nohighlight">\(x_p(t)\)</span> a solution”</p>
+</div>
 <p>The method of undetermined coefficients is a technique used to solve certain types of non-homogeneous second-order differential equations. Specifically, this method is suitable for equations where the non-homogeneous term (the term not involving the function or its derivatives) is a simple function like a polynomial, exponential, sine, cosine, or a combination of these.</p>
 <p>The overall process of the method of undetermined coefficients involves several steps:</p>
 <ol class="arabic simple">
@@ -739,7 +788,9 @@ This is the second derivative of f(x): 4*exp(-2*x)
 </tr>
 </tbody>
 </table>
-<p><strong>Example</strong> Solve the initial value problem <span class="math notranslate nohighlight">\(x'' + 5x = -15\)</span>, <span class="math notranslate nohighlight">\(x(0)=0\)</span> and <span class="math notranslate nohighlight">\(x'(0)=1\)</span>.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Solve the initial value problem <span class="math notranslate nohighlight">\(x'' + 5x = -15\)</span>, <span class="math notranslate nohighlight">\(x(0)=0\)</span> and <span class="math notranslate nohighlight">\(x'(0)=1\)</span>.</p>
 <p>Step 1: Solve the homogeneous differential equation.</p>
 <div class="math notranslate nohighlight">
 \[x'' +5x=0.\]</div>
@@ -769,8 +820,14 @@ This is the second derivative of f(x): 4*exp(-2*x)
 \[c_2 = \dfrac{1}{\sqrt{5}}\]</div>
 <p>Step 6: State the final solution.</p>
 <p>This means the final solution to the initial value problem is <span class="math notranslate nohighlight">\(x(t) = -3\cos(\sqrt{5}t)+\dfrac{1}{\sqrt{5}}\sin(\sqrt{5}t)-3\)</span>.</p>
+</div>
 <p>Now that we have the solution we can generate a plot of it to see how the solution behaves.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -792,6 +849,7 @@ This is the second derivative of f(x): 4*exp(-2*x)
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/f8a125c3c03734964735ccefb61dcffa3c926f0ff2a4c2dac0f892bfe402fee6.png" src="../../_images/f8a125c3c03734964735ccefb61dcffa3c926f0ff2a4c2dac0f892bfe402fee6.png" />
 </div>
@@ -800,6 +858,8 @@ This is the second derivative of f(x): 4*exp(-2*x)
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
 <ol class="arabic simple">
 <li><p>Find all solutions to <span class="math notranslate nohighlight">\(x''+x'-6x=0\)</span>.</p></li>
 <li><p>Use your answer to 1 to find the general solution to the differential equation <span class="math notranslate nohighlight">\(x''+x'-6x=\sin(3t)\)</span>.</p></li>
@@ -814,6 +874,7 @@ This is the second derivative of f(x): 4*exp(-2*x)
 </ul>
 </li>
 </ol>
+</div>
 </section>
 </section>
 

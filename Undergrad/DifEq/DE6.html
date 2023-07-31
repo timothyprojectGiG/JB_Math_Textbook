@@ -557,16 +557,20 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laplace-transforms">
 <h1>6. Laplace Transforms<a class="headerlink" href="#laplace-transforms" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>In the realm of differential equations, the Laplace Transform is a crucial and powerful tool that simplifies the process of solving complex equations. This mathematical operation is named after Pierre-Simon Laplace, a French mathematician and astronomer whose work was foundational to many branches of mathematics.</p>
 <p>The essence of the Laplace Transform lies in its ability to convert differential equations, which involve rates of change and are dependent on time, into algebraic equations, which are easier to manipulate. In this conversion process, complex patterns of time-dependent behavior are mapped into a domain where they are described as simple functions of a complex variable.</p>
 <p>In this chapter, we will explore the fundamentals of Laplace Transforms, beginning with its definition and properties. We’ll investigate how to apply Laplace Transforms to linear ordinary differential equations, including initial and boundary value problems. We will also study the Inverse Laplace Transform, a crucial technique for reclaiming our original function after performing operations in the Laplace domain. By leveraging Laplace Transforms, we can tackle systems that would be otherwise intimidating or intractable, such as those involving discontinuous or impulsive forces. This method is extensively used in various fields, including engineering, physics, and mathematics, to solve real-world problems ranging from electric circuit analysis to modeling population growth or decay.</p>
+</div>
 <section id="introduction-to-laplace-transforms">
 <h2>6.1 Introduction to Laplace Transforms<a class="headerlink" href="#introduction-to-laplace-transforms" title="Permalink to this heading">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(f(t)\)</span> be a function and consider the integeral</p>
-<div class="math notranslate nohighlight">
-\[\mathcal{L}(f(t)) = \int_{0}^{\infty} e^{-st}f(t) \mathrm{d}t \equiv F(s).\]</div>
-<p>If this integral is finite, then <span class="math notranslate nohighlight">\(\mathcal{L}(f(t))\)</span> (also denoted <span class="math notranslate nohighlight">\(F(s)\)</span>) is called the <strong>Laplace transform</strong>of <span class="math notranslate nohighlight">\(f(t)\)</span>. Note that not all function have Laplace transforms.</p>
-<p><strong>Example</strong> Find the Laplace transform of <span class="math notranslate nohighlight">\(f(t)=1\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(f(t)\)</span> be a function and consider the integeral
+$<span class="math notranslate nohighlight">\(\mathcal{L}(f(t)) = \int_{0}^{\infty} e^{-st}f(t) \mathrm{d}t \equiv F(s).\)</span><span class="math notranslate nohighlight">\(
+If this integral is finite, then \)</span>\mathcal{L}(f(t))<span class="math notranslate nohighlight">\( (also denoted \)</span>F(s)<span class="math notranslate nohighlight">\() is called the **Laplace transform**of \)</span>f(t)$. Note that not all function have Laplace transforms.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Find the Laplace transform of <span class="math notranslate nohighlight">\(f(t)=1\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(1) = \int_{0}^{\infty} e^{-st} \mathrm{d}t\]</div>
 <div class="math notranslate nohighlight">
@@ -576,7 +580,13 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[= \left[\lim_{R \rightarrow \infty} -\dfrac{1}{s} e^{-sR} \right] + \dfrac{1}{s}\]</div>
 <p>Notice that if <span class="math notranslate nohighlight">\(s&lt;0\)</span>, then the limit goes to <span class="math notranslate nohighlight">\(\infty\)</span> and if <span class="math notranslate nohighlight">\(s&gt;0\)</span>, the limit goes to <span class="math notranslate nohighlight">\(0\)</span>. Thus <span class="math notranslate nohighlight">\(\mathcal{L}(1) = \dfrac{1}{s}\)</span> for <span class="math notranslate nohighlight">\(s &gt;0\)</span>.</p>
-<div class="cell docutils container">
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#We can also do this example in the Jupyter notebook.</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">LaplaceTransform</span><span class="p">,</span> <span class="n">Function</span>
@@ -594,13 +604,16 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Laplace transform of f(t) = 1 is: (1/s, 0, True)
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Example</strong> Find the Laplace transform of <span class="math notranslate nohighlight">\(f(t)=e^{at}\)</span>.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Find the Laplace transform of <span class="math notranslate nohighlight">\(f(t)=e^{at}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(e^{at}) = \int_{0}^{\infty} e^{-st}e^{at} \mathrm{d}t\]</div>
 <div class="math notranslate nohighlight">
@@ -610,7 +623,13 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[= \left[\lim_{R \rightarrow \infty} \dfrac{1}{a-s} e^{(a-s)R} \right] - \dfrac{1}{a-s}\]</div>
 <p>Notice that if <span class="math notranslate nohighlight">\(s&lt;a\)</span>, then the limit goes to <span class="math notranslate nohighlight">\(\infty\)</span> and if <span class="math notranslate nohighlight">\(s&gt;a\)</span>, the limit goes to <span class="math notranslate nohighlight">\(0\)</span>. Thus <span class="math notranslate nohighlight">\(\mathcal{L}(1) = -\dfrac{1}{a-s} \dfrac{1}{s-a}\)</span> for <span class="math notranslate nohighlight">\(s &gt;a\)</span>.</p>
-<div class="cell docutils container">
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">LaplaceTransform</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">exp</span>
 
@@ -627,8 +646,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Laplace transform of f(t) = e^(at) is: (1/(-a + s), a, True)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Laplace transform of f(t) = e^(at) is: (1/(-a + s), 0, Abs(arg(a) + pi) &lt;= pi/2)
 </pre></div>
 </div>
 </div>
@@ -670,60 +690,49 @@ $<span class="math notranslate nohighlight">\(\mathcal{L}(af(t)+bg(t)) = a \math
 </section>
 <section id="the-inverse-laplace-transform">
 <h2>6.2 The Inverse Laplace Transform<a class="headerlink" href="#the-inverse-laplace-transform" title="Permalink to this heading">#</a></h2>
-<p><strong>Example</strong> Consider the linear initial value problem</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Consider the linear initial value problem
+$<span class="math notranslate nohighlight">\(x'+4x = e^{-5t}, \quad x(0)=1.\)</span><span class="math notranslate nohighlight">\(
+Find the Laplace transform of the solution \)</span>x(t)$.</p>
 <div class="math notranslate nohighlight">
-\[
-x'+4x = e^{-5t}, \quad x(0)=1.
-\]</div>
-<p>Find the Laplace transform of the solution <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
+\[\mathcal{L}(x' + 4x) = \mathcal{L}(e^{-5t})\]</div>
 <div class="math notranslate nohighlight">
-\[
-\mathcal{L}(x' + 4x) = \mathcal{L}(e^{-5t})
-\]</div>
+\[\mathcal{L}(x') + 4\mathcal{L}(x) = \mathcal{L}(e^{-5t})\]</div>
 <div class="math notranslate nohighlight">
-\[
-\mathcal{L}(x') + 4\mathcal{L}(x) = \mathcal{L}(e^{-5t})
-\]</div>
+\[s\mathcal{L}(x)-x(0)+4\mathcal{L}(x) = \dfrac{1}{s+5}\]</div>
 <div class="math notranslate nohighlight">
-\[
-s\mathcal{L}(x)-x(0)+4\mathcal{L}(x) = \dfrac{1}{s+5}
-\]</div>
+\[(s+4)\mathcal{L}(x)-1 = \dfrac{1}{s+5}\]</div>
 <div class="math notranslate nohighlight">
-\[
-(s+4)\mathcal{L}(x)-1 = \dfrac{1}{s+5}
-\]</div>
+\[(s+4)\mathcal{L}(x) = \dfrac{1}{s+5}+ \dfrac{s+5}{s+5}\]</div>
 <div class="math notranslate nohighlight">
-\[
-(s+4)\mathcal{L}(x) = \dfrac{1}{s+5}+ \dfrac{s+5}{s+5}
-\]</div>
+\[(s+4)\mathcal{L}(x) = \dfrac{s+6}{s+5}\]</div>
 <div class="math notranslate nohighlight">
-\[
-(s+4)\mathcal{L}(x) = \dfrac{s+6}{s+5}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}
-\]</div>
+\[\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}\]</div>
 <p>Now we want to know, what function <span class="math notranslate nohighlight">\(x(t)\)</span> has <span class="math notranslate nohighlight">\(\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}\)</span>?</p>
-<p>The function <span class="math notranslate nohighlight">\(f(t)\)</span> which has Laplace transform <span class="math notranslate nohighlight">\(F(s)\)</span> is called the <strong>inverse Laplace transform of</strong> <span class="math notranslate nohighlight">\(F(s)\)</span>. So long as all of the functions are piecewise continuous of exponential order, this transformation is unique, except possibly at the points of discontinuity. Moreover, the inverse Laplace transform is a linear operator. That is,</p>
-<div class="math notranslate nohighlight">
-\[ \mathcal{L}^{-1}(aF(s)+bG(s)) = a \mathcal{L}^{-1}(F(s))+b \mathcal{L}^{-1}(G(s)).\]</div>
-<p><strong>Example (continued)</strong> Find the inverse Laplace transform for <span class="math notranslate nohighlight">\(\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}\)</span>.</p>
+</div>
+<p>The function <span class="math notranslate nohighlight">\(f(t)\)</span> which has Laplace transform <span class="math notranslate nohighlight">\(F(s)\)</span> is called the <strong>inverse Laplace transform of</strong> <span class="math notranslate nohighlight">\(F(s)\)</span>. So long as all of the functions are piecewise continuous of exponential order, this transformation is unique, except possibly at the points of discontinuity. Moreover, the inverse Laplace transform is a linear operator. That is,
+$<span class="math notranslate nohighlight">\( \mathcal{L}^{-1}(aF(s)+bG(s)) = a \mathcal{L}^{-1}(F(s))+b \mathcal{L}^{-1}(G(s)).\)</span>$</p>
+<div class="admonition-example-continued admonition">
+<p class="admonition-title">Example (continued)</p>
+<p>Find the inverse Laplace transform for <span class="math notranslate nohighlight">\(\mathcal{L}(x) = \dfrac{s+6}{(s+5)(s+4)}\)</span>.</p>
 <p>First, we can use partial fractions to split this into more reasonable pieces.
 $<span class="math notranslate nohighlight">\(\dfrac{s+6}{(s+5)(s+4)} = \dfrac{A}{s+5} + \dfrac{B}{s+4}\)</span><span class="math notranslate nohighlight">\(
 \)</span><span class="math notranslate nohighlight">\(s+6 = A(s+4) + B(s+5)\)</span>$</p>
 <p>If <span class="math notranslate nohighlight">\(s=-4\)</span>, then <span class="math notranslate nohighlight">\(2 = A(0) + B(1)\)</span>, thus <span class="math notranslate nohighlight">\(B=2\)</span>.
 If <span class="math notranslate nohighlight">\(s=-5\)</span>, then <span class="math notranslate nohighlight">\(1 = A(-1) + B(0)\)</span>, thus <span class="math notranslate nohighlight">\(A=-1\)</span>.</p>
 <p>So <span class="math notranslate nohighlight">\(\mathcal{L}(x) = \dfrac{-1}{s+5} + \dfrac{2}{s+4}\)</span>. Recall that <span class="math notranslate nohighlight">\(\mathcal{L}(e^{at}) = \dfrac{1}{s-a}\)</span>. Thus <span class="math notranslate nohighlight">\(\mathcal{L}(x) = -\mathcal{L}(e^{-5t}) + 2 \mathcal{L}(e^{-4t})\)</span>. So <span class="math notranslate nohighlight">\(x(t) = -e^{-5t}+2e^{-4t}\)</span>, which is the solution to the initial-value problem given in the previous example!</p>
+</div>
 <p>In order to solve differential equations with Laplace transforms, we will:</p>
 <p><em>Step 1</em>: Take the Laplace transform of both sides and set them equal.</p>
 <p><em>Step 2</em>: Enter initial conditions (if needed)</p>
 <p><em>Step 3</em>: Solve the equation algebraically for the transform <span class="math notranslate nohighlight">\(\mathcal{L}(X)\)</span>, which we will now denote <span class="math notranslate nohighlight">\(X(s)\)</span>, of the unknown function <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
 <p><em>Step 4</em>: Invert <span class="math notranslate nohighlight">\(X(s)\)</span> to find <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
-<p><strong>Example</strong> Consider the linear initial value problem</p>
-<div class="math notranslate nohighlight">
-\[x''+4x = 8, \quad x(0)=0, \quad x'(0)=0.\]</div>
-<p>Find the Laplace transform of the solution <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Consider the linear initial value problem
+$<span class="math notranslate nohighlight">\(x''+4x = 8, \quad x(0)=0, \quad x'(0)=0.\)</span><span class="math notranslate nohighlight">\(
+Find the Laplace transform of the solution \)</span>x(t)$.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(x'' + 4x) = \mathcal{L}(8)\]</div>
 <div class="math notranslate nohighlight">
@@ -739,11 +748,21 @@ $<span class="math notranslate nohighlight">\(\dfrac{8}{(s)(s^2+4)} = \dfrac{A}{
 \)</span><span class="math notranslate nohighlight">\(8 = (s^2+4)A + s(Bs+C)\)</span>$</p>
 <p>Solving for <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span>, yields <span class="math notranslate nohighlight">\(A = 2\)</span>, <span class="math notranslate nohighlight">\(B=-2\)</span>, and <span class="math notranslate nohighlight">\(C=0\)</span>.</p>
 <p>Thus <span class="math notranslate nohighlight">\(X(s) = \dfrac{-2s}{s^2+4} + \dfrac{2}{s} = -2 \left(\dfrac{s}{s^2+2^2}\right) +2 \left(\dfrac{1}{s}\right)\)</span>. Therefore, <span class="math notranslate nohighlight">\(x(t) = -2\cos(2t)+2\)</span>.</p>
+</div>
 </section>
 <section id="more-laplace-transforms-the-heaviside-function">
 <h2>6.3 More Laplace Transforms &amp; the Heaviside Function<a class="headerlink" href="#more-laplace-transforms-the-heaviside-function" title="Permalink to this heading">#</a></h2>
-<p><strong>Theorem</strong> If <span class="math notranslate nohighlight">\(f(t)\)</span> is any piecewise contiunous function of exponential order, then $<span class="math notranslate nohighlight">\(\mathcal{L}(e^{at}f(t)) = F(s-a) \quad \text{ where } F(s) = \mathcal{L}(f(t)).\)</span>$</p>
-<p><strong>Theorem</strong> If <span class="math notranslate nohighlight">\(f(t)\)</span> is any piecewise contiunous function of exponential order, then $<span class="math notranslate nohighlight">\(\mathcal{L}(tf(t)) = -\dfrac{d}{ds}F(s) \quad \text{ where } F(s) = \mathcal{L}(f(t)).\)</span>$</p>
+<div class="tip admonition">
+<p class="admonition-title">Theorem</p>
+<p>If <span class="math notranslate nohighlight">\(f(t)\)</span> is any piecewise contiunous function of exponential order, then $<span class="math notranslate nohighlight">\(\mathcal{L}(e^{at}f(t)) = F(s-a) \quad \text{ where } F(s) = \mathcal{L}(f(t)).\)</span>$</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Theorem</p>
+<p>Theorem</p>
+<p>If <span class="math notranslate nohighlight">\(f(t)\)</span> is any piecewise contiunous function of exponential order, then</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(tf(t)) = -\dfrac{d}{ds}F(s) \quad \text{ where } F(s) = \mathcal{L}(f(t)).\]</div>
+</div>
 <p>Let’s update our table to take in this new information</p>
 <table class="colwidths-auto table">
 <thead>
@@ -799,14 +818,24 @@ $<span class="math notranslate nohighlight">\(\dfrac{8}{(s)(s^2+4)} = \dfrac{A}{
 <p>Now we will explore how we invert terms of the form <span class="math notranslate nohighlight">\(\dfrac{As+B}{s^2+cs+d}\)</span> where <span class="math notranslate nohighlight">\(s^2+cs+d\)</span> is an irreducible quadratic. To do this we will complete the square, that is, we will write $<span class="math notranslate nohighlight">\(s^2+cs+d=s^2+cs+\left(\dfrac{c}{2} \right)^2 + d -\left(\dfrac{c}{2} \right)^2= \left(s+\dfrac{c}{2}\right)^2 + \left(\sqrt{d-\dfrac{c}{2}^2} \right)^2 =(s-a)^2+b^2.\)</span>$ If we complete the square, then</p>
 <div class="math notranslate nohighlight">
 \[\dfrac{As+B}{s^2+cs+d} = c_1 \left( \dfrac{s-a}{(s-a)^2+b^2} \right) + c_2 \left(\dfrac{b}{(s-a)^2+b^2} \right) = c_1 \mathcal{L}(e^{at}\cos(bt))+c_2 \mathcal{L}(e^{at}\sin(bt)).\]</div>
-<p><strong>Example</strong> Find the inverse Laplace Transform of $<span class="math notranslate nohighlight">\(\dfrac{4s+2}{s^2+2s+5}.\)</span>$</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Find the inverse Laplace Transform of $<span class="math notranslate nohighlight">\(\dfrac{4s+2}{s^2+2s+5}.\)</span>$</p>
 <p>Notice the denominator is an irreducible quadratic, so we need to complete the square.</p>
 <div class="math notranslate nohighlight">
 \[s^2+2s+5 = s^2+2s+\left(\dfrac{2}{2} \right)^2 + 5 - \left(\dfrac{2}{2} \right)^2 = (s+1)^2+4 = (s-(-1))^2+2^2\]</div>
-<p>Thus, $<span class="math notranslate nohighlight">\(\mathcal{L}^{-1}\left(\dfrac{4s+2}{s^2+2s+5} \right) = 4 \mathcal{L}^{-1}\left(\dfrac{s+1}{(s+1)^2+2^2}\right)- \mathcal{L}^{-1}\left(\dfrac{2}{(s+1)^2+2^2}\right) = 4e^{-t}\cos(2t) - e^{-t}\sin(2t).\)</span>$</p>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}^{-1}\left(\dfrac{4s+2}{s^2+2s+5} \right) = 4 \mathcal{L}^{-1}\left(\dfrac{s+1}{(s+1)^2+2^2}\right)- \mathcal{L}^{-1}\left(\dfrac{2}{(s+1)^2+2^2}\right) = 4e^{-t}\cos(2t) - e^{-t}\sin(2t).\]</div>
+</div>
 <p>The <strong>unit step function</strong> (also called the <strong>Heaviside function</strong>) at <span class="math notranslate nohighlight">\(t=c\)</span> is the function $<span class="math notranslate nohighlight">\(u(t-c) = \begin{cases} 0 &amp; \text{ if } t &lt; c \\ 1 &amp; \text{ if } t&gt;c \end{cases} .\)</span>$</p>
 <p>More importantly, the Laplace transform of the Heaviside function exists and any piecewise continuous function can be expressed in terms of the Heaviside function. The Heaviside function for <span class="math notranslate nohighlight">\(c=0\)</span> is plotted below.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -840,13 +869,22 @@ $<span class="math notranslate nohighlight">\(\dfrac{8}{(s)(s^2+4)} = \dfrac{A}{
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../../_images/665782a7075e2445800f20dc34d4965b2d16eff2f946528c2277cc109d202320.png" src="../../_images/665782a7075e2445800f20dc34d4965b2d16eff2f946528c2277cc109d202320.png" />
+<img alt="../../_images/d71b66b7f59f1a5d235f1947815878d21eeb0464f823e53facfa953c75073024.png" src="../../_images/d71b66b7f59f1a5d235f1947815878d21eeb0464f823e53facfa953c75073024.png" />
 </div>
 </div>
-<p><strong>Example</strong> Consider the function $<span class="math notranslate nohighlight">\(f(t) = \begin{cases} 4-t &amp; \text{ if } 0 \leq t \leq \pi \\ 4+\cos(t) &amp; \text{ if } t&gt;pi \end{cases}\)</span>$
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Consider the function $<span class="math notranslate nohighlight">\(f(t) = \begin{cases} 4-t &amp; \text{ if } 0 \leq t \leq \pi \\ 4+\cos(t) &amp; \text{ if } t&gt;pi \end{cases}\)</span>$
 plotted below. Express this function in terms of the Heaviside function.</p>
-<div class="cell docutils container">
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -884,19 +922,28 @@ plotted below. Express this function in terms of the Heaviside function.</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../../_images/85905725b9c84d28af71c3a28e1be9e53b4a04dc81702a784ec586e34e71ed3a.png" src="../../_images/85905725b9c84d28af71c3a28e1be9e53b4a04dc81702a784ec586e34e71ed3a.png" />
+<img alt="../../_images/9928330cc3dabfcf0083009516529cbac70cff91e5f855c9faf062760423e880.png" src="../../_images/9928330cc3dabfcf0083009516529cbac70cff91e5f855c9faf062760423e880.png" />
 </div>
 </div>
 <p>To express <span class="math notranslate nohighlight">\(f(t)\)</span> in terms of the Heaviside function, notice that <span class="math notranslate nohighlight">\(f(t) = 4-t + u(t-\pi)(4+\cos(t)-(4-t))\)</span>. Now we’d like to find the Laplace transform of <span class="math notranslate nohighlight">\(u(t-\pi)(4+\cos(t)-(4-t))\)</span> in order to be able to solve initial-value problems. The following theorem will help us do exactly that.</p>
-<p><strong>Theorem</strong> Let <span class="math notranslate nohighlight">\(f(t)\)</span> be a piecewise continuous function of exponential order and let <span class="math notranslate nohighlight">\(u(t-c)\)</span> be the unit step function for some <span class="math notranslate nohighlight">\(c\)</span>. Then</p>
+<div class="tip admonition">
+<p class="admonition-title">Theorem</p>
+<p>Let <span class="math notranslate nohighlight">\(f(t)\)</span> be a piecewise continuous function of exponential order and let <span class="math notranslate nohighlight">\(u(t-c)\)</span> be the unit step function for some <span class="math notranslate nohighlight">\(c\)</span>. Then</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathcal{L}(u(t-c)) = \dfrac{e^{-cs}}{s}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{L}(u(t-c)f(t-c)) = e^{-cs}F(s)\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{L}(u(t-c)f(t)) = e^{-cs}G(s)\)</span> where <span class="math notranslate nohighlight">\(G(s) = \mathcal{L}(f(t+c))\)</span></p></li>
 </ul>
-<p><strong>Example (continued)</strong> Consider the function $<span class="math notranslate nohighlight">\(f(t) = \begin{cases} 4-t &amp; \text{ if } 0 \leq t \leq \pi \\ 4+\cos(t) &amp; \text{ if } t&gt;pi. \end{cases}\)</span><span class="math notranslate nohighlight">\(
-Find \)</span>\mathcal{L}(f(t))$.</p>
+</div>
+<div class="admonition-example-continued admonition">
+<p class="admonition-title">Example (continued)</p>
+<p>Consider the function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(t) = \begin{cases} 4-t &amp; \text{ if } 0 \leq t \leq \pi \\ 4+\cos(t) &amp; \text{ if } t&gt;pi. \end{cases}
+\end{split}\]</div>
+<p>Find <span class="math notranslate nohighlight">\(\mathcal{L}(f(t))\)</span>.</p>
 <p>Since <span class="math notranslate nohighlight">\(f(t) = 4-t + u(t-\pi)(4+\cos(t)-(4-t))\)</span>, we know</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(f(t)) = \mathcal{L}(4) - \mathcal{L}(t) + \mathcal{L}(u(t-\pi)(4+\cos(t)-(4-t)))\]</div>
@@ -908,24 +955,36 @@ Find \)</span>\mathcal{L}(f(t))$.</p>
 \[\mathcal{L}(f(t)) = \dfrac{4}{s} - \dfrac{1}{s^2} + e^{-\pi s}G(s) \text{ where } G(s) = \mathcal{L}(\cos(t)+t+\pi)\]</div>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(f(t)) = \dfrac{4}{s} - \dfrac{1}{s^2} + e^{-\pi s}\left(\dfrac{s}{s^2+\pi^2} + \dfrac{1}{s^2} + \dfrac{\pi}{s}\right)\]</div>
+</div>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
 <ol class="arabic simple">
 <li><p>By hand show that the Laplace transforms of <span class="math notranslate nohighlight">\(\cos(bt)\)</span> and <span class="math notranslate nohighlight">\(\sin(bt)\)</span> are the functions listed in the chart.</p></li>
 <li><p>Show that the Laplace transform of <span class="math notranslate nohighlight">\(f'(t)\)</span> is <span class="math notranslate nohighlight">\(sF(s)-f(0)\)</span>.</p></li>
 <li><p>Show that the Laplace transform of <span class="math notranslate nohighlight">\(f''(t)\)</span> is <span class="math notranslate nohighlight">\(s^2F(s)-sf(0)-sf'(0)\)</span>.</p></li>
 <li><p>Show that the function <span class="math notranslate nohighlight">\(g(x) = e^{t^2}\)</span> does not have a Laplace transform.</p></li>
 <li><p>Find the Laplace transform of <span class="math notranslate nohighlight">\(f(t) = 8+3e^{2t}-\cos(6t)\)</span>.</p></li>
-<li><p>Solve the initial value problem
-$<span class="math notranslate nohighlight">\(x'' + 4x'+3x = 10\cos(t), \quad x(0)=2, \quad x'(0)=3.\)</span>$</p></li>
-<li><p>Solve the initial value problem
-$<span class="math notranslate nohighlight">\(x'' + 2x'+3x = 9t, \quad x(0)=1, \quad x'(0)=2.\)</span>$</p></li>
+<li><p>Solve the initial value problem</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[x'' + 4x'+3x = 10\cos(t), \quad x(0)=2, \quad x'(0)=3.\]</div>
+<ol class="arabic simple" start="7">
+<li><p>Solve the initial value problem</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[x'' + 2x'+3x = 9t, \quad x(0)=1, \quad x'(0)=2.\]</div>
+<ol class="arabic simple" start="8">
 <li><p>Let <span class="math notranslate nohighlight">\(f(t) = \begin{cases} t &amp; \text{ if } 0 \leq t \leq 2 \\ 0 &amp; \text{ if } t&gt;2 \end{cases}\)</span>. Solve the initial value problem</p></li>
 </ol>
 <div class="math notranslate nohighlight">
-\[x'' + x = f(t), \quad x(0)=0, \quad x'(0)=0.\]</div>
+\[
+x'' + x = f(t), \quad x(0)=0, \quad x'(0)=0.
+\]</div>
 <p><em>Hint: First rewrite <span class="math notranslate nohighlight">\(f(t)\)</span> using the Heaviside function so that you can take the Laplace transform of both sides.</em></p>
+</div>
 </section>
 </section>
 
