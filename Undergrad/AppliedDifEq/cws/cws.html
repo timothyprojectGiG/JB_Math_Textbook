@@ -525,10 +525,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">SOLUTION</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 </li>
 </ul>
@@ -1226,90 +1223,6 @@ in Water, Air, and Soil</i>, New York: John Wiley &amp; Sons.</p>
 Frangione, B. 1993. Blood-brain barrier transport of circulating
 Alzheimer’s amyloid <span class="math notranslate nohighlight">\(\beta\)</span>, <i>Biochemical and Biophysical
 Research Communications</i>, 197, 1034-1040.</p>
-<section id="solution">
-<h4>SOLUTION<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h4>
-<p>The A<span class="math notranslate nohighlight">\(\beta\)</span> concentration in the brain during treatment 2
-decreases by 2.5% while the concentrations in the CSF and plasma
-both roughly double (in agreement with Figure 6 b-d in [Craft et.
-al. 2002]).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="n">b1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
-    <span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">k3</span><span class="p">,</span> <span class="n">r12</span><span class="p">,</span><span class="n">r13</span><span class="p">,</span><span class="n">r23</span><span class="p">,</span><span class="n">r21</span><span class="p">,</span><span class="n">r31</span><span class="p">,</span><span class="n">r32</span><span class="p">,</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">L3</span> <span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
-    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="o">+</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">465</span><span class="p">,</span><span class="mi">0</span><span class="p">)))</span><span class="o">-</span><span class="n">L1</span><span class="o">*</span><span class="n">b1</span><span class="p">,</span>      <span class="c1"># list of dy/dt=f functions</span>
-             <span class="n">k2</span><span class="o">+</span><span class="n">r12</span><span class="o">*</span><span class="n">b1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">465</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="n">r32</span><span class="o">*</span><span class="n">p</span><span class="o">-</span><span class="p">(</span><span class="n">r21</span><span class="o">*</span><span class="n">c</span><span class="o">+</span><span class="n">r23</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">L2</span><span class="o">*</span><span class="n">c</span><span class="p">,</span>
-             <span class="n">k3</span><span class="o">+</span><span class="n">r13</span><span class="o">*</span><span class="n">b1</span><span class="o">+</span><span class="n">r23</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="p">(</span><span class="n">r31</span><span class="o">*</span><span class="n">p</span><span class="o">+</span><span class="n">r32</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="n">L3</span><span class="o">*</span><span class="n">p</span><span class="p">,]</span>
-    <span class="k">return</span> <span class="n">derivs</span>
-
-<span class="c1"># Parameters</span>
-<span class="n">k1</span> <span class="o">=</span> <span class="mf">7.34</span><span class="o">*</span><span class="mi">86400</span>         
-<span class="n">L1</span> <span class="o">=</span> <span class="mi">24</span> 
-<span class="n">k2</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">L2</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">k3</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">L3</span><span class="o">=</span><span class="mf">6.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
-<span class="n">r12</span><span class="o">=</span><span class="mf">7.6</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
-<span class="n">r23</span><span class="o">=</span><span class="mf">1.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
-<span class="n">r31</span><span class="o">=</span><span class="mf">3.7</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="mi">86400</span>   
-<span class="n">r32</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">r21</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">r13</span><span class="o">=</span><span class="mi">0</span>
-
-<span class="c1"># Initial values</span>
-<span class="n">b10</span> <span class="o">=</span> <span class="mf">25.7</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>     
-<span class="n">c0</span> <span class="o">=</span> <span class="mi">115</span>
-<span class="n">p0</span> <span class="o">=</span> <span class="mi">29</span>
-
-<span class="c1"># Bundle parameters for ODE solver</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">k3</span><span class="p">,</span> <span class="n">r12</span><span class="p">,</span><span class="n">r13</span><span class="p">,</span><span class="n">r23</span><span class="p">,</span><span class="n">r21</span><span class="p">,</span><span class="n">r31</span><span class="p">,</span><span class="n">r32</span><span class="p">,</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">L3</span> <span class="p">]</span>
-
-<span class="c1"># Bundle initial conditions for ODE solver</span>
-<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">b10</span><span class="p">,</span><span class="n">c0</span><span class="p">,</span><span class="n">p0</span><span class="p">]</span>
-
-<span class="c1"># Make time array for solution</span>
-<span class="n">tStop</span> <span class="o">=</span> <span class="mf">1000.</span>
-<span class="n">tInc</span> <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
-
-<span class="c1"># Call the ODE solver</span>
-<span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
-
-<span class="c1"># Plot results</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-
-<span class="c1"># Plot b1 as a function of time</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;b1&#39;</span><span class="p">)</span>
-
-<span class="c1"># Plot c as a function of time</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
-
-<span class="c1"># Plot p as a function of time</span>
-<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;treatment2.png&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../../_images/53bb3923452febb4442bbc647f108b688835dbfd7eef4c254a56101a99f31f10.png" src="../../../_images/53bb3923452febb4442bbc647f108b688835dbfd7eef4c254a56101a99f31f10.png" />
-</div>
-</div>
-</section>
 </section>
 </section>
 </section>
@@ -1394,10 +1307,7 @@ al. 2002]).</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">SOLUTION</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 </li>
 </ul>
