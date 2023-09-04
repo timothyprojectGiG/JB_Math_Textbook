@@ -490,7 +490,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -506,6 +508,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -573,9 +583,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.figure.Figure at 0x2c4721ca0b8&gt;
-</pre></div>
-</div>
+<img alt="../../_images/0947c5453748d3493ba4eff8adc0da4a2d90639a35bf11befd368622c5b97f01.png" src="../../_images/0947c5453748d3493ba4eff8adc0da4a2d90639a35bf11befd368622c5b97f01.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -622,45 +630,23 @@ document.write(`
 <img alt="../../_images/24b7233125736262189ecab8b47ed2d3ca719f4862f65ed47bf701b9319cc1b5.png" src="../../_images/24b7233125736262189ecab8b47ed2d3ca719f4862f65ed47bf701b9319cc1b5.png" />
 </div>
 </div>
-<h4> Lab </h4>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
 <p>Suppose a manufacturing process of a certain part is “in control” when a sample is normally distributed with average length <span class="math notranslate nohighlight">\(\mu=1\)</span> inch (mean)  and standard deviation <span class="math notranslate nohighlight">\(\sigma=.01\)</span> inch.</p>
 <ol class="arabic simple">
-<li><p>Make a sketch of a  normal distribution with this mean and standard deviation, showing the rule of 68,95,99.7.</p></li>
+<li><p>Make a sketch of a  normal distribution with this mean and standard deviation, showing the rule of 68,95,99.7.’</p></li>
 </ol>
 <p>2a) Out of 100 samples, how many would we expect to have an average length between .997 and 1.003 inches?</p>
-<p>2c) Out of 100 samples, how many would we expect to have an average length less than .997 inches?</p>
-<p>2d) Out of 100 samples, how many would we expect to have an average length less than 1.003 inches?</p>
+<p>2b) Out of 100 samples, how many would we expect to have an average length less than .997 inches?</p>
+<p>2c) Out of 100 samples, how many would we expect to have an average length less than 1.003 inches?</p>
 <ol class="arabic simple" start="3">
 <li><p>Consider the following sequence of twenty average sample lengths:</p></li>
 </ol>
 <p>1.001, .9995, 1.000, 1.001, 1.002, .998, .999,1.0025,, .9975, .9825, 1.0025, 1.00075, 1.000, .999, .9985,1.0035,1.001,1.000,1.995,1.0015.</p>
 <p>a) Complete the control chart corresponding to these sample sizes. The outer boundary lines are within 3 standard deviations of the mean. If a data point goes outside these boundaries, this signals the process may be out of control.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">UCL</span><span class="o">=</span> <span class="mi">0</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mf">1.003</span>  <span class="c1">#upper control line</span>
-<span class="n">LCL</span><span class="o">=</span> <span class="mi">0</span><span class="o">*</span><span class="n">x</span><span class="o">+.</span><span class="mi">997</span>  <span class="c1">#upper control line</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">UCL</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">LCL</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">1.0035</span><span class="p">,</span><span class="s2">&quot;Upper Control Line&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="o">.</span><span class="mi">9965</span><span class="p">,</span><span class="s2">&quot;Lower Control Line&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="o">.</span><span class="mi">995</span><span class="p">,</span><span class="mf">1.005</span><span class="p">))</span>
-<span class="n">sample</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">length</span><span class="o">=</span><span class="p">[</span><span class="mf">1.001</span><span class="p">,</span><span class="o">.</span><span class="mi">9995</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span><span class="n">length</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/c389d77dc8dd64bffd7972f20e729e7f2f1b0da769507be15c0d5c8a9329ad5d.png" src="../../_images/c389d77dc8dd64bffd7972f20e729e7f2f1b0da769507be15c0d5c8a9329ad5d.png" />
-</div>
-</div>
+<img alt="Drawing" src="../../_images/control.png" />
 <p>b) Suppose the process is stopped if the average sample length has a probability of less than .0015 of occurring. Will the process be stopped?  If so, at what point(s)?</p>
 <ol class="arabic simple" start="4">
 <li><p>A normal distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> is given by</p></li>
@@ -671,7 +657,9 @@ document.write(`
 <p>a) Use the first and second derivatives to find the exact coordinates of the
 max/min and inflection points of this exponential function.</p>
 <p>b) Sketch the graph for the case <span class="math notranslate nohighlight">\(\mu=1, \sigma=.01\)</span> on the interval <span class="math notranslate nohighlight">\(-3 \le x \le 5\)</span>.</p>
+</div>
 <p>Reference: Wayworld.Inc tutorial on Statistical Process Control (SPC) (<a class="reference external" href="http://www.wayworld.com/spc/spc.cfm">http://www.wayworld.com/spc/spc.cfm</a>).</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -732,6 +720,20 @@ max/min and inflection points of this exponential function.</p>
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

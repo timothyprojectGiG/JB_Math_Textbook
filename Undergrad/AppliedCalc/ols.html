@@ -490,7 +490,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -506,6 +508,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -528,8 +538,9 @@ document.write(`
 \[\frac{\partial S}{\partial m} = 0 \]</div>
 <div class="math notranslate nohighlight">
 \[\frac{\partial S}{\partial b} = 0 \]</div>
-<h4> Example </h4>
-Consider the data values (1,1), (2,3) and (4,3).  In this case,
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Consider the data values (1,1), (2,3) and (4,3).  In this case,</p>
 <div class="math notranslate nohighlight">
 \[ S(m,b)= (m+b-1)^2 + (2m+b-3)^2+(4m+b-3)^2.\]</div>
 <p>This gives rise to the system</p>
@@ -554,7 +565,13 @@ Consider the data values (1,1), (2,3) and (4,3).  In this case,
 <div class="math notranslate nohighlight">
 \[7(4/7) + 3b = 7 \Rightarrow 3b=3 \Rightarrow b=1. \]</div>
 <p>The plot below shows the OLS regression line <span class="math notranslate nohighlight">\(y=\frac{4}{7}x+1\)</span> together with the three data points.</p>
-<div class="cell docutils container">
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -580,35 +597,42 @@ Consider the data values (1,1), (2,3) and (4,3).  In this case,
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/490a4dfb394ab1cde6ed9588a9b9f758b57224f6800163ee61fb183088e258df.png" src="../../_images/490a4dfb394ab1cde6ed9588a9b9f758b57224f6800163ee61fb183088e258df.png" />
 </div>
 </div>
-<h3>Lab</h3><p>A college admissions officer has compiled the following data relating 8 students’ high school and college GPA:</p>
- <table>
-  <tr>
-    <td>High School GPA</td>
-    <td>2.0</td>
-    <td>2.5</td>
-    <td>3.0</td>
-    <td>3.0</td>
-    <td>3.5</td>
-    <td>3.5</td>
-    <td>4.0</td>
-    <td>4.0</td>
-  </tr>
-  <tr>
-    <td>College GPA</td>
-    <td>1.5</td>
-    <td>2.0</td>
-    <td>2.5</td>
-    <td>3.5</td>
-    <td>2.5</td>
-    <td>3.0</td>
-    <td>3.0</td>
-    <td>3.5</td>  
-  </tr>
-</table><p>1)Complete the plot of this data and then guess the value of <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(b\)</span> for the least squares regression line <span class="math notranslate nohighlight">\(y=mx+b\)</span>. (Use your guess to check that your answer to problem 2 is reasonable).</p>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p>A college admissions officer has compiled the following data relating 8 students’ high school and college GPA:</p>
+<table>
+ <tr>
+   <td>High School GPA</td>
+   <td>2.0</td>
+   <td>2.5</td>
+   <td>3.0</td>
+   <td>3.0</td>
+   <td>3.5</td>
+   <td>3.5</td>
+   <td>4.0</td>
+   <td>4.0</td>
+ </tr>
+ <tr>
+   <td>College GPA</td>
+   <td>1.5</td>
+   <td>2.0</td>
+   <td>2.5</td>
+   <td>3.5</td>
+   <td>2.5</td>
+   <td>3.0</td>
+   <td>3.0</td>
+   <td>3.5</td>  
+ </tr>
+</table>
+</div>
+<p>1)Complete the plot of this data and then guess the value of <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(b\)</span> for the least squares regression line <span class="math notranslate nohighlight">\(y=mx+b\)</span>. (Use your guess to check that your answer to problem 2 is reasonable).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -739,6 +763,7 @@ Consider the data values (1,1), (2,3) and (4,3).  In this case,
     <td> 3.3 </td>
   </tr>
 </table></section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -798,6 +823,20 @@ Consider the data values (1,1), (2,3) and (4,3).  In this case,
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
