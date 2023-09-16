@@ -515,10 +515,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solutions">Numerical Solutions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hint-for-problem-2">Hint for Problem 2</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
 </li>
 </ul>
@@ -645,68 +642,6 @@ Use simulation to justify and explain your answer.</p>
 <li><p>Consider a modification of the SIR model called the SIRD model for the mathematical modeling of epidemics, where D is the number of individuals who die, and the parameter mu&gt;0 is the given constant mortality rate. The goal is to solve for S(t), I(t), R(t), and D(t). Our new model will simulate the populations levels S, I, R, and D. Visualize and interpret the results for this model as above.</p></li>
 </ol>
 <p>In the SIR model, change the equation with dI/dt to convey that not only does the number of infectives increase proportional to the number of encounters S*I between susceptibles and infectives (with a constant of proportionality beta) and decrease proportional to the number of infected individuals I present (with a constant of proportionality gamma), but the number of infectives also DECREASES proportional to the number of infectives I present (with a constant of proportionality of the mortality rate mu). Also, add an equation to convey that the number of individuals who die increases proportional to the number of infectives present (with a constant of proportionality mu). Draw a schematic on a piece of paper to summarize the movement of people between the compartments S, I, R, and V for the population in this model.</p>
-<section id="hint-for-problem-2">
-<h4>Hint for Problem 2<a class="headerlink" href="#hint-for-problem-2" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
-
-<span class="c1"># Define Equations</span>
-<span class="k">def</span> <span class="nf">SIRV</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
-    <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">v</span>     <span class="c1"># unpack parameters</span>
-    <span class="c1">#specify dS/dt, dI/dt and dR/dt</span>
-    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">beta</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="n">I</span> <span class="o">-</span> <span class="n">v</span><span class="o">*</span><span class="n">V</span><span class="p">,</span>  
-             <span class="n">beta</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="n">I</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">I</span><span class="p">,</span>
-             <span class="n">gamma</span> <span class="o">*</span> <span class="n">I</span><span class="p">,</span>
-             <span class="n">v</span><span class="o">*</span><span class="n">S</span><span class="p">]</span>  
-    <span class="k">return</span> <span class="n">derivs</span>
-
-<span class="c1"># Parameters</span>
-<span class="n">beta</span><span class="o">=.</span><span class="mi">000001</span>
-<span class="n">gamma</span><span class="o">=.</span><span class="mi">2</span>
-<span class="n">v</span><span class="o">=.</span><span class="mi">01</span>
-<span class="c1"># Initial values</span>
-<span class="n">S0</span><span class="o">=</span><span class="mi">3000000</span>
-<span class="n">I0</span><span class="o">=</span><span class="mi">1</span>
-<span class="n">R0</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">V0</span><span class="o">=</span><span class="mi">0</span>
-
-<span class="c1"># Bundle parameters for ODE solver</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">beta</span><span class="p">,</span><span class="n">gamma</span><span class="p">,</span><span class="n">v</span><span class="p">]</span>
-<span class="c1"># Bundle initial conditions for ODE solver</span>
-<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">S0</span><span class="p">,</span><span class="n">I0</span><span class="p">,</span><span class="n">R0</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span>
-
-<span class="c1"># Make time array for solution</span>
-<span class="n">tStop</span> <span class="o">=</span> <span class="mi">70</span>  <span class="c1"># number of days</span>
-<span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
-
-<span class="c1"># Call the ODE solver</span>
-<span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">SIRV</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
-
-<span class="c1"># Plot results</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;susceptible&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;infected&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;recovered&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;vaccinateded&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;SIRV.png&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/8ad75b381ca8f4099a5b1fc57abaf019b928cf8a96af92cfa0d3d7621d1e65c6.png" src="../../_images/8ad75b381ca8f4099a5b1fc57abaf019b928cf8a96af92cfa0d3d7621d1e65c6.png" />
-</div>
-</div>
-</section>
 </section>
 </section>
 </section>
@@ -780,10 +715,7 @@ Use simulation to justify and explain your answer.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solutions">Numerical Solutions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hint-for-problem-2">Hint for Problem 2</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
 </li>
 </ul>
