@@ -514,12 +514,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-growth">Exponential Growth</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-growth-model">Logistic Growth Model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-growth">Exponential Growth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-growth-model">Logistic Growth Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
 </ul>
 </li>
 </ul>
@@ -533,7 +531,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="logistic-growth-and-covid-19">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="logistic-growth-and-covid-19">
 <h1>1. Logistic Growth and COVID-19<a class="headerlink" href="#logistic-growth-and-covid-19" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
@@ -577,12 +586,14 @@ $<span class="math notranslate nohighlight">\(
 y_0 = 5000 e^{-10k}\rightarrow y_0=5000 e^{-10\frac{\ln(6)}{10}}= 5000 e^{-\ln 6} = 5000 ( \frac{1}{6}) = 5000/6.
 \)</span>$</p>
 <p>Let’s look at a graph of <span class="math notranslate nohighlight">\(y=y_0e^{kt}\)</span> for these values of <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">k</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
 <span class="n">y0</span><span class="o">=</span><span class="mi">5000</span><span class="o">/</span><span class="mi">6</span>
 
 <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="n">y0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
@@ -603,12 +614,18 @@ y_0 = 5000 e^{-10k}\rightarrow y_0=5000 e^{-10\frac{\ln(6)}{10}}= 5000 e^{-\ln 6
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../../_images/e3b37946dce48ff8b920f4c6a72cbbda6771d3053175b482c1bee42c9e2d4151.png" src="../../_images/e3b37946dce48ff8b920f4c6a72cbbda6771d3053175b482c1bee42c9e2d4151.png" />
+<img alt="../../_images/81c43f58edea0db2ac49b58ddc0ee32cdf96b9ea1aa28567b4e9f48b210862f3.png" src="../../_images/81c43f58edea0db2ac49b58ddc0ee32cdf96b9ea1aa28567b4e9f48b210862f3.png" />
 </div>
 </div>
 <p>Any exponential growth function with <span class="math notranslate nohighlight">\(y_0&gt;0\)</span> and <span class="math notranslate nohighlight">\(k&gt;0\)</span> is such that <span class="math notranslate nohighlight">\(\lim_{t\rightarrow\infty} y(t) =\infty\)</span>  . and thus is not realistic for predicting the spread of COVID-19 if the time horizon is sufficiently long. Observe in our case what happens if we extend for example the time horizon fro  <span class="math notranslate nohighlight">\(t=0\)</span> to <span class="math notranslate nohighlight">\(t=50\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="n">y0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
 <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="o">.</span><span class="mi">01</span><span class="p">)</span>
@@ -628,14 +645,16 @@ y_0 = 5000 e^{-10k}\rightarrow y_0=5000 e^{-10\frac{\ln(6)}{10}}= 5000 e^{-\ln 6
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../../_images/a7c3a533e034c1b126fbfce6d5a5868fddc7c66f909bf677841e0963e84bcd4c.png" src="../../_images/a7c3a533e034c1b126fbfce6d5a5868fddc7c66f909bf677841e0963e84bcd4c.png" />
+<img alt="../../_images/5799765e5de257b9e90f5ec14c6b0d9e5854e077bb8610137379f867ab599abe.png" src="../../_images/5799765e5de257b9e90f5ec14c6b0d9e5854e077bb8610137379f867ab599abe.png" />
 </div>
 </div>
 <p>The actual reported data is shown below, and shows <span class="math notranslate nohighlight">\(y(t)\)</span> leveling off at about 80000.</p>
 <a class="reference internal image-reference" href="../../_images/fig24.png"><img alt="../../_images/fig24.png" src="../../_images/fig24.png" style="width: 300px;" /></a>
+</section>
 <section id="logistic-growth-model">
-<h3>Logistic Growth Model<a class="headerlink" href="#logistic-growth-model" title="Permalink to this heading">#</a></h3>
+<h2>Logistic Growth Model<a class="headerlink" href="#logistic-growth-model" title="Permalink to this heading">#</a></h2>
 <p>The <b>logistic growth model</b></p>
 <div class="math notranslate nohighlight">
 \[
@@ -648,14 +667,15 @@ y_0 = 5000 e^{-10k}\rightarrow y_0=5000 e^{-10\frac{\ln(6)}{10}}= 5000 e^{-\ln 6
 \]</div>
 <p>so we he have exponential growth.</p>
 <p>However, as <span class="math notranslate nohighlight">\(y\)</span> approaches <span class="math notranslate nohighlight">\(M\)</span>, the factor <span class="math notranslate nohighlight">\((1-\frac{y}{M})\)</span> wpproaches 0, and so <span class="math notranslate nohighlight">\(\frac{dy}{dt}\rightarrow 0\)</span>.This achieves the “leveling off” of the growth.</p>
-<p>Let’s ask Python to solve numerically the logistic growth model for the values <span class="math notranslate nohighlight">\(k=\log(6)/10\)</span>, <span class="math notranslate nohighlight">\(y_0=5000/6\)</span> and <span class="math notranslate nohighlight">\(M=80000\)</span>.</p>
-<div class="cell docutils container">
+<p>Let’s solve numerically the logistic growth model for the values <span class="math notranslate nohighlight">\(k=\log(6)/10\)</span>, <span class="math notranslate nohighlight">\(y_0=5000/6\)</span> and <span class="math notranslate nohighlight">\(M=80000\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-poster&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-poster&#39;</span><span class="p">)</span>
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
@@ -686,17 +706,18 @@ y_0 = 5000 e^{-10k}\rightarrow y_0=5000 e^{-10\frac{\ln(6)}{10}}= 5000 e^{-\ln 6
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/j3/nk1kg2ds0n7dc_f3bh90rj5c0000gn/T/ipykernel_23352/1395747516.py:5: MatplotlibDeprecationWarning: The seaborn styles shipped by Matplotlib are deprecated since 3.6, as they no longer correspond to the styles shipped by seaborn. However, they will remain available as &#39;seaborn-v0_8-&lt;style&gt;&#39;. Alternatively, directly use the seaborn API instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\pisihara\AppData\Local\Temp\ipykernel_22672\137539061.py:1: MatplotlibDeprecationWarning: The seaborn styles shipped by Matplotlib are deprecated since 3.6, as they no longer correspond to the styles shipped by seaborn. However, they will remain available as &#39;seaborn-v0_8-&lt;style&gt;&#39;. Alternatively, directly use the seaborn API instead.
   plt.style.use(&#39;seaborn-poster&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/81b6a32397c60b782c2b614fcca39b7a26a25e9d571414fbc3a95b57b987a8e7.png" src="../../_images/81b6a32397c60b782c2b614fcca39b7a26a25e9d571414fbc3a95b57b987a8e7.png" />
+<img alt="../../_images/a43185cabf70826b5b0ba8400320d981050d6c25b5e48bc60edcc29900aa3787.png" src="../../_images/a43185cabf70826b5b0ba8400320d981050d6c25b5e48bc60edcc29900aa3787.png" />
 </div>
 </div>
 </section>
 <section id="exercises">
-<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
 <ol class="arabic simple">
@@ -712,9 +733,8 @@ y_0 = 5000 e^{-10k}\rightarrow y_0=5000 e^{-10\frac{\ln(6)}{10}}= 5000 e^{-\ln 6
 <p>b) Sketch a slope field to explain qualitatively the behavior of the general logistic model for <span class="math notranslate nohighlight">\(k&gt;0\)</span> and <span class="math notranslate nohighlight">\(M&gt;0\)</span>. Sketch  solution curves where a) <span class="math notranslate nohighlight">\(y_0\)</span> is close to 0; b) <span class="math notranslate nohighlight">\(y_0\)</span> is roughly <span class="math notranslate nohighlight">\(M/2\)</span>; c) <span class="math notranslate nohighlight">\(y_0\)</span> is slightly smaller than <span class="math notranslate nohighlight">\(M\)</span>;  and d) <span class="math notranslate nohighlight">\(y_0\)</span> is slightly greater than <span class="math notranslate nohighlight">\(M\)</span></p>
 </div>
 <section id="reference">
-<h4>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">#</a></h4>
+<h3>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">#</a></h3>
 <p>Wang, P., Zheng, X., Li, J., and Zhu, B.  2020. Prediction of epidemic trends in COVID-19 with logistic model and machine learning technics.  Chaos, Solitons, and Fractals, 139(2020), 1-7.</p>
-</section>
 </section>
 </section>
 </section>
@@ -787,12 +807,10 @@ y_0 = 5000 e^{-10k}\rightarrow y_0=5000 e^{-10\frac{\ln(6)}{10}}= 5000 e^{-\ln 6
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-growth">Exponential Growth</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-growth-model">Logistic Growth Model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-growth">Exponential Growth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-growth-model">Logistic Growth Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
 </ul>
 </li>
 </ul>
