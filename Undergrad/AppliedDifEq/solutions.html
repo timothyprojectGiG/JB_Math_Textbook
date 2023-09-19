@@ -1134,6 +1134,84 @@ y=\frac{C_1Mke^{kt}}{1+C_1ke^{kt}}
 </section>
 <section id="cholera-in-haiti">
 <h2>3. Cholera in Haiti<a class="headerlink" href="#cholera-in-haiti" title="Permalink to this heading">#</a></h2>
+<p>Exercise 1</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="c1"># Define Equations</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
+    <span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span>      <span class="c1"># unpack parameters</span>
+    <span class="c1">#specify dS/dt, dI/dt and dR/dt</span>
+    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">H</span><span class="o">-</span><span class="n">S</span><span class="p">)</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="n">B</span><span class="p">),</span>  
+             <span class="n">a</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="n">r</span><span class="o">*</span><span class="n">I</span><span class="p">,</span>
+             <span class="n">B</span><span class="o">*</span><span class="n">Nb</span><span class="o">+</span><span class="n">e</span><span class="o">*</span><span class="n">I</span><span class="p">]</span>  
+    <span class="k">return</span> <span class="n">derivs</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">H</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">n</span><span class="o">=.</span><span class="mi">0001</span>
+<span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">r</span><span class="o">=.</span><span class="mi">2</span>
+<span class="n">Nb</span><span class="o">=-.</span><span class="mi">33</span>
+<span class="n">e</span><span class="o">=</span><span class="mi">10</span>
+<span class="c1"># Initial values</span>
+<span class="n">S0</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">I0</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">B0</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">exposure_rate</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">max_infected</span><span class="o">=</span><span class="p">[]</span>
+    
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">exposure_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="c1"># Bundle parameters for ODE solver</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span><span class="p">]</span>
+    <span class="c1"># Bundle initial conditions for ODE solver</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">S0</span><span class="p">,</span><span class="n">I0</span><span class="p">,</span><span class="n">B0</span><span class="p">]</span>
+
+    <span class="c1"># Make time array for solution</span>
+    <span class="n">tStop</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of days</span>
+    <span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
+
+    <span class="c1"># Call the ODE solver</span>
+    <span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">max_infected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span>
+    
+<span class="c1"># Plot results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">exposure_rate</span><span class="p">,</span> <span class="n">max_infected</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;max infected&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;a=exposure rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;max infected population&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cholerEx1.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/e4836c961d6d99829f7cc4e2de9b716fc2ef2d35d9ae2951c22f58e2ee52f568.png" src="../../_images/e4836c961d6d99829f7cc4e2de9b716fc2ef2d35d9ae2951c22f58e2ee52f568.png" />
+</div>
+</div>
+<p>The max infected population rises sharply as the exposure rate (a) is increased from 0 to 10. When a=100, the max_infected population has leveled off at approximately 8000 people.</p>
+<p>Exercise 2</p>
+<p>Exercise 3</p>
+<p>Exercise 4</p>
+<p>Exercise 5</p>
+<p>a) Though it would be better to revise the model by adding a vaccinated compartment V (t), the basic model might reflect a vaccination program by lowering the initial susceptible population S(0) and raising the value of K, the latter being the bacteria concentration required to give a .5 probability.</p>
+<p>b) Seasonal behavior of cholera outbreaks which may be related to weather events such as floods or El Nino must be considered. That is, even though there may be a period with no or very few cases, there is a latent possibility for re-emergence of a large number ofinfected population. Mathematically viable solutions may be overly simplistic in light of the reality of everyday life in Haiti.</p>
+<p>From the sensitivity analysis, the contamination rate seems to have the largest effect on the infected population, although exposure rate, recovery rate, and initial concentration of bacteria also have an effect. Within the range of 2.5-30 number of people contaminated per day, the infected population will increase significantly. As the contamination rate increases above 30, the infected population stabilizes and increases more slowly. These observations suggest focusing response and preparation measures on lowering the contamination rate</p>
 </section>
 <section id="hiv-aids">
 <h2>4. HIV-AIDS<a class="headerlink" href="#hiv-aids" title="Permalink to this heading">#</a></h2>
