@@ -554,22 +554,33 @@ document.write(`
 <p><span class="math notranslate nohighlight">\(S(t)\)</span> the number of susceptible individuals,</p>
 <p><span class="math notranslate nohighlight">\(I(t)\)</span> is the number of infected individuals,</p>
 <p><span class="math notranslate nohighlight">\(R(t)\)</span> is number of recovered individuals.</p>
-<a class="reference internal image-reference" href="../../_images/SIRdiagram.png"><img alt="../../_images/SIRdiagram.png" src="../../_images/SIRdiagram.png" style="width: 400px;" /></a>
+<figure class="align-default" id="sirdiagram">
+<a class="reference internal image-reference" href="../../_images/SIRdiagram.png"><img alt="../../_images/SIRdiagram.png" src="../../_images/SIRdiagram.png" style="width: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Schematic diagram of transitions.</span><a class="headerlink" href="#sirdiagram" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </div>
-<p>The differential equations are</p>
-<p>Equation <a class="reference internal" href="#equation-sir1">(41)</a></p>
-<div class="math notranslate nohighlight" id="equation-sir1">
-<span class="eqno">(41)<a class="headerlink" href="#equation-sir1" title="Permalink to this equation">#</a></span>\[dS/dt = -\beta S I\]</div>
-<p>The number of susceptibles (<span class="math notranslate nohighlight">\(S\)</span>) decreases with time at a rate proportional to the number of encounters <span class="math notranslate nohighlight">\(S I\)</span> between susceptibles and infected (with a constant of proportionality <span class="math notranslate nohighlight">\(\beta\)</span>).</p>
-<p>Equation <a class="reference internal" href="#equation-sir2">(42)</a></p>
-<div class="math notranslate nohighlight" id="equation-sir2">
-<span class="eqno">(42)<a class="headerlink" href="#equation-sir2" title="Permalink to this equation">#</a></span>\[dI/dt = \beta S I - \gamma I\]</div>
-<p>The number of infectious people <span class="math notranslate nohighlight">\(I\)</span> is increasing with respect to time <span class="math notranslate nohighlight">\(t\)</span>, proportional to the number of encounters <span class="math notranslate nohighlight">\(S I\)</span> between susceptibles and infected (with a constant of proportionality beta) and decreasing proportional to the number of infected <span class="math notranslate nohighlight">\(I\)</span> present (with a constant of proportionality <span class="math notranslate nohighlight">\(\gamma\)</span></p>
-<p>Equation <a class="reference internal" href="#equation-sir3">(43)</a></p>
-<div class="math notranslate nohighlight" id="equation-sir3">
-<span class="eqno">(43)<a class="headerlink" href="#equation-sir3" title="Permalink to this equation">#</a></span>\[dR/dt = \gamma I.\]</div>
-<p>The rate of recovered people <span class="math notranslate nohighlight">\(R\)</span> is increasing at a rate proportional to the number infected <span class="math notranslate nohighlight">\(I\)</span> (with a constant of proportionality gamma.)</p>
 <p>The parameter <span class="math notranslate nohighlight">\(\beta&gt;0\)</span> is called the transmission rate, and the parameter <span class="math notranslate nohighlight">\(\gamma&gt;0\)</span> is the recovery rate.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+The differential equations are 
+
+Equation {eq}`SIR1`
+
+```{math}
+:label: SIR1
+dS/dt = -\beta S I
+</pre></div>
+</div>
+<p>The number of susceptibles (<span class="math notranslate nohighlight">\(S\)</span>) decreases with time at a rate proportional to the number of encounters <span class="math notranslate nohighlight">\(S I\)</span> between susceptibles and infected (with a constant of proportionality <span class="math notranslate nohighlight">\(\beta\)</span>).</p>
+<p>Equation <a class="reference internal" href="#equation-sir2">(41)</a></p>
+<div class="math notranslate nohighlight" id="equation-sir2">
+<span class="eqno">(41)<a class="headerlink" href="#equation-sir2" title="Permalink to this equation">#</a></span>\[dI/dt = \beta S I - \gamma I\]</div>
+<p>The number  of infected <span class="math notranslate nohighlight">\(I\)</span> is increasing with respect to time <span class="math notranslate nohighlight">\(t\)</span>, proportional to the number of encounters <span class="math notranslate nohighlight">\(S I\)</span> between susceptibles and infected (with a constant of proportionality <span class="math notranslate nohighlight">\(\beta\)</span>) and decreasing proportional to the number of infected <span class="math notranslate nohighlight">\(I\)</span> present (with a constant of proportionality <span class="math notranslate nohighlight">\(\gamma\)</span></p>
+<p>Equation <a class="reference internal" href="#equation-sir3">(42)</a></p>
+<div class="math notranslate nohighlight" id="equation-sir3">
+<span class="eqno">(42)<a class="headerlink" href="#equation-sir3" title="Permalink to this equation">#</a></span>\[dR/dt = \gamma I.\]</div>
+<p>The number of recovered <span class="math notranslate nohighlight">\(R\)</span> is increasing at a rate proportional to the number of infected <span class="math notranslate nohighlight">\(I\)</span> (with a constant of proportionality <span class="math notranslate nohighlight">\(\gamma\)</span>.)</p>
 </section>
 <section id="numerical-solutions">
 <h2>Numerical Solutions<a class="headerlink" href="#numerical-solutions" title="Permalink to this heading">#</a></h2>
@@ -579,7 +590,7 @@ document.write(`
 <p><span class="math notranslate nohighlight">\(\gamma\)</span> (recovery_rate) = 0.2.</p>
 <p><b>INITIAL CONDITIONS</b></p>
 <p><span class="math notranslate nohighlight">\(S_0 = 1,000,000\)</span>  (Initial number of susceptibles)</p>
-<p><span class="math notranslate nohighlight">\(I_0 = 1\)</span>  (Initial number of infectives)</p>
+<p><span class="math notranslate nohighlight">\(I_0 = 1\)</span>  (Initial number of infected)</p>
 <p><span class="math notranslate nohighlight">\(R_0 = 0\)</span> (initial number of recovered)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -644,17 +655,17 @@ document.write(`
 <p>(a) What happens if you change the population to a smaller or a larger number? For instance, if you change the population (initial S) to 3,000,000, will the epidemic be over sooner or later? What happens if the population is 1000?</p>
 <p>(b) What happens if you change the transmission rate? For instance, if the transmission rate is high, e.g. 0.0001, what do you observe from the curves in the epidemic model? What happens if the transmission rate is lower, e.g. 10^(-7)?</p>
 <p>(c) Does the recovery rate play a role in the epidemic model? If so, how does the recovery rate contribute to the disease progression? Show your adjustments of the recovery rate and their related results.</p>
-<p>(d) According to your observations, do you think all people infected by the disease? Use simulation to justify and explain your answer.</p>
+<p>(d) According to your observations, do you think all people can potentially be infected by the disease? Explain your answer.</p>
 <p>(e) Is it possible, based on some initial conditions and parameter values that there is no disease outbreak?
-Use simulation to justify and explain your answer.</p>
+Explain your answer.</p>
 <ol class="arabic simple" start="2">
 <li><p>Consider a modification of the SIR model called the SIRV model for the mathematical modeling of epidemics, where V is the number of vaccinated individuals, and the parameter v&gt;0 is the given constant vaccination rate. The goal is to solve for S(t), I(t), R(t), and V(t). Model and simulate the populations levels S, I, R, and V and interpret the results for this model as above.</p></li>
 </ol>
-<p>In the model, change the equation with dS/dt to convey that not only does the number of susceptibles decrease proportional to the number of encounters S*I between susceptibles and infectives (with a constant of proportionality beta), but it also decreases proportional to the number of vaccinated individuals V present (with a constant of proportionality v). Also, add an equation to convey that the number of vaccinated individuals increases proportional to the number of susceptibles present (with a constant of proportionality v). Draw a schematic on a piece of paper to summarize the movement of people between the compartments S, I, R, and V for the population in this model.‘’’</p>
+<p>In the model, change the equation with dS/dt to convey that not only does the number of susceptibles decrease proportionally to the number of encounters S*I between susceptibles and infected (with a constant of proportionality <span class="math notranslate nohighlight">\(\beta\)</span>), but it also decreases proportionally to the number of vaccinated individuals V present (with a constant of proportionality v). Also, add an equation to convey that the number of vaccinated individuals increases proportionally to the number of susceptibles present (with a constant of proportionality v). Draw a schematic diagram to summarize the movement of people between the compartments S, I, R, and V for the population in this model.‘’’</p>
 <ol class="arabic simple" start="3">
-<li><p>Consider a modification of the SIR model called the SIRD model for the mathematical modeling of epidemics, where D is the number of individuals who die, and the parameter mu&gt;0 is the given constant mortality rate. The goal is to solve for S(t), I(t), R(t), and D(t). Our new model will simulate the populations levels S, I, R, and D. Visualize and interpret the results for this model as above.</p></li>
+<li><p>Consider a modification of the SIR model called the SIRD model for the mathematical modeling of epidemics, where D is the number of individuals who have died, and the parameter <span class="math notranslate nohighlight">\(\mu&gt;0\)</span> is the given constant mortality rate. The goal is to solve for S(t), I(t), R(t), and D(t). Our new model will simulate the populations levels S, I, R, and D. Visualize and interpret the results for this model as above.</p></li>
 </ol>
-<p>In the SIR model, change the equation with dI/dt to convey that not only does the number of infectives increase proportional to the number of encounters S*I between susceptibles and infectives (with a constant of proportionality beta) and decrease proportional to the number of infected individuals I present (with a constant of proportionality gamma), but the number of infectives also DECREASES proportional to the number of infectives I present (with a constant of proportionality of the mortality rate mu). Also, add an equation to convey that the number of individuals who die increases proportional to the number of infectives present (with a constant of proportionality mu). Draw a schematic on a piece of paper to summarize the movement of people between the compartments S, I, R, and V for the population in this model.</p>
+<p>In the SIR model, change the equation with dI/dt to convey that not only does the number of infected increase proportionally to the number of encounters S*I between susceptibles and infected (with a constant of proportionality <span class="math notranslate nohighlight">\(\beta\)</span>) and decrease proportionally to the number of infected individuals I present (with a constant of proportionality <span class="math notranslate nohighlight">\(\gamma\)</span>), but the number of infectives also decreases proportionally to the number of infectives I present (with a constant of proportionality of the mortality rate <span class="math notranslate nohighlight">\(\mu\)</span>). Also, add an equation to convey that the number of individuals who have died increases proportionally to the number of infected (with a constant of proportionality <span class="math notranslate nohighlight">\(\mu\)</span>). Draw a schematic diagram to summarize the movement of people between the compartments S, I, R, and V for the population in this model.</p>
 </div>
 </section>
 </section>
