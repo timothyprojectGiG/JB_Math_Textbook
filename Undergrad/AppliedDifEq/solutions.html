@@ -559,14 +559,13 @@ document.write(`
 <p>leads to</p>
 <div class="math notranslate nohighlight">
 \[
-\ln \frac{y}{Mk-ky} = kt+C.
+\frac{1}{k}\ln \frac{My}{M-y} = t+C.
 \]</div>
-<p>Using the initial condition <span class="math notranslate nohighlight">\(y(0)=y_0\)</span>, after algebra we obtain the solution’</p>
+<p>Considering the initial condition <span class="math notranslate nohighlight">\(y(0)=y_0&gt;0\)</span>,  the solution can be obtained using algebra:</p>
 <div class="math notranslate nohighlight">
 \[
-y=\frac{C_1Mke^{kt}}{1+C_1ke^{kt}}
+y=\frac{M}{1+(\frac{M}{y_0}-1)e^{-kt}}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(C_1=\frac{y_0}{Mk-ky_0}\)</span>.</p>
 <p>2a)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1206,8 +1205,265 @@ y=\frac{C_1Mke^{kt}}{1+C_1ke^{kt}}
 </div>
 <p>The max infected population rises sharply as the exposure rate (a) is increased from 0 to 10. When a=100, the max_infected population has leveled off at approximately 8000 people.</p>
 <p>Exercise 2</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="c1"># Define Equations</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
+    <span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span>      <span class="c1"># unpack parameters</span>
+    <span class="c1">#specify dS/dt, dI/dt and dR/dt</span>
+    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">H</span><span class="o">-</span><span class="n">S</span><span class="p">)</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="n">B</span><span class="p">),</span>  
+             <span class="n">a</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="n">r</span><span class="o">*</span><span class="n">I</span><span class="p">,</span>
+             <span class="n">B</span><span class="o">*</span><span class="n">Nb</span><span class="o">+</span><span class="n">e</span><span class="o">*</span><span class="n">I</span><span class="p">]</span>  
+    <span class="k">return</span> <span class="n">derivs</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">H</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">n</span><span class="o">=.</span><span class="mi">0001</span>
+<span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">r</span><span class="o">=.</span><span class="mi">2</span>
+<span class="n">Nb</span><span class="o">=-.</span><span class="mi">33</span>
+<span class="c1"># Initial values</span>
+<span class="n">S0</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">I0</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">B0</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">contam</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">peak1</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">peak2</span><span class="o">=</span><span class="p">[]</span>
+    
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">contam</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">40</span>
+    <span class="c1"># Bundle parameters for ODE solver</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span><span class="p">]</span>
+    <span class="c1"># Bundle initial conditions for ODE solver</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">S0</span><span class="p">,</span><span class="n">I0</span><span class="p">,</span><span class="n">B0</span><span class="p">]</span>
+
+    <span class="c1"># Make time array for solution</span>
+    <span class="n">tStop</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of days</span>
+    <span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
+
+    <span class="c1"># Call the ODE solver</span>
+    <span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">peak1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span>
+    
+    <span class="n">a</span><span class="o">=</span><span class="mi">20</span>
+        <span class="c1"># Bundle parameters for ODE solver</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span><span class="p">]</span>
+    <span class="c1"># Bundle initial conditions for ODE solver</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">S0</span><span class="p">,</span><span class="n">I0</span><span class="p">,</span><span class="n">B0</span><span class="p">]</span>
+
+    <span class="c1"># Make time array for solution</span>
+    <span class="n">tStop</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of days</span>
+    <span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
+
+    <span class="c1"># Call the ODE solver</span>
+    <span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">peak2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span>
+    
+<span class="c1"># Plot results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">contam</span><span class="p">,</span> <span class="n">peak1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;max infected (a=40)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">contam</span><span class="p">,</span> <span class="n">peak2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;max infected (a=20)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;a=40&quot;</span><span class="p">,</span><span class="s2">&quot;a=20&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;e=water contamination rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;max infected population&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cholerEx2.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/f79cba871952245ccaca1efd30d6f5d104c06051d68d4793ac8427b1e29c6a57.png" src="../../_images/f79cba871952245ccaca1efd30d6f5d104c06051d68d4793ac8427b1e29c6a57.png" />
+</div>
+</div>
+<p>Increased exposure rate (a=20 to a=40) increases the max infected population at each level of the water contamination rate (e).</p>
 <p>Exercise 3</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="c1"># Define Equations</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
+    <span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span>      <span class="c1"># unpack parameters</span>
+    <span class="c1">#specify dS/dt, dI/dt and dR/dt</span>
+    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">H</span><span class="o">-</span><span class="n">S</span><span class="p">)</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="n">B</span><span class="p">),</span>  
+             <span class="n">a</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="n">r</span><span class="o">*</span><span class="n">I</span><span class="p">,</span>
+             <span class="n">B</span><span class="o">*</span><span class="n">Nb</span><span class="o">+</span><span class="n">e</span><span class="o">*</span><span class="n">I</span><span class="p">]</span>  
+    <span class="k">return</span> <span class="n">derivs</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">H</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">n</span><span class="o">=.</span><span class="mi">0001</span>
+<span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">e</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">Nb</span><span class="o">=-.</span><span class="mi">33</span>
+<span class="c1"># Initial values</span>
+<span class="n">S0</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">I0</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">B0</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">recovery</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">peak1</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">peak2</span><span class="o">=</span><span class="p">[]</span>
+    
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">01</span><span class="p">):</span>
+    <span class="n">recovery</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">40</span>
+    <span class="c1"># Bundle parameters for ODE solver</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span><span class="p">]</span>
+    <span class="c1"># Bundle initial conditions for ODE solver</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">S0</span><span class="p">,</span><span class="n">I0</span><span class="p">,</span><span class="n">B0</span><span class="p">]</span>
+
+    <span class="c1"># Make time array for solution</span>
+    <span class="n">tStop</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of days</span>
+    <span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
+
+    <span class="c1"># Call the ODE solver</span>
+    <span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">peak1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span>
+    
+    <span class="n">a</span><span class="o">=</span><span class="mi">80</span>
+        <span class="c1"># Bundle parameters for ODE solver</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span><span class="p">]</span>
+    <span class="c1"># Bundle initial conditions for ODE solver</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">S0</span><span class="p">,</span><span class="n">I0</span><span class="p">,</span><span class="n">B0</span><span class="p">]</span>
+
+    <span class="c1"># Make time array for solution</span>
+    <span class="n">tStop</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of days</span>
+    <span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
+
+    <span class="c1"># Call the ODE solver</span>
+    <span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">peak2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span>
+    
+<span class="c1"># Plot results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">recovery</span><span class="p">,</span> <span class="n">peak1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;max infected (a=40)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">recovery</span><span class="p">,</span> <span class="n">peak2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;max infected (a=80)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;r=recovery rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;max infected population&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cholerEx3.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/7663f5009099b640e0b386299e2d369f687551f31ae1d3ce4af37c953fa79054.png" src="../../_images/7663f5009099b640e0b386299e2d369f687551f31ae1d3ce4af37c953fa79054.png" />
+</div>
+</div>
+<p>Peak infection dependency on the cholera recovery rate r for two exposure levels (a=40/day and a=80/day).</p>
 <p>Exercise 4</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="c1"># Define Equations</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
+    <span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span>      <span class="c1"># unpack parameters</span>
+    <span class="c1">#specify dS/dt, dI/dt and dR/dt</span>
+    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">H</span><span class="o">-</span><span class="n">S</span><span class="p">)</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="n">B</span><span class="p">),</span>  
+             <span class="n">a</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="n">r</span><span class="o">*</span><span class="n">I</span><span class="p">,</span>
+             <span class="n">B</span><span class="o">*</span><span class="n">Nb</span><span class="o">+</span><span class="n">e</span><span class="o">*</span><span class="n">I</span><span class="p">]</span>  
+    <span class="k">return</span> <span class="n">derivs</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">H</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">n</span><span class="o">=.</span><span class="mi">0001</span>
+<span class="n">K</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">r</span><span class="o">=.</span><span class="mi">2</span>
+<span class="n">e</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">Nb</span><span class="o">=-.</span><span class="mi">33</span>
+<span class="c1"># Initial values</span>
+<span class="n">S0</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">I0</span><span class="o">=</span><span class="mi">0</span>
+
+
+<span class="n">Z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="mi">201</span><span class="p">)</span>  
+    
+<span class="k">for</span> <span class="n">B0</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>     
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>  
+        <span class="n">a</span><span class="o">=</span><span class="n">i</span><span class="o">/</span><span class="mi">10</span>  <span class="c1"># exposure rate</span>
+        <span class="c1"># Bundle parameters for ODE solver</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">H</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Nb</span><span class="p">,</span><span class="n">e</span><span class="p">]</span>
+        <span class="c1"># Bundle initial conditions for ODE solver</span>
+        <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">S0</span><span class="p">,</span><span class="n">I0</span><span class="p">,</span><span class="n">B0</span><span class="p">]</span>
+
+        <span class="c1"># Make time array for solution</span>
+        <span class="n">tStop</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of days</span>
+        <span class="n">tInc</span> <span class="o">=</span> <span class="o">.</span><span class="mi">001</span>  
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
+
+        <span class="c1"># Call the ODE solver</span>
+        <span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+        <span class="c1"># Record the peak infection</span>
+        <span class="n">Z</span><span class="p">[</span><span class="n">B0</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">psoln</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    
+
+<span class="c1"># Plot results</span>
+<span class="c1"># Creating dataset</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># Creating figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+ 
+<span class="c1"># syntax for 3-D projection</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span> <span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+ 
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Max Infected&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;a= .1 * i = exposure rate&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;B0=initial bacteria concent&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Max Infected&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;cholerEx4.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+ 
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/0e8ee649a8e560d2c574c93b465e594fb0fe02e724153ce5ae49e9721dffa634.png" src="../../_images/0e8ee649a8e560d2c574c93b465e594fb0fe02e724153ce5ae49e9721dffa634.png" />
+</div>
+</div>
 <p>Exercise 5</p>
 <p>a) Though it would be better to revise the model by adding a vaccinated compartment V (t), the basic model might reflect a vaccination program by lowering the initial susceptible population S(0) and raising the value of K, the latter being the bacteria concentration required to give a .5 probability.</p>
 <p>b) Seasonal behavior of cholera outbreaks which may be related to weather events such as floods or El Nino must be considered. That is, even though there may be a period with no or very few cases, there is a latent possibility for re-emergence of a large number ofinfected population. Mathematically viable solutions may be overly simplistic in light of the reality of everyday life in Haiti.</p>
