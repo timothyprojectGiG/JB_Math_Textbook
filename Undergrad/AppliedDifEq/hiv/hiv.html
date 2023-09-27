@@ -640,39 +640,27 @@ differential equations. Perelson’s model considers the qualitative dynamics of
 <a class="reference internal image-reference" href="../../../_images/fig112.png"><img alt="../../../_images/fig112.png" src="../../../_images/fig112.png" style="width: 400px;" /></a>
 <p>In this model, <span class="math notranslate nohighlight">\(T(t)\)</span>, <span class="math notranslate nohighlight">\(T^*(t)\)</span>, <span class="math notranslate nohighlight">\(T^{**}(t)\)</span> and <span class="math notranslate nohighlight">\(V(t)\)</span> represent respectively the concentrations of healthy T-cells, latently infected T-cells, actively infected T-cells, and HIV viral cells. The four equations specify the dynamics shown in Figure 2.
 <a class="reference internal" href="../../../_images/fig26.png"><img alt="../../../_images/fig26.png" src="../../../_images/fig26.png" style="width: 500px;" /></a></p>
-<p><strong>Change in Healthy T-Cells</strong> Equation <code class="xref eq docutils literal notranslate"><span class="pre">HIV1</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">label</span><span class="p">:</span> <span class="n">HIV1</span>
-<span class="n">dT</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="n">s</span><span class="o">+</span><span class="n">rT</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span>\<span class="n">frac</span><span class="p">{</span><span class="n">T</span><span class="o">+</span><span class="n">T</span><span class="o">^*+</span><span class="n">T</span><span class="o">^</span><span class="p">{</span><span class="o">**</span><span class="p">}}{</span><span class="n">T_</span><span class="p">{</span><span class="nb">max</span><span class="p">}})</span><span class="o">-</span> \<span class="n">mu_T</span> <span class="n">T</span> <span class="o">-</span><span class="n">k_</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="n">TV</span>
-
-</pre></div>
-</div>
+<p><strong>Change in Healthy T-Cells</strong> Equation <a class="reference internal" href="#equation-hiv1">(44)</a></p>
+<div class="math notranslate nohighlight" id="equation-hiv1">
+<span class="eqno">(44)<a class="headerlink" href="#equation-hiv1" title="Permalink to this equation">#</a></span>\[dT/dt = s+rT (1-\frac{T+T^*+T^{**}}{T_{max}})- \mu_T T -k_{1}TV\]</div>
 <p>This equation gives the rate of change <span class="math notranslate nohighlight">\(dT /dt\)</span> in the concentration <span class="math notranslate nohighlight">\(T(t)\)</span> of
 healthy T-cells New, healthy T-cells enter into the blood stream at a constant rate s. (This is an oversimplification, since the rate is expected to decrease during the course of the HIV infection. See Kirschner and Webb 1996) In the absence of free virus (V = 0), the entire right-hand side of the equation reduces to a modified logistic growth equation. The <span class="math notranslate nohighlight">\(−k_1T V\)</span> term assumes that the rate of infection of T-cells by free viral cells is jointly proportional to the concentration of T-cells and the concentration of free virus</p>
-<p><strong>Change in Infected T-Cells</strong> Equation <code class="xref eq docutils literal notranslate"><span class="pre">HIV2</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">label</span><span class="p">:</span> <span class="n">HIV2</span>
-<span class="n">dT</span><span class="o">^*/</span><span class="n">dt</span> <span class="o">=</span><span class="n">k_</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="n">TV</span><span class="o">-</span> \<span class="n">mu_T</span> <span class="n">T</span><span class="o">^*-</span><span class="n">k_</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="n">T</span><span class="o">^*</span>
-
-</pre></div>
-</div>
+<p><strong>Change in Infected T-Cells</strong> Equation <a class="reference internal" href="#equation-hiv2">(45)</a></p>
+<div class="math notranslate nohighlight" id="equation-hiv2">
+<span class="eqno">(45)<a class="headerlink" href="#equation-hiv2" title="Permalink to this equation">#</a></span>\[dT^*/dt =k_{1}TV- \mu_T T^*-k_{2}T^*\]</div>
 <p>This equation gives the rate of change <span class="math notranslate nohighlight">\(dT^∗/dt\)</span> in the concentration <span class="math notranslate nohighlight">\(T^∗(t)\)</span> of
 latently infected T-cells. Growth is due to the infection of healthy T-cells with free viral cells
 (<span class="math notranslate nohighlight">\(k_1T V\)</span> ). Decreases are due to death (<span class="math notranslate nohighlight">\(−\mu_{T^∗} T)\)</span> (the death rates may be different for
 healthy, latently infected, and actively infected T-cells), and by progression from latent to active infection (<span class="math notranslate nohighlight">\(−k_2T^∗\)</span>)</p>
-<p><strong>Change in Actively Infected T-Cells</strong> Equation <code class="xref eq docutils literal notranslate"><span class="pre">HIV3</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">label</span><span class="p">:</span> <span class="n">HIV3</span>
-<span class="n">dT</span><span class="o">^</span><span class="p">{</span><span class="o">**</span><span class="p">}</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="n">k_</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="n">T</span><span class="o">^</span><span class="p">{</span><span class="o">*</span><span class="p">}</span> <span class="o">-</span> \<span class="n">mu_b</span> <span class="n">T</span><span class="o">^</span><span class="p">{</span><span class="o">**</span><span class="p">}</span>
-
-</pre></div>
-</div>
+<p><strong>Change in Actively Infected T-Cells</strong> Equation <a class="reference internal" href="#equation-hiv3">(46)</a></p>
+<div class="math notranslate nohighlight" id="equation-hiv3">
+<span class="eqno">(46)<a class="headerlink" href="#equation-hiv3" title="Permalink to this equation">#</a></span>\[dT^{**}/dt = k_{2}T^{*} - \mu_b T^{**}\]</div>
 <p>This equation gives the rate of change <span class="math notranslate nohighlight">\(dT^{∗∗}/dt\)</span> in the concentration <span class="math notranslate nohighlight">\(T^{∗∗}(t)\)</span> of
 actively infected T-cells. Growth is due to latently infected cells becoming actively infected (<span class="math notranslate nohighlight">\(k_2T^∗\)</span>).
 Decrease in concentration is due only to death (<span class="math notranslate nohighlight">\(µ_{T^{∗∗}}T^{∗∗}\)</span>).</p>
-<p><strong>Change in Virus Concentration</strong> Equation <code class="xref eq docutils literal notranslate"><span class="pre">HIV4</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">label</span><span class="p">:</span> <span class="n">HIV4</span>
-<span class="n">dV</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="n">N</span> \<span class="n">mu_</span><span class="p">{</span><span class="n">b</span><span class="p">}</span><span class="n">T</span><span class="o">^</span><span class="p">{</span><span class="o">**</span><span class="p">}</span> <span class="o">-</span> <span class="n">k_1</span> <span class="n">TV</span> <span class="o">-</span>\<span class="n">mu_</span><span class="p">{</span><span class="n">V</span><span class="p">}</span><span class="n">V</span>
-
-</pre></div>
-</div>
+<p><strong>Change in Virus Concentration</strong> Equation <a class="reference internal" href="#equation-hiv4">(47)</a></p>
+<div class="math notranslate nohighlight" id="equation-hiv4">
+<span class="eqno">(47)<a class="headerlink" href="#equation-hiv4" title="Permalink to this equation">#</a></span>\[dV/dt = N \mu_{b}T^{**} - k_1 TV -\mu_{V}V\]</div>
 <p>This equation gives the rate of change <span class="math notranslate nohighlight">\(dV /dt\)</span> in the concentration <span class="math notranslate nohighlight">\(V (t)\)</span> of the free virus.  Growth occurs when an actively infected T-cell lyses (i.e., explodes). It is assumed that <span class="math notranslate nohighlight">\(N\)</span> copies of the free viral cell are created upon lysing (<span class="math notranslate nohighlight">\(Nµ_{T^{∗∗}} T^{∗∗}\)</span>). The free viral concentration decreases as the free virus becomes attached
 to healthy T-cells (<span class="math notranslate nohighlight">\(−k_1T V\)</span>) and also through death (<span class="math notranslate nohighlight">\(−µ_V V\)</span>).</p>
 <p>In particular, Equation HIV1 tells us latently infected T-cells are created when free HIV viral cells attach  to healthy T-cells with rate constant <span class="math notranslate nohighlight">\(k_1\)</span>. Also, Equation HIV4, giving the rate of change <span class="math notranslate nohighlight">\(dV/dt\)</span> in the concentration <span class="math notranslate nohighlight">\(V(t)\)</span> of the HIV virus indicates that when an actively infected T-cell lyses (i.e. explodes), it releases <span class="math notranslate nohighlight">\(N\)</span> copies of the  HIV viral cell (<span class="math notranslate nohighlight">\(N\mu_bT^{**}\)</span>).  The free viral concentration decreases as the free virus becomes attached to healthy T-cells (<span class="math notranslate nohighlight">\(-k_{1}TV\)</span>) and also through death (<span class="math notranslate nohighlight">\(-\mu_VV\)</span>).</p>
