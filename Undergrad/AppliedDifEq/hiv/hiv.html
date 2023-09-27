@@ -513,18 +513,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unaids-fact-sheet">UNAIDS Fact Sheet</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perelsons-immunologyical-hiv-model">Perelson’s Immunologyical HIV Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-analysis">Equilibrium Analysis</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab">LAB</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-questions">Discussion Questions</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1 Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unaids-fact-sheet">4.2 UNAIDS Fact Sheet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perelsons-immunological-hiv-model">4.3 Perelson’s Immunological HIV Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-analysis">4.4 Equilibrium Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-in-python">4.5 Analysis in Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">4.6 Sensitivity Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">4.7 Exercises</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliography">Bibliography</a></li>
 </ul>
             </nav>
@@ -537,132 +532,174 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="hiv-aids">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits</span> <span class="kn">import</span> <span class="n">mplot3d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="hiv-aids">
 <h1>4. HIV-AIDS<a class="headerlink" href="#hiv-aids" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>The war against HIV/AIDS has been fought for many years on many fronts. Clinical research \cite{c} has shown that early administration of anti-retroviral therapy (ART)  can  reduce transmission of HIV from one infected partner to another.  Similarly, such therapy can help prevent the transmission of HIV from mother to newborn.  Countries such as Lesotho have experienced 1/4 of its population HIV-positive. In such situations, there is an urgent need to get the word out to at-risk  people to go for HIV testing. Vodafone foundation initiated a mobile outreach program in September 2015, using the mobile platform to register HIV patients and track treatment, as well as send out SMS messages providing information about HIV AIDS, all messages ending with the words “Get tested for HIV”. Timely testing can make all the difference.</p>
-<p>Mosotho’s mother discovered that she was HIV+ early in her pregnancy, and immediately began to take drugs to prevent her from infecting her baby. When Mosotho was born, he was immediately put on the life saving treatment. M’e N’thabang, a mother of eight children, three of whom were HIV+, for   months would bring her young grandson, Mosotho, for his pediatric check-up. Today, he is HIV-, a testament to the impact of what proper health care can do for people. (<a class="reference external" href="http://allafrica.com">allafrica.com</a>, 2016)</p>
+<h2>4.1 Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>The war against HIV/AIDS has been fought for many years on a variety of fronts. Clinical research has shown that early administration of anti-retroviral therapy (ART)  can  reduce transmission of HIV from one infected partner to another (Cohen et al 2011).  Similarly, such therapy can help prevent the transmission of HIV from mother to newborn.  Countries such as the African country of Lesotho have experienced 1/4 of its population HIV-positive. In such situations, there is an urgent need to get the word out to at-risk  people to go for HIV testing. Vodafone foundation initiated a mobile outreach program in September 2015, using the mobile platform to register HIV patients and track treatment, as well as send out SMS messages providing information about HIV AIDS, all messages ending with the words “Get tested for HIV”. Timely testing can make all the difference.</p>
+<p>Mosotho’s mother discovered that she was HIV+ early in her pregnancy, and immediately began to take drugs to prevent her from infecting her baby. When Mosotho was born, he was immediately put on the life saving treatment. M’e N’thabang, a mother of eight children, three of whom were HIV+, for months would bring her young grandson, Mosotho, for his pediatric check-up. Today, he is HIV-, a testament to the impact of what proper health care can do for people. (<a class="reference external" href="http://allafrica.com">allafrica.com</a>, 2016)</p>
 </section>
 <section id="unaids-fact-sheet">
-<h2>UNAIDS Fact Sheet<a class="headerlink" href="#unaids-fact-sheet" title="Permalink to this heading">#</a></h2>
-<p>Here is the data from a recent UNAIDS fact sheet (<a class="reference external" href="https://www.unaids.org/en/resources/fact-sheet">https://www.unaids.org/en/resources/fact-sheet</a>)</p>
+<h2>4.2 UNAIDS Fact Sheet<a class="headerlink" href="#unaids-fact-sheet" title="Permalink to this heading">#</a></h2>
+<p>Here is the data from a recent UNAIDS fact sheet highlighting how grave the HIV situation is.  (<a class="reference external" href="https://www.unaids.org/en/resources/fact-sheet">https://www.unaids.org/en/resources/fact-sheet</a>)</p>
+<p><b>Global HIV statistics</b></p>
+<ul class="simple">
+<li><p>39.0 million [33.1 million–45.7 million] people globally were living with HIV in 2022.</p></li>
+<li><p>1.3 million [1 million–1.7 million] people became newly infected with HIV in 2022.</p></li>
+<li><p>630 000 [480 000–880 000] people died from AIDS-related illnesses in 2022.</p></li>
+<li><p>29.8 million people were accessing antiretroviral therapy in 2022.</p></li>
+<li><p>85.6 million [64.8 million–113.0 million] people have become infected with HIV since the start of the epidemic.</p></li>
+<li><p>40.4 million [32.9 million–51.3 million] people have died from AIDS-related illnesses since the start of the epidemic.</p></li>
+</ul>
 <p><b>Infected Population</b></p>
-<p>In 2021, there were 38.4 million [33.9 million–43.8 million] people living with HIV.
-36.7 million [32.3 million–41.9 million] adults (15 years or older).
-1.7 million [1.3 million–2.1 million] children (0–14 years).
-54% of all people living with HIV were women and girls.
-85% [75– 97%] of all people living with HIV knew their HIV status in 2021.
-About 5.9 million people did not know that they were living with HIV in 2021.</p>
+<ul class="simple">
+<li><p>In 2022, there were 39.0 million [33.1 million–45.7 million] people living with HIV.</p>
+<ul>
+<li><p>37.5 million [31.8 million–43.6 million] adults (15 years or older).</p></li>
+<li><p>1.5 million [1.2 million–2.1 million] children (0–14 years).</p></li>
+<li><p>53% of all people living with HIV were women and girls.</p></li>
+<li><p>86% [73– 98%] of all people living with HIV knew their HIV status in 2022.</p></li>
+</ul>
+</li>
+<li><p>About 5.5 million people did not know that they were living with HIV in 2022.</p></li>
+</ul>
 <p><b>People living with HIV accessing antiretroviral therapy</b></p>
-<p>At the end of December 2021, 28.7 million people were accessing antiretroviral therapy, up from 7.8 million in 2010.
-In 2021, 75% [66–85%] of all people living with HIV were accessing treatment.
-76% [67–87%] of adults aged 15 years and older living with HIV had access to treatment, as did 52% [42–65%] of children aged 0–14 years.
-80% [72–91%] of female adults aged 15 years and older had access to treatment; however, just 70% [61–82%] of male adults aged 15 years and older had access.
-81% [63–97%] of pregnant women living with HIV had access to antiretroviral medicines to prevent transmission of HIV to their child in 2021.</p>
+<ul class="simple">
+<li><p>At the end of December 2022, 29.8 million people were accessing antiretroviral therapy, up from 7.7 million in 2010.</p></li>
+<li><p>In 2022, 76% [65–89%] of all people living with HIV were accessing treatment.</p></li>
+<li><p>77% [65–90%] of adults aged 15 years and older living with HIV had access to treatment, as did 57% [44–78%] of children aged 0–14 years.</p></li>
+<li><p>82% [69–95%] of women aged 15 years and older had access to treatment; however, just 72% [60–84%] of men aged 15 years and older had access.</p></li>
+<li><p>82% [64–98%] of pregnant women living with HIV had access to antiretroviral medicines to prevent transmission of HIV to their child in 2022.</p></li>
+</ul>
 <p><b>New HIV infections</b></p>
-<p>New HIV infections have been reduced by 54% since the peak in 1996.
-In 2021, around 1.5 million [1.1 million–2.0 million] people were newly infected with HIV, compared to 3.2 million [2.4 million–4.3 million] people in 1996.
-Women and girls accounted for 49% of all new infections in 2021.
-Since 2010, new HIV infections have declined by 32%, from 2.2 million [1.7 million–2.9 million] to 1.5 million [1.1 million–2.0 million] in 2021.
-Since 2010, new HIV infections among children have declined by 52%, from 320 000 [220 000–480 000] in 2010 to 160 000 [110 000–230 000] in 2021.</p>
+<ul class="simple">
+<li><p>New HIV infections have been reduced by 59% since the peak in 1995.</p></li>
+<li><p>In 2022, 1.3 million [1 million–1.7 million] people were newly infected with HIV, compared to 3.2 million [2.5 million–4.3 million] people in 1995.</p></li>
+<li><p>Women and girls accounted for 46% of all new infections in 2022.</p></li>
+<li><p>Since 2010, new HIV infections have declined by 38%, from 2.1 million [1.6 million–2.8 million] to 1.3 million [1 million–1.7 million] in 2022.</p></li>
+<li><p>Since 2010, new HIV infections among children have declined by 58%, from 310 000 [210 000–490 000] in 2010 to 130 000 [90 000–210 000] in 2022.</p></li>
+</ul>
 <p><b> AIDS-related deaths </b></p>
-<p>AIDS-related deaths have been reduced by 68% since the peak in 2004 and by 52% since 2010.
-In 2021, around 650 000 [510 000–860 000] people died from AIDS-related illnesses worldwide, compared to 2.0 million [1.6 million–2.7 million] people in 2004 and 1.4 million [1.1 million–1.8 million] people in 2010.
-AIDS-related mortality has declined by 57% among women and girls and by 47% among men and boys since 2010.</p>
+<ul class="simple">
+<li><p>AIDS-related deaths have been reduced by 69% since the peak in 2004 and by 51% since 2010.</p></li>
+<li><p>In 2022, around 630 000 [480 000–880 000] people died from AIDS-related illnesses worldwide, compared to 2.0 million [1.5 million–2.8 million] people in 2004 and 1.3 million [970 000–1.8 million] people in 2010.</p></li>
+<li><p>AIDS-related mortality has declined by 55% among women and girls and by 47% among men and boys since 2010.</p></li>
+</ul>
 <p><b>Key populations</b></p>
-<p>In 2021, key populations (sex workers and their clients, gay men and other men who have sex with men, people who inject drugs, transgender people) and their sexual partners accounted for 70% of HIV infections globally:
-94% of new HIV infections outside of sub-Saharan Africa.
-51% of new HIV infections in sub-Saharan Africa.
-The risk of acquiring HIV is:
-35 times higher among people who inject drugs than adults who do not inject drugs.
-30 times higher for female sex workers than adult women.
-28 times higher among gay men and other men who have sex with men than adult men.
-14 times higher for transgender women than adult women.
-Women</p>
-<p>Every week, around 4900 young women aged 15–24 years became infected with HIV globally in 2021. Around 4000 of these infections occurred in sub-Saharan Africa.
-In sub-Saharan Africa, six in seven new HIV infections among adolescents aged 15–19 years are among girls. Girls and young women aged 15–24 years are three times more likely to be living with HIV than young men of the same age.
-In sub-Saharan Africa, women and girls accounted for 63% of all new HIV infections in 2021</p>
-<p><b>95–95–95</b></p>
-<p>In 2021, 85% [75–97%] of people living with HIV knew their HIV status.
-Among people who knew their status, 88% [78– &gt;98%] were accessing treatment.
-And among people accessing treatment, 92% [81– &gt;98%] were virally suppressed.
-Of all people living with HIV, 85% [75–97%] knew their status, 75% [66–85%] were accessing treatment and 68% [60–78%] were virally suppressed in 2021.</p>
+<p>Globally, median HIV prevalence among the adult population (ages 15-49) was 0.7%. However median prevalence was higher among key populations:</p>
+<ul class="simple">
+<li><p>2.5% among sex workers</p></li>
+<li><p>7.7% among gay men and other men who have sex with men</p></li>
+<li><p>5.0% among people who inject drugs</p></li>
+<li><p>10.3% among transgender persons</p></li>
+<li><p>1.4% among people in prisons.</p></li>
+</ul>
+<p><b>Women and Girls</b></p>
+<ul class="simple">
+<li><p>Globally 46% of all new HIV infections were among women and girls (all ages) in 2022.</p></li>
+<li><p>In sub-Saharan Africa, women and girls (all ages) accounted for 63% of all new HIV infections.  In all other geographical regions, over 70% of new HIV infections in 2022 occurred among men and boys.</p></li>
+<li><p>Every week, 4000 adolescent girls and young women aged 15–24 years became infected with HIV globally in 2022. 3100 of these infections occurred in sub-Saharan Africa.</p></li>
+</ul>
+<p><b>Testing and Treatment Targets (95–95–95)</b></p>
+<ul class="simple">
+<li><p>In 2022, 86% [73– &gt;98%] of all people living with HIV knew their HIV status.</p>
+<ul>
+<li><p>Among people who knew their status, 89% [75– &gt;98%] were accessing treatment.</p></li>
+<li><p>And among people accessing treatment, 93% [79– &gt;98%] were virally suppressed.</p></li>
+<li><p>Among children ages 0-14 years the 95-95-95 targets were 63% [49% - 86%], 91% [71% - &gt;98%], 81% [63%-&gt;98%]</p></li>
+<li><p>Among women, the 95-95-95 targets were: 90% [76-&gt;98%], 91% [77-&gt;98%], and 93% [79-&gt;98%].</p></li>
+<li><p>Among men, the 95-95-95 targets were: 83% [70-98%] of adult men living with HIV knew their HIV status, 86% [72-&gt;98%] were accessing treatment and 94% [79-&gt;98%] were virally suppressed.</p></li>
+</ul>
+</li>
+<li><p>Among all people living with HIV, 86% [73– &gt;98%] knew their status, 76% [65–89%] were accessing treatment and 71% [60–83%] were virally suppressed in 2022.</p></li>
+</ul>
 <p><b>Investments</b></p>
-<p>At the end of 2021, USD 21.4 billion (in constant 2019 United States dollars) was available for the AIDS response in low- and middle-income countries—around 60% was from domestic sources.
-UNAIDS estimates that US$ 29 billion (in constant 2019 United States dollars) will be required for the AIDS response in low- and middle-income countries, including countries formerly considered to be upper-income countries, in 2025 to get on track to end AIDS as a global public health threat.</p>
+<ul class="simple">
+<li><p>At the end of 2022, 20.8 billion (in constant 2019 United States dollars) was available for the AIDS response in low- and middle-income countries—around 60% was from domestic sources.</p></li>
+<li><p>UNAIDS estimates that 29 billion (in constant 2019 United States dollars) will be required for the AIDS response in low- and middle-income countries, including countries formerly considered to be upper-income countries, in 2025 to get on track to end AIDS as a public health threat.</p></li>
+</ul>
 </section>
-<section id="perelsons-immunologyical-hiv-model">
-<h2>Perelson’s Immunologyical HIV Model<a class="headerlink" href="#perelsons-immunologyical-hiv-model" title="Permalink to this heading">#</a></h2>
+<section id="perelsons-immunological-hiv-model">
+<h2>4.3 Perelson’s Immunological HIV Model<a class="headerlink" href="#perelsons-immunological-hiv-model" title="Permalink to this heading">#</a></h2>
 <p>Almost 50 years have passed since the first immunological model of HIV was proposed by Leon Cooper [1986]. Differential equation models and discrete difference equations have been used by both immunologists and epidemiologists in the war against HIV/AIDS. Whereas immunological models describe how the HIV virus attacks the body’s immune system, epidemiological models describe the spread of the HIV/AIDS throughout a population.
-With the understanding that all mathematical models depend on simplifying assumptions which need to be revised as further experimental evidence/data is obtained \cite{cv}, Perelson’s model, as introduced briefly in this lab, will help us understand why ART helps the human immune system fight HIV (see \cite{i} for a more complete introduction).</p>
-<p>Our immune system has two lines of defense:  <i>innate</i> \index{g}{immune system!innate}(i.e., general defense against all invaders) and <i>acquired</i> \index{g}{immune system!acquired} (i.e., defense targeted at specific invaders). Our front-line defense keep invaders from entering the body or bloodstream; and secondary defense fights invaders that have passed through the front-line. Whereas the innate immune system \index{g}{immune system}(eg. skin, stomach acid, mucus, phagocytes) works in both lines of defense, the acquired immune system only works in the second-line via  \emph{lymphocytes} which target <i>antigens</i>, (i.e. large molecules on the surfaces of cells, viruses, bacteria etc.) which uniquely identify invaders. \emph{T-cells} are a type of lymphocyte produced in the marrow. CD4<span class="math notranslate nohighlight">\(^{+}\)</span> T-cells normally average about 1000 per cubic mm of blood and a decrease in their concentration level is used to assess HIV positive status. Perelson’s model describes the change in concentration of healthy CD4<span class="math notranslate nohighlight">\(^{+}\)</span> T-cells after an individual becomes infected with the HIV virus.  After the
-primary infection, an HIV positive individual may go through a latency period which may vary considerably before the onset of AIDS. During this period, while free HIV viral cells attach themselves to healthy T-cells \index{g}{T-cells}resulting in latently affected T-cells, \index{g}{T-cells!latently affected}the healthy T-cell concentration remains sufficiently high so that the immune system remains functional. AIDS occurs when the T-cell concentration drops and the HIV viral concentration rises sufficiently thereby crippling the acquired immune system. AIDS patients are then at critical risk to succumb to other diseases such as pneumonia.</p>
+With the understanding that all mathematical models depend on simplifying assumptions which need to be revised as further experimental evidence/data is obtained (Covert and Kischner 2000). Perelson’s model, as introduced briefly in this lab, will help us understand why ART helps the human immune system fight HIV (see Isihara et. al 2005 for a more complete introduction).</p>
+<p>Our immune system has two lines of defense:  <i>innate</i> (i.e., general defense against all invaders) and <i>acquired</i>  (i.e., defense targeted at specific invaders). Our front-line defense keep invaders from entering the body or bloodstream; and secondary defense fights invaders that have passed through the front-line. Whereas the innate immune system (eg. skin, stomach acid, mucus, phagocytes) works in both lines of defense, the acquired immune system only works in the second-line via lymphocytes which target <i>antigens</i>, (i.e. large molecules on the surfaces of cells, viruses, bacteria etc.) which uniquely identify invaders. T-cells are a type of lymphocyte produced in the marrow. CD4<span class="math notranslate nohighlight">\(^{+}\)</span> T-cells normally average about 1000 per cubic mm of blood and a decrease in their concentration level is used to assess HIV positive status. Perelson’s model describes the change in concentration of healthy CD4<span class="math notranslate nohighlight">\(^{+}\)</span> T-cells after an individual becomes infected with the HIV virus.  After the
+primary infection, an HIV positive individual may go through a latency period which may vary considerably before the onset of AIDS. During this period, while free HIV viral cells attach themselves to healthy T-cells resulting in latently affected T-cells, the healthy T-cell concentration remains sufficiently high so that the immune system remains functional. AIDS occurs when the T-cell concentration drops and the HIV viral concentration rises sufficiently thereby crippling the acquired immune system. AIDS patients are then at critical risk to succumb to other diseases such as pneumonia.</p>
 <p>Perelson’s Immunological Model is a non-linear system of four ordinary
 differential equations. Perelson’s model considers the qualitative dynamics of the healthy T-cell and HIV-viral concentrations shown  in Figure 1 below.</p>
-<a class="reference internal image-reference" href="../../../_images/fig112.png"><img alt="../../../_images/fig112.png" src="../../../_images/fig112.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="Undergrad/AppliedDifEq/hiv/fig1(2).png"><img alt="Undergrad/AppliedDifEq/hiv/fig1(2).png" src="Undergrad/AppliedDifEq/hiv/fig1(2).png" style="width: 400px;" /></a>
 <p>In this model, <span class="math notranslate nohighlight">\(T(t)\)</span>, <span class="math notranslate nohighlight">\(T^*(t)\)</span>, <span class="math notranslate nohighlight">\(T^{**}(t)\)</span> and <span class="math notranslate nohighlight">\(V(t)\)</span> represent respectively the concentrations of healthy T-cells, latently infected T-cells, actively infected T-cells, and HIV viral cells. The four equations specify the dynamics shown in Figure 2.
-<a class="reference internal" href="../../../_images/fig26.png"><img alt="../../../_images/fig26.png" src="../../../_images/fig26.png" style="width: 500px;" /></a></p>
-<p>Equation (1)</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{dT}{dt} = s+rT (1-\frac{T+T^*+T^{**}}{T_{max}})- \mu_T T -k_{1}TV \label{eqHIV1}
-\]</div>
+<a class="reference internal" href="Undergrad/AppliedDifEq/hiv/fig2(2).png"><img alt="Undergrad/AppliedDifEq/hiv/fig2(2).png" src="Undergrad/AppliedDifEq/hiv/fig2(2).png" style="width: 500px;" /></a></p>
+<p><strong>Change in Healthy T-Cells</strong> Equation <code class="xref eq docutils literal notranslate"><span class="pre">HIV1</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">label</span><span class="p">:</span> <span class="n">HIV1</span>
+<span class="n">dT</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="n">s</span><span class="o">+</span><span class="n">rT</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span>\<span class="n">frac</span><span class="p">{</span><span class="n">T</span><span class="o">+</span><span class="n">T</span><span class="o">^*+</span><span class="n">T</span><span class="o">^</span><span class="p">{</span><span class="o">**</span><span class="p">}}{</span><span class="n">T_</span><span class="p">{</span><span class="nb">max</span><span class="p">}})</span><span class="o">-</span> \<span class="n">mu_T</span> <span class="n">T</span> <span class="o">-</span><span class="n">k_</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="n">TV</span>
+
+</pre></div>
+</div>
 <p>This equation gives the rate of change <span class="math notranslate nohighlight">\(dT /dt\)</span> in the concentration <span class="math notranslate nohighlight">\(T(t)\)</span> of
-healthy T-cells New, healthy T-cells enter into the blood stream at a constant rate s. (This is an oversimplification, since the rate is expected to decrease during the course of the HIV infection. See Kirschner and Webb [1996].) In the absence of free virus (V = 0), the entire right-hand side of the equation reduces to a modified logistic equation. The <span class="math notranslate nohighlight">\(−k_1T V\)</span> term assumes that the rate of infection of T-cells by free viral cells is jointly proportional to the concentration of T-cells and the concentration of free virus</p>
-<p>Equation (2)</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{dT^*}{dt} = k_{1}TV- \mu_T T^*-k_{2}T^* \label{eqHIV2} 
-\]</div>
+healthy T-cells New, healthy T-cells enter into the blood stream at a constant rate s. (This is an oversimplification, since the rate is expected to decrease during the course of the HIV infection. See Kirschner and Webb 1996) In the absence of free virus (V = 0), the entire right-hand side of the equation reduces to a modified logistic growth equation. The <span class="math notranslate nohighlight">\(−k_1T V\)</span> term assumes that the rate of infection of T-cells by free viral cells is jointly proportional to the concentration of T-cells and the concentration of free virus</p>
+<p><strong>Change in Infected T-Cells</strong> Equation <code class="xref eq docutils literal notranslate"><span class="pre">HIV2</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">label</span><span class="p">:</span> <span class="n">HIV2</span>
+<span class="n">dT</span><span class="o">^*/</span><span class="n">dt</span> <span class="o">=</span><span class="n">k_</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="n">TV</span><span class="o">-</span> \<span class="n">mu_T</span> <span class="n">T</span><span class="o">^*-</span><span class="n">k_</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="n">T</span><span class="o">^*</span>
+
+</pre></div>
+</div>
 <p>This equation gives the rate of change <span class="math notranslate nohighlight">\(dT^∗/dt\)</span> in the concentration <span class="math notranslate nohighlight">\(T^∗(t)\)</span> of
 latently infected T-cells. Growth is due to the infection of healthy T-cells with free viral cells
 (<span class="math notranslate nohighlight">\(k_1T V\)</span> ). Decreases are due to death (<span class="math notranslate nohighlight">\(−\mu_{T^∗} T)\)</span> (the death rates may be different for
 healthy, latently infected, and actively infected T-cells), and by progression from latent to active infection (<span class="math notranslate nohighlight">\(−k_2T^∗\)</span>)</p>
-<p>Equation (3)</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{dT^{**}}{dt} = k_{2}T^{*} - \mu_b T^{**} \label{eqHIV3} 
-\]</div>
+<p><strong>Change in Actively Infected T-Cells</strong> Equation <code class="xref eq docutils literal notranslate"><span class="pre">HIV3</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">label</span><span class="p">:</span> <span class="n">HIV3</span>
+<span class="n">dT</span><span class="o">^</span><span class="p">{</span><span class="o">**</span><span class="p">}</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="n">k_</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="n">T</span><span class="o">^</span><span class="p">{</span><span class="o">*</span><span class="p">}</span> <span class="o">-</span> \<span class="n">mu_b</span> <span class="n">T</span><span class="o">^</span><span class="p">{</span><span class="o">**</span><span class="p">}</span>
+
+</pre></div>
+</div>
 <p>This equation gives the rate of change <span class="math notranslate nohighlight">\(dT^{∗∗}/dt\)</span> in the concentration <span class="math notranslate nohighlight">\(T^{∗∗}(t)\)</span> of
 actively infected T-cells. Growth is due to latently infected cells becoming actively infected (<span class="math notranslate nohighlight">\(k_2T^∗\)</span>).
 Decrease in concentration is due only to death (<span class="math notranslate nohighlight">\(µ_{T^{∗∗}}T^{∗∗}\)</span>).</p>
-<p>Equation (4)</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{dV}{dt} = N \mu_{b}T^{**} - k_1 TV -\mu_{V}V. \label{eqHIV4}
-\]</div>
+<p><strong>Change in Virus Concentration</strong> Equation <code class="xref eq docutils literal notranslate"><span class="pre">HIV4</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">label</span><span class="p">:</span> <span class="n">HIV4</span>
+<span class="n">dV</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="n">N</span> \<span class="n">mu_</span><span class="p">{</span><span class="n">b</span><span class="p">}</span><span class="n">T</span><span class="o">^</span><span class="p">{</span><span class="o">**</span><span class="p">}</span> <span class="o">-</span> <span class="n">k_1</span> <span class="n">TV</span> <span class="o">-</span>\<span class="n">mu_</span><span class="p">{</span><span class="n">V</span><span class="p">}</span><span class="n">V</span>
+
+</pre></div>
+</div>
 <p>This equation gives the rate of change <span class="math notranslate nohighlight">\(dV /dt\)</span> in the concentration <span class="math notranslate nohighlight">\(V (t)\)</span> of the free virus.  Growth occurs when an actively infected T-cell lyses (i.e., explodes). It is assumed that <span class="math notranslate nohighlight">\(N\)</span> copies of the free viral cell are created upon lysing (<span class="math notranslate nohighlight">\(Nµ_{T^{∗∗}} T^{∗∗}\)</span>). The free viral concentration decreases as the free virus becomes attached
 to healthy T-cells (<span class="math notranslate nohighlight">\(−k_1T V\)</span>) and also through death (<span class="math notranslate nohighlight">\(−µ_V V\)</span>).</p>
 <p>In particular, Equation HIV1 tells us latently infected T-cells are created when free HIV viral cells attach  to healthy T-cells with rate constant <span class="math notranslate nohighlight">\(k_1\)</span>. Also, Equation HIV4, giving the rate of change <span class="math notranslate nohighlight">\(dV/dt\)</span> in the concentration <span class="math notranslate nohighlight">\(V(t)\)</span> of the HIV virus indicates that when an actively infected T-cell lyses (i.e. explodes), it releases <span class="math notranslate nohighlight">\(N\)</span> copies of the  HIV viral cell (<span class="math notranslate nohighlight">\(N\mu_bT^{**}\)</span>).  The free viral concentration decreases as the free virus becomes attached to healthy T-cells (<span class="math notranslate nohighlight">\(-k_{1}TV\)</span>) and also through death (<span class="math notranslate nohighlight">\(-\mu_VV\)</span>).</p>
+</section>
 <section id="equilibrium-analysis">
-<h3>Equilibrium Analysis<a class="headerlink" href="#equilibrium-analysis" title="Permalink to this heading">#</a></h3>
+<h2>4.4 Equilibrium Analysis<a class="headerlink" href="#equilibrium-analysis" title="Permalink to this heading">#</a></h2>
 <p>A key to understanding how Perelson’s model simulates the lowering of the healthy T-cell concentration is based on an equilibrium analysis. Full details of this equilibrium analysis can be found here: <a target="_blank" href="https://drive.google.com/file/d/1ogtSOT2e--F84M1GM3pSg4vXSg8ria1L/view?usp=sharing">Link to pdf</a></p>
 <p>The equilibrium points for the system are obtained by solving the following system of algebraic equations:
 <a class="reference internal" href="../../../_images/equil.png"><img alt="../../../_images/equil.png" src="../../../_images/equil.png" style="width: 400px;" /></a>
-Using the paramter values shown in Table 1 below, the system has two different equilibrium points for the healthy T cell concentration.  Figure 3  shows that for lower values of the lysing paramter <span class="math notranslate nohighlight">\(N\)</span>, the equilibrium value corresponding to a healthy person’s T-cell concentration is stable.
-<a class="reference internal" href="../../../_images/fig34.png"><img alt="../../../_images/fig34.png" src="../../../_images/fig34.png" style="width: 400px;" /></a>
-Figure shows at higher values of <span class="math notranslate nohighlight">\(N\)</span> a loss of stability of the equilibrium representing healthy T-cell concentrations and gain of stability of the other equilibrium representing a low T-cell count characteristic of the onset of AIDS.
-<a class="reference internal" href="../../../_images/fig44.png"><img alt="../../../_images/fig44.png" src="../../../_images/fig44.png" style="width: 400px;" /></a></p>
-<p>This exchange of stability between the two equilibria occurs at a critical value <span class="math notranslate nohighlight">\(N_{crit}\approx 774\)</span> and is an example of what is called a <i>transcritical bifurcation</i>.</p>
-<a class="reference internal image-reference" href="../../../_images/fig53.png"><img alt="../../../_images/fig53.png" src="../../../_images/fig53.png" style="width: 400px;" /></a>
+Using the parameter values shown in Table 1 below, the system has two different equilibrium points for the healthy T cell concentration.  Figure 3  shows that for lower values of the lysing parameter <span class="math notranslate nohighlight">\(N\)</span>, the equilibrium value corresponding to a healthy person’s T-cell concentration is stable.
+<a class="reference internal" href="Undergrad/AppliedDifEq/hiv/fig3(1).png"><img alt="Undergrad/AppliedDifEq/hiv/fig3(1).png" src="Undergrad/AppliedDifEq/hiv/fig3(1).png" style="width: 400px;" /></a>
+Figure 4 shows at higher values of <span class="math notranslate nohighlight">\(N\)</span> a loss of stability of the equilibrium representing healthy T-cell concentrations and gain of stability of the other equilibrium representing a low T-cell count characteristic of the onset of AIDS.
+<a class="reference internal" href="../../../_images/fig44.png"><img alt="../../../_images/fig44.png" src="../../../_images/fig44.png" style="width: 400px;" /></a>
+Figure 5 shows the long term stability of T-cells as <span class="math notranslate nohighlight">\(N\)</span> grows larger and larger, displaying
+<a class="reference internal" href="Undergrad/AppliedDifEq/hiv/figure5.png"><img alt="Undergrad/AppliedDifEq/hiv/figure5.png" src="Undergrad/AppliedDifEq/hiv/figure5.png" style="width: 400px;" /></a></p>
 <p>One type of anti-retrovial drug called a nucleotide reverse transcriptase inhibitor (NRTI), for example AZT, reduces the lysing number <span class="math notranslate nohighlight">\(N\)</span> by preventing the virus from reproducing inside infected T-cells.</p>
 </section>
-</section>
-<section id="lab">
-<h2>LAB<a class="headerlink" href="#lab" title="Permalink to this heading">#</a></h2>
+<section id="analysis-in-python">
+<h2>4.5 Analysis in Python<a class="headerlink" href="#analysis-in-python" title="Permalink to this heading">#</a></h2>
 <p>The script below can be used to solve the Perelson model numerically using the initial and constant values given in Table 1.</p>
-<a class="reference internal image-reference" href="../../../_images/Table13.png"><img alt="../../../_images/Table13.png" src="../../../_images/Table13.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="Undergrad/AppliedDifEq/hiv/Table1(1).png"><img alt="Undergrad/AppliedDifEq/hiv/Table1(1).png" src="Undergrad/AppliedDifEq/hiv/Table1(1).png" style="width: 400px;" /></a>
 <p>What is important to observe is
 the long-range or steady-state T-cell and free viral concentrations. A drop significantly below the
 (healthy) steady state value of 1000 cell/ml indicates the onset of AIDS.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
     <span class="n">T</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span><span class="n">T2</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
     <span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
     <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">T1</span><span class="o">+</span><span class="n">T2</span><span class="p">)</span><span class="o">/</span><span class="n">Tmax</span><span class="p">)</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="p">,</span>   <span class="c1"># list of dy/dt=f functions</span>
@@ -716,7 +753,7 @@ the long-range or steady-state T-cell and free viral concentrations. A drop sign
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/1261baf4c8d925b8e70316bd6b5832deaa3bc38203bda4057b7ad61a1d94e796.png" src="../../../_images/1261baf4c8d925b8e70316bd6b5832deaa3bc38203bda4057b7ad61a1d94e796.png" />
+<img alt="../../../_images/0b0079832bf9662f16b2ea34fb577aa353e84d0f87c694909f75f495065e5a95.png" src="../../../_images/0b0079832bf9662f16b2ea34fb577aa353e84d0f87c694909f75f495065e5a95.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -735,7 +772,7 @@ Steady State Free Viral Concentration= 751.3443859716944
 </div>
 </section>
 <section id="sensitivity-analysis">
-<h2>Sensitivity Analysis<a class="headerlink" href="#sensitivity-analysis" title="Permalink to this heading">#</a></h2>
+<h2>4.6 Sensitivity Analysis<a class="headerlink" href="#sensitivity-analysis" title="Permalink to this heading">#</a></h2>
 <p>The onset of HIV is marked by  rapid decrease in healthy T-cell  concentration which impairs the immune system.  Let us see how the long-range (i.e. steady-state) healthy T-cell concentration depands on the size of the lysing parameter <span class="math notranslate nohighlight">\(N\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -797,57 +834,49 @@ Steady State Free Viral Concentration= 751.3443859716944
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a34e1f5be4cf8128bf3171f452b5c3c969e5924b9d3bb889634c236d1c794898.png" src="../../../_images/a34e1f5be4cf8128bf3171f452b5c3c969e5924b9d3bb889634c236d1c794898.png" />
+<img alt="../../../_images/c51ce2a0dcc8295002c07994d0bcf822abd4a69ac7156e465439361b8589393e.png" src="../../../_images/c51ce2a0dcc8295002c07994d0bcf822abd4a69ac7156e465439361b8589393e.png" />
 </div>
 </div>
 <p>Note that around <span class="math notranslate nohighlight">\(N=1200\)</span>, there is a rapid drop off in the healthy T-cell concentration. Our model predicts that an anti-retroviral drug therapy which reduces the value of <span class="math notranslate nohighlight">\(N\)</span> to less than 1000 would help prevent the onset of AIDS.</p>
 </section>
-<section id="assignment">
-<h2>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h2>
+<section id="exercises">
+<h2>4.7 Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
 <ol class="arabic simple">
-<li><p>A second type of anti-retroviral drug reduces the value of <span class="math notranslate nohighlight">\(k_1\)</span> by attaching themselves to free HIV viral cells so they are not able to infect healthy T-cells.
-Using the values in Table 1 except <span class="math notranslate nohighlight">\(k_1=10^{-6}\)</span> and <span class="math notranslate nohighlight">\(N=500\)</span>, plot the healthy <span class="math notranslate nohighlight">\(T\)</span> cell and free viral concentration <span class="math notranslate nohighlight">\(V\)</span> as a function of time <span class="math notranslate nohighlight">\(t\)</span> over the time interval <span class="math notranslate nohighlight">\(0\le t\le 1500\)</span>. Repeat using <span class="math notranslate nohighlight">\(k_1=10^{-4}\)</span> and <span class="math notranslate nohighlight">\(N=500\)</span>. What do you observe?</p></li>
+<li><p>A second type of anti-retroviral drug reduces the value of <span class="math notranslate nohighlight">\(k_1\)</span> by attaching themselves to free HIV viral cells so they are not able to infect healthy T-cells.</p></li>
+</ol>
+<p>a)Using the values in Table 1 except <span class="math notranslate nohighlight">\(k_1=10^{-6}\)</span> and <span class="math notranslate nohighlight">\(N=500\)</span>, plot the healthy <span class="math notranslate nohighlight">\(T\)</span> cell and free viral concentration <span class="math notranslate nohighlight">\(V\)</span> as a function of time <span class="math notranslate nohighlight">\(t\)</span> over the time interval <span class="math notranslate nohighlight">\(0\le t\le 1500\)</span>.</p>
+<p>b)Repeat using <span class="math notranslate nohighlight">\(k_1=10^{-4}\)</span> and <span class="math notranslate nohighlight">\(N=500\)</span>. What do you observe?</p>
+<ol class="arabic simple" start="2">
 <li><p>Using the parameter values in Table 1 with <span class="math notranslate nohighlight">\(N=500\)</span>, do a sensitivity analysis showing how the steady state healthy T-cell and free-viral concentrations depend on <span class="math notranslate nohighlight">\(k_1\)</span>.</p></li>
 <li><p>Explore combinations of anti-retroviral therapies.</p></li>
 </ol>
 <p>a) First define a function <span class="math notranslate nohighlight">\(z\)</span>=treatment<span class="math notranslate nohighlight">\((i,j)\)</span> which assigns the values <span class="math notranslate nohighlight">\(N=100+i\)</span> and <span class="math notranslate nohighlight">\(k_1=10^{-5}j\)</span> and computes the corresponding steady-state healthy T-cell concentration.</p>
 <p>b)Let <span class="math notranslate nohighlight">\(Z(i,j)\)</span>=treatment<span class="math notranslate nohighlight">\((i,j)\)</span> over the range <span class="math notranslate nohighlight">\(1\le i \le 100\)</span> and <span class="math notranslate nohighlight">\(1\le j\le 20\)</span>. Give the value of <span class="math notranslate nohighlight">\(Z(10,5)\)</span> and interpret it’s meaning.</p>
-<p>c) Make a 3D plot of your output.  Label the axes appropriately. \index{m}</p>
-<section id="discussion-questions">
-<h3>Discussion Questions<a class="headerlink" href="#discussion-questions" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
+<p>c) Make a 3D plot of your output.  Label the axes appropriately.</p>
+<ol class="arabic simple" start="4">
 <li><p>What caution is needed in interpreting our model results?</p></li>
 <li><p>What parts of the world have the most serious HIV/AIDS problem today?</p></li>
-<li><p>A pandemic must be fought at all times by as many  people as possible.   What role might you play in fighting HIV/AIDS?</p></li>
+<li><p>A pandemic must be fought at all times by as many  people as possible. What role might you play in fighting HIV/AIDS?</p></li>
 </ol>
-</section>
+</div>
 </section>
 <section id="bibliography">
 <h2>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this heading">#</a></h2>
-<p>\begin{thebibliography}{9}
-\scriptsize
-\bibitem{AA}
-Africa: Using Mobile to Fight HIV/Aids in Lesotho and Kenya - Breaking the Cycle of Infection With Data, M-Money and SMS.(May 1, 2016)
+<p>Africa: Using Mobile to Fight HIV/Aids in Lesotho and Kenya - Breaking the Cycle of Infection With Data, M-Money and SMS.(May 1, 2016)
 <a class="reference external" href="http://allafrica.com/stories/201605301340.html">http://allafrica.com/stories/201605301340.html</a></p>
-<p>\bibitem{c}
-Cohen, Myron S. et. al., 2011. Prevention of HIV-1 Infection with Early Anti-retroviral Therapy. The new England Journal of Medicine, 365(6), 493-505.</p>
-<p>\bibitem{cp}
-Cooper, Leon N. 1986.  Theory of an immune system
-retrovirus.  \emph{Proceedings of the National Academy of Science.}  83: 9159-9163.</p>
-<p>\bibitem{cv}
-Covert, Douglas J. and Denise Kirschner. 2000. Revisiting Early Models of the Host-Pathogen
-Interactions in HIV Infection. \emph{Comments Theoretical Biology.} 5(6): 383-411.</p>
-<p>\bibitem{GBD}
-GBD 2015 HIV Collaborators. Estimates of global, regional, and national incidence, prevalence, and mortality of HIV, 1980-2015: the Global Burden of Disease Study 2015.
-<a class="reference external" href="http://www.thelancet.com/pdfs/journals/lan">http://www.thelancet.com/pdfs/journals/lan</a> hiv/PIIS2352-3018(16)30087-X.pdf</p>
-<p>\bibitem{i}
-Isihara, P. et. al., Immunological and Epidemiological HIV/AIDS Modeling. 2005. UMAP Journal 26.1, 49-90.</p>
-<p>\bibitem{p}
-Perelson, Alan S., D.E. Kirschner and R. DeBoer. 1993. Dynamics of HIV Infection of CD4<span class="math notranslate nohighlight">\(^{+}\)</span> cells. \emph{Mathematical Biosciences.} 114: 81-125.</p>
-<p>\bibitem{UN}
-UNAIDS, 2014, 90-90-90 An ambitious treatment target to help end the AIDS epidemic.
-<a class="reference external" href="http://www.unaids.org/sites/default/files/">http://www.unaids.org/sites/default/files/</a> media_asset/90-90-90_en_0.pdf</p>
-<p>\end{thebibliography}</p>
+<p>Cohen, Myron S. et. al., 2011. Prevention of HIV-1 Infection with Early Anti-retroviral Therapy. The new England Journal of Medicine, 365(6), 493-505.</p>
+<p>Cooper, Leon N. 1986.  Theory of an immune system
+retrovirus.  <b>{Proceedings of the National Academy of Science.}</b>  83: 9159-9163.</p>
+<p>Covert, Douglas J. and Denise Kirschner. 2000. Revisiting Early Models of the Host-Pathogen
+Interactions in HIV Infection. <b>{Comments Theoretical Biology.}</b> 5(6): 383-411.</p>
+<p>GBD 2015 HIV Collaborators. Estimates of global, regional, and national incidence, prevalence, and mortality of HIV, 1980-2015: the Global Burden of Disease Study 2015.
+<a class="reference external" href="http://www.thelancet.com/pdfs/journals/lanhiv/PIIS2352-3018(16)30087-X.pdf">http://www.thelancet.com/pdfs/journals/lanhiv/PIIS2352-3018(16)30087-X.pdf</a></p>
+<p>Isihara, P. et. al., Immunological and Epidemiological HIV/AIDS Modeling. 2005. UMAP Journal 26.1, 49-90.</p>
+<p>Perelson, Alan S., D.E. Kirschner and R. DeBoer. 1993. Dynamics of HIV Infection of CD4<span class="math notranslate nohighlight">\(^{+}\)</span> cells. <b>{Mathematical Biosciences.}</b> 114: 81-125.</p>
+<p>UNAIDS, 2014, 90-90-90 An ambitious treatment target to help end the AIDS epidemic.
+<a class="reference external" href="http://www.unaids.org/sites/default/files/media_asset/90-90-90_en_0.pdf">http://www.unaids.org/sites/default/files/media_asset/90-90-90_en_0.pdf</a></p>
 </section>
 </section>
 
@@ -918,18 +947,13 @@ UNAIDS, 2014, 90-90-90 An ambitious treatment target to help end the AIDS epidem
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unaids-fact-sheet">UNAIDS Fact Sheet</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perelsons-immunologyical-hiv-model">Perelson’s Immunologyical HIV Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-analysis">Equilibrium Analysis</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab">LAB</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-questions">Discussion Questions</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1 Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unaids-fact-sheet">4.2 UNAIDS Fact Sheet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perelsons-immunological-hiv-model">4.3 Perelson’s Immunological HIV Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-analysis">4.4 Equilibrium Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-in-python">4.5 Analysis in Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">4.6 Sensitivity Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">4.7 Exercises</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliography">Bibliography</a></li>
 </ul>
   </nav></div>
