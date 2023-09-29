@@ -527,7 +527,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-operations-with-pandas-dataframe">3.2 Data operations with pandas.Dataframe</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-matplotlib">4. Basics of matplotlib</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-matplotlib">4. Basics of matplotlib</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -1405,10 +1408,10 @@ vhigh 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vhigh    432
-low      432
-high     432
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>high     432
 med      432
+low      432
+vhigh    432
 Name: buying, dtype: int64
 </pre></div>
 </div>
@@ -1672,6 +1675,8 @@ We can re-write the above code to use Numpy arrays.</p>
 <p>Explanation: in this figure, we put both precipitation data and temperature data (high and low) together. Since several different data records are in the same place, we use the <code class="docutils literal notranslate"><span class="pre">subplots()</span></code> function to make them appear in one single figure instead of multiple ones. We also choose to add paramaters such as color to differentiate presented data, so that the overall display can convey the information to the readers more effectively.</p>
 <p>In summary, first and foremost, any data visualization must accurately and completely reflect the original data. Additionally, scientists should also make a reasonable choice of the data visualization form. In our example of present Addis Ababa’s climate data, we use both a line chart and a histogram to represent a series of data. Both the line chart and the histogram are possible for displaying the differences between any two data points. However, a line chart is usually adopted to reflect the changes whereas a histogram may be more effective to tell the absolute value of data.</p>
 <p>We have demonstrated the use of Python’s visualization library, Watplotlib. We must realize that choosing a suitable visualization method is equally important as choosing a right visualization tool. Furthermore, annotations such as labels and legends are necessary to help people understand the visualization. For making a good data visualization, there are other factors for us to consider, such as chart size, color selections and uses, design styles, animations, and so on.</p>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
 <p><strong>1. An Overview of Data and Data Analysis</strong></p>
@@ -1681,7 +1686,6 @@ We can re-write the above code to use Numpy arrays.</p>
 <li><p>Does structured data have higher quality than unstructured data? If so, justify your answer. If not, give a counterexample.</p></li>
 </ol>
 <p><strong>2. Data Operations</strong></p>
-<p>Questions:</p>
 <ol class="arabic simple">
 <li><p>Write a Python program that can take a limitless number of user input values but let the program output a maximum of first 6 values. You can freely design and determine how the program takes each value and how it stops accepting user inputs. For example, if the user inputs 1, 2, 3, 4, the program outputs 1, 2, 3, 4. If the user inputs 1, 3, 5, 7, 9, 2, 4, 6, 8, 0, the program outputs 1, 3, 5, 7, 9, 2.</p></li>
 <li><p>There is a .csv file that stores data like a spreadsheet. There are 100 lines in total. Each line has 25 commas that are used to separate data. This .csv file also contains a title line (in the first row) and an index column (in the first column). The titles and indices are not part of the actual and meaningful data records. Only the remaining fields (i.e. data below the title line and right to the index column) are the actual data records. How many actual data records can this .csv file store?</p></li>
@@ -1704,21 +1708,15 @@ Write a Python program to read the entire line and parse the data in a way that 
 </ol>
 <p><strong>3. Introduction to Pandas</strong></p>
 <ol class="arabic simple">
-<li></li>
+<li><p>We will be using the World Population Dataset for this question. The dataset was originally obtained from the World Bank of the United Nations: <a class="reference external" href="https://api.worldbank.org/v2/en/indicator/SM.POP.TOTL?downloadformat=csv">https://api.worldbank.org/v2/en/indicator/SM.POP.TOTL?downloadformat=csv</a></p></li>
 </ol>
-<p>We will be using the World Population Dataset for this question. The dataset was originally obtained from the World Bank of the United Nations: <a class="reference external" href="https://api.worldbank.org/v2/en/indicator/SM.POP.TOTL?downloadformat=csvSome">https://api.worldbank.org/v2/en/indicator/SM.POP.TOTL?downloadformat=csvSome</a> . Some pre-processing steps have already been taken for the purpose of making this question, including the removal of unnecessary rows from the original file. You can use our prepared file world_population.excel for the data analysis purpose.</p>
+<p>Some pre-processing steps have already been taken for the purpose of making this question, including the removal of unnecessary rows from the original file. You can use our prepared file world_population.excel for the data analysis purpose.</p>
 <p>a) Read the data file and print the raw data.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A dataset is often so large that we do not want to display everything from it. Sometimes, we just want to take a glance at the structure of the dataset by viewing the first few rows. 
-</pre></div>
-</div>
+<p>A dataset is often so large that we do not want to display everything from it. Sometimes, we just want to take a glance at the structure of the dataset by viewing the first few rows.</p>
 <p>b) Display the first 5 rows of data.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Particular rows may be selected for displaying purposes. For example, we may be interested in knowing the population values for a specific country or multiple countries.
-</pre></div>
-</div>
+<p>Particular rows may be selected for displaying purposes. For example, we may be interested in knowing the population values for a specific country or multiple countries.</p>
 <p>c) Display the population values for the country Ethiopia.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>We may want to look at all countries and regions whose population is over 1 billion in the year of 2000. Hint: the Python code will be using the &gt; operator in the conditional expression.
-</pre></div>
-</div>
+<p>We may want to look at all countries and regions whose population is over 1 billion in the year of 2000. Hint: the Python code will be using the &gt; operator in the conditional expression.</p>
 <p>d) Select and display all countries and regions whose population is over 1 billion in the year of 2000.</p>
 <p>e) Select a column “Country Name” and the year column “1960” to display the data that are associated with these two columns.</p>
 <ol class="arabic" start="2">
@@ -1736,6 +1734,7 @@ Write a Python program to read the entire line and parse the data in a way that 
 <p><strong>4. Basics of matplotlib</strong></p>
 <p>If a statistician wants to analyze the data of total births by month in a region, i.e. January: 253, February: 229, March: 247, … What charts would you suggest to use in order to display the monthly records in data visualization? What type of chart is more suitable or less suitable, and for what kind of analysis purpose? Hint: this is a semi-open-ended question. The selection of a chart is determined by a set goal.</p>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1819,7 +1818,10 @@ Write a Python program to read the entire line and parse the data in a way that 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-operations-with-pandas-dataframe">3.2 Data operations with pandas.Dataframe</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-matplotlib">4. Basics of matplotlib</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-matplotlib">4. Basics of matplotlib</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
