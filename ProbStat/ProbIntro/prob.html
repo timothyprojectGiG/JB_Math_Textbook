@@ -1,0 +1,1592 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ProbStat/ProbIntro/prob';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise solutions" href="solutions.html" />
+    <link rel="prev" title="Probability Models" href="../../Prob.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">Elementary Blackboard Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">Beginning Python Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">Glimpse of Chicago</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">Arts in STEM (STEAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">After-School Program Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Data.html">Working with Data</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY Laura Gross, Yiheng Liang</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">Exercise solutions</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Peter Jantsch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS  Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">4. Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/6%20Parametric%20Equations.html">6. Parametric Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">7. Sequences and Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">Solution to Calculus Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">3. Optimization and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/0.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/1.html">1. Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/2.html">2. Matrices and Determinants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/3.html">3. Linear Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/4.html">4. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/5.html">5. Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">3. First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">4. Second-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/hiv.html">4. HIV-AIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">2. About Text Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">5. Evaluating Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">6. Applications</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/ProbStat/ProbIntro/prob.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FProbStat/ProbIntro/prob.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ProbStat/ProbIntro/prob.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">Random numbers</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-arbitrariness-span"><span style="font-size:medium">Arbitrariness</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-pseudo-randomness-span"><span style="font-size:medium">Pseudo-randomness</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-pseudo-random-number-generation-in-python-span"><span style="font-size:medium">(Pseudo-)random number generation in Python</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-true-randomness-span"><span style="font-size:medium">True randomness</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-exercises-span"><span style="font-size:medium">Exercises</span></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-definitions-and-facts-span"><span style="font-size:medium">Definitions and facts</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-addition-rule-span"><span style="font-size:medium">Addition rule</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-multiplication-rule-span"><span style="font-size:medium">Multiplication rule</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-simulation-span"><span style="font-size:medium">Simulation</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-law-of-large-numbers-span"><span style="font-size:medium">Law of large numbers</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-gamblers-fallacy-span"><span style="font-size:medium">Gambler’s fallacy</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><span style="font-size:medium">Exercises</span></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><span style="font-size:medium">Exercises</span></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability distributions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-uniform-distribution-span"><span style="font-size:medium">Uniform distribution</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-normal-distribution-span"><span style="font-size:medium">Normal distribution</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-binomial-distribution-span"><span style="font-size:medium">Binomial distribution</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walks">Random walks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#agent-based-models">Agent-based models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-games">Mathematical games</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-craps-span"><span style="font-size:medium">Craps</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-choosing-the-right-one-span"><span style="font-size:medium">Choosing the right one</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-coin-flipping-game-span"><span style="font-size:medium">Coin-flipping game</span></a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>The </span><span style='font-size:medium'><strong>probability</strong></span><span style='font-size:medium'> is the chance or likelihood that a given event will occur. For example, we can ask, “What is the probability that it will rain tomorrow?” Probability is a branch of mathematics concerned with the study of probabilities.</span></p>
+<p><span style='font-size:medium'>We quantify the probabilities of various events in this chapter. We do both mathematical analysis and computation. As in other fields of mathematics, mathematical understanding guides the choices of what to compute, and insights gained from computational exploration enhance mathematical understanding.</span></p>
+<p><span style='font-size:medium'>Ultimately we use </span><span style='font-size:medium'><strong>models</strong></span><span style='font-size:medium'> to describe practical problems via mathematics or an algorithm (precise method). We solve mathematical models approximately using Python programs or implement algorithms using Python. The results mimic, imitate, or simulate the behavior of the physical or practical problem at hand. We can use Python to create visualizations that facilitate interpretation of the computer simulation.</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="random-numbers">
+<h1>Random numbers<a class="headerlink" href="#random-numbers" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>Many areas of study involve random numbers. Examples include probability, computational science, data science, and statistics.</span></p>
+<section id="span-style-font-size-medium-arbitrariness-span">
+<h2><span style='font-size:medium'>Arbitrariness</span><a class="headerlink" href="#span-style-font-size-medium-arbitrariness-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>When you tell a friend to “Pick a number between 1 and 10,” you may think you are telling the friend to pick a </span><span style='font-size:medium'><strong>random</strong></span><span style='font-size:medium'> number. However, for true randomness, each outcome 1, 2, 3, …, 10 must be equally likely. It turns out that people have a preference, usually unconscious, for picking some numbers over others. Therefore, you are really telling the friend to pick an </span><span style='font-size:medium'><strong>arbitrary</strong></span><span style='font-size:medium'> integer between 1 and 10, rather than a random one.</span></p>
+</section>
+<section id="span-style-font-size-medium-pseudo-randomness-span">
+<h2><span style='font-size:medium'>Pseudo-randomness</span><a class="headerlink" href="#span-style-font-size-medium-pseudo-randomness-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>Even when computers do the choosing, most of time we should only say we have generated pseudo-random (fake random) numbers. A pseudo-random number generator, or PRNG, is a program that uses mathematical methods to </span><span style='font-size:medium'><strong>simulate</strong></span><span style='font-size:medium'> (mimic) randomness. </span></p>
+<p><span style='font-size:medium'>The basic process is to:</span></p>
+<ol class="arabic simple">
+<li><p><span style='font-size:medium'>Provide the PRNG with an arbitrary seed (starting condition).</span></p></li>
+<li><p><span style='font-size:medium'>Ask the PRNG for the next “random” number. It is produced by a step-by-step, complicated, but not random, process.</span></p></li>
+</ol>
+<p><span style='font-size:medium'>Such a generator is also called a </span><span style='font-size:medium'><strong>deterministic</strong></span><span style='font-size:medium'> random bit generator. “Deterministic” means causally determined by preceding actions. The word “deterministic” is typically used in contrast to “random.”</span></p>
+<p><span style='font-size:medium'>Sometimes, researchers use a cryptographically secure pseudo-random number generator (CSPRNG). A CSPRNG may sound like it uses true randomness (for strong security). However, you cannot safely assume that you have a completely fair (unbiased) “coin flip” or means of selection, even in this context. Fortunately, though, the prescriptive (deterministic) mechanism involved is hard to reverse, ensuring some measure of security. The key is to have a CSPRNG that is good enough for the application at hand.</span></p>
+</section>
+<section id="span-style-font-size-medium-pseudo-random-number-generation-in-python-span">
+<h2><span style='font-size:medium'>(Pseudo-)random number generation in Python</span><a class="headerlink" href="#span-style-font-size-medium-pseudo-random-number-generation-in-python-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>People typically speak of computers </span><span style='font-size:medium'><strong>generating random numbers</strong></span><span style='font-size:medium'>. We will use this language when we use Python. However, Python (or Excel, Java, C, C++, or R) is technically doing pseudo-random number generation.</span></p>
+<p><span style='font-size:medium'>In Python, a default mechanism is used to set the seed for the PRNG. If you want to use the default mechanism explicitly, you can import the</span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">random</span></code></span><span style='font-size:medium'>library and do</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>If for any reason you want to set the seed to a specific integer, such as 123, you can do</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-font-size-medium-true-randomness-span">
+<h2><span style='font-size:medium'>True randomness</span><a class="headerlink" href="#span-style-font-size-medium-true-randomness-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>A truly random number cannot simply be generated from a certain </span><span style='font-size:medium'><strong>algorithm</strong></span><span style='font-size:medium'> (detailed method) or by a computer itself (unless the computer is purposely re-designed). Truly-random number generation is possible when we consider some physical phenomenon or process, such as atmospheric noise (static from lightning discharges), cosmic background radiation, etc. While truly random numbers are useful in many practical fields, it is sufficient for us to generate and use pseudo-random numbers in this book. </span></p>
+</section>
+<section id="span-style-font-size-medium-exercises-span">
+<h2><span style='font-size:medium'>Exercises</span><a class="headerlink" href="#span-style-font-size-medium-exercises-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>Exercise 1. Which statement do you judge to be more accurate? Why?</span></p>
+<ol class="arabic simple">
+<li><p>The computer program selected a number between 1 and 10 at random.</p></li>
+<li><p>The computer program selected a number between 1 and 10 arbitrarily.</p></li>
+</ol>
+<p><span style='font-size:medium'>Exercise 2. When a computer program selects a number between 1 and 10, do you think that the choice involves possible preference for some number over others? Support your answer with examples. </span></p>
+<p><span style='font-size:medium'>Exercise 3: Think of an example of how randomness might be involved in a study investigating a new medicine. Explain how randomness is involved. Could computation, for example using Python, be helpful in the study? Explain your answer. </span></p>
+<p><span style='font-size:medium'>Exercise 4: Think of an example of how randomness might occur in the natural world. Explain how randomness is involved. Could a computer simulate or mimic a natural process in the context of your example? If so, how could a computer simulation be useful?</span></p>
+<p><span style='font-size:medium'>Exercise 5: Think of an example of how randomness might occur in a game. Explain how randomness is involved. Could a computer simulate the game? If so, how could the computer simulation be useful?</span></p>
+<p><span style='font-size:medium'>Exercise 6: Consider a die (plural: “dice”). (See the image below.) Do you think that when we roll a physical die, we can be certain that there is an equal chance of the die landing with each of the six sides facing up? Or could there be a bias toward some sides? Explain your thinking. Do you think the outcome of a roll of the physical die could be influenced by the previous roll? Explain your thinking. How could we use a computer program to simulate a die roll? What are some advantages of doing so?</span></p>
+<center>
+    <img src=".chapter probability: gross and liang.ipynb.upload/dice.png"     style="object-fit:cover"/>
+</center><p><span style='font-size:medium'>Exercise 7: Consider the following answer to the question “True or false— An arbitrary choice is made for no special reason”:</span></p>
+<p><span style='font-size:medium'><em>“Yes, an arbitrary choice typically refers to a decision or selection that is made without any specific reason or justification. It means that there is no objective or rational basis for choosing one option over another. Arbitrary choices are often made when there is no clear preference or when the decision doesn’t have a significant impact on the outcome. In such cases, people may resort to random selection, personal whim, or other non-logical factors to make a choice.” (ChatGPT, personal communication, June 6, 2023).</em></span></p>
+<p><span style='font-size:medium'>Provide a critique for which parts are right (if any). Provide justification for why they are correct. Identify which parts are wrong (if any) and explain what is wrong. Rewrite the answer in your own words with any corrections that are needed. (Retain the citation as with any paraphrased material.) Add an example that you think of yourself to clarify the answer to the true/false question.</span></p>
+<p><span style='font-size:medium'>Exercise 8: Use the code below to explore Python commands in the</span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">random</span></code></span><span style='font-size:medium'>library. Read the documentation here as desired: </span><a class="reference external" href="https://docs.python.org/3/library/random.html">https://docs.python.org/3/library/random.html</a> <span style='font-size:medium'>. For each</span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">print</span></code></span><span style='font-size:medium'>statement, insert a comment (using</span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">#</span></code></span><span style='font-size:medium'>) that describes all the possible numbers that can be generated. We see possible output below.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+3
+1
+4
+4
+11.07700234938439
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>Exercise 9: Which does a Python program generate: a pseudo-random number or a truly random number? Give an example, and explain why the example is pseudo random or truly random.</span></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="probability">
+<h1>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>Consider a six-sided die. (See image of two six-sided dice in the previous section.) The die can be used to select a number between 1 and 6 inclusive. By </span><span style='font-size:medium'><strong>inclusive</strong></span><span style='font-size:medium'>, we mean inclusive of the “end points” 1 and 6 (as well as of 2, 3, 4, and 5). The die can be used to select one of the numbers in an approximately random manner, modulo the slight imperfections (physical asymmetries) in the die.</span></p>
+<p><span style='font-size:medium'>Suppose you roll a perfect die </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> times and keep a record of each outcome.</span></p>
+<p><span style='font-size:medium'>We list the following examples: What is the chance or </span><span style='font-size:medium'><strong>probability</strong></span><span style='font-size:medium'> that…</span></p>
+<ol class="arabic simple">
+<li><p><span style='font-size:medium'>the die lands on a given number (say, 3) on the first roll?</span></p></li>
+<li><p><span style='font-size:medium'>the die lands on a given number (say, 4) on the second roll?</span></p></li>
+<li><p><span style='font-size:medium'>the die lands on a 1 or 6 on the first roll?</span></p></li>
+<li><p><span style='font-size:medium'>the die lands on the same number on the first two rolls?</span></p></li>
+<li><p><span style='font-size:medium'>the die lands on 1, 2, 3, 4, 5, and then 6 when rolled six times (<span class="math notranslate nohighlight">\(n=6\)</span>)?</span></p></li>
+</ol>
+<p><span style='font-size:medium'>The </span><span style='font-size:medium'><strong>probability</strong></span><span style='font-size:medium'> of an event, given a set of all of the equally likely outcomes, is the ratio </span></p>
+<div class="math notranslate nohighlight">
+\[\frac{\text{the number of outcomes that produce the event}}{\text{the total number of possible outcomes}}.\]</div>
+<p><span style='font-size:medium'>Does this definition help you answer Example 1? Give it a try. Then read on!</span></p>
+<p><span style='font-size:medium'>We can do all of Examples 1–5 </span><span style='font-size:medium'><strong>approximately</strong></span><span style='font-size:medium'> by using </span><span style='font-size:medium'><strong>computer simulation</strong></span><span style='font-size:medium'>. The computer </span><span style='font-size:medium'><strong>simulates</strong></span><span style='font-size:medium'> or imitates the rolling of a physical die. We can generate (pseudo-)random numbers many times and see what fraction of the cases result in the target outcome. Also, we can answer Problems 1–5 </span><span style='font-size:medium'><strong>exactly</strong></span><span style='font-size:medium'> by using </span><span style='font-size:medium'><strong>mathematical ideas</strong></span><span style='font-size:medium'>. </span></p>
+<section id="span-style-font-size-medium-definitions-and-facts-span">
+<h2><span style='font-size:medium'>Definitions and facts</span><a class="headerlink" href="#span-style-font-size-medium-definitions-and-facts-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>Definitions and rules. The </span><span style='font-size:medium'><strong>sample space</strong></span><span style='font-size:medium'> is the set of possible outcomes. The sample space for the roll of the die is {1, 2, 3, 4, 5, 6}. </span></p>
+<p><span style='font-size:medium'>Definition. An </span><span style='font-size:medium'><strong>event</strong></span><span style='font-size:medium'> <span class="math notranslate nohighlight">\(E\)</span> corresponds to a subset of the sample space. For example, one event <span class="math notranslate nohighlight">\(E\)</span> is that the die lands on a 1 or a 6. The event <span class="math notranslate nohighlight">\(E\)</span> corresponds to the subset {1, 6}.</span></p>
+<p><span style='font-size:medium'>Example 1.  The probability that the die lands on a given number (say, 3) on the first roll is 1/6.</span></p>
+<p><span style='font-size:medium'>Fact. The probability of an event <span class="math notranslate nohighlight">\(A\)</span> is a real number <span class="math notranslate nohighlight">\(P(A)\)</span> between 0 and 1 inclusive, for example 1/6.</span></p>
+<p><span style='font-size:medium'>Fact. The probability of the sample space is 1. For example, the probability that the die lands on a 1 or 2 or 3 or 4 or 5 or 6 is 6/6 or 1.</span></p>
+<p><span style='font-size:medium'>Fact. The probability that event <span class="math notranslate nohighlight">\(A\)</span> does not occur is <span class="math notranslate nohighlight">\(P(\text{not} A) = 1 - P(A)\)</span>.</span></p>
+<p><span style='font-size:medium'>Example 3. The probability that the die lands on a 1 or a 6 is 2/6 or 1/3.</span></p>
+<p><span style='font-size:medium'>Example 4. The sample space for two rolls of the die is {11, 12,…, 16, 21, 22,…, 26, 31, 32,…, 36,…61, 62,…, 66}, where each two-digit number represents two rolls of the die. An event </span><span class="math notranslate nohighlight">\(A\)</span><span style='font-size:medium'>, in which the die lands on the same number on the first two rolls, corresponds to the set {11, 22, 33, 44, 55, 66}. The probability that the die lands on the same number on the first two rolls is 6/36 or 1/6.</span></p>
+<p><span style='font-size:medium'>Definition. </span><span style='font-size:medium'><strong>Mutually exclusive</strong> </span><span style='font-size:medium'>events are events that cannot happen at the same time. For example, one roll of the die can yield one of six mutually exclusive events.</span></p>
+</section>
+<section id="span-style-font-size-medium-addition-rule-span">
+<h2><span style='font-size:medium'>Addition rule</span><a class="headerlink" href="#span-style-font-size-medium-addition-rule-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>The addition rule for mutually exclusive events </span><span class="math notranslate nohighlight">\(A\)</span><span style='font-size:medium'> and </span><span class="math notranslate nohighlight">\(B\)</span><span style='font-size:medium'> is that </span><span class="math notranslate nohighlight">\(P(A \ \text{or} \ B) = P(A) + P(B)\)</span><span style='font-size:medium'>. </span></p>
+<p><span style='font-size:medium'>Example 3. For example, the probability that the die lands on 1 (event </span><span class="math notranslate nohighlight">\(A\)</span><span style='font-size:medium'>) or the die lands on 6 (event </span><span class="math notranslate nohighlight">\(B\)</span><span style='font-size:medium'>) is </span><span class="math notranslate nohighlight">\(P(A \ \text{or} \ B) = P(A) + P(B) = 1/6 + 1/6 = 1/3\)</span><span style='font-size:medium'>. This agrees with the prior solution.</span></p>
+</section>
+<section id="span-style-font-size-medium-multiplication-rule-span">
+<h2><span style='font-size:medium'>Multiplication rule</span><a class="headerlink" href="#span-style-font-size-medium-multiplication-rule-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>The multiplication rule for mutually exclusive events </span><span class="math notranslate nohighlight">\(A\)</span><span style='font-size:medium'> and </span><span class="math notranslate nohighlight">\(B\)</span><span style='font-size:medium'> is that </span><span class="math notranslate nohighlight">\(P(A \ \text{and} \ B) = P(A) P(B).\)</span></p>
+<p><span style='font-size:medium'>Example 4. For example, the probability that the die lands on the same number on the first two rolls is the probability that a number is rolled (event </span><span class="math notranslate nohighlight">\(A\)</span><span style='font-size:medium'>) and the same number is rolled (event </span><span class="math notranslate nohighlight">\(B\)</span><span style='font-size:medium'>) is </span><span class="math notranslate nohighlight">\(P(A \ \text{and} \ B) = P(A) P(B) = 1 * 1/6 = 1/6\)</span><span style='font-size:medium'>. This agrees with the prior solution.</span></p>
+</section>
+<section id="span-style-font-size-medium-simulation-span">
+<h2><span style='font-size:medium'>Simulation</span><a class="headerlink" href="#span-style-font-size-medium-simulation-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>This section opened with Problems 1–5 above. We said we could use a computer program to </span><span style='font-size:medium'><strong>simulate</strong></span><span style='font-size:medium'> the rolling of a physical die to answer the questions approximately.</span></p>
+<p><span style='font-size:medium'>Let’s write a </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">roll</span></code></span><span style='font-size:medium'> function to generate (pseudo-)random numbers many times. We’ll approximate the probability of an event by calculating the fraction of the total cases that result in the event.  We see possible output below.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="c1"># Return a list of num_rolls die rolls.</span>
+<span class="k">def</span> <span class="nf">roll</span><span class="p">(</span><span class="n">num_rolls</span><span class="p">):</span>
+    <span class="c1"># Define a list for the results of the die rolls.</span>
+    <span class="n">die_rolls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Roll the die num_rolls times.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rolls</span><span class="p">):</span>
+        <span class="c1"># Store a number 1-6 inclusive in die_roll.</span>
+        <span class="n">die_roll</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="c1"># Append the die roll into the list of die rolls.</span>
+        <span class="n">die_rolls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">die_roll</span><span class="p">)</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">die_rolls</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store ten rolls of the die in a list.</span>
+<span class="n">rolls</span> <span class="o">=</span> <span class="n">roll</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Print the list.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span>
+<span class="c1"># Print the number of threes that were rolled.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of threes: </span><span class="si">{</span><span class="n">rolls</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 4, 5, 5, 3, 3, 1, 2, 2, 3]
+Number of threes: 3
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>Example 1. Answer Example 1 from the beginning of this section approximately by simulating a large number of rolls and counting the number of threes. Compare the result to the mathematical answer in a complete sentence.  We see possible output below.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make the variable trials equal a large number of rolls.</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="c1"># Roll the die a large number of times.</span>
+<span class="n">rolls</span> <span class="o">=</span> <span class="n">roll</span><span class="p">(</span><span class="n">trials</span><span class="p">)</span>
+<span class="c1"># Count the number of threes in the returned list and divide by the number of rolls.</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">rolls</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="n">trials</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For large number of trials, the simulation should yield a fraction of threes approximately equal to 1/6 or </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Result obtained: </span><span class="si">{</span><span class="n">p3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For large number of trials, the simulation should yield a fraction of threes approximately equal to 1/6 or 0.16666666666666666.
+Result obtained: 0.16813
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make the variable trials equal a large number of rolls.</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="c1"># Roll the die a large number of times.</span>
+<span class="n">rolls</span> <span class="o">=</span> <span class="n">roll</span><span class="p">(</span><span class="n">trials</span><span class="p">)</span>
+<span class="c1"># Count the number of ones and sixes in the returned list and divide by the number of rolls.</span>
+<span class="n">p_1_or_6</span> <span class="o">=</span> <span class="p">(</span><span class="n">rolls</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">rolls</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span><span class="o">/</span><span class="n">trials</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For large number of trials, the simulation should yield a fraction of ones and sixes approximately equal to 1/3 or </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Result obtained: </span><span class="si">{</span><span class="n">p_1_or_6</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For large number of trials, the simulation should yield a fraction of ones and sixes approximately equal to 1/3 or 0.3333333333333333.
+Result obtained: 0.33231
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>For 100,000 simulated rolls of the die, the fraction of values of 1 or 6 is typically rather close to the mathematical probability of rolling a 1 or 6.</span></p>
+<p><span style='font-size:medium'>Example 4. Answer Example 4 from the beginning of this section approximately by doing a large number of trials of two rolls of a die and counting the fraction of times the two rolls are the same. Compare the result to the mathematical probability in a complete sentence. </span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set a counter to 0.</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># Make the variable trials equal a large number of rolls.</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="c1"># Roll two dice a large number of times.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+    <span class="n">rolls</span> <span class="o">=</span> <span class="n">roll</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Roll a die twice</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">rolls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">rolls</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span> <span class="c1"># If the two rolls are the same,</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># increment the counter.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For large number of trials, the simulation should yield a fraction of &#39;double numbers&#39; approximately equal to 1/6 or </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Result obtained: </span><span class="si">{</span><span class="n">count</span><span class="o">/</span><span class="n">trials</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For large number of trials, the simulation should yield a fraction of &#39;double numbers&#39; approximately equal to 1/6 or 0.16666666666666666.
+Result obtained: 0.1664
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-font-size-medium-law-of-large-numbers-span">
+<h2><span style='font-size:medium'>Law of large numbers</span><a class="headerlink" href="#span-style-font-size-medium-law-of-large-numbers-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>In probability theory, the law of large numbers (LLN) says that the average of the results obtained from a large number of trials should be close to the expected average and tends to become closer to the expected average as more trials are performed (based on the Wikipedia article on the LLN, citing A Modern 7 Introduction to Probability and Statistics by Dekking, 2005).</span></p>
+<p><span style='font-size:medium'>Example. A single roll of a fair, six-sided die produces 1, 2, 3, 4, 5, or 6, each with equal probability. Therefore, the expected value of the average of the rolls is (1 + 2 + 3 + 4 + 5 + 6) / 6 = 3.5. According to the LLN, if a six-sided die is rolled a large number of times, the average value will approach 3.5 as the number of die rolls approaches infinity. Illustrate this idea using simulation with a larger and larger number of rolls.  We see possible output below.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">/</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10, 3.1
+100, 3.46
+1000, 3.524
+10000, 3.4606
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000, 3.50184
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000000, 3.499671
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>For a number of rolls </span><span class="math notranslate nohighlight">\(n=10, 100, 1000, 10^4, 10^5, 10^6\)</span><span style='font-size:medium'>, the average value is, for example, 3.1, 3.43, 3.459, 3.5099, 3.50138, 3.499695, respectively.</span></p>
+</section>
+<section id="span-style-font-size-medium-gamblers-fallacy-span">
+<h2><span style='font-size:medium'>Gambler’s fallacy</span><a class="headerlink" href="#span-style-font-size-medium-gamblers-fallacy-span" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>“…the law of large numbers does not imply, as too many seem to think, that if deviations from expected behavior occur, these deviations are likely to be ‘evened out’ by opposite deviations in the future. This misapplication of the law of large numbers is known as the gambler’s fallacy” (Introduction to Computation and Programming Using Python by Guttag).</span></p>
+<p><span style='font-size:medium'>Example. At the Casino de Monte-Carlo on August 18, 1913, the roulette ball landed on black 26 times in a row, and gamblers lost millions betting on red, incorrectly believing that landing on red became increasingly likely as the length of the run of blacks increased (</span><a class="reference external" href="https://www.bbc.com/future/article/20150127-why-we-gamble-like-monkeys">https://www.bbc.com/future/article/20150127-why-we-gamble-like-monkeys</a><span style='font-size:medium'> , 1/27/2015). If you assume that there is a probability of 0.5 of landing on black and a probability of 0.5 of landing on red, what is the probability that 26 spins will result in black all 26 times? What is the probability that the 27th spin will land on black?</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you assume that there is a probability of 0.5 of landing on black and a probability of 0.5 of landing on red,</span>
+<span class="c1"># the probability that 26 spins will result in black all 26 times is</span>
+<span class="nb">print</span><span class="p">((</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">26</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mf">1.5</span><span class="o">/</span><span class="mi">100_000_000</span><span class="p">)</span>
+<span class="c1"># If you do 100 million trials of spinning 26 times each, getting black 26 times will typically happen only once or twice.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4901161193847656e-08
+1.5e-08
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>If you spin a 27th time, the probability of landing on black is 0.5.</span></p>
+</section>
+<section id="id1">
+<h2><span style='font-size:medium'>Exercises</span><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>Exercise 1: Do Example 5 from the beginning of the Probability section mathematically: Suppose you roll a perfect die </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> times and keep a record of each outcome. What is the chance or probability that the die lands on 1, 2, 3, 4, 5, and then 6 when rolled six times (</span><span class="math notranslate nohighlight">\(n=6\)</span><span style='font-size:medium'>)? Use Python to evaluate your answer. Explain your conclusion in a complete sentence. </span></p>
+<p><span style='font-size:medium'>Exercise 2: Do Example 5 from the beginning of the Probability section computationally: Suppose you roll a perfect die </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> times and keep a record of each outcome. What is the chance or probability that the die lands on 1, 2, 3, 4, 5, and then 6 when rolled six times (</span><span class="math notranslate nohighlight">\(n=6\)</span><span style='font-size:medium'>)? Do a large number of trials of six rolls of a die and count the number of times the rolls come out as 1 followed by 2, followed by 3, followed by 4, followed by 5, followed by 6. A piece of syntax you may consider using is </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(rolls[0]</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">and</span> <span class="pre">rolls[1]</span> <span class="pre">==</span> <span class="pre">2</span> <span class="pre">and</span> <span class="pre">rolls[2]</span> <span class="pre">==</span> <span class="pre">3</span> <span class="pre">and</span> <span class="pre">rolls[3]</span> <span class="pre">==</span> <span class="pre">4</span> <span class="pre">and</span> <span class="pre">rolls[4]</span> <span class="pre">==</span> <span class="pre">5</span> <span class="pre">and</span> <span class="pre">rolls[5]</span> <span class="pre">==</span> <span class="pre">6):</span></code></span><span style='font-size:medium'>. Compare the fraction times you get this pattern to your mathematical answer from the previous exercise in a complete sentence.</span></p>
+<p><span style='font-size:medium'>Exercise 3: If event </span><span class="math notranslate nohighlight">\(A\)</span><span style='font-size:medium'> is that the die comes up 2, and event </span><span class="math notranslate nohighlight">\(B\)</span><span style='font-size:medium'> is that the die comes up with an even number, are the two events </span><span class="math notranslate nohighlight">\(A\)</span><span style='font-size:medium'> and </span><span class="math notranslate nohighlight">\(B\)</span><span style='font-size:medium'> mutually exclusive? Explain. Is the addition rule </span><span class="math notranslate nohighlight">\(P(A \ \text{or} \ B) = P(A) + P(B)\)</span><span style='font-size:medium'> applicable? If so, show that the rule holds. If not, show that the rule does not hold. Use Python to illustrate your answer. </span></p>
+<p><span style='font-size:medium'>Exercise 4: Calculate the probability (a) mathematically and (b) computationally of obtaining the given result in </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> rolls of a fair six-sided die. Make a statement in a complete sentence about how many times you expect the outcome, in terms of a number of trials (consisting of </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> rolls per trial). Compare the fraction of times your simulation produces the target pattern with your mathematical answer.</span></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(n=6\)</span>, all numbers are the same</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=6\)</span>, at least one number is different</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=1\)</span>, the number rolled is greater than 2</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=2\)</span>, the sum of the two numbers is greater than 2</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=2\)</span>, the two numbers are different</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=3\)</span>, two numbers are the same and one is different</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=6\)</span>, all the numbers are different</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=100\)</span>, all the numbers are the same</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=6\)</span>, the number 1 appears at least once</p></li>
+<li><p><span class="math notranslate nohighlight">\(n = 6\)</span>, the number 1 appears at most once</p></li>
+</ol>
+<p><span style='font-size:medium'>Exercise 5: Consider the function below. Summarize its purpose in a complete sentence. Add comments (with #) to clarify the code. Demonstrate its performance on a sample run. Summarize the results in a complete sentence.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">num_flips</span><span class="p">):</span>
+    <span class="n">head_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_flips</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">((</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span>
+            <span class="n">head_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">head_count</span><span class="o">/</span><span class="n">num_flips</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>Exercise 6. Consider the function below. Add comments to explain the code. Summarize the purpose of the function in a complete sentence. Demonstrate its performance on a sample run. Summarize the results in a complete sentence.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip_trials_preliminary</span><span class="p">(</span><span class="n">num_flips_per_trial</span><span class="p">,</span> <span class="n">num_trials</span><span class="p">):</span>
+    <span class="n">fraction_heads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_trials</span><span class="p">):</span>
+        <span class="n">fraction_heads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flip</span><span class="p">(</span><span class="n">num_flips_per_trial</span><span class="p">))</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">fraction_heads</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">fraction_heads</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mean</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>Exercise 7. When a fair coin is flipped once, the theoretical probability that the outcome will be heads is equal to 1/2. Therefore, according to the LLN, the proportion of heads in a “large” number n of coin flips “should be” roughly 1⁄2, and the proportion of heads approaches 1/2 as n approaches infinity. Illustrate this idea using simulation with a larger and larger number of flips.</span></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conditional-probability">
+<h1>Conditional probability<a class="headerlink" href="#conditional-probability" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>Independent events are unrelated events. For example, a die roll coming up 1 is independent of whether the previous roll came up 1.</span></p>
+<p><span style='font-size:medium'>Many common events are not independent. Consider and discuss the following events and whether the probability of each is high or low:</span></p>
+<ul class="simple">
+<li><p><span style='font-size:medium'>your bicycle needs repairs,</span></p></li>
+<li><p><span style='font-size:medium'>you have a bicycle accident,</span></p></li>
+<li><p><span style='font-size:medium'>your bicycle needs repairs given that you had a bicycle accident,</span></p></li>
+<li><p><span style='font-size:medium'>you had a bicycle accident, given that your bicycle needs repairs. </span></p></li>
+</ul>
+<p><span style='font-size:medium'>Question: Are the bicycle repairs and the bicycle accident independent events?</span></p>
+<p><span style='font-size:medium'>If not, we call them </span><span style='font-size:medium'><strong>conditionally related</strong></span><span style='font-size:medium'>.</span></p>
+<p><span style='font-size:medium'>Question: Which statement is more logical? Or are they equally logical?</span></p>
+<ol class="arabic simple">
+<li><p><span style='font-size:medium'>Whether your bike needs repairs (event R) is related to whether you have a bike accident (event A).</span></p></li>
+<li><p><span style='font-size:medium'>Whether you have a bike accident (event A) is related to whether your bike needs repairs (event R).</span></p></li>
+</ol>
+<p><span style='font-size:medium'>The </span><span style='font-size:medium'><strong>conditional probability</strong></span><span style='font-size:medium'> of an event is based on prior knowledge of conditions that might be related to the event (based on the Wikipedia article on Bayes’ Theorem). We speak of the conditional probability that event Y occurs, given that event X occurred. We denote the probability as P(Y|X). </span></p>
+<p><span style='font-size:medium'>For example, we may want to know the probability that your bike needs repairs (event R) given that you had a bike accident (event A). We denote the probability as P(R|A). </span></p>
+<p><span style='font-size:medium'>The quantity P(R|A) is a conditional probability. Here A is considered the </span><span style='font-size:medium'><strong>prior</strong></span><span style='font-size:medium'> event. We say we are </span><span style='font-size:medium'><strong>conditioning on</strong></span><span style='font-size:medium'> A. </span></p>
+<p><span style='font-size:medium'>The (conditional) probability of Y given X can be calculated using the mathematical </span><span style='font-size:medium'><strong>definition</strong></span></p>
+<div class="math notranslate nohighlight">
+\[P(Y|X) = \frac{P(X \text{ and } Y)}{P(X)}.\]</div>
+<p><span style='font-size:medium'>The probability P(X) of the prior event X is called the prior probability.</span></p>
+<p><span style='font-size:medium'>We can derive </span><span style='font-size:medium'><strong>Bayes’ Theorem</strong></span><span style='font-size:medium'> by first writing the conditional probability of X given Y</span></p>
+<div class="math notranslate nohighlight">
+\[P(X|Y) = \frac{P(X \text{ and } Y)}{P(Y)}.\]</div>
+<p><span style='font-size:medium'>Solving each of the previous two equations for P(X and Y) shows that</span></p>
+<div class="math notranslate nohighlight">
+\[P(Y|X) P(X) = P(X|Y) {P(Y)}\]</div>
+<p><span style='font-size:medium'>or </span></p>
+<div class="math notranslate nohighlight">
+\[P(Y|X) = \frac{P(X|Y) P(Y)}{P(X)}.\]</div>
+<p><span style='font-size:medium'>Bayes’ Theorem expresses one conditional probability in terms of the other. It captures how a probability should change to account for related evidence.</span></p>
+<section id="id2">
+<h2><span style='font-size:medium'>Exercises</span><a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><span style='font-size:medium'>Exercise 1: Suppose 35 spam email messages contain the word “free”; 25 spam messages do not contain the word “free”; three of non-spam messages contain the word “free”; and 37 non-spam messages do not contain the word “free”. (This problem is adapted from OpenIntoStatistics, David M. Diez, Christoper D. Barr, and Mine Cetinkaya-Rundel, Creative Commons, 2016.)</span></p>
+<p><span style='font-size:medium'>Do the following problems and interpret your answers in complete sentences. </span></p>
+<p><span style='font-size:medium'>(a) Calculate the probability that a message is spam, given that it contains the word “free”. </span></p>
+<p><span style='font-size:medium'>(b) Calculate the probability that a message is not spam, given that it contains the word “free”.</span></p>
+<p><span style='font-size:medium'>(c) Calculate the probability that a message contains the word “free”, given that it is spam.</span></p>
+<p><span style='font-size:medium'>(d) Which of the above quantities do you consider to be of the most practical interest?</span></p>
+<p><span style='font-size:medium'>(e) Suppose we are trying to make decisions about whether a message is spam. Calculate the most relevant probabilities, explain their significance in the context of the practical problem at hand, and describe possible limitations of their applicability.</span></p>
+<p><span style='font-size:medium'>Exercise 2: Suppose the disease meningitis causes a stiff neck 70% of the time, the prior probability of any patient having meningitis is 1/50,000, and the prior probability of any patient having a stiff neck is 1/100. (Artificial Intelligence: A Modern Approach (Third Edition), Stuart J. Russell and Peter Norvig, Prentice Hall, Upper Saddle River, 2010). Use Bayes’ Theorem to calculate the probability that a patient has meningitis, given they have a stiff neck. Show how you apply Bayes’ Theorem. Interpret the results in a complete sentence.</span></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="probability-distributions">
+<h1>Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>A probability distribution is a mathematical function that maps each possible numerical outcome </span><span class="math notranslate nohighlight">\(X\)</span><span style='font-size:medium'> of an experiment to its probability. Probability distributions come in many different types. Some fundamental ones include uniform, normal and binormal. </span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="span-style-font-size-medium-uniform-distribution-span">
+<h1><span style='font-size:medium'>Uniform distribution</span><a class="headerlink" href="#span-style-font-size-medium-uniform-distribution-span" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>The graph of a </span><span style='font-size:medium'><strong>uniform distribution</strong></span><span style='font-size:medium'> could look like this:</span></p>
+<center>
+<img src=".chapter probability: gross and liang.ipynb.upload/uniform.png"     style="object-fit:cover"/>
+</center>
+<p><span style='font-size:medium'>In the uniform distribution, each value along the horizontal axis is equally probable.</span></p>
+<p><span style='font-size:medium'>Mathematical distributions are important.  We use them to determine probabilities for results of certain random experiments and to approximate real frequency distributions.</span></p>
+<p><span style='font-size:medium'>For example, if we use Python to generate a random integer between 1 and 6, the number is selected from a uniform distribution: Each outcome is equally likely. We see possible output below.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>A histogram is a visualization of a frequency distribution: It shows how often a random variable takes on a value.</span>
+<span style='font-size:medium'>It shows the shape, center, and spread.</span></p>
+<p><span style='font-size:medium'>For example, consider the simulation of rolling a die 6000 times. We can capture the results with a histogram in Python using the </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab</span></code></span><span style='font-size:medium'> package.  </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">Pylab</span></code></span><span style='font-size:medium'> is a module that imports functions from the modules </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">numpy</span></code></span><span style='font-size:medium'> and </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></span><span style='font-size:medium'>. </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">Numpy</span></code></span><span style='font-size:medium'> provides tools for numerical computing, e.g., efficient numerical vector/array calculations based on underlying libraries in the Fortran and C programming languages. </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code></span><span style='font-size:medium'> contains functions to create visualizations of data.</span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">Pylab</span></code></span><span style='font-size:medium'>captures the functionality of the proprietary </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">Matlab</span></code></span><span style='font-size:medium'>.</span></p>
+<p><span style='font-size:medium'>Here we call the </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">hist</span></code></span><span style='font-size:medium'> method on the data values that fall in the range 1 to 7 inclusive, where each bar has width 0.8 using . Experiment to see how this call is is an improvement over </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab.hist(values)</span></code></span><span style='font-size:medium'> and </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab.hist(values,</span> <span class="pre">bins</span> <span class="pre">=</span> <span class="pre">6)</span></code></span><span style='font-size:medium'> and </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab.hist(values,</span> <span class="pre">bins</span> <span class="pre">=</span> <span class="pre">6,</span> <span class="pre">rwidth</span> <span class="pre">=</span> <span class="pre">0.8)</span></code></span><span style='font-size:medium'>. We improve the layout of the bars by specifying the leftmost and rightmost values.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Work with list or array.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6000</span><span class="p">):</span> <span class="c1"># Roll the die 6000 times.</span>
+    <span class="n">roll</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span>
+<span class="c1"># Plot a histogram of the values.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">rwidth</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="c1"># The leftmost edge is 1, and the rightmost is 7.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Outcome&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of times&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/64ae7f6cf7aad1c621cacf20a1acea82474e8933c1e657f5ea92221fb5e5f159.png" src="../../_images/64ae7f6cf7aad1c621cacf20a1acea82474e8933c1e657f5ea92221fb5e5f159.png" />
+</div>
+</div>
+<p>The results of the simulation of 6000 die rolls look approximately uniform with some slight differences in the frequencies of the rolls of the six numbers.</p>
+<p>The uniform distribution approximates real data, like births by month, as shown in the figure. The real data for the years shown in the figure have some slight month-to-month differences.</p>
+<center>
+    <img src=".chapter probability: gross and liang.ipynb.upload/birthsUS.png"   width="462px"  height="284px"  style="object-fit:cover"/>
+</center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="span-style-font-size-medium-normal-distribution-span">
+<h1><span style='font-size:medium'>Normal distribution</span><a class="headerlink" href="#span-style-font-size-medium-normal-distribution-span" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>A probability distribution can be discrete or continuous, depending on whether it maps a discrete value or a continuous value </span><span class="math notranslate nohighlight">\(X\)</span><span style='font-size:medium'> of an experiment to its probability. A numerical variable is discrete if there are jumps between the possible values. A numerical variable is continuous if it can take on any real-number value between two other values.</span></p>
+<p><span style='font-size:medium'>The data in the previous examples are discrete. There is a jump of 1 between each possible value on the die. There is a jump of 1 between each possible number of births per month. We cannot roll a 3.72 on a die or have 10,007.21 births per month.</span></p>
+<p><span style='font-size:medium'>The graph of a </span><span style='font-size:medium'><strong>normal distribution</strong></span><span style='font-size:medium'> or Gaussian distribution could look like this:</span></p>
+<center>
+<img src=".chapter probability: gross and liang.ipynb.upload/normal.png" style="max-width:100%" />
+</center>
+<p><span style='font-size:medium'>In the normal distribution, the values in the middle range along the horizontal axis are more probable than at the ends (“in the tails”) of the distribution. The normal distribution is often called a “bell curve” because it is shaped like a bell.</span></p>
+<p><span style='font-size:medium'>The distribution could be discrete. The continuous form of the normal distribution </span></p>
+<div class="math notranslate nohighlight">
+\[P(X) = \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{1}{2} \left(\frac{X - \mu}{\sigma}\right)^2\right),\]</div>
+<p><span style='font-size:medium'>where </span><span class="math notranslate nohighlight">\(\mu\)</span> <span style='font-size:medium'>is the mean, and </span><span class="math notranslate nohighlight">\(\sigma\)</span><span style='font-size:medium'> is the standard deviation, can be graphed in Python as: </span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">plot_normal_curve</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="c1"># Plot the normal distribution with mean mu and standard deviation sigma on an interval from start to end.</span>
+    <span class="n">y_coords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># Use 100 points between start and end.</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_coords</span><span class="p">:</span>
+        <span class="n">y_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">sigma</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">)</span>
+
+<span class="n">plot_normal_curve</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4f1c5ac27cb356904b71d5e011672ea9fc23f2f2a3c355d57c740ddd3d0533c8.png" src="../../_images/4f1c5ac27cb356904b71d5e011672ea9fc23f2f2a3c355d57c740ddd3d0533c8.png" />
+</div>
+</div>
+<p><span style='font-size:medium'>Distributions, such as the normal distribution, are useful for determining probabilities for results of certain random experiments, e.g., in mathematical statistics. </span><span style='font-size:medium'><strong>Statistics</strong></span><span style='font-size:medium'> is the science of collecting and analyzing data in large quantities, especially for making inferences about a </span><span style='font-size:medium'><strong>whole population</strong></span><span style='font-size:medium'> from a </span><span style='font-size:medium'><strong>representative sample</strong></span><span style='font-size:medium'>. </span></p>
+<p><span style='font-size:medium'>For example, how can we estimate the average height of all women in the country? Here the population is women in the country. The average height is the </span><span style='font-size:medium'><strong>expected value</strong></span><span style='font-size:medium'> or population parameter.</span></p>
+<ol class="arabic simple">
+<li><p><span style='font-size:medium'>Sample some women at random. Measure them and average their heights to get the sample average or </span><span style='font-size:medium'><strong>sample mean</strong></span><span style='font-size:medium'>.</span></p></li>
+<li><p><span style='font-size:medium'>Repeat the process of sampling, measuring, and averaging.</span></p></li>
+<li><p><span style='font-size:medium'>Average the average heights for the samples.</span></p></li>
+</ol>
+<p><span style='font-size:medium'>The Law of Large Numbers could be casually stated as: The sample averages converge to the expected value, as the number of samples is increased.</span></p>
+<p><span style='font-size:medium'>The Central Limit Theorem could be casually stated as: The distribution of the sample statistic is approximately normal, if the sample size is large enough.</span></p>
+<p><span style='font-size:medium'>A sample statistic could be a sample mean for a </span><span style='font-size:medium'><strong>numerical variable</strong></span><span style='font-size:medium'> (like the average height of a sample of people) or a </span><span style='font-size:medium'><strong>sample proportion</strong></span><span style='font-size:medium'> for a </span><span style='font-size:medium'><strong>categorical variable</strong></span><span style='font-size:medium'> (like the proportion of adults in a sample of people who are in the “yes” category for the variable that measures completion of a sixth-grade education). Note that for </span><span style='font-size:medium'><strong>numerical variables</strong></span><span style='font-size:medium'>, quantities like the average, sum, or difference of their values have clear meaning. The possible values of </span><span style='font-size:medium'><strong>categorical variables</strong></span><span style='font-size:medium'> are called “levels”, such as the yes/no “levels”.</span></p>
+<p><span style='font-size:medium'>Experiment with / illustrate the law and theorem using </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab</span></code></span><span style='font-size:medium'>. </span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip_trials</span><span class="p">(</span><span class="n">num_flips_per_trial</span><span class="p">,</span> <span class="n">num_trials</span><span class="p">):</span>
+    <span class="c1"># Return the proportions of heads in num_trials trials of num_flips coin flips.</span>
+    <span class="c1"># Return the mean of the proportions.</span>
+    <span class="n">fraction_heads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_trials</span><span class="p">):</span>
+        <span class="n">fraction_heads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flip</span><span class="p">(</span><span class="n">num_flips_per_trial</span><span class="p">))</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">fraction_heads</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">fraction_heads</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fraction_heads</span><span class="p">,</span> <span class="n">mean</span>
+
+<span class="k">def</span> <span class="nf">make_histogram_of_proportions</span><span class="p">(</span><span class="n">num_flips</span><span class="p">,</span> <span class="n">num_trials</span><span class="p">):</span>
+    <span class="c1"># Make a histogram of the proportions of heads in num_trials trials of num_flips coin flips.</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num_trials</span><span class="si">}</span><span class="s1"> trials of </span><span class="si">{</span><span class="n">num_flips</span><span class="si">}</span><span class="s1"> flips&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Proportion of heads&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of trials&#39;</span><span class="p">)</span>
+    <span class="n">proportions_heads</span><span class="p">,</span> <span class="n">mean_of_proportions</span> <span class="o">=</span> <span class="n">flip_trials</span><span class="p">(</span><span class="n">num_flips</span><span class="p">,</span> <span class="n">num_trials</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">proportions_heads</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The mean of the proportions is </span><span class="si">{</span><span class="n">mean_of_proportions</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+<span class="n">make_histogram_of_proportions</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean of the proportions is 0.5002306.
+</pre></div>
+</div>
+<img alt="../../_images/1699c4c20bbf1879174e2f3249c8f2de54405e5d982a42ac684a2afc9aa3d06a.png" src="../../_images/1699c4c20bbf1879174e2f3249c8f2de54405e5d982a42ac684a2afc9aa3d06a.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="span-style-font-size-medium-binomial-distribution-span">
+<h1><span style='font-size:medium'>Binomial distribution</span><a class="headerlink" href="#span-style-font-size-medium-binomial-distribution-span" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>Consider a fixed number <span class="math notranslate nohighlight">\(n\)</span> of independent experiments, where each experiment can result in “success” with the same probability <span class="math notranslate nohighlight">\(p\)</span>. The binomial distribution maps the non-negative integer </span><span class="math notranslate nohighlight">\(k\)</span><span style='font-size:medium'> to the probability of achieving exactly <span class="math notranslate nohighlight">\(k\)</span> successes in <span class="math notranslate nohighlight">\(n\)</span> experiments.</span></p>
+<p><span style='font-size:medium'>The graph of a </span><span style='font-size:medium'><strong>binomial distribution</strong></span><span style='font-size:medium'> could look like this:</span></p>
+<center>
+<img src=".chapter probability: gross and liang.ipynb.upload/binomial.png" style="max-width:100%" />
+    </center>
+<p><span style='font-size:medium'>The distribution is discrete. The binomial distribution </span></p>
+<div class="math notranslate nohighlight">
+\[P(k) = \frac{n!}{k! (n-k)!} \ p^k (1-p)^{n-k}\]</div>
+<p><span style='font-size:medium'>can be graphed in Python as: </span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_binomial_curve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="c1"># Plot the binomial distribution for n independent trials, each with probability p of success.</span>
+    <span class="n">y_coords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">y_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_coords</span><span class="p">)</span> <span class="c1"># Plot x-coordinates 0, 1, 2, 3, ..., n against y-coordinates.</span>
+
+<span class="n">plot_binomial_curve</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/da07a4c1160083d70f8f4bb035da7f3ed1f8977db5016244a280e8ad33a0ca43.png" src="../../_images/da07a4c1160083d70f8f4bb035da7f3ed1f8977db5016244a280e8ad33a0ca43.png" />
+</div>
+</div>
+<p><span style='font-size:medium'>Exercise 1: Consider points </span><span class="math notranslate nohighlight">\((x, y)\)</span><span style='font-size:medium'> in a 1 x 1 square in the first quadrant of the plane </span><span class="math notranslate nohighlight">\((x, y) \in [0, 1) \times [0, 1)\)</span><span style='font-size:medium'>. Simulate filling the square with dots by picking points in the square at random. Generate the coordinates in each </span><span class="math notranslate nohighlight">\(x\)</span><span style='font-size:medium'>-</span><span class="math notranslate nohighlight">\(y\)</span><span style='font-size:medium'> pair by using Python to sample from a uniform distribution on the interval [0, 1). Use the ratio of number of dots inside a quarter circle with center at the origin to total dots to simulate the ratio of the area of the quarter circle to the area of the square. Use this ratio to to estimate the value of </span><span class="math notranslate nohighlight">\(\pi\)</span><span style='font-size:medium'>.</span></p>
+<p><span style='font-size:medium'>Exercise 2: 1. Use Python to simulate a game board in which 10,000 balls are dropped down onto a triangle of ten levels of pegs, one-by-one. Level 1 has 1 peg. Level 2 below it has 2 pegs, etc., down to 10 pegs at Level 10 at the bottom. Assume each ball has equal probability of moving to the left or to the right at each level.</span></p>
+<p><span style='font-size:medium'>(a) Plot the number of balls against the landing-peg number. Include a descriptive title and labels for both axes on your plot.</span></p>
+<p><span style='font-size:medium'>(b) How does the graph tend to change if you use more levels and keep the number of balls the same? Why?</span></p>
+<p><span style='font-size:medium'>(c) How does the graph tend to change if you use more balls and keep the number of levels the same? Why?</span></p>
+<p><span style='font-size:medium'>Exercise 3: Consider a biased coin that lands on heads 20% of the time. Simulate 30 flips of the coin. Record whether no heads were flipped, 1 head was flipped, 2 heads were flipped,  3 heads were flipped, etc., up to 30 heads. Repeat the experiment 10,000 times. Draw a histogram that shows how often each number 1-30 of heads was flipped. Describe the shape and spread of the graph. Compare it to the graph of the mathematical distribution given by the formula.</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="random-walks">
+<h1>Random walks<a class="headerlink" href="#random-walks" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>A </span><span style='font-size:medium'><strong>random walk</strong></span><span style='font-size:medium'> </span><span style='font-size:medium'><strong>on the number line</strong></span><span style='font-size:medium'> is a path in which each of </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> steps is taken either to the left or right at random. In an </span><span style='font-size:medium'><strong>unbiased</strong></span><span style='font-size:medium'> random walk, each step has a 50-50 chance of going to the left or to the right.</span></p>
+<p><span style='font-size:medium'>A </span><span style='font-size:medium'><strong>random walk on a square lattice</strong></span><span style='font-size:medium'> is a path in which each of </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> steps is taken left, right, up, or down at random. In one example of a biased random walk, a person takes a step left with probability 0.35, a step right with probability 0.2, a step forward with probability 0.4, and a step back with probability 0.05. Note the probabilities add to 1, meaning there are no other options at each iteration.</span></p>
+<p><span style='font-size:medium'>A random walk is an example of a </span><span style='font-size:medium'><strong>stochastic process</strong></span><span style='font-size:medium'> because it yields varied output due to randomness when it is executed repeatedly with the same input. By contrast, a deterministic process yields the same output when it is executed repeatedly with the same input. Random walks can be used to model (describe) practical processes in a variety of areas of study, such as the motion of particles in physics, changes in DNA and “genetic drift” in biology, the changes in stock prices in financial markets, and human migration and relocation in global geography and societies.</span></p>
+<p><span style='font-size:medium'>In a traditional framing of a random walk, a drunk person walks on a street with an equal probability of movement to the left or right at each pace. One can readily ask a many questions about the random walk that can be surprisingly challenging to answer via basic calculation and pencil-and-paper experimentation.</span></p>
+<p><span style='font-size:medium'>For instance, in an unbiased random walk on the number line, what is the expected number of paces the person should take in order to move one pace to the left of the starting point? Also consider, in the example above of the biased random walk on a square lattice, what is the expected number of paces the person should take in order to visit the location one pace to the left of the starting point? </span></p>
+<p><span style='font-size:medium'>Mathematical approaches can provide answers about random walks. However, many questions prove quite difficult to address theoretically. </span></p>
+<p><span style='font-size:medium'>Computer simulations can conveniently and intuitively provide insights into random walks. They can also illustrate the variations that occur over many trials of an experiment. In this section, we use computation to consider the questions above and more.</span></p>
+<p><span style='font-size:medium'>Example: Consider and explore this Python code for a random walk on a square lattice. We see possible output below.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="s1">&#39;back&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;forward&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;back&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># val == &#39;right&#39;</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r*-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final position: </span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/84905c0c5052afe2aa63cedc15297e274e184543d8932ee545472d517a4329cc.png" src="../../_images/84905c0c5052afe2aa63cedc15297e274e184543d8932ee545472d517a4329cc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final position: 10.0, 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>Example: Consider and explore this Python code for a random walk on a cubic lattice!  We see possible output below.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="s1">&#39;back&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="s1">&#39;down&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;forward&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;back&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;up&#39;</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># go down</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x position&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y position&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;z position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s1">&#39;r*-&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final position: </span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">z</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final position: 1.0, 4.0, 4.0
+</pre></div>
+</div>
+<img alt="../../_images/927ffd4c1a8c337464be7757bd9d6ccea2de358950c7e322fa2e00223fdd50d9.png" src="../../_images/927ffd4c1a8c337464be7757bd9d6ccea2de358950c7e322fa2e00223fdd50d9.png" />
+</div>
+</div>
+<p>Note you can change the figure size, for example by inserting the following line before plotting:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 500x500 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>Exercise 1: A person walks on a street with an equal probability of movement to the left or right at each pace. Write a Python program to approximate the expected number of paces the person should take in order to move one pace to the left of the starting point. Suggestion: Use 0 as the starting point. State your conclusions in a complete sentence.</span></p>
+<p><span style='font-size:medium'>Exercise 2: Consider an unbiased random walk on a square lattice. Write a Python program to find approximate answers to the following questions:</span></p>
+<p><span style='font-size:medium'>(a) What is the expected number of a paces the person should take in order to visit the location one pace to the left of the starting point (0, 0)? Explain.</span></p>
+<p><span style='font-size:medium'>(b) How far away from the starting point (0,0) does a person end up after </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> steps of an unbiased random walk on a square lattice? Explain.</span></p>
+<p><span style='font-size:medium'>(c) If you run the simulation program for Part (b) many times, is there any statistical distribution you can expect? Explain.</span></p>
+<p><span style='font-size:medium'>Exercise 3: A person walks one pace left with a probability of 0.35, one pace right with a probability of 0.2, one pace forward with a probability of 0.4 and one pace backward with a probability of 0.05.  Write a Python program to approximate the expected number of paces the person should take in order to visit the location one pace to the left of the starting point. State your conclusions in a complete sentence.</span></p>
+<p><span style='font-size:medium'>Exercise 4: A person walks one pace left, right, forward or back with equal probability. When the person walks left, right, or back, she walks one pace. When she walks forward, she walks two paces. Write a Python program to approximate how far forward the person has walked in 1000 paces. State your conclusions in a complete sentence.</span></p>
+<p><span style='font-size:medium'>Exercise 5: A </span><span style='font-size:medium'><strong>Markov chain</strong></span><span style='font-size:medium'> describes a sequence of possible events in which the probability of each event depends on the state in the previous event. For example, suppose that we modify an unbiased random walk on a square lattice such that if the previous step was to the right, then the probability of making the current move up, down, left, or right is 0.2, 0.2, 0.4, or 0.2, respectively. As such,</span></p>
+<p><span style='font-size:medium'>(a) explain the implications of a move to the right in practical terms in a complete sentence.</span></p>
+<p><span style='font-size:medium'>(b) run some simulations and address the question: How does the use of the Markov chain change the unbiased random walk on a square lattice? </span></p>
+<p><span style='font-size:medium'>Exercise 6: Two people get lost in a shopping mall. They both want to find each other as soon as possible. However, each has no clue where the other one is. There are two strategies available:</span></p>
+<p><span style='font-size:medium'>(1) One person stays in the same place. The other moves around.</span></p>
+<p><span style='font-size:medium'>(2) Both people move.</span></p>
+<p><span style='font-size:medium'>Which strategy is better for them to meet?</span></p>
+<p><span style='font-size:medium'>Do simulations and explain how they support your answer.</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="agent-based-models">
+<h1>Agent-based models<a class="headerlink" href="#agent-based-models" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>Agent-based models are used to describe actions and interactions of individuals (agents), which occur with various likelihoods. Simulations on such models can be used to make predictions about the future state of the agents. In this section, we refer to agents acting independently. We do not address multi-agent systems in which individuals collaborate with one another in groups.</span></p>
+<p><span style='font-size:medium'>Like random walks, agent-based models can be used to capture practical processes probabilistically in a variety of areas of study. They can predict the spread of disease, forecast the segregation (separation) of different populations in a certain region, optimize traffic conditions, and describe behaviors within social networks.</span></p>
+<p><span style='font-size:medium'>In a classic example, consider that we often hear news from other people we know. If a piece of information is shared, how might it spread, from one agent to another?</span></p>
+<p><span style='font-size:medium'>Let us develop an agent-based model and use the model to simulate how a piece of information spreads over time. As with any model, we make a few underlying assumptions. Some are very practical. Some are explicit simplifications of a real-life scenario to make the problem easier to solve. In modeling and simulations, practitioners like to </span><span style='font-size:medium'><strong>start with simple models</strong></span><span style='font-size:medium'> and evaluate how well they capture real scenarios. Modelers address some shortcomings in the simulations with changes to the model assumptions. Over time, we typically expand the scope of the model to address additional scenarios. Here we assume:</span></p>
+<ol class="arabic simple">
+<li><p><span style='font-size:medium'>The population is a closed community. The number of individuals does not change.</span></p></li>
+<li><p><span style='font-size:medium'>Agents who do not have the information do not pass any information to others!</span></p></li>
+<li><p><span style='font-size:medium'>An agent does not pass information to itself.</span></p></li>
+<li><p><span style='font-size:medium'>Once an agent hears the piece of information, it will not forget the information. There is no transition from “knowing” to “not knowing”.</span></p></li>
+<li><p><span style='font-size:medium'>A transmission rate defines how many others hear the information from a given individual in one day.</span></p></li>
+<li><p><span style='font-size:medium'>Each agent has one of the allowed transmission rates with equal probability.</span></p></li>
+<li><p><span style='font-size:medium'>When an agent shares the information with another individual, that individual is selected from all the other members of the population with equal probability.</span></p></li>
+</ol>
+<p><span style='font-size:medium'>In models, </span><span style='font-size:medium'><strong>initial conditions</strong></span><span style='font-size:medium'> provide “starting information”. Let us take the following initial condition for our problem: On Day 0, 1 individual has the information.</span></p>
+<p><span style='font-size:medium'>Parameters are changeable values that quantify practical aspects of entities or processes involved in the problem. Let us identify some parameters for the agent-based model and assign them values as follows:</span></p>
+<ol class="arabic simple">
+<li><p><span style='font-size:medium'>The value of the population parameter is 1000. (There are 1000 agents.)</span></p></li>
+<li><p><span style='font-size:medium'>The allowed transmission rates are 0, 1, 2, 3, 4, and 5.</span></p></li>
+</ol>
+<p><span style='font-size:medium'>The way the information could spread is as follows: We have Persons 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,…, 1000. These people might have transmission rates 3, 3, 2, 0, 5, 1, 1, 2, 3, 4, 2, 1, …, 4 respectively. Initially, 1 person knows the information. If that person is Person 1, and Person 1 has a transmission rate of 3, then on the first day of gossip, Person 1 might spread the information to Persons 5, 8, and 9 with transmission rates 5, 2, and 3, respectively. In Day 2 of gossip, Person 1 spreads the information to 3 people, Person 5 to 5 people, Person 8 to 2 people and Person 9 to 3 people. Note these may be some of the same people or people who already know the information. The process continues day-by-day.</span></p>
+<p><span style='font-size:medium'>Exercise 1: Simulate the spread of information under the given assumptions. How many days does it seem to take in general for the information to spread to half of the population? Will all individuals be informed after a certain number of days?</span></p>
+<p><span style='font-size:medium'>Exercise 2: This agent-based model could also be applied to the spread of disease. If “knowing the information” means “having the disease” and “not having the information” means “not having the disease”, what are the interpretations of the assumptions, initial condition, and parameters that are given? Explain how you may find the model compelling in the context of disease, or what changes to the model you recommend to better reflect the spread of disease.</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mathematical-games">
+<h1>Mathematical games<a class="headerlink" href="#mathematical-games" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>Many games that people play for pleasure have mathematical aspects. Indeed </span><span style='font-size:medium'><strong>game theory</strong></span><span style='font-size:medium'> is a field of mathematics. </span></p>
+<p><span style='font-size:medium'>We can identify properties of games mathematically and via computer simulation. In this section, we focus on modeling, simulation, and visualization of the results of a few games that involve randomness. The goal is to get insights into the likelihoods of different outcomes, given rules, rather than actually to engage in games for pure entertainment. No prior familiarity with the games is assumed, and we do not include any betting, which some people consider morally objectionable.</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="span-style-font-size-medium-craps-span">
+<h1><span style='font-size:medium'>Craps</span><a class="headerlink" href="#span-style-font-size-medium-craps-span" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>The game of craps uses two six-sided dice. The rules for two versions of the game are as follows:</span></p>
+<ol class="arabic simple">
+<li><p><span style='font-size:medium'>“Pass Line”:</span></p></li>
+</ol>
+<ul class="simple">
+<li><p><span style='font-size:medium'>If the first roll is a 7 or 11, you win.</span></p></li>
+<li><p><span style='font-size:medium'>Otherwise, if the first roll is a 2, 3, or 12, you lose.</span></p></li>
+<li><p><span style='font-size:medium'>In all other cases, the specific number rolled is “the point”, and you roll again until one of the following outcomes:</span></p>
+<ul>
+<li><p><span style='font-size:medium'>If you roll “the point” again, you win.</span></p></li>
+<li><p><span style='font-size:medium'>If you roll a 7, you lose.</span></p></li>
+</ul>
+</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><span style='font-size:medium'>“Don’t Pass”:</span></p></li>
+</ol>
+<ul class="simple">
+<li><p><span style='font-size:medium'>If the first roll is a 7 or 11, you lose.</span></p></li>
+<li><p><span style='font-size:medium'>Otherwise, if the first roll is a 2, 3, or 12, you win.</span></p></li>
+<li><p><span style='font-size:medium'>In all other cases, the specific number rolled is “the point”, and you roll again until one of the following outcomes:</span></p>
+<ul>
+<li><p><span style='font-size:medium'>If you roll “the point” again, you lose.</span></p></li>
+<li><p><span style='font-size:medium'>If you roll a 7, you win.</span></p></li>
+</ul>
+</li>
+</ul>
+<p><span style='font-size:medium'>If you neither win, nor lose, we call the result a draw or a tie.</span></p>
+<p><span style='font-size:medium'>We can implement these two versions of the game in Python. We see possible output below. </span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">roll_two_dice</span><span class="p">():</span>
+    <span class="n">die1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">die2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">die1</span> <span class="o">+</span> <span class="n">die2</span>
+
+<span class="k">def</span> <span class="nf">pass_line</span><span class="p">():</span>
+    <span class="n">roll</span> <span class="o">=</span> <span class="n">roll_two_dice</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">11</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;win&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">12</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;lose&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">the_point</span> <span class="o">=</span> <span class="n">roll</span>
+        <span class="n">roll</span> <span class="o">=</span> <span class="n">roll_two_dice</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="n">the_point</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;win&quot;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">7</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;lose&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;draw&quot;</span>
+
+<span class="k">def</span> <span class="nf">dont_pass</span><span class="p">():</span>
+    <span class="n">roll</span> <span class="o">=</span> <span class="n">roll_two_dice</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">11</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;lose&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">12</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;win&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">the_point</span> <span class="o">=</span> <span class="n">roll</span>
+        <span class="n">roll</span> <span class="o">=</span> <span class="n">roll_two_dice</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="n">the_point</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;lose&quot;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">roll</span> <span class="o">==</span> <span class="mi">7</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;win&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;draw&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pass line:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pass_line</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Play again</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Don&#39;t pass:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dont_pass</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pass line:
+draw
+
+Play again
+
+Don&#39;t pass:
+lose
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>Explore these two versions of the game craps in the Exercises section.</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="span-style-font-size-medium-choosing-the-right-one-span">
+<h1><span style='font-size:medium'>Choosing the right one</span><a class="headerlink" href="#span-style-font-size-medium-choosing-the-right-one-span" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>Consider the following problem:</span></p>
+<p><span style='font-size:medium'>You arrive at a hotel and are invited to walk down the hall and choose what you consider the best out of <span class="math notranslate nohighlight">\(n\)</span> rooms. The rooms are varied with no underlying organization. You will view them one-by-one, and the person in charge says you must accept or reject a room immediately after viewing it because a stream of others seeking lodging is coming in behind you. If you have not accepted a room before you reach the end of the hall, you will get the last of the <span class="math notranslate nohighlight">\(n\)</span> rooms.</span></p>
+<p><span style='font-size:medium'>Problem: How can you maximize the chance that you will accept the room you consider the best?</span></p>
+<p><span style='font-size:medium'>Optimal stopping problems like this one arise in various contexts, including financial markets (choosing when to sell stock in an </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'>-day period), housing markets (choosing when to sell a house in an </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'>-day period), and hiring or marriage (selecting someone when </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> candidates “dribble in” sequentially).</span></p>
+<p><span style='font-size:medium'>Notice that if your strategy is to pick a room at random, your chance of getting the best room is <span class="math notranslate nohighlight">\(1/n\)</span>. If your strategy is to choose the first, second, last, or “middle” room, your chance of getting the best room is also <span class="math notranslate nohighlight">\(1/n\)</span>. For larger values of <span class="math notranslate nohighlight">\(n\)</span>, this strategy performs increasingly poorly.</span></p>
+<p><span style='font-size:medium'>An insight here is that you can benefit from a “preview process.” Set a strategy in which you preview <span class="math notranslate nohighlight">\(r\)</span> rooms (rejecting each one) and record the maximum score <span class="math notranslate nohighlight">\(m\)</span> from the preview set. Then pick the first room with a score that is better than <span class="math notranslate nohighlight">\(m\)</span>.
+</span></p>
+<p><span style='font-size:medium'>For example, suppose </span><span class="math notranslate nohighlight">\(n = 10\)</span><span style='font-size:medium'>. Previewing </span><span class="math notranslate nohighlight">\(r\)</span><span style='font-size:medium'> rooms is possible if </span><span class="math notranslate nohighlight">\(0 \le r &lt; n\)</span><span style='font-size:medium'>. Suppose your strategy is to preview </span><span class="math notranslate nohighlight">\(r = 3\)</span><span style='font-size:medium'> rooms. If the scores for the rooms are [67, 91, 85, 92, 2, 71, 32, 56, 37, 34], then </span><span class="math notranslate nohighlight">\(m = 91\)</span><span style='font-size:medium'>. The first room with a score better than </span><span class="math notranslate nohighlight">\(m\)</span><span style='font-size:medium'> is the fourth room with a score of 92. In this case, the strategy yielded the best room.</span></p>
+<p><span style='font-size:medium'>It can be shown mathematically that the optimal fraction of the total rooms that you should preview is </span><span class="math notranslate nohighlight">\(1/e\)</span><span style='font-size:medium'> or approximately 37% as </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> gets very large. The probability that you will select the best room this way is also </span><span class="math notranslate nohighlight">\(1/e\)</span><span style='font-size:medium'> for large </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'>. We can also come up with this advantageous fraction of rooms approximately via simulation.</span></p>
+<p><span style='font-size:medium'>We can explore the game of choosing the right one with the following algorithm:</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Generate a list ratings of n rooms, from 0 to 100.</span>
+
+<span class="c1"># 2. Define the number_rooms_to_preview as int(0.37 * n).</span>
+
+<span class="c1"># 3. Find max among the first 37% by looping through the rooms to be visited.</span>
+
+<span class="c1"># 4. While rooms still remain to be visited,</span>
+<span class="c1"># and the rating does not surpass the first 37% of ratings,</span>
+<span class="c1"># advance to the next room:</span>
+<span class="c1"># while (i &lt; n) and (ratings[i] &lt;= max):</span>
+    <span class="c1"># i += 1</span>
+
+<span class="c1"># 5. Once you exit the while loop, if you haven&#39;t reached the final room,</span>
+<span class="c1"># if i &lt; n:</span>
+<span class="c1"># then you have found a room that surpasses the first 37%.</span>
+<span class="c1"># You found the first rating that exceeds max, so assign that rating as your choice:</span>
+    <span class="c1"># choice = ratings[i]</span>
+
+<span class="c1"># 6. Otherwise, you have been through all the rooms, and you must take the last room:</span>
+<span class="c1"># else:</span>
+    <span class="c1"># choice = ratings[n-1]</span>
+
+<span class="c1"># 7. Sort apartments best to worst:</span>
+<span class="c1"># ratings.sort(reverse = True)</span>
+
+<span class="c1"># 8. Find the index of your choice in the sorted list</span>
+<span class="c1"># to get the rank of your chosen room (1 &lt;= rank &lt;= n):</span>
+<span class="c1"># rank = ratings.index(choice) + 1</span>
+
+<span class="c1"># 9. Append the rank of the selected apartment into a list.</span>
+
+<span class="c1"># 10. Plot these ranks in a histogram.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span style='font-size:medium'>Explore this algorithm for choosing the right one in the Exercises section. </span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="span-style-font-size-medium-coin-flipping-game-span">
+<h1><span style='font-size:medium'>Coin-flipping game</span><a class="headerlink" href="#span-style-font-size-medium-coin-flipping-game-span" title="Permalink to this heading">#</a></h1>
+<p><span style='font-size:medium'>Suppose you have a coin to flip and </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> tokens. In this game, you put a fraction </span><span class="math notranslate nohighlight">\(F\)</span><span style='font-size:medium'> of your tokens (</span><span class="math notranslate nohighlight">\(Fn\)</span><span style='font-size:medium'> tokens)</span> <span style='font-size:medium'>on the table, </span><span class="math notranslate nohighlight">\(0 &lt;F \le 1\)</span><span style='font-size:medium'>. You choose either heads or tails for the game, for example heads. Then you flip the coin. If it comes up with your choice (heads), then you win </span><span class="math notranslate nohighlight">\(Fn\)</span><span style='font-size:medium'> additional tokens. If your choice is wrong (the coin comes up tails), then you lose all </span><span class="math notranslate nohighlight">\(Fn\)</span><span style='font-size:medium'> tokens. Repeat the process, each time using the same fraction </span><span class="math notranslate nohighlight">\(F\)</span><span style='font-size:medium'> of the number of tokens that you now have and using the same coin-flip choice (in this example, heads). Do this until you lose all your tokens or up to a maximum number of flips, for example 30, whichever comes first.</span></p>
+<p><span style='font-size:medium'>Example: You start the game with </span><span class="math notranslate nohighlight">\(n=100\)</span><span style='font-size:medium'> tokens. You decide that you will put down </span><span class="math notranslate nohighlight">\(F = 1/2\)</span><span style='font-size:medium'> of your tokens for each turn, use heads as your guess, and play until you lose all your tokens or up to a maximum of 30 flips, whichever comes first. As such, you put 50 tokens on the table. You flip the coin. It comes up heads, so you win 50 tokens. Therefore, you have 150 tokens altogether (150 points). So, next you put 75 tokens on the table. You flip the coin. It comes up tails, so you lose the 75 tokens. Now you have 75 tokens (75 points) altogether. In one version of the game, points must be positive integers, so you chose a convention for rounding up or rounding down when the number of tokens </span><span class="math notranslate nohighlight">\(Fn\)</span><span style='font-size:medium'>is odd. In another version, fractional points like 37.5 are allowed. We could simulate a continuation of the game with one of these conventions to determine how many points you have at the end of the game.</span></p>
+<p><span style='font-size:medium'>It has been mathematically established that a winning strategy to maximize your points is to put down the optimal fraction </span><span class="math notranslate nohighlight">\(F\)</span><span style='font-size:medium'> of your tokens,  given by the Kelly criterion as </span>$<span class="math notranslate nohighlight">\(F = \frac{bp – 1 + p}{b},\)</span><span class="math notranslate nohighlight">\(&lt;span style='font-size:medium'&gt;where &lt;/span&gt;\)</span>p<span class="math notranslate nohighlight">\(&lt;span style='font-size:medium'&gt; is the probability of winning, like &lt;/span&gt;\)</span>p = 0.5<span class="math notranslate nohighlight">\(&lt;span style='font-size:medium'&gt; for heads, &lt;/span&gt;\)</span>1 − p<span class="math notranslate nohighlight">\(&lt;span style='font-size:medium'&gt; is the probability of losing, and &lt;/span&gt;\)</span>b<span class="math notranslate nohighlight">\(&lt;span style='font-size:medium'&gt; are the odds in the game. For example, odds &lt;/span&gt;\)</span>b = 1<span class="math notranslate nohighlight">\(&lt;span style='font-size:medium'&gt; means “put down 1 and win &lt;/span&gt;\)</span>b = 1<span class="math notranslate nohighlight">\(&lt;span style='font-size:medium'&gt; points” \(or lose &lt;/span&gt;\)</span>b = 1$<span style='font-size:medium'> point).</span></p>
+<p><span style='font-size:medium'>Explore this game in the Exercises section.</span></p>
+<p><span style='font-size:medium'>Exercise 1: For the game of craps, does the choice of “Pass Line” vs. “Don’t Pass” affect the likelihood of winning, under the rules given? If so, what kind of difference and how much difference? Use quantitative information to support your answer. State whether you have provided mathematical proof or computational evidence.</span></p>
+<p><span style='font-size:medium'>Exercise 2: If one of the two dice is biased in the game of craps, how does that affect the analysis and conclusions from Exercise 1? Illustrate your answer by doing some simulations and discussing the results.</span></p>
+<p><span style='font-size:medium'>Exercise 3: Simulate the optimal stopping problem for ten rooms using the algorithm discussed in this section. Execute many trials.</span></p>
+<p><span style='font-size:medium'>(a) Explain whether you typically get the best room or not when you preview 37% (three or four) of the rooms.</span></p>
+<p><span style='font-size:medium'>(b) If you don’t get the best room, how good of a room do you typically get?</span></p>
+<p><span style='font-size:medium'>(c) Show a histogram of the ranks of the rooms you choose. Do the shape, center, and spread of the ranks suggest that the strategy (algorithm) is a good one for winning the best room? Explain.</span></p>
+<p><span style='font-size:medium'>(d) Does the strategy of previewing three or four of the ten rooms tend to lead to a better outcome than if you preview two or five? Support your answer.</span></p>
+<p><span style='font-size:medium'>Exercise 4: With a fair coin, is there a winning strategy to maximize your points in the coin-flipping game described in this section? If so, what is the winning strategy? Illustrate your conclusions using simulation.</span></p>
+<p><span style='font-size:medium'>Exercise 5: If you know the coin is biased, with 60% chance of heads and 40% chance of tails, how should you change your strategy? Illustrate your answer using simulation.</span></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ProbStat/ProbIntro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../Prob.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Probability Models</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="solutions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise solutions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">Random numbers</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-arbitrariness-span"><span style="font-size:medium">Arbitrariness</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-pseudo-randomness-span"><span style="font-size:medium">Pseudo-randomness</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-pseudo-random-number-generation-in-python-span"><span style="font-size:medium">(Pseudo-)random number generation in Python</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-true-randomness-span"><span style="font-size:medium">True randomness</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-exercises-span"><span style="font-size:medium">Exercises</span></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-definitions-and-facts-span"><span style="font-size:medium">Definitions and facts</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-addition-rule-span"><span style="font-size:medium">Addition rule</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-multiplication-rule-span"><span style="font-size:medium">Multiplication rule</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-simulation-span"><span style="font-size:medium">Simulation</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-law-of-large-numbers-span"><span style="font-size:medium">Law of large numbers</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-gamblers-fallacy-span"><span style="font-size:medium">Gambler’s fallacy</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><span style="font-size:medium">Exercises</span></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><span style="font-size:medium">Exercises</span></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability distributions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-uniform-distribution-span"><span style="font-size:medium">Uniform distribution</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-normal-distribution-span"><span style="font-size:medium">Normal distribution</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-binomial-distribution-span"><span style="font-size:medium">Binomial distribution</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walks">Random walks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#agent-based-models">Agent-based models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-games">Mathematical games</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-craps-span"><span style="font-size:medium">Craps</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-choosing-the-right-one-span"><span style="font-size:medium">Choosing the right one</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-medium-coin-flipping-game-span"><span style="font-size:medium">Coin-flipping game</span></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
