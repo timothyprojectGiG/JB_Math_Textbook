@@ -17,47 +17,13 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import matplotlib
-def board_game(balls, levels):
-    # The number levels is the number of levels (excluding 0th level) and number of pegs at bottom level
-    total_balls = np.zeros(levels) # array to keep a record of how many balls land in each position
-    for i in range(balls): # For each trial:
-        current_position = 0
-        for level in range(1, levels): # Start at Level 1 and go up to and not including the bottom row.
-            current_position += random.randrange(2) # Increment the current position by 0 (left move) or 1 (right move).
-        # When you're done with all levels, increment the ball total at the position where the ball ended up.
-        total_balls[current_position] += 1
-    matplotlib.pyplot.plot(total_balls)
-    matplotlib.pyplot.title(f"{balls} balls in a {levels}-level board with a left-bounce probability of {0.5}")
-    matplotlib.pyplot.xlabel('Position')
-    matplotlib.pyplot.ylabel('Number of balls')
-    matplotlib.pyplot.show()
-
-board_game(10_000, 10)
+Exercise 1e)
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mAttributeError[0m                            Traceback (most recent call last)
-[0;32m<ipython-input-36-9928de9bc274>[0m in [0;36m<module>[0;34m[0m
-[1;32m     16[0m     [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m[0;34m.[0m[0mshow[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     17[0m [0;34m[0m[0m
-[0;32m---> 18[0;31m [0mboard_game[0m[0;34m([0m[0;36m10_000[0m[0;34m,[0m [0;36m10[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;32m<ipython-input-36-9928de9bc274>[0m in [0;36mboard_game[0;34m(balls, levels)[0m
-[1;32m     10[0m         [0;31m# When you're done with all levels, increment the ball total at the position where the ball ended up.[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     11[0m         [0mtotal_balls[0m[0;34m[[0m[0mcurrent_position[0m[0;34m][0m [0;34m+=[0m [0;36m1[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 12[0;31m     [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m[0;34m.[0m[0mplot[0m[0;34m([0m[0mtotal_balls[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     13[0m     [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m[0;34m.[0m[0mtitle[0m[0;34m([0m[0;34mf"{balls} balls in a {levels}-level board with a left-bounce probability of {0.5}"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     14[0m     [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m[0;34m.[0m[0mxlabel[0m[0;34m([0m[0;34m'Position'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;36m  File [0;32m"<ipython-input-33-ea75863f558d>"[0;36m, line [0;32m1[0m
+[0;31m    Exercise 1e)[0m
+[0m             ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
 
-[0;32m~/anaconda3/lib/python3.8/site-packages/matplotlib/_api/__init__.py[0m in [0;36m__getattr__[0;34m(name)[0m
-[1;32m    224[0m         [0;32mif[0m [0mname[0m [0;32min[0m [0mprops[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    225[0m             [0;32mreturn[0m [0mprops[0m[0;34m[[0m[0mname[0m[0;34m][0m[0;34m.[0m[0m__get__[0m[0;34m([0m[0minstance[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 226[0;31m         raise AttributeError(
-[0m[1;32m    227[0m             f"module {cls.__module__!r} has no attribute {name!r}")
-[1;32m    228[0m [0;34m[0m[0m
-
-[0;31mAttributeError[0m: module 'matplotlib' has no attribute 'pyplot'
-AttributeError: module 'matplotlib' has no attribute 'pyplot'
+SyntaxError: invalid syntax (<ipython-input-33-ea75863f558d>, line 1)
 
