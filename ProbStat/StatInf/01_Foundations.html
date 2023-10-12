@@ -285,6 +285,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/Complex_Potentials.html">Complex Potentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/model.html">Fischer-Calo Contaminant Model</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">2. About Text Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">5. Evaluating Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">6. Applications</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -825,8 +836,8 @@ document.write(`
 </div>
 <p>Now let’s compare this to the theory. What does the Central Limit Theorem tell us?</p>
 <p>If the sample size is “large enough”, then the sample mean, considered as a random variable, is approximately normally distributed with the same mean as the population and with standard deviation equal to the population standard deviation divided by the sample size. In mathematical language,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2170b3d4-5e3e-4a69-80f8-dfee0f945425">
-<span class="eqno">(4)<a class="headerlink" href="#equation-2170b3d4-5e3e-4a69-80f8-dfee0f945425" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2d02fe62-cb08-4bb6-8957-b0b27811e424">
+<span class="eqno">(4)<a class="headerlink" href="#equation-2d02fe62-cb08-4bb6-8957-b0b27811e424" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \displaystyle \overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right),
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\overline{X}\)</span> is the sample mean, <span class="math notranslate nohighlight">\(\mu\)</span> is the population mean, <span class="math notranslate nohighlight">\(\sigma\)</span> is the population standard deviation, and <span class="math notranslate nohighlight">\(n\)</span> is the sample size.</p>
@@ -1088,13 +1099,13 @@ if (outputEl) {{
 </div>
 </div>
 <p>Now we know where <span class="math notranslate nohighlight">\(\overline X\)</span> is likely to fall in relation to <span class="math notranslate nohighlight">\(\mu\)</span>. We can express what we see in the graph as a probability:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d58cb72e-6e6d-4421-b6db-0a0a6821cdef">
-<span class="eqno">(5)<a class="headerlink" href="#equation-d58cb72e-6e6d-4421-b6db-0a0a6821cdef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3964a453-1879-4b9d-96c1-0a8e21ac9a0a">
+<span class="eqno">(5)<a class="headerlink" href="#equation-3964a453-1879-4b9d-96c1-0a8e21ac9a0a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P\left(\mu-1.96 \frac{\sigma}{\sqrt{n}} \le \overline X \le \mu + 1.96  \frac{\sigma}{\sqrt{n}}\right) = .95.
 \end{equation}\]</div>
 <p>With a little bit of algebraic manipulation, we can write this as an interval for <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-778a996d-e9e3-4075-8d09-9a5bc056819a">
-<span class="eqno">(6)<a class="headerlink" href="#equation-778a996d-e9e3-4075-8d09-9a5bc056819a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cf4a214a-e9f1-4c7c-88e2-0d455e39bd7a">
+<span class="eqno">(6)<a class="headerlink" href="#equation-cf4a214a-e9f1-4c7c-88e2-0d455e39bd7a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P\left(\overline{X}-1.96 \frac{\sigma}{\sqrt{n}} \le \mu \le \overline{X} + 1.96  \frac{\sigma}{\sqrt{n}}\right) = .95.
 \end{equation}\]</div>
 <p>In the real world, we’ll have a value of <span class="math notranslate nohighlight">\(\overline{X}\)</span>, and we want to know where <span class="math notranslate nohighlight">\(\mu\)</span> is. This second interval gives us exactly this! Look at what’s on the upper and lower side of the interval: (almost) all things we can calculate from the data, like <span class="math notranslate nohighlight">\(\overline X\)</span> and <span class="math notranslate nohighlight">\(n\)</span> (we’ll discuss how to handle the <span class="math notranslate nohighlight">\(\sigma\)</span> in a moment). This gives an interval for <span class="math notranslate nohighlight">\(\mu\)</span>, the population mean that we can’t calculate but want to know.</p>
