@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ProbStat/ProbIntro/prob4';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Agent-based models" href="prob5.html" />
+    <link rel="next" title="Random walks" href="prob4a.html" />
     <link rel="prev" title="Conditional probability" href="prob3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -193,6 +193,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="prob2.html">Probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prob3.html">Conditional probability</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prob4a.html">Random walks</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="prob5.html">Agent-based models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prob6.html">Mathematical Games</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solutions.html">Solution to Exercises</a></li>
@@ -523,7 +525,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">Uniform distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution">Normal distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walks">Random walks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
             </nav>
@@ -538,7 +539,10 @@ document.write(`
                   
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">random</span>
 <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -566,7 +570,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
 </pre></div>
 </div>
 </div>
@@ -577,9 +581,7 @@ document.write(`
 <p><span style='font-size:medium'>Here we call the </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">hist</span></code></span><span style='font-size:medium'> method on the data values that fall in the range 1 to 7 inclusive, where each bar has width 0.8 using . Experiment to see how this call is is an improvement over </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab.hist(values)</span></code></span><span style='font-size:medium'> and </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab.hist(values,</span> <span class="pre">bins</span> <span class="pre">=</span> <span class="pre">6)</span></code></span><span style='font-size:medium'> and </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab.hist(values,</span> <span class="pre">bins</span> <span class="pre">=</span> <span class="pre">6,</span> <span class="pre">rwidth</span> <span class="pre">=</span> <span class="pre">0.8)</span></code></span><span style='font-size:medium'>. We improve the layout of the bars by specifying the leftmost and rightmost values.</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Work with list or array.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Work with list or array.</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6000</span><span class="p">):</span> <span class="c1"># Roll the die 6000 times.</span>
     <span class="n">roll</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
     <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span>
@@ -593,7 +595,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/64ae7f6cf7aad1c621cacf20a1acea82474e8933c1e657f5ea92221fb5e5f159.png" src="../../_images/64ae7f6cf7aad1c621cacf20a1acea82474e8933c1e657f5ea92221fb5e5f159.png" />
+<img alt="../../_images/f55fe579d68111c19f9cb78b6a9ec71c83b66b665ed24502afd4bad52ed3803d.png" src="../../_images/f55fe579d68111c19f9cb78b6a9ec71c83b66b665ed24502afd4bad52ed3803d.png" />
 </div>
 </div>
 <p>The results of the simulation of 6000 die rolls look approximately uniform with some slight differences in the frequencies of the rolls of the six numbers.</p>
@@ -617,9 +619,7 @@ document.write(`
 <p><span style='font-size:medium'>where </span><span class="math notranslate nohighlight">\(\mu\)</span> <span style='font-size:medium'>is the mean, and </span><span class="math notranslate nohighlight">\(\sigma\)</span><span style='font-size:medium'> is the standard deviation, can be graphed in Python as: </span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="k">def</span> <span class="nf">plot_normal_curve</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_normal_curve</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
     <span class="c1"># Plot the normal distribution with mean mu and standard deviation sigma on an interval from start to end.</span>
     <span class="n">y_coords</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># Use 100 points between start and end.</span>
@@ -648,7 +648,14 @@ document.write(`
 <p><span style='font-size:medium'>Experiment with / illustrate the law and theorem using </span><span style='font-size:medium'><code class="docutils literal notranslate"><span class="pre">pylab</span></code></span><span style='font-size:medium'>. </span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip_trials</span><span class="p">(</span><span class="n">num_flips_per_trial</span><span class="p">,</span> <span class="n">num_trials</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">num_flips</span><span class="p">):</span>
+    <span class="n">head_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_flips</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">((</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span>
+            <span class="n">head_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">head_count</span><span class="o">/</span><span class="n">num_flips</span>
+
+<span class="k">def</span> <span class="nf">flip_trials</span><span class="p">(</span><span class="n">num_flips_per_trial</span><span class="p">,</span> <span class="n">num_trials</span><span class="p">):</span>
     <span class="c1"># Return the proportions of heads in num_trials trials of num_flips coin flips.</span>
     <span class="c1"># Return the mean of the proportions.</span>
     <span class="n">fraction_heads</span> <span class="o">=</span> <span class="p">[]</span>
@@ -673,10 +680,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean of the proportions is 0.5002306.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean of the proportions is 0.49987890000000135.
 </pre></div>
 </div>
-<img alt="../../_images/1699c4c20bbf1879174e2f3249c8f2de54405e5d982a42ac684a2afc9aa3d06a.png" src="../../_images/1699c4c20bbf1879174e2f3249c8f2de54405e5d982a42ac684a2afc9aa3d06a.png" />
+<img alt="../../_images/ec916e52416ffcc22e601178313e58ba97ca30b5f49bc50290987a656ac1163c.png" src="../../_images/ec916e52416ffcc22e601178313e58ba97ca30b5f49bc50290987a656ac1163c.png" />
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
 </pre></div>
 </div>
@@ -711,13 +718,9 @@ document.write(`
 <img alt="../../_images/da07a4c1160083d70f8f4bb035da7f3ed1f8977db5016244a280e8ad33a0ca43.png" src="../../_images/da07a4c1160083d70f8f4bb035da7f3ed1f8977db5016244a280e8ad33a0ca43.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Exercises</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
 <p><span style='font-size:medium'>Exercise 1: Consider points </span><span class="math notranslate nohighlight">\((x, y)\)</span><span style='font-size:medium'> in a 1 x 1 square in the first quadrant of the plane </span><span class="math notranslate nohighlight">\((x, y) \in [0, 1) \times [0, 1)\)</span><span style='font-size:medium'>. Simulate filling the square with dots by picking points in the square at random. Generate the coordinates in each </span><span class="math notranslate nohighlight">\(x\)</span><span style='font-size:medium'>-</span><span class="math notranslate nohighlight">\(y\)</span><span style='font-size:medium'> pair by using Python to sample from a uniform distribution on the interval [0, 1). Use the ratio of number of dots inside a quarter circle with center at the origin to total dots to simulate the ratio of the area of the quarter circle to the area of the square. Use this ratio to to estimate the value of </span><span class="math notranslate nohighlight">\(\pi\)</span><span style='font-size:medium'>.</span></p>
@@ -726,131 +729,6 @@ document.write(`
 <p><span style='font-size:medium'>(b) How does the graph tend to change if you use more levels and keep the number of balls the same? Why?</span></p>
 <p><span style='font-size:medium'>(c) How does the graph tend to change if you use more balls and keep the number of levels the same? Why?</span></p>
 <p><span style='font-size:medium'>Exercise 3: Consider a biased coin that lands on heads 20% of the time. Simulate 30 flips of the coin. Record whether no heads were flipped, 1 head was flipped, 2 heads were flipped,  3 heads were flipped, etc., up to 30 heads. Repeat the experiment 10,000 times. Draw a histogram that shows how often each number 1-30 of heads was flipped. Describe the shape and spread of the graph. Compare it to the graph of the mathematical distribution given by the formula.</span></p>
-</div>
-</section>
-<section id="random-walks">
-<h2>Random walks<a class="headerlink" href="#random-walks" title="Permalink to this heading">#</a></h2>
-<p><span style='font-size:medium'>A </span><span style='font-size:medium'><strong>random walk</strong></span><span style='font-size:medium'> </span><span style='font-size:medium'><strong>on the number line</strong></span><span style='font-size:medium'> is a path in which each of </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> steps is taken either to the left or right at random. In an </span><span style='font-size:medium'><strong>unbiased</strong></span><span style='font-size:medium'> random walk, each step has a 50-50 chance of going to the left or to the right.</span></p>
-<p><span style='font-size:medium'>A </span><span style='font-size:medium'><strong>random walk on a square lattice</strong></span><span style='font-size:medium'> is a path in which each of </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> steps is taken left, right, up, or down at random. In one example of a biased random walk, a person takes a step left with probability 0.35, a step right with probability 0.2, a step forward with probability 0.4, and a step back with probability 0.05. Note the probabilities add to 1, meaning there are no other options at each iteration.</span></p>
-<p><span style='font-size:medium'>A random walk is an example of a </span><span style='font-size:medium'><strong>stochastic process</strong></span><span style='font-size:medium'> because it yields varied output due to randomness when it is executed repeatedly with the same input. By contrast, a deterministic process yields the same output when it is executed repeatedly with the same input. Random walks can be used to model (describe) practical processes in a variety of areas of study, such as the motion of particles in physics, changes in DNA and “genetic drift” in biology, the changes in stock prices in financial markets, and human migration and relocation in global geography and societies.</span></p>
-<p><span style='font-size:medium'>In a traditional framing of a random walk, a drunk person walks on a street with an equal probability of movement to the left or right at each pace. One can readily ask a many questions about the random walk that can be surprisingly challenging to answer via basic calculation and pencil-and-paper experimentation.</span></p>
-<p><span style='font-size:medium'>For instance, in an unbiased random walk on the number line, what is the expected number of paces the person should take in order to move one pace to the left of the starting point? Also consider, in the example above of the biased random walk on a square lattice, what is the expected number of paces the person should take in order to visit the location one pace to the left of the starting point? </span></p>
-<p><span style='font-size:medium'>Mathematical approaches can provide answers about random walks. However, many questions prove quite difficult to address theoretically. </span></p>
-<p><span style='font-size:medium'>Computer simulations can conveniently and intuitively provide insights into random walks. They can also illustrate the variations that occur over many trials of an experiment. In this section, we use computation to consider the questions above and more.</span></p>
-<p><span style='font-size:medium'>Example: Consider and explore this Python code for a random walk on a square lattice. We see possible output below.</span></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="s1">&#39;back&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;forward&#39;</span><span class="p">:</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;back&#39;</span><span class="p">:</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span> <span class="c1"># val == &#39;right&#39;</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r*-&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final position: </span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/84905c0c5052afe2aa63cedc15297e274e184543d8932ee545472d517a4329cc.png" src="../../_images/84905c0c5052afe2aa63cedc15297e274e184543d8932ee545472d517a4329cc.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final position: 10.0, 1.0
-</pre></div>
-</div>
-</div>
-</div>
-<p><span style='font-size:medium'>Example: Consider and explore this Python code for a random walk on a cubic lattice!  We see possible output below.</span></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="s1">&#39;back&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="s1">&#39;down&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;forward&#39;</span><span class="p">:</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;back&#39;</span><span class="p">:</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;up&#39;</span><span class="p">:</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span> <span class="c1"># go down</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x position&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y position&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;z position&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s1">&#39;r*-&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final position: </span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">z</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final position: 1.0, 4.0, 4.0
-</pre></div>
-</div>
-<img alt="../../_images/927ffd4c1a8c337464be7757bd9d6ccea2de358950c7e322fa2e00223fdd50d9.png" src="../../_images/927ffd4c1a8c337464be7757bd9d6ccea2de358950c7e322fa2e00223fdd50d9.png" />
-</div>
-</div>
-<p>Note you can change the figure size, for example by inserting the following line before plotting:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 500x500 with 0 Axes&gt;
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
-<div class="admonition-exercises admonition">
-<p class="admonition-title">Exercises</p>
-<p><span style='font-size:medium'>Exercise 1: A person walks on a street with an equal probability of movement to the left or right at each pace. Write a Python program to approximate the expected number of paces the person should take in order to move one pace to the left of the starting point. Suggestion: Use 0 as the starting point. State your conclusions in a complete sentence.</span></p>
-<p><span style='font-size:medium'>Exercise 2: Consider an unbiased random walk on a square lattice. Write a Python program to find approximate answers to the following questions:</span></p>
-<p><span style='font-size:medium'>(a) What is the expected number of a paces the person should take in order to visit the location one pace to the left of the starting point (0, 0)? Explain.</span></p>
-<p><span style='font-size:medium'>(b) How far away from the starting point (0,0) does a person end up after </span><span class="math notranslate nohighlight">\(n\)</span><span style='font-size:medium'> steps of an unbiased random walk on a square lattice? Explain.</span></p>
-<p><span style='font-size:medium'>(c) If you run the simulation program for Part (b) many times, is there any statistical distribution you can expect? Explain.</span></p>
-<p><span style='font-size:medium'>Exercise 3: A person walks one pace left with a probability of 0.35, one pace right with a probability of 0.2, one pace forward with a probability of 0.4 and one pace backward with a probability of 0.05.  Write a Python program to approximate the expected number of paces the person should take in order to visit the location one pace to the left of the starting point. State your conclusions in a complete sentence.</span></p>
-<p><span style='font-size:medium'>Exercise 4: A person walks one pace left, right, forward or back with equal probability. When the person walks left, right, or back, she walks one pace. When she walks forward, she walks two paces. Write a Python program to approximate how far forward the person has walked in 1000 paces. State your conclusions in a complete sentence.</span></p>
-<p><span style='font-size:medium'>Exercise 5: A </span><span style='font-size:medium'><strong>Markov chain</strong></span><span style='font-size:medium'> describes a sequence of possible events in which the probability of each event depends on the state in the previous event. For example, suppose that we modify an unbiased random walk on a square lattice such that if the previous step was to the right, then the probability of making the current move up, down, left, or right is 0.2, 0.2, 0.4, or 0.2, respectively. As such,</span></p>
-<p><span style='font-size:medium'>(a) explain the implications of a move to the right in practical terms in a complete sentence.</span></p>
-<p><span style='font-size:medium'>(b) run some simulations and address the question: How does the use of the Markov chain change the unbiased random walk on a square lattice? </span></p>
-<p><span style='font-size:medium'>Exercise 6: Two people get lost in a shopping mall. They both want to find each other as soon as possible. However, each has no clue where the other one is. There are two strategies available:</span></p>
-<p><span style='font-size:medium'>(1) One person stays in the same place. The other moves around.</span></p>
-<p><span style='font-size:medium'>(2) Both people move.</span></p>
-<p><span style='font-size:medium'>Which strategy is better for them to meet?</span></p>
-<p><span style='font-size:medium'>Do simulations and explain how they support your answer.</span></p>
 </div>
 </section>
 </section>
@@ -896,11 +774,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="prob5.html"
+       href="prob4a.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Agent-based models</p>
+        <p class="prev-next-title">Random walks</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -925,7 +803,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">Uniform distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution">Normal distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walks">Random walks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
   </nav></div>
