@@ -538,7 +538,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="solution-to-exercises">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="solution-to-exercises">
 <h1>Solution to Exercises<a class="headerlink" href="#solution-to-exercises" title="Permalink to this heading">#</a></h1>
 <p><span style='font-size:medium'>I tried to pose these questions to ask for human thought by asking the student to judge, think, etc. I intend for the student to address these questions with original thought and by referring to the chapter and any resource explicitly provided in the question, initially without doing outside research.</span></p>
 <p><span style='font-size:medium'>Many of the exercises have many answers. I have provided some possible answers from my own perspective.</span></p>
@@ -572,8 +580,7 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -1484,15 +1491,9 @@ or approximately (5/6)**6 + (5/6)**5% of the trials:
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Exercise</span> <span class="mi">1</span><span class="n">e</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>Exercise 1e)</p>
 <p>Probably the most practical number is the probability of spam, given the email contains the word “free” because checking for spam is something you might want to do. It seems that “free” comes up a lot in spam messages. It may be a useful marker because the probability of spam given the possibly related word “free” is about 92%. One limitation of this conclusion is that it is based only on the data provided. We would need reasons to believe that the data are representative of all emails, spam and not spam, that do and do not contain the word “free”. Also practically all spam messages contain the word “the”, so we have to be confident that “free” is not so widespread that it isn’t helpful. Here the probability that a message is not spam, given that it has the word “free” is somewhat small: about 8%.</p>
-<p><span style='font-size:medium'>Exercise 2: Suppose the disease meningitis causes a stiff neck 70% of the time, the prior probability of any patient having meningitis is 1/50,000, and the prior probability of any patient having a stiff neck is 1/100. (Artificial Intelligence: A Modern Approach (Third Edition), Stuart J. Russell and Peter Norvig, Prentice Hall, Upper Saddle River, 2010). Use Bayes’ Theorem to calculate the probability that a patient has meningitis, given they have a stiff neck. Show how you apply Bayes’ Theorem. Interpret the results in a complete sentence.</span></p>
+<p>Exercise 2: Suppose the disease meningitis causes a stiff neck 70% of the time, the prior probability of any patient having meningitis is 1/50,000, and the prior probability of any patient having a stiff neck is 1/100. (Artificial Intelligence: A Modern Approach (Third Edition), Stuart J. Russell and Peter Norvig, Prentice Hall, Upper Saddle River, 2010). Use Bayes’ Theorem to calculate the probability that a patient has meningitis, given they have a stiff neck. Show how you apply Bayes’ Theorem. Interpret the results in a complete sentence.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -2199,6 +2200,55 @@ The person arrived at (-1, 0) in three steps 95 times.
 <section id="agent-based-models">
 <h2>Agent-based models<a class="headerlink" href="#agent-based-models" title="Permalink to this heading">#</a></h2>
 <p><span style='font-size:medium'>Exercise 1: Simulate the spread of information under the given assumptions. How many days does it seem to take in general for the information to spread to half of the population? Will all individuals be informed after a certain number of days?</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rumor_spread</span><span class="p">(</span><span class="n">total_population</span><span class="p">):</span>
+    <span class="c1"># Set a maximum number of iterations.</span>
+    <span class="n">max_it</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="c1"># Inform Agent 0.</span>
+    <span class="n">informed_status</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># No one else has been informed.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_population</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">informed_status</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Generate a random number from 0 to 5 for each agent and store in a list as the number of transmissions.</span>
+    <span class="n">transmission_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_population</span><span class="p">):</span>
+        <span class="n">transmission_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="c1"># Simulation of the process</span>
+    <span class="n">day</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">spread_to_half</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">day_spread_to_half</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">informed_status</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">total_population</span> <span class="ow">and</span> <span class="p">(</span><span class="n">day</span> <span class="o">&lt;</span> <span class="n">max_it</span><span class="p">):</span>
+        <span class="c1"># Record the first day that at least half of the population has the information.</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">spread_to_half</span><span class="p">)</span> <span class="ow">and</span> <span class="n">informed_status</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_population</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+            <span class="n">day_spread_to_half</span> <span class="o">=</span> <span class="n">day</span>
+            <span class="n">spread_to_half</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">new_status</span> <span class="o">=</span> <span class="n">informed_status</span><span class="p">[:]</span>
+        <span class="k">for</span> <span class="n">agent_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_population</span><span class="p">):</span>
+            <span class="c1"># print(informed_status)</span>
+            <span class="k">if</span> <span class="n">informed_status</span><span class="p">[</span><span class="n">agent_index</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># If agent is informed,</span>
+                <span class="c1"># transmit to (inform) the appropriate number of randomly selected agents (excluding self).</span>
+                <span class="k">for</span> <span class="n">informing</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">transmission_numbers</span><span class="p">[</span><span class="n">agent_index</span><span class="p">]):</span>
+                    <span class="n">recipient_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">total_population</span><span class="p">)</span>
+                    <span class="k">while</span> <span class="n">recipient_index</span> <span class="o">==</span> <span class="n">agent_index</span><span class="p">:</span>
+                        <span class="n">recipient_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">total_population</span><span class="p">)</span> <span class="c1"># Ensure agent does not transmit to self.</span>
+                    <span class="n">new_status</span><span class="p">[</span><span class="n">recipient_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># Copy the lists to ensure that informed_status and new_status point to two different lists in memory.</span>
+        <span class="n">informed_status</span> <span class="o">=</span> <span class="n">new_status</span><span class="p">[:]</span>
+        <span class="n">day</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">informed_status</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">total_population</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All the individuals are informed by Day </span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not all the individuals were informed within the maximum number of iterations (</span><span class="si">{</span><span class="n">max_it</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">day_spread_to_half</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(Half of the individuals are informed by Day </span><span class="si">{</span><span class="n">day_spread_to_half</span><span class="si">}</span><span class="s2">.)&quot;</span><span class="p">)</span>
+
+<span class="n">rumor_spread</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Typically it seems to take about 6 days in general for the information to spread to half of the population of 1000 and about 9 days for all individuals to be informed. However, sometimes not all the individuals are informed within a maximum number of iterations, such as 1000. Upon closer inspection (by doing print(informed_status.count(1) upon exiting the while loop), this situation seems to arise when the initial agent is assigned a transmission number of 0.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -2442,6 +2492,7 @@ The person arrived at (-1, 0) in three steps 95 times.
     <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ranks_chosen</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">num_rooms_per_trial</span><span class="p">,</span> <span class="n">rwidth</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
     <span class="c1"># print(ranks_chosen)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of rooms: </span><span class="si">{</span><span class="n">num_rooms_per_trial</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of rooms previewed: </span><span class="si">{</span><span class="n">number_to_visit</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of trials with </span><span class="si">{</span><span class="n">num_rooms_per_trial</span><span class="si">}</span><span class="s1"> rooms per trial: </span><span class="si">{</span><span class="n">num_trials</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of times best room was picked: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">rank1</span><span class="o">/</span><span class="n">num_trials</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percent of times second best room was picked: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">rank2</span><span class="o">/</span><span class="n">num_trials</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -2456,20 +2507,21 @@ The person arrived at (-1, 0) in three steps 95 times.
 </details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of rooms: 10
+Number of rooms previewed: 3
 Number of trials with 10 rooms per trial: 1000
-Percent of times best room was picked: 40
+Percent of times best room was picked: 41
 Percent of times second best room was picked: 19
 Percent of times third best room was picked: 10
-Percent of times one of the top three rooms was picked: 69
+Percent of times one of the top three rooms was picked: 71
 Percent of times worst room was picked: 3
 </pre></div>
 </div>
-<img alt="../../_images/c279a76187b1b89416c22483e2cc21c688ec1e4ac30f3f21b768efb590e0267f.png" src="../../_images/c279a76187b1b89416c22483e2cc21c688ec1e4ac30f3f21b768efb590e0267f.png" />
+<img alt="../../_images/3829bceb5083f849abff3ee50ac02a72b30c78277e4ea64aceb3378f42ddc739.png" src="../../_images/3829bceb5083f849abff3ee50ac02a72b30c78277e4ea64aceb3378f42ddc739.png" />
 </div>
 </div>
-<p><span style='font-size:medium'>(a) You get the best room about 40 or 42% of the time when you preview approximately 37% (three) of the rooms.</span></p>
-<p><span style='font-size:medium'>(b) You typically get a room in the top three about 70% of the time—about 20% of the time you get the second best and about 10% of the time you get third best.</span></p>
-<p><span style='font-size:medium'>(c) The histogram suggests that the strategy (algorithm) is a good one for winning the best room because it shows that Rank 1 is the dominant rank selected, and lower and lower ranks are generally chosen less and less often.</span></p>
+<p>(a) When you preview three of the rooms, you get the best room about 41% of the time, which is a lot better than a random choice of <span class="math notranslate nohighlight">\(1/n = 1/10\)</span>.</p>
+<p>(b) You typically get a room in the top three about 70% of the time—about 20% of the time you get the second best and about 10% of the time you get third best.</p>
+<p>(c) The histogram suggests that the strategy (algorithm) is a good one for winning the best room because it shows that Rank 1 is the dominant rank selected, and lower and lower ranks are generally chosen less and less often.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -2514,7 +2566,8 @@ Percent of times worst room was picked: 6
 <img alt="../../_images/8e4e340cd8d73d1ba49fad196c9da2487000210ba805dd2a77e3fdea6c2aeef3.png" src="../../_images/8e4e340cd8d73d1ba49fad196c9da2487000210ba805dd2a77e3fdea6c2aeef3.png" />
 </div>
 </div>
-<p><span style='font-size:medium'>(d) The strategy of previewing three of the ten rooms tends to lead to a better outcome than if you preview a fraction 0.2 of the rooms (two rooms) or 0.5 of the rooms (five rooms)? The histograms show a slightly lower peak at Rank 1 and a thicker tail for the distribution, meaning lower-rank choices are more common.</span></p>
+<p>(d) The strategy of previewing three of the ten rooms tends to lead to a better outcome than if you preview a fraction 0.2 of the rooms (two rooms) or 0.4 of the rooms (four rooms). With a preview of two rooms, the percentage of times that you get the best room drops slightly compared to a preview of three rooms. The percentage of times you get a room in the top three seems to hold fairly steady. With a preview of four rooms, the percentage of times that you get the best room drops a little compared to a preview of three rooms. The percentage of times you get a room in the top three drops quite noticeably.  With a preview of four rooms, the histogram shows a slightly lower peak at Rank 1 and a thicker tail for the distribution, meaning lower-rank choices are more common.</p>
+<p>(e) These results are generally consistent with the mathematical finding that the optimal fraction of the total rooms that you should preview is <span class="math notranslate nohighlight">\(1/e\)</span> because <span class="math notranslate nohighlight">\(1/e\)</span> is between 30 and 40% of the rooms. Technically, this mathematical conclusion only applies as <span class="math notranslate nohighlight">\(n\)</span> gets very large, so it is striking that even when <span class="math notranslate nohighlight">\(n\)</span> is only 10, we should still preview around 37% of the rooms. If the probability that you will select the best room this way tends to <span class="math notranslate nohighlight">\(1/e\)</span> for large <span class="math notranslate nohighlight">\(n\)</span>, then we would predict obtaining the best room about 37% of the time. Our simulations show slightly better results than that when we preview three or four out of the ten rooms. It’s reasonable to imagine that getting the best room might become harder as <span class="math notranslate nohighlight">\(n\)</span> gets large, so probably if we simulate with a larger number of rooms and preview about 37% of them, we might get the best room only about 37% of the time, rather than 40 or 41%.</p>
 <p><span style='font-size:medium'>Exercise 4: With a fair coin, is there a winning strategy to maximize your points in the coin-flipping game described in this section? If so, what is the winning strategy? Illustrate your conclusions using simulation.</span></p>
 <p><span style='font-size:medium'>Exercise 5: If you know the coin is biased, with 60% chance of heads and 40% chance of tails, how should you change your strategy? Illustrate your answer using simulation.</span></p>
 <div class="cell tag_hide-input docutils container">

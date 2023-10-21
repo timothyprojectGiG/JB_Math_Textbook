@@ -530,7 +530,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="agent-based-models">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="agent-based-models">
 <h1>Agent-based Models<a class="headerlink" href="#agent-based-models" title="Permalink to this heading">#</a></h1>
 <p><span style='font-size:medium'>Agent-based models are used to describe actions and interactions of individuals (agents), which occur with various likelihoods. Simulations on such models can be used to make predictions about the future state of the agents. In this section, we refer to agents acting independently. We do not address multi-agent systems in which individuals collaborate with one another in groups.</span></p>
 <p><span style='font-size:medium'>Like random walks, agent-based models can be used to capture practical processes probabilistically in a variety of areas of study. They can predict the spread of disease, forecast the segregation (separation) of different populations in a certain region, optimize traffic conditions, and describe behaviors within social networks.</span></p>
@@ -552,11 +559,65 @@ document.write(`
 <li><p><span style='font-size:medium'>The allowed transmission rates are 0, 1, 2, 3, 4, and 5.</span></p></li>
 </ol>
 <p><span style='font-size:medium'>The way the information could spread is as follows: We have Persons 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,…, 1000. These people might have transmission rates 3, 3, 2, 0, 5, 1, 1, 2, 3, 4, 2, 1, …, 4 respectively. Initially, 1 person knows the information. If that person is Person 1, and Person 1 has a transmission rate of 3, then on the first day of gossip, Person 1 might spread the information to Persons 5, 8, and 9 with transmission rates 5, 2, and 3, respectively. In Day 2 of gossip, Person 1 spreads the information to 3 people, Person 5 to 5 people, Person 8 to 2 people and Person 9 to 3 people. Note these may be some of the same people or people who already know the information. The process continues day-by-day.</span></p>
+<p>Example. Simulate the spread of information under the given assumptions. How many days does it seem to take in general for the information to spread to a quarter of the population?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rumor_spread</span><span class="p">(</span><span class="n">total_population</span><span class="p">):</span>
+    <span class="c1"># Set a maximum number of iterations.</span>
+    <span class="n">max_it</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="c1"># Inform Agent 0.</span>
+    <span class="n">informed_status</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># No one else has been informed.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_population</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">informed_status</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Generate a random number from 0 to 5 for each agent and store in a list as the number of transmissions.</span>
+    <span class="n">transmission_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_population</span><span class="p">):</span>
+        <span class="n">transmission_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="c1"># Simulation of the process</span>
+    <span class="n">day</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">spread_to_quarter</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">day_spread_to_quarter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">informed_status</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">total_population</span> <span class="ow">and</span> <span class="p">(</span><span class="n">day</span> <span class="o">&lt;</span> <span class="n">max_it</span><span class="p">):</span>
+        <span class="c1"># Record the first day that at least 1/4 of the population has the information.</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">spread_to_quarter</span><span class="p">)</span> <span class="ow">and</span> <span class="n">informed_status</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_population</span><span class="o">/</span><span class="mi">4</span><span class="p">):</span>
+            <span class="n">day_spread_to_quarter</span> <span class="o">=</span> <span class="n">day</span>
+            <span class="n">spread_to_quarter</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">new_status</span> <span class="o">=</span> <span class="n">informed_status</span><span class="p">[:]</span>
+        <span class="k">for</span> <span class="n">agent_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_population</span><span class="p">):</span>
+            <span class="c1"># print(informed_status)</span>
+            <span class="k">if</span> <span class="n">informed_status</span><span class="p">[</span><span class="n">agent_index</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># If agent is informed,</span>
+                <span class="c1"># transmit to (inform) the appropriate number of randomly selected agents (excluding self).</span>
+                <span class="k">for</span> <span class="n">informing</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">transmission_numbers</span><span class="p">[</span><span class="n">agent_index</span><span class="p">]):</span>
+                    <span class="n">recipient_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">total_population</span><span class="p">)</span>
+                    <span class="k">while</span> <span class="n">recipient_index</span> <span class="o">==</span> <span class="n">agent_index</span><span class="p">:</span>
+                        <span class="n">recipient_index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">total_population</span><span class="p">)</span> <span class="c1"># Ensure agent does not transmit to self.</span>
+                    <span class="n">new_status</span><span class="p">[</span><span class="n">recipient_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># Copy the lists to ensure that informed_status and new_status point to two different lists in memory.</span>
+        <span class="n">informed_status</span> <span class="o">=</span> <span class="n">new_status</span><span class="p">[:]</span>
+        <span class="n">day</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">day_spread_to_quarter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(A quarter of the individuals are informed by Day </span><span class="si">{</span><span class="n">day_spread_to_quarter</span><span class="si">}</span><span class="s2">.)&quot;</span><span class="p">)</span>
+
+<span class="n">rumor_spread</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(A quarter of the individuals are informed by Day 5.)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Run the code repeatedly: Typically it seems to take about 5 days for the information to spread to a quarter of the population of 1000.
+Sometimes the code does not give any output. Why?</p>
+<p>To answer this question, notice that the outer while loop counts up the days and continues to repeat while not everyone in the population has been informed and the maximum number of iterations has not been exceeded.</p>
+<p>In the exercises, you will add a few lines to the code to print how many days it took for all the individuals to be informed. If not all the individuals were informed within the maximum number of iterations, then your modified code will print a message accordingly.</p>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
-<p>Exercise 1: Simulate the spread of information under the given assumptions. How many days does it seem to take in general for the information to spread to half of the population? Will all individuals be informed after a certain number of days?</p>
+<p>Exercise 1: Simulate the spread of information under the given assumptions. (a) How many days does it seem to take in general for the information to spread to half of the population? Modify the code given in this section to answer this question. (b) Add an if-else statement to the end of your function such that if the number of informed individuals equals the total population (if informed_status.count(1) == total_population), a message is printed that says by what day all the individuals are informed, i.e., include the value of day in the output. Otherwise (if the number of informed individuals does not equal the total population), print a message that not all the individuals were informed within the maximum number of iterations.</p>
 <p>Exercise 2: This agent-based model could also be applied to the spread of disease. If “knowing the information” means “having the disease” and “not having the information” means “not having the disease”, what are the interpretations of the assumptions, initial condition, and parameters that are given? Explain how you may find the model compelling in the context of disease, or what changes to the model you recommend to better reflect the spread of disease.</p>
 </div>
 </section>
