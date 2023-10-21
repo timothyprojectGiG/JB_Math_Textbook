@@ -546,6 +546,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dimension-reduction-by-principal-component-analysis">
 <h1>4. Dimension Reduction by Principal Component Analysis<a class="headerlink" href="#dimension-reduction-by-principal-component-analysis" title="Permalink to this heading">#</a></h1>
+<div class="highlight-{index}Dimension notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 <p>Principal component analysis (PCA) is used to reduce high-dimensional data by projecting the data onto a much-lower-dimensional subspace. The subspace is chosen so that the variance of the projected data points is maximized.</p>
 <p>For a simple example illustrating why maximizing the projected variance is useful,   consider the scatterplot of covid test rates and death rates by Chicago zipcode as shown in the figure below.  For the zipcodes in the shaded portion of the scatterplot, we notice  a much higher variance in the death rate than in the test rate. Hence, from the death rate for a zipcode, we would expect to learn more than from its test rate; the test rates are roughly the same for all zipcodes, but there is considerable spread in the death rates.  Thus, if we wish to reduce the dimensionality of the data, it would be more informative to project onto the death rate rather than  onto the test rate, since the former has greater variance. Dimension reduction is based on projections that maximize variance.</p>
 <a class="reference internal image-reference" href="../../../_images/fig81.png"><img alt="../../../_images/fig81.png" src="../../../_images/fig81.png" style="width: 600px;" /></a>
@@ -628,8 +631,8 @@ Var(\mathbf{x})=\dfrac{\sum_{i=1}^n x_i^2}{n}=\frac{1}{n}\,\mathbf{x}\cdot\mathb
 &amp;= u_1^2 Var(\mathbf{x}) + 2u_1u_2Cov(\mathbf{x},\mathbf{y}) + u_2^2Var(\mathbf{y}).
 \end{align*}\]</div>
 <p>On the other hand, if we write <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> as a <span class="math notranslate nohighlight">\(2\times 1\)</span> column vector, VAR can also be computed as the matrix product <span class="math notranslate nohighlight">\({\mathbf{u}}^T\mathbf{A}\mathbf{u}\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cbc217dd-dab1-4674-a449-04f3e3e186a3">
-<span class="eqno">(39)<a class="headerlink" href="#equation-cbc217dd-dab1-4674-a449-04f3e3e186a3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2f19203f-6487-4d89-a9bb-615aaa239eb5">
+<span class="eqno">(39)<a class="headerlink" href="#equation-2f19203f-6487-4d89-a9bb-615aaa239eb5" title="Permalink to this equation">#</a></span>\[\begin{align}
 {\mathbf{u}}^T\mathbf{A}\mathbf{u}  &amp;=
 \begin{pmatrix}
 u_1 \, u_2
@@ -680,12 +683,12 @@ u_1^2Var(\mathbf{x})+2u_1u_2Cov(\mathbf{x},\mathbf{y})+u_2^2Var(\mathbf{y})=\tex
 1/\sqrt{2} \\  1/\sqrt{2}
 \end{pmatrix}=40/6 - 2/6 = 38/6=19/3.
 \end{align*}\]</div>
-</section>
+<span class="target" id="index-3"></span></section>
 <section id="maximization-of-projected-variance-by-principal-component-analysis">
 <h2>Maximization of Projected Variance by Principal Component Analysis<a class="headerlink" href="#maximization-of-projected-variance-by-principal-component-analysis" title="Permalink to this heading">#</a></h2>
 <p>Given an <span class="math notranslate nohighlight">\(n\times m\)</span> data matrix <span class="math notranslate nohighlight">\(X\)</span> whose columns all have mean  zero, the <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the symmetric matrix</p>
-<div class="amsmath math notranslate nohighlight" id="equation-198b006f-be7f-49d5-867a-cb21dbe5a2c8">
-<span class="eqno">(40)<a class="headerlink" href="#equation-198b006f-be7f-49d5-867a-cb21dbe5a2c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4451f035-5641-4a56-bff8-efcc5c1c6cfb">
+<span class="eqno">(40)<a class="headerlink" href="#equation-4451f035-5641-4a56-bff8-efcc5c1c6cfb" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbf{A}=\tfrac{1}{n}\mathbf{X}^T\mathbf{X}.
 \end{equation}\]</div>
 <p>Since the <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a real symmetric matrix, it has <span class="math notranslate nohighlight">\(m\)</span> linearly independent eigenvectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_m \in \mathbf{R}^m\)</span> with <span class="math notranslate nohighlight">\(m\)</span> real eigenvalues <span class="math notranslate nohighlight">\(\lambda_1\ge\lambda_2\ge\dots\ge\lambda_m.\)</span>  The first two principal components solve the following optimization problems:</p>
