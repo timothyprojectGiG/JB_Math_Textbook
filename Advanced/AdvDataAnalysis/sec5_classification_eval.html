@@ -639,7 +639,7 @@ To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other opera
 </div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="evaluating-classification">
-<h1>5. Evaluating Classification<a class="headerlink" href="#evaluating-classification" title="Permalink to this heading">#</a></h1>
+<span id="index-0"></span><h1>5. Evaluating Classification<a class="headerlink" href="#evaluating-classification" title="Permalink to this heading">#</a></h1>
 <p>In many classification problems, the metrics we use include precision, recall. f1, accuracy, and average accuracy (both macro and micro). Additional common metrics for classification include ROC (Receiver Operating Characteristics) and AUC (Area Under the Curve), often combined as ROC-AUC, and for multi-class classification, we can test the model’s ability to classify items on a One vs. Rest (OvR) or One vs. One (OvO) basis.</p>
 <p>In Section 2, we defined precision, recall, and f1. Accuracy is self-explanatory as the proportion of correctly predicted classes as a whole. The micro average accuracy calculates the average accuracy per class, while macro average accuracy similarly calculates this but takes class imbalance into account.</p>
 <p>For this section, we’re going to focus on the results from our ridge classification in the previous section. Notice that we get the specific results for each goal on its own, in addition to a confusion matrix for the specific results on the testing set.</p>
@@ -690,14 +690,14 @@ weighted avg     0.8276    0.8312    0.8257      8141
 <img alt="../../_images/0e1516ecebd3095e3c8ed79357908a1d32addb4c5a9357fc2450321ca5e8ba85.png" src="../../_images/0e1516ecebd3095e3c8ed79357908a1d32addb4c5a9357fc2450321ca5e8ba85.png" />
 </div>
 </div>
-<section id="the-roc-curve">
-<h2>5.1 The ROC Curve<a class="headerlink" href="#the-roc-curve" title="Permalink to this heading">#</a></h2>
+<span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><section id="the-roc-curve">
+<span id="index-4"></span><h2>5.1 The ROC Curve<a class="headerlink" href="#the-roc-curve" title="Permalink to this heading">#</a></h2>
 <p>The goal of any classifier is to maximize true positive rate (TPR) while minimizing false positive rate (FPR). The ROC curve is then determined as follows: for any given threshold, we line up the points, with TPR on the Y-axis and FPR on the X-axis. Points at the top left corner of the plot imply an FPR of 0 and a TPR of 1 (i.e., perfect classification).</p>
 <p>A model can be evaluating qualitatively by judging the “steepness” of its ROC curve; this evaluation can be made quantitative by finding the Area Under the Curve (AUC). A larger AUC implies a steeper curve and is <i>usually</i> better.</p>
 <p>For binary classification, each point on the ROC curve represents a different threshold and can be a choice for the final classifier to be used; the choice made typically depends on the business requirements and constraints.</p>
-</section>
+<span class="target" id="index-5"></span></section>
 <section id="multiclass-classifiers">
-<h2>5.2 Multiclass Classifiers<a class="headerlink" href="#multiclass-classifiers" title="Permalink to this heading">#</a></h2>
+<span id="index-6"></span><h2>5.2 Multiclass Classifiers<a class="headerlink" href="#multiclass-classifiers" title="Permalink to this heading">#</a></h2>
 <p>In any multiclass classification problem, there are multiple class labels <span class="math notranslate nohighlight">\((c_1, c_2, …, c_k)\)</span> in the data, and each training sample is labeled as belonging to one class only. The strategies used with binary classifiers can be taken in multiclass classifiers by reducing the problem to binary classification. There are two strategies typically taken to do this, those being One vs. Rest (OvR) and One vs. One (OvO).</p>
 <section id="one-vs-rest">
 <h3>5.2.1 One vs Rest<a class="headerlink" href="#one-vs-rest" title="Permalink to this heading">#</a></h3>
@@ -756,7 +756,7 @@ weighted avg     0.8276    0.8312    0.8257      8141
 <p><b>Exercise 5.1</b>: Create a similar ROC curve plot for your Naive Bayes classification and Multilayer Perceptron classification from the previous section.</p>
 </section>
 <section id="one-vs-one">
-<h3>5.2.2 One vs One<a class="headerlink" href="#one-vs-one" title="Permalink to this heading">#</a></h3>
+<span id="index-7"></span><h3>5.2.2 One vs One<a class="headerlink" href="#one-vs-one" title="Permalink to this heading">#</a></h3>
 <p>The OvO approach compares each class to another single class for all possible pairs of classes. For each class label <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\((c_1, c_2, …, c_k)\)</span>, and for each pair <span class="math notranslate nohighlight">\((c, c_j)\)</span>, with <span class="math notranslate nohighlight">\(c_j \neq c\)</span>, we say that the <i>positive samples</i> are those that are labeled as class <span class="math notranslate nohighlight">\(c\)</span>, and the <i>negative samples</i> are those that are labeled as class <span class="math notranslate nohighlight">\(c_j\)</span>.</p>
 <p>For each sample to be scored, it gets <span class="math notranslate nohighlight">\(k-1\)</span> classification results, and we then vote by majority to determine the class for the sample.</p>
 <p>Similar to the OvR strategy, we can produce an ROC curve for the OvO strategy as follows:</p>
