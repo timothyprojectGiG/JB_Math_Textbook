@@ -255,6 +255,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../OLS/jnb1.html">2. OLS Linear Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../KMeans/jnb2.html">3. K-means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
@@ -526,14 +527,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-hyperplanes">Separating Hyperplanes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signed-distance">Signed Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-for-linearly-separable-data">Optimization for Linearly-Separable Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-for-non-separable-data">Optimization for Non-Separable Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-for-non-separable-data">Optimization for Non-Separable Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
 </ul>
@@ -656,8 +652,11 @@ minimize \, J(\mathbf{w}.b)= \frac{1}{2}\sum_{i=1}^n\max\{0,1-y_i(\mathbf{w}\cdo
 <p>-correctly predicted points which are ‘well-separated’ from the separating hyperplane (i.e. <span class="math notranslate nohighlight">\(1-y_i(\mathbf{w}\cdot\mathbf{x}_i-k)\le0\)</span>) do not contribute anything to <span class="math notranslate nohighlight">\(J\)</span>.</p>
 <p>The term <span class="math notranslate nohighlight">\(\frac{\lambda}{2}\|\mathbf{w}\|^2\)</span> relates to our previous discussion of maximizing the margin.  The regularization parameter <span class="math notranslate nohighlight">\(\lambda\)</span> adjusts whether widening the margin or making correct classifications should be weighted more heavily.</p>
 <p>Exercise 3) uses a JNB to illustrate how SVMs can be used in binary classification of facial images. Using a training set consisting of <span class="math notranslate nohighlight">\(32\times 32=1024\)</span>-dimensional vectors representing <span class="math notranslate nohighlight">\(32\times 32\)</span> pixel images of former Chicago Mayors Harold Washington and Richard M.\ Daley, an SVM hyperplane is  used to predict which mayor is depicted in a set of test images of the two mayors.</p>
+</section>
 <section id="exercises">
-<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\,\)</span> Let <span class="math notranslate nohighlight">\(\mathbf{w}=(1,2)\in\mathbf{R}^2\)</span> and <span class="math notranslate nohighlight">\(b=-1\)</span>.</p></li>
 </ol>
@@ -675,12 +674,12 @@ In the case where all points in the training set are correctly classified and we
 <ol class="arabic simple" start="3">
 <li><p><span class="math notranslate nohighlight">\(\,\)</span> Binary SVM classification can be used for facial recognition, as demonstrated in  the Jupyter Notebook SUPPORT VECTOR MACHINES  (at <a class="reference external" href="https://tinyurl.com/2neb4z4c">https://tinyurl.com/2neb4z4c</a>). An image can be represented as an <span class="math notranslate nohighlight">\(N\times N\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>  where the <span class="math notranslate nohighlight">\(i,j\)</span> entry is a number representing the gray scale value of the pixel in row <span class="math notranslate nohighlight">\(i\)</span> and column <span class="math notranslate nohighlight">\(j\)</span>.  From this matrix, we can form an <span class="math notranslate nohighlight">\(N^2\times 1\)</span> column vector by concatenating rows in the matrix.  Suppose that we have a set of images of two Chicago mayors,  Mayor Daley and Mayor Washington. Each image is represented as a vector in <span class="math notranslate nohighlight">\(\mathbf{R}^{N^2}\)</span> and is labelled 0 for Mayor Daley and 1 for Mayor Washington.  An SVM hyperplane separates the labelled binary training data.  Given a new image of either Mayor Washington or Mayor Daley (such as shown in the figures below, the SVM hyperplane can be used to predict whether the image is in class 0 = Daley or class 1 = Washington.</p></li>
 </ol>
-<p>32<span class="math notranslate nohighlight">\(\times\)</span>32 pixel images of former Chicago mayors Daley
-<a class="reference internal" href="../../../_images/fig19a.png"><img alt="../../../_images/fig19a.png" src="../../../_images/fig19a.png" style="width: 200px;" /></a>
-and Washington
-<a class="reference internal" href="../../../_images/fig19b.png"><img alt="../../../_images/fig19b.png" src="../../../_images/fig19b.png" style="width: 200px;" /></a></p>
+<p>32<span class="math notranslate nohighlight">\(\times\)</span>32 pixel images of former Chicago mayors Daley</p>
+<a class="reference internal image-reference" href="../../../_images/fig19a.png"><img alt="../../../_images/fig19a.png" src="../../../_images/fig19a.png" style="width: 200px;" /></a>
+<p>and Washington</p>
+<a class="reference internal image-reference" href="../../../_images/fig19b.png"><img alt="../../../_images/fig19b.png" src="../../../_images/fig19b.png" style="width: 200px;" /></a>
 <p>Use the JNB  to make an SVM classification of images of Michelle Obama and Hillary Clinton (both first ladies were raised in Chicago).</p>
-</section>
+</div>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
@@ -688,22 +687,6 @@ and Washington
 <p>Data analysis is becoming incrasingly automated with the development of machine learning tools, including Python JNBs [VanderPlas 2017]. In addition to being adept in the use of such computational tools, a key to proficiency as a data scientist is to have an inquisitive love for data as well as a good understanding of the mathematics underlying a given method of analysis.</p>
 <p>Our team also holds the view that data analysis can and should support efforts to solve pressing societal issues being tackled by organizations working in disadvantaged communities. The housing data which we used to introduce SVM, is an instructive example of applying data analysis tools to complex problems involving equitable distribution of scarce resources.  In pondering why SVM did not give the vertical line which correctly separates rent-burdened from non-rent-Chicago zipcodes, we realized that the <span class="math notranslate nohighlight">\(L_2\)</span> SVM loss function penalizes data points that are correctly classified but are too close to the line (overfitting). In this case, if the default \emph{regularization parameter} <span class="math notranslate nohighlight">\(C=1\)</span> in Python’s Support Vector Classifier SVC() were increased to <span class="math notranslate nohighlight">\(C=1000\)</span>, we would obtain  the separating vertical hyperplane. (<span class="math notranslate nohighlight">\(C\)</span> is inversely proportion to <span class="math notranslate nohighlight">\(\lambda\)</span> in the SVM loss function in {\bf Section 5.7}.)   Using the default SVM classifier with <span class="math notranslate nohighlight">\(C=1\)</span> results in misclassifications: Accuracy = 0.7 (42 out of 60 total predictions were correct), Recall = 0.75 (36 of 48 rent-burdened zipcodes were correctly predicted), Precision = 0.86 (of the 42 zipcodes predicted to be rent-burdened, 36 were correctly predicted), and F-score = 0.8 (geometric mean of accuracy and precision). If the default model were the basis for a decision whether to grant rent support, the false negatives (FN = 12) would deny support from qualified zipcodes, and  false positives (FP = 6) would result in an inequitable use of limited resources. Understanding the mathematics underlying the algorithm can help identify potential dangers in accepting the default ML output at face value.</p>
 <p>Knowledge  of the real-world context under consideration is paramount.  Although the vertical line <span class="math notranslate nohighlight">\(x=0.3\)</span> correctly separates the data and thus has 100% accuracy, recall, and precision, there are  a dozen non-rent-burdened zipcodes close to the cutoff value of 0.3.  Gentrification can result in rapid rental increases that negatively impact low-income areas by creating additional rent-burdened households. Yet, since incomes may also increase in gentrifying areas, zipcodes close to but below the threshold line might not cross over into the rent-burdened category.  Similarly, zipcodes above the  threshold might move below in spite of additional rent burden on low-income households. Those most in need of housing support might be overlooked if funding decisions are based on a superficial machine-learning analysis of aggregated data. A merely mathematical classification of such data might hide or contribute to inequity if not accompanied by a close working knowledge of the actual real-life context.</p>
-<section id="solutions">
-<h3>Solutions<a class="headerlink" href="#solutions" title="Permalink to this heading">#</a></h3>
-<p>1)<span class="math notranslate nohighlight">\(\,\)</span> a) <span class="math notranslate nohighlight">\(\,\)</span> The hyperplane is the line <span class="math notranslate nohighlight">\(x_1+2x_2=1\)</span></p>
-<p>b) <span class="math notranslate nohighlight">\(\,\)</span>  The two half-spaces are the half-plane  <span class="math notranslate nohighlight">\(\pi^+: x_1+2x_2&gt;1\)</span> and the half-plane <span class="math notranslate nohighlight">\(\pi^-: x_1+2x_2&lt;1.\)</span></p>
-<ol class="arabic simple" start="2">
-<li></li>
-</ol>
-<p>a) <span class="math notranslate nohighlight">\(\,\)</span> For any <span class="math notranslate nohighlight">\(k\neq 0\)</span>, we have<span class="math notranslate nohighlight">\( \mathbf{w}\cdot\mathbf{x}+b=0\)</span> if and only if <span class="math notranslate nohighlight">\( k(\mathbf{w}\cdot\mathbf{x}+b)=0\)</span> if and only if <span class="math notranslate nohighlight">\( k\mathbf{w}\cdot\mathbf{x}+kb=0\)</span></p>
-<p>b) <span class="math notranslate nohighlight">\(\,\)</span>  The signed distance formula is <span class="math notranslate nohighlight">\(\rho(\mathbf{x},\pi)=\frac{\mathbf{w}\cdot\mathbf{x}+b}{\|\mathbf{w}\|}\)</span>. Since <span class="math notranslate nohighlight">\(\mathbf{w}\cdot\mathbf{0}=0,\)</span> the signed distance is <span class="math notranslate nohighlight">\(\mathbf{\rho}(\mathbf{0},\mathbf{\pi})= \frac{b}{\|\mathbf{w}\|}\)</span>.</p>
-<p>c) <span class="math notranslate nohighlight">\(\,\)</span> As in the right panel of {\bf Figure~\ref{svm4}},
-there are infinitely many parallel separating hyperplanes with the same margin filling in the space between support vectors. The SVM hyperplane is the one that is equidistant from the two classes <span class="math notranslate nohighlight">\(C_1,C_2.\)</span></p>
-<p>d) <span class="math notranslate nohighlight">\(\,\)</span> The SVM <span class="math notranslate nohighlight">\(L_2\)</span> loss function simplifies to <span class="math notranslate nohighlight">\(J=\frac{\lambda}{2}\|\mathbf{w}\|^2\)</span> (<span class="math notranslate nohighlight">\(\lambda&gt;0\)</span>), which if minimized will then maximize the margin <span class="math notranslate nohighlight">\(\frac{2}{\|\mathbf{w}\|}\)</span>.</p>
-<ol class="arabic simple" start="3">
-<li><p>See the lab.</p></li>
-</ol>
-</section>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
@@ -795,14 +778,9 @@ O’Reilly.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-hyperplanes">Separating Hyperplanes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signed-distance">Signed Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-for-linearly-separable-data">Optimization for Linearly-Separable Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-for-non-separable-data">Optimization for Non-Separable Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-for-non-separable-data">Optimization for Non-Separable Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
 </ul>
