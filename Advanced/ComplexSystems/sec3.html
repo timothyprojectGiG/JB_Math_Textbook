@@ -1,0 +1,1161 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>The Hamiltonian &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/ComplexSystems/sec3';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="1. Introduction" href="sec1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">Elementary Blackboard Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">Beginning Python Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">Glimpse of Chicago</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">Arts in STEM (STEAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">After-School Program Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Data.html">Working with Data</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob1.html">Random Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob2.html">Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob3.html">Conditional Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob4.html">Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob4a.html">Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob5.html">Agent-based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob6.html">Mathematical Games</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Peter Jantsch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">APPLIED CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">3. Optimization and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">4. Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">7. Sequences and Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">Solution to Calculus Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/0.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/1.html">1. Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/2.html">2. Matrices and Determinants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/3.html">3. Linear Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/4.html">4. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/5.html">5. Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">3. First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">4. Second-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/covid.html">1. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/hiv.html">4. HIV-AIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec2_transform_features.html">2. About Text Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec5_classification_eval.html">5. Evaluating Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec6_applications.html">6. Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">INDEX</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX SYSTEMS Wheaton College Team</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sec1.html">1. Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Hamiltonian</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/Advanced/ComplexSystems/sec3.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FAdvanced/ComplexSystems/sec3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Advanced/ComplexSystems/sec3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Hamiltonian</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Hamiltonian</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ising-spin-models-and-entropy">Ising Spin Models and Entropy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-and-phase-transitions">Maximum Likelihood and Phase Transitions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simplified-schelling-model-and-segregation">Simplified Schelling Model and Segregation</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mathematical Concepts from Equilibrium Statistical Physics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Many important concepts in the study of complex systems trace back to the highly mathematical field of statistical physics [Bertin 2022]. This section touches on just a few of these concepts for equilibrium systems:</p>
+<ul>
+   <li>The Hamiltonian (total energy) of a system in equilibrium (Sec. 3.1);<\li>
+   <li>Discrete Ising spin models and entropy for systems with a specified energy (Sec 3.2); and<\li>
+    <li>Maximum likelihood and phase transitions involving a change in a system parameter such as temperature $T$ (Sec 3.3).<\li>
+<\ul>
+<p>The section concludes with a simplified Schelling model (Sec. 3.4) as an example how a statistical physics approach can model segregation.</p>
+<section id="the-hamiltonian">
+<h1>The Hamiltonian<a class="headerlink" href="#the-hamiltonian" title="Permalink to this heading">#</a></h1>
+<p>For systems in equilibrium, the Hamiltonian can illustrate important concepts such as conservation of energy and time reversibility.</p>
+<p><strong>Spring Mass Problem</strong>
+An idealized spring-mass model considers a mass <span class="math notranslate nohighlight">\(m\)</span> attached to a spring which exerts the total  force <span class="math notranslate nohighlight">\(F\)</span>  on the mass moving in 1 dimension:</p>
+<div class="math notranslate nohighlight">
+\[
+    F = -k x.
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(k&gt;0\)</span> is a spring constant, and <span class="math notranslate nohighlight">\(x\)</span> is the distance the spring is stretched (<span class="math notranslate nohighlight">\(x&gt;0\)</span>) or compressed (<span class="math notranslate nohighlight">\(x&lt;0\)</span>) from its rest position at <span class="math notranslate nohighlight">\(x=0\)</span>.</p>
+<p>From Newton’s 2nd Law, we know that <span class="math notranslate nohighlight">\(F=ma\)</span>, which leads to the ODE</p>
+<div class="math notranslate nohighlight">
+\[
+    m x''(t) = -k x.
+\]</div>
+<p>The general solution is <span class="math notranslate nohighlight">\(x(t)=A\cos(\omega t + \phi)\)</span>, where <span class="math notranslate nohighlight">\(\omega = \sqrt{\frac{k}{m}}\)</span>. This indicates that the motion is periodic in the absence of any frictional or damping forces.  .</p>
+<p><strong>Total Energy (Hamiltonian)</strong></p>
+<p>In this idealized model, the total energy of the spring-mass system is conserved, so the solution indicates that a periodic oscillation will continue for all <span class="math notranslate nohighlight">\(t\)</span>. Hamiltonian dynamics focuses on the system’s total energy, denoted H (for Hamiltonian) or E (for energy).  The total energy is the sum of kinetic energy (<span class="math notranslate nohighlight">\(\frac{1}{2}mv^2\)</span>) and
+potential energy <span class="math notranslate nohighlight">\(U\)</span>. Note that momentum <span class="math notranslate nohighlight">\(p=p(t)\)</span> is defined as <span class="math notranslate nohighlight">\(p(t) = mv(t) = mx'(t)\)</span>
+so the kinetic energy in terms of <span class="math notranslate nohighlight">\(p\)</span> is equal to <span class="math notranslate nohighlight">\(\frac{p^2}{2m}\)</span>.
+The potential function <span class="math notranslate nohighlight">\(U\)</span> is related to the conservative force <span class="math notranslate nohighlight">\(F\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[
+    U'(x) = -F(x).
+\]</div>
+<p>It follows that the potential energy is <span class="math notranslate nohighlight">\(U(x)=\frac{1}{2}kx^2.\)</span></p>
+<p>Summing the kinetic and potential energy, gives the Hamiltonian</p>
+<div class="math notranslate nohighlight">
+\[
+    H(x,p)= \frac{p^2}{2m} + \frac{1}{2}kx^2.
+\]</div>
+<p>** Properties of the 1D  Hamiltonian Dynamics**</p>
+<p>Suppose our starting point for analyzing the 1D dynamics is the to give the total energy in terms of the Hamiltonian <span class="math notranslate nohighlight">\(H(x,p)= \frac{p^2}{2m} + \frac{1}{2}kx^2\)</span> obtained in (\ref{ham}). We could then show the following hold:</p>
+<ul>
+<li>(Dynamical Equations) The state vector consisting of position and momentum $<x(t),p(t)>$, satisfies (Exercise 3.1.1)
+<div class="math notranslate nohighlight">
+\[
+ \frac{dx}{dt}  =  \frac{\partial H}{\partial p} 
+ \]</div>
+<div class="math notranslate nohighlight">
+\[
+  \frac{dp}{dt}  =  -\frac{\partial H}{\partial x}.
+\]</div>
+<p>&lt;\li&gt;</p>
+<li>
+Conservation of energy can be proven (Exercise 3.1.2) by showing that if $E=H(x,p)$, then
+<div class="math notranslate nohighlight">
+\[
+    \frac{dE}{dt}=0.
+\]</div>
+<p>Note that as a consequence, if we let</p>
+<div class="math notranslate nohighlight">
+\[
+    X=\sqrt{\frac{k}{2}} x, \hspace{.2in} Y=\frac{p}{\sqrt{2m}}
+\]</div>
+<p>then in <span class="math notranslate nohighlight">\((X,Y)\)</span> \emph{phase space}, the particle’s trajectory is along a circle</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$$
+X^2 + Y^2 = E.
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+   &lt;\li&gt;
+       
+       
+&lt;li&gt; (Time Reversibility) Time reversibility means that the dynamical equations for the time interval ($0\le t \le t_0$) are invariant under the transformations\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>t  \rightarrow  t^*=t_0-t
+$$
+
+$$
+x=x(t) \rightarrow  x^*=x(t^*) 
+$$
+
+$$
+v=\frac{dx(t)}{dt}  \rightarrow  -v(t^*)=\frac{dx(t^*)}{dt^*}=v^*
+$$
+
+$$
+p=p(t) \rightarrow  p^*=-mv(t^*)=m\frac{dx(t^*)}{dt^*}=mv^*
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+    
+The Hamiltonian $H(x^*,p^*)$ for time reversal specifies the dynamical equations (Exercise 3.1.3)\]</div>
+<p>\frac{dx^<em>}{dt^</em>}  =  \frac{\partial H}{\partial p^*}
+$$</p>
+<div class="math notranslate nohighlight">
+\[
+  \frac{dp^*}{dt^*}  =  -\frac{\partial H}{\partial x^*} 
+\]</div>
+<p>That is, the time-reversed state vector <span class="math notranslate nohighlight">\(&lt;x^*,p^*&gt;\)</span> is also a feasible dynamical trajectory.
+\end{itemize}</p>
+<p>The Hamiltonian for a single particle in 1D can be generalized to describe the dynamics of <span class="math notranslate nohighlight">\(N\)</span> particles in 3D space. Conservation of energy and time reversibility continue to hold. Moreover, we state the</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```{admonition} FUNDAMENTAL POSTULATE OF EQUILIBRIUM STATISTICAL PHYSICS
+</pre></div>
+</div>
+<p>In equilibrium, the total energy <span class="math notranslate nohighlight">\(E\)</span> is conserved, and all configurations with energy E are uniformly probable.
+```</p>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p>These  problems are based on the idealized 1D spring-model whose dynamics are given by the ODE</p>
+<div class="math notranslate nohighlight">
+\[
+    m x''(t) = -k x.
+\]</div>
+<p>with general solution <span class="math notranslate nohighlight">\(x(t)=A\cos(\omega t + \phi)\)</span>, where <span class="math notranslate nohighlight">\(\omega = \sqrt{\frac{k}{m}}.\)</span></p>
+<p><strong>3.1.1</strong> Show that</p>
+<div class="math notranslate nohighlight">
+\[
+ \frac{dx}{dt}  =  \frac{\partial H}{\partial p} 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+  \frac{dp}{dt}  =  -\frac{\partial H}{\partial x} 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(H\)</span> is the Hamiltonian given by   <span class="math notranslate nohighlight">\(H(x,p)= \frac{p^2}{2m} + \frac{1}{2}kx^2.\)</span></p>
+<p><strong>3.1.2</strong> Use a chain rule for 2 variables to show that if <span class="math notranslate nohighlight">\(E=H(x,p)\)</span>, then <span class="math notranslate nohighlight">\(\frac{dE}{dt} = 0.\)</span></p>
+<p><strong>3.1.3</strong> Show that  under the the transformations</p>
+<div class="math notranslate nohighlight">
+\[
+    t  \rightarrow  t^*=t_0-t 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    x=x(t)  \rightarrow  x^*=x(t^*) 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    v=\frac{dx(t)}{dt} \rightarrow  -v(t^*)=\frac{dx(t^*)}{dt^*}=v^*
+\]</div>
+<div class="math notranslate nohighlight">
+\[  
+    p=p(t)  \rightarrow  p^*=-mv(t^*)=m\frac{dx(t^*)}{dt^*}=mv^*
+\]</div>
+<p>the Hamiltonian <span class="math notranslate nohighlight">\(H(x^*,p^*)\)</span> specifies the dynamical equations</p>
+<div class="math notranslate nohighlight">
+\[
+ \frac{dx^*}{dt^*}  =  \frac{\partial H}{\partial p^*} 
+ \]</div>
+<div class="math notranslate nohighlight">
+\[
+  \frac{dp^*}{dt^*}  =  -\frac{\partial H}{\partial x^*} 
+\]</div>
+<p>That is, the time-reversed state vector <span class="math notranslate nohighlight">\(&lt;x^*,p^*&gt;\)</span> is also a possible dynamical trajectory.</p>
+</div>
+</section>
+</section>
+<section id="ising-spin-models-and-entropy">
+<h1>Ising Spin Models and Entropy<a class="headerlink" href="#ising-spin-models-and-entropy" title="Permalink to this heading">#</a></h1>
+<p>Ensembles of a finite number of particles can be classified according to whether they exchange energy or mass with their environment.</p>
+<ul>
+<li> **microcanonical ensemble**  An isolated system $\mathcal{S}$ which exchanges neither energy nor mass with its environment $\mathcal{R}$. <\li>
+<li> **canonical ensemble** A system $\mathcal{S}$ which exchanges energy with its environment $\mathcal{R}$. The total system $\mathcal{S}\cup\mathcal{R}$ is assumed to be isolated.<\li>    
+<li> **grand-canonical ensemble** A system $\mathcal{S}$ which exchanges both mass and energy with its environment $\mathcal{R}$. The total system $\mathcal{S}\cup\mathcal{R}$ is assumed to be isolated.  <\li><\ul>
+<p>The Ising model is a simple discrete model which can be used to study energy and mass exchange of a system with its environment, as well as phase transitions. For our discrete model, we restrict particle positions to a lattice of evenly spaced points in dimension D=1,2, …. For example,  the points on a number line representing the integers <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> form a 1D lattice.  Similarly, the points with integer coordinates <span class="math notranslate nohighlight">\(\{(m,n) \mid m,n \in \mathbb{Z}\}\)</span> forms a 2D lattice. A system of <span class="math notranslate nohighlight">\(N\)</span> particles may be confined to a certain portion of the lattice by a boundary, and exchange energy or mass with its environment (lattice points outside the boundary which may be occupied by other particles). Time is incremented in discrete time steps <span class="math notranslate nohighlight">\(t_0, t_1,t_2,...\)</span>.</p>
+<p>A <strong>spin system</strong> assigns a value of +1 or -1 to each particle. The Hamiltonian or total energy E of the system is computed using the spin values.  In the basic Ising model for an <span class="math notranslate nohighlight">\(N\)</span> particle system,</p>
+<div class="math notranslate nohighlight">
+\[
+E = - J \sum_{i,j}s_is_j  - h \sum_{i=1}^N s_i
+\]</div>
+<p>where</p>
+<ul>
+<li> the values of $i,j$ in the first sum run over a specified set of lattice points such as ``nearest neighbors'' . For example,  in dimension $D=1$, a particle has 2 nearest neighbors, and in $D=2$, there are 4 nearest neighbors.<\li>  
+<li> $J \ge 0$ is called the \emph{spin coupling constant}. ($J=0$ if the spins are independent of each other, i.e. totally decoupled).<\li>    
+<li> $h\ge 0$ is the external magnetic field constant and the magnetization M is equal to <\li> 
+<div class="math notranslate nohighlight">
+\[    
+M = \sum_{i=1}^N s_i \hspace{.5in} (s_i=\pm 1)
+\]</div>
+<li> a state or configuration $C$ is specified by a complete list of spin values $(s_1,...,s_N)$<\li>    
+<li> $\Omega(E)$ is the number of configurations with energy $E$ <\li>    
+<li>if $E$ is the energy of the system in equilibrium, all spin configurations with energy $E$ have equal positive probability of occurence and all other configurations have zero probability of occurence.<\li><\ul>
+<p><strong>Isolated Paramagnetic Spin Model</strong></p>
+<p>For the case of independent spins, we set <span class="math notranslate nohighlight">\(J=0\)</span>, and the energy <span class="math notranslate nohighlight">\(E\)</span> simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+    E = - h\sum_{i=1}^N s_i=-hM,  \hspace{.2in} (s_i=\pm 1),
+\]</div>
+<p>where  <span class="math notranslate nohighlight">\(M=\sum_{i=1}^N s_i\)</span> is the magnetization.</p>
+<p>Given the energy <span class="math notranslate nohighlight">\(E\)</span>, let <span class="math notranslate nohighlight">\(N_+\)</span> be the number of particles with spin +1 and <span class="math notranslate nohighlight">\(N_-\)</span> be the number of particles with spin -1. Using algebra, we can show (Exercise 3.2.1) that</p>
+<div class="math notranslate nohighlight">
+\[
+    N_+ = \frac{1}{2} (N-\frac{E}{h})
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    N_- = \frac{1}{2} (N+\frac{E}{h}).
+\]</div>
+<p>It follows that</p>
+<div class="math notranslate nohighlight">
+\[
+    \Omega(E) = \frac{N!}{N_+! N_-!}
+\]</div>
+<p>The entropy <span class="math notranslate nohighlight">\(\mathbf{S}(E)\)</span>  is computed as</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{S}(E)=\ln \Omega(E).
+\]</div>
+<p>Using Stirling’s formula</p>
+<div class="math notranslate nohighlight">
+\[
+    \ln N! \approx N \ln N - N,
+\]</div>
+<p>the entropy <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> of the parametric spin model of a system with energy <span class="math notranslate nohighlight">\(E\)</span> is (Exercise 3.2.2)</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{S}(E) \approx \ln \frac{N^N}{N_{-}^ {N_{-}} N_+ ^{N_+}}.
+\]</div>
+<p><strong>Canonical Ensembles</strong></p>
+<p>We now  consider  a canonical equilibrium system <span class="math notranslate nohighlight">\(S_{tot}=\mathcal{S}\cup\mathcal{R}\)</span> where system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> exchanges energy with its environment <span class="math notranslate nohighlight">\(\mathcal{R}\)</span>. The total system <span class="math notranslate nohighlight">\(S_{tot}=\mathcal{S} \cup \mathcal{R}\)</span> is considered to be a closed system.</p>
+<ul>
+<li> The total energy $E_{tot}=E_{\mathcal{S}}+E_{\mathcal{R}}$ is constant although energy can be exchanged between $\mathcal{S}$ and $\mathcal{R}$.<\li>
+<li> A total system configuration (state) $C_{tot}$ is written as $C_{tot}=(C_{\mathcal{S}},C_\mathcal{R})$ where $C_{\mathcal{S}}$ is a configuration of $\mathcal{S}$ and $C_{\mathcal{R}}$ is a configuration of $\mathcal{R}$. <li>   
+<li>  $\Omega_{tot}(E_{\mathcal{S}}\mid E_{tot})=\Omega_{\mathcal{S}}(E_{\mathcal{S}})\Omega_{\mathcal{R}}(E_{tot}-E_{\mathcal{S}})=\Omega_{\mathcal{S}}(E_{\mathcal{S}})\Omega_{\mathcal{R}}(E_{\mathcal{R}}).$ (Given the total energy $E_{tot}$, for a system energy $E_{\mathcal{S}}$, the admissible configurations of $\mathcal{S}$ and $\mathcal{R}$ are considered to be statistically independent.)<\li><\ul>
+<p>Under maximum likelihood, the most probable value <span class="math notranslate nohighlight">\(E_{\mathcal{S}}^*\)</span> of <span class="math notranslate nohighlight">\(E_{\mathcal{S}}\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial}{\partial E_{\mathcal{S}}} \mid_{E_{\mathcal{S}}^*} \ln \Omega_{tot}(E_{\mathcal{S}}\mid E_{tot})=0.
+\]</div>
+<p>From this it follows that (Exercise  3.2.3)</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac {\partial \ln \Omega_{\mathcal{S}}}{\partial E_{\mathcal{S}}}\mid_ {E_{\mathcal{S}^*}}  =  \frac {\partial \ln \Omega_{\mathcal{R}}}{\partial E_{\mathcal{R}}}\mid_ {E_{\mathcal{R}^*}} 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_{\mathcal{S}^*}+ E_{\mathcal{R}^*}=E_{tot}\)</span>. The common value of the partial derivatives at the maximum likelihood energy is denoted <span class="math notranslate nohighlight">\(\beta\)</span> and called the ``statistical temperature’’.  For large systems, it can be shown that [Bertin 2021]</p>
+<div class="math notranslate nohighlight">
+\[
+    \beta = \frac{\partial \mathbf{S}_{tot}} {\partial E_{tot}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{S}_{tot}=\ln \Omega_{tot}\)</span> is the entropy of the total system.
+A law of thermodynamics states that for physical systems <span class="math notranslate nohighlight">\(d E_{tot}=T d\mathbf{S}_{tot}\)</span> where <span class="math notranslate nohighlight">\(T\)</span> is the usual thermodynamic temperature. Hence, <span class="math notranslate nohighlight">\(\beta=1/T\)</span>.</p>
+<p>** Grand Canonical Ensembles**</p>
+<p>For a grand-canonical ensemble, the macroscopic system <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> exchanges both energy and particles with the environment <span class="math notranslate nohighlight">\(\mathcal{R}\)</span>. The modeling of GC ensembles is a natural extension of the modeling of canonical ensembles.</p>
+<ul>
+  <li>Total energy: $E_{tot}=E_{\mathcal{S}} + E_{\mathcal{R}}$<\li>
+  <li>Total number of particles: $N_{tot}= N_{\mathcal{S}}+N_{\mathcal{R}}$<\li>
+  <li>Probability of Configuration $C_{\mathcal{S}}$:    
+<div class="math notranslate nohighlight">
+\[
+      P_{GC}(C_{\mathcal{S}})=K\Omega_{\mathcal{R}}(E_{tot}-E_{\mathcal{S}}(C_{\mathcal{S}}),N_{tot}-N_{\mathcal{S}}(C_{\mathcal{S}})=Kexp[\mathbf{S}_{\mathcal{R}}(E_{tot}-E_{\mathcal{S}},N_{tot}-N_{\mathcal{S}}(C_{\mathcal{S}})]
+  \]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>where $K=1/Z_{GC}$ is a normalization constant.
+</pre></div>
+</div>
+<p>&lt;\li&gt; &lt;\ul&gt;</p>
+<p>The linear approximation of <span class="math notranslate nohighlight">\(A=\mathbf{S}_{\mathcal{R}}(E_{tot}-E_{\mathcal{S}},N_{tot}-N_{\mathcal{S}})\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+   A=\mathbf{S}_{\mathcal{R}}(E_{tot},N_{tot})-\beta E(C_{\mathcal{S}}) + \frac{\mu}{T} N_{\mathcal{S}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta=1/T\)</span> is the statistical temperature and <span class="math notranslate nohighlight">\(\mu=-T \frac{\partial \mathcal{S}_{\mathcal{R}}}{\partial \mathcal{N}_{\mathcal{R}}}\)</span> is called the chemical potential.</p>
+<p>The grand-canonical partition function is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+    Z_{GC}=\sum_{C_{\mathcal{S}}} exp[-\frac{1}{T}E(C_{\mathcal{S}}) + \frac{\mu}{T} N_{\mathcal{S}}(C_{\mathcal{S}})].
+\]</div>
+<p>In terms of the partition function, the probability of configuration <span class="math notranslate nohighlight">\(C_{\mathcal{S}}\)</span> (called the grand-canonical distribution) is</p>
+<div class="math notranslate nohighlight">
+\[
+    P_{GC}(C_{\mathcal{S}})= \frac{1}{Z_{GC}}exp[-\frac{1}{T} E_\mathcal{S}(C_{\mathcal{S}})+ \frac{\mu}{T} N_S(C_{\mathcal{S}})]
+\]</div>
+<section id="id1">
+<h2>Exercises<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p><strong>3.2.1</strong> Show that the following hold for the paramagnetic spin model with</p>
+<div class="math notranslate nohighlight">
+\[
+    E = - h\sum_{i=1}^N s_i,  \hspace{.2in} (s_i=\pm 1,)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    N_+ = \frac{1}{2} (N-\frac{E}{h})
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+    N_- = \frac{1}{2} (N+\frac{E}{h})
+\]</div>
+<p><strong>3.2.2</strong> Use Stirling’s approximation to show that the entropy  for the paramagnetic spin model of a system with energy <span class="math notranslate nohighlight">\(E\)</span>  is given by</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+    \mathbf{S}(E) \approx \ln \frac{N^N}{N_{-}^ {N_{-}} N_+ ^{N_+}}.
+$$}\\
+** 3.2.3** Under maximum likelihood, the most probable value $E_{\mathcal{S}}^*$ of $E_{\mathcal{S}}$ satisfies\end{aligned}\end{align} \]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\frac{\partial}{\partial E_{\mathcal{S}}} \mid_{E_{\mathcal{S}}^*} \ln \Omega_{tot}(E_{\mathcal{S}}\mid E_{tot})=0.
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[Show that this implies\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\frac {\partial \ln \Omega_{\mathcal{S}}}{\partial E_{\mathcal{S}}}\mid_ {E_{\mathcal{S}^*}}  =  \frac {\partial \ln \Omega_{\mathcal{R}}}{\partial E_{\mathcal{R}}}\mid_ {E_{\mathcal{S}^*}} 
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+** 3.2.4** Explain the intuition behind the formula for the grand-canonical distribution:\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>P_{GC}(C_{\mathcal{S}})= \frac{1}{Z_{GC}}exp[-\frac{1}{T} E_\mathcal{S}(C_{\mathcal{S}})+ \frac{\mu}{T} N_S(C_{\mathcal{S}})]
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+**3.2.5** In information theory, Shannon entropy is defined as\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\mathbf{S} = -\sum_{C} P(C)\ln P(C).
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}Show that\\a) For a microcanonical ensemble with energy $E_{\mathcal{S}}$, the Shannon entropy $\mathbf{S_{mic}}=-\sum_{C_{\mathcal{S}}}P(C_{\mathcal{S}})\ln P(C_{\mathcal{S}})$ is given by \end{aligned}\end{align} \]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\mathbf{S_{mic}} = \ln \Omega (E).
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[ b) For a canonical ensemble, recalling that $P_{\mathcal{S}}(C_{\mathcal{S}})=\frac{1}{Z}e^{-E(C_{\mathcal{S}})/T}$ and $Z=\sum_{C_{\mathcal{S}}} e^{-E_{\mathcal{S}}(C_{\mathcal{S}})/T}$,the Shannon entropy $\mathbf{S_{can}} $ is \]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\mathbf{S_{can}} = \ln Z + \beta &lt;E(C_{\mathcal{S}})&gt;.
+</pre></div>
+</div>
+<p>$$</p>
+</div>
+</section>
+</section>
+<section id="maximum-likelihood-and-phase-transitions">
+<h1>Maximum Likelihood and Phase Transitions<a class="headerlink" href="#maximum-likelihood-and-phase-transitions" title="Permalink to this heading">#</a></h1>
+<p>Phase transitions are sudden onset of a macroscopic phenomenon when a system paramter crosses a critical value.  For example, magnetization occurs below a critical  temperature in the Ising model.  We are familiar with time reversible phase transitions such as water to ice and ice to water.  (In more complex dynamics, catastrophic (irreversible) system bifurcations may occur at critical parameter levels.) We give an example of a phase transition using the Ising model in fully connected geometry.</p>
+<p><strong>Fully Connected Ising Model</strong></p>
+<p>Consider the Hamiltonian</p>
+<div class="math notranslate nohighlight">
+\[
+    E_R = -\frac{J}{N} \sum_{i&lt;j} s_is_j + E_0.
+\]</div>
+<p>Note that the spins in the summation are <code class="docutils literal notranslate"><span class="pre">fully</span> <span class="pre">connected'</span> <span class="pre">rather</span> <span class="pre">than</span> </code>nearest-neighbors’. The factor of <span class="math notranslate nohighlight">\(N\)</span> is therefore needed in the denominator to keep the energy per spin from diverging to infinity as <span class="math notranslate nohighlight">\(N\rightarrow \infty\)</span>.</p>
+<ul>
+<li>The energy can be expressed in terms of the magnetization $M=\sum_{i=1}^N s_i$ as (Exercise 3.3.1)
+<div class="math notranslate nohighlight">
+\[
+    E_R = -\frac{J}{2}Nm^2,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(m=M/N\)</span> is the magnetization per spin and <span class="math notranslate nohighlight">\(E_0=-J/2\)</span>.&lt;\li&gt;</p>
+<li>The distribution of the magnetization per spin $m$ is given by
+<div class="math notranslate nohighlight">
+\[
+    P(m)=\frac{1}{Z} \sum_{C:m(C)=m} e^{-\beta E(C)}=\frac{1}{Z}e^{\mathbf{S}(m) + \frac{1}{2}\beta Nm^2}
+\]</div>
+<p>where the number of configurations with magnetization <span class="math notranslate nohighlight">\(m\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+    \Omega(m)=e^{\bf{S}(m)} =\frac{N!}{N_+!N_-!}
+\]</div>
+<p>and &lt;\li&gt;&lt;\ul&gt;</p>
+<div class="math notranslate nohighlight">
+\[
+    N_+=\frac{N}{2}(1+m)  
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+N_-=\frac{N}{2}(1-m).
+\]</div>
+<p>One can show that [Bertin, 2021]</p>
+<div class="math notranslate nohighlight">
+\[
+   P(m)=e^{-Nf(m)} 
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+    f(m) = f_0(T) +\frac{1}{2}(1-\frac{J}{T})m^2 +\frac{1}{12}m^4 + O(m^6)
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(f_0(T)\)</span> is a temperature dependent constant to ensure <span class="math notranslate nohighlight">\(f(m)\ge 0\)</span>.</p>
+<p>The following phase transition occurs (Exercise 3.3.2):</p>
+<ul>
+   <li> If $T\ge T_{crit}$, $f(m)$ has a single minimum point that occurs when $m=0$. (no magnetization occurs)<\li>
+ <li> If $T < T_{crit},$ $f(m)$ has two symmetric minimum at $\pm m_0.$ (positive/negative magnetization occcurs)<\li>
+<\ul>
+<section id="id2">
+<h2>Exercises<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p>** 3.3.1** Show that for the fully connected Ising model,</p>
+<div class="math notranslate nohighlight">
+\[
+    E_R = -\frac{J}{2}Nm^2,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(m=M/N\)</span> is the magnetization per spin.</p>
+<p><strong>3.3.2</strong> Consider the function <span class="math notranslate nohighlight">\(f_T(m)=\frac{1}{2}(1-\frac{1}{T})m^2 +\frac{1}{12}m^4\)</span>.  Show that there exists a critical value <span class="math notranslate nohighlight">\(T_{crit}\)</span> such that <span class="math notranslate nohighlight">\(f_T(x)\)</span> has a single absolute min at m=0 when <span class="math notranslate nohighlight">\(T\ge T_{crit}\)</span> and symmetric absolute min at <span class="math notranslate nohighlight">\(m=\pm m_0\)</span> when <span class="math notranslate nohighlight">\(T&lt;T_{crit}.\)</span></p>
+</div>
+</section>
+</section>
+<section id="simplified-schelling-model-and-segregation">
+<h1>Simplified Schelling Model and Segregation<a class="headerlink" href="#simplified-schelling-model-and-segregation" title="Permalink to this heading">#</a></h1>
+<p>The Schelling model is an example of how the ideas of statistical physics might be applied within urban science. The Schelling model represents dynamics of residential moves within a city. The city is modelled as a checkerboard divided into cells.  Two types of agents  reside in the city, with at most one agent in each cell.  A utility function <span class="math notranslate nohighlight">\(u\)</span> describes the degree of satisfaction of each agent with the neighborhood in which they reside and governs the dynamics of agent moves. Segregation consists of areas with higher densities of one type of agent.</p>
+<p>A simplified Schelling model considers only one type of agent and considers segregation in the form of areas which have higher densities of agents (as opposed to a homogeneous density throughout the city). In the simplified model,</p>
+<p>\begin{itemize}<ul>
+<li> A city is divided into a large number <span class="math notranslate nohighlight">\(Q\)</span> of blocks.&lt;\li&gt;
+<li>Each block contains <span class="math notranslate nohighlight">\(H\)</span> cells.&lt;\li&gt;</p>
+   <li>A macroscopic configuration $C$ of the city consists of a knowledge of the state (empty or occupied) of each cell.<\li>
+   <li> Each cell contains at most one agent, so the number of agents $n_q$ in a given block $q$ ($q=1,2,...,Q$) satisfies $n_q\le H$.<\li>
+  <li>The density of agents is $\rho_q=n_q/H$ <\li>
+<li>Each agent has the same utility function $u(p_q)$ which indicates the degree of satisfaction with the block it lives in.<\li>
+<\ul>
+<p>The discrete-time movement of the agents in the city follow these rules:</p>
+<ul>
+<li> Agents can only move from one block to a different block.<\li>
+<li>At each time step, one agent and one empty cell in a different block are selected at random.<\li>
+<li> The probability that the agent moves to the empty cell is
+<div class="math notranslate nohighlight">
+\[
+     W(C'\mid C) = \frac{1}{1+e^{-\Delta u/T}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(C'\)</span> denote the respective configurations before and after the move.&lt;\li&gt;</p>
+<li> $\Delta u$ is the change in utility in moving to the empty cell.<\li>
+<li>The parameter $T$ (analogous to temperature) takes into account factors such as presence of services, shops, friends etc. that influence the decision to move.<\li>
+<li> The model is individualistic in that the probability of moving only depends on the agent's change in utility. It does not consider the potential impact on other agents.<\li>
+<li> The balance equation is<li>
+<div class="math notranslate nohighlight">
+\[
+    W(C'\mid C)P(C) = W(C\mid C')P(C')
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+    P(C)=\frac{1}{Z} e^{-F(C)/T}
+\]</div>
+<p>&lt;\ul&gt;</p>
+<p>where <span class="math notranslate nohighlight">\(Z\)</span> is the analog to the partition function and</p>
+<div class="math notranslate nohighlight">
+\[
+     F(C) = -\sum_q \sum_{m=0}^{n_q} u(\frac{m}{H})
+\]</div>
+<p>To study segregation, in equilibrium, the probability distribution of the block densities (with the sum of the densities held constant) has the form</p>
+<div class="math notranslate nohighlight">
+\[
+     P(\rho_1,...,\rho_Q) = K exp(-\frac{H}{T} \sum_{q=1}^Q f(\rho_q))
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(H,T&gt;0\)</span>.</p>
+<p>A homogeneous (non-segregated) density <span class="math notranslate nohighlight">\(\rho_0\)</span> is unstable if there exist two densities <span class="math notranslate nohighlight">\(\rho_1\)</span> and <span class="math notranslate nohighlight">\(\rho_2\)</span> such that</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$$
+ \gamma f(\rho_1) + (1-\gamma)f(\rho_2) &lt; f(\rho_0).
+</pre></div>
+</div>
+<p>$$</p>
+<p>The parameter <span class="math notranslate nohighlight">\(\gamma\)</span> <span class="math notranslate nohighlight">\((0&lt;\gamma&lt;1)\)</span> corresponds to the fraction of blocks that would have a density <span class="math notranslate nohighlight">\(\rho_1\)</span> in the segregated state. This condition means that the value of the potential <span class="math notranslate nohighlight">\(\Phi\)</span> is lower for the segregated state than the homogeneous state (see Exercise 3.4.1). Such densities can be located geometrically as points of `bitangency’[Bertin 2021] (see the Figure below and Exercise 3.4.2).</p>
+<a class="reference internal image-reference" href="../../_images/fig15.png"><img alt="../../_images/fig15.png" src="../../_images/fig15.png" style="width: 600px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Exercises</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p><strong>3.4.1.</strong> Show that in equilibrium the maximum likelihood configurations of densities <span class="math notranslate nohighlight">\((\rho_1,...,\rho_Q)\)</span> minimizes the potential function (`free energy’) <span class="math notranslate nohighlight">\(\Phi(\rho_1,...,\rho_Q)\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi(\rho_1,...,\rho_Q)=\sum_{q=1}^Q f(\rho_q)
+\]</div>
+<p><strong>3.4.2.</strong> Find a line which is a tangent to the quartic <span class="math notranslate nohighlight">\(y=f(x)=x^4-2x^2-x+1\)</span> at two different points <span class="math notranslate nohighlight">\(P=(p,f(p))\)</span> and <span class="math notranslate nohighlight">\(Q=(q,f(q))\)</span>, Sketch the quartic and bi-tangent line.</p>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Advanced/ComplexSystems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sec1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. Introduction</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Hamiltonian</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ising-spin-models-and-entropy">Ising Spin Models and Entropy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-and-phase-transitions">Maximum Likelihood and Phase Transitions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simplified-schelling-model-and-segregation">Simplified Schelling Model and Segregation</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
