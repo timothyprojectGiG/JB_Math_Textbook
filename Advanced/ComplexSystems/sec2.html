@@ -1,0 +1,910 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Fundamental Concepts &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/ComplexSystems/sec2';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Mathematical Concepts from Equilibrium Statistical Physics" href="sec3.html" />
+    <link rel="prev" title="1. Introduction" href="sec1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PatternsSOLUTION.html">Patterns</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">Elementary Blackboard Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">Beginning Python Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">Glimpse of Chicago</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">Arts in STEM (STEAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">After-School Program Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Data.html">Working with Data</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob1.html">Random Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob2.html">Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob3.html">Conditional Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob4.html">Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob4a.html">Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob5.html">Agent-based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob6.html">Mathematical Games</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Peter Jantsch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/04_Regression.html">Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">APPLIED CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">1. Linear Systems and the 2 Commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">3. Optimization and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">4. Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">7. Sequences and Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">Solution to Calculus Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/0.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/1.html">1. Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/2.html">2. Matrices and Determinants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/3.html">3. Linear Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/4.html">4. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/5.html">5. Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">3. First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">4. Second-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/covid.html">1. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/hiv.html">4. HIV-AIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/Complex_Potentials.html">Complex Potentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/model.html">Fischer-Calo Contaminant Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec2_transform_features.html">2. About Text Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec5_classification_eval.html">5. Evaluating Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec6_applications.html">6. Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">INDEX</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX SYSTEMS Wheaton College Team</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sec1.html">1. Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Fundamental Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sec3.html">3. Mathematical Concepts from Equilibrium Statistical Physics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/Advanced/ComplexSystems/sec2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FAdvanced/ComplexSystems/sec2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Advanced/ComplexSystems/sec2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2. Fundamental Concepts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-classification">System Classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-and-global-behavior">Local  and Global Behavior</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linearization">Linearization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bifurcations">Bifurcations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness">Randomness</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fundamental-concepts">
+<h1>2. Fundamental Concepts<a class="headerlink" href="#fundamental-concepts" title="Permalink to this heading">#</a></h1>
+<section id="system-classification">
+<h2>System Classification<a class="headerlink" href="#system-classification" title="Permalink to this heading">#</a></h2>
+<p>** Random, Correlated, and Coherent Systems**</p>
+<p>One type of system classification is based on how the individual components are related to each other [Siegenfeld and Bar-Yam 2020]:</p>
+<ul>
+    <li>RANDOM: Each component behaves independently of the others;<\li>
+    <li> COHERENT: Each component behaves in the same way; and<\li>
+    <li> CORRELATED: Systems which are in between random and coherent systems.<\li>
+<\ul>
+<p>For example, the city destination of <span class="math notranslate nohighlight">\(N\)</span> strangers walking towards the terminals in a large airport parking garage is RANDOM; the city destination of <span class="math notranslate nohighlight">\(N\)</span> strangers seated in a waiting area inside airport security is correlated (many might be on the same flight, a few may have arrived early for the next flight at the same gate, some may be on a flight at the adjacent gate); while  the city destination of <span class="math notranslate nohighlight">\(N\)</span> strangers seated on an airplane in flight is COHERENT (all are heading to the same destination with the same velocity).</p>
+<p>Entropy is a measure of disorder of a system.  Random systems have large entropy, and coherent systems low entropy. Components of a complex systems may undergo transitions from random to coherent states (high to low entropy).</p>
+<p><strong>Open, Closed, and Isolated Systems</strong></p>
+<p>Systems can be classified according to whether they exchange energy or mass with the environment:</p>
+<ul>
+    <li> ISOLATED: exchanges neither mass nor energy with its environment.<\li>
+    <li> CLOSED:  exchanges energy but not mass with its environment. <\li>
+    <li> OPEN: exchanges both mass and energy with its environment.<\li>
+<\ul>
+<p>In November 2020, a horrific 2 year civil war broke out in the Tigray region of northern Ethiopia. A blockade was created which stopped the flow of humanitarian aid, closed banks, cut off internet and phone communication.  Effectively, Tigray was suppressed into a closed system.  Shortly after the war ended in November 2022, UNICEF reported over 2,000 schools were closed in Tigray and over 2 million students out of school, the majority for over 2 years.  Elementary school students’ walk to school increased from 1 to 4 miles, and student to classroom ratios were over 400:1. Without blackboards, a teacher resorted to use of a large stone.</p>
+<a class="reference internal image-reference" href="../../_images/fig31.png"><img alt="../../_images/fig31.png" src="../../_images/fig31.png" style="width: 300px;" /></a>
+<p>Distance learning faciltated by international money transfer can turn an isolated learning system  into a closed system (transfer of credit and knowledge but not physical resources).<br />
+The post-war educational system becomes an open system if humanitarian organizations deliver laptop computers, blackboards, notebooks etc., as well as international guest faculty. An external `mass transfer’ to the Embasneyti school system transformed the isolated system into an open system and was recognized by regional TV media (\url{<a class="reference external" href="https://www.facebook.com/yohans.teklemariam/videos/1018050329637169/?d=w&amp;amp;mibextid=2PtUEq">https://www.facebook.com/yohans.teklemariam/videos/1018050329637169/?d=w&amp;mibextid=2PtUEq</a>})</p>
+</section>
+<section id="local-and-global-behavior">
+<h2>Local  and Global Behavior<a class="headerlink" href="#local-and-global-behavior" title="Permalink to this heading">#</a></h2>
+<p>Complex systems are comprised of a large number of constituent parts.  Models show how recognizable macroscopic or global states emerge from microscopic or local interactions.</p>
+<p>For example, synchronized movement (coherence) of a flock of birds can be modelled as emergent macroscopic system behavior based on a few simple local rules [Tranquillo 2019] (\url{<a class="reference external" href="https://www.youtube.com/watch?v=nbbd5uby0sY">https://www.youtube.com/watch?v=nbbd5uby0sY</a>})</p>
+<ul>
+<li>SEPARATION: Birds keep a minimum distance from other birds;<\li>
+<li> ALIGNMENT: Birds move towards the average direction of the neighbors they see around them;  and <\li>
+<li>COHESION: Birds move towards the average center of mass of the birds around them.<\li><section id="exercises">
+<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p><strong>2.2.1</strong> Show that a clearly visible pattern emerges if we apply Stephen Wolfram’s Rule 90  to a single black square on a large graph paper.(\url{<a class="reference external" href="https://mathworld.wolfram.com/SierpinskiSieve.html">https://mathworld.wolfram.com/SierpinskiSieve.html</a>})  The rule explains the coloring of squares on the row below the current row.</p>
+<a class="reference internal image-reference" href="../../_images/fig41.png"><img alt="../../_images/fig41.png" src="../../_images/fig41.png" style="width: 600px;" /></a>
+</div>
+</section>
+</section>
+<section id="linearization">
+<h2>Linearization<a class="headerlink" href="#linearization" title="Permalink to this heading">#</a></h2>
+<p>Linear systems are foundational and a starting point for the study of dynamical systems. Nonlinear systems are needed to model complexity and have been important in the study of dynamical systems for the past 50 years. In general, non-linear systems do not have exact solution methods.  Non-linear systems may be approximated by linear systems near equilibrium points.</p>
+<p>Consider a non-linear system</p>
+<div class="math notranslate nohighlight">
+\[
+x'  =  f(x,y)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+y'  = g(x,y)
+\]</div>
+<p>An equilibrium point <span class="math notranslate nohighlight">\((x^*,y^*)\)</span> for the non-linear system satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+ f(x^*,y^*)=0
+ \]</div>
+<div class="math notranslate nohighlight">
+\[
+g(x^*,y^*)=0
+\]</div>
+<p>The Jacobian matrix (all partials are evaluated at the equilibrium point) is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+J=
+\begin{pmatrix}
+\frac{\partial f}{\partial x} &amp; \frac{\partial f}{\partial y}\\
+\frac{\partial g}{\partial x} &amp; \frac{\partial g}{\partial y}.
+\end{pmatrix}
+\end{split}\]</div>
+<p>If the real part of the eigenvalues of the Jacobian matrix are non-zero, then the behavior of the non-linear system at the equilibrium point <span class="math notranslate nohighlight">\((x^*,y^*)\)</span> is given qualitatively by the behavior of the equilibrium point at (0,0) of the linear system</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+    x'\\
+    y'
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{\partial f}{\partial x} &amp; \frac{\partial f}{\partial y}\\
+\frac{\partial g}{\partial x} &amp; \frac{\partial g}{\partial y}
+\end{pmatrix}
+\begin{pmatrix}
+    x\\
+    y
+\end{pmatrix}
+\end{split}\]</div>
+<a class="reference internal image-reference" href="../../_images/fig51.png"><img alt="../../_images/fig51.png" src="../../_images/fig51.png" style="width: 300px;" /></a>
+<p>Let A be the Jacobian matrix for a linearized 2D non-linear system at an equilibrium point <span class="math notranslate nohighlight">\(P=(x^*,y^*)\)</span>. The figure below  summarizes the qualitative behavior of the nonlinear system near P (Exercise 2.3.1).</p>
+<a class="reference internal image-reference" href="../../_images/fig61.png"><img alt="../../_images/fig61.png" src="../../_images/fig61.png" style="width: 300px;" /></a>
+<p>** Logistic Growth**</p>
+<p>The logistic growth model shows how system behavior may transition from linear to nonlinear behavior.  Let <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(M\)</span> be positive constants, and consider the equation</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{dz}{dt} =  kz(1 - \frac{z}{M})
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(z(0)=z_0&gt;0\)</span>. Note that when <span class="math notranslate nohighlight">\(z/M\)</span> is small, the linear exponential growth model <span class="math notranslate nohighlight">\(\frac{dz}{dt} =  kz\)</span>  approximates the nonlinear model.  Over time, as <span class="math notranslate nohighlight">\(z\rightarrow M,\)</span> the nonlinear term becomes important to cap the long range growth.</p>
+<a class="reference internal image-reference" href="../../_images/fig71.png"><img alt="../../_images/fig71.png" src="../../_images/fig71.png" style="width: 300px;" /></a>
+<p>As shown in the first (leftmost) graph, the data is being simulated well in relation to the logistic growth model. However, as the model becomes exponential, the data does not follow the line. This can be visualized by the center graph. As a result, we create a nonlinear model as shown in the third graph that displays the long range growth.</p>
+<p>For simplicity, set <span class="math notranslate nohighlight">\(k=2\)</span>, <span class="math notranslate nohighlight">\(M=2\)</span> so that <span class="math notranslate nohighlight">\(\frac{dz}{dt}=g(z)=2z-z^2\)</span>. The stability of the equilibrium when <span class="math notranslate nohighlight">\(z=2\)</span> can be inferred from  the local minimum point of a potential function <span class="math notranslate nohighlight">\(V(z)=-z^2 + \frac{1}{3}z^3\)</span>. Note that</p>
+<p><span class="math notranslate nohighlight">\(V'(z)= - g(z).\)</span></p>
+<a class="reference internal image-reference" href="../../_images/fig81.png"><img alt="../../_images/fig81.png" src="../../_images/fig81.png" style="width: 300px;" /></a>
+<section id="id1">
+<h3>Exercises<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p>** 2.3.1** Let A be the Jacobian matrix for a linearized 2D non-linear system at an equilibrium point <span class="math notranslate nohighlight">\(P=(x^*,y^*)\)</span>. Use Figure \ref{lin} to explain how eigenvalues of A can be used to find the following qualitative behavior of the nonlinear system near P.</p>
+<p><strong>2.3.2</strong> Use linearization to describe the behavior of the following system near its equilibrium at (0,0):</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{dx}{dt} = 3x - y^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \frac{dy}{dt}= sin(y)-x
+\]</div>
+</div>
+</section>
+</section>
+<section id="bifurcations">
+<h2>Bifurcations<a class="headerlink" href="#bifurcations" title="Permalink to this heading">#</a></h2>
+<p>It is often the case that the behavior of a system is dependent on a parameter value such as temperature. In some cases, there is a critical parameter value at which the macroscopic state of a system undergoes a fundamental change in behavior. In some cases, the persisting behavior is stable, meaning that a small change in the system will not dramatically alter the long range behavior of the system.  In other cases, the equilibrium is unstable, in which case a small change might in fact result in a completely different long range behavior of the system.</p>
+<p>For example consider an animal population consisting of two types of animals:  a single predator (eg. foxes) and a single prey (eg. rabbits)</p>
+<p>There are different possibilities for the equilibrium states of the predator density <span class="math notranslate nohighlight">\(F^*\)</span> and prey density <span class="math notranslate nohighlight">\(C^*\)</span>:</p>
+<ul>
+<li> the predator population dies off ($F^*=0$) for lack of food and there is a stable number of prey $(C^*>0)$ that remains <\li>
+<li> there is a stable number of both predators and prey ($F^*>0,C^*>0)$ <\li>
+<li>the number of predators and prey cycle periodically (see Figure below).
+<\ul>
+<a class="reference internal image-reference" href="../../_images/fig91.png"><img alt="../../_images/fig91.png" src="../../_images/fig91.png" style="width: 600px;" /></a>
+<p>For this system, the carrying capacity <span class="math notranslate nohighlight">\(K\)</span> of the predator population is a bifurcation parameter (See Figure below and Exercise 2.3.1):</p>
+<ul>
+<li>When $K>0$ is small, a stable steady state occurs at
+$(F^*,C^*)=(F^*,0)$.<\li>
+<li>For higher values of $K$, there is a steady state with $F^*>0, C^*>0$.<\li>
+<li> For even higher values of $K$, the equilibrium is a spiral sink.<\li>
+<li> For still higher values of $K$, the equilibrium loses its stability and a stable limit cycle (closed curve) solution appears.
+<\li> <\il>
+<a class="reference internal image-reference" href="../../_images/fig101.png"><img alt="../../_images/fig101.png" src="../../_images/fig101.png" style="width: 600px;" /></a>
+<section id="id2">
+<h3>Exercises<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p>** 2.4.1** Consider the Rosenzweig-MacArthur (RM) predator-prey model [Martin and de Roos 2023]</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{dF}{dt}  =  rF(1-\frac{F}{K}) - \frac{aF}{1+ahF}
+\]</div>
+<div class="math notranslate nohighlight">
+\[  
+    \frac{dC}{dt} = \epsilon \frac{aF}{1+afF}C-\mu C
+\]</div>
+<p>where</p>
+<ul>
+<li> $F=$ prey density (eg rabbits) <\li>
+<li> $C=$ predator density (eg foxes) <\li>
+<li> $\frac{dF}{dt}$ = dynamic change of prey <\li>
+<li> $\frac{dC}{dt}$ = dynamic change of predator <\li>
+<li> $r$ = prey natural growth rate <\li>
+<li> $K$ = prey carrying capacity <\li>
+<li> $a$ = attack rate <\li>
+<li> $h$ = handling rate (predator needs h time units to consume prey) <\li>
+<li> $e$ = prey offspring proportionality constant <\li>
+<li> $\mu$ - predator death rate<\li>
+<\ul>
+<p>Show analytically and confirm using a JNB that</p>
+<ul>
+<li> When $K>0$ is small, a stable steady state occurs at
+$(F^*,C^*)=(K,0)$.<\li>
+<li> For higher values of $K$, there is a steady state with $F^*>0, C^*>0$.<\li>
+<li> For even higher values of $K$, the equilibrium is a spiral sink.<\li>
+<li> For still higher values of $K$, the equilibrium loses its stability and a stable limit cycle (closed curve) solution appears.
+<\li>
+<p>** 2.4.2** The RM model exhibits what is called a Hopf bifurcation, as described in the diagram below:</p>
+<img src="fig11.png" width="600px"> 
+Explain how the Hopf bifurcation diagram corresponds to your solution to 2.4.1.
+<p>** 2.4.3** One dimensional maps can also undergo bifurcations. For example, the 1D map <span class="math notranslate nohighlight">\(x_{n+1}=rx_n(1-x_n)\)</span>.</p>
+<p>** a)** Find the period one point (fixed point) for this map when <span class="math notranslate nohighlight">\(r&lt;2\)</span>.</p>
+<p>** b) **
+undergoes a period doubling bifurcation as shown Figure \ref{243b}.  What type of universality is suggested by this sequence of bifurcations?</p>
+<a class="reference internal image-reference" href="../../_images/fig121.png"><img alt="../../_images/fig121.png" src="../../_images/fig121.png" style="width: 600px;" /></a>
+</div>
+</section>
+</section>
+<section id="randomness">
+<h2>Randomness<a class="headerlink" href="#randomness" title="Permalink to this heading">#</a></h2>
+<p>A system which evolves over time is deterministic if its future states are modelled by a deterministic function of time. In contrast, future states may depend on a random process.<br />
+One-dimensional random walks are among the simplest type of non-deterministic systems.  Let <span class="math notranslate nohighlight">\(x_t\)</span> denote the position at discrete times <span class="math notranslate nohighlight">\(t=0,1,2,...\)</span> of an object moving at random on a one-dimensional integer lattice. Consider a random walk with <span class="math notranslate nohighlight">\(x_0=0\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+     x_{t+1}=x_t+e_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(e_t=\pm 1\)</span> with equal probability. The random variables <span class="math notranslate nohighlight">\(e_t\)</span> and <span class="math notranslate nohighlight">\(e_{t'}\)</span> (<span class="math notranslate nohighlight">\(t\neq t')\)</span> are assumed to be independent and identically distributed (IID).</p>
+<p>A single random walk is impossible to predict, and an observed trend in a specific random walk is not a common feature of all random walks.  Yet, a large number of random walks will have a predicatble expected position <span class="math notranslate nohighlight">\(&lt;x_t&gt;=0\)</span> and variance <span class="math notranslate nohighlight">\(&lt;x_t^2&gt;=t\)</span> (Figure \ref{rw})</p>
+<ul>
+    <li> $<x_{t+1}>=<x_t>+<e_t>=<x_t>=<x_0>=0$ for all $t$ <\li>
+   <li> $<x_{t+1}^2>= <x_t^2> + 2<x_t><\epsilon_t> + 1=<x_t^2>+1\Rightarrow <x_t^2>=<x_0^2>+t=t.$ <\li>
+<\ul>
+<img src="fig13.png" width="600px"> 
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>** 2.5.1** Figure \ref{2.3.2} is a graph of an empirical data predator-prey system, of the Canadian lynx and snowshoe hare pelt-trading records collected by the Hudson Bay Company over almost a century:
+<a class="reference internal" href="../../_images/fig14.png"><img alt="../../_images/fig14.png" src="../../_images/fig14.png" style="width: 600px;" /></a>
+** a)** Which of the qualitative behaviors in {\bf Exercise 2.3.1} corresponds to this data?
+** b) ** How could the RM predator-prey model be modified to better capture the dynamical system behavior indicated by the data?</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Advanced/ComplexSystems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sec1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sec3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3. Mathematical Concepts from Equilibrium Statistical Physics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-classification">System Classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-and-global-behavior">Local  and Global Behavior</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linearization">Linearization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bifurcations">Bifurcations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness">Randomness</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

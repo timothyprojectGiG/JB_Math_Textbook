@@ -304,6 +304,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX SYSTEMS Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../ComplexSystems/sec1.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ComplexSystems/sec2.html">2. Fundamental Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ComplexSystems/sec3.html">3. Mathematical Concepts from Equilibrium Statistical Physics</a></li>
 </ul>
 
@@ -572,7 +573,7 @@ document.write(`
 </div>
 <p>Principal component analysis (PCA) is used to reduce high-dimensional data by projecting the data onto a much-lower-dimensional subspace. The subspace is chosen so that the variance of the projected data points is maximized.</p>
 <p>For a simple example illustrating why maximizing the projected variance is useful,   consider the scatterplot of covid test rates and death rates by Chicago zipcode as shown in the figure below.  For the zipcodes in the shaded portion of the scatterplot, we notice  a much higher variance in the death rate than in the test rate. Hence, from the death rate for a zipcode, we would expect to learn more than from its test rate; the test rates are roughly the same for all zipcodes, but there is considerable spread in the death rates.  Thus, if we wish to reduce the dimensionality of the data, it would be more informative to project onto the death rate rather than  onto the test rate, since the former has greater variance. Dimension reduction is based on projections that maximize variance.</p>
-<a class="reference internal image-reference" href="../../../_images/fig81.png"><img alt="../../../_images/fig81.png" src="../../../_images/fig81.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/fig82.png"><img alt="../../../_images/fig82.png" src="../../../_images/fig82.png" style="width: 600px;" /></a>
 <p>Chicago zipcodes shown in the shaded portion of the scatterplot have a variance of roughly 0.1 for the standardized test rate and 0.9 for the standardized death rate. (Zipcode 60604, which includes the Chicago Board of Trade, Federal Building, and Chicago Symphony Center, has a standardized test rate of 5.7 and is not shown.)</p>
 <section id="variance-and-covariance-for-mean-centered-data">
 <h2>Variance and Covariance for Mean-centered Data<a class="headerlink" href="#variance-and-covariance-for-mean-centered-data" title="Permalink to this heading">#</a></h2>
@@ -652,8 +653,8 @@ Var(\mathbf{x})=\dfrac{\sum_{i=1}^n x_i^2}{n}=\frac{1}{n}\,\mathbf{x}\cdot\mathb
 &amp;= u_1^2 Var(\mathbf{x}) + 2u_1u_2Cov(\mathbf{x},\mathbf{y}) + u_2^2Var(\mathbf{y}).
 \end{align*}\]</div>
 <p>On the other hand, if we write <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> as a <span class="math notranslate nohighlight">\(2\times 1\)</span> column vector, VAR can also be computed as the matrix product <span class="math notranslate nohighlight">\({\mathbf{u}}^T\mathbf{A}\mathbf{u}\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-60e4736e-5436-4d1e-8240-b758e3db0e0d">
-<span class="eqno">(39)<a class="headerlink" href="#equation-60e4736e-5436-4d1e-8240-b758e3db0e0d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-462151e7-853a-4936-9582-40f409af35b3">
+<span class="eqno">(39)<a class="headerlink" href="#equation-462151e7-853a-4936-9582-40f409af35b3" title="Permalink to this equation">#</a></span>\[\begin{align}
 {\mathbf{u}}^T\mathbf{A}\mathbf{u}  &amp;=
 \begin{pmatrix}
 u_1 \, u_2
@@ -708,8 +709,8 @@ u_1^2Var(\mathbf{x})+2u_1u_2Cov(\mathbf{x},\mathbf{y})+u_2^2Var(\mathbf{y})=\tex
 <section id="maximization-of-projected-variance-by-principal-component-analysis">
 <h2>Maximization of Projected Variance by Principal Component Analysis<a class="headerlink" href="#maximization-of-projected-variance-by-principal-component-analysis" title="Permalink to this heading">#</a></h2>
 <p>Given an <span class="math notranslate nohighlight">\(n\times m\)</span> data matrix <span class="math notranslate nohighlight">\(X\)</span> whose columns all have mean  zero, the <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the symmetric matrix</p>
-<div class="amsmath math notranslate nohighlight" id="equation-13ac380d-d245-42f9-a5a3-8bcb1ea71e72">
-<span class="eqno">(40)<a class="headerlink" href="#equation-13ac380d-d245-42f9-a5a3-8bcb1ea71e72" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ded2b93b-99a2-494f-b31c-f00679d34886">
+<span class="eqno">(40)<a class="headerlink" href="#equation-ded2b93b-99a2-494f-b31c-f00679d34886" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbf{A}=\tfrac{1}{n}\mathbf{X}^T\mathbf{X}.
 \end{equation}\]</div>
 <p>Since the <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a real symmetric matrix, it has <span class="math notranslate nohighlight">\(m\)</span> linearly independent eigenvectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_m \in \mathbf{R}^m\)</span> with <span class="math notranslate nohighlight">\(m\)</span> real eigenvalues <span class="math notranslate nohighlight">\(\lambda_1\ge\lambda_2\ge\dots\ge\lambda_m.\)</span>  The first two principal components solve the following optimization problems:</p>
@@ -795,7 +796,7 @@ matrix <span class="math notranslate nohighlight">\(\mathbf{A}=\frac{1}{n}\mathb
 </div>
 <p>Principal component analysis (PCA) is used to reduce high-dimensional data by projecting the data onto a much-lower-dimensional subspace. The subspace is chosen so that the variance of the projected data points is maximized.</p>
 <p>For a simple example illustrating why maximizing the projected variance is useful,   consider the scatterplot of covid test rates and death rates by Chicago zipcode as shown in the figure below.  For the zipcodes in the shaded portion of the scatterplot, we notice  a much higher variance in the death rate than in the test rate. Hence, from the death rate for a zipcode, we would expect to learn more than from its test rate; the test rates are roughly the same for all zipcodes, but there is considerable spread in the death rates.  Thus, if we wish to reduce the dimensionality of the data, it would be more informative to project onto the death rate rather than  onto the test rate, since the former has greater variance. Dimension reduction is based on projections that maximize variance.</p>
-<a class="reference internal image-reference" href="../../../_images/fig81.png"><img alt="../../../_images/fig81.png" src="../../../_images/fig81.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/fig82.png"><img alt="../../../_images/fig82.png" src="../../../_images/fig82.png" style="width: 600px;" /></a>
 <p>Chicago zipcodes shown in the shaded portion of the scatterplot have a variance of roughly 0.1 for the standardized test rate and 0.9 for the standardized death rate. (Zipcode 60604, which includes the Chicago Board of Trade, Federal Building, and Chicago Symphony Center, has a standardized test rate of 5.7 and is not shown.)</p>
 <section id="id2">
 <h2>Variance and Covariance for Mean-centered Data<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
@@ -875,8 +876,8 @@ Var(\mathbf{x})=\dfrac{\sum_{i=1}^n x_i^2}{n}=\frac{1}{n}\,\mathbf{x}\cdot\mathb
 &amp;= u_1^2 Var(\mathbf{x}) + 2u_1u_2Cov(\mathbf{x},\mathbf{y}) + u_2^2Var(\mathbf{y}).
 \end{align*}\]</div>
 <p>On the other hand, if we write <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> as a <span class="math notranslate nohighlight">\(2\times 1\)</span> column vector, VAR can also be computed as the matrix product <span class="math notranslate nohighlight">\({\mathbf{u}}^T\mathbf{A}\mathbf{u}\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a5b94aa2-80b0-4a45-afe5-5ae7a6774c17">
-<span class="eqno">(41)<a class="headerlink" href="#equation-a5b94aa2-80b0-4a45-afe5-5ae7a6774c17" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-71dc7edc-293f-4dd7-b677-73856d7da24b">
+<span class="eqno">(41)<a class="headerlink" href="#equation-71dc7edc-293f-4dd7-b677-73856d7da24b" title="Permalink to this equation">#</a></span>\[\begin{align}
 {\mathbf{u}}^T\mathbf{A}\mathbf{u}  &amp;=
 \begin{pmatrix}
 u_1 \, u_2
@@ -932,8 +933,8 @@ u_1^2Var(\mathbf{x})+2u_1u_2Cov(\mathbf{x},\mathbf{y})+u_2^2Var(\mathbf{y})=\tex
 <section id="id7">
 <h2>Maximization of Projected Variance by Principal Component Analysis<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <p>Given an <span class="math notranslate nohighlight">\(n\times m\)</span> data matrix <span class="math notranslate nohighlight">\(X\)</span> whose columns all have mean  zero, the <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the symmetric matrix</p>
-<div class="amsmath math notranslate nohighlight" id="equation-04f3dcde-23bf-476d-8df6-011a018fa8ff">
-<span class="eqno">(42)<a class="headerlink" href="#equation-04f3dcde-23bf-476d-8df6-011a018fa8ff" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bc79639b-78e7-4f05-80a3-0217c9c157eb">
+<span class="eqno">(42)<a class="headerlink" href="#equation-bc79639b-78e7-4f05-80a3-0217c9c157eb" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \mathbf{A}=\tfrac{1}{n}\mathbf{X}^T\mathbf{X}.
 \end{equation}\]</div>
 <p>Since the <span class="math notranslate nohighlight">\(m\times m\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a real symmetric matrix, it has <span class="math notranslate nohighlight">\(m\)</span> linearly independent eigenvectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_m \in \mathbf{R}^m\)</span> with <span class="math notranslate nohighlight">\(m\)</span> real eigenvalues <span class="math notranslate nohighlight">\(\lambda_1\ge\lambda_2\ge\dots\ge\lambda_m.\)</span>  The first two principal components solve the following optimization problems:</p>
