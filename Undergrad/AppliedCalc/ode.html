@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedCalc/ode';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1. Introduction" href="../Calculus/Intro.html" />
+    <link rel="next" title="Solutions to Exercises" href="solutions.html" />
     <link rel="prev" title="11. Integral Test and Income Streams" href="income.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -226,6 +226,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="gini.html">10. Area Between Curves and the Gini Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="income.html">11. Integral Test and Income Streams</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS Inne Singgih</span></p>
 <ul class="nav bd-sidenav">
@@ -507,7 +508,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -523,6 +526,18 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-value-problems">Initial Value Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separation-of-variables">Separation of Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-growth">Exponential Growth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-decay">Exponential Decay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -532,14 +547,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ordinary-differential-equations-and-exponential-growth-decay">
-<h1>12. Ordinary Differential Equations and Exponential Growth/Decay<a class="headerlink" href="#ordinary-differential-equations-and-exponential-growth-decay" title="Permalink to this heading">#</a></h1>
-<p>Simply put, a differential equation is one which includes at least one derivative of a function.  For example,</p>
-<div class="math notranslate nohighlight">
-\[ \frac{dy}{dt} = y, \]</div>
-<p>is a differential equation involving a function <span class="math notranslate nohighlight">\(y(t)\)</span> and its first derivative <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span>.</p>
-<p>Differential equations are used widely across many areas of science, economics, and mathematics.</p>
-<div class="cell docutils container">
+  <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -548,14 +561,34 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<h4>Initial Value Problems</h4>
+<section class="tex2jax_ignore mathjax_ignore" id="ordinary-differential-equations-and-exponential-growth-decay">
+<h1>12. Ordinary Differential Equations and Exponential Growth/Decay<a class="headerlink" href="#ordinary-differential-equations-and-exponential-growth-decay" title="Permalink to this heading">#</a></h1>
+<div class="highlight-{index}ordinary notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>Simply put, a differential equation is one which includes at least one derivative of a function.  For example,</p>
+<div class="math notranslate nohighlight">
+\[ \frac{dy}{dt} = y, \]</div>
+<p>is a differential equation involving a function <span class="math notranslate nohighlight">\(y(t)\)</span> and its first derivative <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span>.</p>
+<p>Differential equations are used widely across many areas of science, economics, and mathematics.</p>
+<div class="highlight-{index}initial notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<section id="initial-value-problems">
+<span id="index-0"></span><h2>Initial Value Problems<a class="headerlink" href="#initial-value-problems" title="Permalink to this heading">#</a></h2>
 <p>An initial value problem (IVP) consists of a differential equation (DE) and an initial condition (IC).  Here is an example:</p>
 <div class="math notranslate nohighlight">
 \[ (DE)\, \frac{dy}{dt} = \frac{1}{y}, \]</div>
 <div class="math notranslate nohighlight">
 \[ (IC)\, y(0) =1 \]</div>
-<h4> Separation of Variables </h4>
+<div class="highlight-{index}separation notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+<section id="separation-of-variables">
+<h2>Separation of Variables<a class="headerlink" href="#separation-of-variables" title="Permalink to this heading">#</a></h2>
 <p>A basic technique which can be used to solve simple IVP’s is called <i>separation of variables</i>.  Here is how we solve the above IVP using this technique:</p>
 <ol class="arabic simple">
 <li><p>bring to one side of the equation all the <span class="math notranslate nohighlight">\(y\)</span>’s times <span class="math notranslate nohighlight">\(dy\)</span>, and to the other side of the equation all the <span class="math notranslate nohighlight">\(t's\)</span> times <span class="math notranslate nohighlight">\(dt\)</span>:</p></li>
@@ -585,7 +618,9 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ y=\sqrt{2t+1} . \]</div>
 <p>Note that we use the positive square root to satisfy the IC <span class="math notranslate nohighlight">\(y(0)=1\)</span>.</p>
-<h4> Exponential Growth </h4>
+</section>
+<section id="exponential-growth">
+<span id="index-1"></span><h2>Exponential Growth<a class="headerlink" href="#exponential-growth" title="Permalink to this heading">#</a></h2>
 <p>In some situations such as continuous compounding of interest, the rate of growth of a quantity is proportional to the size of the quantity:</p>
 <div class="math notranslate nohighlight">
 \[ \frac{dy}{dt} = k y. \]</div>
@@ -602,7 +637,12 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ y(0) = C_1 e^0 = C_1 = y_0.\]</div>
 <p>Thus, our solution is <span class="math notranslate nohighlight">\(y(t)=y_0 e^t.\)</span></p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="n">y0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="n">y0</span><span class="o">=</span><span class="mi">1</span>
@@ -624,18 +664,26 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/f28d92262076ac015f1e64d42cd4faeb252d5a75eb4bc6760a8c3b36b1b736da.png" src="../../_images/f28d92262076ac015f1e64d42cd4faeb252d5a75eb4bc6760a8c3b36b1b736da.png" />
 </div>
 </div>
-<h4> Exponential Decay </h4>
+</section>
+<section id="exponential-decay">
+<span id="index-2"></span><h2>Exponential Decay<a class="headerlink" href="#exponential-decay" title="Permalink to this heading">#</a></h2>
 <p>In some situations such as radioactive decay, the IVP is</p>
 <div class="math notranslate nohighlight">
 \[\frac{dy}{dt} = - ky, \,y(0)=y_0. \]</div>
 <p>Using separation variables in a similar way to solving the exponential growth equation leads to the solution</p>
 <div class="math notranslate nohighlight">
 \[y(t)=y_0 e^{-kt}. \]</div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="n">y0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
 <span class="n">y0</span><span class="o">=</span><span class="mi">1</span>
@@ -657,11 +705,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/2e95e33539727b5389e09a405babe5d9bde05babab55787a7630d0be8a00511b.png" src="../../_images/2e95e33539727b5389e09a405babe5d9bde05babab55787a7630d0be8a00511b.png" />
 </div>
 </div>
-<h4>Half-Life</h4>
+<p id="index-3"><strong>Half-Life</strong></p>
 <p>For radioactive decay problems, the time it takes for radiaoctive material to decay to half the original amount is called the <i>half-life</i>.</p>
 <p>To find the half-life <span class="math notranslate nohighlight">\(t=t_h\)</span> for the case <span class="math notranslate nohighlight">\(k=1\)</span>, we solve as follows:</p>
 <div class="math notranslate nohighlight">
@@ -672,7 +721,12 @@ document.write(`
 \[-t_h=\ln\frac{1}{2}\]</div>
 <div class="math notranslate nohighlight">
 \[t_h=-\ln\frac{1}{2} = \ln 2\approx .69. \]</div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span> <span class="p">:</span> <span class="n">y0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
 <span class="n">y0</span><span class="o">=</span><span class="mi">1</span>
@@ -698,45 +752,35 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/a4e72faf56b732f6c927807176bf8d50b503b9bf6f9a01efd70038f870b34f67.png" src="../../_images/a4e72faf56b732f6c927807176bf8d50b503b9bf6f9a01efd70038f870b34f67.png" />
 </div>
 </div>
-<h3>Lab</h3>
-<p>Let <span class="math notranslate nohighlight">\(y(t)\)</span> be the amount (in grams) of a pollutant at time <span class="math notranslate nohighlight">\(t\)</span> (in days) found in a certain water supply.  Suppose after an industrial accident, <span class="math notranslate nohighlight">\(y(0)=100\)</span> and additional pollutant enters the water supply at a constant rate of <span class="math notranslate nohighlight">\(c_1= 5\)</span> gm/day.  Emergency water purification measures are used to reduce the daily amount of pollutant at a rate of 1% of the existing amount of pollution.</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
 <ol class="arabic simple">
-<li><p>What IVP is used to model this situation?</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(y(t)\)</span> be the amount (in grams) of a pollutant at time <span class="math notranslate nohighlight">\(t\)</span> (in days) found in a certain water supply.  Suppose after an industrial accident, <span class="math notranslate nohighlight">\(y(0)=100\)</span> and additional pollutant enters the water supply at a constant rate of <span class="math notranslate nohighlight">\(c_1= 5\)</span> gm/day.  Emergency water purification measures are used to reduce the daily amount of pollutant at a rate of 1% of the existing amount of pollution.</p></li>
 </ol>
+<p>a) What IVP is used to model this situation?</p>
 <p>Hint:  The rate of change of pollutant <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span> is equal to rate in -  rate out.</p>
+<p>b) Use separation of variables to solve the IVP.</p>
+<p>c) Suppose the water supply becomes unsafe if the pollution level reaches 400 gm.  After how many days will the water supply become unsafe?</p>
+<p>d) Make a graph of <span class="math notranslate nohighlight">\(y(t)\)</span>.</p>
 <ol class="arabic simple" start="2">
-<li><p>Use separation of variables to solve the IVP.</p></li>
-</ol>
-<ol class="arabic simple" start="3">
-<li><p>Suppose the water supply becomes unsafe if the pollution level reaches 400 gm.  After how many days will the water supply become unsafe?</p></li>
-</ol>
-<ol class="arabic simple" start="4">
-<li><p>Make a graph of <span class="math notranslate nohighlight">\(y(t)\)</span>.</p></li>
-</ol>
-<h4> Additional Exercises </h4>
-<ol class="arabic simple">
-<li><p>Prove the <i>Rule of 72</i>: If money is deposited into an account with an annual interest rate <span class="math notranslate nohighlight">\(r\)</span> (expressed as a percentage) compounded continuously, then it will take roughly <span class="math notranslate nohighlight">\(72/r\)</span> years for the money to double.</p></li>
-</ol>
-<ol class="arabic simple" start="2">
+<li><p>Prove the Rule of 72: If money is deposited into an account with an annual interest rate <span class="math notranslate nohighlight">\(r\)</span> (expressed as a percentage) compounded continuously, then it will take roughly <span class="math notranslate nohighlight">\(72/r\)</span> years for the money to double.</p></li>
 <li><p>For exponential decay, find a formula relating the decay constant <span class="math notranslate nohighlight">\(k\)</span> and the half life <span class="math notranslate nohighlight">\(t_h\)</span>.</p></li>
-</ol>
-<ol class="arabic simple" start="3">
 <li><p>The exponential growth model predicts that <span class="math notranslate nohighlight">\(y\rightarrow\infty\)</span> as <span class="math notranslate nohighlight">\(t\rightarrow\infty.\)</span> This may not be realistic. For example, if <span class="math notranslate nohighlight">\(y(t)\)</span> represents population at time <span class="math notranslate nohighlight">\(t\)</span>, there is a limit to how big <span class="math notranslate nohighlight">\(y(t)\)</span> can grow.</p></li>
 </ol>
 <p>The logistic model includes a cap <span class="math notranslate nohighlight">\(M\)</span> on how big the population can grow, and is given by the following IVP:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned} \frac{dy}{dt} = ky(M-y),\,y(0)=y_0$$.\\Use separation of variables to solve the logistic growth model for the case $k=1$, $M=100$, $y_0=5$.\\Hint:\\$$\frac{1}{y(M-y)}=\frac{1}{M}(\frac{1}{y}+\frac{1}{M-y}).\end{aligned}\end{align} \]</div>
-<ol class="arabic simple" start="4">
-<li></li>
-</ol>
-<ol class="arabic simple" start="5">
-<li></li>
-</ol>
-<h4> Solutions</h4></section>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -779,11 +823,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../Calculus/Intro.html"
+       href="solutions.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1. Introduction</p>
+        <p class="prev-next-title">Solutions to Exercises</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -796,6 +840,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-value-problems">Initial Value Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separation-of-variables">Separation of Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-growth">Exponential Growth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-decay">Exponential Decay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

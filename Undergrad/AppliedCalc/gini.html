@@ -226,6 +226,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Area Between Curves and the Gini Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="income.html">11. Integral Test and Income Streams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS Inne Singgih</span></p>
 <ul class="nav bd-sidenav">
@@ -507,7 +508,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -523,6 +526,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-area-between-two-curves">Computing Area Between Two Curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lorentz-curve-and-gini-index">Lorentz Curve and GINI Index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -535,7 +548,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="area-between-curves-and-the-gini-index">
 <h1>10. Area Between Curves and the Gini Index<a class="headerlink" href="#area-between-curves-and-the-gini-index" title="Permalink to this heading">#</a></h1>
 <p>Areas under curves called probability distributions can be used to represent probabilities.  Another way to use area is to represent inequitable distribution of resources as the area between two curves.</p>
-<h4>Computing Area Between Two Curves</h4>
+<section id="computing-area-between-two-curves">
+<span id="index-0"></span><h2>Computing Area Between Two Curves<a class="headerlink" href="#computing-area-between-two-curves" title="Permalink to this heading">#</a></h2>
 <p>Suppose <span class="math notranslate nohighlight">\(f(x)\le g(x)\)</span> on an interval <span class="math notranslate nohighlight">\(a\le x \le b\)</span>.
 Then the area <span class="math notranslate nohighlight">\(A\)</span> between the graph of <span class="math notranslate nohighlight">\(y=f(x)\)</span> and <span class="math notranslate nohighlight">\(y=g(x)\)</span> on the interval <span class="math notranslate nohighlight">\(a\le x \le b\)</span> is given by the definite integral.</p>
 <div class="math notranslate nohighlight">
@@ -545,7 +559,12 @@ Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.
 <p>Solution.</p>
 <div class="math notranslate nohighlight">
 \[ A = \int_0^1 (x - x^2)\,dx = \frac{x^2}{2}-\frac{x^3}{3}\mid_0^1=\frac{1}{2}-\frac{1}{3} - (0-0) = \frac{1}{6}.\]</div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -567,13 +586,17 @@ Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.figure.Figure at 0x1d2458c3ba8&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<h4> Lorentz Curve and GINI Index</h4><p>Consider the following NBA salary data:</p>
+</section>
+<section id="lorentz-curve-and-gini-index">
+<h2>Lorentz Curve and GINI Index<a class="headerlink" href="#lorentz-curve-and-gini-index" title="Permalink to this heading">#</a></h2>
+<p>Consider the following NBA salary data:</p>
  <table>
   <tr>
     <td>S Curry</td>
@@ -597,7 +620,12 @@ Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.
   </tr>
 </table>
 <p id="index-1">The salaries are clearly not evenly distributed between the five starting players. To measure the degree of uneven distribution, we first make a plot of what is known as a <i>Lorentz curve</i>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">5.2</span><span class="p">))</span>
@@ -619,6 +647,7 @@ Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/1cd920e89338f4a1eec39db633254603e664c459d006508d926c94ef2ce65555.png" src="../../_images/1cd920e89338f4a1eec39db633254603e664c459d006508d926c94ef2ce65555.png" />
 </div>
@@ -628,98 +657,18 @@ Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.
 <p>The greatest inequity occurs if  one person  receives everything and the rest nothing. In this case, the area <span class="math notranslate nohighlight">\(A\)</span> between <span class="math notranslate nohighlight">\(y=x\)</span> and the Lorentz curve is one-half (A=1/2).</p>
 <p>The GINI index G.I. measures iniquity as <span class="math notranslate nohighlight">\(G.I.=2A\)</span> so that <span class="math notranslate nohighlight">\(0\le G.I. \le 1\)</span>.</p>
 <p>The larger the value of the GINI index, the greater the inequity.</p>
-<h3> LAB </h3>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
 <p>Suppose the Lorentz curve for Profession 1 is <span class="math notranslate nohighlight">\(L_1(x)=x^{1.7}\)</span> and the Lorentz curve for Profession 2 is <span class="math notranslate nohighlight">\(L_2(x)=.8x^2+.2x.\)</span></p>
 <ol class="arabic simple">
 <li><p>Compute the GINI index of both profession 1 and profession 2 to determine which has the more even income distribution.</p></li>
-</ol>
-<ol class="arabic simple" start="2">
 <li><p>Plot the Lorentz curve for each profession and shade the area <span class="math notranslate nohighlight">\(A\)</span> between the curve and the line <span class="math notranslate nohighlight">\(y=x\)</span> for each profession.</p></li>
 </ol>
-<h4> Solution</h4>
-<ol class="arabic simple">
-<li></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[GI_1= 2\int_0^1(x-x^{1.7})\,dx = 2(\frac{x^2}{2}-\frac{x^{2.7}}{2.7})\mid_0^1=2(\frac{1}{2}-\frac{1}{2.7})\approx .259. \]</div>
-<div class="math notranslate nohighlight">
-\[GI_2= 2\int_0^1(x-(.8x^2+.2x))\,dx = 2\int_0^1(.8x-.8x^2)\,dx 2(.8)(\frac{x^2}{2}-\frac{x^3}{3})\mid_0^1=1.6(\frac{1}{2}-\frac{1}{3})\approx .27. \]</div>
-<p>Profession 1 has a slightly more even salary distribution.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.</span><span class="p">))</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">f</span><span class="o">=</span><span class="n">x</span><span class="o">**</span><span class="mf">1.7</span>
-<span class="n">g</span><span class="o">=</span><span class="n">x</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1(x)=x^1.7&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;g(x)=x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="s2">&quot;Shaded area A=.13&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/cb4180c56853b93cf5e72db9695ca0ebb4386c77cde882f471f59cb523b2ff8a.png" src="../../_images/cb4180c56853b93cf5e72db9695ca0ebb4386c77cde882f471f59cb523b2ff8a.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.</span><span class="p">))</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">f</span><span class="o">=.</span><span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+.</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span>
-<span class="n">g</span><span class="o">=</span><span class="n">x</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;L2(x)=.8x^2+.2x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;g(x)=x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span><span class="s2">&quot;Shaded area A=.135&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/5c9aaf39384671bcd8814522853704148fcd53c4008ab9c863b8dc1b3aa95ef0.png" src="../../_images/5c9aaf39384671bcd8814522853704148fcd53c4008ab9c863b8dc1b3aa95ef0.png" />
-</div>
-</div>
-<p>One further plot shows the two Lorentz curves nearly coincide.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.</span><span class="p">))</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">L1</span><span class="o">=</span><span class="n">x</span><span class="o">**</span><span class="mf">1.7</span>
-<span class="n">L2</span><span class="o">=.</span><span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+.</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span>
-<span class="n">g</span><span class="o">=</span><span class="n">x</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">L1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;L1(x)=x^1.7&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;L2(x)=.8x^2+.2x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;g(x)=x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/6d1ba9a4685a99dd6c9285411d38ad43b7ababd9609773b82afc7214838046bd.png" src="../../_images/6d1ba9a4685a99dd6c9285411d38ad43b7ababd9609773b82afc7214838046bd.png" />
-</div>
-</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -780,6 +729,22 @@ Find the area $A$ between $f(x)=x^2$ and $g(x)=x$ on the interval $0\le x \le 1.
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-area-between-two-curves">Computing Area Between Two Curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lorentz-curve-and-gini-index">Lorentz Curve and GINI Index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
