@@ -547,7 +547,12 @@ In this Notebook, we  model 2-dimensional incompressible flow in various setting
     <li> if there are no transformations of the plane, obstructions to the flow, or singularities such as sources or sinks, flow is in the horizontal direction.
     </ul>
 <p>We beginn by importing all the Python libraries which are needed to run this Notebook.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> <span class="c1">#used for plots</span>
@@ -557,6 +562,7 @@ In this Notebook, we  model 2-dimensional incompressible flow in various setting
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <h4> 1. Uniform Flow </h4>
 Uniform flow means flow is in one direction (eg. in the $x$ direction with the cross-sectional area $A$ created by a depth h is constant). The flow rate $q_u$ ($\frac{m^3}{s}$) and fluid velocity $V_x=q_u/A$ are constant at all points. In this case, Darcy's Law becomes
@@ -564,7 +570,12 @@ Uniform flow means flow is in one direction (eg. in the $x$ direction with the c
 <p>Integrating, we get</p>
 <p><span class="math notranslate nohighlight">\(\Phi(x)= -\frac{q_u}{A} x + \Phi_0\)</span>.</p>
 <p>For example, set <span class="math notranslate nohighlight">\(-\frac{q_u}{A}=1\)</span> and <span class="math notranslate nohighlight">\(\Phi_0=0\)</span>.  Since <span class="math notranslate nohighlight">\(\psi_y(x,y)=\Phi_x=-1\)</span>, we let <span class="math notranslate nohighlight">\(\psi(x,y)=-y\)</span> and so the complex potential is <span class="math notranslate nohighlight">\(\Omega(x,y)=-x-iy\)</span> or   <span class="math notranslate nohighlight">\(\Omega(z)=-z\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create figure and axes</span>
 <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -594,6 +605,7 @@ Uniform flow means flow is in one direction (eg. in the $x$ direction with the c
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/8ceafbae65bfd5d39445c422032693a940a018dcdf738b148122c8049ea88021.png" src="../../_images/8ceafbae65bfd5d39445c422032693a940a018dcdf738b148122c8049ea88021.png" />
 </div>
@@ -605,7 +617,12 @@ $\Omega(z)=\log(z)=\ln(|z|) + i arg(z)$ where $-\pi < arg(z)\le \pi$.
 <p><span class="math notranslate nohighlight">\(\Phi(z)= \ln \mid z\mid=\sqrt{x^2+y^2}\)</span></p>
 <p>and the stream function is</p>
 <p><span class="math notranslate nohighlight">\(\Psi(z)=arg(z)=\arctan(y/x)\)</span></p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create figure and axes</span>
 <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -635,6 +652,7 @@ $\Omega(z)=\log(z)=\ln(|z|) + i arg(z)$ where $-\pi < arg(z)\le \pi$.
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/a53a6167ea1fd205e03257b4c7b553bd220eee0b0d93bae3592c7799d9e121d7.png" src="../../_images/a53a6167ea1fd205e03257b4c7b553bd220eee0b0d93bae3592c7799d9e121d7.png" />
 </div>
@@ -654,7 +672,12 @@ $\Omega(z)=\log(z)=\ln(|z|) + i arg(z)$ where $-\pi < arg(z)\le \pi$.
 <p><span class="math notranslate nohighlight">\(\Phi(x,y) =\frac{-1}{2\pi}[\sqrt{x^2+y^2}-\sqrt{(x-1)^2+(y-1)^2}]\)</span>.</p>
 <p>The stream function, which accounts for the choice of branch cuts (negative x-axis at the branch point (0,0) and in the direction of the positive x-axis at the branch point (1,1), can be evaluated as</p>
 <p><span class="math notranslate nohighlight">\( \Psi(x,y)= \frac{-1}{2\pi}[\pi+\arctan(\frac{y}{x})]+\frac{1}{2\pi}[2\pi-\arccos(\frac{X-1}{\sqrt{(X-1)^2+(Y-1)^2}})]\)</span></p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create figure and axes</span>
 <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
@@ -681,6 +704,7 @@ $\Omega(z)=\log(z)=\ln(|z|) + i arg(z)$ where $-\pi < arg(z)\le \pi$.
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\pisihara\AppData\Local\Continuum\anaconda3\lib\site-packages\ipykernel_launcher.py:14: RuntimeWarning: invalid value encountered in true_divide
   
