@@ -286,6 +286,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Contaminant Extraction Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Complex_Potentials.html">Complex Potentials Lab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Fischer-Calo Contaminant Model Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
 <ul class="nav bd-sidenav">
@@ -537,6 +538,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-output">Model Output</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplemental-jnbs">Supplemental JNBs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
@@ -642,6 +645,31 @@ A second critical value <span class="math notranslate nohighlight">\(k=\hat{k}\)
 <p>The 2D groundwater flow modeling we have introduced in this Module is an elegant application of complex variables. Moreover, complex potentials are useful in many other physical contexts such as heat conduction,  and also gravitational and electrostatic fields. An important strength of using a complex potential <span class="math notranslate nohighlight">\(\Omega(z)\)</span> for groundwater modeling is that it gives a clearer picture of how contaminated flow can be captured  by extraction wells. Direction arrows which are perpendicular to equipotential lines  give the direction of streamlines but not a clear indication of dividing streamlines. Using a complex potential, one can precisely specify these streamlines via the stream function. This is useful to find critical parameter values such as for the well strength parameter.  As suggested, a system sensitivity analysis may quickly furnish evidence in answer to certain “what if” questions about the effectiveness or efficiency of the extraction well system after a modification of the original design.</p>
 <p>We hope this chapter will stimulate the reader to further study hydrology in conjunction with advanced mathematical and computational analysis. The latter are important tools in more sophisticated modeling of groundwater flow, with potential implications that include efficient and effective remediation.</p>
 </section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<p><b> 4.1 </b>  Modify <span class="math notranslate nohighlight">\(\Omega(z)\)</span> in the JNB ``Space-Leasing Plume’’ (available at <a class="github reference external" href="https://github.com/wcapdat/GroundwaterFlow">wcapdat/GroundwaterFlow</a>) so the streamline diagram for <span class="math notranslate nohighlight">\(k=.1\)</span> tilts from northwest to southeast as shown below.</p>
+<a class="reference internal image-reference" href="Advanced/Complex/Rotated.png"><img alt="Advanced/Complex/Rotated.png" src="Advanced/Complex/Rotated.png" style="width: 300px;" /></a>
+<p>Hint: the new complex potential is <span class="math notranslate nohighlight">\(\Omega(e^{i\pi/4}z)\)</span>.</p>
+<p><b>4.2</b> Use a stagnation point to approximate the critical value <span class="math notranslate nohighlight">\(\hat{k}\)</span> which divides normal and inefficient systems for the basic Space Leasing plume model.</p>
+<p><b>4.3</b>  One Line North (1N) is located in a different part of the Fischer Calo superfund site. A simplified  horizontal plume is shown in Figure \ref{1NL}.  Suppose further that the two monitoring wells CRA27A located at (0,0) with potential <span class="math notranslate nohighlight">\(\Phi_1=708.33\)</span> and CRA-42 located at  (-4.5,1) with potential <span class="math notranslate nohighlight">\(\Phi_2=706.5\)</span> show above action level contaminants. Suppose that three extraction wells EW1N-1 at (-5,2), EW1N-2  at (-6.5,1) and EW1N-4 at (-1,4) are in operation with respective strengths in a 1:5:1:1 ratio.</p>
+<a class="reference internal image-reference" href="Advanced/Complex/horizontalmap.png"><img alt="Advanced/Complex/horizontalmap.png" src="Advanced/Complex/horizontalmap.png" style="width: 300px;" /></a>
+<p>a)  Estimate the minimum strength parameter <span class="math notranslate nohighlight">\(k=k^*\)</span> so that the three extraction wells capture all the pollutant from the two action level monitoring wells and plot the corresponding streamlines for the flow.<br />
+b)  Show that for a sufficiently small extraction strength parameter <span class="math notranslate nohighlight">\(k&lt;k^{\dagger}\)</span>, upstream flow can slip in between the top and middle or middle and bottom extraction wells.</p>
+</div>
+</section>
+<section id="supplemental-jnbs">
+<h2>Supplemental JNBs<a class="headerlink" href="#supplemental-jnbs" title="Permalink to this heading">#</a></h2>
+<p>We provide several Jupyter Notebooks (JNBs) as supplementary material (downloadable from the github <a class="github reference external" href="https://github.com/wcapdat/GroundwaterFlow">wcapdat/GroundwaterFlow</a>) which introduce the use of Python and its libraries for the application of complex analysis to groundwater flow:</p>
+<p><b>first_notebook.ipynb</b>: Invites students to learn Python syntax by reading and correcting code, as well as generating some of their own code.</p>
+<p><b>complex_numbers.ipynb</b>: Introduces the the use of complex numbers with generic Python functionality and the functions provided by the CMath module for complex variable mathematics.</p>
+<p><b>plotting_curves.ipynb</b>: Introduces the Numpy and Matplotlib modules and demonstrates how they may be used to visualize groundwater flows using equipotentials, quiver plots, and streamlines.</p>
+<p><b>Complex Potentials</b>: Examples of sketching equipotential lines and streamlines for various complex potentials including uniform flow and flow with sinks/sources.</p>
+<p><b>Rankine Oval</b>: Used to create the figure in Section 3.6.</p>
+<p><b>Space-Leasing Plume</b>: Basic contaminant extraction model of the Fischer-Calo Space-Leasing Plume.</p>
+<p><b>1NL Plume, Rotated Space-Leasing Plume</b>: Solutions for Exercises 4.1 and 4.3.</p>
+</section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <p>U.S. Environmental Protection Agency. 2020. Fifth five-year review for the Fischer-Calo Superfund Site. <a class="reference external" href="https://semspub.epa.gov/work/05/959749.pdf">https://semspub.epa.gov/work/05/959749.pdf</a></p>
@@ -722,6 +750,8 @@ A second critical value <span class="math notranslate nohighlight">\(k=\hat{k}\)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-output">Model Output</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplemental-jnbs">Supplemental JNBs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
