@@ -713,8 +713,8 @@ document.write(`
 </div>
 <p>Using this data, we are going to explore the question of whether the Gentoo penguins at the Palmer Station differ significantly in body mass from the average Gentoo penguin body mass found in the scientific literature. (This example was inspired by <a class="reference external" href="https://github.com/MSCI-599/unit_3_penguins">Erin Meyer-Gutbrod</a>.)</p>
 <p>We can find more information about the worldwide average body mass of the Gentoo penguin by using the <a class="reference external" href="https://eol.org/pages/45512076">Encyclopedia of Life</a>. Based on this page, it looks like the average body mass is 5500 grams. If we let <span class="math notranslate nohighlight">\(\mu\)</span> be the average body mass of Gentoo penguins in the Palmer Station area, our hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-94886aea-849d-4582-bac2-d3621aebcf55">
-<span class="eqno">(15)<a class="headerlink" href="#equation-94886aea-849d-4582-bac2-d3621aebcf55" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eced9268-f67c-4ee9-b4d8-03c6533775b8">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eced9268-f67c-4ee9-b4d8-03c6533775b8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 \end{equation}\]</div>
 <p>What about the mean body mass for penguins in our sample data?</p>
@@ -800,7 +800,7 @@ H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 <p>Unfortunately, if we make a hypothesis about <span class="math notranslate nohighlight">\(\mu\)</span>, we are still left with estimating <span class="math notranslate nohighlight">\(\sigma\)</span>, the population standard deviation. If we have a good estimate for <span class="math notranslate nohighlight">\(\sigma\)</span>, perhaps from past experiments or expert knowledge, then this is no problem! If we don’t know <span class="math notranslate nohighlight">\(\sigma\)</span>, our best estimate from the data will be to use <span class="math notranslate nohighlight">\(S\)</span>, the sample standard deviation.</p>
 <p>When we standardize the test statistic, we then have</p>
 <div class="math notranslate nohighlight" id="equation-t-equation">
-<span class="eqno">(16)<a class="headerlink" href="#equation-t-equation" title="Permalink to this equation">#</a></span>\[ T = \frac{ \overline{X} - \mu } {S / \sqrt{n}} \sim t_{\nu} \qquad \mbox{rather than} \qquad Z = \frac{ \overline{X} - \mu } {\sigma / \sqrt{n}} \sim N(0,1).\]</div>
+<span class="eqno">(15)<a class="headerlink" href="#equation-t-equation" title="Permalink to this equation">#</a></span>\[ T = \frac{ \overline{X} - \mu } {S / \sqrt{n}} \sim t_{\nu} \qquad \mbox{rather than} \qquad Z = \frac{ \overline{X} - \mu } {\sigma / \sqrt{n}} \sim N(0,1).\]</div>
 <p>The good news is that <span class="math notranslate nohighlight">\(T\)</span> has a highly studied distribution called the Student’s T-distribution. The T-distribution looks a lot like the standard normal distribution, but it has a wider spread, i.e., more probability in the “tails” of the distribution. This wider spread reflects the extra uncertainty of using the sample standard deviation <span class="math notranslate nohighlight">\(S\)</span> in place of the population standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. The T-distribution has only one parameter, called “degrees of freedom”, which is represented by the Greek letter <span class="math notranslate nohighlight">\(\nu\)</span> (<em>nu</em>, pronounced like “new”). This is calculated by subtracting one from the sample size, i.e., <span class="math notranslate nohighlight">\(\nu = n - 1\)</span>.</p>
 <p>We have glossed over an important detail here: The statistic <span class="math notranslate nohighlight">\(T = \frac{ \overline{X} - \mu } {S / \sqrt{n}}\)</span> has a T-distribution only if the data in the sample come from a normal distribution. Fortunately, if the sample size is large, we don’t need to worry too much about this assumption thanks to the CLT. But if the sample size is small, this becomes especially important!</p>
 <p>Play around with the widget below to get an idea of what the T-distribution looks like compared to the standard normal distribution. Drag the slider to select different degrees of freedom, and click the labels in the legend to hide or show different parts of the graph. Notice how the T-distribution resembles the standard normal distribution more closely as the degrees of freedom increase.</p>
@@ -942,7 +942,7 @@ if (outputEl) {{
 <img alt="../../_images/a305dd122e981d356748a57260a5f3caeaba24d43804ed4533f7062a6c92e6a4.png" src="../../_images/a305dd122e981d356748a57260a5f3caeaba24d43804ed4533f7062a6c92e6a4.png" />
 </div>
 </div>
-<p>Now since we know the values of <span class="math notranslate nohighlight">\(\overline X\)</span>, <span class="math notranslate nohighlight">\(S\)</span>, and <span class="math notranslate nohighlight">\(n\)</span>, and the null hypothesis tells us what we assume <span class="math notranslate nohighlight">\(\mu\)</span> to be, we can form our test statistic <span class="math notranslate nohighlight">\(T\)</span> based on the formula for <span class="math notranslate nohighlight">\(T\)</span> <a class="reference internal" href="#equation-t-equation">(16)</a> above.</p>
+<p>Now since we know the values of <span class="math notranslate nohighlight">\(\overline X\)</span>, <span class="math notranslate nohighlight">\(S\)</span>, and <span class="math notranslate nohighlight">\(n\)</span>, and the null hypothesis tells us what we assume <span class="math notranslate nohighlight">\(\mu\)</span> to be, we can form our test statistic <span class="math notranslate nohighlight">\(T\)</span> based on the formula for <span class="math notranslate nohighlight">\(T\)</span> <a class="reference internal" href="#equation-t-equation">(15)</a> above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">gentoo</span><span class="p">[</span><span class="s1">&#39;body_mass_g&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="c1"># drop missing values</span>
@@ -1255,8 +1255,8 @@ P-value is 0.000.
 <p>We can also use the T-test to examine the difference between two population means. Typically, this is done to find out if two populations have the same mean or not.</p>
 <p>We can return to our Palmer Penguins example and look at whether the Adélie and Chinstrap penguins from this area have the same average body mass.</p>
 <p>Letting <span class="math notranslate nohighlight">\(\mu_1\)</span> be the average body mass of Adélie penguins and <span class="math notranslate nohighlight">\(\mu_2\)</span> be the average body mass of Chinstrap penguins in the Palmer station area, our hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2fd0a9ca-88dd-4b1f-a330-fd138a8f435e">
-<span class="eqno">(17)<a class="headerlink" href="#equation-2fd0a9ca-88dd-4b1f-a330-fd138a8f435e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3d007380-05ff-4c23-a7c3-705aba3be261">
+<span class="eqno">(16)<a class="headerlink" href="#equation-3d007380-05ff-4c23-a7c3-705aba3be261" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_0: \mu_1 - \mu_2 = 0, \\ H_1: \mu_1 - \mu_2 \neq 0.
 \end{equation}\]</div>
 <p>Let’s look at our samples:</p>
@@ -1284,18 +1284,18 @@ The mean Chinstrap body mass in the sample data is 3733.088.
 <section id="the-test-statistic">
 <h3>The Test Statistic<a class="headerlink" href="#the-test-statistic" title="Permalink to this heading">#</a></h3>
 <p>When the sample sizes <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span> are large enough (typically both <span class="math notranslate nohighlight">\(n_1 \geq 30\)</span> and <span class="math notranslate nohighlight">\(n_2 \geq 30\)</span>), we have</p>
-<div class="amsmath math notranslate nohighlight" id="equation-97005ad8-1642-496e-9fa0-6cbf55af62b2">
-<span class="eqno">(18)<a class="headerlink" href="#equation-97005ad8-1642-496e-9fa0-6cbf55af62b2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3458df1f-57c5-4275-bce2-b13b8f76a1f4">
+<span class="eqno">(17)<a class="headerlink" href="#equation-3458df1f-57c5-4275-bce2-b13b8f76a1f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \overline{X}_1 - \overline{X}_2 \sim N \left( \mu_1 - \mu_2, \sqrt{ \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} } \right),
 \end{equation}\]</div>
 <p>and hence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-84709649-9e8b-41c0-87a3-6f58fda5eb55">
-<span class="eqno">(19)<a class="headerlink" href="#equation-84709649-9e8b-41c0-87a3-6f58fda5eb55" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ecbfc3b8-9769-4313-af8e-8d1b3231eee7">
+<span class="eqno">(18)<a class="headerlink" href="#equation-ecbfc3b8-9769-4313-af8e-8d1b3231eee7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\overline{X}_1 - \overline{X}_2 - (\mu_1 - \mu_2)}{ \sqrt{ \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} }} \sim N(0,1).
 \end{equation}\]</div>
 <p>Just as before, the null hypothesis will tell us about <span class="math notranslate nohighlight">\(\mu_1-\mu_2\)</span>, but not about <span class="math notranslate nohighlight">\(\sigma_1\)</span> and <span class="math notranslate nohighlight">\(\sigma_2\)</span>, so we’ll estimate them from the data using <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span>. Making that substitution for the standard deviations, we have a T-distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1f37f811-e280-436f-8c69-8b23ca333b7c">
-<span class="eqno">(20)<a class="headerlink" href="#equation-1f37f811-e280-436f-8c69-8b23ca333b7c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4ef94cf5-f29c-4972-a155-f45e1178dc5e">
+<span class="eqno">(19)<a class="headerlink" href="#equation-4ef94cf5-f29c-4972-a155-f45e1178dc5e" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\overline{X}_1 - \overline{X}_2 - (\mu_1 - \mu_2)}{ \sqrt{ \frac{S_1^2}{n_1} + \frac{S_2^2}{n_2} }} \sim t_{\nu},
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\nu\)</span> represents the degrees of freedom. The exact value of <span class="math notranslate nohighlight">\(\nu\)</span> will be calculated by something called Welch’s method, but we can let the software handle that details of the computation. You can keep in mind the intuition that if <span class="math notranslate nohighlight">\(S_1 \approx S_2\)</span>, then <span class="math notranslate nohighlight">\(\nu\)</span> will be about <span class="math notranslate nohighlight">\(n_1 + n_2 - 2\)</span>. On the other hand, if <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> are very different, then <span class="math notranslate nohighlight">\(\nu \approx \min({n_1, n_2})\)</span>.</p>
@@ -1379,7 +1379,7 @@ P-value is 0.588.
 <h3>Large Sample vs. Small Sample<a class="headerlink" href="#large-sample-vs-small-sample" title="Permalink to this heading">#</a></h3>
 <p>Why do we need the extra assumption of a normally distributed population in the case of a small sample? In non-technical terms, because we have less information in the data, we need more information from elsewhere (in this case, assumptions) to be able to make conclusions.</p>
 <p>In the large sample case, the Central Limit Theorem tells us that <span class="math notranslate nohighlight">\(\overline{X}\)</span> is normal. In the small sample case, if the sample comes from a normally distributed population, then <span class="math notranslate nohighlight">\(\overline{X}\)</span> will again be normal.</p>
-<p>Below you can find plots of the sampling distribution of sample averages from both normal and non-normal distributions, each with a population mean of 1 and a standard deviation of 2. The top row looks at small samples (size <span class="math notranslate nohighlight">\(n=10\)</span>), one from a non-normal distribution (left) and the other from a normal distribution (right). We take the average and “studentize” according to the formula for <span class="math notranslate nohighlight">\(T\)</span> <a class="reference internal" href="#equation-t-equation">(16)</a> above.</p>
+<p>Below you can find plots of the sampling distribution of sample averages from both normal and non-normal distributions, each with a population mean of 1 and a standard deviation of 2. The top row looks at small samples (size <span class="math notranslate nohighlight">\(n=10\)</span>), one from a non-normal distribution (left) and the other from a normal distribution (right). We take the average and “studentize” according to the formula for <span class="math notranslate nohighlight">\(T\)</span> <a class="reference internal" href="#equation-t-equation">(15)</a> above.</p>
 <p>Look first at the upper left plot. The histogram of small-sample averages from the non-normal distribution do not fit well with a T-distribution on 9 degrees of freedom. However, the small-sample averages from the normal distribution in the upper right plot do!</p>
 <p>In the bottom row you can find histograms of simulated large sample averages (<span class="math notranslate nohighlight">\(n=50\)</span>), overlaid with the density function for a T-distribution on 49 degrees of freedom. The sample averages from both the non-normal (lower left) and normal (lower right) distributions end up fitting well with the T-distribution.</p>
 <div class="cell tag_hide-input docutils container">
