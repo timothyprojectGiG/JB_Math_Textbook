@@ -62,8 +62,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labsolutions';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -540,10 +538,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-in-nature">1. Patterns in Nature</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-in-societal-data">2. Patterns in Societal Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-in-mathematics">3. Patterns in Mathematics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadric-surfaces">3.2 Quadric Surfaces</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-in-mathematics">3. Patterns in Mathematics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-patterns-in-mathematics-to-patterns-in-nature-and-society">4. Connecting Patterns in Mathematics to Patterns in Nature and Society</a></li>
 </ul>
             </nav>
@@ -824,50 +819,6 @@ R^2 for OLS is  0.429488206625943
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#-----Set Up Plot -----</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">fig</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="c1">#----Define the Parametric Equations------</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="c1">#paramter values from 0 to 12$\pi$ in steps of ,1</span>
-<span class="n">xt</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">3.5</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.3</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+.</span><span class="mi">7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">12.2</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>     
-<span class="n">yt</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">3.5</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.3</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+.</span><span class="mi">7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">12.2</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>   
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">)</span>
-<span class="c1">#----Create a Red Dot to Trace the Curve------</span>
-<span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
-    <span class="n">redDot</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span> <span class="c1">#starting position of dot</span>
-    <span class="k">return</span> <span class="n">redDot</span><span class="p">,</span>
-
-<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-    <span class="n">redDot</span><span class="p">,</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">3.5</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.3</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+.</span><span class="mi">7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">12.2</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>   <span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mf">3.5</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.3</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+.</span><span class="mi">7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">12.2</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>  <span class="p">)</span> <span class="p">],</span><span class="s1">&#39;ro&#39;</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">redDot</span><span class="p">,</span>
-
-<span class="c1"># create animation using the animate() function</span>
-<span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="o">.</span><span class="mi">01</span><span class="p">),</span> <span class="n">init_func</span><span class="o">=</span><span class="n">init</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="_images/302adc1b49748f5f0d3e1bbdca49f169adc2994f12e5c6c1533f0aa597dd0176.png" src="_images/302adc1b49748f5f0d3e1bbdca49f169adc2994f12e5c6c1533f0aa597dd0176.png" />
-</div>
-</div>
-<div class="admonition-exercise-3a admonition">
-<p class="admonition-title">Exercise 3a</p>
-<p>What familiar object resembles the parametric curve traced out by the equations</p>
-<p><span class="math notranslate nohighlight">\(x(t)=\sin(t)[e^{\cos t}-2\cos(4t)-\sin^5(t/12)]\)</span>,</p>
-<p><span class="math notranslate nohighlight">\(y(t)=\cos(t)[e^{\cos t}-2\cos(4t)-\sin^5(t/12)]\)</span></p>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Butterfly Curve</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="c1">#-----Set Up Plot -----</span>
@@ -900,8 +851,6 @@ R^2 for OLS is  0.429488206625943
 <img alt="_images/bcc5692b1d5f8b2e101626948e5a54cd8f36d9fe6db25492f9016536532bcff8.png" src="_images/bcc5692b1d5f8b2e101626948e5a54cd8f36d9fe6db25492f9016536532bcff8.png" />
 </div>
 </div>
-<section id="quadric-surfaces">
-<h3>3.2 Quadric Surfaces<a class="headerlink" href="#quadric-surfaces" title="Permalink to this heading">#</a></h3>
 <p>Solution to Exercise 3b.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -942,7 +891,6 @@ R^2 for OLS is  0.429488206625943
 </details>
 </div>
 <a class="reference internal image-reference" href="_images/hyperb1.png"><img alt="_images/hyperb1.png" class="align-center" src="_images/hyperb1.png" style="width: 700px;" /></a>
-</section>
 </section>
 <section id="connecting-patterns-in-mathematics-to-patterns-in-nature-and-society">
 <h2>4. Connecting Patterns in Mathematics to Patterns in Nature and Society<a class="headerlink" href="#connecting-patterns-in-mathematics-to-patterns-in-nature-and-society" title="Permalink to this heading">#</a></h2>
@@ -1022,10 +970,7 @@ R^2 for OLS is  0.429488206625943
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-in-nature">1. Patterns in Nature</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-in-societal-data">2. Patterns in Societal Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-in-mathematics">3. Patterns in Mathematics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadric-surfaces">3.2 Quadric Surfaces</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-in-mathematics">3. Patterns in Mathematics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-patterns-in-mathematics-to-patterns-in-nature-and-society">4. Connecting Patterns in Mathematics to Patterns in Nature and Society</a></li>
 </ul>
   </nav></div>
