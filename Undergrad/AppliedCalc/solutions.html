@@ -542,6 +542,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-systems-and-the-two-commodity-model">1. Linear Systems and the Two-Commodity Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-and-average-cost">2. Marginal and Average Cost</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-and-object-design">3. Optimization and Object Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-and-cobbs-douglas-production">4. Optimization and Cobbs-Douglas Production</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-derivatives-and-ols-regression">9. Partial Derivatives and OLS Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#area-between-curves-and-the-gini-index">10. Area between curves and the GINI index</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integral-test-and-income-streams">11. Integral Test and Income Streams</a></li>
@@ -721,6 +722,87 @@ ATC'(Q) = Q - 3 -\frac{50}{Q^2}.
 <img alt="../../_images/a67e4e83e6c8f1c0b6879a421f636a1d17b11d0a8d94b7dbdc9ff87182370473.png" src="../../_images/a67e4e83e6c8f1c0b6879a421f636a1d17b11d0a8d94b7dbdc9ff87182370473.png" />
 </div>
 </div>
+</section>
+<section id="optimization-and-cobbs-douglas-production">
+<h2>4. Optimization and Cobbs-Douglas Production<a class="headerlink" href="#optimization-and-cobbs-douglas-production" title="Permalink to this heading">#</a></h2>
+<p>Solution to Exercise 1</p>
+<div class="math notranslate nohighlight">
+\[
+10L + 20K + 20 =3040 \Rightarrow 20K = 3020 - 10L \Rightarrow K=151 - .5L.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Q=2L^{.4}(151-.5L)^.6
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{dQ}{dL}=2[.4L^{-.6}(151-.5L)^{.6}+L^{.4}(.6)(151-.5L)^{-.4}(-.5)]=
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{.8(151-.5L)^{.6}}{L^{.6}}-\frac{.6L^{.4}}{(151-.5L)^{.4}}=0\Rightarrow
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+.8(151-.5L)=.6L.
+\]</div>
+<p>Solving the last equation for <span class="math notranslate nohighlight">\(L\)</span> gives <span class="math notranslate nohighlight">\(L=120.8\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+K=151-.5L=151-.5(120.8)=90.6
+\]</div>
+<p>The maximum production is <span class="math notranslate nohighlight">\(Q=2(120.8)^{.4}(90.6)^{.6}=203.3.\)</span></p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+
+<span class="c1"># Create a symbolic expression for the given equation</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">L</span><span class="o">**</span><span class="p">(</span><span class="o">.</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">151</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">.</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">Q_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="c1"># Plot Q(L)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Q_vals</span><span class="p">,</span> <span class="n">Q</span><span class="p">(</span><span class="n">Q_vals</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Optimal Production&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/73d238bf7c13de6fe3ec3d28615ed23e0b138fdd62ef926dbceefc3acdf0068f.png" src="../../_images/73d238bf7c13de6fe3ec3d28615ed23e0b138fdd62ef926dbceefc3acdf0068f.png" />
+</div>
+</div>
+<p>Solution to Exercise 2</p>
+<div class="math notranslate nohighlight">
+\[
+130=2L^{.4}K^{.6}\Rightarrow\frac{130}{2L^{.4}}=K^{.6}\Rightarrow K = (\frac{65}{L^{.4}})^{5/3}=65^{5/3}L^{-2/3}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+TC=10L+20(65^{5/3}L^{-2/3})+20
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+TC'=10 - \frac{40}{3}65^{5/3}L^{-5/3}=0 \Rightarrow L=77.246
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(TC''=\frac{200}{9}65^{5/3}L^{-7/3}&gt;0\)</span> so there is a minimum at <span class="math notranslate nohighlight">\(L=77.25\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(K=65^{5/3}(77.246)^{-2/3}\approx 57.9346\)</span>.</p>
+<p>The minimum total cost is <span class="math notranslate nohighlight">\(10(77.246)+20 (57.9346)+20\approx 1951.15\)</span>.</p>
 </section>
 <section id="partial-derivatives-and-ols-regression">
 <h2>9. Partial Derivatives and OLS Regression<a class="headerlink" href="#partial-derivatives-and-ols-regression" title="Permalink to this heading">#</a></h2>
@@ -1057,6 +1139,7 @@ ATC'(Q) = Q - 3 -\frac{50}{Q^2}.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-systems-and-the-two-commodity-model">1. Linear Systems and the Two-Commodity Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-and-average-cost">2. Marginal and Average Cost</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-and-object-design">3. Optimization and Object Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-and-cobbs-douglas-production">4. Optimization and Cobbs-Douglas Production</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-derivatives-and-ols-regression">9. Partial Derivatives and OLS Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#area-between-curves-and-the-gini-index">10. Area between curves and the GINI index</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integral-test-and-income-streams">11. Integral Test and Income Streams</a></li>
