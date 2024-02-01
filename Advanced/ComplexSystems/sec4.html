@@ -553,12 +553,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idp-data">IDP Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simplifying-assumptions-on-idp-system-complexity">Simplifying Assumptions on IDP System Complexity</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basic-response-model">A  Basic Response Model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complexity-of-a-response-region">Complexity of a Response Region</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Complexity of a Response Region</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idp-camp-deficiency-entropy">IDP Camp Deficiency Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -740,28 +741,157 @@ Ns= &lt;Ns_1,Ns_2,...,Ns_k&gt;  \preceq  &lt;n_1,n_2,...,n_k&gt;,
 <a class="reference internal image-reference" href="../../_images/fig211.png"><img alt="../../_images/fig211.png" src="../../_images/fig211.png" style="width: 600px;" /></a>
 <p><b> Figure 21 </b> Hypothetical NGO’s map of effective response IDP camp locations  with proportion of children under age 3. See the JNB ‘IDP Response’ available at <a class="reference external" href="https://drive.google.com/drive/folders/1zqQB-hEPocxOVOjiI0Q32XDKVJoq6PI3?usp=sharing">https://drive.google.com/drive/folders/1zqQB-hEPocxOVOjiI0Q32XDKVJoq6PI3?usp=sharing</a></p>
 </section>
-<section id="complexity-of-a-response-region">
-<h3>Complexity of a Response Region<a class="headerlink" href="#complexity-of-a-response-region" title="Permalink to this heading">#</a></h3>
-<p>Note that we can use entropy to measure the amount of disorder in a given area with <span class="math notranslate nohighlight">\(N\)</span> IDP camps. Let <span class="math notranslate nohighlight">\(p_i\)</span> be the empirical probability that a camp  has need <span class="math notranslate nohighlight">\(i \in \{ 1,2,...,k\}\)</span>. Then the entropy <span class="math notranslate nohighlight">\(H\)</span> is computed as</p>
+<section id="idp-camp-deficiency-entropy">
+<h3>IDP Camp Deficiency Entropy<a class="headerlink" href="#idp-camp-deficiency-entropy" title="Permalink to this heading">#</a></h3>
+<p>Entropy for societal applications can be introduced in an intuitive way using simple examples. We suggest that there is more than one way to interpret the meaning of entropy depending on the context.  The computation of entropy is based on empirical histograms whose choice of bins determines the meaning of higher or lower entropy.</p>
+<p><strong>Example 1:  ENTROPY AS A MEASURE OF DISAGREEMENT</strong></p>
+<p>Suppose a campus club’s leadership committee comprised of <span class="math notranslate nohighlight">\(N\)</span> students is deliberating the use of funding for a certain year-end activity and must decide between Option A and Option B. Table \ref{ex1} shows several possibilities where a proportion <span class="math notranslate nohighlight">\(p_1=p\)</span> of t0he committee strongly prefers option A and a proportion <span class="math notranslate nohighlight">\(p_2=1-p\)</span> strongly prefers option B.  the degree of disagreement is reflected by   the (Shannon) entropy defined as</p>
 <div class="math notranslate nohighlight">
 \[
-    H= -\sum_{i=1}^N p_i \ln p_i.
+H(p_1,p_2) = -\sum_{i=1}^2 p_i \ln p_i = -[p\ln p + (1-p)\ln(1-p)],
 \]</div>
-<p>For example,</p>
-<p>i) all the camps have need <span class="math notranslate nohighlight">\(i=1\)</span> (eg. food) and no other need, then <span class="math notranslate nohighlight">\(p_1=1\)</span>, all other <span class="math notranslate nohighlight">\(p_i=0\)</span>, and hence
-<span class="math notranslate nohighlight">\(H=0\)</span>.</p>
-<p>ii) all camps have all the needs <span class="math notranslate nohighlight">\(1,...,k\)</span>, then <span class="math notranslate nohighlight">\(p_i=1\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>, and again <span class="math notranslate nohighlight">\(H=0\)</span>.</p>
-<p>iii) the probability that a camp has need <span class="math notranslate nohighlight">\(i\)</span> is <span class="math notranslate nohighlight">\(1/i\)</span>, then <span class="math notranslate nohighlight">\(H_N=\sum_{i=1}^N\frac{\ln i}{i}\)</span>. Note that in this case, the needs are ordered by frequency of occurrence. A graph of <span class="math notranslate nohighlight">\(H_N\)</span> is shown in <b>Figure 22</b>.</p>
-<a class="reference internal image-reference" href="../../_images/fig22.png"><img alt="../../_images/fig22.png" src="../../_images/fig22.png" style="width: 300px;" /></a>
-<p><b>Figure 22</b> Graph of <span class="math notranslate nohighlight">\(H_N\)</span> for the case where the probability of need is <span class="math notranslate nohighlight">\(p_i=1/i\)</span> (<span class="math notranslate nohighlight">\(i=1,...,N\)</span>).</p>
-<p>Entropy can be used to measure disorder for the entire Tigray region. If all camps have exactly the same needs (coherent system with <span class="math notranslate nohighlight">\(H=0\)</span>), the response to the needs is conceptually less complex than the case when there are varying needs (correlated system, <span class="math notranslate nohighlight">\(H&gt;0)\)</span>.<br />
-Note that if peace is restored in such a way that all camps are vacated and the IDP return to their homes, this is a special case where all camps have the same need: <span class="math notranslate nohighlight">\(p_i=0\)</span> for all <span class="math notranslate nohighlight">\(i\in\{1,...,k\}\)</span>.  Civil war resulted in a tragic phase transition from  <span class="math notranslate nohighlight">\(H=0\)</span> to <span class="math notranslate nohighlight">\(H&gt;0\)</span>.</p>
-</section>
-<section id="id3">
-<h3>Complexity of a Response Region<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
-<p>Note that we can use entropy to measure the amount of disorder in a given area with <span class="math notranslate nohighlight">\(N\)</span> IDP camps. Let <span class="math notranslate nohighlight">\(p_i\)</span> be the empirical probability that a camp  has need <span class="math notranslate nohighlight">\(i \in \{ 1,2,...,k\}\)</span>. Then</p>
-<p>Entropy can be used to measure disorder for the entire Tigray region. If all camps have exactly the same needs (coherent system with <span class="math notranslate nohighlight">\(H=0\)</span>), the response to the needs is conceptually less complex than the case when there are varying needs (correlated system, <span class="math notranslate nohighlight">\(H&gt;0)\)</span>.<br />
-Note that if peace is restored in such a way that all camps are vacated and the IDP return to their homes, this is a special case where all camps have the same need: <span class="math notranslate nohighlight">\(p_i=0\)</span> for all <span class="math notranslate nohighlight">\(i\in\{1,...,k\}\)</span>.  Civil war resulted in a tragic phase transition from  <span class="math notranslate nohighlight">\(H=0\)</span> to <span class="math notranslate nohighlight">\(H&gt;0\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(0\le p \le 1\)</span>.</p>
+<table style="width:50%">
+    <tr>
+        <th> Committee Preferences </th>
+        <th>$p_1$</th>
+        <th>$p_2$</th>
+        <th>Disagreement</th>
+        <th> H= </th>
+    </tr>   
+   <tr>
+       <td>All favor Option A</td>
+       <td>1 </td>
+       <td>0 </td>
+       <td>none</td>
+       <td>0</td>
+   </tr>   
+   <tr>
+       <td>All favor Option B</td>
+       <td>0 </td>
+       <td>1 </td>
+       <td>none</td>
+       <td>0</td>
+    </tr>
+    <tr>
+        <td>90\% favor Option A</td>
+        <td>.9</td>
+        <td>.1</td>
+        <td>small</td>
+        <td>$.325$</td>
+    </tr>
+    <tr>    
+    <td>50\% favor each option</td>
+        <td>.5</td>
+        <td>.5 </td>
+        <td>maximum</td>
+        <td>$\ln 2\approx .69$</td>
+    </tr>
+</table>
+ Note 
+<ul>
+    <li>  $H=0$ when $p_1=1,p_2=0$ or when $p_1=0,p_2=1$.</li>
+<li> $H$ has a maximum at $p_1=p_2=.5$ as can be seen from a graph of  $H(p)=-[p\ln p + (1-p)\ln(1-p)]$ (see Figure below) and verified using calculus:
+</li>
+ </ul>
+<div class="math notranslate nohighlight">
+\[
+H'(p)=-\ln p - 1 + 1 + \ln(1-p)= 0 \Rightarrow \ln(\frac{1-p}{p})=0\Rightarrow \frac{1-p}{p}=1\Rightarrow p=.5.
+\]</div>
+<a class="reference internal image-reference" href="Advanced/ComplexSystems/H.png"><img alt="Advanced/ComplexSystems/H.png" src="Advanced/ComplexSystems/H.png" style="width: 100px;" /></a>
+<p>Note that the entropy generalizes to any number of options <span class="math notranslate nohighlight">\(n\ge 2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+H(p_1,p_2,...,p_n)=-\sum_{p_i&gt;0} p_i \ln p_i.
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_i\ge 0\)</span> and  <span class="math notranslate nohighlight">\(\sum p_i=1\)</span>. For the case where the committee is split evenly between the <span class="math notranslate nohighlight">\(n\)</span> options (<span class="math notranslate nohighlight">\(p_i=1/n\)</span> for <span class="math notranslate nohighlight">\(i=1,2,...,n\)</span>), the entropy is</p>
+<div class="math notranslate nohighlight">
+\[
+H= -\sum_{i=1}^n (1/n) \ln(1/n) = \ln n.
+\]</div>
+<p>Thus, for an even split between two options, the level of disagreement is <span class="math notranslate nohighlight">\(H=\ln 2 \approx .69 \)</span> and for three options it is <span class="math notranslate nohighlight">\(\ln 3 \approx 1.1.\)</span></p>
+<p><strong>Example 2  ENTROPY AS A MEASURE OF DIVERSIFICATION</strong></p>
+<p>Business types have various classifications, including the North American Industry Classification System (NAICS), a hierarchical taxonomy with resolution levels 2-6. Level 2 describes broad sectors such as “71= arts and entertainment” and level 6 the most granular classifications of businesses such as “711110= dinner theater”. Using  data from the US Bureau of Labor Statistics <a class="reference external" href="https://www.bls.gov/oes/tables.htm">https://www.bls.gov/oes/tables.htm</a>, a histogram such as Figure 4 gives in order of decreasing frequency the number of jobs in each of <span class="math notranslate nohighlight">\(N\)</span> job categories.</p>
+<a class="reference internal image-reference" href="../../_images/jobs.png"><img alt="../../_images/jobs.png" src="../../_images/jobs.png" style="width: 400px;" /></a>
+<p>Data for this histogram specifies empirical probabilities that a job is of a given category.  The Shannon entropy  is computed from the histogram data as <span class="math notranslate nohighlight">\(H=-\sum_{p_i&gt;0} p_i\ln p_i\)</span> where <span class="math notranslate nohighlight">\(p_i\)</span> is the proportion of jobs belonging to job type <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(N\)</span> is the number of job types (<span class="math notranslate nohighlight">\(N=290\)</span> and <span class="math notranslate nohighlight">\(H=7.25\)</span> for Abilene. (See the JNB “Job Diversification” available at <a class="reference external" href="http://tinyurl.com/3awd2kvx.">http://tinyurl.com/3awd2kvx.</a>)</p>
+<p>This entropy can be used to compare the level of job diversification in different cities. A higher entropy reflects greater diversification of employment.</p>
+<p><strong>Example 3 ENTROPY AS A MEASURE OF DEFICIENCY</strong></p>
+<p>Consider a calculus course with 4 unit tests. Table \ref{ex2} shows the distributions of number of  tests failed by students in three different sections (denoted <span class="math notranslate nohighlight">\(S1,S2\)</span> and <span class="math notranslate nohighlight">\(S3\)</span> ).  For each of these sections we have computed the Shannon entropy</p>
+<div class="math notranslate nohighlight">
+\[
+    H = - \sum_{p_i&gt;0} p_i \ln p_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_i\)</span> denotes the empirical probability that a student fails <span class="math notranslate nohighlight">\(i\)</span> unit tests. Section <span class="math notranslate nohighlight">\(S1\)</span> (all students pass all 4 tests) has no deficiency and the entropy is <span class="math notranslate nohighlight">\(H=-1\ln(1)=0.\)</span>  Section <span class="math notranslate nohighlight">\(S2\)</span>,  with just 1 out of 20 students failing 1 of the tests, has a low entropy value (<span class="math notranslate nohighlight">\(H=-[.95\ln(.95) + .05\ln(.05)]=.20\)</span>).  Section <span class="math notranslate nohighlight">\(S3\)</span> had the highest entropy (<span class="math notranslate nohighlight">\(H=-[.6\ln.6+.2\ln.2+.09\ln.09+.12\ln.12]=1.1\)</span>) with a considerable proportion of   students failing 1,2, or 3 tests.</p>
+<table style="width:50%">
+    <tr>
+        <th> </th>
+        <th> </th>
+        <th> Number </th>
+        <th>  Failed</th>
+        <th>Unit</th>
+        <th>Tests</th>
+    </tr>
+    <tr>
+        <th>Course Section</th>
+        <th>Number Students</th>
+        <th>0</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>H</th>
+    </tr>
+    <tr>
+        <td>S1</td>
+        <td>30</td>
+        <td>30></td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>S2</td>
+        <td>20</td>
+        <td>19></td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>.2</td>
+    </tr>
+    <tr>
+        <td>S3</td>
+        <td>25</td>
+        <td>15</td>
+        <td>5</td>
+        <td>2</td>
+        <td>3</td>
+        <td>1.1</td>
+    </tr>
+</table>
+<p>One major problem with using Shannon entropy to measure deficiency is that it gives a misleading  result when there is a high probability that the students fail most or even all the tests.  For example, in the case of the worst deficiency where all students fail all 4 tests, <span class="math notranslate nohighlight">\(p_4=1\)</span> (all other <span class="math notranslate nohighlight">\(p_i=0\)</span>) so <span class="math notranslate nohighlight">\(H=p_4\ln p_4 = 1\ln1=0\)</span>.  To analyze deficiency, we need a metric that increases with increased number of tests failed. We therefore use a weighted  Shannon for deficiency:</p>
+<div class="math notranslate nohighlight">
+\[
+H_{deficiency}= - \sum_{p_i\neq0} i \,p_i \ln p_i. 
+\]</div>
+<p><span class="math notranslate nohighlight">\(H_{deficiency}\)</span> is designed to work with histogram bins indexed 1,2,…,<span class="math notranslate nohighlight">\(n\)</span>, such that the higher the index, the higher the level of deficiency.  <span class="math notranslate nohighlight">\(p_i\)</span> is the empirical probability that a data value belongs to bin <span class="math notranslate nohighlight">\(i\)</span>. While <span class="math notranslate nohighlight">\(H_{deficiency}\)</span> does not handle well the extreme exceptional cases where <span class="math notranslate nohighlight">\(p_i=1\)</span> for some <span class="math notranslate nohighlight">\(i&gt;0\)</span>, it can be applied to more typical cases, including our original IDP camp question.</p>
+<p><strong>IDP Camp Analysis</strong></p>
+<p>Using the full IOM dataset, we created a binary dataset which indicated whether or not each camp in a given city (Mekelle or Shire) has a deficiency in each of the following areas of education:
+a) pre-primary</p>
+<p>b) primary</p>
+<p>c) secondary</p>
+<p>d) resources</p>
+<p>e) quality/satisfaction</p>
+<p>f) girl attendance</p>
+<p>g) boy attendance; and</p>
+<p>h) teachers.</p>
+<p>We classify IDP camp data according to the number of deficient areas. If a camp has no deficient areas, it is put into bin <span class="math notranslate nohighlight">\(i=0\)</span>; if a camp has two deficient areas, say <span class="math notranslate nohighlight">\(\{b,c\}=\{primary, secondary\}\)</span> or <span class="math notranslate nohighlight">\(\{d.h\}=\{resources, teachers\}\)</span> it is put into bin <span class="math notranslate nohighlight">\(i=2\)</span>. Let <span class="math notranslate nohighlight">\(p_i\)</span> be the empirical probability that a camp in a certain region (Mekelle or Shire) has a total of <span class="math notranslate nohighlight">\(i\)</span> educational deficiencies (i.e., is in bin <span class="math notranslate nohighlight">\(i\in\{0,1,...,8\}\)</span>).  We computed <span class="math notranslate nohighlight">\(H_{deficiency}= - \sum_{p_i\neq0} i \,p_i \ln p_i\)</span>   using a Python Jupyter Notebook available at <a class="reference external" href="http://tinyurl.com/2yjrycp5">http://tinyurl.com/2yjrycp5</a>.
+Our analysis gave an entropy of  2.72 for the <span class="math notranslate nohighlight">\(N_1=48\)</span> camps in Mekelle and
+1.21 for the <span class="math notranslate nohighlight">\(N_2=34\)</span> camps in Shire.
+The figure below shows the distributions of IDP camps in Mekelle and Shire according to how many of the eight education areas each camp is deficient.</p>
+<a class="reference internal image-reference" href="../../_images/needs.png"><img alt="../../_images/needs.png" src="../../_images/needs.png" style="width: 400px;" /></a>
+<p>The higher value of <span class="math notranslate nohighlight">\(H_{deficiency}\)</span> for Mekelle is consistent with the fact that Mekelle (unlike Shire) had a few camps with 4 or 5 educational deficiencies, and also considerably more camps with 3 educational deficiencies.</p>
+<p><strong>Discussion</strong></p>
+<p>The American Statistical Association (ASA) missional statement  to use statistics to enhance human welfare (Lesser 2007, Schram et al. 2018, Amdat 2022) encourages us to consider social justice datasets such as data on IDP in Tigray.  Entropy has flexible interpretations, and with suitable modification offers a metric  to assess the condition of IDP camp education for a given locale. Entropy is a topic not usually covered in an intro to stats or data science class, or even within a traditional math major, but takes histogram analysis one step further.   In the case of our IDP data, there are several other important categories such as food, water and health that could be explored  in a similar way using Jupyter Notebooks. Thinking in general about various intepretations of entropy in societal contexts and use of the IDP dataset in particular gives an opportunity to enact several Gaise (2016) recommendations including: teaching  statistics as an investigative process of problem-solving and decision-making, focusing on conceptual understanding, integrating real data with a context and purpose, fostering active learning, and using technology to explore concepts and analyze data.</p>
 </section>
 <section id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
@@ -786,24 +916,22 @@ where $Camp_{a_i}$ is feasible for $NGO_i$ ($i=1,2,...,x$).  What is the probabi
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Mini-Modeling Problem</strong></p>
-<p>Suppose an NGO provides educational support for IDPs and is considering working in either Mekelle or Shire (the two largest cities in Tigray with the most IDP).  Using the data IDP.xlsx available at <a class="reference external" href="https://drive.google.com/drive/folders/1zqQB-hEPocxOVOjiI0Q32XDKVJoq6PI3?usp=sharing">https://drive.google.com/drive/folders/1zqQB-hEPocxOVOjiI0Q32XDKVJoq6PI3?usp=sharing</a>, develop a model which can be used to determine which between Mekelle and Shire  has the greater disorder in its IDP camp education sector.</p>
+<p>Suppose an NGO provides educational support for IDPs and is considering working in either Mekelle or Shire (the two largest cities in Tigray with the most IDP).  Using the data IDP.xlsx available at <a class="reference external" href="https://drive.google.com/drive/folders/1zqQB-hEPocxOVOjiI0Q32XDKVJoq6PI3?usp=sharing">https://drive.google.com/drive/folders/1zqQB-hEPocxOVOjiI0Q32XDKVJoq6PI3?usp=sharing</a>, develop a model which can be used to determine which between Mekelle and Shire  has the greater educational deficiency in its IDP camp education sector.</p>
 </div>
+<section id="references">
+<h4>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h4>
+<p>Amdat, W.C. (2022). “The Chicago Hardship Index: An Introduction to Urban Inequity.” Available at <a class="reference external" href="https://www.tandfonline.com/doi/full/10.1080/26939169.2021.1994489">https://www.tandfonline.com/doi/full/10.1080/26939169.2021.1994489</a></p>
+<p>Bertin, E. (2021). Statistical Physics of Complex Systems: A Concise Introduction (3rd Edition). Cham, Switzerland: Springer Nature.</p>
+<p>GAISE College Report ASA Revision Committee, (2016), “Guidelines for Assessment and Instruction in
+Statistics Education College Report 2016,” available at: <a class="reference external" href="https://www.amstat.org/asa/files/pdfs/GAISE/GaiseCollege_Full.pdf">https://www.amstat.org/asa/files/pdfs/GAISE/GaiseCollege_Full.pdf</a></p>
+<p>Hartnett, K. (2022), “How Shannon entropy imposes fundamental limits on communication,” available at <a class="reference external" href="https://www.quantamagazine.org/how-claude-shannons-concept-of-entropy-quantifies-information-20220906/">https://www.quantamagazine.org/how-claude-shannons-concept-of-entropy-quantifies-information-20220906/</a></p>
+<p>Lesser, L. (2007),“Critical Values and Transforming Data: Teaching Statistics with Social Justice.” Journal of Statistics Education, 15:1,  DOI:10.1080/10691898.2007.11889454</p>
+<p>Nawrock, D.N. and Harding W.H. (1986), “State-value weighted entropy as a measure of investment risk,” available at <a class="reference external" href="https://www.researchgate.net/publication/24072353_State-Value_Weighted_Entropy_as_a_Measure_of_Investment_Risk">https://www.researchgate.net/publication/24072353_State-Value_Weighted_Entropy_as_a_Measure_of_Investment_Risk</a></p>
+<p>Saraiva, P. (2023) “On Shannon entropy and its applications.” Available at <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S2307410823000433">https://www.sciencedirect.com/science/article/pii/S2307410823000433</a></p>
+<p>Schramm, H., Koehlmoos T.,  and  Nestler, S. (2018), “Statistics in Pursuit of Social Justice,” available at:<a class="reference external" href="https://csbaonline.org/about/news/statistics-in-pursuit-of-social-justice">https://csbaonline.org/about/news/statistics-in-pursuit-of-social-justice</a></p>
+<p>Wang, L., Whittemore, K., Johnston, S.A., and Stafford P. (2017), “Entropy is a simple measure of the antibody profile and is an indicator of health status: proof of concept,” available at <a class="reference external" href="https://www.nature.com/articles/s41598-017-18469-6">https://www.nature.com/articles/s41598-017-18469-6</a>}</p>
 </section>
 </section>
-<section id="discussion">
-<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this heading">#</a></h2>
-<p>In this Module, we have introduced a few intuitive ideas about complex systems (<b>Section 2</b>), examined some of the underlying mathematical concepts such as equilibrium, phase transition, and entropy from statistical physics (<b> Section 3</b>), and provided examples how these concepts might be applied to empirical data about complexity in human society (<b>Section 4</b>).
-We refer the reader to Fieguth [2021] (<b>Section 2</b>), Bertin [2021] (<b>Section 3</b>) and Bettencourt [2022] (<b> Section 4</b>)  for in-depth treatments of this material. The applicability of calculus, differential equations, and probability reinforces the value of undergraduate level mathematics.</p>
-<p>We also hope to have raised awareness of the plight of IDP in the Tigray region of Ethiopia. While writing this Module, the authorship team was involved in a `Math Serve’, communicating with the Mayor of Nebelet who was overseeing an IDP camp of 266 people living in a school (IDP center). Since our team leader visited  Nebelet in August 2023, we knew that a primary need   was emergency food supply. Problems we encountered setting up food delivery included the right quantity and timing of deliveries (roughly 10 quintiles per month), as well how to ensure the quality of the food being delivered. Even so, the IDP were very grateful for the food support.</p>
-<p>A second need we considered was IDP housing.  As classrooms are in great demand,  the IDP need to be relocated. One  affordable housing option is a $ 125 tent large enough for one household (<b>Figure 23</b>).</p>
-<a class="reference internal image-reference" href="../../_images/fig23.png"><img alt="../../_images/fig23.png" src="../../_images/fig23.png" style="width: 300px;" /></a>
-<p><b> Figure 23 </b> Tents are an affordable housing option for IDP households.</p>
-<a class="reference internal image-reference" href="../../_images/fig24.png"><img alt="../../_images/fig24.png" src="../../_images/fig24.png" style="width: 300px;" /></a>
-<p><b> Figure 24 </b>   Preliminary idea for the layout of an IDP tent village.</p>
-<p>As a big scale `reality check’, the U.N. spent millions of dollars to build a large IDP camp about 7 km southwest of Shire.  But none of the tens of thousands of IDP living in Shire (see <b> Figure 25</b>) wanted to move there since it was not within easy walking distance to the city where the IDP beg for food.  Furthermore, firewood was not available for cooking, and to compound matters, it was close to an army base, raising safety concerns. Plans which are not well-connected to the community/beneficiaries’ needs and preference may look good on paper but in fact be unrealistic and result in a huge waste of time and material resources if implemented.</p>
-<a class="reference internal image-reference" href="../../_images/fig25.png"><img alt="../../_images/fig25.png" src="../../_images/fig25.png" style="width: 300px;" /></a>
-<p><b> Figure 25</b> There are many sizeable IDP camp populations in Shire, the second largest city ion Tigray.</p>
-<p>From complex system theory we know that in some cases a transition can be catastrophic or irreversible. Our prayers are with the people of Tigray that the effects of the horrific civil war will be reversible in the sense that a stable and peaceful society will soon be restored. Our hope is that readers of this Module will be moved to participate in some way in an open system for the restoration of Tigray to the beautiful land that it once was.</p>
 </section>
 </section>
 
@@ -888,12 +1016,13 @@ We refer the reader to Fieguth [2021] (<b>Section 2</b>), Bertin [2021] (<b>Sect
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idp-data">IDP Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simplifying-assumptions-on-idp-system-complexity">Simplifying Assumptions on IDP System Complexity</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basic-response-model">A  Basic Response Model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complexity-of-a-response-region">Complexity of a Response Region</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Complexity of a Response Region</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idp-camp-deficiency-entropy">IDP Camp Deficiency Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
