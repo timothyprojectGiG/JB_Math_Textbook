@@ -584,13 +584,13 @@ document.write(`
 <section id="derivative-optimization">
 <h2>1. Derivative Optimization<a class="headerlink" href="#derivative-optimization" title="Permalink to this heading">#</a></h2>
 <p>Given a function <span class="math notranslate nohighlight">\(y=f(x)\)</span>, the derivative <span class="math notranslate nohighlight">\(f'(x)\)</span> evalauted at <span class="math notranslate nohighlight">\(x=a\)</span> gives us the slope of the tangent (instantaneous rate of change)  to the graph of <span class="math notranslate nohighlight">\(y=f(x)\)</span> ad the point <span class="math notranslate nohighlight">\((a,f(a))\)</span>.  Maximum and minimum points are special since the tangents are horitzontal at those points and hence the derivative satisfies the equation <span class="math notranslate nohighlight">\(f'(x)=0\)</span>. Maximum and minimum points are important in applications since, for example, minimizing cost or maximizing benefit of a project is often a primary goal.</p>
-<p>Entropy is an important example discussed in the section on societal applications in the final chapter (complex systems) of this book. We illustrate here why minimization/maximazation of entropy is important.  Suppose you have  a committee  of <span class="math notranslate nohighlight">\(N\)</span> people voting on a certain decision such that a proportion <span class="math notranslate nohighlight">\(p_1=p\)</span> strongly prefers option A and a proportion <span class="math notranslate nohighlight">\(p_2=1-p\)</span> strongly prefers option B .  Note that there is no disagreement (disorder) if <span class="math notranslate nohighlight">\(p_1=1\)</span> and <span class="math notranslate nohighlight">\(p_2=0\)</span> (everyone strongly prefers option A) and likewise there is no disagreement (disorder) if <span class="math notranslate nohighlight">\(p_1=0\)</span> and <span class="math notranslate nohighlight">\(p_2=1\)</span> (everyone strongly prefers option B.)  Note that if <span class="math notranslate nohighlight">\(p_1=.9\)</span> and <span class="math notranslate nohighlight">\(p_2=.1\)</span>, there is a strong consensus for Option A so while there is a little bit of disagreement (disorder), Option A will likely carry.  Note that the case where the population is evely split <span class="math notranslate nohighlight">\(p_1=p_2=.5\)</span> will have the greatest disagreement (disorder) in trying to achieve a consensus.</p>
-<p>Entropy is a function used to measure disorder within a system. In this case, we can define the entropy as</p>
+<p>Entropy is an important example discussed in the section on societal applications in the final chapter (complex systems) of this book. We illustrate here why minimization/maximazation of entropy is important.  Suppose you have  a committee  of <span class="math notranslate nohighlight">\(N\)</span> people voting on a certain decision such that a proportion <span class="math notranslate nohighlight">\(p_1=p\)</span> strongly prefers option A and a proportion <span class="math notranslate nohighlight">\(p_2=1-p\)</span> strongly prefers option B .  Note that there is no disagreement  if <span class="math notranslate nohighlight">\(p_1=1\)</span> and <span class="math notranslate nohighlight">\(p_2=0\)</span> (everyone strongly prefers option A) and likewise there is no disagreement  if <span class="math notranslate nohighlight">\(p_1=0\)</span> and <span class="math notranslate nohighlight">\(p_2=1\)</span> (everyone strongly prefers option B.)  Note that if <span class="math notranslate nohighlight">\(p_1=.9\)</span> and <span class="math notranslate nohighlight">\(p_2=.1\)</span>, there is a strong consensus for Option A so while there is a little bit of disagreement, Option A will likely carry.  Note that the case where the population is evely split <span class="math notranslate nohighlight">\(p_1=p_2=.5\)</span> will have the greatest disagreement  in trying to achieve a consensus.</p>
+<p>Entropy can be used to measure the level of disagreement.  we define the Shannon entropy as</p>
 <div class="math notranslate nohighlight">
 \[
 H(p) = -\sum_{i=1}^2 p_i \ln p_i = -[p\ln p + (1-p)\ln(1-p)].
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(0\le p \le 1\)</span>.  Exercise 1.1 shows the properties of this function correspond to the degree of disorder in our example.  (Note: We could generalize the definition from 2 to <span class="math notranslate nohighlight">\(k\ge 1\)</span> options, in which case <span class="math notranslate nohighlight">\(H= -\sum_{i=1}^k p_i \ln p_i\)</span> where <span class="math notranslate nohighlight">\(p_i\)</span> is the proportion of people who are strongly inclined to vote for option <span class="math notranslate nohighlight">\(i\)</span>, so that <span class="math notranslate nohighlight">\(0&lt;p_i\le 1\)</span> and <span class="math notranslate nohighlight">\(p_1+...p_k=1\)</span>.)</p>
+<p>where <span class="math notranslate nohighlight">\(0\le p \le 1\)</span>.  Exercise 1.1 shows the properties of this function <span class="math notranslate nohighlight">\(H(p)\)</span> correspond to the amount of disagreement in our example.</p>
 <section id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
 <div class="admonition-exercises admonition">
@@ -604,30 +604,41 @@ H(p) = -\sum_{i=1}^2 p_i \ln p_i = -[p\ln p + (1-p)\ln(1-p)].
 </section>
 <section id="series">
 <h2>2. Series<a class="headerlink" href="#series" title="Permalink to this heading">#</a></h2>
-<p>Let us now switch contexts to a region which has <span class="math notranslate nohighlight">\(N\)</span> refugee camps or icamps of internally displaced people (IDP). In this case, we consider needs 1,2,…,k where 1=food, 2=water, 3=shelter, … and <span class="math notranslate nohighlight">\(p_i\)</span> is the proportion of camps whose greatest need is <span class="math notranslate nohighlight">\(i\)</span> (we assume each camp has a greatest need and so <span class="math notranslate nohighlight">\(p_1+....+p_k=1\)</span>.</p>
+<p>Suppose now there are <span class="math notranslate nohighlight">\(k\)</span> options.  <span class="math notranslate nohighlight">\(p_i\)</span> is the proportion of committee members favoring option  <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(1\le i \le k\)</span> and <span class="math notranslate nohighlight">\(p_1+....+p_k=1\)</span>).</p>
 <div class="math notranslate nohighlight">
 \[
-H= -\sum_{i=1}^k p_i
+H= -\sum_{i=1}^k p_i \ln p_i= -(p_1\ln p_1 + p_2\ln p_2 + ... + p_k \ln p_k).
 \]</div>
-<p>From the point of view of disaster response, <span class="math notranslate nohighlight">\(H\)</span> as a measure of disorder could be interpreted as a measure of the complexity of the response.  For example, if every camp has the same greatest need (labelled 1), then <span class="math notranslate nohighlight">\(p_1=1\)</span> and and <span class="math notranslate nohighlight">\(p_i=0\)</span> otherwise, in which case <span class="math notranslate nohighlight">\(H=-1\ln 1 = 0\)</span>. Conceptually the response is simple since every camp’s greatest need is for food and so food is the first priority sent to every camp.</p>
 <section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
-<div class="admonition-exercise admonition">
-<p class="admonition-title">Exercise</p>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
 <p><b>2.1</b></p>
-<p>a) Compute the entropy <span class="math notranslate nohighlight">\(H\)</span> in the case where each of the <span class="math notranslate nohighlight">\(N\)</span> camps has a different first priority need. Is <span class="math notranslate nohighlight">\(H\)</span> a strictly increasing function of <span class="math notranslate nohighlight">\(N\)</span>?  Is <span class="math notranslate nohighlight">\(H\)</span> bounded?</p>
-<p>b) Compute the entropy <span class="math notranslate nohighlight">\(H\)</span> in the case where each of <span class="math notranslate nohighlight">\(k\)</span> needs is equally likely to be a first priority need.  Make a plot of <span class="math notranslate nohighlight">\(H\)</span> as a function of <span class="math notranslate nohighlight">\(k\)</span> for <span class="math notranslate nohighlight">\(k=1,...,10\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Consider the case with <span class="math notranslate nohighlight">\(k=3\)</span>. Compute the entropy <span class="math notranslate nohighlight">\(H\)</span> if</p></li>
+</ol>
+<p>a) <span class="math notranslate nohighlight">\(p_1=.5, p_2=.3, p_3=.2\)</span> and</p>
+<p>b) <span class="math notranslate nohighlight">\(p_1=.2, p_2=.5, p_3=.3\)</span></p>
+<p>c) <span class="math notranslate nohighlight">\(p_1=.2, p_2=.3, p_3=.5\)</span></p>
+<ol class="arabic simple" start="2">
+<li><p>What does problem 1 tell us about the computation of entropy of disagreement?</p></li>
+</ol>
 </div>
 </section>
 </section>
 <section id="probability-distributions">
 <h2>3. Probability Distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
-<p>Now let us consider a situation where you are holding a dinner and there is a certain probability <span class="math notranslate nohighlight">\(p_k\)</span> that a guest will arrive <span class="math notranslate nohighlight">\(k\)</span> hours late.  If all guests arrive on time, <span class="math notranslate nohighlight">\(p_0=1\)</span> and all other <span class="math notranslate nohighlight">\(p_k=0\)</span>, so the entropy <span class="math notranslate nohighlight">\(H=0\)</span>. This is in certain cultures an ideal situation where there is no disorder and you can start the dinner right on time.</p>
-<p>In other cases, it might be normative for guests to arrive later than the announced time.  We can use a probability distribution to model the arrival time.  For example, if the mean arrival time is 10 minutes after the designated time, then we consider the probability density function  <span class="math notranslate nohighlight">\(f(x)=\frac{1}{10}e^{-x/10}\)</span> where <span class="math notranslate nohighlight">\(x\in[0,\infty)\)</span>.  The probability that a guest arrives in the interval <span class="math notranslate nohighlight">\(a\le x \le b\)</span> is given by the definite integral</p>
+<p>Now let us consider a situation where you are holding a dinner and there is a certain probability <span class="math notranslate nohighlight">\(p_k\)</span> that a guest prefers to arrive between <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(k+1\)</span> hours late.  If all guests prefer to arrive no more than say 1/2 hour late, then <span class="math notranslate nohighlight">\(p_0=1\)</span> and all other <span class="math notranslate nohighlight">\(p_k=0\)</span>, so the entropy <span class="math notranslate nohighlight">\(H=0\)</span>. This is in certain cultures an ideal situation and there is no major disagreement in the preferred arrival time (<span class="math notranslate nohighlight">\(H=0\)</span>).</p>
+<p>In other cases, it might be normative for guests to arrive substantially later than the announced time.  For example, if all guests prefer to arrive between <span class="math notranslate nohighlight">\(k=1\)</span> and <span class="math notranslate nohighlight">\(k=2\)</span> (between 1 and 2 hours late), then <span class="math notranslate nohighlight">\(p_1=1\)</span> and again there is no major disagreement (<span class="math notranslate nohighlight">\(H=0\)</span>).</p>
+<p>We can use a probability distribution to model the probability of a preferred arrival time.  For example, if the mean arrival time is 10 minutes after the designated time (1/k=1/6 hour), then we consider the probability density function  <span class="math notranslate nohighlight">\(f(x)=\frac{1}{6} e^{-6x}\)</span> where <span class="math notranslate nohighlight">\(x\in[0,\infty)\)</span>.  The probability that a guest arrives in the interval <span class="math notranslate nohighlight">\(k\le x \le k+1\)</span> is given by the definite integral</p>
 <div class="math notranslate nohighlight">
 \[
-prob(a\le x \le b) = \int_a^b f(x)\, dx = (1/10) \int_a^b e^{-x/10}= (1/10)(-10) e^{-x/10} \mid_a^b = e^{-b/10}+e^{-a/10}. \]</div>
-<p>For the case where we wish to know the probability that a guest will arrive up to 10 minutes after the designated time, we set <span class="math notranslate nohighlight">\(a=0\)</span> and <span class="math notranslate nohighlight">\(b=10\)</span> so the probability is <span class="math notranslate nohighlight">\(1-e^{-1}\approx .63\)</span>.</p>
+p_k=prob(k\le x \le k+1) = \int_k^{k+1} f(x)\, dx = (1/6) \int_k^{k+1} e^{-6x}\,dx= -\frac{1}{36} e^{-6x} \mid_k^{k+1} = -\frac{1}{36}[e^{-6(k+1)}-e^{-6k}]. \]</div>
+<p>For example, <span class="math notranslate nohighlight">\(p_0= - \frac{1}{36}[ e^{-6} -1] \approx .9999 \)</span></p>
+<p>and</p>
+<p><span class="math notranslate nohighlight">\(p_1=- \frac{1}{36}[ e^{-6(2)} -exp(-6)] \approx .0001\)</span></p>
+<p>so</p>
+<p><span class="math notranslate nohighlight">\(H\approx .001\)</span>.  (There is almost no disagreement in preferred arrival time.)</p>
 </section>
 <section id="id1">
 <h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
@@ -709,7 +720,7 @@ Contribution to Entropy by Exceptional Students= 0.006221442622110208
 <h3>Exercise<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
-<p>a) Skecth the unit normal and Cauchy distributions on the interval <span class="math notranslate nohighlight">\(-5\le x \le 5\)</span>. What do you note about the tails of these distributions?</p>
+<p>a) Sketch the unit normal and Cauchy distributions on the interval <span class="math notranslate nohighlight">\(-5\le x \le 5\)</span>. What do you note about the tails of these distributions?</p>
 <p>b) Do a Monte Carlo simulation with 10,000 trials to estimate the entropy of a Cauchy distributed class with 10 students as well as the contribution to the entropy by exceptional students.</p>
 </div>
 </section>
