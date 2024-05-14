@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="1. Logistic Growth and COVID-19" href="../AppliedDifEq/covid.html" />
-    <link rel="prev" title="5. Systems of First-Order Differential Equations" href="DE5.html" />
+    <link rel="prev" title="6. Laplace Transforms" href="DE6.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -274,6 +274,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="DE3.html">3. First-Order Differential Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DE4.html">4. Second-Order Differential Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DE5.html">5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DE6.html">6. Laplace Transforms</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL, EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
@@ -632,7 +633,7 @@ This is the second derivative of f(x): -sin(x) - cos(x) + 2
 </li>
 <li><p><span class="math notranslate nohighlight">\(\sqrt{y} + 2\frac{dy}{dx} = e^{x}\)</span></p>
 <ul>
-<li><p>Neither</p></li>
+<li><p>Neither- the square root makes this non-linear</p></li>
 </ul>
 </li>
 <li><p><span class="math notranslate nohighlight">\(\sqrt{y}\frac{dy}{dx} = e^{x}\)</span></p>
@@ -649,14 +650,16 @@ This is the second derivative of f(x): -sin(x) - cos(x) + 2
 </li>
 <li><p>Find the explicit solution to the differential equation <span class="math notranslate nohighlight">\(y'(x) = y+5\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\dfrac{dy}{y+5} = dt \]</div>
+\[\dfrac{dy}{y+5} = dx \]</div>
 <div class="math notranslate nohighlight">
-\[\ln|y+5| = t + C \]</div>
+\[\ln|y+5| = x + C \]</div>
 <div class="math notranslate nohighlight">
-\[y+5 = e^{t + C} \]</div>
+\[y+5 = e^{x + C} \]</div>
 <ul class="simple">
-<li><p>Solution: <span class="math notranslate nohighlight">\(y(x) = Ce^x-5\)</span></p></li>
+<li><p>Solution: <span class="math notranslate nohighlight">\(y(x) = C_1e^x-5\)</span></p></li>
 </ul>
+<p><em>Note:</em> The reason that the solution can be written as such is because <span class="math notranslate nohighlight">\( e^{x + C} \)</span> can be rewritten as <span class="math notranslate nohighlight">\( e^{x}e^{C} \)</span>; since <span class="math notranslate nohighlight">\(C\)</span> itself is already an arbitrary constant, <span class="math notranslate nohighlight">\( e^{C} \)</span> can simply become the new arbitrary constant, which is then named <span class="math notranslate nohighlight">\(C_1\)</span>. Sometimes, teachers will just name the new constant <span class="math notranslate nohighlight">\(C\)</span> instead of <span class="math notranslate nohighlight">\(C_1\)</span> for simplicity, although <span class="math notranslate nohighlight">\(C_1\)</span> is technically more accurate, as it is a new constant. This simplification is common and helps keep expressions concise.
+$<span class="math notranslate nohighlight">\( \)</span>$</p>
 </li>
 <li><p>Find the explicit solution to the differential equation <span class="math notranslate nohighlight">\(W'(s) = s+sW^2\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -720,11 +723,11 @@ This is the second derivative of f(x): -sin(x) - cos(x) + 2
 <div class="math notranslate nohighlight">
 \[t^{-2}\cdot P(t) = \tan(t)+C\]</div>
 <ul class="simple">
-<li><p>Solution: <span class="math notranslate nohighlight">\(P(t) = t^2(\tan(t)+C)\)</span>$</p></li>
+<li><p>Solution: <span class="math notranslate nohighlight">\(P(t) = t^2(\tan(t)+C)\)</span></p></li>
 </ul>
 <ol class="arabic simple" start="8">
 <li><p>Find the solution to the initial value problem <span class="math notranslate nohighlight">\(xy' + y = \sin(x)\)</span>, where <span class="math notranslate nohighlight">\(y(\pi)=0\)</span>.
-<em>Note:</em> This differential equation is in standard form so we need to first put it in standard form prior to applying the method of the integrating factor.</p></li>
+<em>Note:</em> This differential equation is not in standard form, so we need to first put it in standard form prior to applying the method of the integrating factor.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\frac{dy}{dx} + \frac{y}{x} = \dfrac{\sin(x)}{x}\]</div>
@@ -936,16 +939,16 @@ Suppose <span class="math notranslate nohighlight">\(x(t)=e^{kt}\)</span> is a s
 <li><p>Use your answer to 1 to find the general solution to the differential equation <span class="math notranslate nohighlight">\(x''+x'-6x=5e^{2t}\)</span>. Hint: Think about why changing the exponent from <span class="math notranslate nohighlight">\(4t\)</span> to <span class="math notranslate nohighlight">\(2t\)</span> adds an extra step to the problem.</p></li>
 </ol>
 <p>From Problem 1, we know that the solution to the associated homogeneous equation is <span class="math notranslate nohighlight">\(x_h(t)= c_1e^{-3t} + c_2e^{2t}\)</span>.</p>
-<p>We now need to find the particular solution. Using the chart, we know that <span class="math notranslate nohighlight">\(x_p(t) = Ae^{2t}\)</span>. But, this isn’t linearly independent from <span class="math notranslate nohighlight">\(x_h(t)\)</span> so we must multiple our particular solution by <span class="math notranslate nohighlight">\(t\)</span>. Therefore, our updated <span class="math notranslate nohighlight">\(x_p(t) = Ate^{2t}\)</span>. Furthermore, <span class="math notranslate nohighlight">\(x_p'(t) = Ae^{2t}+2tAe^{2t}\)</span> and <span class="math notranslate nohighlight">\(x_p''(t) = 4Ae^{2t}+4te^{2t}\)</span>. Plugging this into the differential equation gives</p>
+<p>We now need to find the particular solution. Using the chart, we know that <span class="math notranslate nohighlight">\(x_p(t) = Ae^{2t}\)</span>. But, this isn’t linearly independent from <span class="math notranslate nohighlight">\(x_h(t)\)</span> so we must multiple our particular solution by <span class="math notranslate nohighlight">\(t\)</span>. Therefore, our updated <span class="math notranslate nohighlight">\(x_p(t) = Ate^{2t}\)</span>. Furthermore, <span class="math notranslate nohighlight">\(x_p'(t) = Ae^{2t}+2tAe^{2t}\)</span> and <span class="math notranslate nohighlight">\(x_p''(t) = 4Ae^{2t}+4Ate^{2t}\)</span>. Plugging this into the differential equation gives</p>
 <div class="math notranslate nohighlight">
 \[x_p''(t)+ x_p'(t)-6x_p(t) = 5e^{2t} \]</div>
 <div class="math notranslate nohighlight">
-\[4Ae^{2t}+4te^{2t}+ Ae^{2t}+2tAe^{2t}-6Ate^{2t} = 5e^{2t} \]</div>
+\[4Ae^{2t}+4Ate^{2t}+ Ae^{2t}+2tAe^{2t}-6Ate^{2t} = 5e^{2t} \]</div>
 <div class="math notranslate nohighlight">
 \[5Ae^{2t} = 5e^{2t} \]</div>
-<p>Thus we know <span class="math notranslate nohighlight">\(A = 1\)</span>. Thus <span class="math notranslate nohighlight">\(x_p(t) = e^{2t}\)</span>. So the general solution is</p>
+<p>Thus we know <span class="math notranslate nohighlight">\(A = 1\)</span>. Thus <span class="math notranslate nohighlight">\(x_p(t) = te^{2t}\)</span>. So the general solution is</p>
 <div class="math notranslate nohighlight">
-\[x(t) = x_h(t) + x_p(t) = c_1e^{-3t} + c_2e^{2t} + e^{2t}.\]</div>
+\[x(t) = x_h(t) + x_p(t) = c_1e^{-3t} + c_2e^{2t} + te^{2t}.\]</div>
 <ol class="arabic simple" start="5">
 <li><p>Use your answer to 2 and 3 to find the general solution of the differential equation <span class="math notranslate nohighlight">\(x''+x'-6x = 5e^{4t}+\sin(3t)\)</span>. Hint: What does the Superposition Principle tell us?</p></li>
 </ol>
@@ -1637,12 +1640,12 @@ Therefore, <span class="math notranslate nohighlight">\(x(t) = -2, 3t+3e^{-t}\co
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="DE5.html"
+       href="DE6.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">5. Systems of First-Order Differential Equations</p>
+        <p class="prev-next-title">6. Laplace Transforms</p>
       </div>
     </a>
     <a class="right-next"

@@ -274,6 +274,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="DE3.html">3. First-Order Differential Equations</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Second-Order Differential Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DE5.html">5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DE6.html">6. Laplace Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DESolutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL, EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
@@ -562,17 +563,17 @@ document.write(`
 <h1>4. Second-Order Differential Equations<a class="headerlink" href="#second-order-differential-equations" title="Permalink to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In this section, we will start with some general theory of <span class="math notranslate nohighlight">\(n\)</span>th-order linear differential equations to motivate the techniques used for solving second-order differential equations. Second-order differential equations play a critical role in mathematical physics and engineering disciplines due to their ubiquity in modelling natural phenomena. They are differential equations in which the highest order derivative is of the second order. Specifically, a second-order differential equation can be written as <span class="math notranslate nohighlight">\(\frac{d^2x}{dt^2} = f(t, x, \frac{dx}{dt})\)</span> where <span class="math notranslate nohighlight">\(x\)</span> is the unknown function we are interested in, <span class="math notranslate nohighlight">\(t\)</span> is the independent variable, <span class="math notranslate nohighlight">\(\frac{dx}{dt}\)</span> is the first derivative of <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(\frac{d^2x}{dt^2}\)</span> is the second derivative of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>In this section, we will start with some general theory of <span class="math notranslate nohighlight">\(n\)</span>th-order linear differential equations to motivate the techniques used for solving second-order differential equations. Second-order differential equations play a critical role in mathematical physics and engineering disciplines due to their ubiquity in modeling natural phenomena. They are differential equations in which the highest order derivative is of the second order. Specifically, a second-order differential equation can be written as <span class="math notranslate nohighlight">\(\frac{d^2x}{dt^2} = f(t, x, \frac{dx}{dt})\)</span> where <span class="math notranslate nohighlight">\(x\)</span> is the unknown function we are interested in, <span class="math notranslate nohighlight">\(t\)</span> is the independent variable, <span class="math notranslate nohighlight">\(\frac{dx}{dt}\)</span> is the first derivative of <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(\frac{d^2x}{dt^2}\)</span> is the second derivative of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p>Examples of the practical applications of second-order differential equations include but are not limited to: modeling the motion of a spring (harmonic oscillator), predicting the population dynamics in ecology, and describing the behavior of electric circuits. They are also widely used in the fields of physics, economics, and engineering to create mathematical models of real-world situations. One reason for the importance of second-order equations is that if <span class="math notranslate nohighlight">\(x(t)\)</span> represents the position of an object at time <span class="math notranslate nohighlight">\(t\)</span>, then <span class="math notranslate nohighlight">\(x'(t)\)</span> is its instantaneous velocity and <span class="math notranslate nohighlight">\(x''(t)\)</span> is its acceleration; thus, real-world problems from the physical sciences often lead to equations of this type.</p>
-<p>Solving second-order differential equations can be quite complex and may involve techniques such as characteristic equations, method of undetermined coefficients, and variation of parameters, among others. The nature of the solution can widely vary depending on the form of the equation. For instance, solutions can be real or complex, periodic or exponential, convergent, or divergent. Some special types of second-order differential equations, like the Cauchy-Euler equation or the Bessel’s equation, have their own dedicated methods of solutions due to their unique structure.</p>
+<p>Solving second-order differential equations can be quite complex and may involve techniques such as characteristic equations, method of undetermined coefficients, and variation of parameters, among others. The nature of the solution can widely vary depending on the form of the equation. For instance, solutions can be real or complex, periodic or exponential, and convergent or divergent. Some special types of second-order differential equations, like the Cauchy-Euler equation or the Bessel’s equation, have their own dedicated methods of solutions due to their unique structure.</p>
 <p>As we explore the world of second-order differential equations, we uncover a variety of mathematical landscapes with significant implications for understanding the world around us. Through these equations, we can dive deep into the patterns and behaviors that underscore numerous phenomena, both natural and man-made.</p>
 </div>
-<p>Recall a general linear <span class="math notranslate nohighlight">\(n\)</span>th-order initial-value problem is of the form</p>
+<p>Recall that a general linear <span class="math notranslate nohighlight">\(n\)</span>th-order initial-value problem is of the form</p>
 <div class="math notranslate nohighlight">
 \[
 a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=g(x)
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(y(x_0)=y_0\)</span>, <span class="math notranslate nohighlight">\(y'(x_0)=y_1\)</span>, <span class="math notranslate nohighlight">\(\dots\)</span>, <span class="math notranslate nohighlight">\(y{(n-1)}(x_0)=y_{n-1}\)</span>. Recall the number of initial conditions must match the order of the differential equation and they must have the same input <span class="math notranslate nohighlight">\(x_0\)</span>. We call a linear differential equation <strong>homogeneous</strong> if <span class="math notranslate nohighlight">\(g(x)=0\)</span>, or in other words, if it can be written as</p>
+<p>where <span class="math notranslate nohighlight">\(y(x_0)=y_0\)</span>, <span class="math notranslate nohighlight">\(y'(x_0)=y_1\)</span>, <span class="math notranslate nohighlight">\(\dots\)</span>, <span class="math notranslate nohighlight">\(y{(n-1)}(x_0)=y_{n-1}\)</span>. Recall that the number of initial conditions must match the order of the differential equation and they must have the same input <span class="math notranslate nohighlight">\(x_0\)</span>. We call a linear differential equation <strong>homogeneous</strong> if <span class="math notranslate nohighlight">\(g(x)=0\)</span>, or in other words, if it can be written as</p>
 <div class="math notranslate nohighlight">
 \[
 a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=0.
@@ -687,13 +688,13 @@ This is the second derivative of f(x): 4*exp(-2*x)
 <p class="admonition-title">Example</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\{1, t, 4t+2\}\)</span> is a linearly dependent set of functions because 2(1)+4(t)-(4t+2)=0.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\{1, x, x^2\}\)</span> is a linearly independent set of functions because c_1+c_2x+c_3x^2=0 only when c_1=c_2=c_3=0.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{1, x, x^2\}\)</span> is a linearly independent set of functions because <span class="math notranslate nohighlight">\(c_1+c_2x+c_3x^2=0\)</span> only when <span class="math notranslate nohighlight">\(c_1=c_2=c_3=0\)</span>.</p></li>
 </ul>
 </div>
-<p>It turns out that this idea of linearly dependent/independent set of functions allows us to precisely answer the earlier question of “Did we find all solutions?” through the following theorem.</p>
+<p>It turns out that this idea of a linearly dependent/independent set of functions allows us to precisely answer the earlier question of “Did we find all of the solutions?” through the following theorem.</p>
 <div class="tip admonition">
 <p class="admonition-title">Theorem</p>
-<p>Every <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equations has a set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent solutions; this is called a <strong>fundamental set of solutions</strong>. Let <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> be a fundamental set of solutions of an <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equation. By the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1x_1(t)+c_2x_2(t)+\dots+c_nx_n(t)\)</span> is also a solutions; we call this the <strong>general solution</strong>.</p>
+<p>Every <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equation has a set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent solutions; this is called a <strong>fundamental set of solutions</strong>. Let <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> be a fundamental set of solutions of an <span class="math notranslate nohighlight">\(n\)</span>th-order linear homogeneous equation. By the Superposition Principle, <span class="math notranslate nohighlight">\(x(t) = c_1x_1(t)+c_2x_2(t)+\dots+c_nx_n(t)\)</span> is also a solutions; we call this the <strong>general solution</strong>.</p>
 </div>
 <p>Let’s now return to our motivating example.</p>
 <div class="admonition-motivating-example-continued admonition">
@@ -752,7 +753,7 @@ This is the second derivative of f(x): 4*exp(-2*x)
 <div class="admonition-motivating-example admonition">
 <p class="admonition-title">Motivating Example</p>
 <p>Consider the second order linear differential equation <span class="math notranslate nohighlight">\(x''+2x'+x=e^{-5t}\)</span>. Find <em>one</em> solution.</p>
-<p>First we will try to guess a particular solution. We know that <span class="math notranslate nohighlight">\(f(t)=e^{-5t}\)</span> in this case. So we will guess a particular solution that looks similar, <span class="math notranslate nohighlight">\(x_p(t)=Ce^{-5t}\)</span>. Now we want to figure out what value of <span class="math notranslate nohighlight">\(C\)</span> (if any) makes <span class="math notranslate nohighlight">\(x_p(t)\)</span> a solution”</p>
+<p>First we will try to guess a particular solution. We know that <span class="math notranslate nohighlight">\(f(t)=e^{-5t}\)</span> in this case. So we will guess a particular solution that looks similar, <span class="math notranslate nohighlight">\(x_p(t)=Ce^{-5t}\)</span>. Now we want to figure out what value of <span class="math notranslate nohighlight">\(C\)</span> (if any) makes <span class="math notranslate nohighlight">\(x_p(t)\)</span> a solution</p>
 </div>
 <p>The method of undetermined coefficients is a technique used to solve certain types of non-homogeneous second-order differential equations. Specifically, this method is suitable for equations where the non-homogeneous term (the term not involving the function or its derivatives) is a simple function like a polynomial, exponential, sine, cosine, or a combination of these.</p>
 <p>The overall process of the method of undetermined coefficients involves several steps:</p>
@@ -797,7 +798,7 @@ This is the second derivative of f(x): 4*exp(-2*x)
 <p>Step 1: Solve the homogeneous differential equation.</p>
 <div class="math notranslate nohighlight">
 \[x'' +5x=0.\]</div>
-<p>Thus, <span class="math notranslate nohighlight">\(k^2+5=0\)</span> is the <strong>characteristic equation</strong> of this differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k=\pm\sqrt{5}i\)</span>. Thus, <span class="math notranslate nohighlight">\(x_h(t)=c_1\cos(\sqrt{5}t)+c_2\sin(\sqrt(\sqrt{5}t)\)</span> is the general solution to the homogeneous differential equation.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(k^2+5=0\)</span> is the <strong>characteristic equation</strong> of this differential equation. Solving the characteristic equation gives <span class="math notranslate nohighlight">\(k=\pm\sqrt{5}i\)</span>. Thus, <span class="math notranslate nohighlight">\(x_h(t)=c_1\cos(\sqrt{5}t)+c_2\sin(\sqrt{5}t)\)</span> is the general solution to the homogeneous differential equation.</p>
 <p>Step 2: Guess <span class="math notranslate nohighlight">\(x_p\)</span>.</p>
 <p>Note in this case <span class="math notranslate nohighlight">\(f(t)=-15\)</span>, which is a degree 1 polynomial. Using the table above our guess is <span class="math notranslate nohighlight">\(x_p(t)=b_0\)</span>. Notice that this guess for <span class="math notranslate nohighlight">\(x_p\)</span> is linearly independent from <span class="math notranslate nohighlight">\(x_h\)</span> so we do not need to adjust our guess.</p>
 <p>Step 3: Solve the guess.</p>
@@ -805,7 +806,7 @@ This is the second derivative of f(x): 4*exp(-2*x)
 \[x_p(t) = b_0, \quad x_p'(t) = 0, \quad x_p''(t) = 0\]</div>
 <p>Plugging this back into <span class="math notranslate nohighlight">\(x'' + 5x = -15\)</span>, we find that <span class="math notranslate nohighlight">\(0 + 5b_0 = -15\)</span>. Thus, <span class="math notranslate nohighlight">\(b_0=-3\)</span>.</p>
 <p>Step 4: General Solution</p>
-<p>This means that <span class="math notranslate nohighlight">\(x(t) = x_h(t)+x_p(t) = c_1\cos(\sqrt{5}t)+c_2\sin(\sqrt(\sqrt{5}t)-3\)</span>.</p>
+<p>This means that <span class="math notranslate nohighlight">\(x(t) = x_h(t)+x_p(t) = c_1\cos(\sqrt{5}t)+c_2\sin(\sqrt{5}t)-3\)</span>.</p>
 <p>Step 5: Find <span class="math notranslate nohighlight">\(c_1\)</span>, <span class="math notranslate nohighlight">\(c_2\)</span> using the initial conditions.</p>
 <p>Since <span class="math notranslate nohighlight">\(x(0)=0\)</span>, we have</p>
 <div class="math notranslate nohighlight">
@@ -822,7 +823,7 @@ This is the second derivative of f(x): 4*exp(-2*x)
 <div class="math notranslate nohighlight">
 \[c_2 = \dfrac{1}{\sqrt{5}}\]</div>
 <p>Step 6: State the final solution.</p>
-<p>This means the final solution to the initial value problem is <span class="math notranslate nohighlight">\(x(t) = -3\cos(\sqrt{5}t)+\dfrac{1}{\sqrt{5}}\sin(\sqrt{5}t)-3\)</span>.</p>
+<p>This means the final solution to the initial value problem is <span class="math notranslate nohighlight">\(x(t) = 3\cos(\sqrt{5}t)+\dfrac{1}{\sqrt{5}}\sin(\sqrt{5}t)-3\)</span>.</p>
 </div>
 <p>Now that we have the solution we can generate a plot of it to see how the solution behaves.</p>
 <div class="cell tag_hide-input docutils container">
@@ -865,7 +866,7 @@ a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=f_k(x).
 <p>Then the linear combination <span class="math notranslate nohighlight">\(y(x)= y_1(x) + y_2(x) + \dots + y_n(x)\)</span> is a particular solution to</p>
 <div class="math notranslate nohighlight">
 \[
-a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=f_1(x)+f_2(x)+\dots+f_n(t).
+a_n(x)y^{(n)}(x)+a_{n-1}y^{(n-1)}(x) + \dots + a_1(x)y'(x) + a_0(x)y(x)=f_1(x)+f_2(x)+\dots+f_n(x).
 \]</div>
 </section>
 <section id="exercises">
