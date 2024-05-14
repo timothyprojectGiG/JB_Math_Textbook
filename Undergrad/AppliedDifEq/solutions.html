@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/AppliedDifEq/solutions';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1. Setting the Scene" href="../../Advanced/Complex/jnb1.html" />
-    <link rel="prev" title="6. Gravity Fed Water Delivery" href="gravity/gravity.html" />
+    <link rel="next" title="JNB Lab: HIV-AIDS" href="hiv/lab.html" />
+    <link rel="prev" title="JNB Lab: Eartquake Resistant Construction" href="erc/erc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -281,10 +281,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="covid.html">1. Logistic Growth and COVID-19</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sir.html">2. The Basic SIR Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cholera.html">3. Cholera in Haiti</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hiv/hiv.html">4. HIV-AIDS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cws/cws.html">5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cws/cws.html">4. CWS Model of Alzheimer’s Disease</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gravity/gravity.html">6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="erc/erc.html">JNB Lab: Eartquake Resistant Construction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Solutions to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hiv/lab.html">JNB Lab: HIV-AIDS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -544,9 +545,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-growth-and-covid-19">1. Logistic Growth and COVID-19</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basic-sir-model">2. The Basic SIR Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholera-in-haiti">3. Cholera in Haiti</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiv-aids">4. HIV-AIDS</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cws-model-of-alzheimers-disease">5. CWS Model of Alzheimer’s Disease</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gravity-fed-water-delivery">6. Gravity-Fed Water Delivery</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cws-model-of-alzheimers-disease">4. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gravity-fed-water-delivery">5. Gravity-Fed Water Delivery</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#earthquake-resistant-construction">6. Earthquake Resistant Construction</a></li>
 </ul>
             </nav>
         </div>
@@ -1503,352 +1504,8 @@ y=\frac{M}{1+(\frac{M}{y_0}-1)e^{-kt}}
 <p>b) Seasonal behavior of cholera outbreaks which may be related to weather events such as floods or El Nino must be considered. That is, even though there may be a period with no or very few cases, there is a latent possibility for re-emergence of a large number ofinfected population. Mathematically viable solutions may be overly simplistic in light of the reality of everyday life in Haiti.</p>
 <p>From the sensitivity analysis, the contamination rate seems to have the largest effect on the infected population, although exposure rate, recovery rate, and initial concentration of bacteria also have an effect. Within the range of 2.5-30 number of people contaminated per day, the infected population will increase significantly. As the contamination rate increases above 30, the infected population stabilizes and increases more slowly. These observations suggest focusing response and preparation measures on lowering the contamination rate</p>
 </section>
-<section id="hiv-aids">
-<h2>4. HIV-AIDS<a class="headerlink" href="#hiv-aids" title="Permalink to this heading">#</a></h2>
-<p>Problem 1</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="n">T</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span><span class="n">T2</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
-    <span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
-    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">T1</span><span class="o">+</span><span class="n">T2</span><span class="p">)</span><span class="o">/</span><span class="n">Tmax</span><span class="p">)</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="p">,</span>   <span class="c1"># list of dy/dt=f functions</span>
-             <span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T1</span><span class="o">-</span><span class="n">k2</span><span class="o">*</span><span class="n">T1</span><span class="p">,</span>
-             <span class="n">k2</span><span class="o">*</span><span class="n">T1</span><span class="o">-</span><span class="n">mub</span><span class="o">*</span><span class="n">T2</span><span class="p">,</span>
-             <span class="n">N</span><span class="o">*</span><span class="n">mub</span><span class="o">*</span><span class="n">T2</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="o">-</span><span class="n">muV</span><span class="o">*</span><span class="n">V</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">derivs</span>
-
-<span class="c1"># Parameters</span>
-<span class="n">s</span><span class="o">=</span><span class="mi">10</span>
-<span class="n">r</span><span class="o">=.</span><span class="mi">03</span>
-<span class="n">Tmax</span><span class="o">=</span><span class="mi">1500</span>
-<span class="n">muT</span><span class="o">=.</span><span class="mi">02</span>
-<span class="n">mub</span><span class="o">=.</span><span class="mi">24</span>
-<span class="n">muV</span><span class="o">=</span><span class="mf">2.4</span>
-<span class="n">k1</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>       
-<span class="n">k2</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">N</span><span class="o">=</span><span class="mi">500</span>
-
-<span class="c1"># Initial values</span>
-<span class="n">T0</span><span class="o">=</span><span class="mi">1000</span>
-<span class="n">T10</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">T20</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">V0</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="c1"># Bundle parameters for ODE solver</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="p">]</span>
-
-<span class="c1"># Bundle initial conditions for ODE solver</span>
-<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">T0</span><span class="p">,</span><span class="n">T10</span><span class="p">,</span><span class="n">T20</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span>
-
-<span class="c1"># Make time array for solution</span>
-<span class="n">tStop</span> <span class="o">=</span> <span class="mi">1501</span>
-<span class="n">tInc</span> <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
-
-<span class="c1"># Call the ODE solver</span>
-<span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
-
-<span class="c1"># Plot results</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Healthy T-Cell&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Free Virus&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;Ex1.png&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="../../_images/b3042ee6ed2718724e577516209ff7f23d82e2a37f99f6eb00258573f52ed715.png" src="../../_images/b3042ee6ed2718724e577516209ff7f23d82e2a37f99f6eb00258573f52ed715.png" />
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="n">T</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span><span class="n">T2</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
-    <span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
-    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">T1</span><span class="o">+</span><span class="n">T2</span><span class="p">)</span><span class="o">/</span><span class="n">Tmax</span><span class="p">)</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="p">,</span>   <span class="c1"># list of dy/dt=f functions</span>
-             <span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T1</span><span class="o">-</span><span class="n">k2</span><span class="o">*</span><span class="n">T1</span><span class="p">,</span>
-             <span class="n">k2</span><span class="o">*</span><span class="n">T1</span><span class="o">-</span><span class="n">mub</span><span class="o">*</span><span class="n">T2</span><span class="p">,</span>
-             <span class="n">N</span><span class="o">*</span><span class="n">mub</span><span class="o">*</span><span class="n">T2</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="o">-</span><span class="n">muV</span><span class="o">*</span><span class="n">V</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">derivs</span>
-
-<span class="c1"># Parameters</span>
-<span class="n">s</span><span class="o">=</span><span class="mi">10</span>
-<span class="n">r</span><span class="o">=.</span><span class="mi">03</span>
-<span class="n">Tmax</span><span class="o">=</span><span class="mi">1500</span>
-<span class="n">muT</span><span class="o">=.</span><span class="mi">02</span>
-<span class="n">mub</span><span class="o">=.</span><span class="mi">24</span>
-<span class="n">muV</span><span class="o">=</span><span class="mf">2.4</span>
-<span class="n">k1</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>       
-<span class="n">k2</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">N</span><span class="o">=</span><span class="mi">500</span>
-
-<span class="c1"># Initial values</span>
-<span class="n">T0</span><span class="o">=</span><span class="mi">1000</span>
-<span class="n">T10</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">T20</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">V0</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="c1"># Bundle parameters for ODE solver</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="p">]</span>
-
-<span class="c1"># Bundle initial conditions for ODE solver</span>
-<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">T0</span><span class="p">,</span><span class="n">T10</span><span class="p">,</span><span class="n">T20</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span>
-
-<span class="c1"># Make time array for solution</span>
-<span class="n">tStop</span> <span class="o">=</span> <span class="mi">1501</span>
-<span class="n">tInc</span> <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
-
-<span class="c1"># Call the ODE solver</span>
-<span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
-
-<span class="c1"># Plot results</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Healthy T-Cell&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">psoln</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Free Virus&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;Ex1.png&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="../../_images/bd15146866f1a5deca543906ec2ec07b3e98aecfae4a81b0df7a0e25c4c95017.png" src="../../_images/bd15146866f1a5deca543906ec2ec07b3e98aecfae4a81b0df7a0e25c4c95017.png" />
-</div>
-</div>
-<p>When <span class="math notranslate nohighlight">\(k1=10^{-6}\)</span>, we do not see the onset of AIDS.  On the other hand, when <span class="math notranslate nohighlight">\(k1=10^{-4}\)</span>, the onset of AIDS occurs at around day 500.</p>
-<p>Problem 2</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="n">T</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span><span class="n">T2</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
-    <span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
-    <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">T1</span><span class="o">+</span><span class="n">T2</span><span class="p">)</span><span class="o">/</span><span class="n">Tmax</span><span class="p">)</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="p">,</span>   <span class="c1"># list of dy/dt=f functions</span>
-             <span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T1</span><span class="o">-</span><span class="n">k2</span><span class="o">*</span><span class="n">T1</span><span class="p">,</span>
-             <span class="n">k2</span><span class="o">*</span><span class="n">T1</span><span class="o">-</span><span class="n">mub</span><span class="o">*</span><span class="n">T2</span><span class="p">,</span>
-             <span class="n">N</span><span class="o">*</span><span class="n">mub</span><span class="o">*</span><span class="n">T2</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="o">-</span><span class="n">muV</span><span class="o">*</span><span class="n">V</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">derivs</span>
-
-<span class="c1"># Parameters</span>
-<span class="n">s</span><span class="o">=</span><span class="mi">10</span>
-<span class="n">r</span><span class="o">=.</span><span class="mi">03</span>
-<span class="n">Tmax</span><span class="o">=</span><span class="mi">1500</span>
-<span class="n">muT</span><span class="o">=.</span><span class="mi">02</span>
-<span class="n">mub</span><span class="o">=.</span><span class="mi">24</span>
-<span class="n">muV</span><span class="o">=</span><span class="mf">2.4</span>
-<span class="n">k2</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">N</span><span class="o">=</span><span class="mi">500</span>
-<span class="c1"># Initial values</span>
-<span class="n">T0</span><span class="o">=</span><span class="mi">1000</span>
-<span class="n">T10</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">T20</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">V0</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-<span class="c1"># Bundle initial conditions for ODE solver</span>
-<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">T0</span><span class="p">,</span><span class="n">T10</span><span class="p">,</span><span class="n">T20</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span>
-
-<span class="c1"># Make time array for solution</span>
-<span class="n">tStop</span> <span class="o">=</span> <span class="mf">1501.</span>
-<span class="n">tInc</span> <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
-
-<span class="c1"># k1 values</span>
-<span class="n">k1val</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">),</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">),</span><span class="o">.</span><span class="mi">000001</span><span class="p">)</span>
-<span class="n">Tval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">Vval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-    <span class="c1"># Bundle parameters for ODE solver</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1val</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="p">]</span>
-    <span class="c1"># Call the ODE solver</span>
-    <span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
-    <span class="n">Tval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">psoln</span><span class="p">[</span><span class="mi">30000</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">Vval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">psoln</span><span class="p">[</span><span class="mi">30000</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-    
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k1val</span><span class="p">,</span> <span class="n">Tval</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Healthy T cell Concentration&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k1val</span><span class="p">,</span> <span class="n">Vval</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Free Viral Concentration&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;k1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Steady State Concentration&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;k1sa.png&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="../../_images/ba36536815ad6c836764e852f7b683e21f40051def947b0371703da87a212698.png" src="../../_images/ba36536815ad6c836764e852f7b683e21f40051def947b0371703da87a212698.png" />
-</div>
-</div>
-<p>Problem 3</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#part a)</span>
-<span class="k">def</span> <span class="nf">treatment</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-        <span class="n">T</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span><span class="n">T2</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>      <span class="c1"># unpack current values of y</span>
-        <span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="o">=</span> <span class="n">params</span>  <span class="c1"># unpack parameters</span>
-        <span class="n">derivs</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">T1</span><span class="o">+</span><span class="n">T2</span><span class="p">)</span><span class="o">/</span><span class="n">Tmax</span><span class="p">)</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="p">,</span>   <span class="c1"># list of dy/dt=f functions</span>
-             <span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="o">-</span><span class="n">muT</span><span class="o">*</span><span class="n">T1</span><span class="o">-</span><span class="n">k2</span><span class="o">*</span><span class="n">T1</span><span class="p">,</span>
-             <span class="n">k2</span><span class="o">*</span><span class="n">T1</span><span class="o">-</span><span class="n">mub</span><span class="o">*</span><span class="n">T2</span><span class="p">,</span>
-             <span class="n">N</span><span class="o">*</span><span class="n">mub</span><span class="o">*</span><span class="n">T2</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">V</span><span class="o">-</span><span class="n">muV</span><span class="o">*</span><span class="n">V</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">derivs</span>
-
-    <span class="c1"># Parameters</span>
-    <span class="n">s</span><span class="o">=</span><span class="mi">10</span>
-    <span class="n">r</span><span class="o">=.</span><span class="mi">03</span>
-    <span class="n">Tmax</span><span class="o">=</span><span class="mi">1500</span>
-    <span class="n">muT</span><span class="o">=.</span><span class="mi">02</span>
-    <span class="n">mub</span><span class="o">=.</span><span class="mi">24</span>
-    <span class="n">muV</span><span class="o">=</span><span class="mf">2.4</span>
-    <span class="n">k2</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="o">+</span><span class="n">i</span>
-    <span class="n">k1</span><span class="o">=</span><span class="n">j</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
-    <span class="c1"># Initial values</span>
-    <span class="n">T0</span><span class="o">=</span><span class="mi">1000</span>
-    <span class="n">T10</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">T20</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">V0</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-    <span class="c1"># Bundle initial conditions for ODE solver</span>
-    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">T0</span><span class="p">,</span><span class="n">T10</span><span class="p">,</span><span class="n">T20</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span>
-
-    <span class="c1"># Make time array for solution</span>
-    <span class="n">tStop</span> <span class="o">=</span> <span class="mf">1501.</span>
-    <span class="n">tInc</span> <span class="o">=</span> <span class="mf">0.05</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tStop</span><span class="p">,</span> <span class="n">tInc</span><span class="p">)</span>
-
-    <span class="c1"># Bundle parameters for ODE solver</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Tmax</span><span class="p">,</span><span class="n">muT</span><span class="p">,</span><span class="n">mub</span><span class="p">,</span><span class="n">muV</span><span class="p">,</span><span class="n">k1val</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">k2</span><span class="p">,</span><span class="n">N</span><span class="p">]</span>
-    <span class="c1"># Call the ODE solver</span>
-    <span class="n">psoln</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
-    <span class="n">Tss</span><span class="o">=</span><span class="n">psoln</span><span class="p">[</span><span class="mi">30000</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">Tss</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># part b)</span>
-<span class="n">Z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">treatment</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-<span class="n">Z</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># steady state T-cell concentration when N=100, k1= 5 * 10**(-5)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>999.9999999998947
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importing mplot3d toolkits, numpy and matplotlib</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits</span> <span class="kn">import</span> <span class="n">mplot3d</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
- 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
- 
-<span class="c1"># syntax for 3-D projection</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span> <span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
- 
-<span class="c1"># defining all 3 axis</span>
-<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">25</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">25</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
- 
-<span class="c1"># plotting</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot3D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;3D line plot&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/93d53d62ea7371561d207a9a75c09632553eab9f45fef86052d8cad0ddceda59.png" src="../../_images/93d53d62ea7371561d207a9a75c09632553eab9f45fef86052d8cad0ddceda59.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># part c)</span>
-
-<span class="c1"># Creating dataset</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">z</span><span class="o">=</span><span class="n">Z</span>
-
-<span class="c1"># Creating figure</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
- 
-<span class="c1"># syntax for 3-D projection</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span> <span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
- 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Steady State T-cell Concentration&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Value of j (k1=j*10**(-5))&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Value of i (N=100+i)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;T cell Concentratiom&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
- 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/e73c859b0ff185ee8952cfe53638074e01d5d3dc2d73d540e1d5173d305cd190.png" src="../../_images/e73c859b0ff185ee8952cfe53638074e01d5d3dc2d73d540e1d5173d305cd190.png" />
-</div>
-</div>
-<p>The graph shows the dramatic reduction of T-cell count when the values or  𝑛
-and/or  𝑘1
-become sufficiently large.</p>
-</section>
 <section id="cws-model-of-alzheimers-disease">
-<h2>5. CWS Model of Alzheimer’s Disease<a class="headerlink" href="#cws-model-of-alzheimers-disease" title="Permalink to this heading">#</a></h2>
+<h2>4. CWS Model of Alzheimer’s Disease<a class="headerlink" href="#cws-model-of-alzheimers-disease" title="Permalink to this heading">#</a></h2>
 <p>Exercise 1</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1952,7 +1609,7 @@ become sufficiently large.</p>
 <p>The output of the nonlinear is the same as the simplified linear model since the former is equivalent to the latter when <span class="math notranslate nohighlight">\(E=S=0\)</span>.</p>
 </section>
 <section id="gravity-fed-water-delivery">
-<h2>6. Gravity-Fed Water Delivery<a class="headerlink" href="#gravity-fed-water-delivery" title="Permalink to this heading">#</a></h2>
+<h2>5. Gravity-Fed Water Delivery<a class="headerlink" href="#gravity-fed-water-delivery" title="Permalink to this heading">#</a></h2>
 <p>[2.1] <span class="math notranslate nohighlight">\(F_{gn}=F_{g} \cos(\theta) = \gamma \delta V \cos(\theta) = \gamma \delta V \sqrt{1-(\frac{dz}{ds})^2}\)</span>.</p>
 <p>[2.2] <span class="math notranslate nohighlight">\(\frac{dp}{ds}\approx \frac{p(s_0-\frac{\delta s}{2})-p(s_0)}{-\frac{\delta s}{2}} \Rightarrow p(s_0-\frac{\delta s}{2}) \approx p(s_0) -  \frac{dp}{ds} \frac{\delta s}{2}\)</span>.</p>
 <p>[2.3] Since <span class="math notranslate nohighlight">\(z\)</span> has dimension <span class="math notranslate nohighlight">\(L\)</span>, we must show the other two terms do as well.  Pressure being force per unit area, and force being mass time acceleration,  <span class="math notranslate nohighlight">\(p\)</span> has dimension <span class="math notranslate nohighlight">\(\frac{M \frac{L}{T^2} }{L^2}=\frac{M}{LT^2}\)</span>. Since <span class="math notranslate nohighlight">\(\gamma=\rho g\)</span> has dimension <span class="math notranslate nohighlight">\(\frac {M}{L^3} \frac{L}{T^2} = \frac{M}{L^2T^2}\)</span>,  the dimension of <span class="math notranslate nohighlight">\(\frac{p}{\gamma}\)</span> is <span class="math notranslate nohighlight">\(\frac{M}{LT^2} \frac{L^2T^2}{M}=L\)</span>. The dimension for <span class="math notranslate nohighlight">\(\frac{u^2}{g}\)</span> is  <span class="math notranslate nohighlight">\(\frac{(\frac{L}{T})^2}{\frac{L}{T^2}}=L\)</span>.</p>
@@ -2025,6 +1682,124 @@ h_f = f \frac{L}{D} \frac{\stackrel{-}{u}^2}{2g}.
 <p>Knowing the head loss, we can easily plot the HGL on the graph shown in Figure (21). The HGL will help us decide whether the pipe may be used for that segment of the system as explained in Section 4.4.</p>
 <p>[5.1] There are different possible designs, but a system using a 80 mm diameter is shown here.  In 10 years Tesuque Pueblo will have about 1148 people and a required volumetric flow rate of <span class="math notranslate nohighlight">\(Q=4.27 l/s=0.00427 m^3/s\)</span>.  A 80 mm diameter pipe has a cross-sectional area of 0.005 <span class="math notranslate nohighlight">\(m^2\)</span>, so our average velocity is 0.85 m/s (low, but within limits).  The maximum static pressure will be <span class="math notranslate nohighlight">\(2255-1950=335\)</span> m at the outlet faucet, which is above the maximum operating pressure head from {\bf Table 5} (146 m).  Break pressure tanks at elevations of 2130 m and 2030 m reduce the maximum static pressures to 125 m, 100 m, and 110 m in the first, second, and third sections, respectively (Note that since a 2030 m elevation isn’t included in the survey, we don’t know if there is a suitable building site at this location.  In that case a third break pressure tank would be needed).  By rounding our flow rate down we get from {\bf Table 5} a head loss of about 0.96 m per 100 m.  We will approximate horizontal distance as pipe length, so our HGL is modeled by the equation <span class="math notranslate nohighlight">\(2255-\frac{0.85^2}{2g}-0.96x\)</span>.  If we compare this line to the given elevations we find the elevations remain below the HGL line.  This means the dynamic pressure will never be negative and the system is feasible.</p>
 </section>
+<section id="earthquake-resistant-construction">
+<h2>6. Earthquake Resistant Construction<a class="headerlink" href="#earthquake-resistant-construction" title="Permalink to this heading">#</a></h2>
+<p><strong>2.1</strong></p>
+<p>a) <span class="math notranslate nohighlight">\(u=c_1 \cos t + c_2 \sin t\)</span>;</p>
+<p>b) <span class="math notranslate nohighlight">\(u(t)=e^{-\frac{1}{2}t}[ c_1 \cos( \frac{\sqrt{3}}{2} t )+ c_2 \sin( \frac{\sqrt{3}}{2} t ) ]\)</span>;</p>
+<p>c)<span class="math notranslate nohighlight">\(u(t)=e^{-t}(c_1+ c_2 t)\)</span>;</p>
+<p>d) <span class="math notranslate nohighlight">\(u(t)= c_1 e^{(-2+\sqrt{3})t}+c_2e^{(-2-\sqrt{3})t}\)</span>.</p>
+<p><strong>2.2</strong>  For example, to check the solution for <span class="math notranslate nohighlight">\(c=4\)</span>, the initial conditions <span class="math notranslate nohighlight">\(u(0)=1\)</span>, <span class="math notranslate nohighlight">\(\stackrel{.}{u}(0)=0\)</span> imply that the constants <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> in the general solution <span class="math notranslate nohighlight">\(u(t)= c_1 e^{(-2+\sqrt{3})t}+c_2e^{(-2-\sqrt{3})t}\)</span> must satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+c_1 + c_2  =  1
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+c_1(-2 + \sqrt{3})+c_2(-2 - \sqrt{3})  =  0.
+\]</div>
+<p>It follows easily that <span class="math notranslate nohighlight">\(c_1=\frac{2+\sqrt{3}}{2\sqrt{3}}\)</span> and
+<span class="math notranslate nohighlight">\(c_2=\frac{-2+\sqrt{3}}{2\sqrt{3}}\)</span>.</p>
+<p><strong>2.3</strong>  For <span class="math notranslate nohighlight">\(0&lt;c&lt;4\)</span>, <span class="math notranslate nohighlight">\(u=h_h+u_p\)</span> where <span class="math notranslate nohighlight">\(u_h\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\stackrel{..}{u_h}+c\stackrel{.}{u_h} + 4u_h= 0,
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(u_p=A\cos(2t)+B\sin(2t)\)</span> is a particular solution to the non-homogeneous equation.  Solving, we have
+<span class="math notranslate nohighlight">\(u=\frac{1}{2c} \sin(2t) - \frac{2}{c\sqrt{16-c^2}}e^{\frac{-ct}{2}}\sin(\frac{\sqrt{16-c^2}}{2}t).\)</span></p>
+<a class="reference internal image-reference" href="Undergrad/AppliedDifEq/figE1.png"><img alt="Undergrad/AppliedDifEq/figE1.png" src="Undergrad/AppliedDifEq/figE1.png" style="width: 400px;" /></a>
+<p>At the critical value <span class="math notranslate nohighlight">\(c=4\)</span>, the solution becomes  <span class="math notranslate nohighlight">\(u=-\frac{1}{4}te^{-2t} + \frac{1}{8} \sin(2t)\)</span></p>
+<a class="reference internal image-reference" href="Undergrad/AppliedDifEq/figE2.png"><img alt="Undergrad/AppliedDifEq/figE2.png" src="Undergrad/AppliedDifEq/figE2.png" style="width: 400px;" /></a>
+<p>Note that in general, increasing the damping coefficient <span class="math notranslate nohighlight">\(c\)</span> will reduce the amplitude of the periodic term <span class="math notranslate nohighlight">\(\frac{1}{2c} \sin(2t)\)</span> in the solution and cause a more rapid decay of the transient term  <span class="math notranslate nohighlight">\(\frac{2}{c\sqrt{16-c^2}}e^{\frac{-ct}{2}}\sin(\frac{\sqrt{16-c^2}}{2}t)\)</span> in the solution.</p>
+<p><strong>2.4</strong> Since <span class="math notranslate nohighlight">\(Rmax=2=\frac{k umax}{Fmax}\)</span>  with <span class="math notranslate nohighlight">\(k=10^{10} \frac{kg}{sec}\)</span> and <span class="math notranslate nohighlight">\(umax=5\)</span>x<span class="math notranslate nohighlight">\(10^{-3}\)</span>, we obtain the maximum allowable blast force <span class="math notranslate nohighlight">\(Fmax= 2.5(10^7) N.\)</span></p>
+<p><strong>2.4.1</strong></p>
+<div class="math notranslate nohighlight">
+\[
+u(t)=u_2(t)= \frac{1}{m\omega_0}\int_0^t F(\tau)\sin(\omega_0(t-\tau))d\tau
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{1}{m\omega_0}\int_0^T F(\tau)\sin(\omega_0(t-\tau))d\tau+
+\frac{1}{m\omega_0}\int_T^t F(\tau)\sin(\omega_0(t-\tau))d\tau
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\frac{Fmax}{m\omega_0}\int_0^T(-\frac{\tau}{T}+1)\sin(\omega_0(t-\tau))d\tau
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\frac{Fmax}{m\omega_0}[(\frac{-\tau}{T}+1)\frac{\cos(\omega_0(t-\tau))}{\omega_0}\mid_0^T-\int_0^T\frac{\cos(\omega_0(t-\tau))}{\omega_0}(\frac{-1}{T})d\tau]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\frac{Fmax}{m\omega_0^2}[(\frac{-\tau}{T}+1)\cos(\omega_0(t-\tau))\mid_0^T -(\frac{\sin(\omega_0(t-\tau)}{\omega_0 T})\mid_0^T ]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{Fmax}{k} [(- \frac{T}{T}+1)(\cos(\omega_0 (t-T))-  ( -\frac{0}{T}+1)(\cos(\omega_0 (t)) 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\hspace{1in}-\frac{1}{T}\sin (\omega_0 (t-T))+\frac{1}{T}\sin (\omega_0 (t))
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\frac{Fmax}{k} [0-\cos(\omega_0 t) - \frac{1}{T} \sin (\omega_0 (t-T)) + \frac{1}{T} \sin (\omega_0 (t))]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\frac{Fmax}{k}[-\cos (\omega t)]
+\]</div>
+<p><strong>2.4.2</strong>
+a)</p>
+<div class="math notranslate nohighlight">
+\[
+s^2L[u]+\omega_0^2L[u]=\frac{Fmax}{m}\{ L[\frac{-t}{T}+1]- L[ (\frac{-t}{T}+1)U_T(t)] \}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+(s^2+\omega_0^2)L[u]=\frac{Fmax}{m}\{\frac{-1}{T}(\frac{1}{s^2})+\frac{1}{s}-e^{Ts}(\frac{-1}{Ts^2})\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+L[u]=\frac{Fmax}{m}\{\frac{-1}{(Ts^2)(s^2+\omega_0^2)}+\frac{1}{s(s^2+\omega_0^2)}+\frac{e^{-Ts}}{Ts^2(s^2+\omega_0^2)}\}
+\]</div>
+<p>b)
+$<span class="math notranslate nohighlight">\(
+L[u]=\frac{Fmax}{m}\{\frac{\frac{-1}{T}+s}{s^2(s^2+\omega_0^2)}+\frac{\frac{1}{T}+e^{-Ts}}{s^2(s^2+\omega_0^2)}\}
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+L[u]=\frac{Fmax}{mT\omega_0^2}\{\frac{T}{s}-\frac{1}{s^2}-\frac{Ts}{s^2+\omega_0^2}+\frac{1}{s^2+\omega_0^2}+e^{-sT}(\frac{1}{s^2}-\frac{1}{s^2+\omega_0^2})\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+L[u]=\frac{Fmax}{mT\omega_0^2}\{L[T-t-T\cos(\omega_0 t)+\frac{1}{\omega_0}\sin(\omega_0 t)]+e^{-sT}L[t-\frac{1}{\omega_0}\sin(\omega_0 t)]\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+L[u]=\frac{Fmax}{mT\omega_0^2}\{L[T-t-T\cos(\omega_0 t)+\frac{1}{\omega_0}\sin(\omega_0 t) +U_T(t)[t-T-\frac{1}{\omega_0}\sin(\omega_0(t-T))]]\}
+\]</div>
+<p>c)</p>
+<div class="math notranslate nohighlight">
+\[
+u=\frac{Fmax}{mT\omega_0^2}\{T-t-T\cos(\omega_0 t)+\frac{1}{\omega_0}\sin(\omega_0 t) +U_T(t)[t-T-\frac{1}{\omega_0}\sin(\omega_0t)]\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+u=\frac{Fmax}{k}\{1-\frac{t}{T}-\cos(\omega_0 t)+\frac{1}{\omega_0T}\sin(\omega_0 t) +U_T(t)[\frac{t}{T}-1-\frac{1}{\omega_0T}\sin(\omega_0t)]\}
+\]</div>
+<p><strong>2.5</strong>
+The ground motion <span class="math notranslate nohighlight">\(z(t)\)</span> effectively creates a reversed inertial force  <span class="math notranslate nohighlight">\(- m \stackrel{..}{z}\)</span>.</p>
+<p><strong>3.1</strong>
+<span class="math notranslate nohighlight">\(W=\left(\begin{array}{c}w_1\\w_2\\w_3 \end{array}\right)\)</span> represents the relative displacements,
+<span class="math notranslate nohighlight">\(M=\left(\begin{array}{ccc}m_1&amp;0&amp;0\\0&amp;m_2&amp;0\\0&amp;0&amp;m_3\end{array}\right)\)</span> represents the mass of the floors,
+<span class="math notranslate nohighlight">\(K=\left(\begin{array}{ccc}2(k_1+k_2)&amp;-2k_2&amp;0\\-2k_2&amp;2(k_2+k_3)&amp;-2k_3\\0&amp;-2k_3&amp;2k_3\end{array}\right)\)</span> represents the spring constants, and
+<span class="math notranslate nohighlight">\(F=\left(\begin{array}{c}F_1-m_1\stackrel{..}{z}\\F_2- m_2\stackrel{..}{z}\\F_3- m_3\stackrel{..}{z}\end{array}\right)\)</span> the represents wind force and the inertial force caused by the ground motion.</p>
+<p><strong>3.3</strong>  <span class="math notranslate nohighlight">\(x_1(t)=\frac{6+2\sqrt{17}}{5\sqrt{17}+17}+c_{11} \cos \sqrt{ \frac{5+\sqrt{17}}{4}} t + c_{12} \sin \sqrt{ \frac{5+\sqrt{17}}{4}} t\)</span>  and  <span class="math notranslate nohighlight">\(x_2(t)=  \frac{-6+2\sqrt{17}}{5\sqrt{17}-17} + c_{21} \cos \sqrt{ \frac{5-\sqrt{17}}{4}} t + c_{22} \sin \sqrt{ \frac{5-\sqrt{17}}{4}} t \)</span>.  The initial conditions <span class="math notranslate nohighlight">\(w_1(0)=w_2(0)=   \stackrel{.}{w_1}(0)= \stackrel{.}{w_2}(0)=0\)</span> imply that <span class="math notranslate nohighlight">\(x_1(0)=x_2(0)=\stackrel{.}{x_1}=(0)= \stackrel{.}{x_2}(0)=0\)</span>, giving
+<span class="math notranslate nohighlight">\(c_{11}=  \frac{-6-2\sqrt{17}}{5\sqrt{17}+17} ,c_{12}= 0, c_{22}=  \frac{6-2\sqrt{17}}{5\sqrt{17}-17}, c_{21}= 0\)</span>.  Finally, using <span class="math notranslate nohighlight">\(W= \Phi X\)</span> gives <span class="math notranslate nohighlight">\(w_1(t)= x_1(t)+x_2(t)\)</span>, and <span class="math notranslate nohighlight">\(w_2(t)= (\frac{3-\sqrt{17}}{4})x_1(t) +  (\frac{3+\sqrt{17}}{4})x_2(t) \)</span>.</p>
+<p><strong>3.4</strong>  <span class="math notranslate nohighlight">\(U=\left[  \begin{array}{c} u(t)\\ \theta(t) \end{array}   \right]\)</span>, <span class="math notranslate nohighlight">\(M=\left[  \begin{array}{cc} M+m&amp;Ma\\ Ma&amp;I_G+Ma^2 \end{array}   \right]\)</span> , <span class="math notranslate nohighlight">\(C=\left[  \begin{array}{cc} c&amp;0\\ 0&amp;0 \end{array}   \right]\)</span>, <span class="math notranslate nohighlight">\(K=\left[  \begin{array}{cc} k&amp;0\\ 0&amp;K-Mga \end{array}   \right]\)</span>   and  <span class="math notranslate nohighlight">\( F(t) =\left[  \begin{array}{c} c\stackrel{.}{z}+kz \\ 0 \end{array}   \right] \)</span></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2059,20 +1834,20 @@ h_f = f \frac{L}{D} \frac{\stackrel{-}{u}^2}{2g}.
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="gravity/gravity.html"
+       href="erc/erc.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">6. Gravity Fed Water Delivery</p>
+        <p class="prev-next-title">JNB Lab: Eartquake Resistant Construction</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../Advanced/Complex/jnb1.html"
+       href="hiv/lab.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1. Setting the Scene</p>
+        <p class="prev-next-title">JNB Lab: HIV-AIDS</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2097,9 +1872,9 @@ h_f = f \frac{L}{D} \frac{\stackrel{-}{u}^2}{2g}.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-growth-and-covid-19">1. Logistic Growth and COVID-19</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basic-sir-model">2. The Basic SIR Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholera-in-haiti">3. Cholera in Haiti</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiv-aids">4. HIV-AIDS</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cws-model-of-alzheimers-disease">5. CWS Model of Alzheimer’s Disease</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gravity-fed-water-delivery">6. Gravity-Fed Water Delivery</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cws-model-of-alzheimers-disease">4. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gravity-fed-water-delivery">5. Gravity-Fed Water Delivery</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#earthquake-resistant-construction">6. Earthquake Resistant Construction</a></li>
 </ul>
   </nav></div>
 
