@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -276,8 +277,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="DE5.html">5. Systems of First-Order Differential Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DE6.html">6. Laplace Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DESolutions.html">Solutions to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Differential%20Equations%20Book%201%20Lab.html">Differential Equations Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL, EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/covid.html">1. Logistic Growth and COVID-19</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
@@ -820,6 +823,8 @@ document.write(`
 <h2>3.3 Slope Fields<a class="headerlink" href="#slope-fields" title="Permalink to this heading">#</a></h2>
 <p>Note we still do not know how to solve every first-order linear differential equation. For example, <span class="math notranslate nohighlight">\(y' = x(x^2-y^2)\)</span> is neither separable or linear. However, even if we cannot solve a differential equation, it is still possible to get qualitative information about the solution.</p>
 <p>Consider the first-order differential equation <span class="math notranslate nohighlight">\(\frac{dx}{dt} = f(t,x)\)</span>. If we evaluate <span class="math notranslate nohighlight">\(f(t,x)\)</span> at a set of grid points, we can then draw short vectors that represent the slope of the solution <span class="math notranslate nohighlight">\(x(t)\)</span> at those points. If we look at this grid of vectors at many points, we can get an idea of what the solution, <span class="math notranslate nohighlight">\(x(t)\)</span>, looks like. This grid of vectors is called a <strong>slope field</strong> or <strong>direction field</strong>.</p>
+<p>To draw a direction field, you can simply evaluate the differential equation at various points and plot the resulting vectors. For example, using the equation <span class="math notranslate nohighlight">\(y' = x(x^2-y^2)\)</span>, if you plug in the point (0,0), you see that the slope (<span class="math notranslate nohighlight">\(y'\)</span>) is <span class="math notranslate nohighlight">\(0\)</span> at that point, so you can draw a short vector of <span class="math notranslate nohighlight">\(0\)</span> slope at the origin. In fact, whenever <span class="math notranslate nohighlight">\(x = 0\)</span>, the slope is <span class="math notranslate nohighlight">\(0\)</span>, so along the y-axis, there will be short horizontal (<span class="math notranslate nohighlight">\(0\)</span> slope) vectors at every y-value. This process can be repeated for a set of sample points to create a graph that tells us about the behavior of solutions to a first order equation.</p>
+<p>Direction fields can also be plotted using electronically, as demonstrated below.</p>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
 <p>Plot a direction field for <span class="math notranslate nohighlight">\(y'(x) = x + \sin(y)\)</span>.</p>
@@ -834,7 +839,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mf">.3</span><span class="p">,</span> <span class="mf">.3</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">nx</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>
 
@@ -854,7 +859,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/7f10e6f4d330d5284e3bf253cfcb6a0358fdb0e6f42dc32546bbdb874ab1456b.png" src="../../_images/7f10e6f4d330d5284e3bf253cfcb6a0358fdb0e6f42dc32546bbdb874ab1456b.png" />
+<img alt="../../_images/5639f524071eb95360df927ae33a1534c43a8afed947388cdc0a2da433452173.png" src="../../_images/5639f524071eb95360df927ae33a1534c43a8afed947388cdc0a2da433452173.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -868,7 +873,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1">#Take some time to play around with the various parameters and see how it impacts the slope-field that is produced.</span>
-<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.2</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nx</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>
 
@@ -907,7 +912,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1">#Take some time to play around with the various parameters and see how it impacts the slope-field that is produced.</span>
-<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.2</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">nx</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>
 
@@ -967,14 +972,14 @@ document.write(`
 
 <span class="c1"># Solve the differential equation for the initial condition y(0)=1</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">y0</span> <span class="o">=</span> <span class="o">.</span><span class="mi">7</span>  <span class="c1"># initial condition</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="mf">.7</span>  <span class="c1"># initial condition</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">dy_dx</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
 <span class="c1"># Plot the solution on the direction field</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y(0)=0.7&#39;</span><span class="p">)</span>
 
 <span class="c1"># Plot the point (0,0.7)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>  <span class="c1"># &#39;bo&#39; means blue dot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.7</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>  <span class="c1"># &#39;bo&#39; means blue dot</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
@@ -1123,8 +1128,8 @@ document.write(`
 <p>Given the equilibrium solutions of an autonomous differential equation, we can make a phase line to analyze the behavior of the solution.</p>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
-<p>Draw a phase line and determine where the solutions of the differential equation <span class="math notranslate nohighlight">\(y'(x) = y(y-1)^2(x-2)\)</span> are increasing and decreasing.</p>
-<p>First we must find the equilibrium solutions, which means we must solve <span class="math notranslate nohighlight">\(y'(x)=0\)</span>. This means <span class="math notranslate nohighlight">\(y(y-1)^2(x-2)=0\)</span>. So <span class="math notranslate nohighlight">\(y(x)=0\)</span>, <span class="math notranslate nohighlight">\(y(x)=1\)</span>, and <span class="math notranslate nohighlight">\(y(x)=2\)</span> are the equilibrium solutions. To draw a phase line, see the code below.</p>
+<p>Draw a phase line and determine where the solutions of the differential equation <span class="math notranslate nohighlight">\(y'(x) = y(y-1)^2(y-2)\)</span> are increasing and decreasing.</p>
+<p>First we must find the equilibrium solutions, which means we must solve <span class="math notranslate nohighlight">\(y'(x)=0\)</span>. This means <span class="math notranslate nohighlight">\(y(y-1)^2(y-2)=0\)</span>. So <span class="math notranslate nohighlight">\(y(x)=0\)</span>, <span class="math notranslate nohighlight">\(y(x)=1\)</span>, and <span class="math notranslate nohighlight">\(y(x)=2\)</span> are the equilibrium solutions. To draw a phase line, see the code below.</p>
 </div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -1156,7 +1161,7 @@ document.write(`
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="s1">&#39;yo&#39;</span><span class="p">)</span> <span class="c1"># Semi-stable point in yellow</span>
         
 <span class="c1"># Draw arrows indicating direction of movement</span>
-<span class="n">arrow_properties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.075</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=.</span><span class="mi">3</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=.</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># Decrease head_width to make arrows skinnier</span>
+<span class="n">arrow_properties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.075</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">.3</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>  <span class="c1"># Decrease head_width to make arrows skinnier</span>
 
 <span class="n">check_points</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
 
@@ -1203,7 +1208,8 @@ document.write(`
 </div>
 </div>
 <p>Notice that this tells us that a solution to the previous differential equation would have to be increasing on the interval <span class="math notranslate nohighlight">\((-\infty,0)\)</span> or decreasing on <span class="math notranslate nohighlight">\((0,1)\)</span> or decreasing on <span class="math notranslate nohighlight">\((1,2)\)</span> or increasing on <span class="math notranslate nohighlight">\((2,\infty)\)</span>.</p>
-<p>In addition it allows us to classify the stability of our equilibrium solutions. An equilibrium solution <span class="math notranslate nohighlight">\(x(t)=c\)</span> is <strong>stable</strong> if solutions whose initial value is near <span class="math notranslate nohighlight">\(c\)</span> stays near <span class="math notranslate nohighlight">\(c\)</span> as the independent variable incrases.  An equilibrium solution <span class="math notranslate nohighlight">\(x(t)=c\)</span> is <strong>unstable</strong> if solutions whose initial value is near <span class="math notranslate nohighlight">\(c\)</span> goes away from <span class="math notranslate nohighlight">\(c\)</span> as the independent variable incrases. An equilibrium solution is considered <strong>semi-stable</strong> if both cases occur (one in the region above and one in the region below). We can see an example of each type of equilibrium in the above example. In particular, <span class="math notranslate nohighlight">\(x(t)=0\)</span> is stable, <span class="math notranslate nohighlight">\(x(t)=1\)</span> is semi-stable, and <span class="math notranslate nohighlight">\(x(t)=2\)</span> is unstable.</p>
+<p>In addition it allows us to classify the stability of our equilibrium solutions. An equilibrium solution <span class="math notranslate nohighlight">\(x(t)=c\)</span> is <strong>stable</strong> if solutions whose initial value is near <span class="math notranslate nohighlight">\(c\)</span> stays near <span class="math notranslate nohighlight">\(c\)</span> as the independent variable incrases.  An equilibrium solution <span class="math notranslate nohighlight">\(x(t)=c\)</span> is <strong>unstable</strong> if solutions whose initial value is near <span class="math notranslate nohighlight">\(c\)</span> goes away from <span class="math notranslate nohighlight">\(c\)</span> as the independent variable incrases. An equilibrium solution is considered <strong>semi-stable</strong> if both cases occur (one in the region above and one in the region below). We can see an example of each type of equilibrium in the above example. In particular, <span class="math notranslate nohighlight">\(x(t)=0\)</span> is stable, <span class="math notranslate nohighlight">\(x(t)=1\)</span> is semi-stable, and <span class="math notranslate nohighlight">\(x(t)=2\)</span> is unstable.
+Alternatively, a stable solution can be referred to as a <strong>sink</strong>, an unstable solution as a <strong>source</strong>, and a semi-stable solution as a <strong>node</strong>.</p>
 <p>It turns out that if we know that there is a unique solution to the autonomous initial-value problem <span class="math notranslate nohighlight">\(\frac{dx}{dt} = f(x)\)</span> where <span class="math notranslate nohighlight">\(x(t_0)=x_0\)</span>, then we know a few more things about the solution. Namely,</p>
 <ol class="arabic simple">
 <li><p>The equilibrium points divide the region <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> plane into regions. A solution cannot pass between regions and the initial value will determine which region a particular solution is in.</p></li>
