@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Linear/1';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3. Linear Transformations" href="3.html" />
+    <link rel="next" title="2. Matrices and Determinants" href="2.html" />
     <link rel="prev" title="Introduction" href="0.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -236,6 +236,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/2Functions.html">2. Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/4%20Derivatives.html">4. Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/5%20Integrals.html">5. Integrals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/6%20ParametricEquations.html">6. Parametric Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/7%20Sequences%20and%20Series.html">7. Sequences and Series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Solutions.html">Solution to Exercises</a></li>
@@ -247,8 +248,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.html">Introduction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.html">2. Matrices and Determinants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3.html">3. Linear Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.html">4. Eigenvalues and Eigenvectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5.html">5. Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Solutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -258,6 +262,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/solutions.html">Solution to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlab.html">JNB LAB: Linear Algebra for Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlabsolution.html">JNB Lab Solutions</a></li>
 </ul>
@@ -290,6 +295,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/solutions.html">Solutions to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/cplab.html">JNB LAB: Complex Potentials and Contaminant Flow</a></li>
@@ -594,8 +600,8 @@ document.write(`
 a_1 x_1 + a_2 x_2 + \dots + a_n x_n = b
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> are variables, and <span class="math notranslate nohighlight">\(b\)</span> and the coefficients <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n\)</span> are real numbers. A <em>system of linear equations</em> is a collection of linear equations in the same set of variables. For example, a system of <span class="math notranslate nohighlight">\(m\)</span> equations in <span class="math notranslate nohighlight">\(n\)</span> variables <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span> can be represented as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e9fd6985-374b-4ed8-b51c-425ba7a03ec9">
-<span class="eqno">(31)<a class="headerlink" href="#equation-e9fd6985-374b-4ed8-b51c-425ba7a03ec9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-24cf11ef-d9da-4215-a600-16141e335d9e">
+<span class="eqno">(31)<a class="headerlink" href="#equation-24cf11ef-d9da-4215-a600-16141e335d9e" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n &amp;= b_1 \\
 a_{21} x_1 + a_{22} x_2 + \dots + a_{2n} x_n &amp;= b_2 \\
 &amp;\vdots \\
@@ -1325,17 +1331,12 @@ y +2z =&amp; 0\
 </section>
 <section id="matrix-equation-a-vec-x-vec-b">
 <h3>Matrix Equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span><a class="headerlink" href="#matrix-equation-a-vec-x-vec-b" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>``` {index} matrix equation
-```
-</pre></div>
-</div>
-</div>
-</div>
-<p>Similarly, we can translate a linear system into a matrix equation of the form <span class="math notranslate nohighlight">\(A\vec{x} = \vec{b}\)</span>. To that end, we need to define the product on the left-hand side of equality.</p>
+<p id="index-23">Similarly, we can translate a linear system into a matrix equation of the form <span class="math notranslate nohighlight">\(A\vec{x} = \vec{b}\)</span>. To that end, we need to define the product on the left-hand side of equality.</p>
 <p>Let A be an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix (a rectangular array) with columns <span class="math notranslate nohighlight">\(\vec{a_1}, \vec{a_2}, \dots, \vec{a_n}\)</span>, and <span class="math notranslate nohighlight">\(\vec{x}\in \mathbb{R}^n\)</span>. We can define the product of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(\vec{x}\)</span>, denoted by <span class="math notranslate nohighlight">\(A\vec{x}\)</span>, as the linear combination of the columns of <span class="math notranslate nohighlight">\(A\)</span> where the coefficients are the components of <span class="math notranslate nohighlight">\(\vec{x}\)</span>:</p>
-<p>$<span class="math notranslate nohighlight">\(A\vec{x}=[\vec{a_1},\  \vec{a_2},\  \dots,\ \vec{a_n}]\, \begin{bmatrix} x_1 \\ x_2\\ \vdots \\ x_n \end{bmatrix}\, := x_1 \vec{a_1} + x_2\vec{a_2} + \dots + x_n \vec{a_n}\)</span>$.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A\vec{x}=[\vec{a_1},\  \vec{a_2},\  \dots,\ \vec{a_n}]\, \begin{bmatrix} x_1 \\ x_2\\ \vdots \\ x_n \end{bmatrix}\, := x_1 \vec{a_1} + x_2\vec{a_2} + \dots + x_n \vec{a_n}.
+\end{split}\]</div>
 <p>Note that <span class="math notranslate nohighlight">\(A\vec{x}\)</span> is defined only if the number of columns of A equals the number of entries of <span class="math notranslate nohighlight">\(\vec{x}\)</span></p>
 <div class="tip admonition">
 <p class="admonition-title">Theorem 4  (properties of the product of A and <span class="math notranslate nohighlight">\(\vec{x}\)</span>)</p>
@@ -1401,8 +1402,8 @@ A = \begin{bmatrix}
 \end{split}\]</div>
 <p>Now, let’s form the augmented matrix of equation <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span>:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6d2f71d0-c026-48f7-ad62-66231cf29681">
-<span class="eqno">(32)<a class="headerlink" href="#equation-6d2f71d0-c026-48f7-ad62-66231cf29681" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+<div class="amsmath math notranslate nohighlight" id="equation-be493e54-c729-4f49-8644-a468e67ce8f0">
+<span class="eqno">(32)<a class="headerlink" href="#equation-be493e54-c729-4f49-8644-a468e67ce8f0" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
 1 &amp; 4 &amp; 7 &amp;&amp; 1 \\
 2 &amp; 5 &amp; 8 &amp;&amp; 2 \\
 3 &amp; 6 &amp; 9 &amp;&amp; 3 \\
@@ -2051,11 +2052,11 @@ A = \begin{bmatrix}
       </div>
     </a>
     <a class="right-next"
-       href="3.html"
+       href="2.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">3. Linear Transformations</p>
+        <p class="prev-next-title">2. Matrices and Determinants</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

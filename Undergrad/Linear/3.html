@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Undergrad/Linear/3';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5. Orthogonality" href="5.html" />
-    <link rel="prev" title="1. Linear Systems" href="1.html" />
+    <link rel="next" title="4. Eigenvalues and Eigenvectors" href="4.html" />
+    <link rel="prev" title="2. Matrices and Determinants" href="2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -236,6 +236,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/2Functions.html">2. Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/4%20Derivatives.html">4. Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Calculus/5%20Integrals.html">5. Integrals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/6%20ParametricEquations.html">6. Parametric Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/7%20Sequences%20and%20Series.html">7. Sequences and Series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Calculus/Solutions.html">Solution to Exercises</a></li>
@@ -247,8 +248,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1.html">1. Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.html">2. Matrices and Determinants</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Linear Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.html">4. Eigenvalues and Eigenvectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5.html">5. Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Solutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -258,6 +262,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/solutions.html">Solution to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlab.html">JNB LAB: Linear Algebra for Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlabsolution.html">JNB Lab Solutions</a></li>
 </ul>
@@ -290,6 +295,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb1.html">1. Setting the Scene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/solutions.html">Solutions to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Advanced/Complex/cplab.html">JNB LAB: Complex Potentials and Contaminant Flow</a></li>
@@ -552,7 +558,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-linear-transformations">3.2  Introduction to Linear Transformations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-standard-matrix-representation-of-a-linear-transformation">The standard matrix representation of a linear transformation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -598,7 +604,7 @@ document.write(`
 \]</div>
 <p>Both of these vectors are in <span class="math notranslate nohighlight">\(H\)</span>.</p>
 <p>In general, if <span class="math notranslate nohighlight">\(\vec{u}_1, \vec{u}_2, \dots, \vec{u}_p \in \mathbb{R}^n\)</span>, then the span of of  <span class="math notranslate nohighlight">\(\vec{u}_1, \vec{u}_2, \dots, \vec{u}_p\)</span>, is a subspace <span class="math notranslate nohighlight">\(H\subset \mathbb{R}^n\)</span>, and we say H is <strong>spanned (or generated)</strong> by <span class="math notranslate nohighlight">\(\vec{u}_1, \vec{u}_2, \dots, \vec{u}_p\)</span>.</p>
-<p>Any <span class="math notranslate nohighlight">\(m \times n\)</span> matrix $A is associated with important subspaces:</p>
+<p>Any <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is associated with important subspaces:</p>
 <ol class="arabic simple">
 <li><p>The <strong>column space</strong> of <span class="math notranslate nohighlight">\(A\)</span>, denoted by <span class="math notranslate nohighlight">\(\text{col}(A)\)</span>, is the span of the columns of <span class="math notranslate nohighlight">\(A\)</span>:</p></li>
 </ol>
@@ -1113,33 +1119,35 @@ A = \begin{bmatrix} 1 &amp; 3 &amp; 3 &amp; 2 &amp; -9 \\ -2 &amp; -2 &amp; 2 &a
 </section>
 <section id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
-<div class="highlight-{admonition}Exercises notranslate"><div class="highlight"><pre><span></span>
-1. Determine which one of the following sets are a subspace:
-
-    a.   
-    
-    $$H = \left\lbrace \  \begin{bmatrix} x \\ y \\ z \end{bmatrix} \in \mathbb{R}^3 \mbox{ with } x \geq 0, \right\rbrace.$$
-    
-    b. 
-    
-    $$H = \left\lbrace \ \begin{bmatrix} x \\ 1 \\2x \end{bmatrix} \in \mathbb{R}^3 \right\rbrace.$$
-
-
-2. Let 
-
-$$A = \begin{bmatrix} 1 &amp; 2 &amp;-9 \\ -2 &amp; -2 &amp; 2 \\ 2 &amp; 3 &amp;0 \end{bmatrix}.$$  
-Find the dimension of $col(A)$ and $null(A)$.
-
-
-3. Suppose $A$ is a $5 \times 5$ matrix, and $A$ has 3 pivot columns. 
-
-    a. Prove that $A\vec{x}=\vec{0}$ must have nontrivial solutions.
-    
-    b. Is there an example of $A$ where $col(A)= null(A)$?
-
- 
-4. Find an explicit example of a $4\times 4$ matrix $A$ which has $colA = null(A)$ 
-</pre></div>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic">
+<li><p>Determine which one of the following sets are subspaces:</p>
+<p>a.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    H = \left\lbrace \  \begin{bmatrix} x \\ y \\ z \end{bmatrix} \in \mathbb{R}^3 \mbox{ with } x \geq 0, \right\rbrace.
+    \end{split}\]</div>
+<p>b.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    H = \left\lbrace \ \begin{bmatrix} x \\ 1 \\2x \end{bmatrix} \in \mathbb{R}^3 \right\rbrace.
+    \end{split}\]</div>
+</li>
+<li><p>Let</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix} 1 &amp; 2 &amp;-9 \\ -2 &amp; -2 &amp; 2 \\ 2 &amp; 3 &amp;0 \end{bmatrix}.
+\end{split}\]</div>
+<p>Find the dimension of <span class="math notranslate nohighlight">\(col(A)\)</span> and <span class="math notranslate nohighlight">\(null(A)\)</span> .</p>
+<ol class="arabic" start="3">
+<li><p>Suppose <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(5 \times 5\)</span> matrix, and <span class="math notranslate nohighlight">\(A\)</span> has 3 pivot columns.</p>
+<p>a. Prove that <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span> must have nontrivial solutions.</p>
+<p>b. Is there an example of <span class="math notranslate nohighlight">\(A\)</span> where <span class="math notranslate nohighlight">\(col(A)= null(A)\)</span> ?</p>
+</li>
+<li><p>Find an explicit example of a <span class="math notranslate nohighlight">\(4\times 4\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> which has <span class="math notranslate nohighlight">\(colA = null(A)\)</span></p></li>
+</ol>
 </div>
 </section>
 </section>
@@ -1335,9 +1343,10 @@ T: \mathbb{R}^3 \rightarrow \mathbb{R}^3
 \vec{u} = \begin{bmatrix} x\\ y\\ z \end{bmatrix},
 \end{split}\]</div>
 <p>it doesn’t affect the first two components and replaces <span class="math notranslate nohighlight">\(z\)</span> with zero. Let’s verify this by evaluating it for</p>
-<p>$<span class="math notranslate nohighlight">\(
-\vec{u} = \begin{bmatrix} 1\\ 3\\ 5 \end{bmatrix}
-\)</span>$:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\vec{u} = \begin{bmatrix} 1\\ 3\\ 5 \end{bmatrix}:
+\end{split}\]</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1466,11 +1475,14 @@ T(\begin{bmatrix} x \\ y \end{bmatrix}) = \begin{bmatrix} x+2y \\ y \end{bmatrix
 <p>Shearing a plane figure does not change its area. The shear transformation can also be generalized to three dimensions:</p>
 <p>Let</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\begin{split}
+\[\begin{split}
 A=\begin{bmatrix} 1 &amp; 0 &amp; \lambda \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}.
-$$. \end{split}\\Then, the transformation \end{aligned}\end{align} \]</div>
-<p>T: \mathbb{R}^3 \rightarrow \mathbb{R}^3
-$$</p>
+\end{split}\]</div>
+<p>Then, the transformation</p>
+<div class="math notranslate nohighlight">
+\[
+T: \mathbb{R}^3 \rightarrow \mathbb{R}^3
+\]</div>
 <p>defined by <span class="math notranslate nohighlight">\(T(\vec{x})= A\vec{x}\)</span> is a shear transformation.</p>
 </section>
 <section id="the-standard-matrix-representation-of-a-linear-transformation">
@@ -1621,8 +1633,8 @@ Let’s verify that <span class="math notranslate nohighlight">\(D\begin{bmatrix
 </div>
 </div>
 </section>
-<section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
+<section id="id1">
+<h3>Exercises<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
 <ol class="arabic">
@@ -1654,7 +1666,7 @@ T\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix} \right) = \begin{bmatrix} 1 \\ 2 \\
 <span class="math notranslate nohighlight">\(T \begin{bmatrix}
 2 \\ 3
 \end{bmatrix}.
-\)</span>$</p>
+\)</span></p>
 </div>
 </section>
 </section>
@@ -1692,20 +1704,20 @@ T\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix} \right) = \begin{bmatrix} 1 \\ 2 \\
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="1.html"
+       href="2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1. Linear Systems</p>
+        <p class="prev-next-title">2. Matrices and Determinants</p>
       </div>
     </a>
     <a class="right-next"
-       href="5.html"
+       href="4.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">5. Orthogonality</p>
+        <p class="prev-next-title">4. Eigenvalues and Eigenvectors</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1736,7 +1748,7 @@ T\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix} \right) = \begin{bmatrix} 1 \\ 2 \\
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-linear-transformations">3.2  Introduction to Linear Transformations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-standard-matrix-representation-of-a-linear-transformation">The standard matrix representation of a linear transformation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercises</a></li>
 </ul>
 </li>
 </ul>
