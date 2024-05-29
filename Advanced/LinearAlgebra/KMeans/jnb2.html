@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>3. K-means Clustering &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -19,53 +18,50 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=a4f27da2" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/LinearAlgebra/KMeans/jnb2';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="4. Dimension Reduction by Principal Component Analysis" href="../PCA/jnb3.html" />
@@ -79,7 +75,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -114,11 +118,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -133,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
+  
   
   
   
@@ -145,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -277,7 +297,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">Differential Equations Lab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Answer Key</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -324,7 +344,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">END MATTER</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">INDEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -509,20 +529,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -577,12 +599,12 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="k-means-clustering">
-<h1>3. K-means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading">#</a></h1>
+<h1>3. K-means Clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h1>
 <section id="clustering-of-data">
-<h2>Clustering of Data<a class="headerlink" href="#clustering-of-data" title="Permalink to this heading">#</a></h2>
+<span id="index-0"></span><h2>Clustering of Data<a class="headerlink" href="#clustering-of-data" title="Link to this heading">#</a></h2>
 <p>In this section, we will consider the problem of clustering into <span class="math notranslate nohighlight">\(k\)</span> groups a set of unlabelled points in a coordinate plane <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span> For example, the figure below is a scatterplot of a data set from the Chicago Data Portal that shows the locations of 1,000 recent acts of violence in the city of Chicago. Police departments may use data like this to help identify clusters or “hot spots” in their violence reduction efforts. Another question is whether these crime locations might be naturally divided in some way, say, into two halves.</p>
 <a class="reference internal image-reference" href="../../../_images/fig6a.png"><img alt="../../../_images/fig6a.png" src="../../../_images/fig6a.png" style="width: 200px;" /></a>
 <p>We can use <span class="math notranslate nohighlight">\(k\)</span>-means clustering to separate the mapped crime data as points in <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> into an arbitrary number of groups solely based on location, as seen in the  figure below. This figure shows  <span class="math notranslate nohighlight">\(k=2\)</span> clusters.  The I-55 Stevenson Expressway, which runs northeast from Stickney to downtown Chicago, is close to the boundary between the two clusters. High-density areas exist within each cluster, one in the West side and the other in much of the South side of the city. These areas reflect a long history of injustices in these parts of Chicago [Amdat 2021].</p>
@@ -592,7 +614,7 @@ document.write(`
 <p>As discussed in the previous section on OLS linear regression, minimization of a loss function <span class="math notranslate nohighlight">\(J(c_0,c_1)\)</span> is the basis for finding a line <span class="math notranslate nohighlight">\(y=c_0+c_1 x\)</span> which best fits a collection of data points <span class="math notranslate nohighlight">\((x_1,y_1), (x_2,y_2),\dots (x_n,y_n).\)</span> We show how minimization of a different loss function is basic to a particular method to cluster data into <span class="math notranslate nohighlight">\(k\)</span> groups called <i>k-means clustering</i>.    We begin by describing three recursive methods for locating a minimum point of a loss function, the first of which is <i>gradient descent</i>.</p>
 </section>
 <section id="optimization-by-gradient-descent">
-<h2>Optimization by Gradient Descent<a class="headerlink" href="#optimization-by-gradient-descent" title="Permalink to this heading">#</a></h2>
+<span id="index-1"></span><h2>Optimization by Gradient Descent<a class="headerlink" href="#optimization-by-gradient-descent" title="Link to this heading">#</a></h2>
 <p>Recall that given a function <span class="math notranslate nohighlight">\(J(w_1,w_2,\dots,w_s)\)</span>, the gradient of <span class="math notranslate nohighlight">\(J\)</span> (denoted <span class="math notranslate nohighlight">\(\nabla J\)</span>) is the vector</p>
 <div class="math notranslate nohighlight">
 \[
@@ -627,7 +649,7 @@ w_{n+1}=w_n - \sigma J'(w_n).
 <p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is a positive constant called the <i>learning rate.</i></p>
 </section>
 <section id="example-3-1">
-<h2>Example 3.1.<a class="headerlink" href="#example-3-1" title="Permalink to this heading">#</a></h2>
+<h2>Example 3.1.<a class="headerlink" href="#example-3-1" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(J(w_1,w_2)=w_1^2+2w_1+w_2^2+4w_2,\)</span> <span class="math notranslate nohighlight">\(\mathbf{w}_0=(0,0)\)</span> and <span class="math notranslate nohighlight">\(\sigma=0.1\)</span>.  Find <span class="math notranslate nohighlight">\(\mathbf{w}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{w}_2.\)</span> To which point do we expect the gradient descent sequence <span class="math notranslate nohighlight">\(\mathbf{w}_n\)</span> to converge?</p>
 <p><b>Solution:</b><br />
 We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)</span></p>
@@ -642,13 +664,13 @@ We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)
 <p>Note that <span class="math notranslate nohighlight">\(J=(w_1+1)^2+(w_2+2)^2-5\)</span> has a minimum point at <span class="math notranslate nohighlight">\(\mathbf{w}^*=(-1,-2)\)</span>. That point is where we would expect the gradient descent sequence <span class="math notranslate nohighlight">\(\mathbf{w}_n\)</span> to converge.</p>
 <p id="index-2">We continue with minimizing a loss function <span class="math notranslate nohighlight">\(J(w_1,w_2,\dots,w_s)\)</span> by introducing two additional methods of optimization.</p>
 <section id="coordinate-descent">
-<h3>Coordinate Descent<a class="headerlink" href="#coordinate-descent" title="Permalink to this heading">#</a></h3>
+<h3>Coordinate Descent<a class="headerlink" href="#coordinate-descent" title="Link to this heading">#</a></h3>
 <p>In contrast to gradient descent, <i>coordinate descent</i> seeks to minimize the value of <span class="math notranslate nohighlight">\(J\)</span> one coordinate at a time. For example, to minimize <span class="math notranslate nohighlight">\(J\)</span>, we begin with an initial point <span class="math notranslate nohighlight">\(\mathbf{w}_0\)</span> which specifies the values for <span class="math notranslate nohighlight">\((w_1,w_2,\dots,w_s)\)</span> and look for the minimum value of <span class="math notranslate nohighlight">\(J\)</span> obtainable by varying <span class="math notranslate nohighlight">\(w_1\)</span> and keep the remaining variables <span class="math notranslate nohighlight">\(w_2,\dots,w_s\)</span> fixed. After finding the value of <span class="math notranslate nohighlight">\(w_1\)</span> that gives a minimum  <span class="math notranslate nohighlight">\(J\)</span>, we continue by varying the value of <span class="math notranslate nohighlight">\(w_2\)</span> to further minimize <span class="math notranslate nohighlight">\(J\)</span> while keeping the newly obtained <span class="math notranslate nohighlight">\(w_1\)</span> and the other variables fixed.  We continue this process until the value of <span class="math notranslate nohighlight">\(J\)</span> remains unchanged (or only changes at each step by an amount less than a specified threshold) when cycling through all <span class="math notranslate nohighlight">\(n\)</span> variables.</p>
 </section>
 <section id="optimization-by-coordinate-and-block-descent">
-<span id="index-3"></span><h3>Optimization by Coordinate and Block Descent<a class="headerlink" href="#optimization-by-coordinate-and-block-descent" title="Permalink to this heading">#</a></h3>
+<span id="index-3"></span><h3>Optimization by Coordinate and Block Descent<a class="headerlink" href="#optimization-by-coordinate-and-block-descent" title="Link to this heading">#</a></h3>
 <section id="example-3-2">
-<h4>Example 3.2.<a class="headerlink" href="#example-3-2" title="Permalink to this heading">#</a></h4>
+<h4>Example 3.2.<a class="headerlink" href="#example-3-2" title="Link to this heading">#</a></h4>
 <p>Use  coordinate descent to minimize</p>
 <div class="math notranslate nohighlight">
 \[J(w_1,w_2)=(w_1-1)^2 + (w_2-2)^2,\]</div>
@@ -658,11 +680,11 @@ We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)
 </section>
 </section>
 <section id="block-descent">
-<h3>Block Descent<a class="headerlink" href="#block-descent" title="Permalink to this heading">#</a></h3>
+<h3>Block Descent<a class="headerlink" href="#block-descent" title="Link to this heading">#</a></h3>
 <p>Block descent is similar to coordinate descent except we minimize <span class="math notranslate nohighlight">\(J\)</span> over blocks of variables rather than a single variable. The <span class="math notranslate nohighlight">\(k\)</span>-means clustering method is based on block descent, as we now explain.</p>
 </section>
 <section id="k-means-clustering-optimization-problem">
-<h3>K-MEANS CLUSTERING OPTIMIZATION PROBLEM<a class="headerlink" href="#k-means-clustering-optimization-problem" title="Permalink to this heading">#</a></h3>
+<h3>K-MEANS CLUSTERING OPTIMIZATION PROBLEM<a class="headerlink" href="#k-means-clustering-optimization-problem" title="Link to this heading">#</a></h3>
 <p>Find <span class="math notranslate nohighlight">\(\mathbf{z}_1,\dots,\mathbf{z}_k\)</span> and <span class="math notranslate nohighlight">\(y_{i,j}\)</span> that</p>
 <div class="math notranslate nohighlight">
 \[
@@ -680,7 +702,7 @@ We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)
 <p>We continue this process until the value of <span class="math notranslate nohighlight">\(J\)</span> either is unchanged or only changes by some amount less than a specified threshold after completing the two steps in the algorithm.</p>
 </section>
 <section id="example-3-3">
-<h3>Example 3.3.<a class="headerlink" href="#example-3-3" title="Permalink to this heading">#</a></h3>
+<h3>Example 3.3.<a class="headerlink" href="#example-3-3" title="Link to this heading">#</a></h3>
 <p>Use <span class="math notranslate nohighlight">\(k\)</span>-means clustering with <span class="math notranslate nohighlight">\(k=2\)</span> to divide the points <span class="math notranslate nohighlight">\(\mathbf{x}_1=(0,0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}_2=(10,0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}_3=(10,1)\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{x}_4=(0,1)\)</span> into two clusters. Begin with the prototypes <span class="math notranslate nohighlight">\(z_1=(0,0)\)</span> and <span class="math notranslate nohighlight">\(z_2=(10,0)\)</span>.</p>
 <p><b> Solution:</b></p>
 <p>i)  Fix the prototypes <span class="math notranslate nohighlight">\(z_1=(0,0)\)</span> and <span class="math notranslate nohighlight">\(z_2=(10,0)\)</span>; we have <span class="math notranslate nohighlight">\(y_{1,1}=1\)</span>, <span class="math notranslate nohighlight">\(y_{1,2}=0\)</span>, <span class="math notranslate nohighlight">\(y_{2,1}=0\)</span>, <span class="math notranslate nohighlight">\(y_{2,2}=1\)</span>, <span class="math notranslate nohighlight">\(y_{3,1}=0\)</span>, <span class="math notranslate nohighlight">\(y_{3,2}=1\)</span>, <span class="math notranslate nohighlight">\(y_{4,1}=1\)</span>,  and <span class="math notranslate nohighlight">\(y_{4,2}=0\)</span>;</p>
@@ -690,7 +712,7 @@ We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)
 <p>Observing that <span class="math notranslate nohighlight">\(y_{1,1}=1\)</span> and <span class="math notranslate nohighlight">\(y_{4,1}=1\)</span>,  the points <span class="math notranslate nohighlight">\(\mathbf{x_1}=(0,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x_4}=(0,1)\)</span> are assigned to cluster 1. Furthermore, since <span class="math notranslate nohighlight">\(y_{2,2}=1\)</span> and <span class="math notranslate nohighlight">\(y_{3,2}=1\)</span>, the points <span class="math notranslate nohighlight">\(\mathbf{x_2}=(10,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x_3}=(10,1)\)</span> are assigned to cluster 2.</p>
 </section>
 <section id="proof-of-block-descents-stepwise-minimization-of-j">
-<h3>Proof of Block Descent’s Stepwise Minimization of <span class="math notranslate nohighlight">\(J\)</span><a class="headerlink" href="#proof-of-block-descents-stepwise-minimization-of-j" title="Permalink to this heading">#</a></h3>
+<h3>Proof of Block Descent’s Stepwise Minimization of <span class="math notranslate nohighlight">\(J\)</span><a class="headerlink" href="#proof-of-block-descents-stepwise-minimization-of-j" title="Link to this heading">#</a></h3>
 <p>Since <span class="math notranslate nohighlight">\(J\)</span> is the sum of squared distances between data points and their cluster centers, it is clear that if we fix the prototypes, <span class="math notranslate nohighlight">\(J\)</span> will be minimized by assigning each data point to the nearest prototype. We now show that for any fixed choice of assignment variables, the loss function <span class="math notranslate nohighlight">\(J\)</span> is minimized when each prototype is the mean of the points in its cluster.</p>
 <p>Let
 <span class="math notranslate nohighlight">\(J=\sum_{j=1}^k O_j\)</span> where <span class="math notranslate nohighlight">\(O_j=\sum_{i-1}^my_{i,j}\|\mathbf{x}_{i}-\mathbf{z}_j\|^2.\)</span> Note that <span class="math notranslate nohighlight">\(O_j\)</span> can be computed using only the points in cluster <span class="math notranslate nohighlight">\(j\)</span>,  since otherwise <span class="math notranslate nohighlight">\(y_{i,j}=0\)</span>. Denote these points <span class="math notranslate nohighlight">\(\mathbf{u}_1,\dots,\mathbf{u}_{n_j}.\)</span> Then for each <span class="math notranslate nohighlight">\(j\)</span>, we minimize</p>
@@ -710,7 +732,7 @@ O_j(z_{j,1},\dots,z_{j,m}) = (u_{1,1}-z_{j,1})^2+\dots+(u_{1,m}-z_{j,m})^2+
 </section>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
 <ol class="arabic simple">
@@ -723,7 +745,7 @@ O_j(z_{j,1},\dots,z_{j,m}) = (u_{1,1}-z_{j,1})^2+\dots+(u_{1,m}-z_{j,m})^2+
 </div>
 </section>
 <section id="lab">
-<h2>LAB<a class="headerlink" href="#lab" title="Permalink to this heading">#</a></h2>
+<h2>LAB<a class="headerlink" href="#lab" title="Link to this heading">#</a></h2>
 <p>In this lab, we will illustrate how to cluster a larger number of points in analyzing Chicago violent crime data.</p>
 <p>Datafile: Violence.csv</p>
 <p>Data source: Chicago Data Portal (<a class="reference external" href="https://data.cityofchicago.org/Public-Safety/Violence-Reduction-Victims-of-Homicides-and-Non-Fa/gumc-mgzr">https://data.cityofchicago.org/Public-Safety/Violence-Reduction-Victims-of-Homicides-and-Non-Fa/gumc-mgzr</a>). Data was extracted on December 7th, 2022.</p>
@@ -13035,7 +13057,7 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /anaconda3/lib/python3.1
 <p>Note that the I55 Expressway which runs northeast from Summit to Chicago is an approximate dividing line between the clusters on the South and West sides of Chicago.</p>
 <p>Now, we will compare the police district boundaries in Chicago to the 22 clusters our k-means algorithm comes up with.</p>
 <section id="lab-assignment">
-<h3>Lab Assignment<a class="headerlink" href="#lab-assignment" title="Permalink to this heading">#</a></h3>
+<h3>Lab Assignment<a class="headerlink" href="#lab-assignment" title="Link to this heading">#</a></h3>
 <div class="admonition-lab-assignment admonition">
 <p class="admonition-title">Lab Assignment</p>
 <p>Use k-means to divide the crime data into 22 clusters.  How does the result compare
@@ -13070,11 +13092,10 @@ with a map of the 22 Chicago Police Deparftment districts&gt;</p>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../OLS/jnb1.html"
@@ -13094,10 +13115,7 @@ with a map of the 22 Chicago Police Deparftment districts&gt;</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -13105,6 +13123,7 @@ with a map of the 22 Chicago Police Deparftment districts&gt;</p>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -13152,6 +13171,7 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2024.
@@ -13185,8 +13205,8 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

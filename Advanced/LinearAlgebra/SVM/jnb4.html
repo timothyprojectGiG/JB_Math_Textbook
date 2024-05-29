@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>5. Binary Classification of Labelled Data by Support Vector Machines &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -19,53 +18,50 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=a4f27da2" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/LinearAlgebra/SVM/jnb4';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Solution to Exercises" href="../solutions.html" />
@@ -79,7 +75,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -114,11 +118,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -133,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
+  
   
   
   
@@ -145,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -277,7 +297,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">Differential Equations Lab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Answer Key</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -324,7 +344,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">END MATTER</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">INDEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -509,20 +529,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -570,16 +592,16 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="binary-classification-of-labelled-data-by-support-vector-machines">
-<h1>5. Binary Classification of Labelled Data by Support Vector Machines<a class="headerlink" href="#binary-classification-of-labelled-data-by-support-vector-machines" title="Permalink to this heading">#</a></h1>
+<h1>5. Binary Classification of Labelled Data by Support Vector Machines<a class="headerlink" href="#binary-classification-of-labelled-data-by-support-vector-machines" title="Link to this heading">#</a></h1>
 <p id="index-0">In this section, we consider data points that are labeled as belonging to one of two classes. Our goal is to determine a line (more generally, a hyperplane) that correctly separates the data. That is, all the points in one class are on one side of the line (hyperplane), and all the points in the other class are on the other side. For example, the scatterplot in  the figure below is an example of linearly separable data, meaning that the data can be correctly separated by a line.  The scatterplot shows for each Chicago ZIP Code the median proportion of income spent on rent vs. % of single-parent households.  The labels indicate 1 = rent-burdened (median 12-month rent is  more than 30% of median annual income) or 0 = not rent-burdened. As such, the line <span class="math notranslate nohighlight">\(x=0.3\)</span> separates the data. Points on one side of the line are in one class and points on the other in the other class.</p>
 <a class="reference internal image-reference" href="../../../_images/fig13a1.png"><img alt="../../../_images/fig13a1.png" src="../../../_images/fig13a1.png" style="width: 200px;" /></a>
 <p>As shown in the  figure below, a line that does not correctly separate the labeled data will create  false positives (FP) and/or false negatives (FN). An FP is a point that the line indicates to be in class 1 but which in fact is in class 0; an FN is a point that the line indicates to be in class 0 but which is actually in class 1.</p>
 <a class="reference internal image-reference" href="../../../_images/fig13b1.png"><img alt="../../../_images/fig13b1.png" src="../../../_images/fig13b1.png" style="width: 200px;" /></a>
 <section id="intuition-underlying-svm">
-<h2>Intuition Underlying SVM<a class="headerlink" href="#intuition-underlying-svm" title="Permalink to this heading">#</a></h2>
+<span id="index-1"></span><h2>Intuition Underlying SVM<a class="headerlink" href="#intuition-underlying-svm" title="Link to this heading">#</a></h2>
 <p>For simplicity, let us consider a small number of data points with each point labeled as belonging to one of two distinct groups indicated by a pentagon or square.  Our goal is to find a boundary line that separates the two groups.</p>
 <a class="reference internal image-reference" href="../../../_images/fig141.png"><img alt="../../../_images/fig141.png" src="../../../_images/fig141.png" style="width: 200px;" /></a>
 <p>We might separate the data with a line as shown below.</p>
@@ -595,14 +617,14 @@ A support vector is a vector whose terminal point  <span class="math notranslate
 <p>An ideal hyperplane would separate the data most clearly, and thus we would not want the hyperplane to be very close to any of the data points. Instead, the ideal hyperplane is as far from both classes of data as possible while continuing to separate the two groups. Thus, we should aim to maximize the margin around the hyperplane. However, given a fixed margin, multiple hyperplanes correctly separate the data, as shown in the figure above. The separating line <span class="math notranslate nohighlight">\(L_1\)</span> is  close to the star data  but well-separated from the square data.  <span class="math notranslate nohighlight">\(L_1\)</span> is not an ideal hyperplane because a small error in the star data could result in incorrectly separated points.  In order to prevent small variations in the data from affecting the grouping of points, we should look for a hyperplane that is well-separated from both classes, namely, the hyperplane that  has a maximized margin and is equidistant from support vectors in the two classes.</p>
 </section>
 <section id="mathematical-formalism">
-<h2>Mathematical Formalism<a class="headerlink" href="#mathematical-formalism" title="Permalink to this heading">#</a></h2>
+<span id="index-2"></span><h2>Mathematical Formalism<a class="headerlink" href="#mathematical-formalism" title="Link to this heading">#</a></h2>
 <p>Consider the binary classification of a labeled training data set consisting of <span class="math notranslate nohighlight">\(n\)</span> data points (observations). Each data point has <span class="math notranslate nohighlight">\(m\)</span> coordinates (features) and is represented by a row vector in <span class="math notranslate nohighlight">\(\mathbf{R}^m\)</span>. Binary class membership is indicated by the labels <span class="math notranslate nohighlight">\(y_i\in\{+1,-1\}.\)</span> The classification problem that we consider involves</p>
 <p>i) finding a hyperplane that separates points by their class, using a labeled training set (see table below) to supervise the classification; and
 ii) using the hyperplane to make a prediction as to the class of a new point given just its features.</p>
 <a class="reference internal image-reference" href="../../../_images/table11.png"><img alt="../../../_images/table11.png" src="../../../_images/table11.png" style="width: 300px;" /></a>
 </section>
 <section id="separating-hyperplanes">
-<h2>Separating Hyperplanes<a class="headerlink" href="#separating-hyperplanes" title="Permalink to this heading">#</a></h2>
+<span id="index-3"></span><h2>Separating Hyperplanes<a class="headerlink" href="#separating-hyperplanes" title="Link to this heading">#</a></h2>
 <p>The goal of linear separation is to find components of a vector <span class="math notranslate nohighlight">\(\mathbf{w}=\langle w_1,\dots,w_m \rangle\)</span> and real constant <span class="math notranslate nohighlight">\(b\)</span> such that the hyperplane <span class="math notranslate nohighlight">\(\pi(\mathbf{w},b)\)</span> defined by the equation <span class="math notranslate nohighlight">\(\mathbf{w}\cdot\mathbf{x}+b=w_1 x_1 + w_2x_2 + \dots + w_mx_m+b=0\)</span> is a linear separator of the labeled training data <span class="math notranslate nohighlight">\((\mathbf{x}_1,y_1),\dots,(\mathbf{x}_n,y_n)\)</span>. That is, for all <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>:</p>
 <p><span class="math notranslate nohighlight">\(\mathbf{w}\cdot\mathbf{x}_i+b&gt;0\)</span> if <span class="math notranslate nohighlight">\(y_i=+1\)</span>, and</p>
 <p><span class="math notranslate nohighlight">\(\mathbf{w}\cdot\mathbf{x}_i+b&lt;0\)</span> if <span class="math notranslate nohighlight">\(y_i=-1\)</span>.</p>
@@ -625,7 +647,7 @@ ii) using the hyperplane to make a prediction as to the class of a new point giv
 <p>The data point  <span class="math notranslate nohighlight">\(\mathbf{x}_1=(0,0,0)\)</span> with label <span class="math notranslate nohighlight">\(y=-1\)</span> is in <span class="math notranslate nohighlight">\(\pi^-\)</span>, and the data points <span class="math notranslate nohighlight">\(\mathbf{x}_2=(1,1,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_3=(1,1,1)\)</span> with label <span class="math notranslate nohighlight">\(y=1\)</span> are in <span class="math notranslate nohighlight">\(\pi^+\)</span>. The hyperplane <span class="math notranslate nohighlight">\(\pi\bigl((1,1,1),-1\bigr)\)</span> correctly separates the three labeled training points.</p>
 </section>
 <section id="signed-distance">
-<h2>Signed Distance<a class="headerlink" href="#signed-distance" title="Permalink to this heading">#</a></h2>
+<span id="index-4"></span><h2>Signed Distance<a class="headerlink" href="#signed-distance" title="Link to this heading">#</a></h2>
 <p>The signed distance, denoted <span class="math notranslate nohighlight">\(\rho(\mathbf{x},\pi)\)</span>, from a data point (vector) <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to the hyperplane <span class="math notranslate nohighlight">\(\pi(\mathbf{w},b)\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -649,7 +671,7 @@ m(C_1,C_2,\pi)=\rho(C_1,\pi)+\rho(C_2,\pi).
 <p>In our example,  <span class="math notranslate nohighlight">\(C_1=\{(1,1,0),(1,1,1)\}\)</span>, <span class="math notranslate nohighlight">\(C_2=\{(0,0,0)\}\)</span>,  <span class="math notranslate nohighlight">\(\rho(C_1,\pi)=2/\sqrt{3}\)</span>, and  <span class="math notranslate nohighlight">\(\rho(C_2,\pi)=1/\sqrt{3}\)</span>. The margin is therefore <span class="math notranslate nohighlight">\(m(C_1,C_2,\pi)=1/\sqrt{3}+1/\sqrt{3}=2/\sqrt{3}\)</span>.</p>
 </section>
 <section id="optimization-for-linearly-separable-data">
-<h2>Optimization for Linearly-Separable Data<a class="headerlink" href="#optimization-for-linearly-separable-data" title="Permalink to this heading">#</a></h2>
+<span id="index-5"></span><h2>Optimization for Linearly-Separable Data<a class="headerlink" href="#optimization-for-linearly-separable-data" title="Link to this heading">#</a></h2>
 <p>For classifying data points, SVM seeks a  hyperplane <span class="math notranslate nohighlight">\(\pi(\mathbf{w},b)\)</span> that</p>
 <p>i)  <span class="math notranslate nohighlight">\(\,\)</span> correctly separates the training data,</p>
 <p>ii) <span class="math notranslate nohighlight">\(\,\)</span> has maximum margin (this is desirable to allow for measurement error or noise in the data), and</p>
@@ -669,7 +691,7 @@ minimize \, J=\frac{1}{2}\|\mathbf{w}\|^2
 <p>Note that by minimizing <span class="math notranslate nohighlight">\(J = \frac{1}{2}\|\mathbf{w}\|^2\)</span>, we are maximizing <span class="math notranslate nohighlight">\(d=\frac{1}{\|\mathbf{w}\|}\)</span>. From constraint <strong>(i)</strong>, we have <span class="math notranslate nohighlight">\(\rho(\mathbf{x}, \pi)=\frac{\mathbf{w}\cdot\mathbf{x}+b}{\|\mathbf{w}\|}\ge \frac{1}{\|\mathbf{w}\|}=d\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{x}\in C_{1}\)</span>. From constraint <strong>(ii)</strong>, we have <span class="math notranslate nohighlight">\(\rho(\mathbf{x},\pi)=\frac{\mathbf{w}\cdot\mathbf{x}+b}{\|\mathbf{w}\|}\le \frac{-1}{\|\mathbf{w}\|}=-d\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{x}\in C_{2}\)</span>. The margin is therefore <span class="math notranslate nohighlight">\(2d\)</span>. Hence, the minimization of <span class="math notranslate nohighlight">\(J=\frac{1}{2}\|\mathbf{w}\|^2\)</span> maximizes the margin <span class="math notranslate nohighlight">\(2d=\frac{2}{\|w\|}\)</span>. For our example, using the Jupiter Notebook  at <a class="reference external" href="https://tinyurl.com/ypasckyh">https://tinyurl.com/ypasckyh</a>, the support vectors are <span class="math notranslate nohighlight">\(\langle 0,0,0 \rangle\)</span> and <span class="math notranslate nohighlight">\(\langle 1,1,0 \rangle\)</span>. This gives us the SVM separating hyperplane <span class="math notranslate nohighlight">\(\pi\bigl((1,1,0),-1\bigr) \)</span> or <span class="math notranslate nohighlight">\(x_1 + x_2 -1 = 0\)</span> with a margin of <span class="math notranslate nohighlight">\(\sqrt{2}\)</span>. This margin is indeed larger than the margin <span class="math notranslate nohighlight">\(2/\sqrt{3}\)</span> that we obtained with our previous separating hyperplane <span class="math notranslate nohighlight">\(x_1+x_2+x_3-1=0.\)</span></p>
 </section>
 <section id="optimization-for-non-separable-data">
-<h2>Optimization for Non-Separable Data<a class="headerlink" href="#optimization-for-non-separable-data" title="Permalink to this heading">#</a></h2>
+<span id="index-6"></span><h2>Optimization for Non-Separable Data<a class="headerlink" href="#optimization-for-non-separable-data" title="Link to this heading">#</a></h2>
 <p>In general, the training data might not be linearly separable. In this case, our goal to find a hyperplane <span class="math notranslate nohighlight">\(\mathbf \pi(\mathbf{w},b)\)</span> that classifies the labeled data is based on the following:</p>
 <p><b>SVM OPTIMIZATION PROBLEM (non-separable training data)</b></p>
 <p>Find <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and  <span class="math notranslate nohighlight">\(b\)</span> that will</p>
@@ -689,7 +711,7 @@ minimize \, J(\mathbf{w}.b)= \frac{1}{2}\sum_{i=1}^n\max\{0,1-y_i(\mathbf{w}\cdo
 <p>Exercise 3) uses a JNB to illustrate how SVMs can be used in the binary classification of facial images. Using a training set consisting of <span class="math notranslate nohighlight">\(32\times 32=1024\)</span>-dimensional vectors representing <span class="math notranslate nohighlight">\(32\times 32\)</span> pixel images of former Chicago Mayors Harold Washington and Richard M. Daley, an SVM hyperplane is  used to predict which mayor is depicted in a set of test images of the two mayors.</p>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
 <ol class="arabic simple">
@@ -717,14 +739,14 @@ In the case where all points in the training set are correctly classified and we
 </div>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>In this chapter, we have seen how linear algebra and optimization provide a framework for four types of machine-learning data analysis: ordinary least squares (OLS) linear regression, <span class="math notranslate nohighlight">\(k\)</span>-means clustering of unlabelled data, dimensionality analysis by principal component analysis, and binary classification of labeled data by support vector machines (SVM). Aggarwal [2020] provides an extensive in-depth treatment of this subject, and Williams [2018] is a good introduction to additional ways linear algebra is useful in data analysis.</p>
 <p>Data analysis is becoming increasingly automated with the development of machine learning tools, including Python JNBs [VanderPlas 2017]. In addition to being adept in the use of such computational tools, a key to proficiency as a data scientist is to have an inquisitive love for data as well as a good understanding of the mathematics underlying a given method of analysis.</p>
 <p>Our team also holds the view that data analysis can and should support efforts to solve pressing societal issues being tackled by organizations working in disadvantaged communities. The housing data which we used to introduce SVM, is an instructive example of applying data analysis tools to complex problems involving equitable distribution of scarce resources.  In pondering why SVM did not give the vertical line which correctly separates rent-burdened from non-rent-Chicago ZIP Codes, we realized that the <span class="math notranslate nohighlight">\(L_2\)</span> SVM loss function penalizes data points that are correctly classified but are too close to the line (overfitting). In this case, if the default <em>regularization parameter</em> <span class="math notranslate nohighlight">\(C=1\)</span> in Python’s Support Vector Classifier SVC() were increased to <span class="math notranslate nohighlight">\(C=1000\)</span>, we would obtain the separating vertical hyperplane. (<span class="math notranslate nohighlight">\(C\)</span> is inversely proportion to <span class="math notranslate nohighlight">\(\lambda\)</span> in the SVM loss function in <strong>Section 5.7</strong>).   Using the default SVM classifier with <span class="math notranslate nohighlight">\(C=1\)</span> results in misclassifications: Accuracy = 0.7 (42 out of 60 total predictions were correct), Recall = 0.75 (36 of 48 rent-burdened ZIP Codes were correctly predicted), Precision = 0.86 (of the 42 ZIP Codes predicted to be rent-burdened, 36 were correctly predicted), and F-score = 0.8 (geometric mean of accuracy and precision). If the default model were the basis for a decision on whether to grant rent support, the false negatives (FN = 12) would deny support from qualified ZIP Codes, and  false positives (FP = 6) would result in an inequitable use of limited resources. Understanding the mathematics underlying the algorithm can help identify potential dangers in accepting the default ML output at face value.</p>
 <p>Knowledge  of the real-world context under consideration is paramount.  Although the vertical line <span class="math notranslate nohighlight">\(x=0.3\)</span> correctly separates the data and thus has 100% accuracy, recall, and precision, there are  a dozen non-rent-burdened ZIP Codes close to the cutoff value of 0.3.  Gentrification can result in rapid rental increases that negatively impact low-income areas by creating additional rent-burdened households. Yet, since incomes may also increase in gentrifying areas, ZIP Codes close to but below the threshold line might not cross over into the rent-burdened category.  Similarly, ZIP Codes above the  threshold might move below in spite of the additional rent burden on low-income households. Those most in need of housing support might be overlooked if funding decisions are based on a superficial machine-learning analysis of aggregated data. A merely mathematical classification of such data might hide or contribute to inequity if not accompanied by a close working knowledge of the actual real-life context.</p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <p>Aggarwal, C. 2020. <i>Linear Algebra and Optimization for Machine Learning: A Textbook</i>. Cham, Switzerland: Springer Nature.</p>
 <p>Amdat, W.C. 2021. The Chicago Hardship Index: An Introduction to Urban Inequity. Journal of Statistics and Data Science Education. <a class="reference external" href="https://www.researchgate.net/publication/361130606_The_Chicago_Hardship_Index_An_Introduction_to_Urban_Inequity">https://www.researchgate.net/publication/361130606_The_Chicago_Hardship_Index_An_Introduction_to_Urban_Inequity</a>.</p>
 <p>Epperly, E. 2022. Don’t solve the normal equations. <a class="reference external" href="https://www.ethanepperly.com/index.php/2022/07/26/dont-solve-the-normal-equations/">https://www.ethanepperly.com/index.php/2022/07/26/dont-solve-the-normal-equations/</a></p>
@@ -735,7 +757,7 @@ In the case where all points in the training set are correctly classified and we
 O’Reilly.</p>
 <p>Williams, G. 2018. <i>Linear Algebra with Applications (9e).}  Burlington, MA: Jones &amp; Bartlett. </i></p>
 <section id="acknowledgements">
-<h3>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading">#</a></h3>
+<h3>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h3>
 <p>The project team is grateful to UMAP Journal Editor Paul Campbell for helpful guidance as to the design and content of this chapter, and also to  anonymous referees for suggesting improvements to the original manuscript.</p>
 </section>
 </section>
@@ -766,11 +788,10 @@ O’Reilly.</p>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../PCA/jnb3.html"
@@ -790,10 +811,7 @@ O’Reilly.</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -801,6 +819,7 @@ O’Reilly.</p>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -841,6 +860,7 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2024.
@@ -874,8 +894,8 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

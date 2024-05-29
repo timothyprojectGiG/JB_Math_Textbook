@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>3. Hypothesis Testing for Numerical Data &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -19,53 +18,50 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a4f27da2" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ProbStat/StatInf/03_Inference_Numerical';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4. Linear Regression" href="04_Regression.html" />
@@ -79,7 +75,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -114,11 +118,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -133,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../intro.html">
+  
   
   
   
@@ -145,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -277,7 +297,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">Differential Equations Lab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Answer Key</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -324,7 +344,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">END MATTER</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">INDEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -509,20 +529,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -572,7 +594,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -613,11 +635,11 @@ document.write(`
         </div></div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-for-numerical-data">
-<h1>3. Hypothesis Testing for Numerical Data<a class="headerlink" href="#hypothesis-testing-for-numerical-data" title="Permalink to this heading">#</a></h1>
-<p>In the <a class="reference internal" href="02_Inference_Categorical.html"><span class="doc std std-doc">last section</span></a>, we learned about the statistical test of hypotheses, which tells us how we can choose between two statistical models. We did this in the context of categorical data, where we hypothesized about population proportions.</p>
+<h1>3. Hypothesis Testing for Numerical Data<a class="headerlink" href="#hypothesis-testing-for-numerical-data" title="Link to this heading">#</a></h1>
+<p>In the <a class="reference internal" href="02_Inference_Categorical.html"><span class="std std-doc">last section</span></a>, we learned about the statistical test of hypotheses, which tells us how we can choose between two statistical models. We did this in the context of categorical data, where we hypothesized about population proportions.</p>
 <p>In this section, we apply the same theory to numerical data to hypothesize about population means and variances.</p>
 <section id="the-palmer-penguins">
-<h2>The Palmer Penguins<a class="headerlink" href="#the-palmer-penguins" title="Permalink to this heading">#</a></h2>
+<h2>The Palmer Penguins<a class="headerlink" href="#the-palmer-penguins" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://github.com/mcnakhaee/palmerpenguins">Palmer Penguins dataset</a>, created by Allison Horst, Alison Hill, and Kristen Gorman, contains physical measurements for 344 adult penguins observed near the Palmer Station in Antarctica. The penguins come from 3 different species: Chinstrap, Gentoo, and Adélie. The data were collected by Kristen Gorman and the Palmer Station LTER Program.</p>
 <figure>
     <img src='https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png' alt='Illustration of Chinstrap, Gentoo, and Adélie penguins. Artwork by @allison_horst, used with permission.'>
@@ -724,8 +746,8 @@ document.write(`
 </div>
 <p>Using this data, we are going to explore the question of whether the Gentoo penguins at the Palmer Station differ significantly in body mass from the average Gentoo penguin body mass found in the scientific literature. (This example was inspired by <a class="reference external" href="https://github.com/MSCI-599/unit_3_penguins">Erin Meyer-Gutbrod</a>.)</p>
 <p>We can find more information about the worldwide average body mass of the Gentoo penguin by using the <a class="reference external" href="https://eol.org/pages/45512076">Encyclopedia of Life</a>. Based on this page, it looks like the average body mass is 5500 grams. If we let <span class="math notranslate nohighlight">\(\mu\)</span> be the average body mass of Gentoo penguins in the Palmer Station area, our hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-76324b9b-803b-40a2-a627-c9856ca33d22">
-<span class="eqno">(13)<a class="headerlink" href="#equation-76324b9b-803b-40a2-a627-c9856ca33d22" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e9ac04c9-d9c5-4bd3-8f18-a9fa7bac000f">
+<span class="eqno">(13)<a class="headerlink" href="#equation-e9ac04c9-d9c5-4bd3-8f18-a9fa7bac000f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 \end{equation}\]</div>
 <p>What about the mean body mass for penguins in our sample data?</p>
@@ -795,23 +817,23 @@ H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/1cbd2b40520f0f123a37aa2db996f341fcd09ff2fff09387ac9b276b2eb7a3c8.png" src="../../_images/1cbd2b40520f0f123a37aa2db996f341fcd09ff2fff09387ac9b276b2eb7a3c8.png" />
+<a class="reference internal image-reference" href="../../_images/1cbd2b40520f0f123a37aa2db996f341fcd09ff2fff09387ac9b276b2eb7a3c8.png"><img alt="../../_images/1cbd2b40520f0f123a37aa2db996f341fcd09ff2fff09387ac9b276b2eb7a3c8.png" src="../../_images/1cbd2b40520f0f123a37aa2db996f341fcd09ff2fff09387ac9b276b2eb7a3c8.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
-<p>Though we could introduce a test based on the standard normal distribution—as we did in the <a class="reference internal" href="02_Inference_Categorical.html"><span class="doc std std-doc">previous section</span></a>—in the case of numerical data, we are going to utilize the <strong>T-test</strong> instead. As the name suggests, this test is based on the Student’s T-distribution. We do this because the T-test will apply both to the cases when the sample size is large and to the cases when it is relatively small.</p>
+<p>Though we could introduce a test based on the standard normal distribution—as we did in the <a class="reference internal" href="02_Inference_Categorical.html"><span class="std std-doc">previous section</span></a>—in the case of numerical data, we are going to utilize the <strong>T-test</strong> instead. As the name suggests, this test is based on the Student’s T-distribution. We do this because the T-test will apply both to the cases when the sample size is large and to the cases when it is relatively small.</p>
 <div class="highlight-{index}Student's notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </section>
 <section id="the-students-t-distribution">
-<h2>The Student’s T-Distribution<a class="headerlink" href="#the-students-t-distribution" title="Permalink to this heading">#</a></h2>
+<h2>The Student’s T-Distribution<a class="headerlink" href="#the-students-t-distribution" title="Link to this heading">#</a></h2>
 <p>When hypothesizing about a population proportion, the null hypothesis gives us a value of <span class="math notranslate nohighlight">\(p\)</span> that determines both the mean and standard deviation of the null distribution. On the other hand, the CLT for sample means tells us that as long as <span class="math notranslate nohighlight">\(n\)</span> is large enough,</p>
 <div class="math notranslate nohighlight">
 \[\overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}} \right).\]</div>
 <p>Unfortunately, if we make a hypothesis about <span class="math notranslate nohighlight">\(\mu\)</span>, we are still left with estimating <span class="math notranslate nohighlight">\(\sigma\)</span>, the population standard deviation. If we have a good estimate for <span class="math notranslate nohighlight">\(\sigma\)</span>, perhaps from past experiments or expert knowledge, then this is no problem! If we don’t know <span class="math notranslate nohighlight">\(\sigma\)</span>, our best estimate from the data will be to use <span class="math notranslate nohighlight">\(S\)</span>, the sample standard deviation.</p>
 <p>When we standardize the test statistic, we then have</p>
 <div class="math notranslate nohighlight" id="equation-t-equation">
-<span class="eqno">(14)<a class="headerlink" href="#equation-t-equation" title="Permalink to this equation">#</a></span>\[ T = \frac{ \overline{X} - \mu } {S / \sqrt{n}} \sim t_{\nu} \qquad \mbox{rather than} \qquad Z = \frac{ \overline{X} - \mu } {\sigma / \sqrt{n}} \sim N(0,1).\]</div>
+<span class="eqno">(14)<a class="headerlink" href="#equation-t-equation" title="Link to this equation">#</a></span>\[ T = \frac{ \overline{X} - \mu } {S / \sqrt{n}} \sim t_{\nu} \qquad \mbox{rather than} \qquad Z = \frac{ \overline{X} - \mu } {\sigma / \sqrt{n}} \sim N(0,1).\]</div>
 <p>The good news is that <span class="math notranslate nohighlight">\(T\)</span> has a highly studied distribution called the Student’s T-distribution. The T-distribution looks a lot like the standard normal distribution, but it has a wider spread, i.e., more probability in the “tails” of the distribution. This wider spread reflects the extra uncertainty of using the sample standard deviation <span class="math notranslate nohighlight">\(S\)</span> in place of the population standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. The T-distribution has only one parameter, called “degrees of freedom”, which is represented by the Greek letter <span class="math notranslate nohighlight">\(\nu\)</span> (<em>nu</em>, pronounced like “new”). This is calculated by subtracting one from the sample size, i.e., <span class="math notranslate nohighlight">\(\nu = n - 1\)</span>.</p>
 <p>We have glossed over an important detail here: The statistic <span class="math notranslate nohighlight">\(T = \frac{ \overline{X} - \mu } {S / \sqrt{n}}\)</span> has a T-distribution only if the data in the sample come from a normal distribution. Fortunately, if the sample size is large, we don’t need to worry too much about this assumption thanks to the CLT. But if the sample size is small, this becomes especially important!</p>
 <p>Play around with the widget below to get an idea of what the T-distribution looks like compared to the standard normal distribution. Drag the slider to select different degrees of freedom, and click the labels in the legend to hide or show different parts of the graph. Notice how the T-distribution resembles the standard normal distribution more closely as the degrees of freedom increase.</p>
@@ -935,7 +957,7 @@ if (outputEl) {{
 </div>
 </section>
 <section id="the-t-test">
-<h2>The T-Test<a class="headerlink" href="#the-t-test" title="Permalink to this heading">#</a></h2>
+<h2>The T-Test<a class="headerlink" href="#the-t-test" title="Link to this heading">#</a></h2>
 <p>Now back to our current example: to use a T-test, we need to check the assumption that the underlying data come from a normal distribution. We have <span class="math notranslate nohighlight">\(n=119\)</span> observations, which means we’re working with a large sample case. Additionally, the histogram of the body mass of the Gentoo penguins is roughly mound-shaped, so using the T-test is appropriate for this situation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -950,7 +972,7 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a305dd122e981d356748a57260a5f3caeaba24d43804ed4533f7062a6c92e6a4.png" src="../../_images/a305dd122e981d356748a57260a5f3caeaba24d43804ed4533f7062a6c92e6a4.png" />
+<a class="reference internal image-reference" href="../../_images/a305dd122e981d356748a57260a5f3caeaba24d43804ed4533f7062a6c92e6a4.png"><img alt="../../_images/a305dd122e981d356748a57260a5f3caeaba24d43804ed4533f7062a6c92e6a4.png" src="../../_images/a305dd122e981d356748a57260a5f3caeaba24d43804ed4533f7062a6c92e6a4.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <p>Now since we know the values of <span class="math notranslate nohighlight">\(\overline X\)</span>, <span class="math notranslate nohighlight">\(S\)</span>, and <span class="math notranslate nohighlight">\(n\)</span>, and the null hypothesis tells us what we assume <span class="math notranslate nohighlight">\(\mu\)</span> to be, we can form our test statistic <span class="math notranslate nohighlight">\(T\)</span> based on the formula for <span class="math notranslate nohighlight">\(T\)</span> <a class="reference internal" href="#equation-t-equation">(14)</a> above.</p>
@@ -1064,7 +1086,7 @@ if (outputEl) {{
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/6fe8869e613d9c2630c808622d08dee9893802f19e222ee1e58e08fca3fa9b00.png" src="../../_images/6fe8869e613d9c2630c808622d08dee9893802f19e222ee1e58e08fca3fa9b00.png" />
+<a class="reference internal image-reference" href="../../_images/6fe8869e613d9c2630c808622d08dee9893802f19e222ee1e58e08fca3fa9b00.png"><img alt="../../_images/6fe8869e613d9c2630c808622d08dee9893802f19e222ee1e58e08fca3fa9b00.png" src="../../_images/6fe8869e613d9c2630c808622d08dee9893802f19e222ee1e58e08fca3fa9b00.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1171,7 +1193,7 @@ if (outputEl) {{
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/f3424e73ac188aa814821b77b735d3ad88cfac55a434efc6a6c9ce1e1b20aa0d.png" src="../../_images/f3424e73ac188aa814821b77b735d3ad88cfac55a434efc6a6c9ce1e1b20aa0d.png" />
+<a class="reference internal image-reference" href="../../_images/f3424e73ac188aa814821b77b735d3ad88cfac55a434efc6a6c9ce1e1b20aa0d.png"><img alt="../../_images/f3424e73ac188aa814821b77b735d3ad88cfac55a434efc6a6c9ce1e1b20aa0d.png" src="../../_images/f3424e73ac188aa814821b77b735d3ad88cfac55a434efc6a6c9ce1e1b20aa0d.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <p>As this graph shows, the area measured by the <span class="math notranslate nohighlight">\(P\)</span>-value is quite small (note the range of the <span class="math notranslate nohighlight">\(y\)</span>-axis).</p>
@@ -1179,7 +1201,7 @@ if (outputEl) {{
 <p>Why the big difference? Probably the Encyclopedia of Life body mass trait is specifically for adult Gentoo penguins, and our observations contain younger penguins. If we wanted to make a stronger, publishable conclusion we could use this as a jumping off point for further research.</p>
 <p>If we were writing this test for a publication we could use language like this: “We conducted a one-sample t-test to compare the body mass of Gentoo penguins measured at the Palmer Station with the theoretical mean adult Gentoo body mass of 5500 g pulled from the Encyclopedia of Life trait bank. The penguin body mass measurements in this study were significantly smaller than the theoretical mean (<span class="math notranslate nohighlight">\(p=6.05 \times 10^{-16}\)</span>).”</p>
 <section id="the-t-test-in-python">
-<h3>The T-Test in Python<a class="headerlink" href="#the-t-test-in-python" title="Permalink to this heading">#</a></h3>
+<h3>The T-Test in Python<a class="headerlink" href="#the-t-test-in-python" title="Link to this heading">#</a></h3>
 <p>Fortunately, Python has many of these statistical tests built in, so we don’t have to calculate it all from scratch every time. In this case, we use the <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> library, which includes the T-test as <code class="docutils literal notranslate"><span class="pre">ttest_1samp</span></code>. Here is code that performs the same test we just did. Verify that the answers match what we computed above!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1224,7 +1246,7 @@ P-value is 0.000.
 </div>
 </div>
 </div>
-<p>If your version of <code class="docutils literal notranslate"><span class="pre">scipy</span></code> is less than 1.10.0, you can compute the confidence interval by using the <code class="docutils literal notranslate"><span class="pre">t.interval</span></code> function instead. (It also works for versions greater than or equal to 1.10.0.) This function is similar to the <code class="docutils literal notranslate"><span class="pre">norm.interval</span></code> function we used <a class="reference internal" href="01_Foundations.html"><span class="doc std std-doc">earlier</span></a>:</p>
+<p>If your version of <code class="docutils literal notranslate"><span class="pre">scipy</span></code> is less than 1.10.0, you can compute the confidence interval by using the <code class="docutils literal notranslate"><span class="pre">t.interval</span></code> function instead. (It also works for versions greater than or equal to 1.10.0.) This function is similar to the <code class="docutils literal notranslate"><span class="pre">norm.interval</span></code> function we used <a class="reference internal" href="01_Foundations.html"><span class="std std-doc">earlier</span></a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># works for versions of scipy &lt; 1.10.0</span>
@@ -1248,7 +1270,7 @@ P-value is 0.000.
 <p>We have 95% confidence that the average mass of Gentoo penguins in the Palmer Station area is between about 4986 and 5165 grams, much lower than the null hypothesis from before.</p>
 </section>
 <section id="exercise-3-1">
-<h3>Exercise 3.1<a class="headerlink" href="#exercise-3-1" title="Permalink to this heading">#</a></h3>
+<h3>Exercise 3.1<a class="headerlink" href="#exercise-3-1" title="Link to this heading">#</a></h3>
 <p>Repeat the test above for the bill length of Gentoo penguins. This is found in the variable <code class="docutils literal notranslate"><span class="pre">bill_length_mm</span></code>.</p>
 <ol class="arabic simple">
 <li><p>Find the average bill length for Gentoo penguins from the <a class="reference external" href="https://eol.org/pages/45512076">Encyclopedia of Life</a>. Use this information to form null and alternative hypotheses, making sure to note the units.</p></li>
@@ -1262,12 +1284,12 @@ P-value is 0.000.
 </section>
 </section>
 <section id="two-sample-t-test">
-<h2>Two-Sample T-Test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h2>
+<h2>Two-Sample T-Test<a class="headerlink" href="#two-sample-t-test" title="Link to this heading">#</a></h2>
 <p>We can also use the T-test to examine the difference between two population means. Typically, this is done to find out if two populations have the same mean or not.</p>
 <p>We can return to our Palmer Penguins example and look at whether the Adélie and Chinstrap penguins from this area have the same average body mass.</p>
 <p>Letting <span class="math notranslate nohighlight">\(\mu_1\)</span> be the average body mass of Adélie penguins and <span class="math notranslate nohighlight">\(\mu_2\)</span> be the average body mass of Chinstrap penguins in the Palmer station area, our hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-830594dd-8461-4a27-952e-45037f4c90a7">
-<span class="eqno">(15)<a class="headerlink" href="#equation-830594dd-8461-4a27-952e-45037f4c90a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cb9400ef-12bd-4c6a-9b0d-56cc40ed6bb2">
+<span class="eqno">(15)<a class="headerlink" href="#equation-cb9400ef-12bd-4c6a-9b0d-56cc40ed6bb2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_0: \mu_1 - \mu_2 = 0, \\ H_1: \mu_1 - \mu_2 \neq 0.
 \end{equation}\]</div>
 <p>Let’s look at our samples:</p>
@@ -1293,20 +1315,20 @@ The mean Chinstrap body mass in the sample data is 3733.088.
 </pre></div>
 </div>
 <section id="the-test-statistic">
-<h3>The Test Statistic<a class="headerlink" href="#the-test-statistic" title="Permalink to this heading">#</a></h3>
+<h3>The Test Statistic<a class="headerlink" href="#the-test-statistic" title="Link to this heading">#</a></h3>
 <p>When the sample sizes <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span> are large enough (typically both <span class="math notranslate nohighlight">\(n_1 \geq 30\)</span> and <span class="math notranslate nohighlight">\(n_2 \geq 30\)</span>), we have</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d7ef27c2-356c-4120-9bf5-4a8b091c1e8d">
-<span class="eqno">(16)<a class="headerlink" href="#equation-d7ef27c2-356c-4120-9bf5-4a8b091c1e8d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7194b09e-f2f9-43c9-921d-2236c698b2a9">
+<span class="eqno">(16)<a class="headerlink" href="#equation-7194b09e-f2f9-43c9-921d-2236c698b2a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \overline{X}_1 - \overline{X}_2 \sim N \left( \mu_1 - \mu_2, \sqrt{ \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} } \right),
 \end{equation}\]</div>
 <p>and hence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-95f54fad-fd1d-4a33-985c-daad87a4b2de">
-<span class="eqno">(17)<a class="headerlink" href="#equation-95f54fad-fd1d-4a33-985c-daad87a4b2de" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-04967022-b311-4bfb-a598-3949b0ba961b">
+<span class="eqno">(17)<a class="headerlink" href="#equation-04967022-b311-4bfb-a598-3949b0ba961b" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\overline{X}_1 - \overline{X}_2 - (\mu_1 - \mu_2)}{ \sqrt{ \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} }} \sim N(0,1).
 \end{equation}\]</div>
 <p>Just as before, the null hypothesis will tell us about <span class="math notranslate nohighlight">\(\mu_1-\mu_2\)</span>, but not about <span class="math notranslate nohighlight">\(\sigma_1\)</span> and <span class="math notranslate nohighlight">\(\sigma_2\)</span>, so we’ll estimate them from the data using <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span>. Making that substitution for the standard deviations, we have a T-distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ae837f79-dfa6-4c89-9d43-84303e0982d1">
-<span class="eqno">(18)<a class="headerlink" href="#equation-ae837f79-dfa6-4c89-9d43-84303e0982d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-70c3eafb-c08d-43ec-a96a-da7e01a810fc">
+<span class="eqno">(18)<a class="headerlink" href="#equation-70c3eafb-c08d-43ec-a96a-da7e01a810fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\overline{X}_1 - \overline{X}_2 - (\mu_1 - \mu_2)}{ \sqrt{ \frac{S_1^2}{n_1} + \frac{S_2^2}{n_2} }} \sim t_{\nu},
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\nu\)</span> represents the degrees of freedom. The exact value of <span class="math notranslate nohighlight">\(\nu\)</span> will be calculated by something called Welch’s method, but we can let the software handle that details of the computation. You can keep in mind the intuition that if <span class="math notranslate nohighlight">\(S_1 \approx S_2\)</span>, then <span class="math notranslate nohighlight">\(\nu\)</span> will be about <span class="math notranslate nohighlight">\(n_1 + n_2 - 2\)</span>. On the other hand, if <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> are very different, then <span class="math notranslate nohighlight">\(\nu \approx \min({n_1, n_2})\)</span>.</p>
@@ -1329,7 +1351,7 @@ The mean Chinstrap body mass in the sample data is 3733.088.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d1fb41d02cfbde539d9deee939d8ac1f70a99a7d86a9d6c031d1a2c7023a7a5e.png" src="../../_images/d1fb41d02cfbde539d9deee939d8ac1f70a99a7d86a9d6c031d1a2c7023a7a5e.png" />
+<a class="reference internal image-reference" href="../../_images/d1fb41d02cfbde539d9deee939d8ac1f70a99a7d86a9d6c031d1a2c7023a7a5e.png"><img alt="../../_images/d1fb41d02cfbde539d9deee939d8ac1f70a99a7d86a9d6c031d1a2c7023a7a5e.png" src="../../_images/d1fb41d02cfbde539d9deee939d8ac1f70a99a7d86a9d6c031d1a2c7023a7a5e.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <p>These look appropriately normal-ish, and the large sample gives us extra wiggle room in the assumptions of the T-test. Moreover, the distributions don’t look too different, so we might start to expect that the true difference in means really is 0. So let’s perform the test!</p>
@@ -1387,7 +1409,7 @@ P-value is 0.588.
 <p>Note that this confidence interval contains 0. Since we have 95% confidence that the difference in the average mass of Adélie and Chinstrap penguins in the Palmer Station area is in this interval, this confirms our conclusion that we have no evidence to reject the null hypothesis.</p>
 </section>
 <section id="large-sample-vs-small-sample">
-<h3>Large Sample vs. Small Sample<a class="headerlink" href="#large-sample-vs-small-sample" title="Permalink to this heading">#</a></h3>
+<h3>Large Sample vs. Small Sample<a class="headerlink" href="#large-sample-vs-small-sample" title="Link to this heading">#</a></h3>
 <p>Why do we need the extra assumption of a normally distributed population in the case of a small sample? In non-technical terms, because we have less information in the data, we need more information from elsewhere (in this case, assumptions) to be able to make conclusions.</p>
 <p>In the large sample case, the Central Limit Theorem tells us that <span class="math notranslate nohighlight">\(\overline{X}\)</span> is normal. In the small sample case, if the sample comes from a normally distributed population, then <span class="math notranslate nohighlight">\(\overline{X}\)</span> will again be normal.</p>
 <p>Below you can find plots of the sampling distribution of sample averages from both normal and non-normal distributions, each with a population mean of 1 and a standard deviation of 2. The top row looks at small samples (size <span class="math notranslate nohighlight">\(n=10\)</span>), one from a non-normal distribution (left) and the other from a normal distribution (right). We take the average and “studentize” according to the formula for <span class="math notranslate nohighlight">\(T\)</span> <a class="reference internal" href="#equation-t-equation">(14)</a> above.</p>
@@ -1464,18 +1486,18 @@ P-value is 0.588.
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/ebb38def3d0cd52e38d802789e654837f2a3685fcf9b0a2ba278deaa8e40f2f7.png" src="../../_images/ebb38def3d0cd52e38d802789e654837f2a3685fcf9b0a2ba278deaa8e40f2f7.png" />
+<a class="reference internal image-reference" href="../../_images/ebb38def3d0cd52e38d802789e654837f2a3685fcf9b0a2ba278deaa8e40f2f7.png"><img alt="../../_images/ebb38def3d0cd52e38d802789e654837f2a3685fcf9b0a2ba278deaa8e40f2f7.png" src="../../_images/ebb38def3d0cd52e38d802789e654837f2a3685fcf9b0a2ba278deaa8e40f2f7.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <p>This shows us that, in order to use the T-test with a small sample, it’s necessary to assume that our data comes from a normal distribution. But how we can tell if this assumption is true? This is a nuanced question. Because you don’t have much data to start with, it’s difficult to draw strong conclusions about the distribution it came from! Some textbooks will simply tell you to look for rules of thumb: as long as there are no outliers, or the graph looks roughly “mound-shaped”, you’re ok to proceed with the test. There are even hypothesis tests to quantify this or more sophisticated visuals to use, but they are outside of the scope of this chapter.</p>
 </section>
 <section id="robustness-to-assumptions">
-<h3>Robustness to Assumptions<a class="headerlink" href="#robustness-to-assumptions" title="Permalink to this heading">#</a></h3>
+<h3>Robustness to Assumptions<a class="headerlink" href="#robustness-to-assumptions" title="Link to this heading">#</a></h3>
 <p>Statisticians have determined that the T-test is fairly “robust” to the normality assumptions. In simple terms, robustness means that you can still trust the results of the test, even if your assumptions are only approximately met. In this case, if your data comes from something that is close to normal, the T-test will still work properly. If that feels too imprecise, that’s ok! It can take some time to develop your understanding and intuition for this.</p>
 </section>
 </section>
 <section id="exercise-3-2">
-<h2>Exercise 3.2<a class="headerlink" href="#exercise-3-2" title="Permalink to this heading">#</a></h2>
+<h2>Exercise 3.2<a class="headerlink" href="#exercise-3-2" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Framingham_Heart_Study">Framingham Heart Study</a> is an ongoing study of cardiovascular health in the United States. The initial study followed over 5,000 volunteers from  Framingham, Massachusetts, USA over the course of several decades, and it still continues today. The study led to important findings in many areas, including a link between cholesterol and heart disease. (This exercise was inspired by an assignment from UC Berkeley’s <a class="reference external" href="http://data8.org/">Data 8</a>.)</p>
 <p>We load in the data below from the file <code class="docutils literal notranslate"><span class="pre">framingham.csv</span></code> (click <a class="reference download internal" download="" href="../../_downloads/676633eefefb056c2f9726ae9198fbe9/framingham.csv"><span class="xref download myst">here</span></a> to download a copy). There are a number of different interesting variables to explore, but we will focus on exploring total cholesterol levels (<code class="docutils literal notranslate"><span class="pre">TOTCHOL</span></code>) versus the occurence of heart disease (<code class="docutils literal notranslate"><span class="pre">ANYCHD</span></code>). The variable <code class="docutils literal notranslate"><span class="pre">ANYCHD</span></code> takes the value <code class="docutils literal notranslate"><span class="pre">0</span></code> if the patient does not have heart disease and the value <code class="docutils literal notranslate"><span class="pre">1</span></code> if they do.</p>
 <div class="cell docutils container">
@@ -1616,11 +1638,10 @@ P-value is 0.588.
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="02_Inference_Categorical.html"
@@ -1640,10 +1661,7 @@ P-value is 0.588.
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1651,6 +1669,7 @@ P-value is 0.588.
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1693,6 +1712,7 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2024.
@@ -1726,8 +1746,8 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

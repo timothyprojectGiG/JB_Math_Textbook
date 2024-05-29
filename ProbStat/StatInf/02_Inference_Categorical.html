@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2. Hypothesis Testing for Categorical Data &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -19,53 +18,50 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a4f27da2" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ProbStat/StatInf/02_Inference_Categorical';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="3. Hypothesis Testing for Numerical Data" href="03_Inference_Numerical.html" />
@@ -79,7 +75,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -114,11 +118,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -133,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../intro.html">
+  
   
   
   
@@ -145,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -277,7 +297,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">Differential Equations Lab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Answer Key</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -324,7 +344,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">END MATTER</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">INDEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -509,20 +529,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -575,7 +597,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -619,14 +641,14 @@ document.write(`
 </pre></div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-for-categorical-data">
-<h1>2. Hypothesis Testing for Categorical Data<a class="headerlink" href="#hypothesis-testing-for-categorical-data" title="Permalink to this heading">#</a></h1>
+<h1>2. Hypothesis Testing for Categorical Data<a class="headerlink" href="#hypothesis-testing-for-categorical-data" title="Link to this heading">#</a></h1>
 <section id="statistical-decision-making-the-hypothesis-test">
-<h2>Statistical Decision-Making: The Hypothesis Test<a class="headerlink" href="#statistical-decision-making-the-hypothesis-test" title="Permalink to this heading">#</a></h2>
-<p>In the <a class="reference internal" href="01_Foundations.html"><span class="doc std std-doc">last section</span></a>, we saw how probabilty theory can help us to estimate how close a sample average is to the true average of a population using a confidence interval.</p>
+<h2>Statistical Decision-Making: The Hypothesis Test<a class="headerlink" href="#statistical-decision-making-the-hypothesis-test" title="Link to this heading">#</a></h2>
+<p>In the <a class="reference internal" href="01_Foundations.html"><span class="std std-doc">last section</span></a>, we saw how probabilty theory can help us to estimate how close a sample average is to the true average of a population using a confidence interval.</p>
 <p>In this section, we will look at another important tool in the statistician’s repetoire, the statistical test of hypotheses. Hypothesis testing works much like the scientific method: we make a hypothesis about how the world works, construct an experiment to test it, gather data from the experiment, and then evaluate how closely that data fits the hypothesis.</p>
 <p>Let’s look at this process in the context of an example.</p>
 <section id="the-wellcome-global-monitor-survey">
-<h3>The Wellcome Global Monitor Survey<a class="headerlink" href="#the-wellcome-global-monitor-survey" title="Permalink to this heading">#</a></h3>
+<h3>The Wellcome Global Monitor Survey<a class="headerlink" href="#the-wellcome-global-monitor-survey" title="Link to this heading">#</a></h3>
 <p>The Wellcome Global Monitor survey, which is part of the World Gallup Poll, asks people around the world about their views on topics related to science and health. The <a class="reference external" href="https://doi.org/10.5255/UKDA-SN-8466-2">most recent data</a>, as of writing, is from 2018 and consists of survey answers from over 140,000 people in 144 different countries, collected in person or by telephone. The data is available under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 <p>One of our goals in this chapter is to help you understand the statistical decision-making process, and, through learning more, to have more confidence about how scientists move forward in their understanding. As a statistician and educator, I’m very interested in the level of trust people have in scientists and the scientific process.</p>
 <p>Hence, we are going to look today at the Wellcome Global Monitor’s Trust in Scientists Index, which measures how much each respondent trusts scientists based on their answers to five of the questions in the survey:</p>
@@ -747,7 +769,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/199bf2c4b4778ab387268db7f0ddf94964d3fcc3beb6bf63f5f3573724d7dc90.png" src="../../_images/199bf2c4b4778ab387268db7f0ddf94964d3fcc3beb6bf63f5f3573724d7dc90.png" />
+<a class="reference internal image-reference" href="../../_images/199bf2c4b4778ab387268db7f0ddf94964d3fcc3beb6bf63f5f3573724d7dc90.png"><img alt="../../_images/199bf2c4b4778ab387268db7f0ddf94964d3fcc3beb6bf63f5f3573724d7dc90.png" src="../../_images/199bf2c4b4778ab387268db7f0ddf94964d3fcc3beb6bf63f5f3573724d7dc90.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <p>In what follows, we are going to narrow our analysis to focus in on one country. In this case, we will look at the United States. If you’re interested in a different country, later on you’ll get a chance to repeat this analysis for a different country in the exercises. Or, if you’re using the interactive notebook, you can change the code to use a different country!</p>
@@ -800,7 +822,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/993ae7fee4166ea63f4b83121a2971860289cd50b328a4356775ecd567757b84.png" src="../../_images/993ae7fee4166ea63f4b83121a2971860289cd50b328a4356775ecd567757b84.png" />
+<a class="reference internal image-reference" href="../../_images/993ae7fee4166ea63f4b83121a2971860289cd50b328a4356775ecd567757b84.png"><img alt="../../_images/993ae7fee4166ea63f4b83121a2971860289cd50b328a4356775ecd567757b84.png" src="../../_images/993ae7fee4166ea63f4b83121a2971860289cd50b328a4356775ecd567757b84.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <div class="highlight-{index}Hypothesis notranslate"><div class="highlight"><pre><span></span>
@@ -808,11 +830,11 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="making-a-hypothesis">
-<h3>Making a Hypothesis<a class="headerlink" href="#making-a-hypothesis" title="Permalink to this heading">#</a></h3>
+<h3>Making a Hypothesis<a class="headerlink" href="#making-a-hypothesis" title="Link to this heading">#</a></h3>
 <p>The first step in a hypothesis test is to determine the hypotheses that we are comparing. We are comparing two opposing views of the world: either it works like this, or it doesn’t. These views are best understood in terms of <em>models</em>—a framework for understanding how the world works.</p>
 <p>For example, perhaps I think that the proportion of residents in the United States who have a high trust in scientists is large, say over 0.25. In this situation, the two models are statistical: we are hypothesizing about the proportion from a population. Either the proportion of people in our chosen country who have high trust in scientists is 0.25, or it’s more than that. In mathematical terms, we’ll write this as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cbc8cea9-d6eb-430f-930d-6c017281e369">
-<span class="eqno">(5)<a class="headerlink" href="#equation-cbc8cea9-d6eb-430f-930d-6c017281e369" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ec5daa95-5032-4295-8071-162310396d26">
+<span class="eqno">(5)<a class="headerlink" href="#equation-ec5daa95-5032-4295-8071-162310396d26" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: p = 0.25, \\
     H_1: p &gt; 0.25.
 \end{equation}\]</div>
@@ -821,7 +843,7 @@ Name: count, dtype: int64
 <p>The statistical hypothesis test is the method for making a decision between these two models. We gather data and see how well the data fits with what we would expect based on the null hypothesis.</p>
 </section>
 <section id="how-much-evidence-do-we-need">
-<h3>How Much Evidence Do We Need?<a class="headerlink" href="#how-much-evidence-do-we-need" title="Permalink to this heading">#</a></h3>
+<h3>How Much Evidence Do We Need?<a class="headerlink" href="#how-much-evidence-do-we-need" title="Link to this heading">#</a></h3>
 <p>After we have determined the hypotheses, the next step is to determine our threshold for making a decision. How much evidence do we need to reject our null hypothesis in favor of the alternative hypothesis? Another way to think about this is, how much risk are we willing to take to be wrong?</p>
 <p>In this case, there are actaully <em>two</em> ways to make the wrong conclusion: we could reject our null hypothesis when it is actually true (called a <strong>Type I error</strong>), or we could fail to reject the null hypothesis when it is actually false (a <strong>Type II error</strong>). We won’t go any deeper into Type II error at the moment, but it is just as important to consider!</p>
 <p>The “risk level” or “evidence threshold” associated with the first type of wrong conclusion is denoted by the Greek letter <span class="math notranslate nohighlight">\(\alpha\)</span> (alpha). For any given example, the value should be chosen based on both the context of the problem and the risk of making a Type I error that you are willing to take. Typical values for <span class="math notranslate nohighlight">\(\alpha\)</span> in scientific literature are 0.1, 0.05, and 0.01, but these values are somewhat arbitrary.</p>
@@ -838,13 +860,13 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="the-test-statistic-using-data-to-decide">
-<h3>The Test Statistic: Using Data to Decide<a class="headerlink" href="#the-test-statistic-using-data-to-decide" title="Permalink to this heading">#</a></h3>
+<h3>The Test Statistic: Using Data to Decide<a class="headerlink" href="#the-test-statistic-using-data-to-decide" title="Link to this heading">#</a></h3>
 <p>After determining the value of <span class="math notranslate nohighlight">\(\alpha\)</span>, the next step of a real-world study would be to gather the data we need and make a decision. In the statistics classroom, you typically have the data or summary statistics already available to you, as we do in this case.</p>
 <p>We are asking questions about the proportion of people in the United States who have high trust in scientists. It would be impossible to get an answer from every single person in the entire country! However, the Wellcome Global Monitor data gives us answers from a large representative sample of people in the USA. So we can use this data to get a statistically sound idea of what the true proportion in the entire population is.</p>
 <p>Let’s compare the proportion from the sample to what the null hypothesis says it should be. If the sample proportion is close to what the null hypothesis says it should be, that would mean that the null hypothesis is probably right. On the other hand, if it is different, perhaps the null hypothesis is wrong!</p>
 <p>We can compute the sample proportion of people with high trust in scientists by taking the total number of people in the sample with a high trust score and dividing it by the total sample size:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-49760eab-b2df-4492-8496-05194c47592d">
-<span class="eqno">(6)<a class="headerlink" href="#equation-49760eab-b2df-4492-8496-05194c47592d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6c8dd7e1-7493-414d-8e71-1b025c1ca353">
+<span class="eqno">(6)<a class="headerlink" href="#equation-6c8dd7e1-7493-414d-8e71-1b025c1ca353" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat p = \frac{\mbox{num. of respondents with high trust in scientists}}{\mbox{num. of respondents}}.
 \end{equation}\]</div>
 <div class="cell docutils container">
@@ -871,7 +893,7 @@ Name: count, dtype: int64
 </pre></div>
 </div>
 <p>This is clearly more than <span class="math notranslate nohighlight">\(0.25\)</span>, the value in our null hypothesis! But remember that the sample proportion is variable, so it won’t be <em>exactly</em> the same as the population proportion. So is this evidence for the alternative hypothesis?</p>
-<p>We could ask a better question: is the sample proportion of 0.28 a lot different from our null hypothesis or just a little bit different? We can answer this using probability theory. Just like in the <a class="reference internal" href="01_Foundations.html"><span class="doc std std-doc">last section</span></a>, the theoretical foundation for the hypothesis test is the Central Limit Theorem. Remember that if the sample size <span class="math notranslate nohighlight">\(n\)</span> is large enough, sample proportions have a normal distribution, where the mean is the population proportion <span class="math notranslate nohighlight">\(p\)</span>, and the standard deviation is the population standard deviation <span class="math notranslate nohighlight">\(\sqrt{p(1-p)}\)</span> divided by <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>:</p>
+<p>We could ask a better question: is the sample proportion of 0.28 a lot different from our null hypothesis or just a little bit different? We can answer this using probability theory. Just like in the <a class="reference internal" href="01_Foundations.html"><span class="std std-doc">last section</span></a>, the theoretical foundation for the hypothesis test is the Central Limit Theorem. Remember that if the sample size <span class="math notranslate nohighlight">\(n\)</span> is large enough, sample proportions have a normal distribution, where the mean is the population proportion <span class="math notranslate nohighlight">\(p\)</span>, and the standard deviation is the population standard deviation <span class="math notranslate nohighlight">\(\sqrt{p(1-p)}\)</span> divided by <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[ \hat{p} \sim N\left(p, \sqrt{\frac{p(1-p)}{n}} \right). \]</div>
 <p>Above we can see that <span class="math notranslate nohighlight">\(n = 1006\)</span>. If we assume the null hypothesis is true, then we also know what to fill in for <span class="math notranslate nohighlight">\(p\)</span>:</p>
@@ -879,8 +901,8 @@ Name: count, dtype: int64
 \[ \hat{p} \sim N\left(.25, \sqrt{\frac{.25(1-.25)}{1006}} \right). \]</div>
 <p>We call this the <strong>null distribution</strong>, since it is the distribution of the sample statistic under the assumption that the null hypothesis is true. (This is another reason why we always state the null hypothesis in terms of “population parameter equals some value”.)</p>
 <p>Back to the question: is the difference between the observed value of <span class="math notranslate nohighlight">\(\hat p\)</span> and the value that the null hypothesis says it should be a big difference or small difference? One way to answer that question would be to <strong>standardize</strong> by taking the difference between the sample mean and the (hypothesized) population mean and dividing by the standard deviation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-02aeb3e4-a010-493b-a1c7-155cb3c58650">
-<span class="eqno">(7)<a class="headerlink" href="#equation-02aeb3e4-a010-493b-a1c7-155cb3c58650" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5218ec7a-9c2f-4fce-8ad9-f00b048ee727">
+<span class="eqno">(7)<a class="headerlink" href="#equation-5218ec7a-9c2f-4fce-8ad9-f00b048ee727" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 \end{equation}\]</div>
 <p>This gives us the standardized test statistic <span class="math notranslate nohighlight">\(Z\)</span>, which has a standard normal distribution (<span class="math notranslate nohighlight">\(\mu = 0, \sigma = 1\)</span>)—again assuming that the null hypothesis is true.</p>
@@ -950,14 +972,14 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/6f08015206bc651f76dae7e61b8d2412fa709a319c811aa15387c3f4a500ddee.png" src="../../_images/6f08015206bc651f76dae7e61b8d2412fa709a319c811aa15387c3f4a500ddee.png" />
+<a class="reference internal image-reference" href="../../_images/6f08015206bc651f76dae7e61b8d2412fa709a319c811aa15387c3f4a500ddee.png"><img alt="../../_images/6f08015206bc651f76dae7e61b8d2412fa709a319c811aa15387c3f4a500ddee.png" src="../../_images/6f08015206bc651f76dae7e61b8d2412fa709a319c811aa15387c3f4a500ddee.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <p>This changes our difference to units of standard deviations. In other words, the sample proportion is 2.221 standard deviations above the mean value of 0.</p>
 <p>Think about it another way: if the null hypothesis is true, then most of the time <span class="math notranslate nohighlight">\(\hat p\)</span> will be close to <span class="math notranslate nohighlight">\(p=0.25\)</span>, and hence <span class="math notranslate nohighlight">\(Z\)</span> will be close to 0. But <span class="math notranslate nohighlight">\(\hat p\)</span> varies, and hence <span class="math notranslate nohighlight">\(Z\)</span> is variable. So how likely is it that <span class="math notranslate nohighlight">\(Z\)</span> would be 2.221 standard deviations from what the null hypothesis says it should be most of the time? And how far away does it need to be before we would start to doubt the null hypothesis?</p>
 </section>
 <section id="making-a-decision">
-<h3>Making a Decision<a class="headerlink" href="#making-a-decision" title="Permalink to this heading">#</a></h3>
+<h3>Making a Decision<a class="headerlink" href="#making-a-decision" title="Link to this heading">#</a></h3>
 <p>Now that we have a hypothesis and have calculated a test statistic to try to evaluate the hypothesis, we are ready to make a conclusion. Under the null hypothesis, we know the distribution of the sample statistic <span class="math notranslate nohighlight">\(\hat p\)</span>. However, we have just one observation of the sample proportion.</p>
 <p>So we ask, if the null hypothesis is true and the population proportion really is 0.25, how likely is it that we would observe the value of 0.28 or something even further away from 0.25? Or translated to <span class="math notranslate nohighlight">\(Z\)</span>-space, how likely is it to get a test statistic that is 2.221 or larger?</p>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> to compute directly compute this probability from a <span class="math notranslate nohighlight">\(N(0,1)\)</span> distribution using the CDF function. We subtract the probability from 1 since the CDF always gives the probability to the <em>left</em> of a number, and we want the probability that <span class="math notranslate nohighlight">\(Z\)</span> is <em>larger</em> or to the right of 2.221.</p>
@@ -1036,7 +1058,7 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/bc12a521e9543a7d7af3be15a17572a89620e9bf51956b31d9c19656bdb620a2.png" src="../../_images/bc12a521e9543a7d7af3be15a17572a89620e9bf51956b31d9c19656bdb620a2.png" />
+<a class="reference internal image-reference" href="../../_images/bc12a521e9543a7d7af3be15a17572a89620e9bf51956b31d9c19656bdb620a2.png"><img alt="../../_images/bc12a521e9543a7d7af3be15a17572a89620e9bf51956b31d9c19656bdb620a2.png" src="../../_images/bc12a521e9543a7d7af3be15a17572a89620e9bf51956b31d9c19656bdb620a2.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <p>In some sense, the <span class="math notranslate nohighlight">\(P\)</span>-value quantifies the evidence you have <em>against</em> the null hypothesis. If the <span class="math notranslate nohighlight">\(P\)</span>-value is small (i.e., the blue area under the curve is small), then that means that if the null hypothesis is really true, it is unlikely that you would get the value of <span class="math notranslate nohighlight">\(\hat p\)</span> that you did. In other words, a small <span class="math notranslate nohighlight">\(P\)</span>-value indicates that the data is in disagreement with the statistical model given by the null hypothesis.</p>
@@ -1069,8 +1091,8 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 <p>As you can see, <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> gives us the same test statistic and <span class="math notranslate nohighlight">\(P\)</span>-value that we found earlier. As before, since <span class="math notranslate nohighlight">\(0.013 &lt; 0.05\)</span>, we reject the null hypothesis. Note that the output of the code doesn’t tell you what conclusion to make. Remember again that <span class="math notranslate nohighlight">\(\alpha\)</span>, the threshold for making your conclusion, is context-dependent, and the <span class="math notranslate nohighlight">\(P\)</span>-value is just one part of making a decision.</p>
 </section>
 <section id="confidence-intervals-for-proportions">
-<h3>Confidence Intervals for Proportions<a class="headerlink" href="#confidence-intervals-for-proportions" title="Permalink to this heading">#</a></h3>
-<p>Now that we’ve made a decision to reject the null hypothesis, we might want to estimate the actual proportion of people in the USA with high trust in scientists. We can do this using a confidence interval. Confidence intervals for population proportions have a similar theory to the confidence intervals for population means we discussed in the <a class="reference internal" href="01_Foundations.html"><span class="doc std std-doc">previous section</span></a>, so we won’t discuss it here.</p>
+<h3>Confidence Intervals for Proportions<a class="headerlink" href="#confidence-intervals-for-proportions" title="Link to this heading">#</a></h3>
+<p>Now that we’ve made a decision to reject the null hypothesis, we might want to estimate the actual proportion of people in the USA with high trust in scientists. We can do this using a confidence interval. Confidence intervals for population proportions have a similar theory to the confidence intervals for population means we discussed in the <a class="reference internal" href="01_Foundations.html"><span class="std std-doc">previous section</span></a>, so we won’t discuss it here.</p>
 <p>We will use a <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> function called <code class="docutils literal notranslate"><span class="pre">proportion_confint</span></code> to calculate the confidence interval.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1099,10 +1121,10 @@ Z = \frac{\hat p - .25}{\sqrt{\frac{.25(1-.25)}{1006} }} \sim N(0,1)
 </section>
 </section>
 <section id="difference-of-two-proportions">
-<h2>Difference of Two Proportions<a class="headerlink" href="#difference-of-two-proportions" title="Permalink to this heading">#</a></h2>
+<h2>Difference of Two Proportions<a class="headerlink" href="#difference-of-two-proportions" title="Link to this heading">#</a></h2>
 <p>We can also use hypothesis testing to compare two proportions. This test is most common when you want to see if a population proportion is the same in two independent populations. For example, maybe we want to see if the proportion of men in the United States who have high trust in scientists (<span class="math notranslate nohighlight">\(p_1\)</span>) is different than the proportion of women in the United States who have high trust in scientists (<span class="math notranslate nohighlight">\(p_2\)</span>). Our two hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6600213f-8698-4423-a5eb-69403b2896a5">
-<span class="eqno">(8)<a class="headerlink" href="#equation-6600213f-8698-4423-a5eb-69403b2896a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fe50d440-be71-4ef9-be3c-ea9395d6ee25">
+<span class="eqno">(8)<a class="headerlink" href="#equation-fe50d440-be71-4ef9-be3c-ea9395d6ee25" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: p_1 - p_2 = 0, \\
     H_1: p_1 - p_2 \neq 0.
 \end{equation}\]</div>
@@ -1158,7 +1180,7 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/058632e63cbfc23267bfd8376ed0cbbb9a420faf1ace22a715898cccd0e464f1.png" src="../../_images/058632e63cbfc23267bfd8376ed0cbbb9a420faf1ace22a715898cccd0e464f1.png" />
+<a class="reference internal image-reference" href="../../_images/058632e63cbfc23267bfd8376ed0cbbb9a420faf1ace22a715898cccd0e464f1.png"><img alt="../../_images/058632e63cbfc23267bfd8376ed0cbbb9a420faf1ace22a715898cccd0e464f1.png" src="../../_images/058632e63cbfc23267bfd8376ed0cbbb9a420faf1ace22a715898cccd0e464f1.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <div class="highlight-{index}Pooled notranslate"><div class="highlight"><pre><span></span>
@@ -1166,21 +1188,21 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 <p>Overall, in our sample we see a difference of about 0.04 between the proportions of men and women who have high trust in scientists. Again we ask, is that a large difference?</p>
 <p>Recall that if our sample sizes <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span> are large enough,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-22a02bad-a5dd-4f90-8572-57c880928b7a">
-<span class="eqno">(9)<a class="headerlink" href="#equation-22a02bad-a5dd-4f90-8572-57c880928b7a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b356b1ce-9486-4077-a41c-f1d9df4e91f7">
+<span class="eqno">(9)<a class="headerlink" href="#equation-b356b1ce-9486-4077-a41c-f1d9df4e91f7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat p_1 - \hat p_2 \sim N\left(p_1 - p_2, \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } \right).
 \end{equation}\]</div>
 <p>and hence</p>
 <div class="math notranslate nohighlight" id="equation-z-equation-prop-diff">
-<span class="eqno">(10)<a class="headerlink" href="#equation-z-equation-prop-diff" title="Permalink to this equation">#</a></span>\[ Z = \frac{\hat p_1 - \hat p_2 - (p_1 - p_2)}{ \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } } \sim N(0,1). \]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-z-equation-prop-diff" title="Link to this equation">#</a></span>\[ Z = \frac{\hat p_1 - \hat p_2 - (p_1 - p_2)}{ \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  } } \sim N(0,1). \]</div>
 <p>The null hypothesis tells us what to fill in for <span class="math notranslate nohighlight">\(p_1-p_2\)</span>, but it doesn’t hypothesize directly about the values of <span class="math notranslate nohighlight">\(p_1\)</span> or <span class="math notranslate nohighlight">\(p_2\)</span>. However, it does hypothesize that <span class="math notranslate nohighlight">\(p_1 = p_2\)</span>, and it that is true, then our estimates <span class="math notranslate nohighlight">\(\hat p_1\)</span> and <span class="math notranslate nohighlight">\(\hat p_2\)</span> are estimating the same thing. In that case, we can combine them to estimate the variance. Define <span class="math notranslate nohighlight">\(p\)</span> to be the common value of <span class="math notranslate nohighlight">\(p_1 = p_2 = p\)</span>. Then the variance of our test statistic is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cb7c5dee-833c-4a57-be3e-8cb7e6578515">
-<span class="eqno">(11)<a class="headerlink" href="#equation-cb7c5dee-833c-4a57-be3e-8cb7e6578515" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-70f49b37-a6e2-4e14-a062-7947de0e049d">
+<span class="eqno">(11)<a class="headerlink" href="#equation-70f49b37-a6e2-4e14-a062-7947de0e049d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}  }  = \sqrt{ \frac{p(1-p)}{n_1} + \frac{p(1-p)}{n_2}  } = \sqrt{ p(1-p)\left( \frac{1}{n_1} + \frac{1}{n_2}\right)  },
 \end{equation}\]</div>
 <p>and we can estimate <span class="math notranslate nohighlight">\(p\)</span> using</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cb3db7b4-8a22-41ca-9669-b2a7f518a05a">
-<span class="eqno">(12)<a class="headerlink" href="#equation-cb3db7b4-8a22-41ca-9669-b2a7f518a05a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-30e9e567-c794-4957-8735-e06ff5f09f4b">
+<span class="eqno">(12)<a class="headerlink" href="#equation-30e9e567-c794-4957-8735-e06ff5f09f4b" title="Permalink to this equation">#</a></span>\[\begin{equation}
     p \approx \hat p = \frac{\mbox{num. of male respondents with high trust in scientists} + \mbox{num. of female respondents with high trust in scientists}}{\mbox{num. of male respondents} + \mbox{num. of female respondents}}.
 \end{equation}\]</div>
 <p>We call <span class="math notranslate nohighlight">\(\hat p\)</span> the <strong>pooled sample proportion</strong>.</p>
@@ -1294,7 +1316,7 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/f9b555c1acbe5707fdcf4d89ed01001f0e8eb1ef8f3324096d22fb44be76941c.png" src="../../_images/f9b555c1acbe5707fdcf4d89ed01001f0e8eb1ef8f3324096d22fb44be76941c.png" />
+<a class="reference internal image-reference" href="../../_images/f9b555c1acbe5707fdcf4d89ed01001f0e8eb1ef8f3324096d22fb44be76941c.png"><img alt="../../_images/f9b555c1acbe5707fdcf4d89ed01001f0e8eb1ef8f3324096d22fb44be76941c.png" src="../../_images/f9b555c1acbe5707fdcf4d89ed01001f0e8eb1ef8f3324096d22fb44be76941c.png" style="width: 710px; height: 411px;" /></a>
 </div>
 </div>
 <p>In other words, using the CDF will calculate the blue area under the curve in only one of those sections. So we double it to get the total area of the blue shaded region. Let’s see what this <span class="math notranslate nohighlight">\(P\)</span>-value is:</p>
@@ -1313,8 +1335,8 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 <p>This <span class="math notranslate nohighlight">\(P\)</span>-value is fairly large (<span class="math notranslate nohighlight">\(&gt;0.05\)</span>), indicating that if the null hypothesis is true, it’s not unlikely that we would observe a difference of 4% in our sample. So we fail to reject the null hypothesis because we do not find evidence in our data of a difference of high trust in scientists between men and women in the United States.</p>
 </section>
 <section id="using-python-for-the-test">
-<h2>Using Python for the Test<a class="headerlink" href="#using-python-for-the-test" title="Permalink to this heading">#</a></h2>
-<p>Of course, we’re here to see how to perform these tests using Python code! The function to perform the test is the same as the one from the <a class="reference internal" href="01_Foundations.html"><span class="doc std std-doc">previous section</span></a>, except this time the arguments <code class="docutils literal notranslate"><span class="pre">count</span></code> and <code class="docutils literal notranslate"><span class="pre">nobs</span></code> each take a list containing the relevant information from both of our samples. We have changed the value of the argument <code class="docutils literal notranslate"><span class="pre">alternative</span></code> to account for the fact that we are performing a <code class="docutils literal notranslate"><span class="pre">two-sided</span></code> test. Again, the output of the test is stored in <code class="docutils literal notranslate"><span class="pre">stat</span></code> and <code class="docutils literal notranslate"><span class="pre">pval</span></code>, and we have provided code to print them out in a nice way.</p>
+<h2>Using Python for the Test<a class="headerlink" href="#using-python-for-the-test" title="Link to this heading">#</a></h2>
+<p>Of course, we’re here to see how to perform these tests using Python code! The function to perform the test is the same as the one from the <a class="reference internal" href="01_Foundations.html"><span class="std std-doc">previous section</span></a>, except this time the arguments <code class="docutils literal notranslate"><span class="pre">count</span></code> and <code class="docutils literal notranslate"><span class="pre">nobs</span></code> each take a list containing the relevant information from both of our samples. We have changed the value of the argument <code class="docutils literal notranslate"><span class="pre">alternative</span></code> to account for the fact that we are performing a <code class="docutils literal notranslate"><span class="pre">two-sided</span></code> test. Again, the output of the test is stored in <code class="docutils literal notranslate"><span class="pre">stat</span></code> and <code class="docutils literal notranslate"><span class="pre">pval</span></code>, and we have provided code to print them out in a nice way.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># proportion under null hypothesis</span>
@@ -1365,7 +1387,7 @@ The sample proportion for women is 0.302. There are 464 total observations for w
 </div>
 </section>
 <section id="further-exploration-of-p-values">
-<h2>Further Exploration of P-Values<a class="headerlink" href="#further-exploration-of-p-values" title="Permalink to this heading">#</a></h2>
+<h2>Further Exploration of P-Values<a class="headerlink" href="#further-exploration-of-p-values" title="Link to this heading">#</a></h2>
 <p>To improve your understanding of one-sided and two-sided <span class="math notranslate nohighlight">\(P\)</span>-values and how they are related to the observed value of your test statistic, you can play around with the interactive widget below.</p>
 <p>Drag the slider to select different values of <span class="math notranslate nohighlight">\(Z_{obs}\)</span>. Compare the one-sided and two-sided <span class="math notranslate nohighlight">\(P\)</span>-values, and notice how the areas represented by the <span class="math notranslate nohighlight">\(P\)</span>-values shrink as <span class="math notranslate nohighlight">\(Z_{obs}\)</span> gets further and further away from 0, the mean of the standard normal distribution.</p>
 <div class="cell tag_hide-input docutils container">
@@ -1594,9 +1616,9 @@ if (outputEl) {{
 </div>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise-2-1">
-<h3>Exercise 2.1<a class="headerlink" href="#exercise-2-1" title="Permalink to this heading">#</a></h3>
+<h3>Exercise 2.1<a class="headerlink" href="#exercise-2-1" title="Link to this heading">#</a></h3>
 <p>To get some practice, we are going to look at trust in scientists in a different country.</p>
 <ol class="arabic simple">
 <li><p>Pick another country (perhaps your country of origin or another country you are interested in) and filter the observations to just include responses from that country. For example, here is how to do that for the United States.</p></li>
@@ -1617,7 +1639,7 @@ if (outputEl) {{
 </ol>
 </section>
 <section id="exercise-2-2">
-<h3>Exercise 2.2<a class="headerlink" href="#exercise-2-2" title="Permalink to this heading">#</a></h3>
+<h3>Exercise 2.2<a class="headerlink" href="#exercise-2-2" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Pick a second country of interest.</p></li>
 <li><p>Write hypotheses to test whether the proportion of people in the first country with high trust in scientists is higher than the same proportion in the second country.</p></li>
@@ -1654,11 +1676,10 @@ if (outputEl) {{
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="01_Foundations.html"
@@ -1678,10 +1699,7 @@ if (outputEl) {{
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1689,6 +1707,7 @@ if (outputEl) {{
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1734,6 +1753,7 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2024.
@@ -1767,8 +1787,8 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2. OLS Linear Regression &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -19,53 +18,50 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=a4f27da2" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/LinearAlgebra/OLS/jnb1';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="3. K-means Clustering" href="../KMeans/jnb2.html" />
@@ -79,7 +75,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -114,11 +118,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -133,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
+  
   
   
   
@@ -145,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -277,7 +297,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">Differential Equations Lab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Answer Key</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -324,7 +344,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">END MATTER</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">INDEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -509,20 +529,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -578,10 +600,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ols-linear-regression">
-<h1>2. OLS Linear Regression<a class="headerlink" href="#ols-linear-regression" title="Permalink to this heading">#</a></h1>
+<h1>2. OLS Linear Regression<a class="headerlink" href="#ols-linear-regression" title="Link to this heading">#</a></h1>
 <p id="index-0">We begin with the familiar topic of ordinary least squares (OLS) linear regression. The table below shows an excerpt of Chicago Public School data for 2011–2012 from the Chicago Data Portal. One expects  a higher average ACT score to be associated with a higher percentage of college eligibility.</p>
 <table>
   <tr>
@@ -611,7 +633,7 @@ document.write(`
 <p>The figure below shows a scatterplot  of <span class="math notranslate nohighlight">\(n= 83 \)</span> data points partly reproduced in the above table together with the OLS regression line.</p>
 <a class="reference internal image-reference" href="../../../_images/fig110.png"><img alt="../../../_images/fig110.png" src="../../../_images/fig110.png" style="width: 200px;" /></a>
 <section id="least-squares-solutions">
-<h2>Least-Squares Solutions<a class="headerlink" href="#least-squares-solutions" title="Permalink to this heading">#</a></h2>
+<span id="index-1"></span><h2>Least-Squares Solutions<a class="headerlink" href="#least-squares-solutions" title="Link to this heading">#</a></h2>
 <p>Consider a collection of <span class="math notranslate nohighlight">\(n\)</span> data points <span class="math notranslate nohighlight">\((x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span> We seek the line <span class="math notranslate nohighlight">\(y=c_0+c_1x\)</span> that best fits these data, where <span class="math notranslate nohighlight">\(c_0\)</span> is the <span class="math notranslate nohighlight">\(y\)</span>-intercept of the line and <span class="math notranslate nohighlight">\(c_1\)</span> the slope of the line. As shown in the figure below, an OLS loss function <span class="math notranslate nohighlight">\(J(c_0,c_1)\)</span> sums the squared vertical separations between the data points <span class="math notranslate nohighlight">\((x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)\)</span> and the line <span class="math notranslate nohighlight">\(y=c_0+c_1x\)</span>.</p>
 <a class="reference internal image-reference" href="../../../_images/fig22.png"><img alt="../../../_images/fig22.png" src="../../../_images/fig22.png" style="width: 300px;" /></a>
 <p>If the <span class="math notranslate nohighlight">\(n\)</span> data points are collinear, then there exists an exact solution <span class="math notranslate nohighlight">\((c_0,c_1)\)</span> to the system</p>
@@ -658,7 +680,7 @@ y_n
 <p>In general, this linear system with <span class="math notranslate nohighlight">\(n&gt;2\)</span> equations and 2 unknowns  (<span class="math notranslate nohighlight">\(c_0,c_1\)</span>)  will not have an exact solution.  Instead, our goal to find a linear fit to the data is based on a <i>least-squares solution</i>, one that solves the following optimization problem:</p>
 </section>
 <section id="ols-linear-regression-optimization-problem">
-<h2>OLS LINEAR REGRESSION OPTIMIZATION PROBLEM<a class="headerlink" href="#ols-linear-regression-optimization-problem" title="Permalink to this heading">#</a></h2>
+<span id="index-2"></span><h2>OLS LINEAR REGRESSION OPTIMIZATION PROBLEM<a class="headerlink" href="#ols-linear-regression-optimization-problem" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">OLS Linear Regression Optimization Problem</p>
 <p>Find <span class="math notranslate nohighlight">\((c_0,c_1)\)</span> which minimizes the loss function <span class="math notranslate nohighlight">\(J(c_0,c_1)\)</span> defined as</p>
@@ -671,7 +693,7 @@ J(c_0,c_1)=\tfrac{1}{2}\sum_{i=1}^n (y_i-(c_0+c_1x_i) )^2=\tfrac{1}{2}\|\mathbf{
 <p>The loss function <span class="math notranslate nohighlight">\(J\)</span> is zero when the points are collinear and situated on the line <span class="math notranslate nohighlight">\(y=c_0+c_1x\)</span>; otherwise, <span class="math notranslate nohighlight">\(J\)</span> is positive, since it is half the sum of the squared vertical separations between data points and the line <span class="math notranslate nohighlight">\(y=c_0+c_1x\)</span>, as shown in the previous figure.</p>
 </section>
 <section id="minimizing-the-ols-loss-function-via-normal-equations">
-<h2>Minimizing the OLS Loss Function via Normal Equations<a class="headerlink" href="#minimizing-the-ols-loss-function-via-normal-equations" title="Permalink to this heading">#</a></h2>
+<span id="index-3"></span><h2>Minimizing the OLS Loss Function via Normal Equations<a class="headerlink" href="#minimizing-the-ols-loss-function-via-normal-equations" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> be an <span class="math notranslate nohighlight">\(n\times 2\)</span> matrix of real numbers, and let the linear transformation <span class="math notranslate nohighlight">\(\mathbf{L}:\mathbb{R}^2\rightarrow\mathbb{R}^n\)</span> be defined by <span class="math notranslate nohighlight">\(\mathbf{L}(\mathbf{c})= \mathbf{A}\mathbf{c}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is a <span class="math notranslate nohighlight">\(2\times 1\)</span> column vector. The range of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the set of all <span class="math notranslate nohighlight">\(n\times 1\)</span> vectors defined by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -695,7 +717,7 @@ range\, of \, \mathbf{A} = \{ \mathbf{A}\mathbf{c} \mid \mathbf{c}\in\mathbf{R}^
 \]</div>
 <p>The last equation is called the <strong>normal equation</strong> for the system <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{c}=\mathbf{y}.\)</span> Solving the normal equations, one obtains optimal values for <span class="math notranslate nohighlight">\(c_0,c_1\)</span>.</p>
 <section id="example-2-1">
-<h3>Example 2.1.<a class="headerlink" href="#example-2-1" title="Permalink to this heading">#</a></h3>
+<h3>Example 2.1.<a class="headerlink" href="#example-2-1" title="Link to this heading">#</a></h3>
 <div class="admonition-example-2-1 admonition">
 <p class="admonition-title">Example 2.1</p>
 <p>Consider the data <span class="math notranslate nohighlight">\((-1, 1)\)</span>, <span class="math notranslate nohighlight">\((0, 0)\)</span>, <span class="math notranslate nohighlight">\((1, 2)\)</span>, <span class="math notranslate nohighlight">\((2, 3)\)</span>. Use the normal equations to find the OLS regression line for the data.</p>
@@ -731,8 +753,8 @@ c_1
 \end{pmatrix}.
 \end{align*}\]</div>
 <p>The normal equations are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e372a05c-656f-430f-880b-47f74895d5ac">
-<span class="eqno">(34)<a class="headerlink" href="#equation-e372a05c-656f-430f-880b-47f74895d5ac" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-9e22b620-74ca-4258-939a-0b1b0db5f2a3">
+<span class="eqno">(34)<a class="headerlink" href="#equation-9e22b620-74ca-4258-939a-0b1b0db5f2a3" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 \begin{pmatrix}
 1&amp; 1&amp;1&amp;1\\
 -1&amp;0&amp;1&amp;2
@@ -780,7 +802,7 @@ c_1
 </section>
 </section>
 <section id="equivalence-of-gradient-based-optimization">
-<h2>Equivalence of Gradient-Based Optimization<a class="headerlink" href="#equivalence-of-gradient-based-optimization" title="Permalink to this heading">#</a></h2>
+<span id="index-4"></span><h2>Equivalence of Gradient-Based Optimization<a class="headerlink" href="#equivalence-of-gradient-based-optimization" title="Link to this heading">#</a></h2>
 <p>Note that the normal equations are equivalent to gradient-based minimization of the OLS linear regression loss function <span class="math notranslate nohighlight">\(J(c_0,c_1)=\frac{1}{2}\sum_{i=1}^n (y_i-(c_0+c_1x_i) )^2\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -811,7 +833,7 @@ y_n-(c_0+c_1x_n)
 \end{align*}\]</div>
 <p>The normal equations are equivalent to setting both partial derivatives of <span class="math notranslate nohighlight">\(J\)</span> equal to zero, as is required to minimize the loss function <span class="math notranslate nohighlight">\(J(c_0,c_1)\)</span>.</p>
 <section id="example-2-2">
-<h3>Example 2.2.<a class="headerlink" href="#example-2-2" title="Permalink to this heading">#</a></h3>
+<h3>Example 2.2.<a class="headerlink" href="#example-2-2" title="Link to this heading">#</a></h3>
 <div class="admonition-example-2-2 admonition">
 <p class="admonition-title">Example 2.2</p>
 <p>For the data points in Example 2.1, show how gradient-based optimization of the loss function <span class="math notranslate nohighlight">\(J\)</span> gives the same values for <span class="math notranslate nohighlight">\(c_0\)</span> and <span class="math notranslate nohighlight">\(c_1\)</span>.</p>
@@ -833,8 +855,8 @@ J(c_0,c_1)&amp;=\tfrac{1}{2}[\bigl(1-(c_0-c_1)\bigr)^2+(0-c_0)^2+\bigl(2-(c_0+c_
 \]</div>
 <p>Solving this system, we obtain <span class="math notranslate nohighlight">\(c_0=11/10\)</span> and <span class="math notranslate nohighlight">\(c_1=4/5\)</span>.</p>
 <p>The system used to find these critical values is equivalent to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ba2a24b4-0ac3-440a-8360-9d85d4ea70bc">
-<span class="eqno">(35)<a class="headerlink" href="#equation-ba2a24b4-0ac3-440a-8360-9d85d4ea70bc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-81c9ce02-bfd4-4a56-bb16-9885f6cb56f7">
+<span class="eqno">(35)<a class="headerlink" href="#equation-81c9ce02-bfd4-4a56-bb16-9885f6cb56f7" title="Permalink to this equation">#</a></span>\[\begin{align}
 %\scriptstyle
 \begin{pmatrix}
 %\scriptstyle
@@ -888,7 +910,7 @@ c_1
 </section>
 </section>
 <section id="practice-problems">
-<h2>Practice Problems<a class="headerlink" href="#practice-problems" title="Permalink to this heading">#</a></h2>
+<h2>Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
 <div class="admonition-practice-problems admonition">
 <p class="admonition-title">Practice Problems</p>
 <ol class="arabic simple">
@@ -897,7 +919,7 @@ c_1
 </ol>
 </div>
 <section id="solutions-to-practice-problems">
-<h3>Solutions to Practice Problems<a class="headerlink" href="#solutions-to-practice-problems" title="Permalink to this heading">#</a></h3>
+<h3>Solutions to Practice Problems<a class="headerlink" href="#solutions-to-practice-problems" title="Link to this heading">#</a></h3>
 <div class="toggle docutils container">
 <p>Problem 1)
 The system is</p>
@@ -1054,7 +1076,7 @@ c
 </section>
 </section>
 <section id="lab">
-<h2>Lab<a class="headerlink" href="#lab" title="Permalink to this heading">#</a></h2>
+<h2>Lab<a class="headerlink" href="#lab" title="Link to this heading">#</a></h2>
 <p>In this lab we will make scatterplots of data which include the OLS regression line.</p>
 <p>We begin by importing libraries.</p>
 <div class="cell docutils container">
@@ -1068,7 +1090,7 @@ c
 </div>
 </div>
 <section id="example-1">
-<h3>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
+<h3>Example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h3>
 <div class="admonition-ols-regression-of-act-and-college-eligibility admonition">
 <p class="admonition-title">OLS Regression of ACT and College Eligibility</p>
 <p>Datafile: ACTCollegeEligible.csv</p>
@@ -1247,9 +1269,9 @@ R^2 for OLS is  0.9351396968249491
 </div>
 </section>
 <section id="example-2">
-<h3>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
+<h3>Example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h3>
 <div class="admonition-linear-regression-of-chicago-public-school-data admonition">
-<p class="admonition-title">Linear Regression of Chicago Public School Data </p>
+<p class="admonition-title">Linear Regression of Chicago Public School Data</p>
 <p>Data File:  Imported directly from the Chicago data portal in Step 1.</p>
 </div>
 <ol class="arabic simple">
@@ -2059,7 +2081,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
 <p>Make a scatterplot which shows the %black (x-axis) vs. %hispanic (y-axis) and include the OLS regression line on the plot. What does the graph tell us about grade pre K - 8 schools in Chicago zip code 60623?</p>
@@ -2094,11 +2116,10 @@ Name: count, dtype: int64
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../Introduction.html"
@@ -2118,10 +2139,7 @@ Name: count, dtype: int64
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -2129,6 +2147,7 @@ Name: count, dtype: int64
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -2177,6 +2196,7 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2024.
@@ -2210,8 +2230,8 @@ By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
