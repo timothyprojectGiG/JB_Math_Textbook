@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>3. Idealized Groundwater Flow &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
   
@@ -28,40 +29,44 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a4f27da2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/Complex/jnb3';</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4. Contaminant Extraction Modeling" href="jnb4.html" />
@@ -160,18 +165,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -345,7 +339,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">END MATTER</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">INDEX</a></li>
 </ul>
 
     </div>
@@ -609,13 +603,13 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="idealized-groundwater-flow">
-<h1>3. Idealized Groundwater Flow<a class="headerlink" href="#idealized-groundwater-flow" title="Link to this heading">#</a></h1>
+<h1>3. Idealized Groundwater Flow<a class="headerlink" href="#idealized-groundwater-flow" title="Permalink to this heading">#</a></h1>
 <section id="two-dimensional-flow-and-the-continuity-equation">
-<h2>3.1 Two-Dimensional Flow and the Continuity Equation<a class="headerlink" href="#two-dimensional-flow-and-the-continuity-equation" title="Link to this heading">#</a></h2>
-<p id="index-1"><span id="index-0"></span>Having introduced differentiable (also called analytic) functions in Section \ref{complex}, we now turn to the topic of how these functions are used to model idealized 2-dimensional groundwater flow. We will also show how isolated singularities (points where a function is not differentiable) are used to describe sources or sinks. In modeling groundwater flow, we assume that the flow is two dimensional with <span class="math notranslate nohighlight">\(x\)</span>  corresponding to the east-west and <span class="math notranslate nohighlight">\(y\)</span> to the north-south directions. In particular, such flow in 3 dimensions does not depend on <span class="math notranslate nohighlight">\(z\)</span>; that is, any plane parallel to the <span class="math notranslate nohighlight">\((x,y)\)</span>-plane has an identical flow pattern. The groundwater flow equation used to model such flow in 3 dimensions results when the <i>continuity equation</i> is combined with Darcy’s Law (Section 3.2) The continuity equation relates the rate of change in density at a given point <span class="math notranslate nohighlight">\((x,y,z)\)</span> to the divergence of the mass flow rate. This flow rate is the product of the density <span class="math notranslate nohighlight">\(\rho(x,y,z;t)\)</span> (mass per unit volume at the position <span class="math notranslate nohighlight">\((x,y,z)\)</span> and time <span class="math notranslate nohighlight">\(t\)</span>) times the fluid velocity <span class="math notranslate nohighlight">\(\vec{v}(x,y,z;t)=\mathbf{V}\)</span>  at the same point and time. The velocity is assumed to be continuously differentiable.</p>
+<h2>3.1 Two-Dimensional Flow and the Continuity Equation<a class="headerlink" href="#two-dimensional-flow-and-the-continuity-equation" title="Permalink to this heading">#</a></h2>
+<span class="target" id="index-0"></span><p id="index-1">Having introduced differentiable (also called analytic) functions in Section \ref{complex}, we now turn to the topic of how these functions are used to model idealized 2-dimensional groundwater flow. We will also show how isolated singularities (points where a function is not differentiable) are used to describe sources or sinks. In modeling groundwater flow, we assume that the flow is two dimensional with <span class="math notranslate nohighlight">\(x\)</span>  corresponding to the east-west and <span class="math notranslate nohighlight">\(y\)</span> to the north-south directions. In particular, such flow in 3 dimensions does not depend on <span class="math notranslate nohighlight">\(z\)</span>; that is, any plane parallel to the <span class="math notranslate nohighlight">\((x,y)\)</span>-plane has an identical flow pattern. The groundwater flow equation used to model such flow in 3 dimensions results when the <i>continuity equation</i> is combined with Darcy’s Law (Section 3.2) The continuity equation relates the rate of change in density at a given point <span class="math notranslate nohighlight">\((x,y,z)\)</span> to the divergence of the mass flow rate. This flow rate is the product of the density <span class="math notranslate nohighlight">\(\rho(x,y,z;t)\)</span> (mass per unit volume at the position <span class="math notranslate nohighlight">\((x,y,z)\)</span> and time <span class="math notranslate nohighlight">\(t\)</span>) times the fluid velocity <span class="math notranslate nohighlight">\(\vec{v}(x,y,z;t)=\mathbf{V}\)</span>  at the same point and time. The velocity is assumed to be continuously differentiable.</p>
 <p id="index-2">The continuity equation is given by the equation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c5f439f9-009d-4c42-878b-33c9737457fa">
-<span class="eqno">(45)<a class="headerlink" href="#equation-c5f439f9-009d-4c42-878b-33c9737457fa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-940ebaf7-367c-4ac5-9615-d640d6e1a848">
+<span class="eqno">(45)<a class="headerlink" href="#equation-940ebaf7-367c-4ac5-9615-d640d6e1a848" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{\partial \rho}{\partial t} + \nabla \cdot \rho \mathbf{V} = 0.
 \label{continuity}
 \end{equation}\]</div>
@@ -638,7 +632,7 @@ document.write(`
 \]</div>
 <p>which is the continuity equation previously stated. For an <i>incompressible</i> fluid, <span class="math notranslate nohighlight">\(\frac{\partial \rho}{\partial t} = 0\)</span>, which is also an underlying assumption about the fluid flow discussed in this module.</p>
 <section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
 <p><b>3.1.1</b>  For the density function <span class="math notranslate nohighlight">\(\rho (x,y) = 2e^{-y}\)</span> and the velocity vector <span class="math notranslate nohighlight">\(\mathbf{V} (x,y) = \langle x^2 + y^2,2x\rangle,\)</span> compute the following to evaluate whether <span class="math notranslate nohighlight">\(\rho (x,y)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{V} (x,y)\)</span> satisfy the continuity equation:</p>
@@ -649,7 +643,7 @@ document.write(`
 </section>
 </section>
 <section id="darcys-law-and-the-velocity-potential-phi">
-<h2>3.2 Darcy’s Law and the Velocity Potential <span class="math notranslate nohighlight">\(\Phi\)</span><a class="headerlink" href="#darcys-law-and-the-velocity-potential-phi" title="Link to this heading">#</a></h2>
+<h2>3.2 Darcy’s Law and the Velocity Potential <span class="math notranslate nohighlight">\(\Phi\)</span><a class="headerlink" href="#darcys-law-and-the-velocity-potential-phi" title="Permalink to this heading">#</a></h2>
 <p id="index-3">To analyze groundwater flow, we note that the velocity vector <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> depends on the type of liquid, the characteristics of the surrounding material, and the pressure at any given point. Darcy’s Law summarizes these relationships. For the groundwater flows we are considering, Darcy’s Law states that the velocity <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -674,7 +668,7 @@ document.write(`
  \]</div>
 <p>In other words, for the flows we consider, the velocity potential <span class="math notranslate nohighlight">\(\Phi(x,y)\)</span> will be a harmonic function.</p>
 <section id="exercises">
-<h3>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h3>
+<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
 <div class="admonition-exercises admonition">
 <p class="admonition-title">Exercises</p>
 <p><b>3.2.1</b> For the density function <span class="math notranslate nohighlight">\(\rho (x,y) = 2x^2e^{-y}\)</span>, compute <span class="math notranslate nohighlight">\(\nabla \rho\)</span>.</p>
@@ -686,8 +680,8 @@ document.write(`
 </section>
 </section>
 <section id="the-stream-function-psi-and-complex-potential-omega">
-<h2>3.3 The Stream Function <span class="math notranslate nohighlight">\(\Psi\)</span> and Complex Potential <span class="math notranslate nohighlight">\(\Omega\)</span><a class="headerlink" href="#the-stream-function-psi-and-complex-potential-omega" title="Link to this heading">#</a></h2>
-<p id="index-7"><span id="index-6"></span><span id="index-5"></span>Since all harmonic functions have a harmonic conjugate, we know that the 2-dimensional velocity potential <span class="math notranslate nohighlight">\(\Phi(x,y)\)</span> from the previous section has a harmonic conjugate which we designate <span class="math notranslate nohighlight">\(\Psi(x,y)\)</span> and call a <i>stream function</i>.</p>
+<h2>3.3 The Stream Function <span class="math notranslate nohighlight">\(\Psi\)</span> and Complex Potential <span class="math notranslate nohighlight">\(\Omega\)</span><a class="headerlink" href="#the-stream-function-psi-and-complex-potential-omega" title="Permalink to this heading">#</a></h2>
+<span class="target" id="index-5"></span><span class="target" id="index-6"></span><p id="index-7">Since all harmonic functions have a harmonic conjugate, we know that the 2-dimensional velocity potential <span class="math notranslate nohighlight">\(\Phi(x,y)\)</span> from the previous section has a harmonic conjugate which we designate <span class="math notranslate nohighlight">\(\Psi(x,y)\)</span> and call a <i>stream function</i>.</p>
 <p><span class="math notranslate nohighlight">\(\Phi(x,y)\)</span> and <span class="math notranslate nohighlight">\(\Psi(x,y)\)</span> are related by the Cauchy-Riemann (C-R) Equations.</p>
 <p><b> Cartesian form:</b></p>
 <div class="math notranslate nohighlight">
@@ -709,7 +703,7 @@ document.write(`
 \]</div>
 <p>Given a velocity potential <span class="math notranslate nohighlight">\(\Phi(x,y)\)</span>, we can apply our method from the section on Harmonic Conjugates to find a stream function <span class="math notranslate nohighlight">\(\Psi(x,y)\)</span>, and thereby obtain a differentiable function  <span class="math notranslate nohighlight">\(\Omega(z)=\Phi+i\Psi\)</span> called a <i>complex potential</i>.  The level curves <span class="math notranslate nohighlight">\(\Phi\)</span>=constant are called <i>equipotentials</i>, and the level curves <span class="math notranslate nohighlight">\(\Psi=\)</span> constant are called <i>streamlines</i>. Our 2D groundwater modeling approach is based on the complex potential <span class="math notranslate nohighlight">\(\Omega\)</span>, and its associated velocity potential <span class="math notranslate nohighlight">\(\Phi=Re(\Omega)\)</span> and stream function <span class="math notranslate nohighlight">\(\Psi=Im(\Omega)\)</span>.</p>
 <section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
 <p>Given the velocity potential <span class="math notranslate nohighlight">\(\Phi(r)= k \ln r\)</span> where  =<span class="math notranslate nohighlight">\(\sqrt{x^2+y^2}\)</span> and <span class="math notranslate nohighlight">\(k\)</span> is a real constant, find the stream function <span class="math notranslate nohighlight">\(\Psi\)</span>. Show that the equipotentials and streamlines are orthogonal.</p>
 <p><b> Solution.</b></p>
 <p>First we take the partial derivative of <span class="math notranslate nohighlight">\(\Phi\)</span> with respect to r,</p>
@@ -743,7 +737,7 @@ k\theta + \, constant.\)</span> If  we let <span class="math notranslate nohighl
 <p>Note that the equipotentials are given by <span class="math notranslate nohighlight">\(\ln r\)</span> = constant or equivalently <span class="math notranslate nohighlight">\(r=\)</span> constant and hence are concentric circles centered at the origin. This illustrates the general fact that the streamlines and equipotentials are orthogonal.</p>
 </section>
 <section id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
 <p>3.3.1 Let <span class="math notranslate nohighlight">\(\Phi(x)= - \frac{q_u}{A}x+\Phi_0\)</span> be the velocity potential for uniform flow. Find the corresponding stream function <span class="math notranslate nohighlight">\(\Psi\)</span> and complex potential <span class="math notranslate nohighlight">\(\Omega\)</span>. Then show that the equipotentials and streamlines are orthogonal.</p>
@@ -751,9 +745,9 @@ k\theta + \, constant.\)</span> If  we let <span class="math notranslate nohighl
 </section>
 </section>
 <section id="uniform-flow">
-<h2>3.4 Uniform Flow<a class="headerlink" href="#uniform-flow" title="Link to this heading">#</a></h2>
+<h2>3.4 Uniform Flow<a class="headerlink" href="#uniform-flow" title="Permalink to this heading">#</a></h2>
 <p id="index-8">Uniform flow means both the flow rate <span class="math notranslate nohighlight">\(q_u\)</span> (<span class="math notranslate nohighlight">\(\frac{m^3}{s}\)</span>) and the velocity vector <span class="math notranslate nohighlight">\(&lt;V_x,V_y&gt;\)</span> are constant at each point.  If the flow is in the <span class="math notranslate nohighlight">\(x\)</span> direction, then <span class="math notranslate nohighlight">\(V_y=0\)</span> and <span class="math notranslate nohighlight">\(V_x=q_u/A\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is the cross-sectional area through which such flow in 3 dimensions passes (see figure below). The flow pattern is exactly the same in every plane parallel to the original.</p>
-<a class="reference internal image-reference" href="../../_images/fig4.png"><img alt="../../_images/fig4.png" src="../../_images/fig4.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fig46.png"><img alt="../../_images/fig46.png" src="../../_images/fig46.png" style="width: 200px;" /></a>
 <p>In this case, Darcy’s Law becomes</p>
 <div class="math notranslate nohighlight">
 \[
@@ -765,9 +759,9 @@ k\theta + \, constant.\)</span> If  we let <span class="math notranslate nohighl
     \Phi(x)= -\frac{q_u}{A} x + \Phi_0. 
 \]</div>
 <p>For example, set <span class="math notranslate nohighlight">\(-\frac{q_u}{A}=1\)</span> and <span class="math notranslate nohighlight">\(\Phi_0=0\)</span> so in this case <span class="math notranslate nohighlight">\(\Phi=-x\)</span>.  Since <span class="math notranslate nohighlight">\(\Psi_y(x,y)=\Phi_x=-1\)</span>, we can let <span class="math notranslate nohighlight">\(\Psi(x,y)=-y\)</span> and obtain the complex potential is <span class="math notranslate nohighlight">\(\Omega(x,y)=-x-iy=-z\)</span></p>
-<a class="reference internal image-reference" href="../../_images/fig5.png"><img alt="../../_images/fig5.png" src="../../_images/fig5.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fig55.png"><img alt="../../_images/fig55.png" src="../../_images/fig55.png" style="width: 200px;" /></a>
 <section id="id2">
-<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>Exercise<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
 <p><b>3.4.1</b> Consider the uniform flow with complex potential <span class="math notranslate nohighlight">\(\Omega(z)=z\)</span>.  Find <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span>, and describe the direction of the flow.</p>
@@ -775,19 +769,19 @@ k\theta + \, constant.\)</span> If  we let <span class="math notranslate nohighl
 </section>
 </section>
 <section id="sources-and-sinks">
-<h2>3.5 Sources and Sinks<a class="headerlink" href="#sources-and-sinks" title="Link to this heading">#</a></h2>
-<p id="index-10"><span id="index-9"></span>For a source or sink with a constant flow  rate <span class="math notranslate nohighlight">\(q_w\)</span> (<span class="math notranslate nohighlight">\(\frac{m^3}{s}\)</span>) in the <span class="math notranslate nohighlight">\(r\)</span> (radial) direction (<span class="math notranslate nohighlight">\(q_w&gt;0\)</span> for a source and <span class="math notranslate nohighlight">\(q_w&lt;0\)</span> for a sink),  the area <span class="math notranslate nohighlight">\(A\)</span>  through which such flow  in 3 dimensions passes is the lateral surface of a circular cylinder with radius <span class="math notranslate nohighlight">\(r\)</span> and height <span class="math notranslate nohighlight">\(h\)</span>:  <span class="math notranslate nohighlight">\(A=2\pi r h\)</span> (see figure below).  The  flow pattern is assumed to be exactly  the same in each plane parallel to the original.</p>
-<a class="reference internal image-reference" href="../../_images/fig6.png"><img alt="../../_images/fig6.png" src="../../_images/fig6.png" style="width: 200px;" /></a>
+<h2>3.5 Sources and Sinks<a class="headerlink" href="#sources-and-sinks" title="Permalink to this heading">#</a></h2>
+<span class="target" id="index-9"></span><p id="index-10">For a source or sink with a constant flow  rate <span class="math notranslate nohighlight">\(q_w\)</span> (<span class="math notranslate nohighlight">\(\frac{m^3}{s}\)</span>) in the <span class="math notranslate nohighlight">\(r\)</span> (radial) direction (<span class="math notranslate nohighlight">\(q_w&gt;0\)</span> for a source and <span class="math notranslate nohighlight">\(q_w&lt;0\)</span> for a sink),  the area <span class="math notranslate nohighlight">\(A\)</span>  through which such flow  in 3 dimensions passes is the lateral surface of a circular cylinder with radius <span class="math notranslate nohighlight">\(r\)</span> and height <span class="math notranslate nohighlight">\(h\)</span>:  <span class="math notranslate nohighlight">\(A=2\pi r h\)</span> (see figure below).  The  flow pattern is assumed to be exactly  the same in each plane parallel to the original.</p>
+<a class="reference internal image-reference" href="../../_images/fig63.png"><img alt="../../_images/fig63.png" src="../../_images/fig63.png" style="width: 200px;" /></a>
 <p>Darcy’s law becomes</p>
 <div class="math notranslate nohighlight">
 \[
         V_r=\frac{q_w}{2\pi r h} = - \frac{d\Phi}{dr},\,
 \]</div>
 <p>so <span class="math notranslate nohighlight">\(\Phi(r)= - \frac{q_w}{2\pi h} \ln r \)</span>. Since fluid flows  from higher to lower potential potential, the velocity potential <span class="math notranslate nohighlight">\(\Phi\)</span> decreases with increasing <span class="math notranslate nohighlight">\(r\)</span> for a source ( <span class="math notranslate nohighlight">\(q_w&gt;0\)</span> ) and increases with increasing <span class="math notranslate nohighlight">\(r\)</span> for a sink <span class="math notranslate nohighlight">\((q_w&lt;0\)</span>). The equipotential lines (level curves for <span class="math notranslate nohighlight">\(\Phi\)</span>) have the form <span class="math notranslate nohighlight">\(\ln(r)=constant\)</span>, or more simply <span class="math notranslate nohighlight">\(r\)</span> = constant. The equipotentials are concentric circles centered at the origin.</p>
-<a class="reference internal image-reference" href="../../_images/fig7.png"><img alt="../../_images/fig7.png" src="../../_images/fig7.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fig74.png"><img alt="../../_images/fig74.png" src="../../_images/fig74.png" style="width: 200px;" /></a>
 <p>Setting <span class="math notranslate nohighlight">\(\Phi_0=0\)</span>, as we showed earlier in introducing the stream function and complex potential, a corresponding stream function is <span class="math notranslate nohighlight">\(\Psi=- \frac{q_w}{2\pi h}\theta=- \frac{q_w}{2\pi h}\arg(z)\)</span> so the streamlines have the form <span class="math notranslate nohighlight">\(\Psi=- \frac{q_w}{2\pi h} \arg z=- \frac{q_w}{2\pi h}\arctan(\frac{y}{x})\)</span> = constant, or more simply, <span class="math notranslate nohighlight">\(\theta\)</span> = constant. The streamlines are half-lines which radiate to or away from the origin. Note that in this case, we can use a potential of the form <span class="math notranslate nohighlight">\(\Omega(z)=- \frac{q_w}{2\pi h}(\ln r+\theta)=- \frac{q_w}{2\pi h}\log(z)\)</span> to model  a sink (<span class="math notranslate nohighlight">\(q_w&lt;0\)</span>) or a source (<span class="math notranslate nohighlight">\(q_w&gt;0\)</span>) at the origin.  (More generally, if the source or sink is located at <span class="math notranslate nohighlight">\(z_w=(x_w,y_w)\)</span>, then a complex potential of the form <span class="math notranslate nohighlight">\(\Omega(z)=- \frac{q_w}{2\pi h} \log(z-z_w)\)</span> is used to model the source or sink.)</p>
 <section id="id3">
-<h3>Example<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <p>Consider a complex potential for an equal strength source (<span class="math notranslate nohighlight">\(q_w/h=1\)</span>)  at A(0,0) and sink (<span class="math notranslate nohighlight">\(q_w/h=-1\)</span>) at C(1,1):  <span class="math notranslate nohighlight">\(\Omega(z) =\frac{-1}{2\pi}[\log(z)-\log(z-(1+i))\)</span>].  In this case, the velocity potential  is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -795,13 +789,13 @@ k\theta + \, constant.\)</span> If  we let <span class="math notranslate nohighl
 \]</div>
 <p>The stream function must account for the choice of branch cuts. Suppose we specify the branches as shown in the figure below,  namely a branch cut in the direction of the negative x-axis at the branch point A(0,0) and a branch cut in the direction of the positive x-axis at the branch point C(1,1). The stream function is in this case</p>
 <p><span class="math notranslate nohighlight">\( \Psi(x,y)= \frac{-1}{2\pi}[\theta(z,z_{source})-\theta(z,z_{sink})],\, z=x+iy.\)</span></p>
-<a class="reference internal image-reference" href="../../_images/fig8.png"><img alt="../../_images/fig8.png" src="../../_images/fig8.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fig84.png"><img alt="../../_images/fig84.png" src="../../_images/fig84.png" style="width: 200px;" /></a>
 <p>The equipotentials and streamlines are shown in the figure below.</p>
-<a class="reference internal image-reference" href="../../_images/fig9.png"><img alt="../../_images/fig9.png" src="../../_images/fig9.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fig94.png"><img alt="../../_images/fig94.png" src="../../_images/fig94.png" style="width: 200px;" /></a>
 </section>
 </section>
 <section id="the-rankine-oval">
-<h2>3.6 The Rankine Oval<a class="headerlink" href="#the-rankine-oval" title="Link to this heading">#</a></h2>
+<h2>3.6 The Rankine Oval<a class="headerlink" href="#the-rankine-oval" title="Permalink to this heading">#</a></h2>
 <p id="index-11">The superposition principle for flows (based on superposition of harmonic functions) says that to find the complex potential <span class="math notranslate nohighlight">\(\Omega(z)\)</span> for a uniform flow with a source at <span class="math notranslate nohighlight">\(d_1\)</span> and a sink at <span class="math notranslate nohighlight">\(d_2\)</span>, we add together the three individual complex potentials:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -814,7 +808,7 @@ k\theta + \, constant.\)</span> If  we let <span class="math notranslate nohighl
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(2d\)</span> is the distance between the source and sink.</p>
 <p>This complex potential <span class="math notranslate nohighlight">\(\Omega(z)\)</span>  can be used to model uniform flow  around an oval boundary known as Rankine’s oval which contains in its interior the flow from source to sink. The figure below shows streamlines for the complex potential <span class="math notranslate nohighlight">\(\Omega(z)=-z-2\log(\frac{z+1}{z-1})\)</span>. A source is located at (-1,0) and equal strength sink at (1,0). Rankine’s oval is the dividing streamline between uncontaminated and contaminated flow. A separation of the flow occurs at the stagnation point where the oval intersects the horizontal axis through the center of the oval.</p>
-<a class="reference internal image-reference" href="../../_images/fig10.png"><img alt="../../_images/fig10.png" src="../../_images/fig10.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fig103.png"><img alt="../../_images/fig103.png" src="../../_images/fig103.png" style="width: 600px;" /></a>
 <p>In general, the complex velocity <span class="math notranslate nohighlight">\(W\)</span> is defined to be the negative of the derivative of <span class="math notranslate nohighlight">\(\Omega\)</span>. That is, <span class="math notranslate nohighlight">\(W=-\frac{d\Omega}{dz}\)</span>. The stagnation points, or critical points where the velocity is zero and thus the flow can abruptly change directions, are obtained by setting <span class="math notranslate nohighlight">\(W=0\)</span>. In our example,<br />
 $<span class="math notranslate nohighlight">\(
     W=-\frac{d\Omega}{dz}=\frac{q_{u}}{A}+\frac{q_{s}}{2\pi h}\Big(\frac{1}{z+d}-\frac{1}{z-d}\Big)=0\, ,
@@ -822,7 +816,7 @@ $<span class="math notranslate nohighlight">\(
 <p>which yields the stagnation points  <span class="math notranslate nohighlight">\(z=\pm \sqrt{d^{2}+\frac{A}{q_{u}}\frac{q_{s}}{\pi h}d}\)</span>. A streamline which passes through a stagnation point is called a \emph{dividing streamline}.  The value of the stream function <span class="math notranslate nohighlight">\(\Psi\)</span> at a stagnation point gives the value of the level curve representing the dividing streamline. If we think of the source as a pollution source, then the Rankine oval is the dividing streamline passing through the two stagnation points and thus indicates the boundary between uncontaminated and contaminated flow.</p>
 <p>In the limit as <span class="math notranslate nohighlight">\(d\rightarrow 0\)</span> and  <span class="math notranslate nohighlight">\(m=\frac{q_s}{2\pi h} \rightarrow \infty\)</span> in such a way that <span class="math notranslate nohighlight">\(2dm=\sigma\)</span> remains finite, a dipole is created with a circular Rankine oval. In this case, the complex potential  takes the form <span class="math notranslate nohighlight">\(\Omega(z)=-\frac{q_u}{A}z-\frac{\sigma}{z}\)</span> (see Exercise 3) and is used to represents uniform flow around a circular boundary.</p>
 <section id="id4">
-<h3>Exercises<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3>Exercises<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <div class="highlight-{admonition}Exercises notranslate"><div class="highlight"><pre><span></span>
 &lt;b&gt;3.6.1&lt;/b&gt; What scenario is modelled by the complex potential $\Omega=-z-2 \log(z+1)$? Make a sketch of the streamlines corresponding to this potential.
 

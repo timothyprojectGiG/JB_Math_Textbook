@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a4f27da2" />
@@ -58,6 +58,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/LinearAlgebra/Introduction';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -312,13 +314,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb1.html">1. Setting the Scene</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb2.html">2. Complex Analysis Background</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb3.html">3. Idealized Groundwater Flow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Complex/jnb4.html">4. Contaminant Extraction Modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Complex/solutions.html">Solutions to Exercises</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Complex/cplab.html">JNB LAB: Complex Potentials and Contaminant Flow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Complex/cplabsolution.html">JNB Lab Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_solutions.html">Solutions to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_lab.html">JNB LAB: Complex Potentials and Contaminant Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_lab_solution.html">JNB Lab Solutions</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
 <ul class="nav bd-sidenav">
@@ -575,11 +577,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
 <p>This chapter offers a brief introduction to several important topics in data analysis:</p>
-<ul>
-    <li> Linear approximation of data by OLS regression (Section 2)</li>
-    <li> Clustering of unlabelled data using $k$ -means (Section 3)</li>
-<li> Dimensionality reduction of data by principal component analysis (Section 4)</li>
-    <li> Binary classification of labeled data using support vector machines (Section 5)</li>
+<ul class="simple">
+<li><p>Linear approximation of data by OLS regression (Section 2)</p></li>
+<li><p>Clustering of unlabelled data using <span class="math notranslate nohighlight">\(k\)</span> -means (Section 3)</p></li>
+<li><p>Dimensionality reduction of data by principal component analysis (Section 4)</p></li>
+<li><p>Binary classification of labeled data using support vector machines (Section 5)</p></li>
 </ul>
 <p>For each topic, we first illustrate the goal or a key idea(s) underlying the data analysis using a real data set (e.g., COVID test rates and death rates by zip code). We then explain how linear algebra and the solution to an optimization problem yield the desired goal. For simplicity, we explain concepts and/or give examples in two-dimensional settings that are easy to visualize. Aggarwal [2020] gives an in-depth treatment of how the basic theory covered in this module can be extended to more advanced settings.</p>
 <p>The exercises include problems solvable by hand to test the reader’s understanding of the theory, as well as problems that utilize Python Jupyter Notebooks (JNBs). Instructors can tailor these JNBs for use as computer labs depending on the level of students’ familiarity with Python programming. The JNB exercises should at least be read, if not tackled until completion, since they suggest how the basic examples and concepts introduced using small datasets in two dimensions can be applied to real data. The table below indicates the Python Jupyter Notebooks (JNBs) utilized in this chapter. The JNBs are available at <a class="reference external" href="https://tinyurl.com/2neb4z4c">https://tinyurl.com/2neb4z4c</a></p>
@@ -609,8 +611,7 @@ document.write(`
     <td>Exercise 5.3</td>
     <td>Housing.xlsx</td>
   </tr>
-</table>
-</section>
+</table></section>
 
     <script type="text/x-thebe-config">
     {
