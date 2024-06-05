@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Introduction &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=73a372f1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/ComplexSystems/complex_systems_1';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. Fundamental Concepts" href="complex_systems_2.html" />
+    <link rel="prev" title="6. Applications" href="../AdvDataAnalysis/sec6_applications.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to  Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PREFACE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">README!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JMM23.html">JMM 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lab.html">JNB LAB: Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../labsolutions.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRE-COLLEGE</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">1. Elementary Blackboard Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">2. Beginning Python Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">3. Glimpse of Chicago</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">4. Arts in STEM (STEAM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/solutions.html">Solution to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">JNB LAB: After-School Program Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PreCollege/Celestial/demosolutions.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON PROGRAMMING GUIDE Thomas VanDrunen, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Intropy.html">Transition to College Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">1. Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/Data.html">2. Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Programming/solutions.html">Solution to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PROBABILITY Laura Gross, Yiheng Liang</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Prob.html">Probability Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob1.html">1. Random Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob2.html">2. Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob3.html">3. Conditional Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob4.html">4. Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob4a.html">5. Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob5.html">6. Agent-based Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/prob6.html">7. Mathematical Games</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/solutions.html">Solution to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/lab.html">JNB Lab Homicides in Chicago</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/ProbIntro/labsolution.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EXPLORATORY DATA ANALYSIS Peter Jantsch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Data.html">Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STATISTICAL INFERENCE Peter Jantsch, Claire Wagner</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Stat.html">Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">Introduction and Instructor Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">1. Foundations of Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">2. Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">3. Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProbStat/StatInf/04_Regression.html">4. Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">APPLIED CALCULUS FOR DAILY LIFE  Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">1. Linear Systems and the Two-commodity Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">2. Marginal and Average Cost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">3. Optimization and Object Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">4. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">5. Related Rates and Volumes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">6. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">8. Normal Distribution and Process Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">9. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">10. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">11. Integral Test and Income Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/solutions.html">Solutions to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClab.html">JNB Lab: Calculus of Entropy in Daily Life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClabsolutions.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CALCULUS Inne Singgih</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">4. Derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">5. Integrals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/6%20ParametricEquations.html">6. Parametric Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">7. Sequences and Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">Solution to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/clab.html">JNB LAB: Calculus Animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Calculus/clabsolution.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA Soheil Anbouhi</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Linear.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/0.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/1.html">1. Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/2.html">2. Matrices and Determinants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/3.html">3. Linear Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/4.html">4. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/5.html">5. Orthogonality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">Solutions to Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Aplin.html">Applied Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/OLS/jnb1.html">2. OLS Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/KMeans/jnb2.html">3. K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/PCA/jnb3.html">4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/SVM/jnb4.html">5. Binary Classification of Labelled Data by Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/solutions.html">Solution to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/ALlab.html">JNB LAB: Linear Algebra for Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LinearAlgebra/ALlabsolution.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS Rachel Petrik</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DifEq.html">Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">1. Overview of Chapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">2. Introduction to Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">3. First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">4. Second-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">6. Laplace Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">Solutions to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">Differential Equations Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">Differential Equations Lab Answer Key</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/covid.html">1. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">2. The Basic SIR Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">3. Cholera in Haiti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">4. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">5. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/erc/erc.html">6. Earthquake Resistant Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">Solutions to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/lab.html">JNB Lab: HIV-AIDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Undergrad/AppliedDifEq/labsolutions.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX VARIABLES IN GROUNDWATER MODELING Wheaton College Team</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_1.html">1. Setting the Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_2.html">2. Complex Analysis Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_3.html">3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_4.html">4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_solutions.html">Solutions to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_lab.html">JNB LAB: Complex Potentials and Contaminant Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Complex/complex_variables_lab_solution.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ADVANCED DATA ANALYSIS Ying Li, Jonathan Zhu</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../AdvData.html">Advanced Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec0_data.html">0. Before Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec1_preprocessing.html">1. Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec2_transform_features.html">2. About Text Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec3_doc_embedding.html">3. Document Embedding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec4_classification_algos.html">4. Classification of Texts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec5_classification_eval.html">5. Evaluating Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvDataAnalysis/sec6_applications.html">6. Applications</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX SYSTEMS Wheaton College Team</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complex_systems_2.html">2. Fundamental Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complex_systems_3.html">3. Mathematical Concepts from Equilibrium Statistical Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complex_systems_4.html">4. Societal Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complex_systems_solutions.html">Solution to Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complex_systems_lab.html">JNB LAB: Complex Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complex_systems_labsolution.html">JNB Lab Solutions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">END MATTER</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/Advanced/ComplexSystems/complex_systems_1.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FAdvanced/ComplexSystems/complex_systems_1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Advanced/ComplexSystems/complex_systems_1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-the-scene">Setting the Scene</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-system-science">Complex System Science</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<section id="setting-the-scene">
+<span id="index-2"></span><span id="index-1"></span><span id="index-0"></span><h2>Setting the Scene<a class="headerlink" href="#setting-the-scene" title="Link to this heading">#</a></h2>
+<p>A brutal two year civil war (Nov 2020-Nov 2022) crippled the entire infrastructure of the Tigray region of northern Ethiopia. All 6-7 million people in the region experienced trauma due to a large number of civilian deaths and victims of rape as a weapon of war, as well as a 2-year blockade of internet,
+cell phone communication, banking, and humanitarian aid.  Today, there are food shortages everywhere, and hundreds of deaths by starvation have occurred during the writing of this Module. Poverty abounded everywhere during the war and continues to be a major problem with many women forced into prostitution for survival.
+Almost all medical services were incapacitated and doctors were among those left begging on the streets for food. In the education sector, over 2,000 schools were closed during the war.   Without outside intervention, over two million children  faced their third year out of school. To compound this already overwhelming scenario, one year after the Pretoria peace agreement was signed, fighting continued in the western part of Tigray, leaving 1 million internally displaced people (IDP) living in over 600 IDP camps scattered across the rest of the region ( <b>Figure 1</b>). Maintaining a minimum holistic standard of living for one million IDP (food, water, sanitation, health, education, safety,…) is a complex problem. Is this a problem for the Tigray regional government to implement a well-orchestrated and funded policy across the region? (With all the other problems it faces, how high a priority can the regional government give to the IDP’s?)  Or, is this a problem requiring intervention by individuals, NGOs, and local district governments (woredas)   who might make a difference for selected groups of IDP’s?</p>
+<p>Let’s narrow our focus to the following scenario which considers just one aspect of the complex IDP problem. A small NGO involved in disaster relief has experience in supporting education within IDP camps. Data made available by the U.N.’s International Office for Migration (IOM) in August 2023
+(<a class="reference external" href="https://data.humdata.org/dataset/ethiopia-displacement-northern-region-tigray-idps-site-assessment-iom-dtm?">https://data.humdata.org/dataset/ethiopia-displacement-northern-region-tigray-idps-site-assessment-iom-dtm?</a>) includes information whether or not IDP camps have education needs in the following areas:</p>
+<a class="reference internal image-reference" href="../../_images/fig1.png"><img alt="../../_images/fig1.png" src="../../_images/fig1.png" style="width: 600px;" /></a>
+<p><b>Figure 1</b> Numbers of IDP camps in Tigray.  The regional capital (Mekelle) and second largest city (Shire) have the largest number of camps.</p>
+<ul>
+<li>pre-primary; </li>
+<li> secondary;</li>
+<li> resources;</li>
+<li> quality/satisfaction;</li>
+<li> girl attendance;</li>
+<li> boy attendance; and</li>
+<li> teachers.
+</ul>
+<p>To maximize effective  impact in an efficient way, it would make sense for the NGO to base its efforts either in the regional capital (Mekelle) or the second largest city (Shire) since they have roughly half of all the IDP camps and half of the one million IDPs.   Moreover, these cities  have  direct flights to and from Addis Ababa which is important for safety considerations.  A specific question we pose here and re-visit at the end of this Module is:  “which city has the greater need for the NGO’s intervention due to a higher degree of educational disorder in its IDP camps?”</p>
+</section>
+<section id="complex-system-science">
+<span id="index-5"></span><span id="index-4"></span><span id="index-3"></span><h2>Complex System Science<a class="headerlink" href="#complex-system-science" title="Link to this heading">#</a></h2>
+<p>This Module offers a brief introduction to complex system science. Complexity is an intuitive concept which arises across disciplines, including urban issues such as the problem of an influx of large numbers of displaced people.  The science of complex systems seeks to develop a rigorous methodology  for analyzing overall system behavior based on interactions involving a large number of constituent parts or agents.  Analytical methods, including those arising from statistical physics, utilize a wide range of undergraduate level mathematics such as calculus, linear algebra, differential equations, and probability and statistics.  Our goal is to show how a few important concepts found in these quantitative methods (for example, equilibrium, phase transition, and entropy) support basic notions of complex systems, and how they offer a perspective on practical questions in complex human society.</p>
+<p>From a humanitarian standpoint, two goals of complex system science include:</p>
+<ul>
+   <li> prevent dangerous misunderstanding and unjust practices associated with an erroneous  view of complex social/environmental systems; and </li>
+    <li> provide insights which can help facilitate enduring solutions to complex societal problems.</li>
+</ul>
+<p>A classic example of a dangerous misunderstanding of a complex situation in Chicago is the  urban redlining maps from the 1920’s  which classified neighborhoods with high density of African Americans as ‘hazardous’ and deemed mortgages not insurable by the F.H.A. Redlining permanently crippled Black home ownership (see <b>Figure 2</b>, left panel). As for a recent example of a helpful insight into the same urban area,   Robert Sampson [2012] introduced a concept called <i>collective efficacy</i> (cooperation between community members) suggesting that violent crime reduction might be facilitated by  a coherent community-based approach (<b>Figure 2</b> right panel).</p>
+<a class="reference internal image-reference" href="../../_images/fig21.png"><img alt="../../_images/fig21.png" src="../../_images/fig21.png" style="width: 600px;" /></a>
+<p><b>Figure 2</b> (Left) Home Owners’ Loan Corporation neighborhood classifications and present day city owned empty lots. The circled area with a high concentration of empty lots was labeled ‘Hazardous’. Map Credit: Claire Wagner   (Right) Collective efficacy (CE) levels and homicides. Map credit: Robert Sampson <a class="reference external" href="https://www.youtube.com/watch?v=gEXSOUqwztA">https://www.youtube.com/watch?v=gEXSOUqwztA</a> (Used with permission of the author.)</p>
+<p>This Module is organized into three sections:</p>
+<ul>
+<li>Fundamental Concepts <b>(Section 2</b>); </li>
+<li> Mathematical Formalism from Statistical Physics (<b>Section 3</b>); and </li>
+<li> Societal Applications (<b>Section 4</b>).</li>
+</ul>
+<p>The Exercises are an integral part of this Module, and should at least be read if not attempted in earnest (solutions to the Exercises are included at the end of the Module).  Python Jupyter Notebooks (JNBs) are also an important part of this Module and available to the reader at <a class="reference external" href="https://drive.google.com/drive/folders/1zqQB-hEPocxOVOjiI0Q32XDKVJoq6PI3?usp=sharing">https://drive.google.com/drive/folders/1zqQB-hEPocxOVOjiI0Q32XDKVJoq6PI3?usp=sharing</a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Advanced/ComplexSystems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../AdvDataAnalysis/sec6_applications.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">6. Applications</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="complex_systems_2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2. Fundamental Concepts</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-the-scene">Setting the Scene</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-system-science">Complex System Science</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' width=88 style='border-width:0' src='https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png'/></a>
+  Except where otherwise noted, this work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
