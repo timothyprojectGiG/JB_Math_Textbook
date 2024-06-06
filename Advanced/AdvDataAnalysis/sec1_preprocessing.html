@@ -330,6 +330,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sec4_classification_algos.html">4. Classification of Texts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec5_classification_eval.html">5. Evaluating Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sec6_applications.html">6. Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">Solutions to Exercises</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">COMPLEX SYSTEMS Wheaton College Team</span></p>
 <ul class="nav bd-sidenav">
@@ -591,16 +592,36 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="preprocessing">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="c1"># change this to your own data directory</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span>
+
+<span class="c1"># read and preprocess data</span>
+<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="preprocessing">
 <span id="index-0"></span><h1>1. Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h1>
-<p id="index-1">Usually, natural language processors (NLP) refer to both speech data and textual data. There are several components necessary to understand the structure and meaning of human language.</p>
+<p id="index-1">Natural language processing (NLP) refers to the use of computers to process, analyze, and interpret human languages. NLP often involves the use of machine learning (ML), which is explained in more detail in <a class="reference internal" href="sec4_classification_algos.html"><span class="std std-doc">section 4</span></a>. Usually, natural language processors operate on both speech data and textual data. There are several components necessary to understand the structure and meaning of human language.</p>
 <p>From a linguistics perspective, it is important to look at the following:</p>
 <ul class="simple">
 <li><p><strong>syntax</strong>, the actual rules that define how words are combined to form understandable sentences;</p></li>
 <li><p><strong>semantics</strong>, referring to the meaning behind the phrases and sentences formed by syntax;</p></li>
 <li><p><strong>morphology</strong>, referring to the ways in which words can take different forms.</p></li>
 </ul>
-<p>Then, from a computational perspective, we can take the rules from the linguistics aspects and transform linguistic knowledge into rule-based and/or ML-based algorithms to solve problems related to natural language processing.</p>
+<p>Then, from a computational perspective, we can take the rules from these linguistics aspects and transform linguistic knowledge into rule-based and/or ML-based algorithms to solve problems related to natural language processing.</p>
 <div class="admonition-exercise-1-1 admonition">
 <p class="admonition-title">Exercise 1.1</p>
 <p>Explore the Allen NLP demos found at <a class="reference external" href="https://demo.allennlp.org/sentiment-analysis/glove-sentiment-analysis">https://demo.allennlp.org/sentiment-analysis/glove-sentiment-analysis</a>. Choose either of the two sentiment analysis algorithms and use any of the provided example sentences.</p>
@@ -612,7 +633,7 @@ document.write(`
 </div>
 <section id="tasks">
 <span id="index-10"></span><span id="index-9"></span><span id="index-8"></span><span id="index-7"></span><span id="index-6"></span><span id="index-5"></span><span id="index-4"></span><span id="index-3"></span><span id="index-2"></span><h2>1.1 Tasks<a class="headerlink" href="#tasks" title="Link to this heading">#</a></h2>
-<p>Within the realm of preprocessing textual data, we first must perform certain detections and tasks; this ensures that we have textual data that makes sense and is meaningful. The following all help at ensuring data cleanliness:</p>
+<p>Within the realm of preprocessing textual data, we first must perform certain detections and tasks; this ensures that we have textual data that make sense and are meaningful. The following all help at ensuring data cleanliness:</p>
 <ul class="simple">
 <li><p><strong>Syntactic analysis:</strong> Does the grammar make sense? Is the text gramatically correct?</p></li>
 <li><p><strong>Semantic analysis:</strong> Are we aware of the meaning of the words in context?  Do we understand the structure, word interaction, and related concepts of the text?</p></li>
@@ -620,7 +641,7 @@ document.write(`
 <li><p><strong>Named entity resolution:</strong> How do we identify and extract entities (names, organizations, addresses and places) and relationships?</p></li>
 <li><p><strong>Text classification:</strong> Can we organize our text into predefined categories? Ways of doing this include:</p>
 <ul>
-<li><p><strong>Sentiment analysis:</strong> Can we classify text (like customer feedback) into positive and negative feedback?</p></li>
+<li><p><strong>Sentiment analysis:</strong> Can we classify text (such as customer feedback) into positive and negative feedback?</p></li>
 <li><p><strong>Email filtering:</strong> If we are taking our texts from emails, can we classify email text as spam mail and remove spam?</p></li>
 <li><p><strong>Intent detection:</strong> What is the text generator trying to achieve? For example, searching “apple” could indicate an intent of buying, eating, or researching apples.</p></li>
 <li><p><strong>Language detection:</strong> Can we classify the body of text into languages, with an associated probability?</p></li>
@@ -647,21 +668,66 @@ document.write(`
 </div>
 </div>
 </div>
-<p>You may notice that the sum of the positively and negatively labeled texts does not equal the full amount of texts imported from the dataset. Hence, this provides some beginning rationale for the necessity of preprocessing.</p>
-<p>Data preprocessing for textual data includes some specific tasks, but it also includes some work that can be done on datasets in general. For our UN SDG dataset, it is useful to remove the columns that we don’t need, which for this dataset are the columns with zeroes in all entries. We do this by the following code:</p>
+<p>Compare this to the number of text samples in the dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">text_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40062
 </pre></div>
 </div>
 </div>
 </div>
-<p>It is also a good idea to check our data for any discrepancies, especially N/A values and incorrect entries.</p>
+<p>You may notice that the sum of the positive and negative labels does not equal the number of texts in the dataset. This is because the texts have been labeled by more than one volunteer. As the table below shows, between 3 and 990 volunteers labeled each text, with an average (and median) of about 7 volunteers per text. The columns <code class="docutils literal notranslate"><span class="pre">labels_positive</span></code> and <code class="docutils literal notranslate"><span class="pre">labels_negative</span></code> give the total number of positive and negative labels assigned to each text by these volunteers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">text_df</span><span class="p">[</span><span class="s1">&#39;labels_positive&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">text_df</span><span class="p">[</span><span class="s1">&#39;labels_negative&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    40062.000000
+mean         6.927363
+std         15.578931
+min          3.000000
+50%          7.000000
+max        990.000000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this in mind, determining a text’s agreement with the assigned SDG goal will be more complicated than simply reading the positive and negative labels. These observations thus provide some beginning rationale for the necessity of preprocessing.</p>
+<p>The data preprocessing we will need to perform includes some tasks specific to textual data, but it also includes some work that can be done on datasets more generally. For our UN SDG dataset, it is useful to remove the columns that we don’t need, which for this dataset are any columns with N/A values in all entries. We can use the following code to do so:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># save the original number of columns in a variable</span>
+<span class="n">ncols_old</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># remove columns comprised solely of N/A values</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of columns removed:&quot;</span><span class="p">,</span> <span class="n">ncols_old</span> <span class="o">-</span> <span class="n">text_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of columns removed: 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, there were no columns comprised solely of N/A values.</p>
+<p>It is also a good idea to check our data for any other discrepancies, such as missing or incorrect entries.</p>
 <div class="admonition-exercise-1-3 admonition">
 <p class="admonition-title">Exercise 1.3</p>
-<p>Check the data for any N/A values. Is it good to remove any entries with N/A values?</p>
+<ul class="simple">
+<li><p>Modify the code above to remove any rows that contain only N/A values. (Hint: change the value of the <code class="docutils literal notranslate"><span class="pre">axis</span></code> parameter.) How many rows, if any, were removed?</p></li>
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">isna()</span></code> and <code class="docutils literal notranslate"><span class="pre">any()</span></code> functions, check the data for any remaining N/A values. Is it a good idea to remove entries with N/A values?</p></li>
+</ul>
 </div>
-<p>For our UN SDG dataset, we want texts that are clearly classified into a single goal. We also will want to select for only the positively labeled texts as this indicates higher agreement with the labeled goal, so our filtering will remove the rows with labeling agreement less than 0.5 and the rows where the positive labels minus the negative labels is less than 2.</p>
+<p>For our UN SDG dataset, we want texts that are clearly classified into a single goal. Positive labels indicate agreement with the labeled goal, while negative labels indicate disagreeement. With this in mind, our filtering will remove the rows with labeling agreement less than or equal to 0.5, as well as the rows where the number of positive labels minus the negative labels is less than or equal to 2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
