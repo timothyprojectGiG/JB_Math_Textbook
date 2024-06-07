@@ -576,7 +576,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedures">1.3 Procedures</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">1.3.1 Stemming</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizers">1.3.2 Tokenizers</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">3.3 Named Entity Recognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">1.3.3 Named Entity Recognition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-operations">1.3.4 String Operations</a></li>
 </ul>
 </li>
@@ -597,6 +597,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
 
 <span class="c1"># change this to your own data directory</span>
 <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span>
@@ -747,20 +748,20 @@ dtype: float64
 <p>We will not be focusing on using algorithms to process whole documents or anything above that level, so we can look at preprocessing at the remaining levels: characters, words, sentences, and paragraphs.</p>
 <p><strong>For characters</strong>, we typically process textual data by removing special characters, punctuations, and normalizations. However, this is not necessarily the case for every NLP approach. In some cases, taking away these special characters, punctuations, and normalizations will completely alter the meaning of higher levels of text.</p>
 <p><strong>For words</strong>, we first have to define words within our text snippets. This is known as <strong>segmenting</strong>. In the English language, we can use white space to segment text into words. However, this is not always the case with other languages, so it is important to know the linguistic rules of the primary language you are working with. Additionally, we perform some removals and/or replacements for odd words such as abbreviations, acronyms, numbers, and misspelled words. Finally, we normalize our text data; this is typically done by <strong>stemming</strong> (covered later in this section) or <strong>lemmatization</strong>.</p>
-<p><strong>For sentences</strong>, we first have to define sentence boundaries. In most languages, including English, sentences are started with a capital letter and ended with a period. However, periods and capital letters are also used within sentences, and captial letters or periods might not even exist in other languages, again stressing the importance of knowing the language’s rules.  Within sentences, we can also mark phrases. In English sentences, we can typically label phrases of sentences with a subject, predicate, and object; the subject is the one performing the action, or predicate, on or directed towards the object. Finally, we parse the sentence, or tag the words with their respective part of speech. Note that this can only be done on the sentence level, not the word level, as the same word can have a different part of speech depending on how it is used in a sentence.</p>
-<p>Finally, <strong>for paragraphs</strong>, our primary level of preprocessing is to understand the text by extracting the meaning of the text. This can include sentiments, emotions, intentions, etc. A good way of doing this is to perform abstractive summarization, or constructing new text that is similar in meaning to the old text.</p>
+<p><strong>For sentences</strong>, we first have to define sentence boundaries. In most languages, including English, sentences are started with a capital letter and ended with a period. However, periods and capital letters are also used within sentences, and capital letters or periods might not even exist in other languages, which again highlights the importance of knowing the language’s rules.  Within sentences, we can also mark phrases. In English sentences, we can typically label phrases in sentences with a subject, predicate, and object; the subject is the one performing the action, or predicate, on or directed towards the object. Finally, we parse the sentence by tagging the words with their respective part of speech. Note that this can only be done on the sentence level, not the word level, as the same word can have a different part of speech depending on how it is used in a sentence.</p>
+<p>Finally, <strong>for paragraphs</strong>, our primary level of preprocessing is to understand the text by extracting the meaning of the text. This can include sentiments, emotions, intentions, etc. A good way of doing this is to perform abstractive summarization, which involves constructing new text that concisely captures the meaning of the old text.</p>
 <p>The actual process of text preprocessing, however, does not necessarily flow distinctly from one level to another. The order of preprocessing steps, as well as whether or not to include specific steps, depends largely on the application. An example process is given here:</p>
 <ol class="arabic simple">
 <li><p>Segmentation (breaking text into sentences)</p></li>
 <li><p>Spelling correction</p></li>
-<li><p>Noise removal (includes removal of text that would otherwise confuse the main text, including emojis, foreign language, and http links)</p></li>
+<li><p>Noise removal (includes removal of text that would otherwise confuse the main text, including emojis, foreign language, and hyperlinks)</p></li>
 <li><p>Language detection (identifying the language used in a body of text)</p></li>
 <li><p>Stop-words removal (these words are typically high frequency, generic, and less context-specific, change cases)</p></li>
 <li><p>Lemmatization</p></li>
 <li><p>Tokenization (break texts into words, phrases, symbols, and other semantically useful units or meaningful elements)</p></li>
 <li><p>Parsing (part of speech identification)</p></li>
 <li><p>Standardization</p></li>
-<li><p>Stemming (reduces tokens to base forms or <strong>stems</strong> and removes affixes)</p></li>
+<li><p>Stemming (reduces tokens to base forms, or <strong>stems</strong>, and removes affixes)</p></li>
 </ol>
 <p>Many of these steps may be unfamiliar - that is perfectly fine, as they will be covered later in this section.</p>
 <p>It is commonly accepted that preprocessing text helps improve accuracy, so it is critical to perform good, appropriate preprocessing.</p>
@@ -769,59 +770,176 @@ dtype: float64
 <span id="index-20"></span><span id="index-19"></span><span id="index-18"></span><h2>1.3 Procedures<a class="headerlink" href="#procedures" title="Link to this heading">#</a></h2>
 <section id="stemming">
 <h3>1.3.1 Stemming<a class="headerlink" href="#stemming" title="Link to this heading">#</a></h3>
-<p>Developed by Martin Porter in 1980, the <strong>Porter Stemmer</strong> is the oldest and most commonly used stemming algorithm in many languages. It is slightly time consuming, so another stemming algorithm that can be used is the Lancaster stemmer. This stemmer is very aggressive, however, and is especially harmful for short tokens, where the token itself may become unclear or altered to a point where it loses meaning.</p>
-<p>As mentioned previously, stemming is performed to help normalize our textual data; this is done so that we do not end up with many different words with very similar meaning. For example, stemming turns “watch”, “watched”, “watching”, and “watches” into “watch”. To do this, the algorithm accesses a database where known word forms, such as the various forms of “watch”, are grouped together, then analyzes the text for all instances of these forms and turns them all into the root word. Stemmers also typically perform preprocessing tasks like turning words not at the beginning of a sentence into lowercase and removing stop words, which are common words like “the” and “that” which show up in a variety of contexts and typically do not change meaning across these contexts.</p>
-<p>However, there are always irregularities when using any stemming algorithm. Take the following examples:</p>
-<ul>
-<li>"I bought an Apple" vs. "I bought an apple": Here, the stemming algorithm removed the capital on "Apple", but we can clearly see that this drastically altered the meaning; now, the speaker has bought a fruit instead of a product from the company Apple.  </li>
-<li>"I watched <i>The Who</i>" => remove stop words => "I watched": Here, the stemming algorithm removed the stop words "the" and "who", but this again changed the meaning of the sentence. Here, instead of watching the TV show <i>The Who</i>, the speaker has now watched something unspecified.</li> 
-<li>"Take that!" => remove stop words => "Take": Like the above example, the stemming algorithm removed a stop word, "that". However, the sentence now loses all meaning: it is no longer a complete sentence, and without the "that" which served to add a violent, fighting intent to the original sentence, this emotion and intent is completely gone.
-</ul>
-<p>Let’s try these stemmers, as well as a third type, the Snowball Stemmer, on some tokens:</p>
+<p>As mentioned previously, stemming is performed to help normalize our textual data by reducing tokens to their base forms. This is done so that we do not end up with many different words with very similar meaning. For example, stemming turns “watch”, “watched”, “watching”, and “watches” into “watch”. To do this, the algorithm accesses a database where known word forms, such as the various forms of “watch”, are grouped together. It then analyzes the text for all instances of these forms and turns them all into the root word.</p>
+<p>Stemmers also typically perform preprocessing tasks like turning words not at the beginning of a sentence into lowercase and removing <strong>stop words</strong>, which are common words like “the” and “that” which show up in a variety of contexts and typically do not change meaning across these contexts. The <code class="docutils literal notranslate"><span class="pre">NLTK</span></code> library contains a set of English stop words, which the following code prints out. Notice how many of these stop words are common words like pronouns, prepositions, and conjunctions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">stem</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># download stopwords (if not already downloaded)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">tokens</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;narrative&#39;</span><span class="p">,</span> <span class="s1">&#39;comprehensives&#39;</span><span class="p">,</span> <span class="s1">&#39;publicised&#39;</span><span class="p">,</span> <span class="s1">&#39;moderately&#39;</span><span class="p">,</span> <span class="s1">&#39;prosperous&#39;</span><span class="p">,</span> <span class="s1">&#39;legitimizes&#39;</span><span class="p">,</span> <span class="s1">&#39;according&#39;</span><span class="p">,</span> <span class="s1">&#39;glorifies&#39;</span><span class="p">]</span> 
-
-<span class="n">porter</span> <span class="o">=</span> <span class="n">stem</span><span class="o">.</span><span class="n">porter</span><span class="o">.</span><span class="n">PorterStemmer</span><span class="p">()</span> <span class="c1"># Porter stemmer</span>
-<span class="n">snowball</span> <span class="o">=</span> <span class="n">stem</span><span class="o">.</span><span class="n">snowball</span><span class="o">.</span><span class="n">EnglishStemmer</span><span class="p">()</span> <span class="c1"># Snowball stemmer</span>
-<span class="n">lancaster</span> <span class="o">=</span> <span class="n">stem</span><span class="o">.</span><span class="n">lancaster</span><span class="o">.</span><span class="n">LancasterStemmer</span><span class="p">()</span> <span class="c1"># Lancaster stemmer</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Porter Stemmer:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">porter</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Snowball Stemmer:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">snowball</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lancaster Stemmer:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">lancaster</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Porter Stemmer: [&#39;narr&#39;, &#39;comprehens&#39;, &#39;publicis&#39;, &#39;moder&#39;, &#39;prosper&#39;, &#39;legitim&#39;, &#39;accord&#39;, &#39;glorifi&#39;]
-Snowball Stemmer: [&#39;narrat&#39;, &#39;comprehens&#39;, &#39;publicis&#39;, &#39;moder&#39;, &#39;prosper&#39;, &#39;legitim&#39;, &#39;accord&#39;, &#39;glorifi&#39;]
-Lancaster Stemmer: [&#39;nar&#39;, &#39;comprehend&#39;, &#39;publ&#39;, &#39;mod&#39;, &#39;prosp&#39;, &#39;legitim&#39;, &#39;accord&#39;, &#39;glor&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;i&#39;, &#39;me&#39;, &#39;my&#39;, &#39;myself&#39;, &#39;we&#39;, &#39;our&#39;, &#39;ours&#39;, &#39;ourselves&#39;, &#39;you&#39;, &quot;you&#39;re&quot;, &quot;you&#39;ve&quot;, &quot;you&#39;ll&quot;, &quot;you&#39;d&quot;, &#39;your&#39;, &#39;yours&#39;, &#39;yourself&#39;, &#39;yourselves&#39;, &#39;he&#39;, &#39;him&#39;, &#39;his&#39;, &#39;himself&#39;, &#39;she&#39;, &quot;she&#39;s&quot;, &#39;her&#39;, &#39;hers&#39;, &#39;herself&#39;, &#39;it&#39;, &quot;it&#39;s&quot;, &#39;its&#39;, &#39;itself&#39;, &#39;they&#39;, &#39;them&#39;, &#39;their&#39;, &#39;theirs&#39;, &#39;themselves&#39;, &#39;what&#39;, &#39;which&#39;, &#39;who&#39;, &#39;whom&#39;, &#39;this&#39;, &#39;that&#39;, &quot;that&#39;ll&quot;, &#39;these&#39;, &#39;those&#39;, &#39;am&#39;, &#39;is&#39;, &#39;are&#39;, &#39;was&#39;, &#39;were&#39;, &#39;be&#39;, &#39;been&#39;, &#39;being&#39;, &#39;have&#39;, &#39;has&#39;, &#39;had&#39;, &#39;having&#39;, &#39;do&#39;, &#39;does&#39;, &#39;did&#39;, &#39;doing&#39;, &#39;a&#39;, &#39;an&#39;, &#39;the&#39;, &#39;and&#39;, &#39;but&#39;, &#39;if&#39;, &#39;or&#39;, &#39;because&#39;, &#39;as&#39;, &#39;until&#39;, &#39;while&#39;, &#39;of&#39;, &#39;at&#39;, &#39;by&#39;, &#39;for&#39;, &#39;with&#39;, &#39;about&#39;, &#39;against&#39;, &#39;between&#39;, &#39;into&#39;, &#39;through&#39;, &#39;during&#39;, &#39;before&#39;, &#39;after&#39;, &#39;above&#39;, &#39;below&#39;, &#39;to&#39;, &#39;from&#39;, &#39;up&#39;, &#39;down&#39;, &#39;in&#39;, &#39;out&#39;, &#39;on&#39;, &#39;off&#39;, &#39;over&#39;, &#39;under&#39;, &#39;again&#39;, &#39;further&#39;, &#39;then&#39;, &#39;once&#39;, &#39;here&#39;, &#39;there&#39;, &#39;when&#39;, &#39;where&#39;, &#39;why&#39;, &#39;how&#39;, &#39;all&#39;, &#39;any&#39;, &#39;both&#39;, &#39;each&#39;, &#39;few&#39;, &#39;more&#39;, &#39;most&#39;, &#39;other&#39;, &#39;some&#39;, &#39;such&#39;, &#39;no&#39;, &#39;nor&#39;, &#39;not&#39;, &#39;only&#39;, &#39;own&#39;, &#39;same&#39;, &#39;so&#39;, &#39;than&#39;, &#39;too&#39;, &#39;very&#39;, &#39;s&#39;, &#39;t&#39;, &#39;can&#39;, &#39;will&#39;, &#39;just&#39;, &#39;don&#39;, &quot;don&#39;t&quot;, &#39;should&#39;, &quot;should&#39;ve&quot;, &#39;now&#39;, &#39;d&#39;, &#39;ll&#39;, &#39;m&#39;, &#39;o&#39;, &#39;re&#39;, &#39;ve&#39;, &#39;y&#39;, &#39;ain&#39;, &#39;aren&#39;, &quot;aren&#39;t&quot;, &#39;couldn&#39;, &quot;couldn&#39;t&quot;, &#39;didn&#39;, &quot;didn&#39;t&quot;, &#39;doesn&#39;, &quot;doesn&#39;t&quot;, &#39;hadn&#39;, &quot;hadn&#39;t&quot;, &#39;hasn&#39;, &quot;hasn&#39;t&quot;, &#39;haven&#39;, &quot;haven&#39;t&quot;, &#39;isn&#39;, &quot;isn&#39;t&quot;, &#39;ma&#39;, &#39;mightn&#39;, &quot;mightn&#39;t&quot;, &#39;mustn&#39;, &quot;mustn&#39;t&quot;, &#39;needn&#39;, &quot;needn&#39;t&quot;, &#39;shan&#39;, &quot;shan&#39;t&quot;, &#39;shouldn&#39;, &quot;shouldn&#39;t&quot;, &#39;wasn&#39;, &quot;wasn&#39;t&quot;, &#39;weren&#39;, &quot;weren&#39;t&quot;, &#39;won&#39;, &quot;won&#39;t&quot;, &#39;wouldn&#39;, &quot;wouldn&#39;t&quot;]
 </pre></div>
 </div>
 </div>
 </div>
+<p>Stemming algorithms can be very useful for preprocessing text. However, there are always irregularities when using any stemming algorithm. Take the following examples of how a stemming algorithm might transform sentences:</p>
+<ul class="simple">
+<li><p>“I bought an Apple” =&gt; <em>change to lowercase</em> =&gt; “I bought an apple”</p>
+<ul>
+<li><p>Here, the stemming algorithm has removed the capital on “Apple”. We can clearly see that this drastically altered the meaning; now, the speaker has bought a fruit instead of a product from the company Apple.</p></li>
+</ul>
+</li>
+<li><p>“I watched <em>The Who</em>” =&gt; <em>remove stop words</em> =&gt; “I watched”</p>
+<ul>
+<li><p>Here, the stemming algorithm has removed the stop words “the” and “who”, but this again changed the meaning of the sentence. Instead of watching the TV show <em>The Who</em>, the speaker has now watched something unspecified.</p></li>
+</ul>
+</li>
+<li><p>“Take that!” =&gt; <em>remove stop words</em> =&gt; “Take”</p>
+<ul>
+<li><p>Like the above example, the stemming algorithm removed a stop word, “that”. However, the sentence now loses all meaning: it is no longer a complete sentence, and without the “that” which served to add a violent, fighting intent to the original sentence, this emotion and intent is completely gone.</p></li>
+</ul>
+</li>
+</ul>
+<p>Developed by Martin Porter in 1980, the <strong>Porter Stemmer</strong> is the oldest and most commonly used stemming algorithm in many languages. It is slightly time consuming, so another stemming algorithm that can be used is the <strong>Lancaster Stemmer</strong>. This stemmer is very aggressive, however, and is especially harmful for short tokens, where the token itself may become unclear or altered to a point where it loses meaning.</p>
+<p>Let’s try these stemmers, as well as a third type, the <strong>Snowball Stemmer</strong>, on some tokens:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;narrative&#39;</span><span class="p">,</span> <span class="s1">&#39;comprehensives&#39;</span><span class="p">,</span> <span class="s1">&#39;publicised&#39;</span><span class="p">,</span> <span class="s1">&#39;moderately&#39;</span><span class="p">,</span> <span class="s1">&#39;prosperous&#39;</span><span class="p">,</span> <span class="s1">&#39;legitimizes&#39;</span><span class="p">,</span> <span class="s1">&#39;according&#39;</span><span class="p">,</span> <span class="s1">&#39;glorifies&#39;</span><span class="p">]</span> 
+
+<span class="n">porter</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">porter</span><span class="o">.</span><span class="n">PorterStemmer</span><span class="p">()</span> <span class="c1"># Porter stemmer</span>
+<span class="n">snowball</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">snowball</span><span class="o">.</span><span class="n">EnglishStemmer</span><span class="p">()</span> <span class="c1"># Snowball stemmer</span>
+<span class="n">lancaster</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">lancaster</span><span class="o">.</span><span class="n">LancasterStemmer</span><span class="p">()</span> <span class="c1"># Lancaster stemmer</span>
+
+<span class="c1"># apply each stemmer to the tokens</span>
+<span class="n">porter_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">porter</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+<span class="n">snowball_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">snowball</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+<span class="n">lancaster_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">lancaster</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+
+<span class="c1"># display results</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Porter Stemmer&#39;</span><span class="p">,</span> <span class="s1">&#39;Snowball Stemmer&#39;</span><span class="p">,</span> <span class="s1">&#39;Lancaster Stemmer&#39;</span><span class="p">],</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">,</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">porter_results</span><span class="p">,</span> <span class="n">snowball_results</span><span class="p">,</span> <span class="n">lancaster_results</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>narrative</th>
+      <th>comprehensives</th>
+      <th>publicised</th>
+      <th>moderately</th>
+      <th>prosperous</th>
+      <th>legitimizes</th>
+      <th>according</th>
+      <th>glorifies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Porter Stemmer</th>
+      <td>narr</td>
+      <td>comprehens</td>
+      <td>publicis</td>
+      <td>moder</td>
+      <td>prosper</td>
+      <td>legitim</td>
+      <td>accord</td>
+      <td>glorifi</td>
+    </tr>
+    <tr>
+      <th>Snowball Stemmer</th>
+      <td>narrat</td>
+      <td>comprehens</td>
+      <td>publicis</td>
+      <td>moder</td>
+      <td>prosper</td>
+      <td>legitim</td>
+      <td>accord</td>
+      <td>glorifi</td>
+    </tr>
+    <tr>
+      <th>Lancaster Stemmer</th>
+      <td>nar</td>
+      <td>comprehend</td>
+      <td>publ</td>
+      <td>mod</td>
+      <td>prosp</td>
+      <td>legitim</td>
+      <td>accord</td>
+      <td>glor</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <div class="admonition-exercise-1-5 admonition">
 <p class="admonition-title">Exercise 1.5</p>
-<p>How do the different stemmers compare for the list of words given to it in the above example? Which one might have the most trouble on a larger set of tokens&gt;</p>
+<p>How do the different stemmers compare for the list of words in the above example? Which stemmer might have the most trouble on a larger set of tokens?</p>
 </div>
 <div class="admonition-exercise-1-6 admonition">
 <p class="admonition-title">Exercise 1.6</p>
-<p>Modify the above code to stem your own tokens. What words seem to be removed as stop words? How are words commonly shortened, and what types of words seem to cause the most trouble for the stemmers?</p>
+<p>Modify the above code to stem your own tokens. How are words commonly shortened, and what types of words seem to cause the most trouble for the stemmers?</p>
 </div>
 </section>
 <section id="tokenizers">
 <span id="index-21"></span><h3>1.3.2 Tokenizers<a class="headerlink" href="#tokenizers" title="Link to this heading">#</a></h3>
-<p>The primary goal of a tokenizer is to break text into tokens. This is highly language dependent; in English, we use white space and punctuations to as word and token separators, but this may not work in some languages.</p>
-<p>For the purposes of building ML models, there are several things that tokenizers track in addition to creating the tokens themselves. Tokenizers track <i>features</i>, or the frequency of occurrence of each individual token (normalized or not). They also produce a <i>sample</i>, or a vector of all the token frequencies for a given document.</p>
-<p>When a tokenizer vectorizes a corpus, it counts the occurrences of tokens in each document, normalizes and weights these occurrences, and constructs an n-gram, which is discussed in the next section.</p>
-</section>
-<section id="named-entity-recognition">
-<span id="index-23"></span><span id="index-22"></span><h3>3.3 Named Entity Recognition<a class="headerlink" href="#named-entity-recognition" title="Link to this heading">#</a></h3>
-<p>The purpose of named entity recognition (NER) is self-explanatory; it extracts entities from data.</p>
+<p>The primary goal of a tokenizer is to break text into tokens. This is highly language dependent; in English, we use white space and punctuation as word and token separators, but this may not work in some languages. Since tokens are semantically useful units of text, a token is not necessarily the same as a word; in fact, some tokens may be pieces of words, or even symbols such as punctuation.</p>
+<p>For example, the following code uses <code class="docutils literal notranslate"><span class="pre">NLTK</span></code> to tokenize one of the texts from our UN SDG dataset. Note how not only words like “policy” but also numbers like “29”, suffixes like “-‘s”, and symbols like “(” and “%” have been separated into individual tokens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># download stopwords (if not already downloaded)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">29432</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Original text: &quot;</span><span class="si">{</span><span class="n">example</span><span class="si">}</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tokens:&#39;</span><span class="p">,</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">example</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original text: &quot;In the 29 cities included in the Observatory. Vasconcellos and Mendonga (2016) note that 49% of the spaces assigned to collective transport are used by buses, 7.5% by meters and 4.6% by urban trains. Thus, with 12.1 % of the space, clean transport (metro and train) carries 16% of the public system&#39;s passengers.&quot;
+
+Tokens: [&#39;In&#39;, &#39;the&#39;, &#39;29&#39;, &#39;cities&#39;, &#39;included&#39;, &#39;in&#39;, &#39;the&#39;, &#39;Observatory&#39;, &#39;.&#39;, &#39;Vasconcellos&#39;, &#39;and&#39;, &#39;Mendonga&#39;, &#39;(&#39;, &#39;2016&#39;, &#39;)&#39;, &#39;note&#39;, &#39;that&#39;, &#39;49&#39;, &#39;%&#39;, &#39;of&#39;, &#39;the&#39;, &#39;spaces&#39;, &#39;assigned&#39;, &#39;to&#39;, &#39;collective&#39;, &#39;transport&#39;, &#39;are&#39;, &#39;used&#39;, &#39;by&#39;, &#39;buses&#39;, &#39;,&#39;, &#39;7.5&#39;, &#39;%&#39;, &#39;by&#39;, &#39;meters&#39;, &#39;and&#39;, &#39;4.6&#39;, &#39;%&#39;, &#39;by&#39;, &#39;urban&#39;, &#39;trains&#39;, &#39;.&#39;, &#39;Thus&#39;, &#39;,&#39;, &#39;with&#39;, &#39;12.1&#39;, &#39;%&#39;, &#39;of&#39;, &#39;the&#39;, &#39;space&#39;, &#39;,&#39;, &#39;clean&#39;, &#39;transport&#39;, &#39;(&#39;, &#39;metro&#39;, &#39;and&#39;, &#39;train&#39;, &#39;)&#39;, &#39;carries&#39;, &#39;16&#39;, &#39;%&#39;, &#39;of&#39;, &#39;the&#39;, &#39;public&#39;, &#39;system&#39;, &quot;&#39;s&quot;, &#39;passengers&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 <div class="admonition-exercise-1-7 admonition">
 <p class="admonition-title">Exercise 1.7</p>
+<p>Modify the above code to tokenize your own text. Does anything surprise you about how the tokenizer breaks up the text? What makes the resultant tokens semantically useful or meaningful?</p>
+</div>
+<p>For the purposes of building ML models, there are several things that tokenizers track in addition to creating the tokens themselves. Tokenizers track <em>features</em>, or the frequency of occurrence of each individual token (normalized or not). They also produce a <em>sample</em>, or a vector of all the token frequencies for a given document.</p>
+<p>When a tokenizer vectorizes a corpus, it counts the occurrences of tokens in each document, normalizes and weights these occurrences, and constructs an n-gram or other representation of the text, which is discussed in the <a class="reference internal" href="sec2_transform_features.html"><span class="std std-doc">next section</span></a>.</p>
+</section>
+<section id="named-entity-recognition">
+<span id="index-23"></span><span id="index-22"></span><h3>1.3.3 Named Entity Recognition<a class="headerlink" href="#named-entity-recognition" title="Link to this heading">#</a></h3>
+<p>The purpose of named entity recognition (NER) is self-explanatory; it extracts entities from data.</p>
+<div class="admonition-exercise-1-8 admonition">
+<p class="admonition-title">Exercise 1.8</p>
 <p>Try the Allen NLP NER demo found at <a class="reference external" href="https://demo.allennlp.org/named-entity-recognition/named-entity-recognition">https://demo.allennlp.org/named-entity-recognition/named-entity-recognition</a>. Use the below sentence in the demo. Which phrases are labeled as named entities?</p>
 <p><em>‘The Israel Oceanographic and Limnological Research station monitors the quantity and quality of water along the coastline of the Mediterranean Sea. The Nature and Parks Authority (NPA) monitors water quality in rivers on behalf of the MoEP. Mekorot and local authorities monitor drinking water quality under the supervision of the Ministry of Health. The Ministry of Health monitors effluent quality prior to its use in the agricultural sector.’</em></p>
 <p>Now use <code class="docutils literal notranslate"><span class="pre">text.lower()</span></code> to make the entire sentence lowercase and use that as an input into the Allen NLP NER. Which phrases are now labeled as named entities?</p>
@@ -977,7 +1095,7 @@ Using lower(): groß
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedures">1.3 Procedures</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">1.3.1 Stemming</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizers">1.3.2 Tokenizers</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">3.3 Named Entity Recognition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">1.3.3 Named Entity Recognition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-operations">1.3.4 String Operations</a></li>
 </ul>
 </li>
