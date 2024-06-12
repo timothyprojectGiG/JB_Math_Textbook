@@ -1,1 +1,1 @@
-# COMPLEX SYSTEMS Wheaton College Team
+# COMPLEX SYSTEMS - Wheaton College Team

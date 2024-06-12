@@ -1,4 +1,4 @@
-# EXPLORATORY DATA ANALYSIS Peter Jantsch
+# EXPLORATORY DATA ANALYSIS - Peter Jantsch
 
 ## Exploratory Data Analysis
 :::{note}
