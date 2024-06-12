@@ -1,0 +1,1 @@
+# APPLIED CALCULUS FOR DAILY LIFE - Wheaton College Team
