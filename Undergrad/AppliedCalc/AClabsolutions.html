@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=73a372f1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=07d05eac" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
@@ -65,7 +65,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8. CALCULUS - Inne Singgih" href="../../Calc.html" />
-    <link rel="prev" title="7.14. JNB Lab: Calculus of Entropy in Daily Life" href="AClab.html" />
+    <link rel="prev" title="7.14. JNB Lab: Calculus of Entropy in Daily Life and Monte Carlo Simulations" href="AClab.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -241,7 +241,7 @@
 <li class="toctree-l2"><a class="reference internal" href="income.html">7.11. 11. Integral Test and Income Streams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ode.html">7.12. 12. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solutions.html">7.13. Solutions to Exercises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AClab.html">7.14. JNB Lab: Calculus of Entropy in Daily Life</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AClab.html">7.14. JNB Lab: Calculus of Entropy in Daily Life and Monte Carlo Simulations</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">7.15. JNB Lab Solutions</a></li>
 </ul>
 </details></li>
@@ -715,6 +715,313 @@ Contribution to Entropy by Exceptional Students= 0.27849303712298606
 </div>
 </div>
 </div>
+<p><b> Exercise 5.1</b></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">num_cars</span><span class="o">=</span><span class="mi">10</span>
+
+<span class="n">k</span><span class="o">=</span><span class="mf">.1</span> <span class="c1">#mean time between arrivals (in minutes)</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="c1">#######PROCESS ORDERING DATA#######</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">15</span><span class="o">+</span><span class="mi">30</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;order_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_cars</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="mi">60</span><span class="o">/</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">15</span><span class="o">+</span><span class="mi">30</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;order_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span>
+   
+<span class="c1">####### PROCESS PAYING DATA #######  </span>
+<span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">.5</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span><span class="mi">5</span>  <span class="c1">#pay by cash</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">15</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">+</span><span class="mi">5</span>  <span class="c1">#pay by credit</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span> 
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span>
+        
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_cars</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">.5</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">+</span><span class="mi">5</span>  <span class="c1">#pay by cash</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">15</span><span class="o">**</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">+</span><span class="mi">5</span>  <span class="c1">#pay by credit</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span>
+    
+<span class="c1">###### PROCESS PICKUP DATA #######</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span> <span class="mi">30</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">]</span> 
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span>
+        
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_cars</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span> <span class="mi">30</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">,</span><span class="s2">&quot;order_system_time&quot;</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">,</span><span class="s2">&quot;pay_system_time&quot;</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">,</span><span class="s2">&quot;pickup_system_time&quot;</span><span class="p">,</span> <span class="s2">&quot;finish_time&quot;</span><span class="p">]]</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>order_arrival_time</th>
+      <th>time_to_order</th>
+      <th>order_system_time</th>
+      <th>pay_arrival_time</th>
+      <th>time_to_pay</th>
+      <th>pay_system_time</th>
+      <th>pickup_arrival_time</th>
+      <th>time_to_pickup</th>
+      <th>pickup_system_time</th>
+      <th>finish_time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>43.602984</td>
+      <td>43.602984</td>
+      <td>43.602984</td>
+      <td>7.556623</td>
+      <td>7.556623</td>
+      <td>51.159607</td>
+      <td>65.477791</td>
+      <td>65.477791</td>
+      <td>116.637398</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>481.388415</td>
+      <td>33.366122</td>
+      <td>33.366122</td>
+      <td>514.754537</td>
+      <td>6.231221</td>
+      <td>6.231221</td>
+      <td>520.985758</td>
+      <td>56.592074</td>
+      <td>56.592074</td>
+      <td>577.577832</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1219.912249</td>
+      <td>41.477045</td>
+      <td>41.477045</td>
+      <td>1261.389293</td>
+      <td>23.202241</td>
+      <td>23.202241</td>
+      <td>1284.591534</td>
+      <td>58.655755</td>
+      <td>58.655755</td>
+      <td>1343.247289</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1294.706715</td>
+      <td>30.565060</td>
+      <td>30.565060</td>
+      <td>1325.271775</td>
+      <td>12.672773</td>
+      <td>12.672773</td>
+      <td>1337.944548</td>
+      <td>43.237563</td>
+      <td>48.540305</td>
+      <td>1386.484852</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1683.852787</td>
+      <td>43.093286</td>
+      <td>43.093286</td>
+      <td>1726.946073</td>
+      <td>6.338934</td>
+      <td>6.338934</td>
+      <td>1733.285006</td>
+      <td>82.937953</td>
+      <td>82.937953</td>
+      <td>1816.222959</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2240.226570</td>
+      <td>43.522066</td>
+      <td>43.522066</td>
+      <td>2283.748635</td>
+      <td>16.409112</td>
+      <td>16.409112</td>
+      <td>2300.157747</td>
+      <td>51.509599</td>
+      <td>51.509599</td>
+      <td>2351.667346</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2859.137294</td>
+      <td>39.779653</td>
+      <td>39.779653</td>
+      <td>2898.916947</td>
+      <td>6.035139</td>
+      <td>6.035139</td>
+      <td>2904.952086</td>
+      <td>57.808210</td>
+      <td>57.808210</td>
+      <td>2962.760296</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>4292.462366</td>
+      <td>27.259678</td>
+      <td>27.259678</td>
+      <td>4319.722044</td>
+      <td>23.996465</td>
+      <td>23.996465</td>
+      <td>4343.718509</td>
+      <td>76.043934</td>
+      <td>76.043934</td>
+      <td>4419.762443</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>4423.265534</td>
+      <td>35.461872</td>
+      <td>35.461872</td>
+      <td>4458.727406</td>
+      <td>34.086612</td>
+      <td>34.086612</td>
+      <td>4492.814018</td>
+      <td>76.186779</td>
+      <td>76.186779</td>
+      <td>4569.000797</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>5183.852133</td>
+      <td>22.406112</td>
+      <td>22.406112</td>
+      <td>5206.258245</td>
+      <td>8.030864</td>
+      <td>8.030864</td>
+      <td>5214.289109</td>
+      <td>37.802962</td>
+      <td>37.802962</td>
+      <td>5252.092071</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">graph</span><span class="p">(</span><span class="n">num_cars</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">k</span><span class="o">=</span><span class="n">k</span> <span class="c1">#mean time between arrivals (in minutes)</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="c1">#######PROCESS ORDERING DATA#######</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">15</span><span class="o">+</span><span class="mi">30</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;order_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_cars</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="mi">60</span><span class="o">/</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">15</span><span class="o">+</span><span class="mi">30</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_order&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;order_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;order_arrival_time&quot;</span><span class="p">]</span>
+
+    <span class="c1">####### PROCESS PAYING DATA #######  </span>
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">.5</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span><span class="mi">5</span>  <span class="c1">#pay by cash</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">15</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">+</span><span class="mi">5</span>  <span class="c1">#pay by credit</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span> 
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_cars</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">.5</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">+</span><span class="mi">5</span>  <span class="c1">#pay by cash</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">15</span><span class="o">**</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">+</span><span class="mi">5</span>  <span class="c1">#pay by credit</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pay&quot;</span><span class="p">]</span> <span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pay_arrival_time&quot;</span><span class="p">]</span>
+
+    <span class="c1">###### PROCESS PICKUP DATA #######</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span> <span class="mi">30</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">]</span> 
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span>
+        
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_cars</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span> <span class="mi">30</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;time_to_pickup&quot;</span><span class="p">]</span> <span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;finish_time&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;pickup_arrival_time&quot;</span><span class="p">]</span>
+
+
+    
+    <span class="n">system_mean</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;order_system_time&quot;</span><span class="p">])</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;pay_system_time&quot;</span><span class="p">])</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;pickup_system_time&quot;</span><span class="p">]))</span><span class="o">/</span><span class="mi">3</span>
+        
+    <span class="k">return</span> <span class="n">system_mean</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">k</span><span class="o">=</span><span class="mf">.1</span><span class="o">+</span><span class="mf">.1</span><span class="o">*</span><span class="n">n</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="s2">&quot;k&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">k</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="s2">&quot;ave_system_time&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">graph</span><span class="p">(</span><span class="n">num_cars</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graph of k vs ave_system_time</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">],</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;ave_system_time&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;mean time between arrivals in minutes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;mean time in system (seconds)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;mean time in system (seconds)&#39;)
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/b45735afe821de982631869e0f1506e891c7c55b8733bfbf51acd50ac91913fe.png"><img alt="../../_images/b45735afe821de982631869e0f1506e891c7c55b8733bfbf51acd50ac91913fe.png" src="../../_images/b45735afe821de982631869e0f1506e891c7c55b8733bfbf51acd50ac91913fe.png" style="width: 710px; height: 411px;" /></a>
+</div>
+</div>
+<p>Note:  This type of analysis can be done using an Excel spreadsheet.  For example, see <a class="reference external" href="https://docs.google.com/spreadsheets/d/1JPq2UfIWMTHizAq6_gH9WYm_qXZodi7v/edit?usp=sharing&amp;amp;ouid=101192945680365451790&amp;amp;rtpof=true&amp;amp;sd=true">https://docs.google.com/spreadsheets/d/1JPq2UfIWMTHizAq6_gH9WYm_qXZodi7v/edit?usp=sharing&amp;ouid=101192945680365451790&amp;rtpof=true&amp;sd=true</a></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -753,7 +1060,7 @@ Contribution to Entropy by Exceptional Students= 0.27849303712298606
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7.14. </span>JNB Lab: Calculus of Entropy in Daily Life</p>
+        <p class="prev-next-title"><span class="section-number">7.14. </span>JNB Lab: Calculus of Entropy in Daily Life and Monte Carlo Simulations</p>
       </div>
     </a>
     <a class="right-next"
