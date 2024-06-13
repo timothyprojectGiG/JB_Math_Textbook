@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=73a372f1" />
@@ -878,8 +878,8 @@ document.write(`
 </div>
 <p>Now let’s compare this to the theory. What does the Central Limit Theorem tell us?</p>
 <p>If the sample size is “large enough”, then the sample mean, considered as a random variable, is approximately normally distributed with the same mean as the population and with standard deviation equal to the population standard deviation divided by the sample size. In mathematical language,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a5e60bc3-3bf9-49ce-8505-bdbd2eb4cf43">
-<span class="eqno">(6.1)<a class="headerlink" href="#equation-a5e60bc3-3bf9-49ce-8505-bdbd2eb4cf43" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-125501f8-cbeb-4a2d-96b2-539691180018">
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-125501f8-cbeb-4a2d-96b2-539691180018" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \displaystyle \overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right),
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\overline{X}\)</span> is the sample mean, <span class="math notranslate nohighlight">\(\mu\)</span> is the population mean, <span class="math notranslate nohighlight">\(\sigma\)</span> is the population standard deviation, and <span class="math notranslate nohighlight">\(n\)</span> is the sample size.</p>
@@ -1141,13 +1141,13 @@ if (outputEl) {{
 </div>
 </div>
 <p>Now we know where <span class="math notranslate nohighlight">\(\overline X\)</span> is likely to fall in relation to <span class="math notranslate nohighlight">\(\mu\)</span>. We can express what we see in the graph as a probability:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5140f3f7-e45c-46db-b347-3a25185b4534">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-5140f3f7-e45c-46db-b347-3a25185b4534" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-258728ad-2dc9-4160-ae90-30de5b928211">
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-258728ad-2dc9-4160-ae90-30de5b928211" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P\left(\mu-1.96 \frac{\sigma}{\sqrt{n}} \le \overline X \le \mu + 1.96  \frac{\sigma}{\sqrt{n}}\right) = .95.
 \end{equation}\]</div>
 <p>With a little bit of algebraic manipulation, we can write this as an interval for <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ef608057-4380-4165-a117-702366c0401c">
-<span class="eqno">(6.3)<a class="headerlink" href="#equation-ef608057-4380-4165-a117-702366c0401c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a98b84c3-6eca-4757-8810-1c9fac28c557">
+<span class="eqno">(6.3)<a class="headerlink" href="#equation-a98b84c3-6eca-4757-8810-1c9fac28c557" title="Permalink to this equation">#</a></span>\[\begin{equation}
     P\left(\overline{X}-1.96 \frac{\sigma}{\sqrt{n}} \le \mu \le \overline{X} + 1.96  \frac{\sigma}{\sqrt{n}}\right) = .95.
 \end{equation}\]</div>
 <p>In the real world, we’ll have a value of <span class="math notranslate nohighlight">\(\overline{X}\)</span>, and we want to know where <span class="math notranslate nohighlight">\(\mu\)</span> is. This second interval gives us exactly this! Look at what’s on the upper and lower side of the interval: (almost) all things we can calculate from the data, like <span class="math notranslate nohighlight">\(\overline X\)</span> and <span class="math notranslate nohighlight">\(n\)</span> (we’ll discuss how to handle the <span class="math notranslate nohighlight">\(\sigma\)</span> in a moment). This gives an interval for <span class="math notranslate nohighlight">\(\mu\)</span>, the population mean that we can’t calculate but want to know.</p>
@@ -1526,10 +1526,8 @@ if (outputEl) {{
 <section id="the-central-limit-theorem-for-discrete-numerical-random-variables">
 <h2><span class="section-number">6.2.6. </span>The Central Limit Theorem for Discrete Numerical Random Variables<a class="headerlink" href="#the-central-limit-theorem-for-discrete-numerical-random-variables" title="Link to this heading">#</a></h2>
 <p>Finally, we want to note that this theory holds for any numerical distribution, even one that is discrete!  In the widget below, we demonstrate the CLT for discrete distributions by approximating the sample average of a number of dice rolls.</p>
-<figure>
-    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/2-Dice-Icon.svg/240px-2-Dice-Icon.svg.png' alt='Dice icon by Steaphan Greene, licensed under CC BY-SA 3.0.'>
-    <figcaption>Dice icon by Steaphan Greene, licensed under CC BY-SA 3.0.</figcaption>
-</figure>
+<a class="reference internal image-reference" href="../../_images/dice.svg"><img alt="Dice icon by Steaphan Greene, licensed under CC BY-SA 3.0." src="../../_images/dice.svg" width="150px" /></a>
+<p><em>Dice icon by Steaphan Greene, licensed under CC BY-SA 3.0.</em></p>
 <p>Given a sample size, the widget simulates rolling a die that many times and then takes the average of the rolls. It does this 10000 times and then plots the histogram of the resulting averages, overlaid with the normal distribution with the same mean and standard deviation.</p>
 <p>Drag the slider to select different sample sizes, and click the labels in the legend to hide or show different parts of the graph. Notice how the histogram of the averages fits the normal distribution more closely as the sample size increases.</p>
 <div class="cell tag_hide-input docutils container">
@@ -1777,7 +1775,7 @@ if (outputEl) {{
   <div class="footer-item">
     
 <p class="component-author">
-By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and  Claire Wagner, Editors
+By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and Claire Wagner, Editors
 </p>
 
   </div>
