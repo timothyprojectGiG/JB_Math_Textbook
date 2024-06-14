@@ -628,7 +628,7 @@ document.write(`
 <p>Source: Chicago Data Portal,</p>
 <p><a class="reference external" href="https://data.cityofchicago.org/Education/Chicago-Public-Schools-Progress-Report-Cards-2011-/9xs2-f89t">https://data.cityofchicago.org/Education/Chicago-Public-Schools-Progress-Report-Cards-2011-/9xs2-f89t</a></p>
 <p>The figure below shows a scatterplot  of <span class="math notranslate nohighlight">\(n= 83 \)</span> data points partly reproduced in the above table together with the OLS regression line.</p>
-<a class="reference internal image-reference" href="../../../_images/fig11.png"><img alt="../../../_images/fig11.png" src="../../../_images/fig11.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/fig110.png"><img alt="../../../_images/fig110.png" src="../../../_images/fig110.png" style="width: 200px;" /></a>
 <section id="least-squares-solutions">
 <span id="index-1"></span><h2><span class="section-number">10.2.1. </span>Least-Squares Solutions<a class="headerlink" href="#least-squares-solutions" title="Link to this heading">#</a></h2>
 <p>Consider a collection of <span class="math notranslate nohighlight">\(n\)</span> data points <span class="math notranslate nohighlight">\((x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span> We seek the line <span class="math notranslate nohighlight">\(y=c_0+c_1x\)</span> that best fits these data, where <span class="math notranslate nohighlight">\(c_0\)</span> is the <span class="math notranslate nohighlight">\(y\)</span>-intercept of the line and <span class="math notranslate nohighlight">\(c_1\)</span> the slope of the line. As shown in the figure below, an OLS loss function <span class="math notranslate nohighlight">\(J(c_0,c_1)\)</span> sums the squared vertical separations between the data points <span class="math notranslate nohighlight">\((x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)\)</span> and the line <span class="math notranslate nohighlight">\(y=c_0+c_1x\)</span>.</p>
@@ -750,8 +750,8 @@ c_1
 \end{pmatrix}.
 \end{align*}\]</div>
 <p>The normal equations are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f29b775d-9c87-4511-8555-a51c62ac9168">
-<span class="eqno">(10.1)<a class="headerlink" href="#equation-f29b775d-9c87-4511-8555-a51c62ac9168" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-524936ef-257d-4e3b-b285-4fb4e8b8ba5f">
+<span class="eqno">(10.1)<a class="headerlink" href="#equation-524936ef-257d-4e3b-b285-4fb4e8b8ba5f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 \begin{pmatrix}
 1&amp; 1&amp;1&amp;1\\
 -1&amp;0&amp;1&amp;2
@@ -852,8 +852,8 @@ J(c_0,c_1)&amp;=\tfrac{1}{2}[\bigl(1-(c_0-c_1)\bigr)^2+(0-c_0)^2+\bigl(2-(c_0+c_
 \]</div>
 <p>Solving this system, we obtain <span class="math notranslate nohighlight">\(c_0=11/10\)</span> and <span class="math notranslate nohighlight">\(c_1=4/5\)</span>.</p>
 <p>The system used to find these critical values is equivalent to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-926a70b3-f7f0-497b-b516-e773b4e58647">
-<span class="eqno">(10.2)<a class="headerlink" href="#equation-926a70b3-f7f0-497b-b516-e773b4e58647" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-66053642-aa45-42d3-b8e5-5bd045122869">
+<span class="eqno">(10.2)<a class="headerlink" href="#equation-66053642-aa45-42d3-b8e5-5bd045122869" title="Permalink to this equation">#</a></span>\[\begin{align}
 %\scriptstyle
 \begin{pmatrix}
 %\scriptstyle
@@ -902,7 +902,7 @@ c_1
 </div>
 <p>To say that solving the normal equations is mathematically equivalent to gradient-based optimization of the OLS loss function does not imply that the normal equations offer the best numerical method for optimization of the loss function [Epperly 2022]. Beyond the scope of this Module is an assessment of different numerical approaches such as gradient descent and its variants including the Adam method [Sun et. al. 2019], matrix factorizations such as <span class="math notranslate nohighlight">\(SVD\)</span> or <span class="math notranslate nohighlight">\(QR\)</span> [Aggarwal 2020], and mean-centering and standardizing data [Toth 2020].</p>
 <p>In addition to facilitating numerical analysis, mean-centering simplifies the linear algebra approach. Mean-centered data is obtained from a collection of data points by replacing the original dataset <span class="math notranslate nohighlight">\((x_i,y_i)\)</span> with the data points <span class="math notranslate nohighlight">\((x_i-\bar{x},y_i-\bar{y})\)</span>, <span class="math notranslate nohighlight">\(i=1, \dots n\)</span>, where <span class="math notranslate nohighlight">\(\bar{x}\)</span> and <span class="math notranslate nohighlight">\(\bar{y}\)</span> are the respective means of the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates of the original data. One can show that for mean-centered data, <span class="math notranslate nohighlight">\(\hat{c}_0=0\)</span>, and the regression line is <span class="math notranslate nohighlight">\(y = \hat{c}_1 x\)</span>. Let <span class="math notranslate nohighlight">\(\mathbf{x}=(x_1,x_2,...,x_n)^{tr}\)</span>. For mean-centered data, the regression vector <span class="math notranslate nohighlight">\({\bf \hat{y}}=\hat{c}_1\mathbf{x}\)</span> is obtained by projecting the vector <span class="math notranslate nohighlight">\({\bf y}\)</span> directly onto the vector <span class="math notranslate nohighlight">\({\bf x}\)</span> as shown in the figure below.</p>
-<a class="reference internal image-reference" href="../../../_images/fig41.png"><img alt="../../../_images/fig41.png" src="../../../_images/fig41.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/fig42.png"><img alt="../../../_images/fig42.png" src="../../../_images/fig42.png" style="width: 200px;" /></a>
 <p>The <i>variation equation</i> states that the total variation in the y-values is the sum of the explained variation (variation in the corresponding <span class="math notranslate nohighlight">\(y\)</span>-values on the regression line) and the unexplained variation (the sum of squared residuals or twice the value of the loss function <span class="math notranslate nohighlight">\(J\)</span>). For mean-centered data, the total variation is <span class="math notranslate nohighlight">\(\mid\mid \mathbf{y}\mid\mid^2\)</span>, the explained variation is <span class="math notranslate nohighlight">\(\mid\mid \hat{c}_1\mathbf{x}\mid\mid^2\)</span> and the unexplained variation is <span class="math notranslate nohighlight">\(\mid\mid \mathbf{y} -\hat{c}_1 \mathbf{x}\mid\mid^2\)</span>. In other words, the variation equation for mean-centered data is simply the Pythagorean theorem.</p>
 </section>
 </section>
