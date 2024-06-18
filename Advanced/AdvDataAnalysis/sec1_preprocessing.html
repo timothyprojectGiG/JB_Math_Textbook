@@ -577,7 +577,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-operations">14.2.3.4. 1.3.4 String Operations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">14.2.4. 1.4 More Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -622,11 +621,10 @@ document.write(`
 <p>Then, from a computational perspective, we can take the rules from these linguistics aspects and transform linguistic knowledge into rule-based and/or ML-based algorithms to solve problems related to natural language processing.</p>
 <div class="admonition-exercise-1-1 admonition">
 <p class="admonition-title">Exercise 1.1</p>
-<p>Explore the Allen NLP demos found at <a class="reference external" href="https://demo.allennlp.org/sentiment-analysis/glove-sentiment-analysis">https://demo.allennlp.org/sentiment-analysis/glove-sentiment-analysis</a>. Choose either of the two sentiment analysis algorithms and use any of the provided example sentences.</p>
+<p>Explore the Lexalytics NLP demo found at <a class="reference external" href="https://www.lexalytics.com/nlp-demo/">https://www.lexalytics.com/nlp-demo/</a>. Choose any of the provided packs and look at the provided sample texts.</p>
 <ul class="simple">
-<li><p>Look under CLI Output. How do the algorithms take the example input sentence and transform it?</p></li>
-<li><p>Look under Model Interpretations and Model Attacks, which visualize the most important words in the sentence. Which words seem to be important, and which ones are often removed?</p></li>
-<li><p>Try some of your own sentences. Does the algorithm seem to be accurate?</p></li>
+<li><p>Look under Document and Themes. What words and phrases does the model highlight for each sample?</p></li>
+<li><p>Look under Topics. What topics does the model detect in each sample? How accurate and comprehensive is its list?</p></li>
 </ul>
 </div>
 <section id="tasks">
@@ -648,9 +646,9 @@ document.write(`
 </ul>
 <div class="admonition-exercise-1-2 admonition">
 <p class="admonition-title">Exercise 1.2</p>
-<p>Explore another Allen NLP demo found at <a class="reference external" href="https://demo.allennlp.org/next-token-lm">https://demo.allennlp.org/next-token-lm</a>.</p>
+<p>Take another look at the Lexalytics NLP demo found at <a class="reference external" href="https://www.lexalytics.com/nlp-demo/">https://www.lexalytics.com/nlp-demo/</a>. Choose any of the provided packs and look at the provided sample texts.</p>
 <ul class="simple">
-<li><p>Try some of the provided example sentences, and give the probabilities for the sentences with the highest score.</p></li>
+<li><p>Look under Document and Themes, which present the model’s sentiment analysis. What sentiment scores does the model give to the various words and phrases it has extracted? Do you agree or disagree with its verdicts?</p></li>
 </ul>
 </div>
 <p>Looking at the UN SDG dataset, we find that it includes positive or negative labels. Since each text is classified with a single goal, positive labels indicate the agreement of that text with the goal, while negative labels indicate disagreement. We use <code class="docutils literal notranslate"><span class="pre">sum()</span></code> to sum the negative labels and the positive labels:</p>
@@ -905,22 +903,22 @@ dtype: float64
 <section id="tokenizers">
 <span id="index-21"></span><h3><span class="section-number">14.2.3.2. </span>1.3.2 Tokenizers<a class="headerlink" href="#tokenizers" title="Link to this heading">#</a></h3>
 <p>The primary goal of a tokenizer is to break text into tokens. This is highly language dependent; in English, we use white space and punctuation as word and token separators, but this may not work in some languages. Since tokens are semantically useful units of text, a token is not necessarily the same as a word; in fact, some tokens may be pieces of words, or even symbols such as punctuation.</p>
-<p>For example, the following code uses <code class="docutils literal notranslate"><span class="pre">NLTK</span></code> to tokenize one of the texts from our UN SDG dataset. Note how not only words like “policy” but also numbers like “29”, suffixes like “-‘s”, and symbols like “(” and “%” have been separated into individual tokens.</p>
+<p>For example, the following code uses <code class="docutils literal notranslate"><span class="pre">NLTK</span></code> to tokenize one of the texts from our UN SDG dataset. Note how not only words like “policy” but also numbers like “70”, suffixes like “-‘s”, and symbols like “%” and “(” have been separated into individual tokens.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># download stopwords (if not already downloaded)</span>
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">example</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">29432</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span>
+<span class="n">example</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2425</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Original text: &quot;</span><span class="si">{</span><span class="n">example</span><span class="si">}</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tokens:&#39;</span><span class="p">,</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">example</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original text: &quot;In the 29 cities included in the Observatory. Vasconcellos and Mendonga (2016) note that 49% of the spaces assigned to collective transport are used by buses, 7.5% by meters and 4.6% by urban trains. Thus, with 12.1 % of the space, clean transport (metro and train) carries 16% of the public system&#39;s passengers.&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original text: &quot;About 70% of them have reported at least one trade policy targeting women&#39;s economic empowerment. Overall, in four years, almost half of the WTO membership has implemented trade policies in support of women (at least one). It simply provides examples of trade policies as reported by WTO members themselves.&quot;
 
-Tokens: [&#39;In&#39;, &#39;the&#39;, &#39;29&#39;, &#39;cities&#39;, &#39;included&#39;, &#39;in&#39;, &#39;the&#39;, &#39;Observatory&#39;, &#39;.&#39;, &#39;Vasconcellos&#39;, &#39;and&#39;, &#39;Mendonga&#39;, &#39;(&#39;, &#39;2016&#39;, &#39;)&#39;, &#39;note&#39;, &#39;that&#39;, &#39;49&#39;, &#39;%&#39;, &#39;of&#39;, &#39;the&#39;, &#39;spaces&#39;, &#39;assigned&#39;, &#39;to&#39;, &#39;collective&#39;, &#39;transport&#39;, &#39;are&#39;, &#39;used&#39;, &#39;by&#39;, &#39;buses&#39;, &#39;,&#39;, &#39;7.5&#39;, &#39;%&#39;, &#39;by&#39;, &#39;meters&#39;, &#39;and&#39;, &#39;4.6&#39;, &#39;%&#39;, &#39;by&#39;, &#39;urban&#39;, &#39;trains&#39;, &#39;.&#39;, &#39;Thus&#39;, &#39;,&#39;, &#39;with&#39;, &#39;12.1&#39;, &#39;%&#39;, &#39;of&#39;, &#39;the&#39;, &#39;space&#39;, &#39;,&#39;, &#39;clean&#39;, &#39;transport&#39;, &#39;(&#39;, &#39;metro&#39;, &#39;and&#39;, &#39;train&#39;, &#39;)&#39;, &#39;carries&#39;, &#39;16&#39;, &#39;%&#39;, &#39;of&#39;, &#39;the&#39;, &#39;public&#39;, &#39;system&#39;, &quot;&#39;s&quot;, &#39;passengers&#39;, &#39;.&#39;]
+Tokens: [&#39;About&#39;, &#39;70&#39;, &#39;%&#39;, &#39;of&#39;, &#39;them&#39;, &#39;have&#39;, &#39;reported&#39;, &#39;at&#39;, &#39;least&#39;, &#39;one&#39;, &#39;trade&#39;, &#39;policy&#39;, &#39;targeting&#39;, &#39;women&#39;, &quot;&#39;s&quot;, &#39;economic&#39;, &#39;empowerment&#39;, &#39;.&#39;, &#39;Overall&#39;, &#39;,&#39;, &#39;in&#39;, &#39;four&#39;, &#39;years&#39;, &#39;,&#39;, &#39;almost&#39;, &#39;half&#39;, &#39;of&#39;, &#39;the&#39;, &#39;WTO&#39;, &#39;membership&#39;, &#39;has&#39;, &#39;implemented&#39;, &#39;trade&#39;, &#39;policies&#39;, &#39;in&#39;, &#39;support&#39;, &#39;of&#39;, &#39;women&#39;, &#39;(&#39;, &#39;at&#39;, &#39;least&#39;, &#39;one&#39;, &#39;)&#39;, &#39;.&#39;, &#39;It&#39;, &#39;simply&#39;, &#39;provides&#39;, &#39;examples&#39;, &#39;of&#39;, &#39;trade&#39;, &#39;policies&#39;, &#39;as&#39;, &#39;reported&#39;, &#39;by&#39;, &#39;WTO&#39;, &#39;members&#39;, &#39;themselves&#39;, &#39;.&#39;]
 </pre></div>
 </div>
 </div>
@@ -941,77 +939,118 @@ Tokens: [&#39;In&#39;, &#39;the&#39;, &#39;29&#39;, &#39;cities&#39;, &#39;inclu
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment the next line to download the &#39;en_core_web_sm&#39; pipeline</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## uncomment the next line to download the &#39;en_core_web_sm&#39; pipeline</span>
 <span class="c1"># ! python3 -m spacy download en_core_web_sm</span>
 
 <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">8246</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">5707</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
 <span class="n">spacy</span><span class="o">.</span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">Vanuatu: 
+<div class="output text_html"><span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">Source: 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    OECD Development Centre
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+, based on 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    IEA
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ (2015a), 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    World Energy Outlook 2015
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+, 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    IEA
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ (
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    2015b
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+), 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    World Energy Outlook
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ 
 <mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
     2015
     <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
 </mark>
- 
-<mark class="entity" style="background: #ff8197; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Article IV
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LAW</span>
+: Special Report on 
+<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Southeast Asia
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
 </mark>
- consultation and request for disbursement under the rapid credit facility and purchase under the rapid financing instrument—press release, staff report, and statement by the Executive Director for 
-<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Vanuatu
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
-</mark>
-', 
+. By definition, 
 <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    IMF Country Report
+    TPES
     <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
 </mark>
- No. Press release: 
+ is equal to 
 <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    IMF Executive Board
+    Total Primary Energy Demand
     <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
 </mark>
- approves 
-<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    US$8.7 million
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">MONEY</span>
+ (TPED), and includes power generation, other energy sector and total final energy consumption (
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    IEA
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
 </mark>
- disbursement under the rapid credit facility for 
+, 2015a). 
 <mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Dominica
+    China
     <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
 </mark>
-', 
-<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    28 October 2015
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+ will continue to account for the largest share of the energy demand in 
+<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Emerging Asia
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
 </mark>
-, Press Release No. Vanuatu: 
-<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    2016
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
-</mark>
- 
-<mark class="entity" style="background: #ff8197; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Article IV
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LAW</span>
-</mark>
- consultation - press release, staff report: and statement by the Executive Director for 
-<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Vanuatu
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
-</mark>
-', 
+, even though its share of the region’s 
 <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    IMF Country Report
+    TPES
     <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
 </mark>
- No. Dominica: Selected issues'.</div></span></div></div>
+ decreases from 
+<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    69%
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERCENT</span>
+</mark>
+ in 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    2013
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+ to 
+<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    57%
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERCENT</span>
+</mark>
+ in 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    2040
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+ owing to the strong growth in energy demand from 
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    ASEAN
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ and 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    India
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+.</div></span></div></div>
 </div>
 <p>At first glance, the meaning of these labels may not be clear. We can use the <code class="docutils literal notranslate"><span class="pre">spacy.explain()</span></code> function to learn more about the meaning of each label:</p>
 <div class="cell docutils container">
@@ -1023,295 +1062,111 @@ Tokens: [&#39;In&#39;, &#39;the&#39;, &#39;29&#39;, &#39;cities&#39;, &#39;inclu
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GPE: Countries, cities, states
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PERCENT: Percentage, including &quot;%&quot;
+GPE: Countries, cities, states
+LOC: Non-GPE locations, mountain ranges, bodies of water
 DATE: Absolute or relative dates or periods
-MONEY: Monetary values, including unit
 ORG: Companies, agencies, institutions, etc.
-PERSON: People, including fictional
-LAW: Named documents made into laws.
 </pre></div>
 </div>
 </div>
 </div>
-<p>In the example above, the trained model has automatically identified and classified various entities in the text. Notice how these entities include not only people, organizations, and places but also laws, dates, and amounts of money.</p>
+<p>In the example above, the trained model has automatically identified and classified various entities in the text. Notice how the types of entities range from countries and organizations to dates and percentages.</p>
 <div class="admonition-exercise-1-8 admonition">
 <p class="admonition-title">Exercise 1.8</p>
 <p>Use the following code to perform NER on a random sample from the UN SDG dataset. Rerun the code several times to get different samples. What types of entities does the model identify?</p>
-<p><code class="docutils literal notranslate"><span class="pre">doc</span> <span class="pre">=</span> <span class="pre">nlp(text_df['text'].sample(1).values[0])</span></code><br />
+<p><code class="docutils literal notranslate"><span class="pre">sample</span> <span class="pre">=</span> <span class="pre">nlp(text_df['text'].sample(1).values[0])</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">doc</span> <span class="pre">=</span> <span class="pre">nlp(sample)</span></code><br />
 <code class="docutils literal notranslate"><span class="pre">spacy.displacy.render(doc,</span> <span class="pre">style='ent',</span> <span class="pre">jupyter=True)</span></code></p>
 </div>
-<p>Although the trained model has correctly identified many of the named entities in this text, it has still made some mistakes. For example, although it correctly labels the first occurrence of the token <code class="docutils literal notranslate"><span class="pre">Dominica</span></code> as a <code class="docutils literal notranslate"><span class="pre">GPE</span></code> entity, it misses the second occurrence of the same token. Additionally, the model often relies on capitalization to identify entities. If we change the sample text to lowercase, notice how the model fails to recognize many of the entities that it previously identified.</p>
+<p>Although the trained model has correctly identified many of the named entities in this text, it has still made some mistakes. For example, it incorrectly labels “Total Primary Energy Demand” as an organization. Additionally, the model often relies on capitalization to identify entities. If we change the sample text to lowercase, notice how the model fails to recognize many of the entities that it previously identified.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">8246</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
 <span class="n">spacy</span><span class="o">.</span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">vanuatu: 
-<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    2015
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">CARDINAL</span>
-</mark>
- article iv consultation and request for disbursement under the rapid credit facility and purchase under the rapid financing instrument—press release, staff report, and statement by the executive director for vanuatu', imf country report no. press release: 
+<div class="output text_html"><span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">source: 
 <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    imf executive board
+    oecd development centre
     <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
 </mark>
- approves 
-<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    us$8.7 million
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">MONEY</span>
-</mark>
- disbursement under the rapid credit facility for dominica', 
+, based on iea (2015a), world energy outlook 
 <mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    28 october 2015
+    2015
     <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
 </mark>
-, press release no. vanuatu: 
-<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    2016
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">CARDINAL</span>
+, iea (
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    2015b
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
 </mark>
- article iv consultation - press release, staff report: and statement by the executive director for vanuatu', imf country report no. dominica: selected issues'.</div></span></div></div>
+), world energy outlook 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    2015
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+: special report on 
+<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    southeast asia
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
+</mark>
+. by definition, tpes is equal to total primary energy demand (tped), and includes power generation, other energy sector and total final energy consumption (iea, 2015a). 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    china
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+ will continue to account for the largest share of the energy demand in emerging 
+<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    asia
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
+</mark>
+, even though its share of the region’s tpes decreases from 
+<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    69%
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERCENT</span>
+</mark>
+ in 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    2013
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+ to 
+<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    57%
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERCENT</span>
+</mark>
+ in 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    2040
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+ owing to the strong growth in energy demand from 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    asean
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+ and 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    india
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+.</div></span></div></div>
 </div>
 <div class="admonition-exercise-1-9 admonition">
 <p class="admonition-title">Exercise 1.9</p>
-<p>Use the following code to perform NER on a random sample from the UN SDG dataset, first in the original case and then in lowercase. Rerun the code several times to get different samples. What mistakes does the model make? What types of entities does it tend to miss when the text is lowercase?</p>
-<p>Rerun the code several times to get different random samples. What types of entities does the model identify?</p>
-<p><code class="docutils literal notranslate"><span class="pre">doc</span> <span class="pre">=</span> <span class="pre">nlp(text_df['text'].sample(1).values[0])</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">spacy.displacy.render(doc,</span> <span class="pre">style='ent',</span> <span class="pre">jupyter=True)</span></code></p>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> 
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">8246</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
-<span class="n">spacy</span><span class="o">.</span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">8246</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-<span class="n">spacy</span><span class="o">.</span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">Vanuatu: 
-<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    2015
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
-</mark>
- 
-<mark class="entity" style="background: #ff8197; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Article IV
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LAW</span>
-</mark>
- consultation and request for disbursement under the rapid credit facility and purchase under the rapid financing instrument—press release, staff report, and statement by the Executive Director for 
-<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Vanuatu
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
-</mark>
-', 
-<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    IMF Country Report
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
-</mark>
- No. Press release: 
-<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    IMF Executive Board
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
-</mark>
- approves 
-<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    US$8.7 million
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">MONEY</span>
-</mark>
- disbursement under the rapid credit facility for 
-<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Dominica
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
-</mark>
-', 
-<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    28 October 2015
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
-</mark>
-, Press Release No. Vanuatu: 
-<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    2016
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
-</mark>
- 
-<mark class="entity" style="background: #ff8197; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Article IV
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LAW</span>
-</mark>
- consultation - press release, staff report: and statement by the Executive Director for 
-<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Vanuatu
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
-</mark>
-', 
-<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    IMF Country Report
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
-</mark>
- No. Dominica: Selected issues'.</div></span></div><div class="output text_html"><span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">vanuatu: 
-<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    2015
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">CARDINAL</span>
-</mark>
- article iv consultation and request for disbursement under the rapid credit facility and purchase under the rapid financing instrument—press release, staff report, and statement by the executive director for vanuatu', imf country report no. press release: 
-<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    imf executive board
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
-</mark>
- approves 
-<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    us$8.7 million
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">MONEY</span>
-</mark>
- disbursement under the rapid credit facility for dominica', 
-<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    28 october 2015
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
-</mark>
-, press release no. vanuatu: 
-<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    2016
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">CARDINAL</span>
-</mark>
- article iv consultation - press release, staff report: and statement by the executive director for vanuatu', imf country report no. dominica: selected issues'.</div></span></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
-<span class="n">i</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="n">spacy</span><span class="o">.</span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32601
-</pre></div>
-</div>
-<div class="output text_html"><span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">The adoption of public accountability institutions has become a crucial aspect of rule of law projects worldwide. This article focuses on 
-<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    National Human Rights Institutions
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
-</mark>
- (NHRIs) in order to explore the process by which such legal models and ideas are adopted and borrowed from global actors, and the reliance on regional and sub-regional networks. Through case studies of 
-<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Indonesia
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
-</mark>
- and 
-<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Myanmar
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
-</mark>
-, it examines several possible meanings and sources of ‘
-<mark class="entity" style="background: #c887fb; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Asian
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">NORP</span>
-</mark>
- legal transplants’, particularly the role of regional networks as sources of legitimacy. It argues that the sub-regional 
-<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    NHRI
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
-</mark>
- network in 
-<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Southeast Asia
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
-</mark>
- has evolved as an alternative site of legitimacy, and that the extent to which a 
-<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    NHRI
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
-</mark>
- in 
-<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    Southeast Asia
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
-</mark>
- may rely on it depends not only on the regime it operates under, but also on the relative position of the 
-<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    NHRI
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG</span>
-</mark>
- within the regional network.</div></span></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">32601</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-<span class="n">spacy</span><span class="o">.</span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">the adoption of public accountability institutions has become a crucial aspect of rule of law projects worldwide. this article focuses on national human rights institutions (
-<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    nhris
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
-</mark>
-) in order to explore the process by which such legal models and ideas are adopted and borrowed from global actors, and the reliance on regional and sub-regional networks. through case studies of 
-<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    indonesia
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
-</mark>
- and 
-<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    myanmar
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
-</mark>
-, it examines several possible meanings and sources of ‘asian legal transplants’, particularly the role of regional networks as sources of legitimacy. it argues that the sub-regional nhri network in 
-<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    southeast asia
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
-</mark>
- has evolved as an alternative site of legitimacy, and that the extent to which a nhri in 
-<mark class="entity" style="background: #ff9561; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
-    southeast asia
-    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
-</mark>
- may rely on it depends not only on the regime it operates under, but also on the relative position of the nhri within the regional network.</div></span></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s1">&#39;NORP&#39;</span><span class="p">)</span>
-<span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s1">&#39;CARDINAL&#39;</span><span class="p">)</span>
-
-<span class="n">labels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GPE: Countries, cities, states
-PERCENT: Percentage, including &quot;%&quot;
-DATE: Absolute or relative dates or periods
-ORG: Companies, agencies, institutions, etc.
-CARDINAL: Numerals that do not fall under another type
-</pre></div>
-</div>
-</div>
-</div>
-<div class="admonition-exercise-1-8 admonition">
-<p class="admonition-title">Exercise 1.8</p>
-<p>Try the Allen NLP NER demo found at <a class="reference external" href="https://demo.allennlp.org/named-entity-recognition/named-entity-recognition">https://demo.allennlp.org/named-entity-recognition/named-entity-recognition</a>. Use the below sentence in the demo. Which phrases are labeled as named entities?</p>
-<p><em>‘The Israel Oceanographic and Limnological Research station monitors the quantity and quality of water along the coastline of the Mediterranean Sea. The Nature and Parks Authority (NPA) monitors water quality in rivers on behalf of the MoEP. Mekorot and local authorities monitor drinking water quality under the supervision of the Ministry of Health. The Ministry of Health monitors effluent quality prior to its use in the agricultural sector.’</em></p>
-<p>Now use <code class="docutils literal notranslate"><span class="pre">text.lower()</span></code> to make the entire sentence lowercase and use that as an input into the Allen NLP NER. Which phrases are now labeled as named entities?</p>
+<p>Modify the code from Exercise 1.8 to perform NER on a random sample from the UN SDG dataset, first in the original case and then in lowercase. (Hint: use the <code class="docutils literal notranslate"><span class="pre">lower()</span></code> function to make the sample lowercase.) Rerun your code several times to get different samples. What mistakes does the model tend to make? What types of entities does it tend to misidentify when the text is converted to lowercase?:::</p>
 </div>
 </section>
 <section id="string-operations">
 <span id="index-24"></span><h3><span class="section-number">14.2.3.4. </span>1.3.4 String Operations<a class="headerlink" href="#string-operations" title="Link to this heading">#</a></h3>
-<p>Now that we know about various preprocessing techniques, we can review some basic string operations. These will also be important in identifying various sentences and tokens within our dataset in case we would like to focus on specific words, or it can help in identifying cases, numeric characters, and other tests that we might need to conduct. A few are given below:</p>
-<div class="cell docutils container">
+<p>Now that we know about various preprocessing techniques, we can review some basic string operations. These will also be important in identifying various sentences and tokens within our dataset in case we would like to focus on specific words. They can also help in identifying cases, numeric characters, and other tests that we might need to conduct. A few are given below:</p>
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c1">#test if s starts with t</span>
-<span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c1">#test if s ends with t</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c1"># test if s starts with t</span>
+<span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c1"># test if s ends with t</span>
 <span class="n">t</span> <span class="ow">in</span> <span class="n">s</span> <span class="c1"># test if t is a substring of s</span>
 <span class="n">s</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="c1"># test if s contains cased characters and all are lowercase</span>
 <span class="n">s</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="c1"># test if s contains cased characters and all are uppercase</span>
@@ -1323,66 +1178,145 @@ CARDINAL: Numerals that do not fall under another type
 </div>
 </div>
 </div>
-<p>As an example to work through, let’s take the Chinese phrase ‘四个全面’ and see if we can locate it in the texts. This phrase, anglicized as “sigequanmian” and roughly translating to “four comprehensives”, was publicized by Chinese President Xi Jinping as a set of goals for China.</p>
+<p>For example, the following code uses the <code class="docutils literal notranslate"><span class="pre">startswith()</span></code> function to test if the first text from the UN SDG dataset begins with the string ‘The’.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;四个全面&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;The&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18009    In China today,President Xi Jinping’s new gran...
-Name: text, dtype: object
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
 </pre></div>
 </div>
 </div>
 </div>
-<p>One possible string operation is comparison, as given below:</p>
+<p>The functions above are all called on one string at a time. In <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, many of these string operations can also be performed on an entire series or dataframe, not just a single value. (These are known as <em>vectorized</em> functions.) For example, the following code uses <code class="docutils literal notranslate"><span class="pre">str.startswith</span></code>, the vectorized version of <code class="docutils literal notranslate"><span class="pre">startswith</span></code>, to test which texts from the UN SDG dataset begin with the string ‘The’.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;四个全面&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;The&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0        False
+1         True
+2         True
+3         True
+4        False
+         ...  
+24664    False
+24665    False
+24666    False
+24667    False
+24668     True
+Name: text, Length: 24669, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-exercise-1-10 admonition">
+<p class="admonition-title">Exercise 1.10</p>
+<p>Practice using some of the string operations on your own sample sentences and observe the results.</p>
+</div>
+<p>As an example to work through, let’s take the Chinese phrase ‘四个全面’ and see if we can locate it in the texts. This phrase, anglicized as “sigequanmian” and roughly translating to “four comprehensives”, was publicized by Chinese President Xi Jinping as a set of goals for China. We will use the vectorized <code class="docutils literal notranslate"><span class="pre">str.contains</span></code> function to search the entire dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;四个全面&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>doi</th>
+      <th>text_id</th>
+      <th>text</th>
+      <th>sdg</th>
+      <th>labels_negative</th>
+      <th>labels_positive</th>
+      <th>agreement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>18009</th>
+      <td>10.32890/UUMJLS.6.2015.4584</td>
+      <td>baa468803d1c7dba3c1096b1665ed7f7</td>
+      <td>In China today,President Xi Jinping’s new gran...</td>
+      <td>16</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0.6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Another possible string operation is comparison, as given below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;四个全面&#39;</span><span class="p">)][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># compare using &#39;==&#39;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t1</span> <span class="o">==</span> <span class="n">text_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">18009</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">t1</span> <span class="ow">is</span> <span class="n">text_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">18009</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="c1"># compare casefolded version</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t1</span> <span class="o">==</span> <span class="n">text_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">18009</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span>
+<span class="c1"># compare lowercase and casefold</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">text_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">18009</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-True
 False
 True
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can see that Python takes uses strict comparisons, meaning that the two sentences will not be equal unless the cases (capital and lowercase) are matched.</p>
-<p>Note that in the above example, <code class="docutils literal notranslate"><span class="pre">lower()</span></code> and <code class="docutils literal notranslate"><span class="pre">casefold()</span></code> yielded equal results. However, this is not the case for all languages. Take the German letter ß:</p>
+<p>We can see that Python uses strict comparisons, meaning that the two sentences will not be equal unless the cases (capital and lowercase) are matched. Note that in the above example, <code class="docutils literal notranslate"><span class="pre">lower()</span></code> and <code class="docutils literal notranslate"><span class="pre">casefold()</span></code> yielded equal results. However, this is not the case for all languages. Take the German letter ß:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;groß&#39;</span>
 
-<span class="c1"># convert text to lowercase using casefold()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Using casefold():&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span> 
-
 <span class="c1"># convert text to lowercase using lower()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Using lower():&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+<span class="c1"># convert text to lowercase using casefold()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Using casefold():&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span>
+
+<span class="c1"># check equality</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s1"> == </span><span class="si">{</span><span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using casefold(): gross
-Using lower(): groß
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using lower(): groß
+Using casefold(): gross
+groß == gross: False
 </pre></div>
 </div>
 </div>
 </div>
-<p>The German word <em>groß</em> translates as “large” or “big”, and this meaning is kept using <code class="docutils literal notranslate"><span class="pre">lower()</span></code>. However, when using <code class="docutils literal notranslate"><span class="pre">casefold()</span></code>, the word becomes <em>gross</em>, which is an acceptable alternate spelling in German but is also used in English to indicate disgust. It is up to you to decide which of these functions to use when converting to lowercase; however, it is best to keep this consistent across all your code so as to avoid potential problems such as this.</p>
+<p>The German word <em>groß</em> translates as “large” or “big”, and this meaning is kept using <code class="docutils literal notranslate"><span class="pre">lower()</span></code>. However, when using <code class="docutils literal notranslate"><span class="pre">casefold()</span></code>, the word becomes <em>gross</em>, which is an acceptable alternate spelling in German but is also used in English to indicate disgust. Even though <em>groß</em> and <em>gross</em> represent the same word in German, Python’s strict comparison will treat them as different. This is another reason to perform consistent and appropriate preprocessing of text.</p>
+<p>It is up to you to decide which of these functions to use when converting to lowercase; however, it is best to keep this consistent across all your code so as to avoid potential problems such as this.</p>
 </section>
-</section>
-<section id="more-exercises">
-<h2><span class="section-number">14.2.4. </span>1.4 More Exercises<a class="headerlink" href="#more-exercises" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -1459,7 +1393,6 @@ Using lower(): groß
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-operations">14.2.3.4. 1.3.4 String Operations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">14.2.4. 1.4 More Exercises</a></li>
 </ul>
   </nav></div>
 
