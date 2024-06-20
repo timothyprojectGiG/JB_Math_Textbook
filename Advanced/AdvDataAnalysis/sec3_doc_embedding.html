@@ -613,57 +613,60 @@ document.write(`
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="document-embedding">
-<span id="index-0"></span><h1><span class="section-number">14.4. </span>Document Embedding<a class="headerlink" href="#document-embedding" title="Link to this heading">#</a></h1>
-<p><b>NOTE: The tensorflow package is very finicky and does not like working on Python 3.11.3 to our knowledge, or on computers that are not so powerful. However, it is the only available package (that we know of) for document embedding, and document embedding is nonetheless and important part of natural language processing. We plan on working around this problem for later editions of the book, but for now, any of the code can be skipped, and later sections will not depend on code from this one.</b></p>
-<p>In the previous section, we represented variable length texts as fixed length numeric vectors; the approach we have used so far is the traditional approach of Bag of Words (BoW), which tokenizes a text into words (tokens), ignoring orders of tokens but may reserve the count. This approach is high dimension, and very sparse; this may result in over fitting and high time complexity.</p>
-<p>A more modern text vectorization approach is word embedding (also called simply embedding), relying on neural representations. This approach takes distributional semantics into account; that is, a word’s meaning is given by the words that frequently appear close-by. Hence, we can construct a word’s context by using the set of words that appear nearby within a fixed-sized window.</p>
-<p>Semantically similar texts, then, would appear closer to each other in the vector space. We could also possibly capture semantic operations by operations in the vector space; for example, similarity between texts could be measured by vector dot product. We could also perform algebraic operations; for example,</p>
-<p><span class="math notranslate nohighlight">\(\text{vector(”King”)} - \text{vector(”Man”)} + \text{vector(”Woman”)} \sim \text{vector(“Queen”)}\)</span>.</p>
-<p>Modern-day representations are typically learned from vast body of texts, often with deep neural networks, and they typically result in pre-trained models.</p>
-<p>To get embeddings, we use the <span class="math notranslate nohighlight">\(\texttt{tensorflow}\)</span> library, installed and imported as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#the below two lines should be run in the terminal to install</span>
-<span class="c1">#pip install tensorflow</span>
-<span class="c1">#pip install tensorflow_hub</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># change this to your own data directory</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span>
+
+<span class="c1"># read and preprocess data</span>
+<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
+<span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="document-embedding">
+<span id="index-0"></span><h1><span class="section-number">14.4. </span>Document Embedding<a class="headerlink" href="#document-embedding" title="Link to this heading">#</a></h1>
+<p>In the previous section, we represented variable length texts as fixed length numeric vectors; the approach we have used so far is the traditional approach of Bag of Words (BoW), which tokenizes a text into words (tokens). BoW ignores the order of the tokens, though it may pay attention to the frequency. This approach is high dimension, and very sparse; this may result in overfitting and high time complexity.</p>
+<p>A more modern text vectorization approach is <strong>word embedding</strong> (also called simply embedding), relying on neural representations. This approach takes distributional semantics into account; that is, a word’s meaning is inferred from the words that frequently appear close-by. Hence, we can construct a word’s context by using the set of words that appear nearby within a fixed-sized window.</p>
+<p>Semantically similar texts, then, would appear closer to each other in the vector space. We could also possibly capture semantic relationships by operations in the vector space; for example, similarity between texts could be measured by vector dot product. We could also perform algebraic operations; for example,</p>
+<p><span class="math notranslate nohighlight">\(\text{vector(``King'')} - \text{vector(``Man'')} + \text{vector(``Woman'')} \sim \text{vector(``Queen'')}\)</span>.</p>
+<p>Modern-day representations are typically learned from vast body of texts, often with deep neural networks, and they typically result in pre-trained models.</p>
+<p>To get embeddings, we use the <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> library, installed and imported as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## uncomment the next two lines of code to install tensorflow</span>
+<span class="c1"># ! pip install tensorflow</span>
+<span class="c1"># ! pip install tensorflow_hub</span>
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> package can be finicky, especially on certain distributions of Python and on computers that are not very powerful. However, it is a versatile and useful package for document embedding, which is an important part of natural language processing. If you encounter trouble with <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>, try using a kernel on a different version of Python (such as Python 3.9) and/or a reduced version of the dataset. If necessary, the code from this section can be skipped, and later sections will not depend on code from this one.</p>
+</div>
+<p>First, we will use a tokenizer found in the <code class="docutils literal notranslate"><span class="pre">NLTK</span></code> library:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># download punkt (if not already downloaded)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1">#embed_url = &quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot; # &quot;https://tfhub.dev/google/universal-sentence-encoder-large/5&quot;</span>
-<span class="c1">#embed = hub.load(embed_url) # print (&quot;module %s loaded&quot; % module_url)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-07-18 22:39:35.751494: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/universal-sentence-encoder_4&quot;</span><span class="p">)</span> <span class="c1"># print (&quot;module %s loaded&quot; % module_url)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We’re also going to use the tokenizer found in the <span class="math notranslate nohighlight">\(\texttt{nltk.data}\)</span> library:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk.data</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">word_tokenize</span><span class="p">,</span> <span class="n">sent_tokenize</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt/english.pickle&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to
-[nltk_data]     /Users/jonathanzhu/nltk_data...
-[nltk_data]   Package punkt is already up-to-date!
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">sent_tokenize</span>
 </pre></div>
 </div>
 </div>
@@ -673,88 +676,247 @@ To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other opera
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df_sentence</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">text_df_sdg</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">sdg</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span><span class="p">)):</span>
-    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> 
-    <span class="n">text_df_sentence</span> <span class="o">=</span> <span class="n">text_df_sentence</span> <span class="o">+</span> <span class="n">sentence</span>
-    <span class="n">text_df_sdg</span> <span class="o">=</span> <span class="n">text_df_sdg</span> <span class="o">+</span> <span class="p">[</span><span class="n">sdg</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-<span class="n">sentence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text_df_sentence</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="n">text_df_sdg</span><span class="p">})</span>
+<span class="n">text_df_sample</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">sdg</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> 
+    <span class="n">text_df_sentence</span> <span class="o">+=</span> <span class="n">sentences</span>
+    <span class="n">text_df_sdg</span> <span class="o">+=</span> <span class="p">[</span><span class="n">sdg</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+    <span class="n">text_df_sample</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+<span class="n">sentence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text_df_sentence</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="n">text_df_sdg</span><span class="p">,</span> <span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="n">text_df_sample</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><b>Exercise 3.1</b>: What are the dimensions of the <span class="math notranslate nohighlight">\(\texttt{text\_df}\)</span> and <span class="math notranslate nohighlight">\(\texttt{sentence\_df}\)</span> dataframes? What do each of the dimension numbers represent?</p>
-<p><b>Exercise 3.2</b>: Verify that the dimensions of the sentence dataframe are correct by breaking the original text dataframe into sentences and then determining the length.</p>
-<p>An important question to ask is how many sentences each document has; in other words, what is the distribution of the number of sentences in each text? We can determine that as follows:</p>
+<p>The dataframe <code class="docutils literal notranslate"><span class="pre">sentence_df</span></code> now contains all of the sentences in the corpus. The column <code class="docutils literal notranslate"><span class="pre">text</span></code> gives the sentences, the column <code class="docutils literal notranslate"><span class="pre">sdg</span></code> gives the SDG, and the column <code class="docutils literal notranslate"><span class="pre">sample</span></code> gives the index of the original text sample from which the sentence was extracted. We can use the <code class="docutils literal notranslate"><span class="pre">head</span></code> function to see the first few sentences:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;num_sent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
-<span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;num_sent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sentence_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3     19649
-4     12018
-5      3723
-6      2601
-2       959
-7       622
-8       191
-1       154
-9        45
-10       22
-12       18
-13       10
-15       10
-11        8
-14        8
-16        5
-19        4
-17        3
-21        3
-20        2
-25        2
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>sdg</th>
+      <th>sample</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>"From a gender perspective, Paulgaard points o...</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>But the fact that young people are still worki...</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>When Paulgaard refers to continuity with tradi...</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>As described earlier, Paulgaard (2015) conclud...</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>The average figure also masks large difference...</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>The number of annual contacts ranges from 2.0 ...</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>In addition, poor coverage of outpatient presc...</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>These findings are consistent with previous wo...</td>
+      <td>10</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Returns to education are also found to be an i...</td>
+      <td>10</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>In these countries, however, the magnitude of ...</td>
+      <td>10</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-exercise-3-1 admonition">
+<p class="admonition-title">Exercise 3.1</p>
+<p>What are the dimensions of the <code class="docutils literal notranslate"><span class="pre">text_df</span></code> and <code class="docutils literal notranslate"><span class="pre">sentence_df</span></code> dataframes? What do each of the dimension numbers represent?</p>
+</div>
+<div class="admonition-exercise-3-2 admonition">
+<p class="admonition-title">Exercise 3.2</p>
+<p>Evaluate the performance of the sentence tokenizer by picking one of the sample texts, manually breaking it into sentences, and determining whether your sentence divisions match the corresponding ones in <code class="docutils literal notranslate"><span class="pre">sentence_df</span></code>.</p>
+</div>
+<p>An important question to ask is how many sentences each document has; in other words, what is the distribution of the number of sentences in each text? We can determine that by <em>grouping</em> the dataframe by sample, counting the number of sentences in each group, and then counting those counts:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sentence_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>text
+3     12015
+4      7579
+5      2263
+6      1586
+2       586
+7       354
+8       119
+1        89
+9        21
+10       14
+12       12
+13        6
+15        6
+11        4
+14        4
+16        3
+17        2
 18        1
-22        1
 24        1
 31        1
-40        1
-Name: num_sent, dtype: int64
+21        1
+19        1
+20        1
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
 </div>
-<p>Notice that the vast majority of the documents have less than 10 sentences, with most being only 3 or 4 sentences. This type of sentence embedding can help us with further NLP tasks down the line.</p>
+<p>Notice that the vast majority of the documents have less than 10 sentences, with most being only 3 or 4 sentences long.</p>
+<p>This type of sentence tokenization can help us with further NLP tasks down the line.</p>
 <section id="universal-sentence-encoder">
 <span id="index-1"></span><h2><span class="section-number">14.4.1. </span>3.1 Universal Sentence Encoder<a class="headerlink" href="#universal-sentence-encoder" title="Link to this heading">#</a></h2>
 <p>The Universal Sentence Encoder (USE) was first published by Google around 2018. It maps a sentence, word, or short paragraph to a fixed length (typically 512) numeric vector. This approach would mean semantically similar sentences would be placed closer to each other in the embedding space.</p>
-<p>Embeddings are typically the result of using raw text, so no pre-processing would be involved. This sentence embedding can then be used for downstream applications,
-e.g., classification, clustering, and language prediction.</p>
-<p>USE is a pre-trained model trained on variety of data, e.g., wikipedia and books. It was trained with a deep averaging network (DAN) encoder; more information and explanation on the process behind USE can be found at <a class="reference external" href="https://arxiv.org/pdf/1803.11175.pdf">https://arxiv.org/pdf/1803.11175.pdf</a>.</p>
+<p>Embeddings are typically the result of using raw text, so no pre-processing would be involved. This sentence embedding can then be used for downstream applications such as classification, clustering, and language prediction.</p>
+<p>USE is a pre-trained model trained on variety of data such as books and Wikipedia. It was trained with a deep averaging network (DAN) encoder; more information about the process behind USE can be found at <a class="reference external" href="https://arxiv.org/pdf/1803.11175.pdf">https://arxiv.org/pdf/1803.11175.pdf</a>.</p>
 <p>To utilize USE, we can take one of three approaches:</p>
-<ol>
-<li>We could take our desired document, turn it into a collection of sentences, and then map each sentence to its respective vector;</li>
-<li>We could treat each document as a short paragraph and match each document to its respective vector, or;</li>
-<li>We could take a similar approach to #1, except then aggregate the vectors for each document to form a single vector per document.</li>
+<ol class="arabic simple">
+<li><p>We could take our desired document, turn it into a collection of sentences, and then map each sentence to its respective vector;</p></li>
+<li><p>We could treat each document as a short paragraph and match each document to its respective vector, or;</p></li>
+<li><p>We could take a similar approach to #1, except then aggregate the vectors for each document to form a single vector per document.</p></li>
 </ol>
-<p>To install USE, run the following code:</p>
+<p>USE can be found at <a class="reference external" href="https://tfhub.dev/google/universal-sentence-encoder/4">https://tfhub.dev/google/universal-sentence-encoder/4</a>. Go to this link, download the embedding (which is around 1GB in size), and put it in a directory you can access. Change the next line of code to refer to this directory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#module_url = &quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot; </span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/universal-sentence-encoder_4&quot;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;module </span><span class="si">%s</span><span class="s2"> loaded&quot;</span> <span class="o">%</span> <span class="n">module_url</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">embed</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module https://tfhub.dev/google/universal-sentence-encoder/4 loaded
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># change this to your own embedding directory</span>
+<span class="n">embedding_dir</span> <span class="o">=</span> <span class="s2">&quot;embeddings/&quot;</span>
+
+<span class="c1"># load the embedding</span>
+<span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">embedding_dir</span> <span class="o">+</span> <span class="s2">&quot;universal-sentence-encoder_4&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>Note that the first time you run this, it may take some time (5+ minutes) to complete the process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">sdg</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">X_train_use_vector</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">X_test_use_vector</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_use_vector</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(62202, 512), dtype=float32, numpy=
+array([[ 0.05109644,  0.05008151, -0.00049568, ..., -0.02072422,
+         0.03613124,  0.01162022],
+       [ 0.06358109, -0.0565166 , -0.05213946, ...,  0.00228676,
+        -0.04131475, -0.00125164],
+       [ 0.05327134, -0.02345247,  0.02675822, ...,  0.06473472,
+         0.0628962 ,  0.03613978],
+       ...,
+       [ 0.01227464,  0.00510351, -0.00631195, ...,  0.0456263 ,
+        -0.04639212, -0.07870013],
+       [ 0.06549167,  0.08835391,  0.00940975, ...,  0.03276522,
+         0.02704752, -0.00052535],
+       [-0.04562642, -0.00093942, -0.0363333 , ..., -0.03696235,
+        -0.03747366, -0.03414274]], dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_test_use_vector</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(30637, 512), dtype=float32, numpy=
+array([[-0.06285849,  0.05835171, -0.0444552 , ..., -0.02508012,
+        -0.04616681, -0.02821783],
+       [ 0.04709839, -0.03887603,  0.01155359, ...,  0.02760062,
+        -0.06390072, -0.0412748 ],
+       [ 0.01141804, -0.01593475, -0.04189894, ...,  0.05544081,
+         0.03996534,  0.03494091],
+       ...,
+       [ 0.07271196, -0.01527977, -0.02277797, ...,  0.02758262,
+        -0.00676865,  0.05427777],
+       [-0.07911933, -0.03813467,  0.00067008, ...,  0.00562062,
+         0.06976797, -0.041276  ],
+       [-0.04857083,  0.06084292, -0.03894068, ...,  0.01013256,
+        -0.03109165, -0.07248887]], dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="more-exercises">
 <h2><span class="section-number">14.4.2. </span>3.2 More Exercises<a class="headerlink" href="#more-exercises" title="Link to this heading">#</a></h2>
