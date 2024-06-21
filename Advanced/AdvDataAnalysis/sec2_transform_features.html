@@ -598,70 +598,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#libraries and data import - needed for later code, will figure out to try and hide this later</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
-<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
-
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
-
-<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/data/&quot;</span>
-
-<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
+  <div class="cell tag_remove-input docutils container">
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#preprocessing - will hide later</span>
-<span class="kn">from</span> <span class="nn">googletrans</span> <span class="kn">import</span> <span class="n">Translator</span>
-<span class="kn">from</span> <span class="nn">langdetect</span> <span class="kn">import</span> <span class="n">detect</span>
-<span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">detect</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
-
-<span class="c1"># change this to your own data directory</span>
-<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span>
-
-<span class="c1"># read and preprocess data</span>
-<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="about-text-data">
 <span id="index-0"></span><h1><span class="section-number">14.3. </span>About Text Data<a class="headerlink" href="#about-text-data" title="Link to this heading">#</a></h1>
@@ -681,21 +620,20 @@ document.write(`
 <section id="bag-of-words">
 <h4><span class="section-number">14.3.1.1.1. </span>Bag of Words<a class="headerlink" href="#bag-of-words" title="Link to this heading">#</a></h4>
 <p>The <strong>bag of words</strong> approach treats a text or document almost literally as a bag of words; i.e., it ignores the order of the words and simply gathers all the words together in one big collection. All the words are then treated as features, with one feature for each word, where the value of the feature is the number of times that word appears in the document. We then set a fixed number of words to be considered, and our bag of words becomes the vocabulary we work with.</p>
-<p>Let’s analyze the vocabulary of our UN SDG dataset. We use <code class="docutils literal notranslate"><span class="pre">CountVectorizer()</span></code> from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library to create our bag of words, <em>fitting</em> it to the corpus to make it learn the vocabulary and <em>transforming</em> it into a document-term matrix that gives the token counts. We can then use the function <code class="docutils literal notranslate"><span class="pre">get_feature_names_out()</span></code> to retrieve the learned vocabulary words, which have become the features of the bag of words.</p>
+<p>Let’s analyze the vocabulary of our UN SDG dataset. We use <code class="docutils literal notranslate"><span class="pre">CountVectorizer()</span></code> from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library to create our bag of words, <em>fitting</em> it to the corpus to make it learn the vocabulary and <em>transforming</em> it into a document-term matrix called <code class="docutils literal notranslate"><span class="pre">cv_fit</span></code> that gives the token counts for each term in each document.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
-<span class="n">cv_fit</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
-<span class="n">vocab</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">cv_fit</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">cv_fit</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
 </div>
+<p>Each row in the document-term matrix <code class="docutils literal notranslate"><span class="pre">cv_fit</span></code> represents a bag of words for the corresponding document. Here are the first five rows.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -703,47 +641,181 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 0, 0, ..., 0, 0, 0],
        [0, 0, 0, ..., 0, 0, 0],
        [0, 0, 0, ..., 0, 0, 0],
-       ...,
-       [0, 0, 0, ..., 0, 0, 0],
        [0, 0, 0, ..., 0, 0, 0],
        [0, 0, 0, ..., 0, 0, 0]])
 </pre></div>
 </div>
 </div>
 </div>
+<p>We can use the function <code class="docutils literal notranslate"><span class="pre">get_feature_names_out()</span></code> to retrieve the learned vocabulary tokens, which have become the features of the bag of words. For example, the first feature (at index 0) is the token “00”, and the last feature (at index 45737) is the token “四个全面”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_names</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of features:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">))</span>
+<span class="n">feature_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of features: 45738
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;00&#39;, &#39;000&#39;, &#39;0000002&#39;, ..., &#39;œopen&#39;, &#39;ʿadawiyya&#39;, &#39;四个全面&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can retrieve the total counts for the features by summing the counts in the matrix. We see, for example, that the token “00” occurs eight times in the entire corpus, while the token “四个全面” occurs twice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_counts</span> <span class="o">=</span> <span class="n">cv_fit</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">total_counts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>matrix([[  8, 840,   1, ...,   1,   1,   2]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get a better idea of how the bag of words works, we can take a look at a short sample text, which is given below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_index</span> <span class="o">=</span> <span class="mi">724</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample text:&#39;</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sample_index</span><span class="p">])</span>
+<span class="n">sample_bag</span> <span class="o">=</span> <span class="n">cv_fit</span><span class="p">[</span><span class="n">sample_index</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample text: Peacemaking, peacekeeping, and peacebuilding may not have the punch and the means of national security, but they are receiving an increasing amount of attention in education, research, and politics.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">inverse_transform()</span></code> function allows us to retrieve a list of all tokens from the vocabulary that occur at least once in the bag of words for this sample text.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">sample_bag</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;the&#39;, &#39;of&#39;, &#39;have&#39;, &#39;in&#39;, &#39;and&#39;, &#39;are&#39;, &#39;but&#39;, &#39;education&#39;, &#39;an&#39;,
+       &#39;research&#39;, &#39;security&#39;, &#39;they&#39;, &#39;may&#39;, &#39;not&#39;, &#39;national&#39;,
+       &#39;politics&#39;, &#39;amount&#39;, &#39;increasing&#39;, &#39;attention&#39;, &#39;means&#39;,
+       &#39;peacekeeping&#39;, &#39;receiving&#39;, &#39;peacemaking&#39;, &#39;peacebuilding&#39;,
+       &#39;punch&#39;], dtype=&#39;&lt;U85&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code compares the counts of several of these tokens in the sample text to their total counts in the entire corpus. We use the attribute <code class="docutils literal notranslate"><span class="pre">vocabulary_</span></code>, which maps the feature names to their indices, to index into the counts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;peacemaking&#39;</span><span class="p">,</span> <span class="s1">&#39;punch&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">tokens</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;sample count&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">sample_bag</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">[</span><span class="n">token</span><span class="p">]]</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">],</span>
+    <span class="s1">&#39;total count&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">total_counts</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">[</span><span class="n">token</span><span class="p">]]</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>and</th>
+      <th>the</th>
+      <th>peacemaking</th>
+      <th>punch</th>
+      <th>test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>sample count</th>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>total count</th>
+      <td>93357</td>
+      <td>143100</td>
+      <td>44</td>
+      <td>1</td>
+      <td>262</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Note how the tokens “and” and “the”, which are typically considered to be English stop words, occur more frequently than the other tokens. Meanwhile, the word “test” has a sample count of 0 because it does not occur in the sample text, even though it occurs 262 times in the rest of the corpus. We also discover that our sample text contains the only occurrence of the token “punch” in the entire corpus. (Words that occur only once in a corpus are known as <em>hapax legomena</em>.)</p>
 <div class="admonition-exercise-2-1 admonition">
 <p class="admonition-title">Exercise 2.1</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">count_vectorizer.vocabulary_</span></code> to get the number of occurrences of each word in our vocabulary. Which words are the most common?</p>
+<p>What is the most common word in the corpus? (Hint: use <code class="docutils literal notranslate"><span class="pre">argmax()</span></code> on <code class="docutils literal notranslate"><span class="pre">total_counts</span></code> to find the index of the token.)</p>
 </div>
-<p>Note that the stop words are not removed by default, so we will get a lot of generic words like “the”. Fortunately, we can easily modify our code to remove stop words:</p>
+<p>As we have seen, stop words like “and” and “the” are not removed by default. Fortunately, we can easily modify our code to remove stop words:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
-<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span> 
-<span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv2</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span> <span class="c1"># exclude English stop words</span>
+<span class="n">cv2_fit</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CountVectorizer()</span></code> provides a way to easily retrieve the stop words we are removing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">get_stop_words</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>CountVectorizer(stop_words=&#x27;english&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">CountVectorizer</label><div class="sk-toggleable__content"><pre>CountVectorizer(stop_words=&#x27;english&#x27;)</pre></div></div></div></div></div></div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>frozenset({&#39;around&#39;, &#39;out&#39;, &#39;were&#39;, &#39;his&#39;, &#39;name&#39;, &#39;co&#39;, &#39;hence&#39;, &#39;nor&#39;, &#39;anyhow&#39;, &#39;detail&#39;, &#39;sixty&#39;, &#39;at&#39;, &#39;would&#39;, &#39;keep&#39;, &#39;less&#39;, &#39;whom&#39;, &#39;someone&#39;, &#39;almost&#39;, &#39;above&#39;, &#39;back&#39;, &#39;five&#39;, &#39;take&#39;, &#39;they&#39;, &#39;she&#39;, &#39;nothing&#39;, &#39;hers&#39;, &#39;seemed&#39;, &#39;its&#39;, &#39;other&#39;, &#39;sincere&#39;, &#39;will&#39;, &#39;after&#39;, &#39;beforehand&#39;, &#39;inc&#39;, &#39;then&#39;, &#39;give&#39;, &#39;yet&#39;, &#39;already&#39;, &#39;whither&#39;, &#39;itself&#39;, &#39;nevertheless&#39;, &#39;please&#39;, &#39;nowhere&#39;, &#39;within&#39;, &#39;be&#39;, &#39;thick&#39;, &#39;herein&#39;, &#39;found&#39;, &#39;had&#39;, &#39;beyond&#39;, &#39;very&#39;, &#39;even&#39;, &#39;perhaps&#39;, &#39;might&#39;, &#39;anywhere&#39;, &#39;whole&#39;, &#39;herself&#39;, &#39;was&#39;, &#39;de&#39;, &#39;everything&#39;, &#39;indeed&#39;, &#39;themselves&#39;, &#39;twelve&#39;, &#39;as&#39;, &#39;by&#39;, &#39;though&#39;, &#39;also&#39;, &#39;any&#39;, &#39;throughout&#39;, &#39;so&#39;, &#39;eleven&#39;, &#39;towards&#39;, &#39;you&#39;, &#39;been&#39;, &#39;noone&#39;, &#39;alone&#39;, &#39;hereafter&#39;, &#39;empty&#39;, &#39;should&#39;, &#39;thereafter&#39;, &#39;thru&#39;, &#39;several&#39;, &#39;us&#39;, &#39;well&#39;, &#39;however&#39;, &#39;why&#39;, &#39;than&#39;, &#39;who&#39;, &#39;in&#39;, &#39;which&#39;, &#39;describe&#39;, &#39;your&#39;, &#39;thus&#39;, &#39;am&#39;, &#39;own&#39;, &#39;latter&#39;, &#39;bill&#39;, &#39;without&#39;, &#39;because&#39;, &#39;off&#39;, &#39;when&#39;, &#39;these&#39;, &#39;ie&#39;, &#39;see&#39;, &#39;there&#39;, &#39;interest&#39;, &#39;amount&#39;, &#39;but&#39;, &#39;under&#39;, &#39;couldnt&#39;, &#39;do&#39;, &#39;therein&#39;, &#39;my&#39;, &#39;third&#39;, &#39;became&#39;, &#39;least&#39;, &#39;myself&#39;, &#39;latterly&#39;, &#39;yours&#39;, &#39;something&#39;, &#39;four&#39;, &#39;therefore&#39;, &#39;whose&#39;, &#39;sometime&#39;, &#39;another&#39;, &#39;yourselves&#39;, &#39;more&#39;, &#39;down&#39;, &#39;through&#39;, &#39;the&#39;, &#39;could&#39;, &#39;him&#39;, &#39;or&#39;, &#39;this&#39;, &#39;that&#39;, &#39;cannot&#39;, &#39;put&#39;, &#39;bottom&#39;, &#39;thereupon&#39;, &#39;none&#39;, &#39;along&#39;, &#39;he&#39;, &#39;into&#39;, &#39;is&#39;, &#39;anyway&#39;, &#39;still&#39;, &#39;top&#39;, &#39;both&#39;, &#39;wherein&#39;, &#39;go&#39;, &#39;whether&#39;, &#39;few&#39;, &#39;whereafter&#39;, &#39;for&#39;, &#39;whereupon&#39;, &#39;full&#39;, &#39;made&#39;, &#39;has&#39;, &#39;same&#39;, &#39;somewhere&#39;, &#39;forty&#39;, &#39;here&#39;, &#39;first&#39;, &#39;himself&#39;, &#39;can&#39;, &#39;neither&#39;, &#39;six&#39;, &#39;their&#39;, &#39;ourselves&#39;, &#39;formerly&#39;, &#39;some&#39;, &#39;wherever&#39;, &#39;me&#39;, &#39;toward&#39;, &#39;never&#39;, &#39;of&#39;, &#39;two&#39;, &#39;between&#39;, &#39;ten&#39;, &#39;up&#39;, &#39;seems&#39;, &#39;while&#39;, &#39;system&#39;, &#39;only&#39;, &#39;eg&#39;, &#39;via&#39;, &#39;elsewhere&#39;, &#39;become&#39;, &#39;a&#39;, &#39;except&#39;, &#39;whereby&#39;, &#39;rather&#39;, &#39;fire&#39;, &#39;mill&#39;, &#39;once&#39;, &#39;un&#39;, &#39;enough&#39;, &#39;moreover&#39;, &#39;part&#39;, &#39;whenever&#39;, &#39;no&#39;, &#39;them&#39;, &#39;serious&#39;, &#39;before&#39;, &#39;everyone&#39;, &#39;due&#39;, &#39;since&#39;, &#39;thereby&#39;, &#39;besides&#39;, &#39;one&#39;, &#39;afterwards&#39;, &#39;whereas&#39;, &#39;hereupon&#39;, &#39;seem&#39;, &#39;ever&#39;, &#39;otherwise&#39;, &#39;last&#39;, &#39;i&#39;, &#39;about&#39;, &#39;on&#39;, &#39;may&#39;, &#39;yourself&#39;, &#39;such&#39;, &#39;others&#39;, &#39;meanwhile&#39;, &#39;thin&#39;, &#39;per&#39;, &#39;sometimes&#39;, &#39;again&#39;, &#39;further&#39;, &#39;seeming&#39;, &#39;else&#39;, &#39;anything&#39;, &#39;hundred&#39;, &#39;three&#39;, &#39;all&#39;, &#39;always&#39;, &#39;mostly&#39;, &#39;either&#39;, &#39;among&#39;, &#39;an&#39;, &#39;each&#39;, &#39;every&#39;, &#39;twenty&#39;, &#39;thence&#39;, &#39;somehow&#39;, &#39;whence&#39;, &#39;now&#39;, &#39;namely&#39;, &#39;done&#39;, &#39;fill&#39;, &#39;although&#39;, &#39;whoever&#39;, &#39;during&#39;, &#39;re&#39;, &#39;most&#39;, &#39;not&#39;, &#39;onto&#39;, &#39;front&#39;, &#39;her&#39;, &#39;together&#39;, &#39;side&#39;, &#39;over&#39;, &#39;are&#39;, &#39;from&#39;, &#39;where&#39;, &#39;below&#39;, &#39;becoming&#39;, &#39;whatever&#39;, &#39;everywhere&#39;, &#39;cry&#39;, &#39;behind&#39;, &#39;nobody&#39;, &#39;amongst&#39;, &#39;former&#39;, &#39;becomes&#39;, &#39;our&#39;, &#39;being&#39;, &#39;etc&#39;, &#39;upon&#39;, &#39;hereby&#39;, &#39;mine&#39;, &#39;much&#39;, &#39;anyone&#39;, &#39;ours&#39;, &#39;hasnt&#39;, &#39;until&#39;, &#39;what&#39;, &#39;show&#39;, &#39;if&#39;, &#39;fifty&#39;, &#39;fifteen&#39;, &#39;it&#39;, &#39;too&#39;, &#39;beside&#39;, &#39;move&#39;, &#39;nine&#39;, &#39;many&#39;, &#39;and&#39;, &#39;how&#39;, &#39;call&#39;, &#39;those&#39;, &#39;cant&#39;, &#39;with&#39;, &#39;con&#39;, &#39;have&#39;, &#39;often&#39;, &#39;amoungst&#39;, &#39;next&#39;, &#39;across&#39;, &#39;ltd&#39;, &#39;must&#39;, &#39;eight&#39;, &#39;get&#39;, &#39;to&#39;, &#39;against&#39;, &#39;we&#39;, &#39;find&#39;})
+</pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(\texttt{CountVectorizer()}\)</span> also has an easy way to retrieve the stop words, so we can easily see which words we are removing:</p>
+</div>
+</div>
+<p>Now that stop words have been excluded from the vocabulary, the list of vocabulary tokens in our sample text with non-zero counts has changed as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_stop_words</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_bag</span> <span class="o">=</span> <span class="n">cv2_fit</span><span class="p">[</span><span class="n">sample_index</span><span class="p">]</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">sample_bag</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>frozenset({&#39;some&#39;, &#39;ten&#39;, &#39;find&#39;, &#39;thus&#39;, &#39;her&#39;, &#39;our&#39;, &#39;whither&#39;, &#39;sincere&#39;, &#39;seeming&#39;, &#39;con&#39;, &#39;seems&#39;, &#39;whole&#39;, &#39;if&#39;, &#39;thru&#39;, &#39;else&#39;, &#39;fifty&#39;, &#39;was&#39;, &#39;though&#39;, &#39;get&#39;, &#39;take&#39;, &#39;not&#39;, &#39;will&#39;, &#39;twelve&#39;, &#39;him&#39;, &#39;first&#39;, &#39;move&#39;, &#39;am&#39;, &#39;when&#39;, &#39;against&#39;, &#39;next&#39;, &#39;hereby&#39;, &#39;throughout&#39;, &#39;of&#39;, &#39;this&#39;, &#39;but&#39;, &#39;moreover&#39;, &#39;others&#39;, &#39;last&#39;, &#39;because&#39;, &#39;hasnt&#39;, &#39;per&#39;, &#39;everything&#39;, &#39;former&#39;, &#39;up&#39;, &#39;since&#39;, &#39;whence&#39;, &#39;whatever&#39;, &#39;latter&#39;, &#39;amount&#39;, &#39;bottom&#39;, &#39;whether&#39;, &#39;indeed&#39;, &#39;sometime&#39;, &#39;bill&#39;, &#39;again&#39;, &#39;within&#39;, &#39;latterly&#39;, &#39;wherein&#39;, &#39;alone&#39;, &#39;interest&#39;, &#39;herein&#39;, &#39;nine&#39;, &#39;he&#39;, &#39;mill&#39;, &#39;front&#39;, &#39;a&#39;, &#39;and&#39;, &#39;none&#39;, &#39;serious&#39;, &#39;thereupon&#39;, &#39;several&#39;, &#39;therein&#39;, &#39;behind&#39;, &#39;twenty&#39;, &#39;often&#39;, &#39;before&#39;, &#39;nothing&#39;, &#39;amoungst&#39;, &#39;somewhere&#39;, &#39;side&#39;, &#39;whereas&#39;, &#39;yourselves&#39;, &#39;during&#39;, &#39;third&#39;, &#39;between&#39;, &#39;mine&#39;, &#39;any&#39;, &#39;were&#39;, &#39;becoming&#39;, &#39;cry&#39;, &#39;still&#39;, &#39;myself&#39;, &#39;name&#39;, &#39;only&#39;, &#39;see&#39;, &#39;another&#39;, &#39;itself&#39;, &#39;nor&#39;, &#39;you&#39;, &#39;along&#39;, &#39;detail&#39;, &#39;whoever&#39;, &#39;these&#39;, &#39;back&#39;, &#39;there&#39;, &#39;whenever&#39;, &#39;system&#39;, &#39;etc&#39;, &#39;however&#39;, &#39;once&#39;, &#39;for&#39;, &#39;until&#39;, &#39;among&#39;, &#39;off&#39;, &#39;had&#39;, &#39;wherever&#39;, &#39;show&#39;, &#39;his&#39;, &#39;except&#39;, &#39;i&#39;, &#39;please&#39;, &#39;who&#39;, &#39;call&#39;, &#39;by&#39;, &#39;us&#39;, &#39;into&#39;, &#39;that&#39;, &#39;hence&#39;, &#39;together&#39;, &#39;nowhere&#39;, &#39;whereafter&#39;, &#39;never&#39;, &#39;six&#39;, &#39;how&#39;, &#39;me&#39;, &#39;hundred&#39;, &#39;always&#39;, &#39;yet&#39;, &#39;became&#39;, &#39;whereby&#39;, &#39;due&#39;, &#39;so&#39;, &#39;now&#39;, &#39;themselves&#39;, &#39;down&#39;, &#39;even&#39;, &#39;from&#39;, &#39;can&#39;, &#39;cant&#39;, &#39;one&#39;, &#39;thereby&#39;, &#39;why&#39;, &#39;inc&#39;, &#39;beforehand&#39;, &#39;them&#39;, &#39;what&#39;, &#39;each&#39;, &#39;an&#39;, &#39;eleven&#39;, &#39;as&#39;, &#39;or&#39;, &#39;beyond&#39;, &#39;could&#39;, &#39;also&#39;, &#39;upon&#39;, &#39;fill&#39;, &#39;ourselves&#39;, &#39;mostly&#39;, &#39;thick&#39;, &#39;through&#39;, &#39;we&#39;, &#39;fifteen&#39;, &#39;seemed&#39;, &#39;becomes&#39;, &#39;it&#39;, &#39;both&#39;, &#39;further&#39;, &#39;same&#39;, &#39;via&#39;, &#39;made&#39;, &#39;cannot&#39;, &#39;they&#39;, &#39;eight&#39;, &#39;co&#39;, &#39;over&#39;, &#39;ever&#39;, &#39;already&#39;, &#39;five&#39;, &#39;sixty&#39;, &#39;enough&#39;, &#39;such&#39;, &#39;must&#39;, &#39;my&#39;, &#39;somehow&#39;, &#39;without&#39;, &#39;other&#39;, &#39;is&#39;, &#39;do&#39;, &#39;hereupon&#39;, &#39;been&#39;, &#39;while&#39;, &#39;might&#39;, &#39;in&#39;, &#39;very&#39;, &#39;everywhere&#39;, &#39;those&#39;, &#39;all&#39;, &#39;become&#39;, &#39;found&#39;, &#39;hers&#39;, &#39;go&#39;, &#39;which&#39;, &#39;nevertheless&#39;, &#39;keep&#39;, &#39;thereafter&#39;, &#39;above&#39;, &#39;thence&#39;, &#39;fire&#39;, &#39;four&#39;, &#39;more&#39;, &#39;has&#39;, &#39;herself&#39;, &#39;then&#39;, &#39;than&#39;, &#39;empty&#39;, &#39;forty&#39;, &#39;describe&#39;, &#39;would&#39;, &#39;noone&#39;, &#39;himself&#39;, &#39;many&#39;, &#39;couldnt&#39;, &#39;under&#39;, &#39;ie&#39;, &#39;out&#39;, &#39;towards&#39;, &#39;being&#39;, &#39;whereupon&#39;, &#39;done&#39;, &#39;anyone&#39;, &#39;beside&#39;, &#39;de&#39;, &#39;neither&#39;, &#39;re&#39;, &#39;two&#39;, &#39;nobody&#39;, &#39;almost&#39;, &#39;are&#39;, &#39;hereafter&#39;, &#39;meanwhile&#39;, &#39;elsewhere&#39;, &#39;where&#39;, &#39;someone&#39;, &#39;may&#39;, &#39;amongst&#39;, &#39;full&#39;, &#39;most&#39;, &#39;eg&#39;, &#39;thin&#39;, &#39;their&#39;, &#39;onto&#39;, &#39;on&#39;, &#39;its&#39;, &#39;whom&#39;, &#39;perhaps&#39;, &#39;therefore&#39;, &#39;she&#39;, &#39;too&#39;, &#39;besides&#39;, &#39;namely&#39;, &#39;ours&#39;, &#39;ltd&#39;, &#39;here&#39;, &#39;across&#39;, &#39;anywhere&#39;, &#39;afterwards&#39;, &#39;less&#39;, &#39;with&#39;, &#39;anyway&#39;, &#39;your&#39;, &#39;formerly&#39;, &#39;three&#39;, &#39;at&#39;, &#39;un&#39;, &#39;something&#39;, &#39;few&#39;, &#39;either&#39;, &#39;anyhow&#39;, &#39;no&#39;, &#39;should&#39;, &#39;to&#39;, &#39;the&#39;, &#39;every&#39;, &#39;yours&#39;, &#39;below&#39;, &#39;top&#39;, &#39;anything&#39;, &#39;put&#39;, &#39;be&#39;, &#39;whose&#39;, &#39;give&#39;, &#39;about&#39;, &#39;have&#39;, &#39;rather&#39;, &#39;part&#39;, &#39;although&#39;, &#39;least&#39;, &#39;much&#39;, &#39;yourself&#39;, &#39;sometimes&#39;, &#39;otherwise&#39;, &#39;around&#39;, &#39;everyone&#39;, &#39;toward&#39;, &#39;own&#39;, &#39;after&#39;, &#39;well&#39;, &#39;seem&#39;})
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;education&#39;, &#39;research&#39;, &#39;security&#39;, &#39;national&#39;, &#39;politics&#39;,
+       &#39;increasing&#39;, &#39;attention&#39;, &#39;means&#39;, &#39;peacekeeping&#39;, &#39;receiving&#39;,
+       &#39;peacemaking&#39;, &#39;peacebuilding&#39;, &#39;punch&#39;], dtype=&#39;&lt;U85&#39;)
 </pre></div>
 </div>
 </div>
 </div>
-<p id="index-5"><span id="index-4"></span><span id="index-3"></span><b>Exercise 2.2</b>: Find the length of the vocabulary without stop words, and also find the length of the list of stop words. Is the difference between our original vocabulary and our stop word removed vocabulary equal to the number of stop words? If not, why not?</p>
 </section>
 <section id="one-hot-vectors">
-<h4><span class="section-number">14.3.1.1.2. </span>One-Hot Vectors<a class="headerlink" href="#one-hot-vectors" title="Link to this heading">#</a></h4>
+<span id="index-5"></span><span id="index-4"></span><span id="index-3"></span><h4><span class="section-number">14.3.1.1.2. </span>One-Hot Vectors<a class="headerlink" href="#one-hot-vectors" title="Link to this heading">#</a></h4>
 <p>Another vectorization approach is to treat a text as a <strong>one-hot vector</strong>. This approach lines up all words in the vocabulary and assigns each of them an index <span class="math notranslate nohighlight">\(1 \le i \le V\)</span>, where <span class="math notranslate nohighlight">\(V\)</span> is the number of words in the vocabulary. For each word, it then forms a vector</p>
 <p><span class="math notranslate nohighlight">\(\overrightarrow{w} = (0, 0, …, 0, 1, 0, 0, …, 0)\)</span> ,</p>
 <p>with only one 1 in the vector and the rest of the numbers being zeroes. The 1 is at the position <span class="math notranslate nohighlight">\(i\)</span> that indexes the word in our vocabulary. The order of the words is ignored, so it does not matter if a certain word is indexed before another one. Because all of the words in our vocabulary are unique, there are no similarity notions among the vectors.</p>
@@ -756,8 +828,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
 <span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
-<span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
-<span class="n">count_vector</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span> 
+<span class="n">count_vector</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
 <span class="n">count_vector_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">count_vector</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
 <span class="n">term_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="n">count_vector_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;freq&quot;</span> <span class="p">:</span> <span class="n">count_vector_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)})</span>
 <span class="n">count_vector_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">125</span><span class="p">,</span><span class="n">term_freq</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;freq&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">term</span><span class="p">]</span> <span class="c1"># take a portion</span>
@@ -1408,11 +1479,15 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p><b>Exercise 2.3</b>: Look at document 118.</p>
+<div class="admonition-exercise-2-3 admonition">
+<p class="admonition-title">Exercise 2.3</p>
+<p>Look at document 118.</p>
 <ol>
 <li>What are the most frequent words for this document?</li>
 <li>Refer to the UN SDGs. What is your best guess as to which goal this document describes?</b>
-</ol></section>
+</ol>
+</div>
+</section>
 </section>
 <section id="n-grams">
 <span id="index-6"></span><h3><span class="section-number">14.3.1.2. </span>2.1.2 N-Grams<a class="headerlink" href="#n-grams" title="Link to this heading">#</a></h3>
@@ -1461,8 +1536,14 @@ document.write(`
 </div>
 </div>
 </div>
-<p><b>Exercise 2.4</b>: Notice that with stop word removal and bi-gram formation, we get fewer terms. Why might this be the case?</p>
-<p><b>Exercise 2.5</b>: Modify the above code to get the counts of the tri-grams. Are there more or fewer tri-grams than bi-grams? Why might this be the case?</p>
+<div class="admonition-exercise-2-4 admonition">
+<p class="admonition-title">Exercise 2.4</p>
+<p>Notice that with stop word removal and bi-gram formation, we get fewer terms. Why might this be the case?</p>
+</div>
+<div class="admonition-exercise-2-5 admonition">
+<p class="admonition-title">Exercise 2.5</p>
+<p>Modify the above code to get the counts of the tri-grams. Are there more or fewer tri-grams than bi-grams? Why might this be the case?</p>
+</div>
 </section>
 <section id="probabilistic-language-modeling">
 <span id="index-8"></span><span id="index-7"></span><h3><span class="section-number">14.3.1.3. </span>2.1.3 Probabilistic Language Modeling<a class="headerlink" href="#probabilistic-language-modeling" title="Link to this heading">#</a></h3>
@@ -1478,7 +1559,7 @@ P(w_1)P(w_2|w_1)P(w_3|w_1,w_2)...P(w_n|w_1, …, w_{(n-1)})\)</span>.</p>
 <p>We could estimate the probability by calculating</p>
 <p><span class="math notranslate nohighlight">\(\text{count}(w_1, w_2, …, w_{(i-1)}, w_i) / \text{count}(w_1, w_2, …, w_{(i-1)})\)</span>,</p>
 <p>but with too many possible occurrences, this calculation is not feasible.</p>
-<p>Instead, we can simplify the equation through the Markov Assumption, placing condition on previous <span class="math notranslate nohighlight">\(k\)</span> words rather than all the previous words:</p>
+<p>Instead, we can simplify the equation through the Markov Assumption, which in an NLP context assumes that the next word only depends on some previous words, not all of them. This means we can place a condition on the previous <span class="math notranslate nohighlight">\(k\)</span> words rather than all the previous words:</p>
 <p><span class="math notranslate nohighlight">\(P(w_n|w_1, w_2, w_3, …, w_{(n-1)}) \sim  P(w_n|w_{(n-k)}, …, w_{(n-1)})\)</span>.</p>
 <p>When considering a unigram <span class="math notranslate nohighlight">\((n=1)\)</span> model, we calculate the probability as</p>
 <p><span class="math notranslate nohighlight">\(P(w_1, w_2, w_3, …, w_n) = P(w_1)P(w_2)P(w_3)...P(w_n)\)</span>.</p>
@@ -1513,13 +1594,13 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <li><p>IDF: take the inverse of DF</p></li>
 <li><p>TF-IDF = TF * IDF</p></li>
 </ul>
-<p>We can use <span class="math notranslate nohighlight">\(\texttt{scikit-learn}\)</span> to get TF-IDF with <span class="math notranslate nohighlight">\(\texttt{scikit-learn.feature\_extraction.text.TfidfVectorizer}\)</span>. This code takes several arguments:</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> to get TF-IDF with <code class="docutils literal notranslate"><span class="pre">scikit-learn.feature_extraction.text.TfidfVectorizer</span></code>. This code takes several arguments:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\texttt{sublinear\_df}\)</span> : Boolean; if true, uses a logarithmic form for frequency,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\texttt{min\_df}\)</span> : the minimum number of documents a word must be present in to be kept,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\texttt{norm}\)</span>: usually set to l2 to ensure all our feature vectors have a Euclidean norm of 1,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\texttt{ngram\_range}\)</span>: takes one of (1, 2) to consider both unigrams and bigrams, and</p></li>
-<li><p><span class="math notranslate nohighlight">\(\texttt{stop\_words}\)</span>:  usually set to “english” for removing  English stop words.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sublinear_df</span></code> : Boolean; if true, uses a logarithmic form for frequency,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_df</span></code> : the minimum number of documents a word must be present in to be kept,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">norm</span></code>: usually set to l2 to ensure all our feature vectors have a Euclidean norm of 1,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ngram_range</span></code>: takes one of (1, 2) to consider both unigrams and bigrams, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_words</span></code>:  usually set to “english” for removing English stop words.</p></li>
 </ul>
 <p>Note that when using logarithmic form for term frequency, the weighted TF is transformed into <span class="math notranslate nohighlight">\(1 + \log \text{TF}\)</span>; if <span class="math notranslate nohighlight">\(\text{TF} &gt; 0\)</span>, then <span class="math notranslate nohighlight">\(\text{TF} = 0\)</span>; otherwise, we use <span class="math notranslate nohighlight">\(\log\frac{N}{\text{df}}\)</span> for IDF to dampen the effect of <span class="math notranslate nohighlight">\(\frac{N}{\text{df}}\)</span>.</p>
 </section>
@@ -1566,12 +1647,18 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <li><p><span class="math notranslate nohighlight">\(fp = 153\)</span> (calculated by summing vertically below 398),</p></li>
 <li><p><span class="math notranslate nohighlight">\(fn = 83\)</span> (calculated by summing horizontally to the right of 398).</p></li>
 </ul>
-<p><b>Exercise 2.3</b>: Use the above values and formulas to calculate precision, recall, and f1 for SDG 1.</p>
+<div class="admonition-exercise-2-3 admonition">
+<p class="admonition-title">Exercise 2.3</p>
+<p>Use the above values and formulas to calculate precision, recall, and f1 for SDG 1.</p>
+</div>
 </section>
 </section>
 <section id="more-exercises">
 <h2><span class="section-number">14.3.3. </span>2.3 More Exercises<a class="headerlink" href="#more-exercises" title="Link to this heading">#</a></h2>
-<p><b>Exercise 2.4</b>: Using the UN SDG dataset, begin working with some of the <span class="math notranslate nohighlight">\(\texttt{scikit-learn}\)</span> NLP capabilities, such as the following code:</p>
+<div class="admonition-exercise-2-4 admonition">
+<p class="admonition-title">Exercise 2.4</p>
+<p>Using the UN SDG dataset, begin working with some of the <span class="math notranslate nohighlight">\(\texttt{scikit-learn}\)</span> NLP capabilities, such as the following code:</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
@@ -1582,7 +1669,7 @@ number of documents containing term <span class="math notranslate nohighlight">\
 </div>
 </div>
 </div>
-<p>Try out different parameters in <span class="math notranslate nohighlight">\(\texttt{CountVectorizer}\)</span>, including</p>
+<p>Try out different parameters in <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code>, including</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ngram_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
@@ -1593,15 +1680,24 @@ number of documents containing term <span class="math notranslate nohighlight">\
 </div>
 </div>
 <p>What are the most frequent unigrams, bigrams, and trigrams? Answer this question with, and then without, stop word removal.</p>
-<p><b>Exercise 2.5</b>: Write a function that takes in the a document corpus prepared in the exercises from Section 1 that returns:</p>
+<div class="admonition-exercise-2-5 admonition">
+<p class="admonition-title">Exercise 2.5</p>
+<p>Write a function that takes in the a document corpus prepared in the exercises from Section 1 that returns:</p>
 <ul class="simple">
 <li><p>The top 50 most frequent words,</p></li>
 <li><p>A plot of the cumulative word count from the most frequent word to the 50th most frequent, and</p></li>
 <li><p>A comparison of the level of cumulation (i.e., the height where the plot ends) with the total number of words of the input corpus, outputting the percentage.</p></li>
 </ul>
-<p>Your function should also contain a parameter <span class="math notranslate nohighlight">\(\texttt{stop\_word}\)</span> with its default set to “None”, which does not remove stop words.</p>
-<p><b>Exercise 2.6</b>: Run your function from Exercise 2.5 on the documents labeled with SDG 8. Give the output.</p>
-<p><b>Exercise 2.7</b>: Run your function from Exercise 2.5 on the entire UN SDG corpus, once with stop removal and once without. Describe the similarities and differences in the outputs when this parameter is changed.</p>
+<p>Your function should also contain a parameter <code class="docutils literal notranslate"><span class="pre">stop_word</span></code> with its default set to “None”, which does not remove stop words.</p>
+</div>
+<div class="admonition-exercise-2-6 admonition">
+<p class="admonition-title">Exercise 2.6</p>
+<p>Run your function from Exercise 2.5 on the documents labeled with SDG 8. What is the output?</p>
+</div>
+<div class="admonition-exercise-2-7 admonition">
+<p class="admonition-title">Exercise 2.7</p>
+<p>Run your function from Exercise 2.5 on the entire UN SDG corpus, once with stop removal and once without. Describe the similarities and differences in the outputs when this parameter is changed.</p>
+</div>
 </section>
 </section>
 

@@ -588,77 +588,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">RocCurveDisplay</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
-
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelBinarizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
-<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
-<span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="kn">import</span> <span class="n">OneVsRestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
-
-<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/data/&quot;</span>
-
-<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;heavy&#39;</span><span class="p">,</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,}</span>
-
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;tab20&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">colors</span><span class="p">)</span>
-
-<span class="n">file_name</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/sdg_names_definitions.csv&quot;</span>
-<span class="n">sdg_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-<span class="n">sdg_names</span>
-
-<span class="k">def</span> <span class="nf">most_informative_feature_for_class</span><span class="p">(</span><span class="n">vectorizer</span><span class="p">,</span> <span class="n">classifier</span><span class="p">,</span> <span class="n">classlabel</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">labelid</span> <span class="ow">in</span> <span class="n">classlabel</span><span class="p">:</span>
-        <span class="n">feature_names</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
-        <span class="n">top_n</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_log_prob_</span><span class="p">[</span><span class="n">labelid</span><span class="p">],</span> <span class="n">feature_names</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">coef</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">top_n</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SDG </span><span class="si">{}</span><span class="s2"> : </span><span class="si">{:30}</span><span class="s2">  </span><span class="si">{:.6}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">labelid</span><span class="p">,</span> <span class="n">feat</span><span class="p">,</span> <span class="n">coef</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">print_top_n_features</span><span class="p">(</span><span class="n">vectorizer</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">class_labels</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints features with the highest coefficient values, per class&quot;&quot;&quot;</span>
-    <span class="n">feature_names</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">class_label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_labels</span><span class="p">):</span>
-        <span class="n">top_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">feature_log_prob_</span><span class="p">[</span><span class="n">i</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="n">n</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">class_label</span><span class="p">,</span>
-              <span class="s2">&quot; || &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">feature_names</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">top_n</span><span class="p">)))</span>
-        
-<span class="k">def</span> <span class="nf">get_text_df</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
-    <span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-    <span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
-    <span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
-    <span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">text_df</span>
-</pre></div>
-</div>
-</div>
+  <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/px/b7vc3nh913zb_m0x36ncftj00000gn/T/ipykernel_73547/3280906689.py:37: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
   colors = list(cm.get_cmap(&#39;tab20&#39;).colors)
@@ -666,18 +596,7 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
-
-<span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/Users/jonathanzhu/Documents/bookchapter/source/universal-sentence-encoder_4&quot;</span><span class="p">)</span>
-
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">get_text_df</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">)</span>
-<span class="n">text_df</span><span class="p">[</span><span class="s2">&quot;embedding&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">embed</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-07-18 20:45:18.975424: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
@@ -802,7 +721,10 @@ weighted avg     0.8276    0.8312    0.8257      8141
 </div>
 </div>
 <p>We can see that each of the goals, aside from goal 17, gets its own curve, and our program is able to report the AUC score for each one.</p>
-<p><b>Exercise 5.1</b>: Create a similar ROC curve plot for your Naive Bayes classification and Multilayer Perceptron classification from the previous section.</p>
+<div class="admonition-exercise-5-1 admonition">
+<p class="admonition-title">Exercise 5.1</p>
+<p>Create a similar ROC curve plot for your Naive Bayes classification and Multilayer Perceptron classification from the previous section.</p>
+</div>
 </section>
 <section id="one-vs-one">
 <span id="index-7"></span><h3><span class="section-number">14.6.2.2. </span>5.2.2 One vs One<a class="headerlink" href="#one-vs-one" title="Link to this heading">#</a></h3>
@@ -878,14 +800,26 @@ weighted avg     0.8276    0.8312    0.8257      8141
 </div>
 </div>
 <p>Here, we identified two classes that which we wanted to specifically examine, and these two are the only curves that are present on the plot. Note that the AUC for these goals we picked are different from those in the OvR strategy.</p>
-<p><b>Exercise 5.2</b>: Create another ROC curve plot for three additional goals of your choosing.</p>
-<p><b>Exercise 5.3</b>: Using SDGs 8 and 16, recreate the ROC curve plot using your Naive Bayes and Multilayer Perceptron classifications from the previous sections.</p>
+<div class="admonition-exercise-5-2 admonition">
+<p class="admonition-title">Exercise 5.2</p>
+<p>Create another ROC curve plot for three additional goals of your choosing.</p>
+<div class="admonition-exercise-5-3 admonition">
+<p class="admonition-title">Exercise 5.3</p>
+<p>Using SDGs 8 and 16, recreate the ROC curve plot using your Naive Bayes and Multilayer Perceptron classifications from the previous sections.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="more-exercises">
 <h2><span class="section-number">14.6.3. </span>5.3 More Exercises<a class="headerlink" href="#more-exercises" title="Link to this heading">#</a></h2>
-<p><b>Exercise 5.4</b>: Modify your function from Exercise 3.1 to now output the test set metrics for the classification you run. Be sure to include precision, recall, f1, and accuracy.</p>
-<p><b>Exercise 5.5</b>: What does a point on the ROC curve at (1,1) indicate about the corresponding model? Similarly, what does a point at (0,0) on the curve indicate about the model?</p>
+<div class="admonition-exercise-5-4 admonition">
+<p class="admonition-title">Exercise 5.4</p>
+<p>Modify your function from Exercise 3.1 to now output the test set metrics for the classification you run. Be sure to include precision, recall, f1, and accuracy.</p>
+</div>
+<div class="admonition-exercise-5-5 admonition">
+<p class="admonition-title">Exercise 5.5</p>
+<p>What does a point on the ROC curve at (1,1) indicate about the corresponding model? Similarly, what does a point at (0,0) on the curve indicate about the model?</p>
+</div>
 </section>
 </section>
 

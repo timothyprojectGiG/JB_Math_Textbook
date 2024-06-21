@@ -690,7 +690,7 @@ memory usage: 1.3+ MB
 <p><strong>Exercise 1.5</strong></p>
 <p>The Porter and Snowball stemmers are largely comparable, while the Lancaster stemmer is the most aggressive. As a result, the Lancaster stemmer is likely to have the most trouble on a larger set of tokens.</p>
 <p><strong>Exercise 1.6</strong></p>
-<p>Answers may vary. Some possible observations include the fact that stemmers tend to remove affixes (such as <code class="docutils literal notranslate"><span class="pre">-ing</span></code>, <code class="docutils literal notranslate"><span class="pre">-ed</span></code>, and <code class="docutils literal notranslate"><span class="pre">-s</span></code> in English).</p>
+<p>Answers may vary. Some possible observations include the fact that stemmers tend to remove affixes (such as <code class="docutils literal notranslate"><span class="pre">-ing</span></code>, <code class="docutils literal notranslate"><span class="pre">-ed</span></code>, and <code class="docutils literal notranslate"><span class="pre">-s</span></code> in English) and the fact that irregular words are particularly likely to give the stemmers trouble.</p>
 <p><strong>Exercise 1.7</strong></p>
 <p>Answers may vary.</p>
 <p><strong>Exercise 1.8</strong></p>
@@ -819,7 +819,76 @@ memory usage: 1.3+ MB
 <section id="about-text-data">
 <h2><span class="section-number">14.8.2. </span>About Text Data<a class="headerlink" href="#about-text-data" title="Link to this heading">#</a></h2>
 <p><strong>Exercise 2.1</strong></p>
-<p>First, we create the bag of words and access the resulting vocabulary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get document-term matrix</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">cv_fit</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+
+<span class="c1"># get feature names and total counts</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">total_counts</span> <span class="o">=</span> <span class="n">cv_fit</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># get the index of the most frequent word</span>
+<span class="n">most_freq_feature</span> <span class="o">=</span> <span class="n">total_counts</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+
+<span class="c1"># get the most frequent word itself</span>
+<span class="n">most_freq_token</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">[</span><span class="n">most_freq_feature</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Most frequent word: &#39;</span><span class="si">{</span><span class="n">most_freq_token</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Most frequent word: &#39;the&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2.2</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get document-term matrix with stop words removed</span>
+<span class="n">cv2</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span> <span class="c1"># exclude English stop words</span>
+<span class="n">cv2_fit</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Length of the original vocabulary (with stop words):&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Length of the new vocabulary (without stop words):&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of stop words:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">get_stop_words</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Length of the original vocabulary (with stop words): 61523
+Length of the new vocabulary (without stop words): 61223
+Number of stop words: 318
+</pre></div>
+</div>
+</div>
+</div>
+<p>The difference between the vocabularies (300) is not equal to the number of stop words (318).</p>
+<p><strong>Exercise 2.3</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get feature names and total counts</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">total_counts</span> <span class="o">=</span> <span class="n">cv2_fit</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># get the index of the most frequent word</span>
+<span class="n">most_freq_feature</span> <span class="o">=</span> <span class="n">total_counts</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+
+<span class="c1"># get the most frequent word itself</span>
+<span class="n">most_freq_token</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">[</span><span class="n">most_freq_feature</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Most frequent word: &#39;</span><span class="si">{</span><span class="n">most_freq_token</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Most frequent word: &#39;countries&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 

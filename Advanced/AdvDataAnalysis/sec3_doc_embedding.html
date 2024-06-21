@@ -583,58 +583,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#libraries and data import - needed for later code, will figure out to try and hide this later</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
-<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
-
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
-
-<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/Users/jonathanzhu/Documents/data/&quot;</span>
-
-<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
+  <div class="cell tag_remove-input docutils container">
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="c1"># change this to your own data directory</span>
-<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span>
-
-<span class="c1"># read and preprocess data</span>
-<span class="n">text_file_name</span> <span class="o">=</span> <span class="s2">&quot;osdg-community-data-v2023-01-01.csv&quot;</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="n">text_file_name</span><span class="p">,</span><span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-<span class="n">col_names</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="p">[</span><span class="n">col_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)))</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;sdg&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_negative&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;labels_positive&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;agreement&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">text_df</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;agreement &gt; 0.5 and (labels_positive - labels_negative) &gt; 2&quot;</span><span class="p">)</span>
-<span class="n">text_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input tag_remove-ouput docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="document-embedding">
 <span id="index-0"></span><h1><span class="section-number">14.4. </span>Document Embedding<a class="headerlink" href="#document-embedding" title="Link to this heading">#</a></h1>
@@ -660,13 +611,18 @@ document.write(`
 <p class="admonition-title">Warning</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> package can be finicky, especially on certain distributions of Python and on computers that are not very powerful. However, it is a versatile and useful package for document embedding, which is an important part of natural language processing. If you encounter trouble with <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>, try using a kernel on a different version of Python (such as Python 3.9) and/or a reduced version of the dataset. If necessary, the code from this section can be skipped, and later sections will not depend on code from this one.</p>
 </div>
-<p>First, we will use a tokenizer found in the <code class="docutils literal notranslate"><span class="pre">NLTK</span></code> library:</p>
+<p>Next, we need to download the embedding method itself, the Universal Sentence Encoder, found at <a class="reference external" href="https://tfhub.dev/google/universal-sentence-encoder/4">https://tfhub.dev/google/universal-sentence-encoder/4</a>. Go to this link, download the embedding (around 1GB file) and put it in a directory you can access.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;[your-directory]/universal-sentence-encoder_4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>We’re also going to use the tokenizer found in the <code class="docutils literal notranslate"><span class="pre">nltk.data</span></code> library:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># download punkt (if not already downloaded)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">sent_tokenize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk.data</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">word_tokenize</span><span class="p">,</span> <span class="n">sent_tokenize</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt/english.pickle&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -854,6 +810,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <p>Note that the first time you run this, it may take some time (5+ minutes) to complete the process.</p>
+<p>We are now ready to use USE! We will be returning back to embedding in more depth in Section 5, but as an example, we will embed some training and testing vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">text</span>
@@ -920,7 +877,10 @@ array([[-0.06285849,  0.05835171, -0.0444552 , ..., -0.02508012,
 </section>
 <section id="more-exercises">
 <h2><span class="section-number">14.4.2. </span>3.2 More Exercises<a class="headerlink" href="#more-exercises" title="Link to this heading">#</a></h2>
-<p><b>Exercise 3.1</b>: Take two documents, one labeled as SDG 1 and the other as SDG 8. Segment these into sentences, compute the embedding, and find the dot product between the embeddings.</p>
+<div class="admonition-exercise-3-3 admonition">
+<p class="admonition-title">Exercise 3.3</p>
+<p>Take two documents, one labeled as SDG 1 and the other as SDG 8. Segment these into sentences, compute the embedding, and find the dot product between the embeddings.</p>
+</div>
 </section>
 </section>
 
