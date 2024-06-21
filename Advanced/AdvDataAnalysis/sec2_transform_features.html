@@ -715,7 +715,7 @@ document.write(`
 <p>The following code compares the counts of several of these tokens in the sample text to their total counts in the entire corpus. We use the attribute <code class="docutils literal notranslate"><span class="pre">vocabulary_</span></code>, which maps the feature names to their indices, to index into the counts.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;peacemaking&#39;</span><span class="p">,</span> <span class="s1">&#39;punch&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;peacemaking&#39;</span><span class="p">,</span> <span class="s1">&#39;punch&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">]</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">tokens</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span>
     <span class="s1">&#39;sample count&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">sample_bag</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">[</span><span class="n">token</span><span class="p">]]</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">],</span>
     <span class="s1">&#39;total count&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">total_counts</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">[</span><span class="n">token</span><span class="p">]]</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
@@ -746,7 +746,7 @@ document.write(`
       <th>the</th>
       <th>peacemaking</th>
       <th>punch</th>
-      <th>test</th>
+      <th>unknown</th>
     </tr>
   </thead>
   <tbody>
@@ -764,13 +764,13 @@ document.write(`
       <td>143100</td>
       <td>44</td>
       <td>1</td>
-      <td>262</td>
+      <td>39</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Note how the tokens “and” and “the”, which are typically considered to be English stop words, occur more frequently than the other tokens. Meanwhile, the word “test” has a sample count of 0 because it does not occur in the sample text, even though it occurs 262 times in the rest of the corpus. We also discover that our sample text contains the only occurrence of the token “punch” in the entire corpus. (Words that occur only once in a corpus are known as <em>hapax legomena</em>.)</p>
+<p>Note how the tokens “and” and “the”, which are typically considered to be English stop words, occur more frequently than the other tokens. Meanwhile, the word “unknown” has a sample count of 0 because it does not occur in the sample text, even though it occurs 39 times in the rest of the corpus. We also discover that our sample text contains the only occurrence of the token “punch” in the entire corpus. (Words that occur only once in a corpus are known as <em>hapax legomena</em>.)</p>
 <div class="admonition-exercise-2-1 admonition">
 <p class="admonition-title">Exercise 2.1</p>
 <p>What is the most common word in the corpus? (Hint: use <code class="docutils literal notranslate"><span class="pre">argmax()</span></code> on <code class="docutils literal notranslate"><span class="pre">total_counts</span></code> to find the index of the token.)</p>
@@ -819,6 +819,107 @@ document.write(`
 <p>Another vectorization approach is to treat a text as a <strong>one-hot vector</strong>. This approach lines up all words in the vocabulary and assigns each of them an index <span class="math notranslate nohighlight">\(1 \le i \le V\)</span>, where <span class="math notranslate nohighlight">\(V\)</span> is the number of words in the vocabulary. For each word, it then forms a vector</p>
 <p><span class="math notranslate nohighlight">\(\overrightarrow{w} = (0, 0, …, 0, 1, 0, 0, …, 0)\)</span> ,</p>
 <p>with only one 1 in the vector and the rest of the numbers being zeroes. The 1 is at the position <span class="math notranslate nohighlight">\(i\)</span> that indexes the word in our vocabulary. The order of the words is ignored, so it does not matter if a certain word is indexed before another one. Because all of the words in our vocabulary are unique, there are no similarity notions among the vectors.</p>
+<p>To gain a better understanding of how one-hot vectors work, we can take a look at how a short sample text from the UN SDG dataset would be encoded. As before, we use <code class="docutils literal notranslate"><span class="pre">NLTK</span></code> to tokenize the text.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_text</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">12737</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample text:&#39;</span><span class="p">,</span> <span class="n">sample_text</span><span class="p">)</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tokens:&#39;</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample text: the chapter examines the contribution that international relations theory has made to the reading and practice of peacebuilding.
+Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#39;contribution&#39;, &#39;that&#39;, &#39;international&#39;, &#39;relations&#39;, &#39;theory&#39;, &#39;has&#39;, &#39;made&#39;, &#39;to&#39;, &#39;the&#39;, &#39;reading&#39;, &#39;and&#39;, &#39;practice&#39;, &#39;of&#39;, &#39;peacebuilding&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also define a convenience function to reshape the list of tokens into a format that can be used by the one-hot encoder:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ohe_reshape</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use <code class="docutils literal notranslate"><span class="pre">OneHotEncoder()</span></code> from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library to create the one-hot encoding. We fit the encoder to our sample text to make it learn the vocabulary. As with <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code>, we can view the resulting features using the function <code class="docutils literal notranslate"><span class="pre">get_feature_names_out()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ohe</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># encode unknown tokens as vectors of all zeros</span>
+<span class="n">ohe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ohe_reshape</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+<span class="n">ohe</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;x0_.&#39;, &#39;x0_and&#39;, &#39;x0_chapter&#39;, &#39;x0_contribution&#39;, &#39;x0_examines&#39;,
+       &#39;x0_has&#39;, &#39;x0_international&#39;, &#39;x0_made&#39;, &#39;x0_of&#39;,
+       &#39;x0_peacebuilding&#39;, &#39;x0_practice&#39;, &#39;x0_reading&#39;, &#39;x0_relations&#39;,
+       &#39;x0_that&#39;, &#39;x0_the&#39;, &#39;x0_theory&#39;, &#39;x0_to&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that the encoder has learned the vocabulary, we can try it out on text. The following code transforms the first five tokens of our sample text into one-hot encodings by calling the <code class="docutils literal notranslate"><span class="pre">transform</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First five tokens:&#39;</span><span class="p">,</span> <span class="n">tokens</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">ohe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ohe_reshape</span><span class="p">(</span><span class="n">tokens</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First five tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#39;contribution&#39;]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0.,
+        0.],
+       [0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0.,
+        0.],
+       [0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how, as explained above, each unique token in the learned vocabulary has a unique encoding, with only one 1 in the vector. Note also how the first and fourth vectors in this matrix are identical because they represent the same token, “the”.</p>
+<p>We can view the unique encoding of “the” by using the <code class="docutils literal notranslate"><span class="pre">transform</span></code> function again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ohe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ohe_reshape</span><span class="p">([</span><span class="s1">&#39;the&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we try to encode a token that isn’t included in the learned vocabulary, however, we get a vector of only zeros:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ohe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ohe_reshape</span><span class="p">([</span><span class="s1">&#39;unknown&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-exercise-2-4 admonition">
+<p class="admonition-title">Exercise 2.4</p>
+<p>Verify that each token in the learned vocabulary has a unique encoding.</p>
+</div>
 <h4>Numeric Count Vectors</h4>
 <p>A third vectorization approach is to make a numeric vector of counts. This approach counts the occurence of the words in the document and lines up the counts of words in a row for each document.</p>
 <h4>Term-Document Matrices</h4>
