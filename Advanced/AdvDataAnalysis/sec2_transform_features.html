@@ -574,6 +574,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorizations">14.3.1.1. 2.1.1 Vectorizations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bag-of-words">14.3.1.1.1. Bag of Words</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-vectors">14.3.1.1.2. One-Hot Vectors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-count-vectors">14.3.1.1.3. Numeric Count Vectors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#document-term-matrices">14.3.1.1.4. Document-Term Matrices</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-grams">14.3.1.2. 2.1.2 N-Grams</a></li>
@@ -620,7 +622,7 @@ document.write(`
 <section id="bag-of-words">
 <h4><span class="section-number">14.3.1.1.1. </span>Bag of Words<a class="headerlink" href="#bag-of-words" title="Link to this heading">#</a></h4>
 <p>The <strong>bag of words</strong> approach treats a text or document almost literally as a bag of words; i.e., it ignores the order of the words and simply gathers all the words together in one big collection. All the words are then treated as features, with one feature for each word, where the value of the feature is the number of times that word appears in the document. We then set a fixed number of words to be considered, and our bag of words becomes the vocabulary we work with.</p>
-<p>Let’s analyze the vocabulary of our UN SDG dataset. We use <code class="docutils literal notranslate"><span class="pre">CountVectorizer()</span></code> from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library to create our bag of words, <em>fitting</em> it to the corpus to make it learn the vocabulary and <em>transforming</em> it into a document-term matrix called <code class="docutils literal notranslate"><span class="pre">cv_fit</span></code> that gives the token counts for each term in each document.</p>
+<p>Let’s analyze the vocabulary of our UN SDG dataset. We use <code class="docutils literal notranslate"><span class="pre">CountVectorizer()</span></code> from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library to create our bag of words, <em>fitting</em> it to the corpus to make it learn the vocabulary and <em>transforming</em> it into a matrix called <code class="docutils literal notranslate"><span class="pre">cv_fit</span></code> that gives the token counts for each term in each document. (This matrix is called a <strong>document-term matrix</strong>, a concept which will be explained more fully later on in this section.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
@@ -630,7 +632,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Each row in the document-term matrix <code class="docutils literal notranslate"><span class="pre">cv_fit</span></code> represents a bag of words for the corresponding document. Here are the first five rows.</p>
+<p>Each row in <code class="docutils literal notranslate"><span class="pre">cv_fit</span></code> represents a bag of words for the corresponding document. Here are the first five rows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
@@ -797,6 +799,14 @@ document.write(`
 </div>
 </div>
 </div>
+<div class="admonition-exercise-2-2 admonition">
+<p class="admonition-title">Exercise 2.2</p>
+<p>Find the length of the vocabulary (the number of features) without stop words, and also find the length of the list of stop words. Is the difference between our original vocabulary and our vocabulary with stop words removed equal to the number of stop words? Why or why not?</p>
+</div>
+<div class="admonition-exercise-2-3 admonition">
+<p class="admonition-title">Exercise 2.3</p>
+<p>What is the most common word now that stop words have been removed?</p>
+</div>
 <p>Now that stop words have been excluded from the vocabulary, the list of vocabulary tokens in our sample text with non-zero counts has changed as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -920,11 +930,15 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
 <p class="admonition-title">Exercise 2.4</p>
 <p>Verify that each token in the learned vocabulary has a unique encoding.</p>
 </div>
-<h4>Numeric Count Vectors</h4>
+</section>
+<section id="numeric-count-vectors">
+<h4><span class="section-number">14.3.1.1.3. </span>Numeric Count Vectors<a class="headerlink" href="#numeric-count-vectors" title="Link to this heading">#</a></h4>
 <p>A third vectorization approach is to make a numeric vector of counts. This approach counts the occurence of the words in the document and lines up the counts of words in a row for each document.</p>
-<h4>Term-Document Matrices</h4>
-<p>One final vectorization approach we will introduce here is to form a document-term matrix. To form this matrix, we define the matrix’s columns to be tokens (such as terms or phrases), the matrix’s rows to be the documents in the collection, and the value of each entry to be frequency of each token occuring in the document. Additionally, the values in each entry are weighted frequencies; one weighting method we use is TF-IDF, or term frequency (TF) times inverse document frequency (IDF). TF refers to the frequency of the word in the document, while IDF refers to the inverse of the number of documents containing the word divided by number of documents. TF-IDF is discussed later in this section.</p>
-<p>The below figure provides a simple term-document matrix in unigram (one-word token) form. While the unigram does provide context for each word, NLP tasks built on such simple model would be disadvantaged.</p>
+</section>
+<section id="document-term-matrices">
+<h4><span class="section-number">14.3.1.1.4. </span>Document-Term Matrices<a class="headerlink" href="#document-term-matrices" title="Link to this heading">#</a></h4>
+<p>One final vectorization approach we will introduce here is to form a document-term matrix. To form this matrix, we define the matrix’s columns to be tokens (such as words or phrases), the matrix’s rows to be the documents in the collection, and the value of each entry to be the frequency of each token occuring in the document. Additionally, the values in each entry are weighted frequencies. One weighting method we use is <strong>TF-IDF</strong>, or term frequency (TF) times inverse document frequency (IDF). TF refers to the frequency of the word in the document, while IDF refers to the inverse of the number of documents containing the word divided by number of documents. TF-IDF is discussed later in this section.</p>
+<p>Below, we compute a simple document-term matrix for a portion of the documents and tokens in the UN SDG dataset. The features are all unigrams (one-word tokens). While the unigram does provide context for each word, NLP tasks built on such simple model would be disadvantaged.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
@@ -932,7 +946,7 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
 <span class="n">count_vector</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
 <span class="n">count_vector_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">count_vector</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
 <span class="n">term_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="n">count_vector_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;freq&quot;</span> <span class="p">:</span> <span class="n">count_vector_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)})</span>
-<span class="n">count_vector_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">125</span><span class="p">,</span><span class="n">term_freq</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;freq&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">term</span><span class="p">]</span> <span class="c1"># take a portion</span>
+<span class="n">count_vector_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">110</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="n">term_freq</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;freq&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">term</span><span class="p">]</span> <span class="c1"># take a portion</span>
 </pre></div>
 </div>
 </div>
@@ -965,249 +979,9 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <th>education</th>
       <th>policy</th>
       <th>international</th>
-      <th>law</th>
-      <th>energy</th>
-      <th>national</th>
-      <th>rights</th>
-      <th>oecd</th>
-      <th>economic</th>
-      <th>use</th>
-      <th>new</th>
-      <th>level</th>
-      <th>income</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>100</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>101</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>102</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>103</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>104</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>105</th>
-      <td>3</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>106</th>
-      <td>1</td>
-      <td>3</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>107</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>108</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>109</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
     <tr>
       <th>110</th>
       <td>0</td>
@@ -1217,16 +991,6 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1243,16 +1007,6 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>0</td>
       <td>3</td>
-      <td>2</td>
-      <td>0</td>
-      <td>1</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>112</th>
@@ -1266,16 +1020,6 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>113</th>
@@ -1283,16 +1027,6 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1312,31 +1046,11 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>115</th>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1358,16 +1072,6 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>117</th>
@@ -1379,16 +1083,6 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -1404,29 +1098,9 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>119</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1450,143 +1124,18 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>121</th>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>122</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>123</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>124</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>125</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<div class="admonition-exercise-2-3 admonition">
-<p class="admonition-title">Exercise 2.3</p>
+<div class="admonition-exercise-2-5 admonition">
+<p class="admonition-title">Exercise 2.5</p>
 <p>Look at document 118.</p>
-<ol>
-<li>What are the most frequent words for this document?</li>
-<li>Refer to the UN SDGs. What is your best guess as to which goal this document describes?</b>
-</ol>
+<ul class="simple">
+<li><p>What are the most frequent words for this document?</p></li>
+<li><p>Refer to the UN SDGs. What is your best guess as to which goal this document describes?</p></li>
+</ul>
 </div>
 </section>
 </section>
@@ -1595,7 +1144,19 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
 <p>An n-gram is a contiguous sequence of <span class="math notranslate nohighlight">\(n\)</span> items from a text. Items in an n-gram are tokens we choose to include through preprocessing, but these items can also include markers we add to the data to serve the NLP tasks at hand.</p>
 <p>For example, if we were to find what words are often used at the beginning or end of a sentence, we would add &lt;s&gt; and &lt;/s&gt; as markers for the beginnings and ends of sentences, to denote the sentence boundaries. We would then build bigrams <span class="math notranslate nohighlight">\((n=2)\)</span>; for the sentence “I built an AI machine”, we would get the items
 (&lt;s&gt; I), (I built), (built an), (an AI), (AI machine), and (machine &lt;/s&gt;). We then count the frequency of bigrams. specifically of the form (&lt;s&gt; *) and (* &lt;/s&gt;), where * represents any other token.</p>
-<p>In the previous subsection, we looked at a term-document matrix of unigrams. We can check the total number of unigrams with the following:</p>
+<p>In the previous subsection, we looked at a document-term matrix of unigrams (with stop words removed). We can check the total number of unigrams with the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">term_freq</span><span class="p">[</span><span class="s1">&#39;term&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">term_freq</span><span class="p">[</span><span class="s1">&#39;term&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((45440,), (45440,))
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">term_freq</span><span class="o">.</span><span class="n">freq</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -1621,7 +1182,7 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
 </div>
 </div>
 </div>
-<p>Notice that stop word removal alone reduced the number of terms by around 40%. Next, we can check the bi-grams for our document corpus:</p>
+<p>Notice that stop word removal alone reduced the number of terms by around 40%. Next, we can check the bigrams for our document corpus by setting the <code class="docutils literal notranslate"><span class="pre">ngram_range</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
@@ -1637,13 +1198,13 @@ Tokens: [&#39;the&#39;, &#39;chapter&#39;, &#39;examines&#39;, &#39;the&#39;, &#
 </div>
 </div>
 </div>
-<div class="admonition-exercise-2-4 admonition">
-<p class="admonition-title">Exercise 2.4</p>
-<p>Notice that with stop word removal and bi-gram formation, we get fewer terms. Why might this be the case?</p>
+<div class="admonition-exercise-2-6 admonition">
+<p class="admonition-title">Exercise 2.6</p>
+<p>Notice that with stop word removal and bigram formation, we get fewer terms. Why might this be the case?</p>
 </div>
-<div class="admonition-exercise-2-5 admonition">
-<p class="admonition-title">Exercise 2.5</p>
-<p>Modify the above code to get the counts of the tri-grams. Are there more or fewer tri-grams than bi-grams? Why might this be the case?</p>
+<div class="admonition-exercise-2-7 admonition">
+<p class="admonition-title">Exercise 2.7</p>
+<p>Modify the above code to get the counts of the trigrams. Are there more or fewer trigrams than bigrams? Why might this be the case?</p>
 </div>
 </section>
 <section id="probabilistic-language-modeling">
@@ -1685,7 +1246,8 @@ P(w_1)P(w_2|w_1)P(w_3|w_1,w_2)...P(w_n|w_1, …, w_{(n-1)})\)</span>.</p>
 <span id="index-11"></span><span id="index-10"></span><h2><span class="section-number">14.3.2. </span>2.2 Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
 <section id="tf-idf-term-frequency-inverse-document-frequency">
 <h3><span class="section-number">14.3.2.1. </span>2.2.1 TF-IDF (Term Frequency, Inverse Document Frequency)<a class="headerlink" href="#tf-idf-term-frequency-inverse-document-frequency" title="Link to this heading">#</a></h3>
-<p>In the document-term matrix previously discussed, we represented columns as tokens, rows as documents, and the entry values as the number of occurrences of that token in the document. In our computation of the matrix cell <span class="math notranslate nohighlight">\((d,t)\)</span> with document as row and term as column, we compute the following:</p>
+<p>In the document-term matrix previously discussed, we represented columns as tokens, rows as documents, and the entry values as the number of occurrences of that token in the document. However, using the counts alone may not give us an accurate picture of how significant each token is in context, since some tokens naturally occur more frequently than others. We can ameliorate this problem by weighting the frequencies with TF-IDF.</p>
+<p>In our computation of the matrix cell <span class="math notranslate nohighlight">\((d,t)\)</span> with document as row and term as column, we compute the following:</p>
 <ul class="simple">
 <li><p>TF: term frequency of term <span class="math notranslate nohighlight">\(t\)</span> in the document <span class="math notranslate nohighlight">\(d\)</span> =
 count of term <span class="math notranslate nohighlight">\(t\)</span> in document <span class="math notranslate nohighlight">\(d\)</span> divided by total number of terms in document <span class="math notranslate nohighlight">\(d\)</span></p></li>
@@ -1700,10 +1262,201 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <li><p><code class="docutils literal notranslate"><span class="pre">sublinear_df</span></code> : Boolean; if true, uses a logarithmic form for frequency,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">min_df</span></code> : the minimum number of documents a word must be present in to be kept,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">norm</span></code>: usually set to l2 to ensure all our feature vectors have a Euclidean norm of 1,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ngram_range</span></code>: takes one of (1, 2) to consider both unigrams and bigrams, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ngram_range</span></code>: determines whether to take unigrams, bigrams, or both, and</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stop_words</span></code>:  usually set to “english” for removing English stop words.</p></li>
 </ul>
 <p>Note that when using logarithmic form for term frequency, the weighted TF is transformed into <span class="math notranslate nohighlight">\(1 + \log \text{TF}\)</span>; if <span class="math notranslate nohighlight">\(\text{TF} &gt; 0\)</span>, then <span class="math notranslate nohighlight">\(\text{TF} = 0\)</span>; otherwise, we use <span class="math notranslate nohighlight">\(\log\frac{N}{\text{df}}\)</span> for IDF to dampen the effect of <span class="math notranslate nohighlight">\(\frac{N}{\text{df}}\)</span>.</p>
+<p>As an example, we compute the same document-term matrix as before, but this time using <code class="docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code>. We include only unigrams and remove English stop words.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">tfidf_vector</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">tfidf_vector_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_vector</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="n">term_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="n">tfidf_vector_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;freq&quot;</span> <span class="p">:</span> <span class="n">tfidf_vector_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)})</span>
+<span class="n">tfidf_vector_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">110</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="n">term_freq</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;freq&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">term</span><span class="p">]</span> <span class="c1"># take a portion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>countries</th>
+      <th>women</th>
+      <th>water</th>
+      <th>health</th>
+      <th>development</th>
+      <th>education</th>
+      <th>energy</th>
+      <th>social</th>
+      <th>public</th>
+      <th>policy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>110</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.144528</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.055794</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.150946</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.073888</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.105940</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.060643</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.128756</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.06901</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>0.134099</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.082325</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>0.000000</td>
+      <td>0.244198</td>
+      <td>0.0</td>
+      <td>0.063116</td>
+      <td>0.216640</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.059071</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>0.000000</td>
+      <td>0.097945</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.046368</td>
+      <td>0.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </section>
 <section id="feature-effectiveness">
 <span id="index-16"></span><span id="index-15"></span><span id="index-14"></span><span id="index-13"></span><span id="index-12"></span><h3><span class="section-number">14.3.2.2. </span>2.2.2 Feature Effectiveness<a class="headerlink" href="#feature-effectiveness" title="Link to this heading">#</a></h3>
@@ -1870,6 +1623,8 @@ number of documents containing term <span class="math notranslate nohighlight">\
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorizations">14.3.1.1. 2.1.1 Vectorizations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bag-of-words">14.3.1.1.1. Bag of Words</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-vectors">14.3.1.1.2. One-Hot Vectors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-count-vectors">14.3.1.1.3. Numeric Count Vectors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#document-term-matrices">14.3.1.1.4. Document-Term Matrices</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-grams">14.3.1.2. 2.1.2 N-Grams</a></li>
