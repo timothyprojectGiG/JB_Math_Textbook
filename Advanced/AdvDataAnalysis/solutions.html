@@ -569,11 +569,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">14.8.1. Preprocessing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-text-data">14.8.2. About Text Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-5">14.8.2.1. Exercise 2.5</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-6">14.8.2.2. Exercise 2.6</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-text-data">14.8.2. About Text Data</a></li>
 </ul>
             </nav>
         </div>
@@ -859,21 +855,40 @@ memory usage: 1.3+ MB
 <span class="n">cv2</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span> <span class="c1"># exclude English stop words</span>
 <span class="n">cv2_fit</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Length of the original vocabulary (with stop words):&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Length of the new vocabulary (without stop words):&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of stop words:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">get_stop_words</span><span class="p">()))</span>
+<span class="n">original_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">)</span> <span class="c1"># length of the original vocabulary (with stop words)</span>
+<span class="n">new_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">)</span> <span class="c1"># length of the new vocabulary (without stop words)</span>
+<span class="n">stopwords</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">get_stop_words</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Length of the original vocabulary (with stop words):&#39;</span><span class="p">,</span> <span class="n">original_len</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Length of the new vocabulary (without stop words):&#39;</span><span class="p">,</span> <span class="n">new_len</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of stop words:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">stopwords</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Difference between original and new vocabularies:&#39;</span><span class="p">,</span> <span class="n">original_len</span> <span class="o">-</span> <span class="n">new_len</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Length of the original vocabulary (with stop words): 61523
-Length of the new vocabulary (without stop words): 61223
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Length of the original vocabulary (with stop words): 45738
+Length of the new vocabulary (without stop words): 45440
 Number of stop words: 318
+Difference between original and new vocabularies: 298
 </pre></div>
 </div>
 </div>
 </div>
-<p>The difference between the vocabularies (300) is not equal to the number of stop words (318).</p>
+<p>The difference between the original and new vocabularies is less than the number of stop words. This is because not all of the stop words actually occur in the original vocabulary. The following code lists the stop words that are missing from the original vocabulary. Note how the difference between the original and new vocabulary lengths (298) added to the number of missing stopwords (20) is equal to the total number of stop words (318).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_stopwords</span> <span class="o">=</span> <span class="n">stopwords</span> <span class="o">-</span> <span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">missing_stopwords</span><span class="p">)</span><span class="si">}</span><span class="s1"> missing stopwords:&#39;</span><span class="p">,</span> <span class="n">missing_stopwords</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20 missing stopwords: {&#39;whereafter&#39;, &#39;whence&#39;, &#39;noone&#39;, &#39;thereupon&#39;, &#39;i&#39;, &#39;thence&#39;, &#39;a&#39;, &#39;latterly&#39;, &#39;yours&#39;, &#39;whereupon&#39;, &#39;couldnt&#39;, &#39;whoever&#39;, &#39;anyhow&#39;, &#39;hasnt&#39;, &#39;whither&#39;, &#39;hers&#39;, &#39;amoungst&#39;, &#39;hereupon&#39;, &#39;yourselves&#39;, &#39;beforehand&#39;}
+</pre></div>
+</div>
+</div>
+</div>
 <p><strong>Exercise 2.3</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -934,8 +949,7 @@ Number of stop words: 318
 </div>
 </div>
 </div>
-<section id="exercise-2-5">
-<h3><span class="section-number">14.8.2.1. </span>Exercise 2.5<a class="headerlink" href="#exercise-2-5" title="Link to this heading">#</a></h3>
+<p><strong>Exercise 2.5</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SDG:&#39;</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">118</span><span class="p">])</span>
@@ -951,11 +965,49 @@ Text: &quot;Female economic activities were critically examined and new light wa
 </div>
 </div>
 <p>The most frequent words are “women” and “development”, which occur 4 times each. This, together with the label of SDG 5 (gender equality), suggests that this document is about equality for women.</p>
-</section>
-<section id="exercise-2-6">
-<h3><span class="section-number">14.8.2.2. </span>Exercise 2.6<a class="headerlink" href="#exercise-2-6" title="Link to this heading">#</a></h3>
-<p>With stop word removal, we get fewer terms because there are fewer words in the vocabulary to group into unigrams.</p>
-</section>
+<p><strong>Exercise 2.6</strong></p>
+<p>Each token in a given document, except for the first and last, is grouped into two different bigrams (one with the previous token, and another with the next token). In this case, the large number of distinct bigrams in the entire corpus likely leads to a bigram vocabulary that is larger than the corresponding unigram vocabulary. However, many of the unigrams may occur more often than many of the bigrams do, making the total count of bigrams smaller than the total count of unigrams.</p>
+<p><strong>Exercise 2.7</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span> 
+<span class="n">count_vector</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total count of trigrams (without stop words):&#39;</span><span class="p">,</span> <span class="n">count_vector</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of unique trigrams (without stop words):&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total count of trigrams (without stop words): 1301713
+Number of unique trigrams (without stop words): 1214215
+</pre></div>
+</div>
+</div>
+</div>
+<p>The total count of trigrams is smaller than the total count of bigrams, but the number of unique trigrams is larger than the total number of unique bigrams. The explanation for this is similar to the reasoning offered in the solution to the previous exercise, but substituting bigrams for unigrams and trigrams for bigrams.</p>
+<p><strong>Exercise 2.8</strong></p>
+<p>Answers may vary depending on the sentences chosen.</p>
+<p><strong>Exercise 2.9</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tp</span> <span class="o">=</span> <span class="mi">398</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="mi">153</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="mi">83</span>
+
+<span class="n">precision</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span>
+<span class="n">recall</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision = </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s1">, recall = </span><span class="si">{</span><span class="n">recall</span><span class="si">}</span><span class="s1">, f1 = </span><span class="si">{</span><span class="n">f1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Precision = 0.7223230490018149, recall = 0.8274428274428275, f1 = 0.7713178294573643
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -1024,11 +1076,7 @@ Text: &quot;Female economic activities were critically examined and new light wa
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">14.8.1. Preprocessing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-text-data">14.8.2. About Text Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-5">14.8.2.1. Exercise 2.5</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-6">14.8.2.2. Exercise 2.6</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-text-data">14.8.2. About Text Data</a></li>
 </ul>
   </nav></div>
 
@@ -1043,7 +1091,7 @@ Text: &quot;Female economic activities were critically examined and new light wa
   <div class="footer-item">
     
 <p class="component-author">
-By Paul Isihara, Peter Jantsch, Thomas VanDrunen, and Claire Wagner, Editors
+By Paul Isihara, Claire Wagner, Peter Jantsch, and Thomas VanDrunen, Editors
 </p>
 
   </div>
