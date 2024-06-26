@@ -571,21 +571,21 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">6.5.1. Simple Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#world-bank-development-indicators">6.5.1.1. World Bank Development Indicators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression-models">6.5.1.2. Simple Linear Regression Models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-sum-of-squares-error">6.5.1.3. Minimizing the Sum of Squares Error</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-least-squares-line">6.5.1.4. Finding the Least Squares Line</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-and-goodness-of-fit-tests">6.5.1.5. <span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit Tests</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-on-model-parameters">6.5.1.6. Inference on Model Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-diagnostics">6.5.1.7. Model Diagnostics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1">6.5.1.8. Exercise 4.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#world-bank-development-indicators">World Bank Development Indicators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression-models">Simple Linear Regression Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-sum-of-squares-error">Minimizing the Sum of Squares Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-least-squares-line">Finding the Least Squares Line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-and-goodness-of-fit-tests"><span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit Tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-on-model-parameters">Inference on Model Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-diagnostics">Model Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1">Exercise 4.1</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">6.5.2. Multiple Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variables">6.5.2.1. Dummy Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">6.5.2.2. Model Diagnostics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.5.2.3. Inference on Model Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2">6.5.2.4. Exercise 4.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variables">Dummy Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Model Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Inference on Model Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2">Exercise 4.2</a></li>
 </ul>
 </li>
 </ul>
@@ -660,7 +660,7 @@ document.write(`
 <h2><span class="section-number">6.5.1. </span>Simple Linear Regression<a class="headerlink" href="#simple-linear-regression" title="Link to this heading">#</a></h2>
 <p>To begin, we’ll look at simple linear regression, which models the linear association between two variables. This allows us to see how changes in one variable affect the other. To motivate the theory, we’ll take a look at how statistics related to primary school education in a given country are associated with the literacy rate in that country.</p>
 <section id="world-bank-development-indicators">
-<h3><span class="section-number">6.5.1.1. </span>World Bank Development Indicators<a class="headerlink" href="#world-bank-development-indicators" title="Link to this heading">#</a></h3>
+<h3>World Bank Development Indicators<a class="headerlink" href="#world-bank-development-indicators" title="Link to this heading">#</a></h3>
 <p>The World Development Indicators dataset, maintained by the World Bank, contains information about a wide variety of topics related to global development. The <a class="reference external" href="https://datacatalog.worldbank.org/search/dataset/0037712">most recent version</a> of the dataset, as of writing, provides over 1500 indicators for 217 economies from 1960 to 2021. The dataset is licensed under a <a class="reference external" href="https://datacatalog.worldbank.org/public-licenses#cc-by">Creative Commons Attribution 4.0 International License</a>.</p>
 <p>For our example, we will look at three statistics related to literacy. We will limit our analysis to the 89 countries that have valid data for all three statistics for at least one year in the time range 2017-2021. For each country, we will consider the most recent year from that time range for which all three statistics are available.</p>
 <p>Let’s take a look at this data, which is in a file called <code class="docutils literal notranslate"><span class="pre">world_bank_literacy.csv</span></code> (click <a class="reference download internal" download="" href="../../_downloads/b5125f4c3e42152ed28a65502e6be57f/world_bank_literacy.csv"><span class="xref download myst">here</span></a> to download a copy).</p>
@@ -807,11 +807,11 @@ Name: adult_literacy_rate_(pct), dtype: float64
 </div>
 </section>
 <section id="simple-linear-regression-models">
-<h3><span class="section-number">6.5.1.2. </span>Simple Linear Regression Models<a class="headerlink" href="#simple-linear-regression-models" title="Link to this heading">#</a></h3>
+<h3>Simple Linear Regression Models<a class="headerlink" href="#simple-linear-regression-models" title="Link to this heading">#</a></h3>
 <p>Simple linear regression is the method we have of modeling the linear association between two variables. You may have learned in algebra that one common way to write the equation of a line is the <em>slope-intercept form</em> <span class="math notranslate nohighlight">\(b + mx\)</span>. In this equation, <span class="math notranslate nohighlight">\(m\)</span> is the slope, and the addition of <span class="math notranslate nohighlight">\(b\)</span> means that the line passes through the point <span class="math notranslate nohighlight">\((0,b)\)</span>, which is called the intercept of the line.</p>
 <p>However, we can see from the <a class="reference internal" href="#scatter-plot-simple"><span class="std std-ref">scatter plot</span></a> that our data points don’t exactly fit a straight line. Instead, they seem to have some random deviations around a general trend line. We can write this <em>line-plus-random-error</em> idea using the mathematical equation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f934393-5ced-4182-8640-6f6467678a5b">
-<span class="eqno">(6.18)<a class="headerlink" href="#equation-4f934393-5ced-4182-8640-6f6467678a5b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7b015c49-215a-48ed-b252-80eb5c349218">
+<span class="eqno">(6.18)<a class="headerlink" href="#equation-7b015c49-215a-48ed-b252-80eb5c349218" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y = \alpha + \beta x + \varepsilon.
 \end{equation}\]</div>
 <p>This is another type of statistical model, called a linear regression model. It says that the value of (the random variable) <span class="math notranslate nohighlight">\(Y\)</span> is just the value along the line <span class="math notranslate nohighlight">\(\alpha + \beta x\)</span> plus a random error <span class="math notranslate nohighlight">\(\varepsilon\)</span>. If we knew the slope <span class="math notranslate nohighlight">\(\beta\)</span> and intercept <span class="math notranslate nohighlight">\(\alpha\)</span> of the line, then we could plug in the value of <span class="math notranslate nohighlight">\(x\)</span> to get a good guess for <span class="math notranslate nohighlight">\(Y\)</span>, though it would be off by some error.</p>
@@ -854,7 +854,7 @@ Y = \alpha + \beta x + \varepsilon.
 </div>
 </section>
 <section id="minimizing-the-sum-of-squares-error">
-<h3><span class="section-number">6.5.1.3. </span>Minimizing the Sum of Squares Error<a class="headerlink" href="#minimizing-the-sum-of-squares-error" title="Link to this heading">#</a></h3>
+<h3>Minimizing the Sum of Squares Error<a class="headerlink" href="#minimizing-the-sum-of-squares-error" title="Link to this heading">#</a></h3>
 <p>If you spent some time thinking about where the “best” line should go, you probably tried to get it somewhere in the middle of the cloud of points, so that it wasn’t too far away from any one point. In that way it would follow the general trend, even if it didn’t exactly match any of the data points.</p>
 <p>We can make this idea more mathematical by considering something called the <strong>residual</strong>. For each country in our data set, we have a pair of primary school completion rates and literacy rates, which we could enumerate as pairs <span class="math notranslate nohighlight">\((x_i,y_i)\)</span>. Given any line <span class="math notranslate nohighlight">\(\hat y = a + bx\)</span>, the residual is the difference between the actual value <span class="math notranslate nohighlight">\(y_i\)</span> associated with <span class="math notranslate nohighlight">\(x_i\)</span> in the data, and the value <span class="math notranslate nohighlight">\(\hat y_i\)</span> that lies along the line <span class="math notranslate nohighlight">\(a + bx_i\)</span> (that is, the residual is <span class="math notranslate nohighlight">\(y_i - \hat y_i\)</span>). In other words, the residual measures how far our line is from passing through a certain data point.</p>
 <p>Below we look at plots of two different lines and examine the residuals associated with them. The residual for each point is the vertical distance from the point to the line. Which line do you think better fits the trend of the points? And what is the difference between the residuals of the two trend lines?</p>
@@ -904,15 +904,15 @@ Y = \alpha + \beta x + \varepsilon.
 </div>
 <p>The better trend line, Trend Line 2, has overall smaller residuals, so we might think that it would help  to pick the line that minimizes the sum of the residuals. This is <em>almost</em> the right idea! However, the worse line, Trend Line 1, has only negative residuals. So in fact the sum of its residuals is a negative number that will be smaller (at least on the number line) than the sum of the residuals of the better line.</p>
 <p>It turns out we don’t care about the sign of the residual, only its magnitude. To solve this issue, we square each of the residuals and take the sum to form a <strong>sum of squared errors (SSE)</strong>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-24e79fc6-8b32-4b40-81f1-c92328db5852">
-<span class="eqno">(6.19)<a class="headerlink" href="#equation-24e79fc6-8b32-4b40-81f1-c92328db5852" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-530b9f7a-41d9-4c74-955d-fa5d850fd9c7">
+<span class="eqno">(6.19)<a class="headerlink" href="#equation-530b9f7a-41d9-4c74-955d-fa5d850fd9c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     SSE = \sum_{i=1}^n (y_i - \hat y_i)^2
 \end{equation}\]</div>
 <p>In the end, we want to find the slope and intercept of the line that minimizes this quantity. Since we are minimizing the sum of squared errors, this best-fit line also goes by the name <strong>least-squares regression</strong> line. Solving this problem looks like it could be tricky, but it turns out that the solution is straightforward when we employ the help of a little bit of calculus. Or, even nicer (in the author’s opinion) is to use <a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html"><span class="std std-doc">a little algebra</span></a>. We do need to assume that the random error <span class="math notranslate nohighlight">\(\varepsilon\)</span> is normally distributed, but we will gloss over this assumption for now. You can read more about how to find the line of best fit elsewhere if you’re interested, but here we’ll simply find the solution using code.</p>
 <p>Why take the sum of the squares of the residuals instead of the sum of the absolute values of the residuals? One reason is mathematical: there is always a unique global minimizer to the SSE. Since squaring a large number will make it larger, this method penalizes very large residuals. Another reason is statistical: it turns out the slope and intercept of the least squares solution have special mathematical properties which make them the <em>maximum likelihood estimators</em> of the model’s true slope and intercept. But we won’t look into that here!</p>
 </section>
 <section id="finding-the-least-squares-line">
-<h3><span class="section-number">6.5.1.4. </span>Finding the Least Squares Line<a class="headerlink" href="#finding-the-least-squares-line" title="Link to this heading">#</a></h3>
+<h3>Finding the Least Squares Line<a class="headerlink" href="#finding-the-least-squares-line" title="Link to this heading">#</a></h3>
 <p>First, we can easily use software to get a visual of the least squares regression line using <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>’s <code class="docutils literal notranslate"><span class="pre">lmplot</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -978,8 +978,8 @@ Notes:
 </div>
 </div>
 <p>There is a lot of information here, most of which we’ll explain later on. For now, let’s see how to get the information about the slope and the intercept of the line. You can find these values in the second table under the column heading <code class="docutils literal notranslate"><span class="pre">coef</span></code>. From this, we can see that the intercept (<code class="docutils literal notranslate"><span class="pre">const</span></code>) is 6.6714, and the slope associated with the primary school completion rate is 0.8615. We can write that in slope-intercept form as the line</p>
-<div class="amsmath math notranslate nohighlight" id="equation-95d289e1-26e0-4c0b-a30a-b85897534b6c">
-<span class="eqno">(6.20)<a class="headerlink" href="#equation-95d289e1-26e0-4c0b-a30a-b85897534b6c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3c4e8498-5720-4c7c-9e1b-d34336b97299">
+<span class="eqno">(6.20)<a class="headerlink" href="#equation-3c4e8498-5720-4c7c-9e1b-d34336b97299" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat y = 6.6714 + 0.8615 x
 \end{equation}\]</div>
 <p>Now that we have this line, how can we understand how to use it? First, the slope tells us how the changes in <span class="math notranslate nohighlight">\(x\)</span> are connected to changes in <span class="math notranslate nohighlight">\(\hat y\)</span>. Here, an increase of 1% in the primary school completion rate (<span class="math notranslate nohighlight">\(x\)</span>) is associated with an average increase of about .865% in the literacy rate (<span class="math notranslate nohighlight">\(y\)</span>).</p>
@@ -990,7 +990,7 @@ Notes:
 </div>
 </section>
 <section id="r-2-and-goodness-of-fit-tests">
-<h3><span class="section-number">6.5.1.5. </span><span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit Tests<a class="headerlink" href="#r-2-and-goodness-of-fit-tests" title="Link to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit Tests<a class="headerlink" href="#r-2-and-goodness-of-fit-tests" title="Link to this heading">#</a></h3>
 <p>We mentioned before that we are using linear regression to <em>model</em> the relationship between two variables. But this only works if these variables actually have a linear relationship! Maybe they are actually related in a nonlinear way, or not related at all.</p>
 <p>We can get some idea of this by looking at the <a class="reference internal" href="#scatter-plot-simple"><span class="std std-ref">scatter plot</span></a>, but we can also quantify the strength of a linear relationship through a number called the <strong>correlation coefficient</strong> <span class="math notranslate nohighlight">\(r\)</span>. The number <span class="math notranslate nohighlight">\(r\)</span> is a value between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span> that measures the strength of the linear association between two variables.</p>
 <p>What’s a large value of <span class="math notranslate nohighlight">\(r\)</span> versus a small one? It depends on the problem! And as you get more comfortable with this, you’ll get a sense for it. Below we’ll take a closer look at how to understand this. As you look at these different plots, which would you say have a strong linear association?</p>
@@ -1100,16 +1100,16 @@ Notes:
 <p>There is a lot more to these kinds of tests, which become more important in the multiple regression case. We’ll come back to that later on!</p>
 </section>
 <section id="inference-on-model-parameters">
-<h3><span class="section-number">6.5.1.6. </span>Inference on Model Parameters<a class="headerlink" href="#inference-on-model-parameters" title="Link to this heading">#</a></h3>
+<h3>Inference on Model Parameters<a class="headerlink" href="#inference-on-model-parameters" title="Link to this heading">#</a></h3>
 <p>Now that we know how to find the line of best fit, we want to know how good our estimates of the slope and intercept are. We began by assuming that there is a linear model describing the relationship between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4c1620d6-4971-4537-9fa1-d58caf5615e6">
-<span class="eqno">(6.21)<a class="headerlink" href="#equation-4c1620d6-4971-4537-9fa1-d58caf5615e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-36511a46-18ed-4a5a-a9a2-6f1b0d55fa1a">
+<span class="eqno">(6.21)<a class="headerlink" href="#equation-36511a46-18ed-4a5a-a9a2-6f1b0d55fa1a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y = \alpha + \beta x + \varepsilon.
 \end{equation}\]</div>
 <p>Because we only have limited data on the relationship between these two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, we can’t calculate <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> exactly, but only estimate them with our least squares estimates <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. How can we know how good these estimates actually are? We turn again to our statistical inference tools of the confidence interval and hypothesis test.</p>
 <p>A big question in linear regression is whether knowing the value of <span class="math notranslate nohighlight">\(x\)</span> makes a difference in our estimation of <span class="math notranslate nohighlight">\(Y\)</span>. If it doesn’t, the slope value in the model would actually be 0. If it does, it would be something different from 0. But <span class="math notranslate nohighlight">\(\beta\)</span> is a parameter of the model, which we estimated by calculating the slope <span class="math notranslate nohighlight">\(b\)</span> using least squares. So we can use our hypothesis testing skills to decide if <span class="math notranslate nohighlight">\(\beta = 0\)</span> or not!</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9da57690-8f2e-4e80-9de1-8cdb83cc723c">
-<span class="eqno">(6.22)<a class="headerlink" href="#equation-9da57690-8f2e-4e80-9de1-8cdb83cc723c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e3c0ba89-9db5-4a83-85c7-3304a64d4486">
+<span class="eqno">(6.22)<a class="headerlink" href="#equation-e3c0ba89-9db5-4a83-85c7-3304a64d4486" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: \beta = 0, \\ H_1: \beta \neq 0.
 \end{equation}\]</div>
 <p>We can show that the test statistic for this hypothesis test is a T random variable, and its value is given in the model summary readout. Look for the column <code class="docutils literal notranslate"><span class="pre">t</span></code>, just two columns to the right of where you found the coefficients. And just next to that is the <span class="math notranslate nohighlight">\(P\)</span>-value for the test.</p>
@@ -1118,7 +1118,7 @@ Y = \alpha + \beta x + \varepsilon.
 <p>Before moving on, take some time to look over the model summary output again, and make sure that you can find all the information we’ve talked about so far.</p>
 </section>
 <section id="model-diagnostics">
-<h3><span class="section-number">6.5.1.7. </span>Model Diagnostics<a class="headerlink" href="#model-diagnostics" title="Link to this heading">#</a></h3>
+<h3>Model Diagnostics<a class="headerlink" href="#model-diagnostics" title="Link to this heading">#</a></h3>
 <p>To wrap up our discussion of simple linear regression, we need to address a few details that we have glossed over up to this point. In our previous discussion, we have made a few assumptions which we need to take a deeper look at.</p>
 <p>We assumed:</p>
 <ol class="arabic simple">
@@ -1129,8 +1129,8 @@ Y = \alpha + \beta x + \varepsilon.
 <p>These last two assumptions were not explicitly stated, but they are needed to make the regression interpretations work. And when we make assumptions like this, we need to check to see if these are reasonable! Here, we will show how to visually evaluate these assumptions using graphs.</p>
 <p>The first question of the relationship between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> can be easily evaluated through the <a class="reference internal" href="#scatter-plot-simple"><span class="std std-ref">scatter plot</span></a> we made at the beginning of this section. If the scatter plot isn’t clear, then the correlation coefficient can help!</p>
 <p>We can evaluate the next two claims by examining the residuals. The residuals are related to the random error since, according to the model,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ee8bf8de-1d50-46c1-8dbf-c2361b670ded">
-<span class="eqno">(6.23)<a class="headerlink" href="#equation-ee8bf8de-1d50-46c1-8dbf-c2361b670ded" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-412c7122-801e-4bfe-8f51-82fd393c6109">
+<span class="eqno">(6.23)<a class="headerlink" href="#equation-412c7122-801e-4bfe-8f51-82fd393c6109" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y_i - \hat y_i =  y_i - (a + b x_i) \approx y_i - (\alpha + \beta x_i) = \varepsilon_i.
 \end{equation}\]</div>
 <p>Plotting the residuals will give us an idea about the distribution of the <span class="math notranslate nohighlight">\(\varepsilon\)</span>, but we need two different types of plots to examine the assumptions.</p>
@@ -1275,7 +1275,7 @@ Notes:
 <p>In summary, if all of the diagnostic plots look ok, then the assumptions are reasonable, and our modeling results can be trusted! If not, there are other things you can try, but that is outside the scope of this section. It can take some time to get the hang of looking at these plots, but the more you practice the easier it becomes.</p>
 </section>
 <section id="exercise-4-1">
-<h3><span class="section-number">6.5.1.8. </span>Exercise 4.1<a class="headerlink" href="#exercise-4-1" title="Link to this heading">#</a></h3>
+<h3>Exercise 4.1<a class="headerlink" href="#exercise-4-1" title="Link to this heading">#</a></h3>
 <p>What sorts of team statistics are associated with winning in the English Premier League? We can explore this question at a high level using simple linear regression.</p>
 <p>Below, we load a dataset from the file <code class="docutils literal notranslate"><span class="pre">epl_table_22_23.csv</span></code> (click <a class="reference download internal" download="" href="../../_downloads/50391c046545c56d5ba292a9867beaa1/epl_table_22_23.csv"><span class="xref download myst">here</span></a> to download a copy). This dataset contains the league standings along with some common statistics for the 2022-23 EPL season. A few notes:</p>
 <ul class="simple">
@@ -1520,19 +1520,19 @@ Notes:
 </div></div></div>
 </div>
 <p>So what does it look like to understand how body mass changes based on these other variables? Mathematically, we are modeling <span class="math notranslate nohighlight">\(Y\)</span> as a linear function of several independent variables <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_p\)</span>. As in the single variable case, our variable <span class="math notranslate nohighlight">\(Y\)</span> won’t follow this linear function exactly. Instead, it will be subject to some random deviations, modelled by <span class="math notranslate nohighlight">\(\varepsilon\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4c9bc520-93d2-417d-a0b0-bee571b576c0">
-<span class="eqno">(6.24)<a class="headerlink" href="#equation-4c9bc520-93d2-417d-a0b0-bee571b576c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1ffba1c7-498a-44ab-8882-3dea9055e82e">
+<span class="eqno">(6.24)<a class="headerlink" href="#equation-1ffba1c7-498a-44ab-8882-3dea9055e82e" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p + \varepsilon.
 \end{equation}\]</div>
 <p>Again, we only have limited data, so we need to <em>estimate</em> the values of <span class="math notranslate nohighlight">\(\beta_0, \ldots, \beta_p\)</span> with some estimators <span class="math notranslate nohighlight">\(b_0, \ldots, b_p\)</span>. As a result, our new equation looks like this:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b5156815-8aee-4498-9eec-2a9892131f96">
-<span class="eqno">(6.25)<a class="headerlink" href="#equation-b5156815-8aee-4498-9eec-2a9892131f96" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f8377f35-d40c-433f-83b8-f4730ea1a6f8">
+<span class="eqno">(6.25)<a class="headerlink" href="#equation-f8377f35-d40c-433f-83b8-f4730ea1a6f8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat y = b_0 + b_1 x_1 + b_2 x_2 + \ldots + b_p x_p.
 \end{equation}\]</div>
 <p>In this equation, <span class="math notranslate nohighlight">\(b_0\)</span> is an intercept, while <span class="math notranslate nohighlight">\(b_1, \ldots, b_p\)</span> are slope parameters associated with the different variables <span class="math notranslate nohighlight">\(x_1, \ldots, x_p\)</span>. For example, the value of <span class="math notranslate nohighlight">\(b_3\)</span> tells us how much we estimate that <span class="math notranslate nohighlight">\(Y\)</span> would change when <span class="math notranslate nohighlight">\(x_3\)</span> changes, <em>with all other independent variables held constant</em>. Thinking about this in the abstract setting can be difficult, so we recommend coming back to this later in light of the example using real data below.</p>
 <p>So how do we find this ‘best’ linear function? The good news is that we can do this estimation using least squares! Similar to the one-variable case, this involves finding the values of <span class="math notranslate nohighlight">\(b_0, \ldots, b_p\)</span> that minimize the sum of the squared residuals:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-186164a2-378a-4ea1-88bb-3967cdf7af34">
-<span class="eqno">(6.26)<a class="headerlink" href="#equation-186164a2-378a-4ea1-88bb-3967cdf7af34" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5113dcd3-110c-4de3-ae9c-bdbd810bb223">
+<span class="eqno">(6.26)<a class="headerlink" href="#equation-5113dcd3-110c-4de3-ae9c-bdbd810bb223" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \min_{b_0, \ldots, b_p} \sum_{i=1}^n (y_i - \hat y_i)^2
 \end{equation}\]</div>
 <p>We’ll spare you the details in this section, as the notation can get messy and a full solution requires the use of linear algebra. You can find the details in most any college linear algebra book, including <a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html"><span class="std std-doc">this section</span></a> of this book.</p>
@@ -1582,8 +1582,8 @@ strong multicollinearity or other numerical problems.
 </div>
 </div>
 <p>Again, there is a lot of information here! First, we can take the coefficients to see that the estimated relationship between body mass (<span class="math notranslate nohighlight">\(Y\)</span>) and the bill depth (<span class="math notranslate nohighlight">\(x_1\)</span>) and flipper length (<span class="math notranslate nohighlight">\(x_2\)</span>) is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-491f20bb-8d16-4725-8e41-540cc9530f51">
-<span class="eqno">(6.27)<a class="headerlink" href="#equation-491f20bb-8d16-4725-8e41-540cc9530f51" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fa4b99cd-afbb-46e0-bdb8-ffcbf0fb6607">
+<span class="eqno">(6.27)<a class="headerlink" href="#equation-fa4b99cd-afbb-46e0-bdb8-ffcbf0fb6607" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat y = -6541.91 + 22.63 x_1 + 51.54 x_2
 \end{equation}\]</div>
 <p>This means that, on average, an increase of 1mm of bill depth is associated with an increase of about 23g in mass, at least for two penguins with the same flipper length. Likewise, holding bill depth constant, an increase of 1mm in flipper length is associated with an increase of about 52g in mass.</p>
@@ -1593,7 +1593,7 @@ strong multicollinearity or other numerical problems.
 </pre></div>
 </div>
 <section id="dummy-variables">
-<h3><span class="section-number">6.5.2.1. </span>Dummy Variables<a class="headerlink" href="#dummy-variables" title="Link to this heading">#</a></h3>
+<h3>Dummy Variables<a class="headerlink" href="#dummy-variables" title="Link to this heading">#</a></h3>
 <p>Categorical or qualitative variables can sometimes also be incorporated into a linear regression model by an appropriate transformation. In this case, we have at least one such variable that might be helpful in understanding body mass. Male penguins are typically larger than female penguins, so it might be helpful to incorporate the <code class="docutils literal notranslate"><span class="pre">sex</span></code> of the penguin into our model.</p>
 <div class="cell docutils container" id="scatter-plot-multiple">
 <div class="cell_input docutils container">
@@ -1745,8 +1745,8 @@ strong multicollinearity or other numerical problems.
 </div>
 </div>
 <p>Take a look at the output of this new model. One way to think about this is that there are two lines, one for each category (male and female). If the penguin is male (<span class="math notranslate nohighlight">\(x_2 = 1\)</span>), the regression line looks like</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0a17e1f7-5fbc-458d-8fef-d369af6869c0">
-<span class="eqno">(6.28)<a class="headerlink" href="#equation-0a17e1f7-5fbc-458d-8fef-d369af6869c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8807a407-30af-4430-b737-32d7c97ec705">
+<span class="eqno">(6.28)<a class="headerlink" href="#equation-8807a407-30af-4430-b737-32d7c97ec705" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat y_{male} = -5327.20  + 46.58 x_1 + 347.26 x_2 = -5327.20  + 46.58 x_1 + 347.26(1) = -4979.94 + 46.58 x_1.
 \end{equation}\]</div>
 <p>For a female penguin, on the other hand, the variable <span class="math notranslate nohighlight">\(x_2\)</span> would take a value of 0. See if you can write down the estimated line for a female penguin.</p>
@@ -1754,7 +1754,7 @@ strong multicollinearity or other numerical problems.
 <p>Notice that we only needed 1 dummy variable to describe a categorical variable with two possible levels. In general, we need to create one fewer variable than the number of levels in the variable. This is what the <code class="docutils literal notranslate"><span class="pre">drop_first=TRUE</span></code> argument does: it drops one of the dummies that isn’t necessary in the model. In the exercises, you’ll see what happens when we add in a categorical variable with 3 levels (<code class="docutils literal notranslate"><span class="pre">species</span></code>, which has levels <code class="docutils literal notranslate"><span class="pre">Gentoo</span></code>, <code class="docutils literal notranslate"><span class="pre">Adelie</span></code>, or <code class="docutils literal notranslate"><span class="pre">Chinstrap</span></code>).</p>
 </section>
 <section id="id1">
-<h3><span class="section-number">6.5.2.2. </span>Model Diagnostics<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>Model Diagnostics<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>The assumptions for a multiple linear regression model are nearly the same as for a simple linear regression model, and they are not much more difficult to evaluate. Once again, we need to assume that the relationship between <span class="math notranslate nohighlight">\(Y\)</span> and the input variables <span class="math notranslate nohighlight">\(x_1, \ldots, x_p\)</span> is linear. And as before, we can check this assumption by looking at the <a class="reference internal" href="#scatter-plot-multiple"><span class="std std-ref">scatter plot</span></a> we made.</p>
 <p>We also need to assume that the residuals are nearly normal and independent of the input variables. Coding the plots to check these last two assumptions looks much the same as it did before.</p>
 <div class="cell docutils container">
@@ -1802,14 +1802,14 @@ strong multicollinearity or other numerical problems.
 <p>But we’ve glossed over something important! If you looked closely at the <a class="reference internal" href="#scatter-plot-multiple"><span class="std std-ref">original scatter plot</span></a>, you probably noticed that male penguins don’t just have larger body mass, they also have larger flipper length. In other words, the input variables <code class="docutils literal notranslate"><span class="pre">sex</span></code> and <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code> are themselves correlated, which could be causing an issue in our model. (Note that the model readout also indicates that this might be a problem.) We can get a better look at this through some <a class="reference internal" href="../../Data.html"><span class="std std-doc">exploratory data analysis</span></a>. But for now, let’s move on to some other topics.</p>
 </section>
 <section id="id2">
-<h3><span class="section-number">6.5.2.3. </span>Inference on Model Parameters<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>Inference on Model Parameters<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>The techniques of inference that we talked about in the single-variable case carry over to the multiple regression model. The main difference is the interpretation of the readout results. Because we have multiple variables involved in the model, which themselves may be linearly connected, the matter becomes slightly more complex.</p>
 <p>First, we might ask how well the model is doing overall. How well does it fit the data? The software has again performed the <em>Goodness of Fit Test</em> for us, comparing (in basic terms) the null hypothesis that the model is not a good fit versus the alternative hypothesis that it is a good fit. Looking back at the model readout, we can find that our F-statistic is 691.0, yielding an extremely small P-value of <span class="math notranslate nohighlight">\(2.53\times10^{-120}\)</span> (0, for our purposes). This means that our model is a good fit and that our input variables are providing some information about <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code>.</p>
 <p>This test looks at the fit of the model all at once, but we can also look in more detail at the values of the individual “slope” coeffecients associated with each input. The model readout provides a seperate hypothesis test for whether each coefficient is significantly different from zero in the columns <code class="docutils literal notranslate"><span class="pre">t</span></code> (the test statistic) and <code class="docutils literal notranslate"><span class="pre">P&gt;|t|</span></code> (the P-value). Moreover, the readout also gives 95% confidence intervals for each coefficient. This information can help you determine the effect that a single variable (such as flipper length) has on body mass when you also account for the differences in the other variables (such as the sex of the animal).</p>
 <p>There is a lot more to say about this, and about regression as a whole, but now you should have enough knowledge of the basics to be able to build and interpret a regression model on your own!</p>
 </section>
 <section id="exercise-4-2">
-<h3><span class="section-number">6.5.2.4. </span>Exercise 4.2<a class="headerlink" href="#exercise-4-2" title="Link to this heading">#</a></h3>
+<h3>Exercise 4.2<a class="headerlink" href="#exercise-4-2" title="Link to this heading">#</a></h3>
 <p>Create a new model using <code class="docutils literal notranslate"><span class="pre">sex</span></code>, <code class="docutils literal notranslate"><span class="pre">species</span></code>, and <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code> to predict <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code>.</p>
 <ol class="arabic simple">
 <li><p>How many different levels (i.e., possible categories) are in the <code class="docutils literal notranslate"><span class="pre">species</span></code> variable? How does the software handle the <code class="docutils literal notranslate"><span class="pre">species</span></code> variable?</p></li>
@@ -1886,21 +1886,21 @@ strong multicollinearity or other numerical problems.
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">6.5.1. Simple Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#world-bank-development-indicators">6.5.1.1. World Bank Development Indicators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression-models">6.5.1.2. Simple Linear Regression Models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-sum-of-squares-error">6.5.1.3. Minimizing the Sum of Squares Error</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-least-squares-line">6.5.1.4. Finding the Least Squares Line</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-and-goodness-of-fit-tests">6.5.1.5. <span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit Tests</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-on-model-parameters">6.5.1.6. Inference on Model Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-diagnostics">6.5.1.7. Model Diagnostics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1">6.5.1.8. Exercise 4.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#world-bank-development-indicators">World Bank Development Indicators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression-models">Simple Linear Regression Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-sum-of-squares-error">Minimizing the Sum of Squares Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-least-squares-line">Finding the Least Squares Line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-and-goodness-of-fit-tests"><span class="math notranslate nohighlight">\(R^2\)</span> and Goodness of Fit Tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-on-model-parameters">Inference on Model Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-diagnostics">Model Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1">Exercise 4.1</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">6.5.2. Multiple Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variables">6.5.2.1. Dummy Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">6.5.2.2. Model Diagnostics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.5.2.3. Inference on Model Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2">6.5.2.4. Exercise 4.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variables">Dummy Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Model Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Inference on Model Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-2">Exercise 4.2</a></li>
 </ul>
 </li>
 </ul>

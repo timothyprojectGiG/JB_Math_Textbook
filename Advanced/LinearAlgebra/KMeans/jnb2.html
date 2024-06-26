@@ -573,20 +573,20 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-of-data">10.3.1. Clustering of Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-gradient-descent">10.3.2. Optimization by Gradient Descent</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-1">10.3.3. Example 3.1.</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-descent">10.3.3.1. Coordinate Descent</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-coordinate-and-block-descent">10.3.3.2. Optimization by Coordinate and Block Descent</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-2">10.3.3.2.1. Example 3.2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-descent">Coordinate Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-coordinate-and-block-descent">Optimization by Coordinate and Block Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-2">Example 3.2.</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-descent">10.3.3.3. Block Descent</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering-optimization-problem">10.3.3.4. K-MEANS CLUSTERING OPTIMIZATION PROBLEM</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-3">10.3.3.5. Example 3.3.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-block-descents-stepwise-minimization-of-j">10.3.3.6. Proof of Block Descent’s Stepwise Minimization of <span class="math notranslate nohighlight">\(J\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-descent">Block Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering-optimization-problem">K-MEANS CLUSTERING OPTIMIZATION PROBLEM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-3">Example 3.3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-block-descents-stepwise-minimization-of-j">Proof of Block Descent’s Stepwise Minimization of <span class="math notranslate nohighlight">\(J\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.3.4. Exercises</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab">10.3.5. LAB</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-assignment">10.3.5.1. Lab Assignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-assignment">Lab Assignment</a></li>
 </ul>
 </li>
 </ul>
@@ -663,13 +663,13 @@ We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)
 <p>Note that <span class="math notranslate nohighlight">\(J=(w_1+1)^2+(w_2+2)^2-5\)</span> has a minimum point at <span class="math notranslate nohighlight">\(\mathbf{w}^*=(-1,-2)\)</span>. That point is where we would expect the gradient descent sequence <span class="math notranslate nohighlight">\(\mathbf{w}_n\)</span> to converge.</p>
 <p id="index-2">We continue with minimizing a loss function <span class="math notranslate nohighlight">\(J(w_1,w_2,\dots,w_s)\)</span> by introducing two additional methods of optimization.</p>
 <section id="coordinate-descent">
-<h3><span class="section-number">10.3.3.1. </span>Coordinate Descent<a class="headerlink" href="#coordinate-descent" title="Link to this heading">#</a></h3>
+<h3>Coordinate Descent<a class="headerlink" href="#coordinate-descent" title="Link to this heading">#</a></h3>
 <p>In contrast to gradient descent, <i>coordinate descent</i> seeks to minimize the value of <span class="math notranslate nohighlight">\(J\)</span> one coordinate at a time. For example, to minimize <span class="math notranslate nohighlight">\(J\)</span>, we begin with an initial point <span class="math notranslate nohighlight">\(\mathbf{w}_0\)</span> which specifies the values for <span class="math notranslate nohighlight">\((w_1,w_2,\dots,w_s)\)</span> and look for the minimum value of <span class="math notranslate nohighlight">\(J\)</span> obtainable by varying <span class="math notranslate nohighlight">\(w_1\)</span> and keep the remaining variables <span class="math notranslate nohighlight">\(w_2,\dots,w_s\)</span> fixed. After finding the value of <span class="math notranslate nohighlight">\(w_1\)</span> that gives a minimum  <span class="math notranslate nohighlight">\(J\)</span>, we continue by varying the value of <span class="math notranslate nohighlight">\(w_2\)</span> to further minimize <span class="math notranslate nohighlight">\(J\)</span> while keeping the newly obtained <span class="math notranslate nohighlight">\(w_1\)</span> and the other variables fixed.  We continue this process until the value of <span class="math notranslate nohighlight">\(J\)</span> remains unchanged (or only changes at each step by an amount less than a specified threshold) when cycling through all <span class="math notranslate nohighlight">\(n\)</span> variables.</p>
 </section>
 <section id="optimization-by-coordinate-and-block-descent">
-<span id="index-3"></span><h3><span class="section-number">10.3.3.2. </span>Optimization by Coordinate and Block Descent<a class="headerlink" href="#optimization-by-coordinate-and-block-descent" title="Link to this heading">#</a></h3>
+<span id="index-3"></span><h3>Optimization by Coordinate and Block Descent<a class="headerlink" href="#optimization-by-coordinate-and-block-descent" title="Link to this heading">#</a></h3>
 <section id="example-3-2">
-<h4><span class="section-number">10.3.3.2.1. </span>Example 3.2.<a class="headerlink" href="#example-3-2" title="Link to this heading">#</a></h4>
+<h4>Example 3.2.<a class="headerlink" href="#example-3-2" title="Link to this heading">#</a></h4>
 <p>Use  coordinate descent to minimize</p>
 <div class="math notranslate nohighlight">
 \[J(w_1,w_2)=(w_1-1)^2 + (w_2-2)^2,\]</div>
@@ -679,11 +679,11 @@ We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)
 </section>
 </section>
 <section id="block-descent">
-<h3><span class="section-number">10.3.3.3. </span>Block Descent<a class="headerlink" href="#block-descent" title="Link to this heading">#</a></h3>
+<h3>Block Descent<a class="headerlink" href="#block-descent" title="Link to this heading">#</a></h3>
 <p>Block descent is similar to coordinate descent except we minimize <span class="math notranslate nohighlight">\(J\)</span> over blocks of variables rather than a single variable. The <span class="math notranslate nohighlight">\(k\)</span>-means clustering method is based on block descent, as we now explain.</p>
 </section>
 <section id="k-means-clustering-optimization-problem">
-<h3><span class="section-number">10.3.3.4. </span>K-MEANS CLUSTERING OPTIMIZATION PROBLEM<a class="headerlink" href="#k-means-clustering-optimization-problem" title="Link to this heading">#</a></h3>
+<h3>K-MEANS CLUSTERING OPTIMIZATION PROBLEM<a class="headerlink" href="#k-means-clustering-optimization-problem" title="Link to this heading">#</a></h3>
 <p>Find <span class="math notranslate nohighlight">\(\mathbf{z}_1,\dots,\mathbf{z}_k\)</span> and <span class="math notranslate nohighlight">\(y_{i,j}\)</span> that</p>
 <div class="math notranslate nohighlight">
 \[
@@ -701,7 +701,7 @@ We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)
 <p>We continue this process until the value of <span class="math notranslate nohighlight">\(J\)</span> either is unchanged or only changes by some amount less than a specified threshold after completing the two steps in the algorithm.</p>
 </section>
 <section id="example-3-3">
-<h3><span class="section-number">10.3.3.5. </span>Example 3.3.<a class="headerlink" href="#example-3-3" title="Link to this heading">#</a></h3>
+<h3>Example 3.3.<a class="headerlink" href="#example-3-3" title="Link to this heading">#</a></h3>
 <p>Use <span class="math notranslate nohighlight">\(k\)</span>-means clustering with <span class="math notranslate nohighlight">\(k=2\)</span> to divide the points <span class="math notranslate nohighlight">\(\mathbf{x}_1=(0,0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}_2=(10,0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}_3=(10,1)\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{x}_4=(0,1)\)</span> into two clusters. Begin with the prototypes <span class="math notranslate nohighlight">\(z_1=(0,0)\)</span> and <span class="math notranslate nohighlight">\(z_2=(10,0)\)</span>.</p>
 <p><b> Solution:</b></p>
 <p>i)  Fix the prototypes <span class="math notranslate nohighlight">\(z_1=(0,0)\)</span> and <span class="math notranslate nohighlight">\(z_2=(10,0)\)</span>; we have <span class="math notranslate nohighlight">\(y_{1,1}=1\)</span>, <span class="math notranslate nohighlight">\(y_{1,2}=0\)</span>, <span class="math notranslate nohighlight">\(y_{2,1}=0\)</span>, <span class="math notranslate nohighlight">\(y_{2,2}=1\)</span>, <span class="math notranslate nohighlight">\(y_{3,1}=0\)</span>, <span class="math notranslate nohighlight">\(y_{3,2}=1\)</span>, <span class="math notranslate nohighlight">\(y_{4,1}=1\)</span>,  and <span class="math notranslate nohighlight">\(y_{4,2}=0\)</span>;</p>
@@ -711,7 +711,7 @@ We have <span class="math notranslate nohighlight">\(\nabla J=(2w_1+2,2w_2+4).\)
 <p>Observing that <span class="math notranslate nohighlight">\(y_{1,1}=1\)</span> and <span class="math notranslate nohighlight">\(y_{4,1}=1\)</span>,  the points <span class="math notranslate nohighlight">\(\mathbf{x_1}=(0,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x_4}=(0,1)\)</span> are assigned to cluster 1. Furthermore, since <span class="math notranslate nohighlight">\(y_{2,2}=1\)</span> and <span class="math notranslate nohighlight">\(y_{3,2}=1\)</span>, the points <span class="math notranslate nohighlight">\(\mathbf{x_2}=(10,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x_3}=(10,1)\)</span> are assigned to cluster 2.</p>
 </section>
 <section id="proof-of-block-descents-stepwise-minimization-of-j">
-<h3><span class="section-number">10.3.3.6. </span>Proof of Block Descent’s Stepwise Minimization of <span class="math notranslate nohighlight">\(J\)</span><a class="headerlink" href="#proof-of-block-descents-stepwise-minimization-of-j" title="Link to this heading">#</a></h3>
+<h3>Proof of Block Descent’s Stepwise Minimization of <span class="math notranslate nohighlight">\(J\)</span><a class="headerlink" href="#proof-of-block-descents-stepwise-minimization-of-j" title="Link to this heading">#</a></h3>
 <p>Since <span class="math notranslate nohighlight">\(J\)</span> is the sum of squared distances between data points and their cluster centers, it is clear that if we fix the prototypes, <span class="math notranslate nohighlight">\(J\)</span> will be minimized by assigning each data point to the nearest prototype. We now show that for any fixed choice of assignment variables, the loss function <span class="math notranslate nohighlight">\(J\)</span> is minimized when each prototype is the mean of the points in its cluster.</p>
 <p>Let
 <span class="math notranslate nohighlight">\(J=\sum_{j=1}^k O_j\)</span> where <span class="math notranslate nohighlight">\(O_j=\sum_{i-1}^my_{i,j}\|\mathbf{x}_{i}-\mathbf{z}_j\|^2.\)</span> Note that <span class="math notranslate nohighlight">\(O_j\)</span> can be computed using only the points in cluster <span class="math notranslate nohighlight">\(j\)</span>,  since otherwise <span class="math notranslate nohighlight">\(y_{i,j}=0\)</span>. Denote these points <span class="math notranslate nohighlight">\(\mathbf{u}_1,\dots,\mathbf{u}_{n_j}.\)</span> Then for each <span class="math notranslate nohighlight">\(j\)</span>, we minimize</p>
@@ -13056,7 +13056,7 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /anaconda3/lib/python3.1
 <p>Note that the I55 Expressway which runs northeast from Summit to Chicago is an approximate dividing line between the clusters on the South and West sides of Chicago.</p>
 <p>Now, we will compare the police district boundaries in Chicago to the 22 clusters our k-means algorithm comes up with.</p>
 <section id="lab-assignment">
-<h3><span class="section-number">10.3.5.1. </span>Lab Assignment<a class="headerlink" href="#lab-assignment" title="Link to this heading">#</a></h3>
+<h3>Lab Assignment<a class="headerlink" href="#lab-assignment" title="Link to this heading">#</a></h3>
 <div class="admonition-lab-assignment admonition">
 <p class="admonition-title">Lab Assignment</p>
 <p>Use k-means to divide the crime data into 22 clusters.  How does the result compare
@@ -13133,20 +13133,20 @@ with a map of the 22 Chicago Police Deparftment districts&gt;</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-of-data">10.3.1. Clustering of Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-gradient-descent">10.3.2. Optimization by Gradient Descent</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-1">10.3.3. Example 3.1.</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-descent">10.3.3.1. Coordinate Descent</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-coordinate-and-block-descent">10.3.3.2. Optimization by Coordinate and Block Descent</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-2">10.3.3.2.1. Example 3.2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-descent">Coordinate Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-coordinate-and-block-descent">Optimization by Coordinate and Block Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-2">Example 3.2.</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-descent">10.3.3.3. Block Descent</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering-optimization-problem">10.3.3.4. K-MEANS CLUSTERING OPTIMIZATION PROBLEM</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-3">10.3.3.5. Example 3.3.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-block-descents-stepwise-minimization-of-j">10.3.3.6. Proof of Block Descent’s Stepwise Minimization of <span class="math notranslate nohighlight">\(J\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-descent">Block Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering-optimization-problem">K-MEANS CLUSTERING OPTIMIZATION PROBLEM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-3">Example 3.3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-block-descents-stepwise-minimization-of-j">Proof of Block Descent’s Stepwise Minimization of <span class="math notranslate nohighlight">\(J\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.3.4. Exercises</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab">10.3.5. LAB</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-assignment">10.3.5.1. Lab Assignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-assignment">Lab Assignment</a></li>
 </ul>
 </li>
 </ul>

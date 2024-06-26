@@ -570,13 +570,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-roc-curve">14.6.1. 5.1 The ROC Curve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classifiers">14.6.2. 5.2 Multiclass Classifiers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-rest">14.6.2.1. 5.2.1 One vs Rest</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-one">14.6.2.2. 5.2.2 One vs One</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-roc-curve">14.6.1. The ROC Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classifiers">14.6.2. Multiclass Classifiers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-rest">One vs Rest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-one">One vs One</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">14.6.3. 5.3 More Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">14.6.3. More Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -659,16 +659,16 @@ weighted avg     0.8276    0.8312    0.8257      8141
 </div>
 </div>
 <section id="the-roc-curve">
-<span id="index-4"></span><span id="index-3"></span><span id="index-2"></span><span id="index-1"></span><h2><span class="section-number">14.6.1. </span>5.1 The ROC Curve<a class="headerlink" href="#the-roc-curve" title="Link to this heading">#</a></h2>
+<span id="index-4"></span><span id="index-3"></span><span id="index-2"></span><span id="index-1"></span><h2><span class="section-number">14.6.1. </span>The ROC Curve<a class="headerlink" href="#the-roc-curve" title="Link to this heading">#</a></h2>
 <p>The goal of any classifier is to maximize true positive rate (TPR) while minimizing false positive rate (FPR). The ROC curve is then determined as follows: for any given threshold, we line up the points, with TPR on the Y-axis and FPR on the X-axis. Points at the top left corner of the plot imply an FPR of 0 and a TPR of 1 (i.e., perfect classification).</p>
 <p>A model can be evaluating qualitatively by judging the “steepness” of its ROC curve; this evaluation can be made quantitative by finding the Area Under the Curve (AUC). A larger AUC implies a steeper curve and is <i>usually</i> better.</p>
 <p>For binary classification, each point on the ROC curve represents a different threshold and can be a choice for the final classifier to be used; the choice made typically depends on the business requirements and constraints.</p>
 </section>
 <section id="multiclass-classifiers">
-<span id="index-6"></span><span id="index-5"></span><h2><span class="section-number">14.6.2. </span>5.2 Multiclass Classifiers<a class="headerlink" href="#multiclass-classifiers" title="Link to this heading">#</a></h2>
+<span id="index-6"></span><span id="index-5"></span><h2><span class="section-number">14.6.2. </span>Multiclass Classifiers<a class="headerlink" href="#multiclass-classifiers" title="Link to this heading">#</a></h2>
 <p>In any multiclass classification problem, there are multiple class labels <span class="math notranslate nohighlight">\((c_1, c_2, …, c_k)\)</span> in the data, and each training sample is labeled as belonging to one class only. The strategies used with binary classifiers can be taken in multiclass classifiers by reducing the problem to binary classification. There are two strategies typically taken to do this, those being One vs. Rest (OvR) and One vs. One (OvO).</p>
 <section id="one-vs-rest">
-<h3><span class="section-number">14.6.2.1. </span>5.2.1 One vs Rest<a class="headerlink" href="#one-vs-rest" title="Link to this heading">#</a></h3>
+<h3>One vs Rest<a class="headerlink" href="#one-vs-rest" title="Link to this heading">#</a></h3>
 <p>The OvR method of evaluation judges the model ability to determine if a given item belongs to a given class or if it is in one of the other classes. For each class label <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\((c_1, c_2, …, c_k)\)</span>, we say that the <i>positive samples</i> are those that are labeled as class <span class="math notranslate nohighlight">\(c\)</span>, and the <i>negative samples</i> are all the rest of the samples. We then fit and predict for class <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <p>For scoring each sample, we simply take the highest probable score (i.e., highest score) of the <span class="math notranslate nohighlight">\(k\)</span> classifiers as the class for the sample.</p>
 <p>When looking at the ROC curve for the OvR strategy on our classification, we get the following graphic:</p>
@@ -727,7 +727,7 @@ weighted avg     0.8276    0.8312    0.8257      8141
 </div>
 </section>
 <section id="one-vs-one">
-<span id="index-7"></span><h3><span class="section-number">14.6.2.2. </span>5.2.2 One vs One<a class="headerlink" href="#one-vs-one" title="Link to this heading">#</a></h3>
+<span id="index-7"></span><h3>One vs One<a class="headerlink" href="#one-vs-one" title="Link to this heading">#</a></h3>
 <p>The OvO approach compares each class to another single class for all possible pairs of classes. For each class label <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\((c_1, c_2, …, c_k)\)</span>, and for each pair <span class="math notranslate nohighlight">\((c, c_j)\)</span>, with <span class="math notranslate nohighlight">\(c_j \neq c\)</span>, we say that the <i>positive samples</i> are those that are labeled as class <span class="math notranslate nohighlight">\(c\)</span>, and the <i>negative samples</i> are those that are labeled as class <span class="math notranslate nohighlight">\(c_j\)</span>.</p>
 <p>For each sample to be scored, it gets <span class="math notranslate nohighlight">\(k-1\)</span> classification results, and we then vote by majority to determine the class for the sample.</p>
 <p>Similar to the OvR strategy, we can produce an ROC curve for the OvO strategy as follows:</p>
@@ -811,7 +811,7 @@ weighted avg     0.8276    0.8312    0.8257      8141
 </section>
 </section>
 <section id="more-exercises">
-<h2><span class="section-number">14.6.3. </span>5.3 More Exercises<a class="headerlink" href="#more-exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.6.3. </span>More Exercises<a class="headerlink" href="#more-exercises" title="Link to this heading">#</a></h2>
 <div class="admonition-exercise-5-4 admonition">
 <p class="admonition-title">Exercise 5.4</p>
 <p>Modify your function from Exercise 3.1 to now output the test set metrics for the classification you run. Be sure to include precision, recall, f1, and accuracy.</p>
@@ -887,13 +887,13 @@ weighted avg     0.8276    0.8312    0.8257      8141
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-roc-curve">14.6.1. 5.1 The ROC Curve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classifiers">14.6.2. 5.2 Multiclass Classifiers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-rest">14.6.2.1. 5.2.1 One vs Rest</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-one">14.6.2.2. 5.2.2 One vs One</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-roc-curve">14.6.1. The ROC Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-classifiers">14.6.2. Multiclass Classifiers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-rest">One vs Rest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-vs-one">One vs One</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">14.6.3. 5.3 More Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">14.6.3. More Exercises</a></li>
 </ul>
   </nav></div>
 
