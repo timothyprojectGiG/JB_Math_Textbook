@@ -1,3 +1,3 @@
 # PRE-COLLEGE
 :::{note}
-The material in this chapter is a sampling of labs that were used in after-school programs at Cornerstone Academy and Celestial Ministries in Chicago.  The original idea for these labs came out of dicussions during Summer 2020 by a Wheaton College (IL) team comprised of Dr. Paul Isihara (professor), Hope Wood (Emerald South Scholars staff) and Demetrius Crawford (Emerald South Scholars student).
+The material in this chapter is a sampling of labs that were used in after-school programs at Cornerstone Academy and Celestial Ministries in Chicago and a math for the benefit of society general education course at Wheaton College (IL).  The original idea for these labs came out of dicussions during Summer 2020 by a Wheaton College (IL) team comprised of Dr. Paul Isihara (professor), Hope Wood (Emerald South Scholars staff) and Demetrius Crawford (Emerald South Scholars student).
