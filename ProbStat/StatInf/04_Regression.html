@@ -144,7 +144,7 @@
 
   
 
-<a class="navbar-brand logo" href="../../pdfintro.html">
+<a class="navbar-brand logo" href="../../intro.html">
   
   
   
@@ -176,7 +176,7 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../../pdfintro.html">
+                <a class="reference internal" href="../../intro.html">
                     An Introduction to Python Jupyter Notebooks for College Math Teachers
                 </a>
             </li>
@@ -347,6 +347,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_labsolution.html">15.7. JNB Lab Solutions</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -813,8 +814,8 @@ Name: adult_literacy_rate_(pct), dtype: float64
 <h3>Simple Linear Regression Models<a class="headerlink" href="#simple-linear-regression-models" title="Link to this heading">#</a></h3>
 <p>Simple linear regression is the method we have of modeling the linear association between two variables. You may have learned in algebra that one common way to write the equation of a line is the <em>slope-intercept form</em> <span class="math notranslate nohighlight">\(b + mx\)</span>. In this equation, <span class="math notranslate nohighlight">\(m\)</span> is the slope, and the addition of <span class="math notranslate nohighlight">\(b\)</span> means that the line passes through the point <span class="math notranslate nohighlight">\((0,b)\)</span>, which is called the intercept of the line.</p>
 <p>However, we can see from the <a class="reference internal" href="#scatter-plot-simple"><span class="std std-ref">scatter plot</span></a> that our data points don’t exactly fit a straight line. Instead, they seem to have some random deviations around a general trend line. We can write this <em>line-plus-random-error</em> idea using the mathematical equation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-61a645e4-4680-4bf8-9927-755b8ce257e9">
-<span class="eqno">(6.18)<a class="headerlink" href="#equation-61a645e4-4680-4bf8-9927-755b8ce257e9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-36b60641-32b9-423c-abb3-5e0d8bc483be">
+<span class="eqno">(6.18)<a class="headerlink" href="#equation-36b60641-32b9-423c-abb3-5e0d8bc483be" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y = \alpha + \beta x + \varepsilon.
 \end{equation}\]</div>
 <p>This is another type of statistical model, called a linear regression model. It says that the value of (the random variable) <span class="math notranslate nohighlight">\(Y\)</span> is just the value along the line <span class="math notranslate nohighlight">\(\alpha + \beta x\)</span> plus a random error <span class="math notranslate nohighlight">\(\varepsilon\)</span>. If we knew the slope <span class="math notranslate nohighlight">\(\beta\)</span> and intercept <span class="math notranslate nohighlight">\(\alpha\)</span> of the line, then we could plug in the value of <span class="math notranslate nohighlight">\(x\)</span> to get a good guess for <span class="math notranslate nohighlight">\(Y\)</span>, though it would be off by some error.</p>
@@ -907,8 +908,8 @@ Y = \alpha + \beta x + \varepsilon.
 </div>
 <p>The better trend line, Trend Line 2, has overall smaller residuals, so we might think that it would help  to pick the line that minimizes the sum of the residuals. This is <em>almost</em> the right idea! However, the worse line, Trend Line 1, has only negative residuals. So in fact the sum of its residuals is a negative number that will be smaller (at least on the number line) than the sum of the residuals of the better line.</p>
 <p>It turns out we don’t care about the sign of the residual, only its magnitude. To solve this issue, we square each of the residuals and take the sum to form a <strong>sum of squared errors (SSE)</strong>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-58db0bfa-5b4e-44cd-8f8d-833b1c2b2ef9">
-<span class="eqno">(6.19)<a class="headerlink" href="#equation-58db0bfa-5b4e-44cd-8f8d-833b1c2b2ef9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1a1ea157-d19f-4c80-b697-9dc43a1916b2">
+<span class="eqno">(6.19)<a class="headerlink" href="#equation-1a1ea157-d19f-4c80-b697-9dc43a1916b2" title="Permalink to this equation">#</a></span>\[\begin{equation}
     SSE = \sum_{i=1}^n (y_i - \hat y_i)^2
 \end{equation}\]</div>
 <p>In the end, we want to find the slope and intercept of the line that minimizes this quantity. Since we are minimizing the sum of squared errors, this best-fit line also goes by the name <strong>least-squares regression</strong> line. Solving this problem looks like it could be tricky, but it turns out that the solution is straightforward when we employ the help of a little bit of calculus. Or, even nicer (in the author’s opinion) is to use <a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html"><span class="std std-doc">a little algebra</span></a>. We do need to assume that the random error <span class="math notranslate nohighlight">\(\varepsilon\)</span> is normally distributed, but we will gloss over this assumption for now. You can read more about how to find the line of best fit elsewhere if you’re interested, but here we’ll simply find the solution using code.</p>
@@ -981,8 +982,8 @@ Notes:
 </div>
 </div>
 <p>There is a lot of information here, most of which we’ll explain later on. For now, let’s see how to get the information about the slope and the intercept of the line. You can find these values in the second table under the column heading <code class="docutils literal notranslate"><span class="pre">coef</span></code>. From this, we can see that the intercept (<code class="docutils literal notranslate"><span class="pre">const</span></code>) is 6.6714, and the slope associated with the primary school completion rate is 0.8615. We can write that in slope-intercept form as the line</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bff56513-487d-45c5-9d2c-5a2fd4d3249f">
-<span class="eqno">(6.20)<a class="headerlink" href="#equation-bff56513-487d-45c5-9d2c-5a2fd4d3249f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0692756d-1ea4-4ab1-8023-299e107762e6">
+<span class="eqno">(6.20)<a class="headerlink" href="#equation-0692756d-1ea4-4ab1-8023-299e107762e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat y = 6.6714 + 0.8615 x
 \end{equation}\]</div>
 <p>Now that we have this line, how can we understand how to use it? First, the slope tells us how the changes in <span class="math notranslate nohighlight">\(x\)</span> are connected to changes in <span class="math notranslate nohighlight">\(\hat y\)</span>. Here, an increase of 1% in the primary school completion rate (<span class="math notranslate nohighlight">\(x\)</span>) is associated with an average increase of about .865% in the literacy rate (<span class="math notranslate nohighlight">\(y\)</span>).</p>
@@ -1105,14 +1106,14 @@ Notes:
 <section id="inference-on-model-parameters">
 <h3>Inference on Model Parameters<a class="headerlink" href="#inference-on-model-parameters" title="Link to this heading">#</a></h3>
 <p>Now that we know how to find the line of best fit, we want to know how good our estimates of the slope and intercept are. We began by assuming that there is a linear model describing the relationship between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cb4632a2-a444-4668-b6d7-9b13f0341f7d">
-<span class="eqno">(6.21)<a class="headerlink" href="#equation-cb4632a2-a444-4668-b6d7-9b13f0341f7d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d5cd8646-55ca-4ae5-91c3-74779c60256b">
+<span class="eqno">(6.21)<a class="headerlink" href="#equation-d5cd8646-55ca-4ae5-91c3-74779c60256b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Y = \alpha + \beta x + \varepsilon.
 \end{equation}\]</div>
 <p>Because we only have limited data on the relationship between these two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, we can’t calculate <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> exactly, but only estimate them with our least squares estimates <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. How can we know how good these estimates actually are? We turn again to our statistical inference tools of the confidence interval and hypothesis test.</p>
 <p>A big question in linear regression is whether knowing the value of <span class="math notranslate nohighlight">\(x\)</span> makes a difference in our estimation of <span class="math notranslate nohighlight">\(Y\)</span>. If it doesn’t, the slope value in the model would actually be 0. If it does, it would be something different from 0. But <span class="math notranslate nohighlight">\(\beta\)</span> is a parameter of the model, which we estimated by calculating the slope <span class="math notranslate nohighlight">\(b\)</span> using least squares. So we can use our hypothesis testing skills to decide if <span class="math notranslate nohighlight">\(\beta = 0\)</span> or not!</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aaf8e193-1336-458c-a031-9ae1414be9f3">
-<span class="eqno">(6.22)<a class="headerlink" href="#equation-aaf8e193-1336-458c-a031-9ae1414be9f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4a4b5c9d-a909-4da4-aab1-337b3166e7ce">
+<span class="eqno">(6.22)<a class="headerlink" href="#equation-4a4b5c9d-a909-4da4-aab1-337b3166e7ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
     H_0: \beta = 0, \\ H_1: \beta \neq 0.
 \end{equation}\]</div>
 <p>We can show that the test statistic for this hypothesis test is a T random variable, and its value is given in the model summary readout. Look for the column <code class="docutils literal notranslate"><span class="pre">t</span></code>, just two columns to the right of where you found the coefficients. And just next to that is the <span class="math notranslate nohighlight">\(P\)</span>-value for the test.</p>
@@ -1132,8 +1133,8 @@ Y = \alpha + \beta x + \varepsilon.
 <p>These last two assumptions were not explicitly stated, but they are needed to make the regression interpretations work. And when we make assumptions like this, we need to check to see if these are reasonable! Here, we will show how to visually evaluate these assumptions using graphs.</p>
 <p>The first question of the relationship between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> can be easily evaluated through the <a class="reference internal" href="#scatter-plot-simple"><span class="std std-ref">scatter plot</span></a> we made at the beginning of this section. If the scatter plot isn’t clear, then the correlation coefficient can help!</p>
 <p>We can evaluate the next two claims by examining the residuals. The residuals are related to the random error since, according to the model,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-45432c8a-5d1a-4bff-90c6-6f7084ec23ab">
-<span class="eqno">(6.23)<a class="headerlink" href="#equation-45432c8a-5d1a-4bff-90c6-6f7084ec23ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4d7cbbad-05b8-4f5f-aff8-a626756ab20d">
+<span class="eqno">(6.23)<a class="headerlink" href="#equation-4d7cbbad-05b8-4f5f-aff8-a626756ab20d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y_i - \hat y_i =  y_i - (a + b x_i) \approx y_i - (\alpha + \beta x_i) = \varepsilon_i.
 \end{equation}\]</div>
 <p>Plotting the residuals will give us an idea about the distribution of the <span class="math notranslate nohighlight">\(\varepsilon\)</span>, but we need two different types of plots to examine the assumptions.</p>
@@ -1523,19 +1524,19 @@ Notes:
 </div></div></div>
 </div>
 <p>So what does it look like to understand how body mass changes based on these other variables? Mathematically, we are modeling <span class="math notranslate nohighlight">\(Y\)</span> as a linear function of several independent variables <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_p\)</span>. As in the single variable case, our variable <span class="math notranslate nohighlight">\(Y\)</span> won’t follow this linear function exactly. Instead, it will be subject to some random deviations, modelled by <span class="math notranslate nohighlight">\(\varepsilon\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6329d50d-af35-40a0-aa70-eaac4be6d680">
-<span class="eqno">(6.24)<a class="headerlink" href="#equation-6329d50d-af35-40a0-aa70-eaac4be6d680" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7cc7ab27-0243-4e27-a93f-3e04ac5db92e">
+<span class="eqno">(6.24)<a class="headerlink" href="#equation-7cc7ab27-0243-4e27-a93f-3e04ac5db92e" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p + \varepsilon.
 \end{equation}\]</div>
 <p>Again, we only have limited data, so we need to <em>estimate</em> the values of <span class="math notranslate nohighlight">\(\beta_0, \ldots, \beta_p\)</span> with some estimators <span class="math notranslate nohighlight">\(b_0, \ldots, b_p\)</span>. As a result, our new equation looks like this:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-974cd4e2-3cc4-489d-ad92-f0e44712b1db">
-<span class="eqno">(6.25)<a class="headerlink" href="#equation-974cd4e2-3cc4-489d-ad92-f0e44712b1db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fab5d823-e1e7-4551-aa48-0725abe06268">
+<span class="eqno">(6.25)<a class="headerlink" href="#equation-fab5d823-e1e7-4551-aa48-0725abe06268" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat y = b_0 + b_1 x_1 + b_2 x_2 + \ldots + b_p x_p.
 \end{equation}\]</div>
 <p>In this equation, <span class="math notranslate nohighlight">\(b_0\)</span> is an intercept, while <span class="math notranslate nohighlight">\(b_1, \ldots, b_p\)</span> are slope parameters associated with the different variables <span class="math notranslate nohighlight">\(x_1, \ldots, x_p\)</span>. For example, the value of <span class="math notranslate nohighlight">\(b_3\)</span> tells us how much we estimate that <span class="math notranslate nohighlight">\(Y\)</span> would change when <span class="math notranslate nohighlight">\(x_3\)</span> changes, <em>with all other independent variables held constant</em>. Thinking about this in the abstract setting can be difficult, so we recommend coming back to this later in light of the example using real data below.</p>
 <p>So how do we find this ‘best’ linear function? The good news is that we can do this estimation using least squares! Similar to the one-variable case, this involves finding the values of <span class="math notranslate nohighlight">\(b_0, \ldots, b_p\)</span> that minimize the sum of the squared residuals:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f31b8b12-79bc-426e-b957-b9c7c185bdd5">
-<span class="eqno">(6.26)<a class="headerlink" href="#equation-f31b8b12-79bc-426e-b957-b9c7c185bdd5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e051941c-2a39-4585-91d8-9500b1d6d3b7">
+<span class="eqno">(6.26)<a class="headerlink" href="#equation-e051941c-2a39-4585-91d8-9500b1d6d3b7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \min_{b_0, \ldots, b_p} \sum_{i=1}^n (y_i - \hat y_i)^2
 \end{equation}\]</div>
 <p>We’ll spare you the details in this section, as the notation can get messy and a full solution requires the use of linear algebra. You can find the details in most any college linear algebra book, including <a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html"><span class="std std-doc">this section</span></a> of this book.</p>
@@ -1585,8 +1586,8 @@ strong multicollinearity or other numerical problems.
 </div>
 </div>
 <p>Again, there is a lot of information here! First, we can take the coefficients to see that the estimated relationship between body mass (<span class="math notranslate nohighlight">\(Y\)</span>) and the bill depth (<span class="math notranslate nohighlight">\(x_1\)</span>) and flipper length (<span class="math notranslate nohighlight">\(x_2\)</span>) is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-80bc0615-b33e-4a77-9840-a98662d8214a">
-<span class="eqno">(6.27)<a class="headerlink" href="#equation-80bc0615-b33e-4a77-9840-a98662d8214a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c39e76a7-2706-4526-9e73-69ce1fde45f3">
+<span class="eqno">(6.27)<a class="headerlink" href="#equation-c39e76a7-2706-4526-9e73-69ce1fde45f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat y = -6541.91 + 22.63 x_1 + 51.54 x_2
 \end{equation}\]</div>
 <p>This means that, on average, an increase of 1mm of bill depth is associated with an increase of about 23g in mass, at least for two penguins with the same flipper length. Likewise, holding bill depth constant, an increase of 1mm in flipper length is associated with an increase of about 52g in mass.</p>
@@ -1748,8 +1749,8 @@ strong multicollinearity or other numerical problems.
 </div>
 </div>
 <p>Take a look at the output of this new model. One way to think about this is that there are two lines, one for each category (male and female). If the penguin is male (<span class="math notranslate nohighlight">\(x_2 = 1\)</span>), the regression line looks like</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c545d4be-1c61-4185-9574-6f5012729b58">
-<span class="eqno">(6.28)<a class="headerlink" href="#equation-c545d4be-1c61-4185-9574-6f5012729b58" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22a53ca7-0e37-4c44-aca7-678fcdae0510">
+<span class="eqno">(6.28)<a class="headerlink" href="#equation-22a53ca7-0e37-4c44-aca7-678fcdae0510" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat y_{male} = -5327.20  + 46.58 x_1 + 347.26 x_2 = -5327.20  + 46.58 x_1 + 347.26(1) = -4979.94 + 46.58 x_1.
 \end{equation}\]</div>
 <p>For a female penguin, on the other hand, the variable <span class="math notranslate nohighlight">\(x_2\)</span> would take a value of 0. See if you can write down the estimated line for a female penguin.</p>
