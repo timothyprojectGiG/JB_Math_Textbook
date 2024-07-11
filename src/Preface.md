@@ -21,6 +21,6 @@ We wish you all the best!
 
 This first edition would not be possible except for the contributions of a congenial team of faculty who worked together during Summer 2023 (acknowledged as authors of their contributed chapters), as well as a team of students (Jakob Hildebrandt, Gavin McClowry and Jonathan Zhu) who did a variety of edits during Summer 2024. The exceptional contribution of Claire Wagner to create both the online and PDF versions of this book must also be acknowledged.   
 
-As this work was completed at the time of my transition to professor emertius, my hope and prayer is that this book will prove to be useful to the next generation of facultly and students.
+As this work was completed at the time of my transition to professor emertius, my hope and prayer is that this book will prove to be useful to the next generation of faculty and students.
 
 P. Isihara, Wheaton College, Wheaton IL, July 2024
