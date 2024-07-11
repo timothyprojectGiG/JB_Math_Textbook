@@ -1,0 +1,871 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.10. Making EDA Reports &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=07d05eac" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ProbStat/EDA/sec8_advanced_report';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.13. Solutions to Exercises - Advanced" href="sec9_advanced_solution.html" />
+    <link rel="prev" title="4.9. Plotting and Statistical Testing" href="sec7_advanced_plotting.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Preface.html">1. PREFACE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../JMM23.html">1.1. JMM 2023</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lab.html">1.2. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../labsolutions.html">1.3. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreCollege.html">2. PRE-COLLEGE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/PreCollegeIntro.html">2.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">2.2. Elementary Blackboard Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">2.3. Beginning Python Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">2.4. Glimpse of Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">2.5. Arts in STEM (STEAM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/solutions.html">2.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">2.7. JNB LAB: After-School Program Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demosolutions.html">2.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Intropy.html">3. PYTHON PROGRAMMING GUIDE - Thomas VanDrunen, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/PythonProgrammingGuideIntro.html">3.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">3.2. Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Data.html">3.3. Working with Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/solutions.html">3.4. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plab.html">3.5. JNB Lab: Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plabsolutions.html">3.6. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Data.html">4. EXPLORATORY DATA ANALYSIS - Jonathan Zhu</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sec1_basic_intro.html">4.1. Introduction to EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec2_basic_tabular.html">4.2. Data Investigation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="sec3_basic_plotting.html">4.5. Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec4_basic_solutions.html">4.6. Solutions to Exercises: Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec5_advanced_intro.html">4.7. Intro to Advanced EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec6_advanced_tabular.html">4.8. Data Investigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec7_advanced_plotting.html">4.9. Plotting and Statistical Testing</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.10. Making EDA Reports</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="sec9_advanced_solution.html">4.13. Solutions to Exercises - Advanced</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab.html">4.14. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labsolution.html">4.15. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prob.html">5. PROBABILITY - Laura Gross, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob.html">5.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob1.html">5.2. Random Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob2.html">5.3. Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob3.html">5.4. Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob4.html">5.5. Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob4a.html">5.6. Random Walks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob5.html">5.7. Agent-based Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob6.html">5.8. Mathematical Games</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/solutions.html">5.9. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/lab.html">5.10. JNB Lab Homicides in Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/labsolution.html">5.11. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Stat.html">6. STATISTICAL INFERENCE - Peter Jantsch, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/00_Instructor_Notes.html">6.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/01_Foundations.html">6.2. Foundations of Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/02_Inference_Categorical.html">6.3. Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/03_Inference_Numerical.html">6.4. Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/04_Regression.html">6.5. Linear Regression</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedCalc.html">7. APPLIED CALCULUS FOR DAILY LIFE - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AppliedCalculusIntro.html">7.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">7.2. Linear Systems and the Two-commodity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">7.3. Marginal and Average Cost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">7.4. Optimization and Object Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">7.5. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">7.6. Related Rates and Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">7.7. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7.8. Probability Distributions and Drive Thrus</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">7.10. Normal Distribution and Process Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">7.11. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">7.12. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">7.13. Integral Test and Income Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">7.14. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/solutions.html">7.15. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClab.html">7.16. JNB Lab: Calculus of Entropy in Daily Life and Monte Carlo Simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClabsolutions.html">7.17. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Calc.html">8. CALCULUS - Inne Singgih</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">8.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">8.2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">8.3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">8.4. Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">8.5. Integrals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/6%20ParametricEquations.html">8.6. Parametric Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">8.7. Sequences and Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">8.8. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clab.html">8.9. JNB LAB: Calculus Animations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clabsolution.html">8.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear.html">9. LINEAR ALGEBRA - Soheil Anbouhi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/0.html">9.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/1.html">9.2. Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/2.html">9.3. Matrices and Determinants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/3.html">9.4. Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/4.html">9.5. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/5.html">9.6. Orthogonality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">9.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlab.html">9.8. Linear Algebra Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlabsolutions.html">9.9. Linear Algebra Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Aplin.html">10. LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">10.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">10.2. OLS Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">10.3. K-means Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">10.4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">10.5. Binary Classification of Labeled Data by Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/solutions.html">10.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlab.html">10.7. JNB LAB: Linear Algebra for Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlabsolution.html">10.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../DifEq.html">11. DIFFERENTIAL EQUATIONS - Rachel Petrik</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">11.1. Overview of Chapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">11.2. Introduction to Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">11.3. First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">11.4. Second-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">11.5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">11.6. Laplace Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">11.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">11.8. Differential Equations Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">11.9. Differential Equations Lab Answer Key</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedDifEq.html">12. DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/AppliedDiffEqIntro.html">12.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/covid.html">12.2. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">12.3. The Basic SIR Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">12.4. Cholera in Haiti</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">12.5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">12.6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/erc/erc.html">12.7. Earthquake Resistant Construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">12.8. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/lab.html">12.9. JNB Lab: HIV-AIDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/labsolutions.html">12.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexVar.html">13. COMPLEX VARIABLES IN GROUNDWATER MODELING - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_1.html">13.1. Setting the Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_2.html">13.2. Complex Analysis Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_3.html">13.3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_4.html">13.4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_solutions.html">13.5. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_lab.html">13.6. JNB LAB: Complex Potentials and Contaminant Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_lab_solution.html">13.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AdvData.html">14. ADVANCED DATA ANALYSIS - Ying Li, Jonathan Zhu, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">14.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">14.2. Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">14.3. About Text Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">14.4. Document Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">14.5. Classification of Texts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">14.6. Evaluating Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">14.7. Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/solutions.html">14.8. Solutions to Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexSystems.html">15. COMPLEX SYSTEMS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_1.html">15.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_2.html">15.2. Fundamental Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_3.html">15.3. Mathematical Concepts from Equilibrium Statistical Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_4.html">15.4. Societal Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_solutions.html">15.5. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_lab.html">15.6. JNB LAB: Complex Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_labsolution.html">15.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/ProbStat/EDA/sec8_advanced_report.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FProbStat/EDA/sec8_advanced_report.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ProbStat/EDA/sec8_advanced_report.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Making EDA Reports</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4.10. Making EDA Reports</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-writing-principles">4.11. EDA Writing Principles</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.11.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">4.11.2. Data Preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">4.11.3. Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">4.11.4. Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-writing-tips">4.11.5. General Writing Tips</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-preparation">4.12. Notebook Preparation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-basics">4.12.1. Markdown Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiding-code">4.12.2. Hiding Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-project-part-3">4.12.3. EDA Project, Part 3</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="making-eda-reports">
+<h1><span class="section-number">4.10. </span>Making EDA Reports<a class="headerlink" href="#making-eda-reports" title="Link to this heading">#</a></h1>
+<p>When you are doing EDA, it is often the case (whether in academia or industry) that you will have to put your findings into a report rather than just sending a Jupyter Notebook with code, plots, and test results. This report should also read nicely; well-written reports are more likely to make an impact on readers.</p>
+<p>In this section, we will go over basic writing principles for EDA and preparing your Jupyter Notebooks for creating a report output.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="eda-writing-principles">
+<h1><span class="section-number">4.11. </span>EDA Writing Principles<a class="headerlink" href="#eda-writing-principles" title="Link to this heading">#</a></h1>
+<p>Many people are familiar with the Scientific Method, which formulates a cyclical workflow for performing science. This process involves:</p>
+<ol class="arabic simple">
+<li><p>Making preliminary observations and reading prior research;</p></li>
+<li><p>Formulating hypotheses based on these observations and research;</p></li>
+<li><p>Designing and performing experiments to test these hypotheses;</p></li>
+<li><p>Evaluating the results collected from the experiments;</p></li>
+<li><p>Making conclusions based on the results, which cycles back into the first step.
+In scientific research papers, these phases formulate into sections for the report. Initial observations, prior research, and hypotheses form an <strong>Introduction</strong> section. The experiments performed form a <strong>Methods</strong> section, and its results form a <strong>Results</strong> section. Following this, the conclusions reached from the results form a <strong>Discussion</strong> section.</p></li>
+</ol>
+<p>Data science, being an offshoot of science, benefits from this workflow as well. However, EDA reports follow a modified structure, placing less emphasis on the methods and requiring less rigor for introduction and discussion sections. Because of this, EDA reports are not typically published but rather can form a piece of a larger work.</p>
+<p>Here, we will go over some of the sections of EDA in-depth, and how to write them.</p>
+<section id="introduction">
+<h2><span class="section-number">4.11.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The introduction of the EDA should answer, at the very least, the following questions:</p>
+<ul class="simple">
+<li><p>Where did you get the data from?</p></li>
+<li><p>What are your guiding questions througout this process?</p></li>
+<li><p>Why did you form these questions?</p></li>
+</ul>
+<p>The introduction section can also include, especially for reports that are made more visible to the public, some background on the topic in general so as to help readers without prior knowledge of the subject get more understanding as to what the topic is about and why it is important. This means incorporating preliminary observations and looking into prior research if possible.</p>
+</section>
+<section id="data-preparation">
+<h2><span class="section-number">4.11.2. </span>Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h2>
+<p>You undoubtedly had to perform some previous data manipulation to get to the basic analysis portion of your EDA. While you do not need to include any code in your EDA report or include basic preprocessing like removing N/A values, you should highlight any methods you took that are atypical, such as transformation to make new variables. The rationale for doing this is also important in this section.</p>
+<p>In other words, this section should answer:</p>
+<ul class="simple">
+<li><p>What did you do to the data that is notable?</p></li>
+<li><p>Why did you do it?</p></li>
+</ul>
+</section>
+<section id="results">
+<h2><span class="section-number">4.11.3. </span>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<p>Rather than have a methods section where you introduce the tests and plots that you made, it is better to segment these aspects together as you go through the results. One framework you can take through this is to go through each of your results, or alternatively, each of the features you found to have striking results. This framework would lend itself to a sub-structure as follows:</p>
+<ul class="simple">
+<li><p>Feature title</p>
+<ul>
+<li><p>Feature description</p></li>
+<li><p>Important result</p></li>
+<li><p>Plots and tests to back up your result</p></li>
+<li><p>Interpretations of the result</p></li>
+</ul>
+</li>
+<li><p>Next feature title…</p></li>
+</ul>
+<p>This is likely to be the most important section of your report, so put as much effort into it as possible. Make sure it is polished and that your rationale and results make sense.</p>
+<p>This section should answer, in short:</p>
+<ul class="simple">
+<li><p>What did you find?</p></li>
+<li><p>What do your findings mean?</p></li>
+</ul>
+</section>
+<section id="discussion">
+<h2><span class="section-number">4.11.4. </span>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h2>
+<p>This section does not have to be labeled as a “Discussion” section, and it will likely not be as extensive as it typically is in many formal research papers. However, it should tackle the questions:</p>
+<ul class="simple">
+<li><p>What did you find, overall? (Summarize your results!)</p></li>
+<li><p>Why are your findings important?</p></li>
+<li><p>What next steps could be taken in analysis?</p></li>
+</ul>
+<p>Such next steps could be ones that come to you as you are performing analysis, but often times you can get these questions as you get feedback from others on your analysis. Feedback is important for the overall strength of a report; an additional set of eyes can see errors that you may not have caught when writing the report or even in revision (more likely than you think - with your own writing, you may be tempted to skip over a section especially if you think you know that section well).</p>
+</section>
+<section id="general-writing-tips">
+<h2><span class="section-number">4.11.5. </span>General Writing Tips<a class="headerlink" href="#general-writing-tips" title="Link to this heading">#</a></h2>
+<p>With many reports, one big tip is to elaborate as much as possible. Adding more content is generally better than adding less content; this is because in writing (like in many aspects of life) it is easier to take things away than to add something completely new.</p>
+<p>Another tip is to not take feedback poorly. As mentioned previously, feedback is important and will help you to improve your analysis with each iteration. Though sometimes feedback can be quite harsh, this often points out areas for significant improvement.</p>
+<p>Writing for EDA reports and for scientific reports in general is very technical. There is typically no need to try and make a report pleasing to read; rather, it is more important that the report is not confusing and gets all the details that are important to cover. That being said, being able to succinctly state what you need to say is good, as extra unnecessary text can make your writing more confusing.</p>
+<p>Finally, I encourage you to enjoy the process. With many things in life, you will get more satisfaction out of the process, <em>and</em> you will do a better job, if you enjoy writing reports. For some people, writing is not their strength, or something they particularly enjoy. Fortunately, there are many people out there who are willing and able to help you out. Having additional people look at your reports or your progress over time can open your eyes to new insights about your own work that you may have missed, such as your own improvement with writing.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="notebook-preparation">
+<h1><span class="section-number">4.12. </span>Notebook Preparation<a class="headerlink" href="#notebook-preparation" title="Link to this heading">#</a></h1>
+<p>Thankfully for EDA report-writers, Jupyter Notebooks have the amazing capability of being able to utilize markdown in addition to running code. This framework of markdown cells and code cells forms the foundation of report-writing, upon which additional cleanup is necessary to make a presentable report.</p>
+<p>Here, we will go over some markdown basics, hiding code, and outputting a PDF from your notebook.</p>
+<section id="markdown-basics">
+<h2><span class="section-number">4.12.1. </span>Markdown Basics<a class="headerlink" href="#markdown-basics" title="Link to this heading">#</a></h2>
+<p>Here, we introduce some of the more common features of markdown that may be helpful to you as you make reports.</p>
+<p>One of the biggest features of markdown to use is the making of titles. This will help you with sectioning your report and will thus make it easier to read. Typically, reports should have one main title at the top, followed by section titles and sub-section titles. These are all indicated with the hash symbol, pound sign, or hashtag, whatever you want to call it (#). One symbol is used for the main title, two for sections, and three for sub-sections. You can use even more for sub-subsections if you need.</p>
+<p>Some people like to write some words in italics or boldface to emphasize points. This is done with asterisks surrounding the portion you want to italicize or make bold, with one asterisk making italics and two making boldface. For example,</p>
+<ul class="simple">
+<li><p>*This text will be italicized.*</p></li>
+<li><p>**This text will be in bold.**</p></li>
+</ul>
+<p>Lists are another common tool in making reports and are done with the hyphen character (-) or a number followed by a period (like “1.”) at the beginning of a new line.</p>
+<p>Markdown also has cross-functionality with LaTeX and HTML. Either of these can be used within markdown in most cases. LaTeX is good for implementing mathematical formulas; in-line math is done with $ surrounding a LaTeX math formula, while large formulas can be done on their own lines by a $$ on a new line, followed by a LaTeX formula on the next line, and another $$ on the next line. HTML tags typically have synonymous functions in either LaTeX or markdown; due to the clunky nature of HTML tags, they are not recommended to be used unless you know HTML very well.</p>
+<p>Finally, some characters like the asterisk and the dollar sign are special, as you saw in the prior paragraphs. To print these characters as they are and not have markdown read them for their function, simply include a backslash (\) before the character, like \$, and it will print out as normal.</p>
+</section>
+<section id="hiding-code">
+<h2><span class="section-number">4.12.2. </span>Hiding Code<a class="headerlink" href="#hiding-code" title="Link to this heading">#</a></h2>
+<p>Before exporting notebooks, it is important to place tags into your code cells to hide them; code should not be present in a report as it may make the report much longer than it should be. To hide code cells, click on the cell’s setting to add a cell tag, then add “remove-input”. If there is a code chunk for which you want to hide the output as well, add “remove-cell”.</p>
+<p>Now you can export to a PDF. However, it’s not nearly that simple. If you try and export a notebook with tagged code cells, the code cells will still produce in the output. Additionally, the required packages for generating PDF output may not be installed on your computer. To fix these, first make sure that the anaconda packages <code class="docutils literal notranslate"><span class="pre">nbconvert</span></code> and its dependencies (<code class="docutils literal notranslate"><span class="pre">pandoc</span></code> and some version of LaTeX) are installed.</p>
+<ul class="simple">
+<li><p>To install <code class="docutils literal notranslate"><span class="pre">nbconvert</span></code>, refer to <a class="reference external" href="https://nbconvert.readthedocs.io/en/latest/install.html#installing-nbconvert">https://nbconvert.readthedocs.io/en/latest/install.html#installing-nbconvert</a>. This can be done in the terminal with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">nbconvert</span></code>.</p></li>
+<li><p>To install <code class="docutils literal notranslate"><span class="pre">pandoc</span></code>, refer to <a class="reference external" href="https://pandoc.org/installing.html">https://pandoc.org/installing.html</a>. This can be done in the terminal with <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">pandoc</span></code>.</p></li>
+<li><p>To install a version of LaTeX, refer to <a class="reference external" href="https://tug.org/mactex/">https://tug.org/mactex/</a> (which installs MacTex for MacOS) or <a class="reference external" href="https://miktex.org/">https://miktex.org/</a> (which installs MikTex for Windows).</p></li>
+</ul>
+<p><strong>Make sure to restart your computer after installing these.</strong></p>
+<p>Then following this, make sure you are in the same directory as your notebook that you wish to export, and type the following in the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">pdf</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="nb">input</span> <span class="o">&lt;</span><span class="n">file_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>replacing <code class="docutils literal notranslate"><span class="pre">&lt;file_name&gt;</span></code> with the name you want your output file to be. At this point you should be able to produce PDFs from your Jupyter Notebooks!</p>
+</section>
+<section id="eda-project-part-3">
+<h2><span class="section-number">4.12.3. </span>EDA Project, Part 3<a class="headerlink" href="#eda-project-part-3" title="Link to this heading">#</a></h2>
+<p>Format your findings from the previous sections into a well-written and presentable PDF report with the aforementioned sections.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ProbStat/EDA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sec7_advanced_plotting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.9. </span>Plotting and Statistical Testing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sec9_advanced_solution.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.13. </span>Solutions to Exercises - Advanced</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4.10. Making EDA Reports</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-writing-principles">4.11. EDA Writing Principles</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.11.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">4.11.2. Data Preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">4.11.3. Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">4.11.4. Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-writing-tips">4.11.5. General Writing Tips</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-preparation">4.12. Notebook Preparation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-basics">4.12.1. Markdown Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiding-code">4.12.2. Hiding Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-project-part-3">4.12.3. EDA Project, Part 3</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Claire Wagner, Peter Jantsch, and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' width=88 style='border-width:0' src='https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png'/></a>
+  Except where otherwise noted, this work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

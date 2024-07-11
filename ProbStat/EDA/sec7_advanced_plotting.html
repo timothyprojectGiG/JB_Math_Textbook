@@ -1,0 +1,1329 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.9. Plotting and Statistical Testing &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=07d05eac" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ProbStat/EDA/sec7_advanced_plotting';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.10. Making EDA Reports" href="sec8_advanced_report.html" />
+    <link rel="prev" title="4.8. Data Investigation" href="sec6_advanced_tabular.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Preface.html">1. PREFACE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../JMM23.html">1.1. JMM 2023</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lab.html">1.2. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../labsolutions.html">1.3. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreCollege.html">2. PRE-COLLEGE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/PreCollegeIntro.html">2.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">2.2. Elementary Blackboard Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">2.3. Beginning Python Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">2.4. Glimpse of Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">2.5. Arts in STEM (STEAM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/solutions.html">2.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">2.7. JNB LAB: After-School Program Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demosolutions.html">2.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Intropy.html">3. PYTHON PROGRAMMING GUIDE - Thomas VanDrunen, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/PythonProgrammingGuideIntro.html">3.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">3.2. Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Data.html">3.3. Working with Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/solutions.html">3.4. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plab.html">3.5. JNB Lab: Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plabsolutions.html">3.6. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Data.html">4. EXPLORATORY DATA ANALYSIS - Jonathan Zhu</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sec1_basic_intro.html">4.1. Introduction to EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec2_basic_tabular.html">4.2. Data Investigation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="sec3_basic_plotting.html">4.5. Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec4_basic_solutions.html">4.6. Solutions to Exercises: Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec5_advanced_intro.html">4.7. Intro to Advanced EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec6_advanced_tabular.html">4.8. Data Investigation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.9. Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec8_advanced_report.html">4.10. Making EDA Reports</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="sec9_advanced_solution.html">4.13. Solutions to Exercises - Advanced</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab.html">4.14. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labsolution.html">4.15. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prob.html">5. PROBABILITY - Laura Gross, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob.html">5.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob1.html">5.2. Random Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob2.html">5.3. Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob3.html">5.4. Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob4.html">5.5. Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob4a.html">5.6. Random Walks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob5.html">5.7. Agent-based Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob6.html">5.8. Mathematical Games</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/solutions.html">5.9. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/lab.html">5.10. JNB Lab Homicides in Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/labsolution.html">5.11. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Stat.html">6. STATISTICAL INFERENCE - Peter Jantsch, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/00_Instructor_Notes.html">6.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/01_Foundations.html">6.2. Foundations of Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/02_Inference_Categorical.html">6.3. Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/03_Inference_Numerical.html">6.4. Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/04_Regression.html">6.5. Linear Regression</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedCalc.html">7. APPLIED CALCULUS FOR DAILY LIFE - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AppliedCalculusIntro.html">7.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">7.2. Linear Systems and the Two-commodity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">7.3. Marginal and Average Cost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">7.4. Optimization and Object Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">7.5. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">7.6. Related Rates and Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">7.7. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7.8. Probability Distributions and Drive Thrus</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">7.10. Normal Distribution and Process Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">7.11. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">7.12. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">7.13. Integral Test and Income Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">7.14. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/solutions.html">7.15. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClab.html">7.16. JNB Lab: Calculus of Entropy in Daily Life and Monte Carlo Simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClabsolutions.html">7.17. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Calc.html">8. CALCULUS - Inne Singgih</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">8.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">8.2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">8.3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">8.4. Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">8.5. Integrals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/6%20ParametricEquations.html">8.6. Parametric Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">8.7. Sequences and Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">8.8. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clab.html">8.9. JNB LAB: Calculus Animations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clabsolution.html">8.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear.html">9. LINEAR ALGEBRA - Soheil Anbouhi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/0.html">9.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/1.html">9.2. Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/2.html">9.3. Matrices and Determinants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/3.html">9.4. Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/4.html">9.5. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/5.html">9.6. Orthogonality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">9.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlab.html">9.8. Linear Algebra Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlabsolutions.html">9.9. Linear Algebra Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Aplin.html">10. LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">10.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">10.2. OLS Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">10.3. K-means Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">10.4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">10.5. Binary Classification of Labeled Data by Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/solutions.html">10.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlab.html">10.7. JNB LAB: Linear Algebra for Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlabsolution.html">10.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../DifEq.html">11. DIFFERENTIAL EQUATIONS - Rachel Petrik</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">11.1. Overview of Chapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">11.2. Introduction to Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">11.3. First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">11.4. Second-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">11.5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">11.6. Laplace Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">11.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">11.8. Differential Equations Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">11.9. Differential Equations Lab Answer Key</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedDifEq.html">12. DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/AppliedDiffEqIntro.html">12.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/covid.html">12.2. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">12.3. The Basic SIR Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">12.4. Cholera in Haiti</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">12.5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">12.6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/erc/erc.html">12.7. Earthquake Resistant Construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">12.8. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/lab.html">12.9. JNB Lab: HIV-AIDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/labsolutions.html">12.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexVar.html">13. COMPLEX VARIABLES IN GROUNDWATER MODELING - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_1.html">13.1. Setting the Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_2.html">13.2. Complex Analysis Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_3.html">13.3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_4.html">13.4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_solutions.html">13.5. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_lab.html">13.6. JNB LAB: Complex Potentials and Contaminant Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_lab_solution.html">13.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AdvData.html">14. ADVANCED DATA ANALYSIS - Ying Li, Jonathan Zhu, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">14.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">14.2. Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">14.3. About Text Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">14.4. Document Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">14.5. Classification of Texts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">14.6. Evaluating Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">14.7. Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/solutions.html">14.8. Solutions to Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexSystems.html">15. COMPLEX SYSTEMS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_1.html">15.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_2.html">15.2. Fundamental Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_3.html">15.3. Mathematical Concepts from Equilibrium Statistical Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_4.html">15.4. Societal Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_solutions.html">15.5. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_lab.html">15.6. JNB LAB: Complex Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_labsolution.html">15.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/ProbStat/EDA/sec7_advanced_plotting.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FProbStat/EDA/sec7_advanced_plotting.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ProbStat/EDA/sec7_advanced_plotting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Plotting and Statistical Testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">4.9.1. Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplots">Barplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplots">Boxplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots">Violin plots</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-plots">4.9.2. Interpreting Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-testing">4.9.3. Statistical Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-comparisons">Numerical Comparisons</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-group-comparisons">One Group Comparisons</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-group-comparisons">Two Group Comparisons</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#many-group-comparisons">Many-Group Comparisons</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-analysis-chi-square-tests-of-independence">Categorical Analysis: Chi-Square Tests of Independence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">Normality Tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-project-part-2">4.9.4. EDA Project, Part 2</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell tag_remove-input docutils container">
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="plotting-and-statistical-testing">
+<h1><span class="section-number">4.9. </span>Plotting and Statistical Testing<a class="headerlink" href="#plotting-and-statistical-testing" title="Link to this heading">#</a></h1>
+<section id="plotting">
+<h2><span class="section-number">4.9.1. </span>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
+<p>Making visualizations is a key part of EDAs. So in order to plot, we will use packages <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> and <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> to make some nice-looking plots.</p>
+<p>The type of plot made typically depends on the type of the data used, whether it is a discrete category or a continuous number, as well as the number of variables analysed in a single plot. We will go over some good plots for categorical data later in this section, but a reference table for common plots is given below.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>One Variable</p></th>
+<th class="head"><p>Two Variables</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Discrete</p></td>
+<td><p>Bar Plot</p></td>
+<td><p>Countplot, Jitterplot, Tornado/Butterfly Plot</p></td>
+</tr>
+<tr class="row-odd"><td><p>Continuous</p></td>
+<td><p>Histogram, Density, Dotplot</p></td>
+<td><p>Scatterplot, Fitted Curve, Density Plot</p></td>
+</tr>
+<tr class="row-even"><td><p>One of Each</p></td>
+<td><p></p></td>
+<td><p>Column Plot, Boxplot, Violin Plot</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="histograms">
+<h3>Histograms<a class="headerlink" href="#histograms" title="Link to this heading">#</a></h3>
+<p>Histograms are a good way of looking at the overall distribution of a single feature, or column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#here we want to make a histogram of the age column in the dataset</span>
+<span class="c1">#using matplotlib.pyplot</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#since we already removed NA values, we can get straight to plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="c1">#add some labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distribution of DHS Service Records&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f89656071e3b8766dda8bb033bbc49e87ebc0fd3c2d483c66decc9d7e267e1d7.png" src="../../_images/f89656071e3b8766dda8bb033bbc49e87ebc0fd3c2d483c66decc9d7e267e1d7.png" />
+</div>
+</div>
+</section>
+<section id="barplots">
+<h3>Barplots<a class="headerlink" href="#barplots" title="Link to this heading">#</a></h3>
+<p>To look at the distribution between distinct categories of a discrete variable, we can turn to bar plots. These can be vertical or horizontal, but with many categories, we will want to make the plot horizontal for readability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Race Distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Race&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d03b6306330afec06a7f0ae88fc8cd92805b84bc062048460a20d0c06069d5be.png" src="../../_images/d03b6306330afec06a7f0ae88fc8cd92805b84bc062048460a20d0c06069d5be.png" />
+</div>
+</div>
+</section>
+<section id="scatter-plots">
+<h3>Scatter Plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h3>
+<p>For looking at the relationship between two numerical variables, we turn to scatterplots. We can also add trend lines if we think there may be a relationship between the two.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#make a scatterplot between age and number of services in the client_attributes dataset</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;num_services&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age vs Number of Services&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Services&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ae9efaafbc946a2423cca7e13f7c2fb1fd942946ab4e0c97881dcc3f0eca7cf3.png" src="../../_images/ae9efaafbc946a2423cca7e13f7c2fb1fd942946ab4e0c97881dcc3f0eca7cf3.png" />
+</div>
+</div>
+</section>
+<section id="boxplots">
+<h3>Boxplots<a class="headerlink" href="#boxplots" title="Link to this heading">#</a></h3>
+<p>For looking at the relationship between two variables, one numeric and one categorical, we can use boxplots, which also give some information on the quartiles of the numeric variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#we want to make a boxplot of age, separated by gender</span>
+<span class="c1">#we can use seaborn for this</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;GENDER&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distribution of DHS Service&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/528840e898e5cdda4d56a79e20d0ab5c551f1923b28678e189924c01fcabe9a2.png" src="../../_images/528840e898e5cdda4d56a79e20d0ab5c551f1923b28678e189924c01fcabe9a2.png" />
+</div>
+</div>
+</section>
+<section id="violin-plots">
+<h3>Violin plots<a class="headerlink" href="#violin-plots" title="Link to this heading">#</a></h3>
+<p>A variation on the boxplot is the violin plot, which shows the relative distributions of each of the groups you are examining.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#we want to make the same as above, but with violin plots</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;GENDER&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;age&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distribution of DHS Service&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5974d3926cfea849b4ea69df3bf974f159b855dcff25afbabf9a1955f4d6c2c3.png" src="../../_images/5974d3926cfea849b4ea69df3bf974f159b855dcff25afbabf9a1955f4d6c2c3.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="interpreting-plots">
+<h2><span class="section-number">4.9.2. </span>Interpreting Plots<a class="headerlink" href="#interpreting-plots" title="Link to this heading">#</a></h2>
+<p>Plotting is one thing, but plots alone do not make for good EDAs. Plots must be interpreted as well. This part can be subjective, but with each iteration of EDA, you will hopefully get better and better interpretations.</p>
+<p>If we refer to the histogram of ages for this dataset, what can we interpret?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="c1">#add some labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distribution of DHS Service Records&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f89656071e3b8766dda8bb033bbc49e87ebc0fd3c2d483c66decc9d7e267e1d7.png" src="../../_images/f89656071e3b8766dda8bb033bbc49e87ebc0fd3c2d483c66decc9d7e267e1d7.png" />
+</div>
+</div>
+<p>We can see that the distribution of ages is right-skewed but is somewhat normally distributed. The mean and mode seem to be around the late 30’s. But we can be more objective with our interpretations by adding these statistics to the plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#remake previous histogram</span>
+<span class="c1">#but add a line for the mean of the distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="c1">#add some labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distribution of DHS Service Records&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4c4c9ee2d844e04c1931981bdc1b65e41c28b473a1a21dcb0333a4d0d32f2b13.png" src="../../_images/4c4c9ee2d844e04c1931981bdc1b65e41c28b473a1a21dcb0333a4d0d32f2b13.png" />
+</div>
+</div>
+<div class="admonition-exercise-6-1 admonition">
+<p class="admonition-title">Exercise 6.1</p>
+<p>Repeat the above, adding the plot’s estimated normal distribution.</p>
+</div>
+<p>The exercise above asks to evaluate, visually, if this distribution approximately follows a normal distribution. The normal distribution is important for a myriad of statistical tests, which are discussed in the next section.</p>
+</section>
+<section id="statistical-testing">
+<h2><span class="section-number">4.9.3. </span>Statistical Testing<a class="headerlink" href="#statistical-testing" title="Link to this heading">#</a></h2>
+<p>While visualizations make for good reports and are a good way of visually looking at data, you can often get much more conclusive results about data by doing statistical tests. All statistical tests follow a principle of deviation from a <em>null hypothesis</em> <span class="math notranslate nohighlight">\(H_0\)</span>; this null hypothesis is what the tester assumes to be true. The tester then calculates the probability of the observations being the way they are given the null hypothesis; if the probability calculated is low, the tester can reject the null hypothesis.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a massive simplification of the theory behind statistical testing. For more accurate theory, refer to the section on Statistical Inference.</p>
+</div>
+<p>There are a myriad of statistical tests, most of which apply to numerical data, but a few of them apply to categorical data. As with plotting, different ones apply in different situations: whether or not we are comparing one or two samples, whether these samples follow a normal distribution, etc.</p>
+<section id="numerical-comparisons">
+<h3>Numerical Comparisons<a class="headerlink" href="#numerical-comparisons" title="Link to this heading">#</a></h3>
+<p>In general, numerical comparison tests follow the null hypothesis of:</p>
+<ul class="simple">
+<li><p>(for one variable) The mean of the dataset is equal to a specific value</p></li>
+<li><p>(for two or more variables) The difference in the means of the groups is equal to zero</p></li>
+</ul>
+<p>Tests involving numerical comparisons are split on how many groups are compared and whether or not these groups follow a normal distribution. The normal distribution assumption is critical for some of these tests; this is because the normal distribution was assumed in the making of these tests and therefore may give you incorrect conclusions if the data do not follow normal distributions when you use them.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Analyzing One Variable</p></th>
+<th class="head"><p>Analyzing Two Variables</p></th>
+<th class="head"><p>Analyzing 3+ Variables</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Normality Assumed</p></td>
+<td><p>One-sample t-test</p></td>
+<td><p>Two-sample t-test</p></td>
+<td><p>ANOVA</p></td>
+</tr>
+<tr class="row-odd"><td><p>Normality Not Assumed</p></td>
+<td><p>Sign test</p></td>
+<td><p>Mann-Whitney U-test, Wilcoxon signed-rank test</p></td>
+<td><p>Kruskal-Wallis test</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="one-group-comparisons">
+<h4>One Group Comparisons<a class="headerlink" href="#one-group-comparisons" title="Link to this heading">#</a></h4>
+<p>To compare one variable to a set null hypothesis, we use a one-sample t-test (if the data follow a normal distribution) or a sign test (if not). Here, let’s look at the number of services used by each person in the dataset, and we’ll set the null hypothesis that these means are equal to 6.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#for the num_services column in the client_attributes dataset</span>
+<span class="c1">#perform one-sample t-test and sign test</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_1samp</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">wilcoxon</span>
+
+<span class="c1">#perform one-sample t-test</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">ttest_1samp</span><span class="p">(</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;num_services&#39;</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;One-sample t-test results:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t-statistic:&#39;</span><span class="p">,</span> <span class="n">t_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value:&#39;</span><span class="p">,</span> <span class="n">p_val</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1">#perform sign test</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">wilcoxon</span><span class="p">(</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sign test results:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test statistic:&#39;</span><span class="p">,</span> <span class="n">t_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value:&#39;</span><span class="p">,</span> <span class="n">p_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>One-sample t-test results:
+t-statistic: 628.1046487314816
+p-value: 0.0
+
+Sign test results:
+Test statistic: 2322208324.0
+p-value: 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>These statistics are indicative of the mean number of services used being different from 6. We would need to perform additional visualizations or testing to get more insights than this, however.</p>
+</section>
+<section id="two-group-comparisons">
+<h4>Two Group Comparisons<a class="headerlink" href="#two-group-comparisons" title="Link to this heading">#</a></h4>
+<p>To compare two groups of data, we would use a paired t-test or a Mann-Whitney U-Test depending on if the groups are normally distributed or not, respectively. The null hypothesis here is that the difference in means between the two groups is some value, typically zero.</p>
+<p>Here, let’s split the number of services used by gender. Note that this dataset has some entries where the gender is listed as “other”, which we saw in plotting. For instructional purposes, we will remove these entries; in practice, we will want to include these with ANOVA or Kruskal-Wallis, which is discussed in the next section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#t-test and mann-whitney u test for num-services split by gender</span>
+<span class="c1">#removing &quot;other&quot; entries in gender</span>
+<span class="n">intermediate_client_atts</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;GENDER&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;99~Other&#39;</span><span class="p">]</span>
+
+<span class="c1">#perform t-test</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_ind</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">intermediate_client_atts</span><span class="p">[</span><span class="n">intermediate_client_atts</span><span class="p">[</span><span class="s1">&#39;GENDER&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1~Male&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">intermediate_client_atts</span><span class="p">[</span><span class="n">intermediate_client_atts</span><span class="p">[</span><span class="s1">&#39;GENDER&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2~Female&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">ttest_ind</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T-test results:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t-statistic:&#39;</span><span class="p">,</span> <span class="n">t_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value:&#39;</span><span class="p">,</span> <span class="n">p_val</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1">#perform mann-whitney u test</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">mannwhitneyu</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">mannwhitneyu</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mann-Whitney U test results:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test statistic:&#39;</span><span class="p">,</span> <span class="n">t_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value:&#39;</span><span class="p">,</span> <span class="n">p_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T-test results:
+t-statistic: -1.205624178437287
+p-value: 0.22796301465831825
+
+Mann-Whitney U test results:
+Test statistic: 29664099747.5
+p-value: 1.5309720336376268e-06
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see here that these tests give very different p-values. It is best practice then to see which test is more accurate, and we would do this by testing the normality of each group. We can do this with a normality test (discussed later in this section) or by using histograms for visual confirmation.</p>
+<div class="admonition-exercise-6-2 admonition">
+<p class="admonition-title">Exercise 6.2</p>
+<p>For the groups tested above, make the histograms for each and judge which test yields a more accurate conclusion.</p>
+</div>
+</section>
+<section id="many-group-comparisons">
+<h4>Many-Group Comparisons<a class="headerlink" href="#many-group-comparisons" title="Link to this heading">#</a></h4>
+<p>To compare three or more groups, we could do t-tests or Mann-Whitney U-tests between each pairing of groups. However, this yields a higher possibility of what are known as Type I Errors (rejecting a null hypothesis when we should not reject it). The mathematical theory as to why this is the case is not important; what is more important is that we have ways to circumvent this.</p>
+<p>Again, for normally and non-normally distributed data, we use Analysis of Variance (ANOVA) or a Kruskal-Wallis Test, respectively. Here, let’s look at the number of services used split by race.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#perform anova and kruskal-wallis test for num-services split by race</span>
+<span class="c1">#not removing any values this time</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+
+<span class="c1">#perform anova</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">&#39;num_services ~ RACE&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">anova_table</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ANOVA results:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">anova_table</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1">#perform kruskal-wallis test</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="n">r_unknown</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;99~Unknown&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+<span class="n">r_white</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1~White&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+<span class="n">r_black</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2~Black/African American&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+<span class="n">r_asian</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;4~Asian&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+<span class="n">r_native</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;5~Native American/Pacific Islander&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+<span class="n">r_more</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;6~Two or More Races&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+<span class="n">r_other</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;7~Other Single Race&#39;</span><span class="p">][</span><span class="s1">&#39;num_services&#39;</span><span class="p">]</span>
+
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">kruskal</span><span class="p">(</span><span class="n">r_unknown</span><span class="p">,</span> <span class="n">r_white</span><span class="p">,</span> <span class="n">r_black</span><span class="p">,</span> <span class="n">r_asian</span><span class="p">,</span> <span class="n">r_native</span><span class="p">,</span> <span class="n">r_more</span><span class="p">,</span> <span class="n">r_other</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kruskal-Wallis test results:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test statistic:&#39;</span><span class="p">,</span> <span class="n">t_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value:&#39;</span><span class="p">,</span> <span class="n">p_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ANOVA results:
+                sum_sq        df           F         PR(&gt;F)
+RACE      9.701921e+04       6.0  236.969478  1.271657e-303
+Residual  3.346570e+07  490440.0         NaN            NaN
+
+Kruskal-Wallis test results:
+Test statistic: 1219.5315398715004
+p-value: 2.836686948222061e-260
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both of these tests have low p-values, indicating that there is a significant difference within at least one pairing. To determine where this difference is, we have to use what are called post-hoc tests. For ANOVA, we use TukeyHSD Post-hoc tests, and for Kruskal-Wallis, we use Dunn tests. Here, we only look at TukeyHSD, especially as post-hoc tests for Kruskal-Wallis are less common, which is understandable given that Kruskal-Wallis tests are less common as a whole.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#post-hoc tests for the anova test</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.multicomp</span> <span class="kn">import</span> <span class="n">pairwise_tukeyhsd</span>
+
+<span class="n">tukey</span> <span class="o">=</span> <span class="n">pairwise_tukeyhsd</span><span class="p">(</span><span class="n">endog</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;num_services&#39;</span><span class="p">],</span> <span class="n">groups</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;RACE&#39;</span><span class="p">],</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tukey</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            Multiple Comparison of Means - Tukey HSD, FWER=0.05                             
+============================================================================================================
+              group1                             group2               meandiff p-adj   lower   upper  reject
+------------------------------------------------------------------------------------------------------------
+                           1~White           2~Black/African American   0.4477  0.001  0.3702  0.5251   True
+                           1~White                            4~Asian  -1.4977  0.001 -1.7021 -1.2932   True
+                           1~White 5~Native American/Pacific Islander  -1.4682 0.0625 -2.9764  0.0399  False
+                           1~White                6~Two or More Races  -0.2988    0.9 -1.0409  0.4432  False
+                           1~White                7~Other Single Race  -1.3499 0.0108 -2.5105 -0.1894   True
+                           1~White                         99~Unknown  -1.4201  0.001 -1.6131  -1.227   True
+          2~Black/African American                            4~Asian  -1.9453  0.001 -2.1551 -1.7356   True
+          2~Black/African American 5~Native American/Pacific Islander  -1.9159 0.0034 -3.4248  -0.407   True
+          2~Black/African American                6~Two or More Races  -0.7465 0.0483   -1.49  -0.003   True
+          2~Black/African American                7~Other Single Race  -1.7976  0.001 -2.9591 -0.6361   True
+          2~Black/African American                         99~Unknown  -1.8677  0.001 -2.0664 -1.6691   True
+                           4~Asian 5~Native American/Pacific Islander   0.0294    0.9 -1.4912  1.5501  False
+                           4~Asian                6~Two or More Races   1.1988  0.001  0.4316   1.966   True
+                           4~Asian                7~Other Single Race   0.1477    0.9 -1.0291  1.3246  False
+                           4~Asian                         99~Unknown   0.0776    0.9 -0.1967  0.3519  False
+5~Native American/Pacific Islander                6~Two or More Races   1.1694 0.3829 -0.5103  2.8491  False
+5~Native American/Pacific Islander                7~Other Single Race   0.1183    0.9 -1.7837  2.0203  False
+5~Native American/Pacific Islander                         99~Unknown   0.0482    0.9  -1.471  1.5673  False
+               6~Two or More Races                7~Other Single Race  -1.0511 0.2678 -2.4272   0.325  False
+               6~Two or More Races                         99~Unknown  -1.1212  0.001 -1.8855  -0.357   True
+               7~Other Single Race                         99~Unknown  -0.0701    0.9  -1.245  1.1047  False
+------------------------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="categorical-analysis-chi-square-tests-of-independence">
+<h3>Categorical Analysis: Chi-Square Tests of Independence<a class="headerlink" href="#categorical-analysis-chi-square-tests-of-independence" title="Link to this heading">#</a></h3>
+<p>A good way to compare two categorical datatypes is to use a chi-square test of independence. This can easily be called from packages in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>.</p>
+<p>This test operates on the null hypothesis that the two categories are independent of each other; in other words, there exists no relationship between the two chosen variables. It creates a contingency table, splitting each variable on its own axis and putting the number of occurrences of each kind of data point in its respective box. For example:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Apples</p></th>
+<th class="head"><p>Bananas</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fresh</p></td>
+<td><p>30</p></td>
+<td><p>27</p></td>
+</tr>
+<tr class="row-odd"><td><p>Frozen</p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The above contingency table indicates that there are 30 occurrences of fresh apples in our pretend dataset. This data may have come from a dataset such as</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Fruit Type</p></th>
+<th class="head"><p>Quality</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Apple</p></td>
+<td><p>Fresh</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Banana</p></td>
+<td><p>Fresh</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Apple</p></td>
+<td><p>Fresh</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Apple</p></td>
+<td><p>Frozen</p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>64</p></td>
+<td><p>Banana</p></td>
+<td><p>Frozen</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The contingency table then adds subtotals to each row and column; for example:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Apples</p></th>
+<th class="head"><p>Bananas</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fresh</p></td>
+<td><p>30</p></td>
+<td><p>27</p></td>
+<td><p>57</p></td>
+</tr>
+<tr class="row-odd"><td><p>Frozen</p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>Total</p></td>
+<td><p>35</p></td>
+<td><p>30</p></td>
+<td><p>65</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>It then calculates an expected value for each entry by multiplying that entry’s row and column totals, then dividing it by the total number of occurrences. So the expected number of fresh apples would be <span class="math notranslate nohighlight">\(\frac{35 * 57}{65} = 30.69\)</span>. This is done for all entries; the two tables are then compared for deviation from each other.</p>
+<p>For a dataset such as what we are using, doing this would be impossible by hand, but computers make it easy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#we are going to do a chi-square test of independence</span>
+<span class="c1">#to see if there is a relationship between RACE and EDUCATION_LEVEL</span>
+<span class="c1">#we can use the scipy library for this</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2_contingency</span>
+
+<span class="c1">#first we get the categories from the race column</span>
+<span class="n">race_cats</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;RACE_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span>
+<span class="n">race</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;RACE_cat&quot;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="n">race_cats</span><span class="p">)</span>
+<span class="c1">#then same for education</span>
+<span class="n">edu_cats</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDUCATION_LEVEL_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span>
+<span class="n">edu</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDUCATION_LEVEL_cat&quot;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="n">edu_cats</span><span class="p">)</span>
+<span class="c1">#now the contingency table</span>
+<span class="n">tab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">race</span><span class="p">,</span> <span class="n">edu</span><span class="p">)</span>
+
+<span class="c1">#now we can run the chi-square test</span>
+<span class="n">chi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">tab</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chi-square test of independence: p = &quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;chi2 = &quot;</span><span class="p">,</span> <span class="n">chi2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-square test of independence: p =  0.0 chi2 =  19200.2208703978
+</pre></div>
+</div>
+</div>
+</div>
+<p>This incredibly high statistic and this very low p-value indicates that there is a dependency between race and education level.</p>
+<p>While other categorical data tests exist, such as Fisher’s Exact test and McNemar’s test, they are not used very often in practice, especially for EDA.</p>
+</section>
+<section id="normality-tests">
+<h3>Normality Tests<a class="headerlink" href="#normality-tests" title="Link to this heading">#</a></h3>
+<p>In practice, tests comparing numerical data may give you the same result regardless of what test you use. However, to assume that this will be the case is not good practice. It is better to perform both tests and analyze differences; if differences between the two tests’ conclusions arise, then it is good to perform normality tests to narrow down which conclusion is more accurate.</p>
+<p>Normality tests operate on the null hypothesis that there is no deviation from a normal distribution for a given dataset. Its associated p-value is low if there is significant deviation from a normal distribution and high if the data follow an approximate normal distribution.</p>
+<p>There are many tests to analyze normality, but the one with the most power is the Shapiro-Wilk test. We’ll use this test to look at the normality of the number of services used overall.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#shapiro-wilk test for normality of num_services in client_attributes</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">shapiro</span>
+
+<span class="n">stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">client_attributes</span><span class="p">[</span><span class="s1">&#39;num_services&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shapiro-Wilk test results:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test statistic:&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shapiro-Wilk test results:
+Test statistic: 0.6876380443572998
+p-value: 0.0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/anaconda3/lib/python3.9/site-packages/scipy/stats/morestats.py:1760: UserWarning: p-value may not be accurate for N &gt; 5000.
+  warnings.warn(&quot;p-value may not be accurate for N &gt; 5000.&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This p-value indicates that it is likely this distribution is not normal. To confirm this is the case, however, we should also make a histogram.</p>
+</section>
+</section>
+<section id="eda-project-part-2">
+<h2><span class="section-number">4.9.4. </span>EDA Project, Part 2<a class="headerlink" href="#eda-project-part-2" title="Link to this heading">#</a></h2>
+<p>EDA typically involves many more tools and statistical techniques than are described in this chapter. As such, refer to outside documentation, such as for <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>, and look into the following:</p>
+<ul class="simple">
+<li><p>Convert all date variables into the date datatype from their current string type.</p></li>
+<li><p>Summarize the date/ID paired client attribute dataset. How many clients used the services in January? How many clients used services by each month?</p></li>
+<li><p>What is the average number of services a client use?</p></li>
+<li><p>How many clients receive services every month?</p></li>
+<li><p>Does the number of services per client increase over time?</p></li>
+<li><p>Do the statistics on the columns make sense? For example, are there any inconsistencies between age and eduction level?</p></li>
+</ul>
+<p>Secondly, perform many plots and tests and isolate the ones you believe to carry the most notable results.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ProbStat/EDA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sec6_advanced_tabular.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.8. </span>Data Investigation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sec8_advanced_report.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.10. </span>Making EDA Reports</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">4.9.1. Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplots">Barplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplots">Boxplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots">Violin plots</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-plots">4.9.2. Interpreting Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-testing">4.9.3. Statistical Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-comparisons">Numerical Comparisons</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-group-comparisons">One Group Comparisons</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-group-comparisons">Two Group Comparisons</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#many-group-comparisons">Many-Group Comparisons</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-analysis-chi-square-tests-of-independence">Categorical Analysis: Chi-Square Tests of Independence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">Normality Tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-project-part-2">4.9.4. EDA Project, Part 2</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Claire Wagner, Peter Jantsch, and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' width=88 style='border-width:0' src='https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png'/></a>
+  Except where otherwise noted, this work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

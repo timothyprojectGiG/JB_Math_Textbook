@@ -1,0 +1,1011 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.5. Plotting and Statistical Testing &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=07d05eac" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ProbStat/EDA/sec3_basic_plotting';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.6. Solutions to Exercises: Basic" href="sec4_basic_solutions.html" />
+    <link rel="prev" title="4.2. Data Investigation" href="sec2_basic_tabular.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Preface.html">1. PREFACE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../JMM23.html">1.1. JMM 2023</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lab.html">1.2. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../labsolutions.html">1.3. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreCollege.html">2. PRE-COLLEGE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/PreCollegeIntro.html">2.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">2.2. Elementary Blackboard Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">2.3. Beginning Python Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">2.4. Glimpse of Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">2.5. Arts in STEM (STEAM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/solutions.html">2.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">2.7. JNB LAB: After-School Program Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demosolutions.html">2.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Intropy.html">3. PYTHON PROGRAMMING GUIDE - Thomas VanDrunen, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/PythonProgrammingGuideIntro.html">3.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">3.2. Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Data.html">3.3. Working with Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/solutions.html">3.4. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plab.html">3.5. JNB Lab: Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plabsolutions.html">3.6. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Data.html">4. EXPLORATORY DATA ANALYSIS - Jonathan Zhu</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sec1_basic_intro.html">4.1. Introduction to EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec2_basic_tabular.html">4.2. Data Investigation</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.5. Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec4_basic_solutions.html">4.6. Solutions to Exercises: Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec5_advanced_intro.html">4.7. Intro to Advanced EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec6_advanced_tabular.html">4.8. Data Investigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec7_advanced_plotting.html">4.9. Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec8_advanced_report.html">4.10. Making EDA Reports</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="sec9_advanced_solution.html">4.13. Solutions to Exercises - Advanced</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab.html">4.14. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labsolution.html">4.15. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prob.html">5. PROBABILITY - Laura Gross, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob.html">5.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob1.html">5.2. Random Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob2.html">5.3. Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob3.html">5.4. Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob4.html">5.5. Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob4a.html">5.6. Random Walks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob5.html">5.7. Agent-based Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob6.html">5.8. Mathematical Games</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/solutions.html">5.9. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/lab.html">5.10. JNB Lab Homicides in Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/labsolution.html">5.11. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Stat.html">6. STATISTICAL INFERENCE - Peter Jantsch, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/00_Instructor_Notes.html">6.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/01_Foundations.html">6.2. Foundations of Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/02_Inference_Categorical.html">6.3. Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/03_Inference_Numerical.html">6.4. Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/04_Regression.html">6.5. Linear Regression</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedCalc.html">7. APPLIED CALCULUS FOR DAILY LIFE - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AppliedCalculusIntro.html">7.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">7.2. Linear Systems and the Two-commodity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">7.3. Marginal and Average Cost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">7.4. Optimization and Object Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">7.5. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">7.6. Related Rates and Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">7.7. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7.8. Probability Distributions and Drive Thrus</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">7.10. Normal Distribution and Process Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">7.11. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">7.12. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">7.13. Integral Test and Income Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">7.14. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/solutions.html">7.15. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClab.html">7.16. JNB Lab: Calculus of Entropy in Daily Life and Monte Carlo Simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClabsolutions.html">7.17. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Calc.html">8. CALCULUS - Inne Singgih</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">8.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">8.2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">8.3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">8.4. Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">8.5. Integrals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/6%20ParametricEquations.html">8.6. Parametric Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">8.7. Sequences and Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">8.8. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clab.html">8.9. JNB LAB: Calculus Animations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clabsolution.html">8.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear.html">9. LINEAR ALGEBRA - Soheil Anbouhi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/0.html">9.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/1.html">9.2. Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/2.html">9.3. Matrices and Determinants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/3.html">9.4. Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/4.html">9.5. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/5.html">9.6. Orthogonality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">9.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlab.html">9.8. Linear Algebra Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlabsolutions.html">9.9. Linear Algebra Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Aplin.html">10. LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">10.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">10.2. OLS Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">10.3. K-means Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">10.4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">10.5. Binary Classification of Labeled Data by Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/solutions.html">10.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlab.html">10.7. JNB LAB: Linear Algebra for Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlabsolution.html">10.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../DifEq.html">11. DIFFERENTIAL EQUATIONS - Rachel Petrik</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">11.1. Overview of Chapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">11.2. Introduction to Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">11.3. First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">11.4. Second-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">11.5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">11.6. Laplace Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">11.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">11.8. Differential Equations Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">11.9. Differential Equations Lab Answer Key</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedDifEq.html">12. DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/AppliedDiffEqIntro.html">12.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/covid.html">12.2. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">12.3. The Basic SIR Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">12.4. Cholera in Haiti</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">12.5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">12.6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/erc/erc.html">12.7. Earthquake Resistant Construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">12.8. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/lab.html">12.9. JNB Lab: HIV-AIDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/labsolutions.html">12.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexVar.html">13. COMPLEX VARIABLES IN GROUNDWATER MODELING - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_1.html">13.1. Setting the Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_2.html">13.2. Complex Analysis Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_3.html">13.3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_4.html">13.4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_solutions.html">13.5. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_lab.html">13.6. JNB LAB: Complex Potentials and Contaminant Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_lab_solution.html">13.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AdvData.html">14. ADVANCED DATA ANALYSIS - Ying Li, Jonathan Zhu, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">14.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">14.2. Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">14.3. About Text Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">14.4. Document Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">14.5. Classification of Texts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">14.6. Evaluating Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">14.7. Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/solutions.html">14.8. Solutions to Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexSystems.html">15. COMPLEX SYSTEMS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_1.html">15.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_2.html">15.2. Fundamental Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_3.html">15.3. Mathematical Concepts from Equilibrium Statistical Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_4.html">15.4. Societal Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_solutions.html">15.5. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_lab.html">15.6. JNB LAB: Complex Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_labsolution.html">15.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/ProbStat/EDA/sec3_basic_plotting.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FProbStat/EDA/sec3_basic_plotting.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ProbStat/EDA/sec3_basic_plotting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Plotting and Statistical Testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">4.5.1. Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-numerical-variable-histograms">One Numerical Variable: Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-categorical-variable-count-plots">One Categorical Variable: Count Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-numerical-variables-scatterplots">Two Numerical Variables: Scatterplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-categorical-one-numerical-boxplots">One Categorical, One Numerical: Boxplots</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-testing">4.5.2. Statistical Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#t-tests">T-tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anova">ANOVA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-project">4.5.3. EDA Project</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell tag_remove-input docutils container">
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="plotting-and-statistical-testing">
+<h1><span class="section-number">4.5. </span>Plotting and Statistical Testing<a class="headerlink" href="#plotting-and-statistical-testing" title="Link to this heading">#</a></h1>
+<p>In this section, we will go over some basic plots we can perform with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. This will involve quite a bit of review of content from the section on using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> in the Python Programming Guide.</p>
+<p>At a basic level, there are a few plots that are widely used in EDAs and for analyses in general. These plots depend on the data that you want to include in the plot, and we will go over some of the main types here.</p>
+<section id="plotting">
+<h2><span class="section-number">4.5.1. </span>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h2>
+<section id="one-numerical-variable-histograms">
+<h3>One Numerical Variable: Histograms<a class="headerlink" href="#one-numerical-variable-histograms" title="Link to this heading">#</a></h3>
+<p>When visualizing one single numerical variable, you will want to use a histogram. Histograms visualize the frequency of each value across a numerical variable and give you a sense of how the instances are distributed. This in turn can give insight about how likely certain values might be; to find out more about probability distributions, look to the Probability and Statistical Inference sections.</p>
+<p>For now, let’s make a histogram of the <code class="docutils literal notranslate"><span class="pre">age</span></code> column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#make a histogram of the age column</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1e78949f4aa45efbd0c9aa8ad3bf117287ef5af9cd42d3dc9bb4f524dc423b7e.png" src="../../_images/1e78949f4aa45efbd0c9aa8ad3bf117287ef5af9cd42d3dc9bb4f524dc423b7e.png" />
+</div>
+</div>
+<p>In making our plot, note that we added labels to each axis and a title to the plot. This is important as our graphs should be able to stand alone and still be somewhat understandable.</p>
+<p>We can see that the distribution of ages is skewed right (values tend to be lower) but with a few outliers corresponding to the very elderly.</p>
+<div class="admonition-exercise-3-1 admonition">
+<p class="admonition-title">Exercise 3.1</p>
+<p>Make another histogram corresponding to a different variable.</p>
+</div>
+</section>
+<section id="one-categorical-variable-count-plots">
+<h3>One Categorical Variable: Count Plots<a class="headerlink" href="#one-categorical-variable-count-plots" title="Link to this heading">#</a></h3>
+<p>To look at the distribution of one categorical variable, we use count plots. These will correspond to the number of instances of each category in a variable, with one bar for each category. While this is possible with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, the <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> package makes for easier and nicer plots much of the time, and this is a case where it is very helpful. It is often used in conjunction with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> as well, and we will see that below.</p>
+<p>Here, let’s make a bar plot of the <code class="docutils literal notranslate"><span class="pre">education</span></code> column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#make a bar plot of the education column</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Education Level Distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Education Level&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/61821456c34cba48b84a17894b7410dda44f431bef6c05de4ab67668e0cec2d2.png" src="../../_images/61821456c34cba48b84a17894b7410dda44f431bef6c05de4ab67668e0cec2d2.png" />
+</div>
+</div>
+<p>An unfortunate reality of countplots is that they will collide labels with each other for variables with a lot of categories. Fortunately, this is where the collaboration between <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> can shine, because the latter allows for rotating the ticks on the axes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Education Level Distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Education Level&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ab6e3a61a045463e874584bb9d3326f75acb39c389a1f235de1c302dc11c521f.png" src="../../_images/ab6e3a61a045463e874584bb9d3326f75acb39c389a1f235de1c302dc11c521f.png" />
+</div>
+</div>
+<p>Much more readable now, but it’s easier to read these labels when they are in their normal positions. How about we rotate this entire graph instead?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Education Level Distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Education Level&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04dab4ab399c7d0520f4a73004899b3736e35a6354b59977db5773fdd87f058a.png" src="../../_images/04dab4ab399c7d0520f4a73004899b3736e35a6354b59977db5773fdd87f058a.png" />
+</div>
+</div>
+<p>And that’s how it’s done. We’ve just gone from a jumble of pixels to a very professional-looking plot with a few iterations. The lesson here (aside from learning about countplots) is to not be afraid to experiment! This whole process is called <em>exploratory</em> for a reason!</p>
+<div class="admonition-exercise-3-2 admonition">
+<p class="admonition-title">Exercise 3.2</p>
+<p>Make another countplot corresponding to a different variable. Adjust it so it looks professional.</p>
+</div>
+</section>
+<section id="two-numerical-variables-scatterplots">
+<h3>Two Numerical Variables: Scatterplots<a class="headerlink" href="#two-numerical-variables-scatterplots" title="Link to this heading">#</a></h3>
+<p>Scatterplots are so called because they scatter points across an (x, y) plane. As such, you need points with two numerical variables in order to do this. Here, let’s look at <code class="docutils literal notranslate"><span class="pre">age</span></code> versus <code class="docutils literal notranslate"><span class="pre">hours-per-week</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#make a scatterplot of age on the x-axis and hours-per-week on the y-axis.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;hours-per-week&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age vs Hours per Week&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Hours per Week&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05f82bf019045ca22919540a59ec666a8cbec9c6af67bb51d4ccbbb734c58f7a.png" src="../../_images/05f82bf019045ca22919540a59ec666a8cbec9c6af67bb51d4ccbbb734c58f7a.png" />
+</div>
+</div>
+<p>Whoa, that’s a bit much. Can we reduce the size of the dots?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#same as before, but reduce the size of the dots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;hours-per-week&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age vs Hours per Week&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Hours per Week&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b79d07b556701ab84f44981ab0267b42c6694745dc9e04ac2e69b500cb9e49ca.png" src="../../_images/b79d07b556701ab84f44981ab0267b42c6694745dc9e04ac2e69b500cb9e49ca.png" />
+</div>
+</div>
+<p>Definitely looks a lot better.</p>
+<p>Plots like this help you to visualize numerical relationships between variables, such as correlation. Unfortunately, it doesn’t seem like there’s a strong correlation here at first glance, especially if you kept the default dot size. But now, with smaller dots, we can kind of see that the number of hours per week increases slightly for adults from children then decreases for the elderly.</p>
+<div class="admonition-exercise-3-3 admonition">
+<p class="admonition-title">Exercise 3.3</p>
+<p>Make another scatterplot with two other variables of your choosing. Make sure it looks presentable!</p>
+</div>
+</section>
+<section id="one-categorical-one-numerical-boxplots">
+<h3>One Categorical, One Numerical: Boxplots<a class="headerlink" href="#one-categorical-one-numerical-boxplots" title="Link to this heading">#</a></h3>
+<p>Boxplots, or box-and-whisker plots, help you to look at the distributions of a numerical variable when split along the categories of a categorical variable. Here, let’s try it with the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> variables; again, we will turn to <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#use seaborn to make a boxplot of age, broken down by sex</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age Distribution by Sex&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Sex&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/18a2d1d785ec30c4b8143789f18c7fdf67c1cfe0624c5e69b0f0ca053418cb3e.png" src="../../_images/18a2d1d785ec30c4b8143789f18c7fdf67c1cfe0624c5e69b0f0ca053418cb3e.png" />
+</div>
+</div>
+<p>Here we can see that the distributions for ages between men and women are somewhat similar. Further statistical investigation would be needed to confirm this, though.</p>
+<div class="admonition-exercise-3-4 admonition">
+<p class="admonition-title">Exercise 3.4</p>
+<p>Make another boxplot between variables of your choosing. Make sure it looks presentable.</p>
+</div>
+</section>
+</section>
+<section id="statistical-testing">
+<h2><span class="section-number">4.5.2. </span>Statistical Testing<a class="headerlink" href="#statistical-testing" title="Link to this heading">#</a></h2>
+<p>While visualizations look good and can sometimes give us information on various dataset attributes, they can be augmented by mathematical techniques to acquire more quantitative insights. These mathematical techniques are known as statistical tests; there are a variety of them and their usage depends largely on the number of variables analyzed and the distribution of the tested groups.</p>
+<p>When performing a statistical test, we assume a <em>null hypothesis</em> <span class="math notranslate nohighlight">\(H_0\)</span>. Following this, the probability of the instances we have is calculated; this probability becomes a p-value. For sufficiently low p-values, we can reject the null hypothesis; this threshold is typically <span class="math notranslate nohighlight">\( p &lt; 0.05\)</span>. In other words, getting a low enough p-value means that the null hypothesis is unlikely to be correct.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a massive simplification of the actual theory behind statistical testing. For more on the theory of statistical testing, refer to the Statistical Inference section.</p>
+</div>
+<p>The tests covered in this section are mainly for numerical data, and we will look at two widely used tests to compare groups: the two-sample t-test and ANOVA.</p>
+<section id="t-tests">
+<h3>T-tests<a class="headerlink" href="#t-tests" title="Link to this heading">#</a></h3>
+<p>When performing a t-test to compare two samples, you first assume the null hypothesis that the mean values for these two samples are equal; in other words, that there is no difference between the groups. You then want to acquire those two samples and then use those samples to find the p-value. The actual theory is not important here as there are many assumptions we are overlooking.</p>
+<p>Here, let’s look at the <code class="docutils literal notranslate"><span class="pre">captial-gain</span></code> variable split between sex.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#t-test for captial-gain between sex</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="c1">#split the groups</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; Male&quot;</span><span class="p">][</span><span class="s1">&#39;capital-gain&#39;</span><span class="p">]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; Female&quot;</span><span class="p">][</span><span class="s1">&#39;capital-gain&#39;</span><span class="p">]</span>
+
+<span class="c1">#perform the t-test</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t-value:&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p-value:&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t-value: 8.487476444760196
+p-value: 2.2070076201365698e-17
+</pre></div>
+</div>
+</div>
+</div>
+<p>This shows that there is a significant difference between the captial gains between men and women in this dataset.</p>
+<div class="admonition-exercise-3-5 admonition">
+<p class="admonition-title">Exercise 3.5</p>
+<p>Make plots to visualize this difference and see if the conclusion of the t-test makes sense.</p>
+</div>
+<div class="admonition-exercise-3-6 admonition">
+<p class="admonition-title">Exercise 3.6</p>
+<p>Perform another t-test in the style of your choosing. Report the t-value and p-value, and supply plots to justify this difference.</p>
+</div>
+</section>
+<section id="anova">
+<h3>ANOVA<a class="headerlink" href="#anova" title="Link to this heading">#</a></h3>
+<p>Analysis of Variance (more often abbreviated as ANOVA) tests are extensions of t-tests in that while t-tests compare two groups, ANOVA can compare 3 or more groups. It assumes the null hypothesis that there is no difference between the means of all of the groups; that is, there is no difference between all of the groups. Again, there is a lot of theory we are overlooking, but for practicality’s sake, this is sometimes permissible.</p>
+<p>Here, let’s split the <code class="docutils literal notranslate"><span class="pre">capital-gains</span></code> variable across the <code class="docutils literal notranslate"><span class="pre">education</span></code> category.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#anova for capital-gains split by education</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+
+<span class="c1">#there is an error in the data that will cause the anova to fail</span>
+<span class="c1">#capital-gain needs to be replaced with capital_gain</span>
+<span class="c1">#otherwise the ANOVA will read this as a minus sign</span>
+<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;capital-gain&#39;</span><span class="p">:</span><span class="s1">&#39;capital_gain&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="c1">#perform the anova</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">&#39;capital_gain ~ education&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">anova_table</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">anova_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 sum_sq       df          F         PR(&gt;F)
+education  6.886420e+10     15.0  87.285486  4.079945e-264
+Residual   1.585586e+12  30146.0        NaN            NaN
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our ANOVA result outputs a table. For basic purposes, the most important result is the one in the last column, the PR(&gt;F) value. This is a very low p-value, so preliminarily we would say that there are significant differences between capital gains by education levels.</p>
+<div class="admonition-exercise-3-7 admonition">
+<p class="admonition-title">Exercise 3.7</p>
+<p>Does the test tell us where the significant difference lies?</p>
+</div>
+<p>::{admonition} Exercise 3.8
+Perform another ANOVA test of your choosing.</p>
+<div class="docutils">
+</div>
+</section>
+</section>
+<section id="eda-project">
+<h2><span class="section-number">4.5.3. </span>EDA Project<a class="headerlink" href="#eda-project" title="Link to this heading">#</a></h2>
+<p>Find another dataset of your choosing on the internet and perform some of the techniques described in this basic EDA part of the chapter. Make sure your results are presentable and that you add some textual description to them.</p>
+<p>Common places to find data include:</p>
+<ul class="simple">
+<li><p>UC Irvine Machine Learning Repository, <a class="reference external" href="https://archive.ics.uci.edu/">https://archive.ics.uci.edu/</a></p></li>
+<li><p>Kaggle, <a class="reference external" href="https://www.kaggle.com/">https://www.kaggle.com/</a></p></li>
+<li><p>The GitHub Repository of Awesome Public Datasets, <a class="github reference external" href="https://github.com/awesomedata/awesome-public-datasets">awesomedata/awesome-public-datasets</a></p></li>
+<li><p>KDNuggets, which links many more data sources: <a class="reference external" href="https://www.kdnuggets.com/datasets/index.html">https://www.kdnuggets.com/datasets/index.html</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ProbStat/EDA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sec2_basic_tabular.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>Data Investigation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sec4_basic_solutions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.6. </span>Solutions to Exercises: Basic</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">4.5.1. Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-numerical-variable-histograms">One Numerical Variable: Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-categorical-variable-count-plots">One Categorical Variable: Count Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-numerical-variables-scatterplots">Two Numerical Variables: Scatterplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-categorical-one-numerical-boxplots">One Categorical, One Numerical: Boxplots</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-testing">4.5.2. Statistical Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#t-tests">T-tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anova">ANOVA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-project">4.5.3. EDA Project</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Claire Wagner, Peter Jantsch, and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' width=88 style='border-width:0' src='https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png'/></a>
+  Except where otherwise noted, this work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

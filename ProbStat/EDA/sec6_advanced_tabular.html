@@ -1,0 +1,3668 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.8. Data Investigation &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=07d05eac" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ProbStat/EDA/sec6_advanced_tabular';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.9. Plotting and Statistical Testing" href="sec7_advanced_plotting.html" />
+    <link rel="prev" title="4.7. Intro to Advanced EDA" href="sec5_advanced_intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Preface.html">1. PREFACE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../JMM23.html">1.1. JMM 2023</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lab.html">1.2. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../labsolutions.html">1.3. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreCollege.html">2. PRE-COLLEGE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/PreCollegeIntro.html">2.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">2.2. Elementary Blackboard Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">2.3. Beginning Python Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">2.4. Glimpse of Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">2.5. Arts in STEM (STEAM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/solutions.html">2.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">2.7. JNB LAB: After-School Program Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demosolutions.html">2.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Intropy.html">3. PYTHON PROGRAMMING GUIDE - Thomas VanDrunen, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/PythonProgrammingGuideIntro.html">3.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">3.2. Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Data.html">3.3. Working with Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/solutions.html">3.4. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plab.html">3.5. JNB Lab: Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plabsolutions.html">3.6. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Data.html">4. EXPLORATORY DATA ANALYSIS - Jonathan Zhu</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sec1_basic_intro.html">4.1. Introduction to EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec2_basic_tabular.html">4.2. Data Investigation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="sec3_basic_plotting.html">4.5. Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec4_basic_solutions.html">4.6. Solutions to Exercises: Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec5_advanced_intro.html">4.7. Intro to Advanced EDA</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.8. Data Investigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec7_advanced_plotting.html">4.9. Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec8_advanced_report.html">4.10. Making EDA Reports</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="sec9_advanced_solution.html">4.13. Solutions to Exercises - Advanced</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab.html">4.14. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labsolution.html">4.15. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prob.html">5. PROBABILITY - Laura Gross, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob.html">5.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob1.html">5.2. Random Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob2.html">5.3. Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob3.html">5.4. Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob4.html">5.5. Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob4a.html">5.6. Random Walks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob5.html">5.7. Agent-based Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/prob6.html">5.8. Mathematical Games</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/solutions.html">5.9. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/lab.html">5.10. JNB Lab Homicides in Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProbIntro/labsolution.html">5.11. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Stat.html">6. STATISTICAL INFERENCE - Peter Jantsch, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/00_Instructor_Notes.html">6.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/01_Foundations.html">6.2. Foundations of Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/02_Inference_Categorical.html">6.3. Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/03_Inference_Numerical.html">6.4. Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../StatInf/04_Regression.html">6.5. Linear Regression</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedCalc.html">7. APPLIED CALCULUS FOR DAILY LIFE - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AppliedCalculusIntro.html">7.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">7.2. Linear Systems and the Two-commodity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">7.3. Marginal and Average Cost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">7.4. Optimization and Object Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">7.5. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">7.6. Related Rates and Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">7.7. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7.8. Probability Distributions and Drive Thrus</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">7.10. Normal Distribution and Process Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">7.11. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">7.12. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">7.13. Integral Test and Income Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">7.14. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/solutions.html">7.15. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClab.html">7.16. JNB Lab: Calculus of Entropy in Daily Life and Monte Carlo Simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClabsolutions.html">7.17. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Calc.html">8. CALCULUS - Inne Singgih</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">8.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">8.2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">8.3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">8.4. Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">8.5. Integrals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/6%20ParametricEquations.html">8.6. Parametric Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">8.7. Sequences and Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">8.8. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clab.html">8.9. JNB LAB: Calculus Animations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clabsolution.html">8.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear.html">9. LINEAR ALGEBRA - Soheil Anbouhi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/0.html">9.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/1.html">9.2. Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/2.html">9.3. Matrices and Determinants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/3.html">9.4. Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/4.html">9.5. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/5.html">9.6. Orthogonality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">9.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlab.html">9.8. Linear Algebra Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlabsolutions.html">9.9. Linear Algebra Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Aplin.html">10. LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/Introduction.html">10.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/OLS/jnb1.html">10.2. OLS Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/KMeans/jnb2.html">10.3. K-means Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/PCA/jnb3.html">10.4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/SVM/jnb4.html">10.5. Binary Classification of Labeled Data by Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/solutions.html">10.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlab.html">10.7. JNB LAB: Linear Algebra for Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/LinearAlgebra/ALlabsolution.html">10.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../DifEq.html">11. DIFFERENTIAL EQUATIONS - Rachel Petrik</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">11.1. Overview of Chapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">11.2. Introduction to Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">11.3. First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">11.4. Second-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">11.5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">11.6. Laplace Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">11.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">11.8. Differential Equations Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">11.9. Differential Equations Lab Answer Key</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedDifEq.html">12. DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/AppliedDiffEqIntro.html">12.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/covid.html">12.2. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">12.3. The Basic SIR Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">12.4. Cholera in Haiti</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">12.5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">12.6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/erc/erc.html">12.7. Earthquake Resistant Construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">12.8. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/lab.html">12.9. JNB Lab: HIV-AIDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/labsolutions.html">12.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexVar.html">13. COMPLEX VARIABLES IN GROUNDWATER MODELING - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_1.html">13.1. Setting the Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_2.html">13.2. Complex Analysis Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_3.html">13.3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_4.html">13.4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_solutions.html">13.5. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_lab.html">13.6. JNB LAB: Complex Potentials and Contaminant Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/Complex/complex_variables_lab_solution.html">13.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AdvData.html">14. ADVANCED DATA ANALYSIS - Ying Li, Jonathan Zhu, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec0_data.html">14.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec1_preprocessing.html">14.2. Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec2_transform_features.html">14.3. About Text Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec3_doc_embedding.html">14.4. Document Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec4_classification_algos.html">14.5. Classification of Texts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec5_classification_eval.html">14.6. Evaluating Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/sec6_applications.html">14.7. Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/AdvDataAnalysis/solutions.html">14.8. Solutions to Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexSystems.html">15. COMPLEX SYSTEMS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_1.html">15.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_2.html">15.2. Fundamental Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_3.html">15.3. Mathematical Concepts from Equilibrium Statistical Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_4.html">15.4. Societal Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_solutions.html">15.5. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_lab.html">15.6. JNB LAB: Complex Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Advanced/ComplexSystems/complex_systems_labsolution.html">15.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/ProbStat/EDA/sec6_advanced_tabular.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FProbStat/EDA/sec6_advanced_tabular.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ProbStat/EDA/sec6_advanced_tabular.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Investigation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">4.8.1. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-data-inspection">4.8.2. Simple Data Inspection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-attributes">4.8.3. Dataframe Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-nan-values">4.8.4. Finding NaN values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-na-columns-and-rows">4.8.5. Removing NA Columns and Rows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-transformations">4.8.6. Basic Transformations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution">Substitution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generation">Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-removal">Outlier Removal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#illogical-value-removal">Illogical Value Removal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-transformations">4.8.7. Advanced Transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-data-transformations">4.8.8. Saving Data Transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-project-part-1">4.8.9. EDA Project: Part 1</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-investigation">
+<h1><span class="section-number">4.8. </span>Data Investigation<a class="headerlink" href="#data-investigation" title="Link to this heading">#</a></h1>
+<p>Often times when we explore data for the first time, we have to spend time looking at what is missing in the data, or what needs to be changed. Data files rarely if ever are perfect for use immediately once you get them. Additionally, it is often unwise to utilize data for predictive modeling or statistical analysis without knowing some of the context for the data and looking at its contents.</p>
+<p>Python has a helpful package called <code class="docutils literal notranslate"><span class="pre">pandas</span></code> which is purpose-built for looking at and manipulating data, and a lot of what we will work on in this section will involve using it.</p>
+<section id="setup">
+<h2><span class="section-number">4.8.1. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>The first thing we typically do when dealing with data in Python is to import the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package and one of its dependencies, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Due to the large size of the provided data file, we store it in a different directory than the one where this notebook lies. We can easily set this directory using the <code class="docutils literal notranslate"><span class="pre">os</span></code> package.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;&lt;your-directory&gt;&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;dhs_service_records_synthesized_final.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+</section>
+<section id="simple-data-inspection">
+<h2><span class="section-number">4.8.2. </span>Simple Data Inspection<a class="headerlink" href="#simple-data-inspection" title="Link to this heading">#</a></h2>
+<p>Before doing anything with the data, it is good practice to take a look at a few samples from the dataset. Here, we’re going to take a look at the first ten rows and the last seven rows, or the head and tail of the data; this is a function that is easy to call, and it is good practice to call either of these often so that you know how a dataset evolves over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>GEO_AREA</th>
+      <th>age</th>
+      <th>DOB</th>
+      <th>DOD</th>
+      <th>GENDER</th>
+      <th>GENDER_IDENTITY</th>
+      <th>SEX_ORIENT</th>
+      <th>LEGAL_SEX</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>LIVING_ARRANGEMENT</th>
+      <th>EMPLOYMENT_STATUS</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+      <th>VETERAN_FLAG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>01/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>NaN</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>02/28/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>NaN</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>03/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>NaN</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>04/30/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>NaN</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>05/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>NaN</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>GEO_AREA</th>
+      <th>age</th>
+      <th>DOB</th>
+      <th>DOD</th>
+      <th>GENDER</th>
+      <th>GENDER_IDENTITY</th>
+      <th>SEX_ORIENT</th>
+      <th>LEGAL_SEX</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>LIVING_ARRANGEMENT</th>
+      <th>EMPLOYMENT_STATUS</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+      <th>VETERAN_FLAG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7116127</th>
+      <td>SYNTHETIC DATA</td>
+      <td>530696</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Suicides</td>
+      <td>NaN</td>
+      <td>21</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2~Female</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7116128</th>
+      <td>SYNTHETIC DATA</td>
+      <td>530765</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Suicides</td>
+      <td>NaN</td>
+      <td>15</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2~Female</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7116129</th>
+      <td>SYNTHETIC DATA</td>
+      <td>530832</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Suicides</td>
+      <td>NaN</td>
+      <td>17</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7116130</th>
+      <td>SYNTHETIC DATA</td>
+      <td>532121</td>
+      <td>2021</td>
+      <td>04/30/2021</td>
+      <td>Suicides</td>
+      <td>NaN</td>
+      <td>22</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2~Female</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Single-Never Married</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7116131</th>
+      <td>SYNTHETIC DATA</td>
+      <td>533991</td>
+      <td>2021</td>
+      <td>11/30/2021</td>
+      <td>Suicides</td>
+      <td>NaN</td>
+      <td>16</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Single-Never Married</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7116132</th>
+      <td>SYNTHETIC DATA</td>
+      <td>534127</td>
+      <td>2021</td>
+      <td>07/31/2021</td>
+      <td>Suicides</td>
+      <td>NaN</td>
+      <td>19</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4~Widowed</td>
+      <td>GRAD~Graduate Degree</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7116133</th>
+      <td>SYNTHETIC DATA</td>
+      <td>535156</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Suicides</td>
+      <td>NaN</td>
+      <td>24</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Single-Never Married</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="dataframe-attributes">
+<h2><span class="section-number">4.8.3. </span>Dataframe Attributes<a class="headerlink" href="#dataframe-attributes" title="Link to this heading">#</a></h2>
+<p>You can get a lot of helpful information from the attributes of the dataframe; specifically, we are going to look at dataframe dimensions, column names, column data types, and the ranges of column values. To get these, we can easily call some prebuilt attributes that are assigned to pandas dataframes. These help us to understand our data before we even start modifying it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7116134, 20)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;synthetic_data&#39;, &#39;MCI_UNIQ_ID&#39;, &#39;CALDR_YR&#39;, &#39;DATE_OF_EVENT&#39;, &#39;service&#39;,
+       &#39;GEO_AREA&#39;, &#39;age&#39;, &#39;DOB&#39;, &#39;DOD&#39;, &#39;GENDER&#39;, &#39;GENDER_IDENTITY&#39;,
+       &#39;SEX_ORIENT&#39;, &#39;LEGAL_SEX&#39;, &#39;RACE&#39;, &#39;ETHNICITY&#39;, &#39;LIVING_ARRANGEMENT&#39;,
+       &#39;EMPLOYMENT_STATUS&#39;, &#39;MARITAL_STATUS&#39;, &#39;EDUCATION_LEVEL&#39;,
+       &#39;VETERAN_FLAG&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pandas dataframes also have a helpful method for easy summarization of the set, which you can call with <code class="docutils literal notranslate"><span class="pre">df.info()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 7116134 entries, 0 to 7116133
+Data columns (total 20 columns):
+ #   Column              Dtype  
+---  ------              -----  
+ 0   synthetic_data      object 
+ 1   MCI_UNIQ_ID         int64  
+ 2   CALDR_YR            int64  
+ 3   DATE_OF_EVENT       object 
+ 4   service             object 
+ 5   GEO_AREA            float64
+ 6   age                 int64  
+ 7   DOB                 float64
+ 8   DOD                 float64
+ 9   GENDER              object 
+ 10  GENDER_IDENTITY     float64
+ 11  SEX_ORIENT          float64
+ 12  LEGAL_SEX           float64
+ 13  RACE                object 
+ 14  ETHNICITY           object 
+ 15  LIVING_ARRANGEMENT  float64
+ 16  EMPLOYMENT_STATUS   float64
+ 17  MARITAL_STATUS      object 
+ 18  EDUCATION_LEVEL     object 
+ 19  VETERAN_FLAG        float64
+dtypes: float64(9), int64(3), object(8)
+memory usage: 1.1+ GB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another way to check the data types, if you just want that, is to use the <code class="docutils literal notranslate"><span class="pre">dtypes</span></code> attribute of the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>synthetic_data         object
+MCI_UNIQ_ID             int64
+CALDR_YR                int64
+DATE_OF_EVENT          object
+service                object
+GEO_AREA              float64
+age                     int64
+DOB                   float64
+DOD                   float64
+GENDER                 object
+GENDER_IDENTITY       float64
+SEX_ORIENT            float64
+LEGAL_SEX             float64
+RACE                   object
+ETHNICITY              object
+LIVING_ARRANGEMENT    float64
+EMPLOYMENT_STATUS     float64
+MARITAL_STATUS         object
+EDUCATION_LEVEL        object
+VETERAN_FLAG          float64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also find the number of unique entries in the dataframe. This can be important as in some cases we may not want duplicates. In the case of these data from Allegheny County, unique IDs are important as each one will correspond to a single person, and we can track that person across their usage of many different services.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>synthetic_data             1
+MCI_UNIQ_ID           533799
+CALDR_YR                   1
+DATE_OF_EVENT             12
+service                   22
+GEO_AREA                   0
+age                      112
+DOB                        0
+DOD                        0
+GENDER                     3
+GENDER_IDENTITY            0
+SEX_ORIENT                 0
+LEGAL_SEX                  0
+RACE                       7
+ETHNICITY                  3
+LIVING_ARRANGEMENT         0
+EMPLOYMENT_STATUS          0
+MARITAL_STATUS             7
+EDUCATION_LEVEL            8
+VETERAN_FLAG               0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note to collaborators: the next two code cells are irrelevant with the complete dataset as there are no entries with “SYNTHET” in the synthetic_data column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#note: I am not sure what &#39;SYNTHET&quot; versus &quot;SYNTHETIC DATA&quot; means.</span>
+<span class="c1">#but we split by them anyway.</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;synthetic_data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>GEO_AREA</th>
+      <th>age</th>
+      <th>DOB</th>
+      <th>DOD</th>
+      <th>GENDER</th>
+      <th>GENDER_IDENTITY</th>
+      <th>SEX_ORIENT</th>
+      <th>LEGAL_SEX</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>LIVING_ARRANGEMENT</th>
+      <th>EMPLOYMENT_STATUS</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+      <th>VETERAN_FLAG</th>
+    </tr>
+    <tr>
+      <th>synthetic_data</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SYNTHETIC DATA</th>
+      <td>7116134</td>
+      <td>7116134</td>
+      <td>7116134</td>
+      <td>7116134</td>
+      <td>0</td>
+      <td>7116134</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7116134</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7116134</td>
+      <td>7116134</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7116134</td>
+      <td>7116134</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;synthetic_data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SYNTHETIC DATA    7116134
+Name: synthetic_data, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>One way to get an overview of the data values is to use another helpful function, <code class="docutils literal notranslate"><span class="pre">df.describe()</span></code>. This will provide several summary statistics for you for each of the columns in the set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>GEO_AREA</th>
+      <th>age</th>
+      <th>DOB</th>
+      <th>DOD</th>
+      <th>GENDER_IDENTITY</th>
+      <th>SEX_ORIENT</th>
+      <th>LEGAL_SEX</th>
+      <th>LIVING_ARRANGEMENT</th>
+      <th>EMPLOYMENT_STATUS</th>
+      <th>VETERAN_FLAG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>7.116134e+06</td>
+      <td>7116134.0</td>
+      <td>0.0</td>
+      <td>7.116134e+06</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2.674853e+05</td>
+      <td>2021.0</td>
+      <td>NaN</td>
+      <td>3.267702e+01</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.544397e+05</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>2.258095e+01</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000e+00</td>
+      <td>2021.0</td>
+      <td>NaN</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.337730e+05</td>
+      <td>2021.0</td>
+      <td>NaN</td>
+      <td>1.300000e+01</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2.675410e+05</td>
+      <td>2021.0</td>
+      <td>NaN</td>
+      <td>3.000000e+01</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>4.010820e+05</td>
+      <td>2021.0</td>
+      <td>NaN</td>
+      <td>4.900000e+01</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>5.356080e+05</td>
+      <td>2021.0</td>
+      <td>NaN</td>
+      <td>1.210000e+02</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In some cases, these are not helpful, like in the IDs portion, having the mean ID value is not important. Same with calendar year, especially since these are all from the same year. But something to note is that the values for the mean, std error, and quartiles will not show up if there are ANY NaN values in the column. So we need to find out where these NaN values are.</p>
+</section>
+<section id="finding-nan-values">
+<h2><span class="section-number">4.8.4. </span>Finding NaN values<a class="headerlink" href="#finding-nan-values" title="Link to this heading">#</a></h2>
+<p>To get the number of NaN (N/A or NA, as they are sometimes called), we can use the <code class="docutils literal notranslate"><span class="pre">isna()</span></code> method in combination with the <code class="docutils literal notranslate"><span class="pre">sum()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>synthetic_data              0
+MCI_UNIQ_ID                 0
+CALDR_YR                    0
+DATE_OF_EVENT               0
+service                     0
+GEO_AREA              7116134
+age                         0
+DOB                   7116134
+DOD                   7116134
+GENDER                      0
+GENDER_IDENTITY       7116134
+SEX_ORIENT            7116134
+LEGAL_SEX             7116134
+RACE                        0
+ETHNICITY                   0
+LIVING_ARRANGEMENT    7116134
+EMPLOYMENT_STATUS     7116134
+MARITAL_STATUS              0
+EDUCATION_LEVEL             0
+VETERAN_FLAG          7116134
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note for collaborators: df.isna() and df.isnull() now produce the same results, so the below code cell is not relevant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>synthetic_data              0
+MCI_UNIQ_ID                 0
+CALDR_YR                    0
+DATE_OF_EVENT               0
+service                     0
+GEO_AREA              7116134
+age                         0
+DOB                   7116134
+DOD                   7116134
+GENDER                      0
+GENDER_IDENTITY       7116134
+SEX_ORIENT            7116134
+LEGAL_SEX             7116134
+RACE                        0
+ETHNICITY                   0
+LIVING_ARRANGEMENT    7116134
+EMPLOYMENT_STATUS     7116134
+MARITAL_STATUS              0
+EDUCATION_LEVEL             0
+VETERAN_FLAG          7116134
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the columns [‘GEO_AREA’, ‘DOB’, ‘DOD’, ‘GENDER_IDENTITY’, ‘SEX_ORIENT’, ‘LEGAL_SEX’, ‘LIVING_ARRANGEMENT’, ‘EMPLOYMENT_STATUS’, ‘VETERAN_FLAG’] have only NaN values.</p>
+<p>Note to collaborators: the bottom row that has only NAs is gone with the complete version of the data.</p>
+<!--and there seem to be one row that has NA in all columns? usually it can be the first row or last row. But let's verify.--><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>GEO_AREA</th>
+      <th>age</th>
+      <th>DOB</th>
+      <th>DOD</th>
+      <th>GENDER</th>
+      <th>GENDER_IDENTITY</th>
+      <th>SEX_ORIENT</th>
+      <th>LEGAL_SEX</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>LIVING_ARRANGEMENT</th>
+      <th>EMPLOYMENT_STATUS</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+      <th>VETERAN_FLAG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7116133</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>let’s clean up the data frame then, drop last row, drop the columns that only have NAs</p>
+<p>Note: I am also not quite sure what the code cell above and below are doing in this context.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>GEO_AREA</th>
+      <th>age</th>
+      <th>DOB</th>
+      <th>DOD</th>
+      <th>GENDER</th>
+      <th>GENDER_IDENTITY</th>
+      <th>SEX_ORIENT</th>
+      <th>LEGAL_SEX</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>LIVING_ARRANGEMENT</th>
+      <th>EMPLOYMENT_STATUS</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+      <th>VETERAN_FLAG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7116133</th>
+      <td>SYNTHETIC DATA</td>
+      <td>535156</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Suicides</td>
+      <td>NaN</td>
+      <td>24</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1~Single-Never Married</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="removing-na-columns-and-rows">
+<h2><span class="section-number">4.8.5. </span>Removing NA Columns and Rows<a class="headerlink" href="#removing-na-columns-and-rows" title="Link to this heading">#</a></h2>
+<p>To drop all rows with only NaN values, we can use a simple function called <code class="docutils literal notranslate"><span class="pre">df.dropna()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7116134, 20)
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this function, the default parameter for a hidden value <code class="docutils literal notranslate"><span class="pre">axis</span></code> removed rows of only NA values, of which there are none in the dataset. To remove columns, we need to specify the axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#we want to remove all the columns that only have NA values</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7116134, 11)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now what if we wanted to drop a row with a single NA value? We can simply remove the how=‘all’ parameter and it will remove the rows with at least one NA value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df.dropna(inplace=True) # will drop rows with any NA.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In addition to looking at the head and the tail, we are also at this point going to take a look at 3 random rows, as it is important to inspect data beyond the head and tail.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set seed for random function so that we get same rows when re-run the cell</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 589043, 5539985, 2078088])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 491929,  828732, 6417139])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set seed for random function so that we get same rows when re-run the cell</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">3</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>age</th>
+      <th>GENDER</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>589041</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>10/31/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539983</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>09/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>2078086</th>
+      <td>SYNTHETIC DATA</td>
+      <td>109525</td>
+      <td>2021</td>
+      <td>09/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We will also take a look at the record for a specific MCI_UNIQ_ID. Let’s look at client 364757.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">364757</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>age</th>
+      <th>GENDER</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>589034</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>02/28/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589035</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>03/31/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589036</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>05/31/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589037</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589038</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>07/31/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589039</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>08/31/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589040</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>09/30/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589041</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>10/31/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589042</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>11/30/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>589043</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>12/31/2021</td>
+      <td>Individuals_Receiving_DHS_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675581</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>01/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675582</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>02/28/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675583</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>03/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675584</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>04/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675585</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>05/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675586</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675587</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>07/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675588</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>08/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675589</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>09/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675590</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>10/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675591</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>11/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>4675592</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>12/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710438</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>01/31/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710439</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>03/31/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710440</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>04/30/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710441</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>05/31/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710442</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710443</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>07/31/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710444</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>08/31/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710445</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>10/31/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710446</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>11/30/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>6710447</th>
+      <td>SYNTHETIC DATA</td>
+      <td>364757</td>
+      <td>2021</td>
+      <td>12/31/2021</td>
+      <td>Individuals_Receiving_Mental_Health_Services</td>
+      <td>54</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And similarly for client 449747.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">449747</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>age</th>
+      <th>GENDER</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5539976</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>01/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539977</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>03/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539978</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>04/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539979</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>05/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539980</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>06/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539981</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>07/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539982</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>08/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539983</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>09/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539984</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>10/31/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>5539985</th>
+      <td>SYNTHETIC DATA</td>
+      <td>449747</td>
+      <td>2021</td>
+      <td>11/30/2021</td>
+      <td>Individuals_Receiving_Income_Supports</td>
+      <td>51</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="basic-transformations">
+<h2><span class="section-number">4.8.6. </span>Basic Transformations<a class="headerlink" href="#basic-transformations" title="Link to this heading">#</a></h2>
+<p>Often times when we encounter data, we find that it is in a format that is a bit clunky to use. Part of EDA will be to make datasets more friendly. Here we will go over four transformations: substitution, generation, outlier removal, and illogical value removal.</p>
+<section id="substitution">
+<h3>Substitution<a class="headerlink" href="#substitution" title="Link to this heading">#</a></h3>
+<p>For the data entries that have strings in certain columns, like “Individuals_Receiving_DHS_Services”, we may need to alter these. Strings can be a bit clunky to work with and are generally read better for plots when we have them in categories. Additionally, we can try and do some mathematical tests on them when we have numerical category labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#we want to take the columns for gender, race, ethnicity, marital status, and education level</span>
+<span class="c1">#and turn these columns into the category data type.</span>
+
+<span class="c1">#first we add a new column to the dataframe that has this dtype</span>
+<span class="c1">#but named with a _cat suffix.</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;GENDER_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;GENDER&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;RACE_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;RACE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;ETHNICITY_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ETHNICITY&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;MARITAL_STATUS_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;MARITAL_STATUS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDUCATION_LEVEL_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDUCATION_LEVEL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;service_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;service&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>age</th>
+      <th>GENDER</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+      <th>GENDER_cat</th>
+      <th>RACE_cat</th>
+      <th>ETHNICITY_cat</th>
+      <th>MARITAL_STATUS_cat</th>
+      <th>EDUCATION_LEVEL_cat</th>
+      <th>service_cat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>01/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>02/28/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>03/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>04/30/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>05/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#forgot to add for ids</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;MCI_UNIQ_ID_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;MCI_UNIQ_ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generation">
+<h3>Generation<a class="headerlink" href="#generation" title="Link to this heading">#</a></h3>
+<p>In other cases, we may want to generate a new variable. These can simply be combinations of previous variables, but in the case of this dataset, we will convert the “age” column to a categorical datatype variable as well. We will do this by putting ages in bins of 10 years.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#first we will define a helper function that takes in an int</span>
+<span class="c1">#and returns the corresponding age bin value (grouped by 10), so a 5 gets returned as &quot;0-9&quot;</span>
+<span class="k">def</span> <span class="nf">age_bin</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;0-9&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;10-19&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;20-29&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;30-39&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;40-49&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;50-59&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;60-69&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;70-79&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;80-89&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;90+&quot;</span>
+    
+<span class="c1">#is there a better way to do this? I am not sure, but we will go with this anyway. </span>
+<span class="c1">#it gets the job done.</span>
+
+<span class="c1">#we will now apply this function to the age column and create a new column called AGE_BIN</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;AGE_BIN&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">age_bin</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>age</th>
+      <th>GENDER</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+      <th>GENDER_cat</th>
+      <th>RACE_cat</th>
+      <th>ETHNICITY_cat</th>
+      <th>MARITAL_STATUS_cat</th>
+      <th>EDUCATION_LEVEL_cat</th>
+      <th>service_cat</th>
+      <th>MCI_UNIQ_ID_cat</th>
+      <th>AGE_BIN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>01/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>02/28/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>03/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>04/30/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>05/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Another type of generation we can do is to split the date of event so we get the month in which each service occurs. We can do this by simply getting the first two characters of the <code class="docutils literal notranslate"><span class="pre">DATE_OF_EVENT</span></code> column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#make a new month column</span>
+<span class="c1">#this is the first two characters of the date column and the last 5 characters of the column</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DATE_OF_EVENT&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DATE_OF_EVENT&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>synthetic_data</th>
+      <th>MCI_UNIQ_ID</th>
+      <th>CALDR_YR</th>
+      <th>DATE_OF_EVENT</th>
+      <th>service</th>
+      <th>age</th>
+      <th>GENDER</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+      <th>GENDER_cat</th>
+      <th>RACE_cat</th>
+      <th>ETHNICITY_cat</th>
+      <th>MARITAL_STATUS_cat</th>
+      <th>EDUCATION_LEVEL_cat</th>
+      <th>service_cat</th>
+      <th>MCI_UNIQ_ID_cat</th>
+      <th>AGE_BIN</th>
+      <th>month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>01/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+      <td>01/2021</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>02/28/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+      <td>02/2021</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>03/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+      <td>03/2021</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>04/30/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+      <td>04/2021</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SYNTHETIC DATA</td>
+      <td>1626</td>
+      <td>2021</td>
+      <td>05/31/2021</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>5</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>1~Male</td>
+      <td>1~White</td>
+      <td>99~Unknown</td>
+      <td>99~Unknown</td>
+      <td>9-12~High School (grade 9-12)</td>
+      <td>Children_Attending_Early_Childhood_Programs_Ma...</td>
+      <td>1626</td>
+      <td>0-9</td>
+      <td>05/2021</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="outlier-removal">
+<h3>Outlier Removal<a class="headerlink" href="#outlier-removal" title="Link to this heading">#</a></h3>
+<p>Often times, data will have outliers. These are data points that are very far from the majority of the data. In the case of a dataset with all categorical variables, this is not often feasible. However, such an act is more common with numeric features. Let’s try the age category and remove all the rows with age 105 or greater.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#want to remove all entries from the dataset where the age entry is 105 or more</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">105</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7115529, 20)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="illogical-value-removal">
+<h3>Illogical Value Removal<a class="headerlink" href="#illogical-value-removal" title="Link to this heading">#</a></h3>
+<p>This portion of data transformations is slightly harder as we will have to look at multiple features at the same time. However, it is still important. Some data points in the dataset have children of age 5, yet lists them as in high school.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#we want to remove all the values where the age is 0-9</span>
+<span class="c1">#AND where they are listed as in high school as &quot;9-12~High School (grade 9-12)&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;AGE_BIN&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0-9&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDUCATION_LEVEL&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;9-12~High School (grade 9-12)&quot;</span><span class="p">))]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6581506, 20)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="advanced-transformations">
+<h2><span class="section-number">4.8.7. </span>Advanced Transformations<a class="headerlink" href="#advanced-transformations" title="Link to this heading">#</a></h2>
+<p>Sometimes when doing exploratory data analysis, the storage format of the table does not give a complete view of the picture. In the case of this dataset, we found earlier that there were several rows with the same ID, which means that there are multiple entries for some people. This indicates that they used the services provided in the dataset multiple times.</p>
+<p>To get a better picture of some data insights, we can make a new dataframe; this one will have one row for each ID, and we will add the columns regarding the number of services used, number of distinct services used, and the number of months the services were used. Because the dataset is big, this may take a while.</p>
+<p>In general cases, to find new transformations for the datasets you work with, you will need to think about the general direction to take the data, which can involve simply thinking about the data logically. However, a better approach is to consult domain knowledge. This basically involves looking to sources related to the data (research articles, people who collected the data, people who are knowledgeable on the subject) and transforming the data as they may advise, or getting advice on where to look for ideas on transformations.</p>
+<p>Here, we are going to perform two aggregative transformations. These will group the entries of the dataset by the ID, as well as by the (ID, Month) pairing and compute some summary statistics, including the number of services used, the number of months the services were used, and the range of dates the services were used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_client_attributes</span><span class="p">(</span><span class="n">services</span><span class="p">):</span>
+    <span class="n">client_attributes</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">num_services</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;service&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span>
+        <span class="n">distinct_services</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;service&#39;</span><span class="p">,</span> <span class="s1">&#39;nunique&#39;</span><span class="p">),</span> 
+        <span class="n">first_date</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;DATE_OF_EVENT&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">),</span> 
+        <span class="n">last_date</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;DATE_OF_EVENT&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">),</span> 
+        <span class="n">num_months</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span> 
+        <span class="n">distinct_month</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;nunique&#39;</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">client_attributes</span>
+
+<span class="n">client_attributes</span> <span class="o">=</span> <span class="n">get_client_attributes</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">client_attributes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MCI_UNIQ_ID</th>
+      <th>num_services</th>
+      <th>distinct_services</th>
+      <th>first_date</th>
+      <th>last_date</th>
+      <th>num_months</th>
+      <th>distinct_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>12</td>
+      <td>1</td>
+      <td>01/31/2021</td>
+      <td>12/31/2021</td>
+      <td>12</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>02/28/2021</td>
+      <td>02/28/2021</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>11</td>
+      <td>1</td>
+      <td>02/28/2021</td>
+      <td>12/31/2021</td>
+      <td>11</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>12</td>
+      <td>1</td>
+      <td>01/31/2021</td>
+      <td>12/31/2021</td>
+      <td>12</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>24</td>
+      <td>3</td>
+      <td>01/31/2021</td>
+      <td>12/31/2021</td>
+      <td>24</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Similarly, we perform the client-month attribute aggregations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_client_date_attributes</span><span class="p">(</span><span class="n">services</span><span class="p">):</span>
+    <span class="n">client_date_attributes</span> <span class="o">=</span> <span class="n">services</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">num_services</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;service&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span>
+        <span class="n">distinct_services</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;service&#39;</span><span class="p">,</span> <span class="s1">&#39;nunique&#39;</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">client_date_attributes</span>
+
+<span class="n">client_date_attributes</span> <span class="o">=</span> <span class="n">get_client_date_attributes</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">client_date_attributes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MCI_UNIQ_ID</th>
+      <th>month</th>
+      <th>num_services</th>
+      <th>distinct_services</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>01/2021</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>02/2021</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>03/2021</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>04/2021</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>05/2021</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now, we can merge the datasets in a sense so that some of the information about each person can carry over to the new datasets we’ve created. Specifically, we want to carry over gender, race, ethnicity, education level, and marital status.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#start with client_attributes</span>
+<span class="c1">#we want to add columns of age, gender, race, ethnicity, education level, and marital status</span>
+<span class="c1">#from the original dataset, making sure IDs match up and that there is only one occurrence of each ID.</span>
+<span class="n">client_attributes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">client_attributes</span><span class="p">,</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;GENDER&#39;</span><span class="p">,</span> <span class="s1">&#39;RACE&#39;</span><span class="p">,</span> <span class="s1">&#39;ETHNICITY&#39;</span><span class="p">,</span> <span class="s1">&#39;MARITAL_STATUS&#39;</span><span class="p">,</span> <span class="s1">&#39;EDUCATION_LEVEL&#39;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="c1">#now remove duplicate rows</span>
+<span class="n">client_attributes</span> <span class="o">=</span> <span class="n">client_attributes</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">])</span>
+<span class="n">client_attributes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MCI_UNIQ_ID</th>
+      <th>num_services</th>
+      <th>distinct_services</th>
+      <th>first_date</th>
+      <th>last_date</th>
+      <th>num_months</th>
+      <th>distinct_month</th>
+      <th>age</th>
+      <th>GENDER</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>12</td>
+      <td>1</td>
+      <td>01/31/2021</td>
+      <td>12/31/2021</td>
+      <td>12</td>
+      <td>12</td>
+      <td>13</td>
+      <td>1~Male</td>
+      <td>99~Unknown</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>99~Unknown</td>
+      <td>GED~High School Diploma/GED Completed</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>02/28/2021</td>
+      <td>02/28/2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>70</td>
+      <td>2~Female</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>2~Married</td>
+      <td>99~Unknown</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>3</td>
+      <td>11</td>
+      <td>1</td>
+      <td>02/28/2021</td>
+      <td>12/31/2021</td>
+      <td>11</td>
+      <td>11</td>
+      <td>29</td>
+      <td>2~Female</td>
+      <td>1~White</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>2~Married</td>
+      <td>9-12~High School (grade 9-12)</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>5</td>
+      <td>12</td>
+      <td>1</td>
+      <td>01/31/2021</td>
+      <td>12/31/2021</td>
+      <td>12</td>
+      <td>12</td>
+      <td>40</td>
+      <td>1~Male</td>
+      <td>2~Black/African American</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>2~Married</td>
+      <td>UNDERGRAD~Some College</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>6</td>
+      <td>24</td>
+      <td>3</td>
+      <td>01/31/2021</td>
+      <td>12/31/2021</td>
+      <td>24</td>
+      <td>12</td>
+      <td>71</td>
+      <td>2~Female</td>
+      <td>2~Black/African American</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>1~Single-Never Married</td>
+      <td>99~Unknown</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#we&#39;ll do the same with client_date_attributes</span>
+<span class="n">client_date_attributes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">client_date_attributes</span><span class="p">,</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;GENDER&#39;</span><span class="p">,</span> <span class="s1">&#39;RACE&#39;</span><span class="p">,</span> <span class="s1">&#39;ETHNICITY&#39;</span><span class="p">,</span> <span class="s1">&#39;MARITAL_STATUS&#39;</span><span class="p">,</span> <span class="s1">&#39;EDUCATION_LEVEL&#39;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="c1">#now remove rows that have duplicate ID-month pairs</span>
+<span class="n">client_date_attributes</span> <span class="o">=</span> <span class="n">client_date_attributes</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MCI_UNIQ_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">])</span>
+<span class="n">client_date_attributes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MCI_UNIQ_ID</th>
+      <th>month</th>
+      <th>num_services</th>
+      <th>distinct_services</th>
+      <th>age</th>
+      <th>GENDER</th>
+      <th>RACE</th>
+      <th>ETHNICITY</th>
+      <th>MARITAL_STATUS</th>
+      <th>EDUCATION_LEVEL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>01/2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>13</td>
+      <td>1~Male</td>
+      <td>99~Unknown</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>99~Unknown</td>
+      <td>GED~High School Diploma/GED Completed</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1</td>
+      <td>02/2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>13</td>
+      <td>1~Male</td>
+      <td>99~Unknown</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>99~Unknown</td>
+      <td>GED~High School Diploma/GED Completed</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>1</td>
+      <td>03/2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>13</td>
+      <td>1~Male</td>
+      <td>99~Unknown</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>99~Unknown</td>
+      <td>GED~High School Diploma/GED Completed</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>1</td>
+      <td>04/2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>13</td>
+      <td>1~Male</td>
+      <td>99~Unknown</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>99~Unknown</td>
+      <td>GED~High School Diploma/GED Completed</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>1</td>
+      <td>05/2021</td>
+      <td>1</td>
+      <td>1</td>
+      <td>13</td>
+      <td>1~Male</td>
+      <td>99~Unknown</td>
+      <td>2~Not Hispanic/Latinx</td>
+      <td>99~Unknown</td>
+      <td>GED~High School Diploma/GED Completed</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="saving-data-transformations">
+<h2><span class="section-number">4.8.8. </span>Saving Data Transformations<a class="headerlink" href="#saving-data-transformations" title="Link to this heading">#</a></h2>
+<p>If you want to close your work and come back to it easily without having to rerun all of the above code, or if you want to use the same data in a new notebook, an easy workaround is to save the data to an intermediate file and then reload it. We’ll be saving all of our datasets to files that we will then plot in the next section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#we will save df to a new csv file</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dhs_cleaned.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">client_attributes</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dhs_client_attributes.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">client_date_attributes</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dhs_client_date_attributes.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="eda-project-part-1">
+<h2><span class="section-number">4.8.9. </span>EDA Project: Part 1<a class="headerlink" href="#eda-project-part-1" title="Link to this heading">#</a></h2>
+<p>Answer the following questions:</p>
+<ul class="simple">
+<li><p>Which MCI_UNIQ_ID has the highest number of records among all IDs?</p></li>
+<li><p>What is the average number of interactions for clients in the file?</p></li>
+<li><p>How many months did a particular client use the service?</p></li>
+<li><p>What other general observations can you make from the data?</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ProbStat/EDA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sec5_advanced_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.7. </span>Intro to Advanced EDA</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sec7_advanced_plotting.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.9. </span>Plotting and Statistical Testing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">4.8.1. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-data-inspection">4.8.2. Simple Data Inspection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-attributes">4.8.3. Dataframe Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-nan-values">4.8.4. Finding NaN values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-na-columns-and-rows">4.8.5. Removing NA Columns and Rows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-transformations">4.8.6. Basic Transformations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution">Substitution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generation">Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-removal">Outlier Removal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#illogical-value-removal">Illogical Value Removal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-transformations">4.8.7. Advanced Transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-data-transformations">4.8.8. Saving Data Transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-project-part-1">4.8.9. EDA Project: Part 1</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Claire Wagner, Peter Jantsch, and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' width=88 style='border-width:0' src='https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png'/></a>
+  Except where otherwise noted, this work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
