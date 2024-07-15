@@ -583,6 +583,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">14.8.1. Preprocessing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-text-data">14.8.2. About Text Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#document-embedding">14.8.3. Document Embedding</a></li>
 </ul>
             </nav>
         </div>
@@ -609,6 +610,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">spacy</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># change this to your own data directory</span>
 <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span>
@@ -1021,6 +1023,1135 @@ Number of unique trigrams (without stop words): 1214215
 </div>
 </div>
 </div>
+<p><strong>Exercise 2.10</strong></p>
+<p>Answers may vary depending on the parameters chosen. Here is a sample answer using the parameters <code class="docutils literal notranslate"><span class="pre">ngram_range</span> <span class="pre">=</span> <span class="pre">(2,2)</span></code> (for bigrams), <code class="docutils literal notranslate"><span class="pre">stop_words</span> <span class="pre">=</span> <span class="pre">'english'</span></code>, and <code class="docutils literal notranslate"><span class="pre">min_df</span> <span class="pre">=</span> <span class="pre">3</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">count_vector</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">term_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(),</span> <span class="s2">&quot;freq&quot;</span> <span class="p">:</span> <span class="n">count_vector</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)})</span>
+
+<span class="c1"># find the frequencies of the 5 most common bigrams</span>
+<span class="n">term_freq</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>term</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>27774</th>
+      <td>human rights</td>
+      <td>1981</td>
+    </tr>
+    <tr>
+      <th>10071</th>
+      <td>climate change</td>
+      <td>1301</td>
+    </tr>
+    <tr>
+      <th>20488</th>
+      <td>et al</td>
+      <td>1167</td>
+    </tr>
+    <tr>
+      <th>40775</th>
+      <td>oecd countries</td>
+      <td>898</td>
+    </tr>
+    <tr>
+      <th>26527</th>
+      <td>health care</td>
+      <td>881</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">count_vector</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">count_vector_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">count_vector</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+<span class="c1"># find the frequencies of the 5 most common bigrams</span>
+<span class="n">term_freq</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2.11</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">analyze_frequency</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># create term-document matrix</span>
+    <span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">stop_words</span><span class="o">=</span><span class="n">stop_words</span><span class="p">)</span>
+    <span class="n">count_vector</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+    
+    <span class="c1"># calculate frequencies of 50 most frequent terms</span>
+    <span class="n">freq_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(),</span> <span class="s2">&quot;freq&quot;</span> <span class="p">:</span> <span class="n">count_vector</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)}</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># calculate cumulative word counts</span>
+    <span class="n">csum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">freq_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    
+    <span class="c1"># create plot</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">csum</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;cumulative word count&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;rank&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cumulative Word Count (Most Frequent to 50th Most Frequent)&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># calculate comparison</span>
+    <span class="n">comp</span> <span class="o">=</span> <span class="n">csum</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">freq_df</span><span class="o">.</span><span class="n">freq</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">freq_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">comp</span><span class="si">:</span><span class="s1">.2%</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2.12</strong></p>
+<p>First, we obtain our corpus:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sdg8</span> <span class="o">=</span> <span class="n">text_df</span><span class="p">[</span><span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span> <span class="o">==</span> <span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we run the function from the previous exercise on that corpus and examine the results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">top_50_words</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">pct</span><span class="p">)</span> <span class="o">=</span> <span class="n">analyze_frequency</span><span class="p">(</span><span class="n">sdg8</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Level of cumulation percentage:&#39;</span><span class="p">,</span> <span class="n">pct</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Top 50 words:&#39;</span><span class="p">)</span>
+<span class="n">top_50_words</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Level of cumulation percentage: 38.58%
+
+Top 50 words:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>term</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6933</th>
+      <td>the</td>
+      <td>5400</td>
+    </tr>
+    <tr>
+      <th>4806</th>
+      <td>of</td>
+      <td>3294</td>
+    </tr>
+    <tr>
+      <th>636</th>
+      <td>and</td>
+      <td>3261</td>
+    </tr>
+    <tr>
+      <th>3578</th>
+      <td>in</td>
+      <td>2777</td>
+    </tr>
+    <tr>
+      <th>7000</th>
+      <td>to</td>
+      <td>2618</td>
+    </tr>
+    <tr>
+      <th>3018</th>
+      <td>for</td>
+      <td>1212</td>
+    </tr>
+    <tr>
+      <th>3842</th>
+      <td>is</td>
+      <td>1005</td>
+    </tr>
+    <tr>
+      <th>6932</th>
+      <td>that</td>
+      <td>745</td>
+    </tr>
+    <tr>
+      <th>712</th>
+      <td>are</td>
+      <td>734</td>
+    </tr>
+    <tr>
+      <th>4843</th>
+      <td>on</td>
+      <td>694</td>
+    </tr>
+    <tr>
+      <th>747</th>
+      <td>as</td>
+      <td>683</td>
+    </tr>
+    <tr>
+      <th>7546</th>
+      <td>with</td>
+      <td>601</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>employment</td>
+      <td>566</td>
+    </tr>
+    <tr>
+      <th>927</th>
+      <td>be</td>
+      <td>550</td>
+    </tr>
+    <tr>
+      <th>1137</th>
+      <td>by</td>
+      <td>539</td>
+    </tr>
+    <tr>
+      <th>3994</th>
+      <td>labour</td>
+      <td>530</td>
+    </tr>
+    <tr>
+      <th>6958</th>
+      <td>this</td>
+      <td>485</td>
+    </tr>
+    <tr>
+      <th>7565</th>
+      <td>workers</td>
+      <td>430</td>
+    </tr>
+    <tr>
+      <th>4888</th>
+      <td>or</td>
+      <td>386</td>
+    </tr>
+    <tr>
+      <th>7560</th>
+      <td>work</td>
+      <td>365</td>
+    </tr>
+    <tr>
+      <th>3326</th>
+      <td>have</td>
+      <td>360</td>
+    </tr>
+    <tr>
+      <th>3094</th>
+      <td>from</td>
+      <td>353</td>
+    </tr>
+    <tr>
+      <th>4552</th>
+      <td>more</td>
+      <td>346</td>
+    </tr>
+    <tr>
+      <th>590</th>
+      <td>also</td>
+      <td>331</td>
+    </tr>
+    <tr>
+      <th>3856</th>
+      <td>it</td>
+      <td>314</td>
+    </tr>
+    <tr>
+      <th>1771</th>
+      <td>countries</td>
+      <td>312</td>
+    </tr>
+    <tr>
+      <th>627</th>
+      <td>an</td>
+      <td>303</td>
+    </tr>
+    <tr>
+      <th>4729</th>
+      <td>not</td>
+      <td>300</td>
+    </tr>
+    <tr>
+      <th>798</th>
+      <td>at</td>
+      <td>290</td>
+    </tr>
+    <tr>
+      <th>3322</th>
+      <td>has</td>
+      <td>274</td>
+    </tr>
+    <tr>
+      <th>7513</th>
+      <td>which</td>
+      <td>273</td>
+    </tr>
+    <tr>
+      <th>6935</th>
+      <td>their</td>
+      <td>266</td>
+    </tr>
+    <tr>
+      <th>6929</th>
+      <td>than</td>
+      <td>256</td>
+    </tr>
+    <tr>
+      <th>3883</th>
+      <td>job</td>
+      <td>248</td>
+    </tr>
+    <tr>
+      <th>7222</th>
+      <td>unemployment</td>
+      <td>243</td>
+    </tr>
+    <tr>
+      <th>1162</th>
+      <td>can</td>
+      <td>241</td>
+    </tr>
+    <tr>
+      <th>4317</th>
+      <td>market</td>
+      <td>235</td>
+    </tr>
+    <tr>
+      <th>4921</th>
+      <td>other</td>
+      <td>228</td>
+    </tr>
+    <tr>
+      <th>7451</th>
+      <td>was</td>
+      <td>220</td>
+    </tr>
+    <tr>
+      <th>6201</th>
+      <td>sector</td>
+      <td>215</td>
+    </tr>
+    <tr>
+      <th>6946</th>
+      <td>these</td>
+      <td>213</td>
+    </tr>
+    <tr>
+      <th>3269</th>
+      <td>growth</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>6947</th>
+      <td>they</td>
+      <td>209</td>
+    </tr>
+    <tr>
+      <th>6735</th>
+      <td>such</td>
+      <td>209</td>
+    </tr>
+    <tr>
+      <th>2396</th>
+      <td>economic</td>
+      <td>202</td>
+    </tr>
+    <tr>
+      <th>6451</th>
+      <td>social</td>
+      <td>199</td>
+    </tr>
+    <tr>
+      <th>3601</th>
+      <td>income</td>
+      <td>189</td>
+    </tr>
+    <tr>
+      <th>7059</th>
+      <td>training</td>
+      <td>187</td>
+    </tr>
+    <tr>
+      <th>4804</th>
+      <td>oecd</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>939</th>
+      <td>been</td>
+      <td>184</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../../_images/6d528b4a32578d54d13e4a14bce433e932e91712a2aa5df66b6eba3e7b83e886.png" src="../../_images/6d528b4a32578d54d13e4a14bce433e932e91712a2aa5df66b6eba3e7b83e886.png" />
+</div>
+</div>
+<p><strong>Exercise 2.13</strong></p>
+<p>With stop word removal:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">text</span>
+<span class="p">(</span><span class="n">top_50_words</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">pct</span><span class="p">)</span> <span class="o">=</span> <span class="n">analyze_frequency</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="s1">&#39;english&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Level of cumulation percentage:&#39;</span><span class="p">,</span> <span class="n">pct</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Top 50 words:&#39;</span><span class="p">)</span>
+<span class="n">top_50_words</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Level of cumulation percentage: 12.27%
+
+Top 50 words:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>term</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10295</th>
+      <td>countries</td>
+      <td>7761</td>
+    </tr>
+    <tr>
+      <th>44859</th>
+      <td>women</td>
+      <td>5984</td>
+    </tr>
+    <tr>
+      <th>12072</th>
+      <td>development</td>
+      <td>5312</td>
+    </tr>
+    <tr>
+      <th>19188</th>
+      <td>health</td>
+      <td>4685</td>
+    </tr>
+    <tr>
+      <th>44337</th>
+      <td>water</td>
+      <td>4664</td>
+    </tr>
+    <tr>
+      <th>33322</th>
+      <td>public</td>
+      <td>4591</td>
+    </tr>
+    <tr>
+      <th>38326</th>
+      <td>social</td>
+      <td>4538</td>
+    </tr>
+    <tr>
+      <th>13847</th>
+      <td>education</td>
+      <td>4535</td>
+    </tr>
+    <tr>
+      <th>31876</th>
+      <td>policy</td>
+      <td>4367</td>
+    </tr>
+    <tr>
+      <th>21846</th>
+      <td>international</td>
+      <td>4360</td>
+    </tr>
+    <tr>
+      <th>24043</th>
+      <td>law</td>
+      <td>4240</td>
+    </tr>
+    <tr>
+      <th>14495</th>
+      <td>energy</td>
+      <td>4224</td>
+    </tr>
+    <tr>
+      <th>27973</th>
+      <td>national</td>
+      <td>4087</td>
+    </tr>
+    <tr>
+      <th>35753</th>
+      <td>rights</td>
+      <td>3905</td>
+    </tr>
+    <tr>
+      <th>29304</th>
+      <td>oecd</td>
+      <td>3547</td>
+    </tr>
+    <tr>
+      <th>13726</th>
+      <td>economic</td>
+      <td>3517</td>
+    </tr>
+    <tr>
+      <th>43320</th>
+      <td>use</td>
+      <td>3391</td>
+    </tr>
+    <tr>
+      <th>28342</th>
+      <td>new</td>
+      <td>3337</td>
+    </tr>
+    <tr>
+      <th>24376</th>
+      <td>level</td>
+      <td>3267</td>
+    </tr>
+    <tr>
+      <th>20913</th>
+      <td>income</td>
+      <td>3171</td>
+    </tr>
+    <tr>
+      <th>32235</th>
+      <td>poverty</td>
+      <td>3167</td>
+    </tr>
+    <tr>
+      <th>11084</th>
+      <td>data</td>
+      <td>3078</td>
+    </tr>
+    <tr>
+      <th>8513</th>
+      <td>climate</td>
+      <td>3033</td>
+    </tr>
+    <tr>
+      <th>18280</th>
+      <td>government</td>
+      <td>3012</td>
+    </tr>
+    <tr>
+      <th>7227</th>
+      <td>care</td>
+      <td>3002</td>
+    </tr>
+    <tr>
+      <th>37356</th>
+      <td>services</td>
+      <td>2999</td>
+    </tr>
+    <tr>
+      <th>17714</th>
+      <td>gender</td>
+      <td>2991</td>
+    </tr>
+    <tr>
+      <th>20001</th>
+      <td>human</td>
+      <td>2975</td>
+    </tr>
+    <tr>
+      <th>5194</th>
+      <td>based</td>
+      <td>2879</td>
+    </tr>
+    <tr>
+      <th>39986</th>
+      <td>support</td>
+      <td>2759</td>
+    </tr>
+    <tr>
+      <th>44896</th>
+      <td>work</td>
+      <td>2742</td>
+    </tr>
+    <tr>
+      <th>19483</th>
+      <td>high</td>
+      <td>2674</td>
+    </tr>
+    <tr>
+      <th>4016</th>
+      <td>areas</td>
+      <td>2611</td>
+    </tr>
+    <tr>
+      <th>37030</th>
+      <td>sector</td>
+      <td>2583</td>
+    </tr>
+    <tr>
+      <th>41272</th>
+      <td>time</td>
+      <td>2581</td>
+    </tr>
+    <tr>
+      <th>31873</th>
+      <td>policies</td>
+      <td>2477</td>
+    </tr>
+    <tr>
+      <th>36770</th>
+      <td>school</td>
+      <td>2466</td>
+    </tr>
+    <tr>
+      <th>25497</th>
+      <td>management</td>
+      <td>2465</td>
+    </tr>
+    <tr>
+      <th>2098</th>
+      <td>access</td>
+      <td>2424</td>
+    </tr>
+    <tr>
+      <th>7882</th>
+      <td>change</td>
+      <td>2416</td>
+    </tr>
+    <tr>
+      <th>18543</th>
+      <td>growth</td>
+      <td>2386</td>
+    </tr>
+    <tr>
+      <th>19484</th>
+      <td>higher</td>
+      <td>2367</td>
+    </tr>
+    <tr>
+      <th>21274</th>
+      <td>information</td>
+      <td>2363</td>
+    </tr>
+    <tr>
+      <th>20898</th>
+      <td>including</td>
+      <td>2357</td>
+    </tr>
+    <tr>
+      <th>15415</th>
+      <td>example</td>
+      <td>2318</td>
+    </tr>
+    <tr>
+      <th>24819</th>
+      <td>local</td>
+      <td>2285</td>
+    </tr>
+    <tr>
+      <th>33571</th>
+      <td>quality</td>
+      <td>2255</td>
+    </tr>
+    <tr>
+      <th>20724</th>
+      <td>important</td>
+      <td>2236</td>
+    </tr>
+    <tr>
+      <th>25028</th>
+      <td>low</td>
+      <td>2217</td>
+    </tr>
+    <tr>
+      <th>12270</th>
+      <td>different</td>
+      <td>2211</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../../_images/e98e748e7b0cc5131408459877468e4bcef994958892783bfef45ab3347c3a53.png" src="../../_images/e98e748e7b0cc5131408459877468e4bcef994958892783bfef45ab3347c3a53.png" />
+</div>
+</div>
+<p>Without stop word removal:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">top_50_words</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">pct</span><span class="p">)</span> <span class="o">=</span> <span class="n">analyze_frequency</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Level of cumulation percentage:&#39;</span><span class="p">,</span> <span class="n">pct</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Top 50 words:&#39;</span><span class="p">)</span>
+<span class="n">top_50_words</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Level of cumulation percentage: 36.81%
+
+Top 50 words:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>term</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>41229</th>
+      <td>the</td>
+      <td>143100</td>
+    </tr>
+    <tr>
+      <th>29487</th>
+      <td>of</td>
+      <td>95834</td>
+    </tr>
+    <tr>
+      <th>3469</th>
+      <td>and</td>
+      <td>93357</td>
+    </tr>
+    <tr>
+      <th>20921</th>
+      <td>in</td>
+      <td>67152</td>
+    </tr>
+    <tr>
+      <th>41630</th>
+      <td>to</td>
+      <td>64701</td>
+    </tr>
+    <tr>
+      <th>16900</th>
+      <td>for</td>
+      <td>30010</td>
+    </tr>
+    <tr>
+      <th>22403</th>
+      <td>is</td>
+      <td>25175</td>
+    </tr>
+    <tr>
+      <th>41221</th>
+      <td>that</td>
+      <td>20395</td>
+    </tr>
+    <tr>
+      <th>4217</th>
+      <td>as</td>
+      <td>18926</td>
+    </tr>
+    <tr>
+      <th>29700</th>
+      <td>on</td>
+      <td>18365</td>
+    </tr>
+    <tr>
+      <th>4040</th>
+      <td>are</td>
+      <td>18215</td>
+    </tr>
+    <tr>
+      <th>6918</th>
+      <td>by</td>
+      <td>14171</td>
+    </tr>
+    <tr>
+      <th>45094</th>
+      <td>with</td>
+      <td>14162</td>
+    </tr>
+    <tr>
+      <th>41378</th>
+      <td>this</td>
+      <td>14153</td>
+    </tr>
+    <tr>
+      <th>5337</th>
+      <td>be</td>
+      <td>12608</td>
+    </tr>
+    <tr>
+      <th>17320</th>
+      <td>from</td>
+      <td>9833</td>
+    </tr>
+    <tr>
+      <th>29892</th>
+      <td>or</td>
+      <td>9382</td>
+    </tr>
+    <tr>
+      <th>22504</th>
+      <td>it</td>
+      <td>9364</td>
+    </tr>
+    <tr>
+      <th>19212</th>
+      <td>have</td>
+      <td>9070</td>
+    </tr>
+    <tr>
+      <th>3397</th>
+      <td>an</td>
+      <td>7885</td>
+    </tr>
+    <tr>
+      <th>10354</th>
+      <td>countries</td>
+      <td>7761</td>
+    </tr>
+    <tr>
+      <th>4447</th>
+      <td>at</td>
+      <td>7643</td>
+    </tr>
+    <tr>
+      <th>19159</th>
+      <td>has</td>
+      <td>7551</td>
+    </tr>
+    <tr>
+      <th>41248</th>
+      <td>their</td>
+      <td>7356</td>
+    </tr>
+    <tr>
+      <th>28988</th>
+      <td>not</td>
+      <td>7182</td>
+    </tr>
+    <tr>
+      <th>3182</th>
+      <td>also</td>
+      <td>7151</td>
+    </tr>
+    <tr>
+      <th>44893</th>
+      <td>which</td>
+      <td>6968</td>
+    </tr>
+    <tr>
+      <th>27490</th>
+      <td>more</td>
+      <td>6953</td>
+    </tr>
+    <tr>
+      <th>41327</th>
+      <td>these</td>
+      <td>6246</td>
+    </tr>
+    <tr>
+      <th>7121</th>
+      <td>can</td>
+      <td>6016</td>
+    </tr>
+    <tr>
+      <th>45152</th>
+      <td>women</td>
+      <td>5984</td>
+    </tr>
+    <tr>
+      <th>40001</th>
+      <td>such</td>
+      <td>5612</td>
+    </tr>
+    <tr>
+      <th>12135</th>
+      <td>development</td>
+      <td>5312</td>
+    </tr>
+    <tr>
+      <th>30114</th>
+      <td>other</td>
+      <td>5018</td>
+    </tr>
+    <tr>
+      <th>41211</th>
+      <td>than</td>
+      <td>4751</td>
+    </tr>
+    <tr>
+      <th>19298</th>
+      <td>health</td>
+      <td>4685</td>
+    </tr>
+    <tr>
+      <th>41339</th>
+      <td>they</td>
+      <td>4666</td>
+    </tr>
+    <tr>
+      <th>44606</th>
+      <td>water</td>
+      <td>4664</td>
+    </tr>
+    <tr>
+      <th>33516</th>
+      <td>public</td>
+      <td>4591</td>
+    </tr>
+    <tr>
+      <th>38540</th>
+      <td>social</td>
+      <td>4538</td>
+    </tr>
+    <tr>
+      <th>13916</th>
+      <td>education</td>
+      <td>4535</td>
+    </tr>
+    <tr>
+      <th>5660</th>
+      <td>between</td>
+      <td>4466</td>
+    </tr>
+    <tr>
+      <th>5401</th>
+      <td>been</td>
+      <td>4377</td>
+    </tr>
+    <tr>
+      <th>32070</th>
+      <td>policy</td>
+      <td>4367</td>
+    </tr>
+    <tr>
+      <th>21975</th>
+      <td>international</td>
+      <td>4360</td>
+    </tr>
+    <tr>
+      <th>44573</th>
+      <td>was</td>
+      <td>4339</td>
+    </tr>
+    <tr>
+      <th>24180</th>
+      <td>law</td>
+      <td>4240</td>
+    </tr>
+    <tr>
+      <th>14571</th>
+      <td>energy</td>
+      <td>4224</td>
+    </tr>
+    <tr>
+      <th>6886</th>
+      <td>but</td>
+      <td>4088</td>
+    </tr>
+    <tr>
+      <th>28132</th>
+      <td>national</td>
+      <td>4087</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../../_images/db51b377e22fd39a55662106206b6f50dcf0f122f626d41c729d8dc61cedd6f7.png" src="../../_images/db51b377e22fd39a55662106206b6f50dcf0f122f626d41c729d8dc61cedd6f7.png" />
+</div>
+</div>
+<p>Frequent words that are not stop words, such as ‘countries’, ‘women’, and ‘development’, occur often enough to show up in both lists. As one might expect, stop words such as ‘the’, ‘of’, and ‘and’ occur much more frequently than terms that are not stop words. As a result, the level of cumulation percentage is much smaller and the cumulative word count curve is more linear with stop word removal than without stop word removal.</p>
+</section>
+<section id="document-embedding">
+<h2><span class="section-number">14.8.3. </span>Document Embedding<a class="headerlink" href="#document-embedding" title="Link to this heading">#</a></h2>
+<p><strong>Exercise 3.1</strong></p>
+<p>After creating <code class="docutils literal notranslate"><span class="pre">sentence_df</span></code>, we can compare its dimensions to those of <code class="docutils literal notranslate"><span class="pre">text_df</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">word_tokenize</span><span class="p">,</span> <span class="n">sent_tokenize</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt/english.pickle&#39;</span><span class="p">)</span>
+<span class="n">text_df_sentence</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">text_df_sdg</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">text_df_sample</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">sdg</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> 
+    <span class="n">text_df_sentence</span> <span class="o">+=</span> <span class="n">sentences</span>
+    <span class="n">text_df_sdg</span> <span class="o">+=</span> <span class="p">[</span><span class="n">sdg</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+    <span class="n">text_df_sample</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+<span class="n">sentence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text_df_sentence</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="n">text_df_sdg</span><span class="p">,</span> <span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="n">text_df_sample</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;text_df dimensions:&#39;</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sentence_df dimensions:&#39;</span><span class="p">,</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>text_df dimensions: (24669, 7)
+sentence_df dimensions: (92839, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The dimensions of <code class="docutils literal notranslate"><span class="pre">text_df</span></code> represent the number of sample texts and the number of features, respectively. The dimensions of <code class="docutils literal notranslate"><span class="pre">sentence_df</span></code>represent the number of sentences and the number of features, respectively.</p>
+<p><strong>Exercise 3.2</strong></p>
+<p>Student answers may vary. As a sample answer, we choose a text containing direct quotations, which can increase the difficulty of sentence tokenization:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">465</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;When asked “Have you no morals?” Alfred Doolittle in George Bernard Shaw’s Pygmalion answered: “Can’t afford them governor. Neither could you if you was as poor as me.” The modern concept of human rights underpins a moral society and holds governments responsible for fulfilling these rights. From informed consent to the right to privacy civil and political rights have dominated the human rights focus of the HIV-1 epidemic. Yet the economic and social rights of people with HIV-1 infection in particular the rights to health care and to share in scientific advances are glaringly disparate between rich and poor countries. This disparity has become the focus of debate in transnational HIV-1 vaccine research. (excerpt)&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Despite the increased difficulty, the sentence tokenizer is able to separate out the sentences correctly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sentence_df</span><span class="p">[</span><span class="n">sentence_df</span><span class="p">[</span><span class="s1">&#39;sample&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">465</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>sdg</th>
+      <th>sample</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1785</th>
+      <td>When asked “Have you no morals?” Alfred Doolit...</td>
+      <td>16</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>1786</th>
+      <td>Neither could you if you was as poor as me.” T...</td>
+      <td>16</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>1787</th>
+      <td>From informed consent to the right to privacy ...</td>
+      <td>16</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>1788</th>
+      <td>Yet the economic and social rights of people w...</td>
+      <td>16</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>1789</th>
+      <td>This disparity has become the focus of debate ...</td>
+      <td>16</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>1790</th>
+      <td>(excerpt)</td>
+      <td>16</td>
+      <td>465</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </section>
 </section>
 
@@ -1090,6 +2221,7 @@ Number of unique trigrams (without stop words): 1214215
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">14.8.1. Preprocessing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-text-data">14.8.2. About Text Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#document-embedding">14.8.3. Document Embedding</a></li>
 </ul>
   </nav></div>
 
