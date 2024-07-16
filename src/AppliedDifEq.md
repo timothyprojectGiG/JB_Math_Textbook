@@ -1,1 +1,3 @@
 # DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY - Wheaton College Team
+
+This chapter includes several collaborative projects supervised by Dr. Paul Isihara. Wheaton College student team members are: (CWS Model) Anne Bowen, Isaac Brown, Tim Dennison, Wesley Hanna, and Kyle Williams; (Gravity-fed Water Delivery) Andrew Dornbush, Timothy Dennison, Kristianna Russo, and David Schultz; (Earthquake Resistant Construction) Andrew Gardener; (HIV-AIDS JNB Lab) Andrew Barker, Jordan Hostetter, Michael Hubbell, Kyle Hunsberger, Kimberly Waite, and Rebecca Wilson.
