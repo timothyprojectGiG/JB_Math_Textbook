@@ -342,9 +342,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/sec4_classification_algos.html">14.5. Classification of Texts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/sec5_classification_eval.html">14.6. Evaluating Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/sec6_applications.html">14.7. Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/solutions.html">14.8. Solutions to Exercises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/nlp_lab.html">14.9. JNB Lab: United States Grant Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/nlp_lab_solutions.html">14.10. JNB Lab Solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/solutions_sec1-4.html">14.8. Solutions to Exercises: Sections 1 to 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/solutions_sec5-7.html">14.9. Solutions to Exercises: Sections 5 to 7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/nlp_lab.html">14.10. JNB Lab: United States Grant Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../AdvDataAnalysis/nlp_lab_solutions.html">14.11. JNB Lab Solutions</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexSystems.html">15. COMPLEX SYSTEMS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -603,63 +604,159 @@ document.write(`
 <h1><span class="section-number">10.6. </span>Solution to Exercises<a class="headerlink" href="#solution-to-exercises" title="Link to this heading">#</a></h1>
 <section id="ols-linear-regression">
 <span id="index-0"></span><h2><span class="section-number">10.6.1. </span>OLS Linear Regression<a class="headerlink" href="#ols-linear-regression" title="Link to this heading">#</a></h2>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">raw_CPS_data</span><span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;https://data.cityofchicago.org/resource/kh4r-387c.json?$limit=100000&#39;</span><span class="p">)</span>
-<span class="n">raw_CPS_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> 
-<span class="n">df</span><span class="o">=</span><span class="n">raw_CPS_data</span><span class="p">[[</span><span class="s1">&#39;address&#39;</span><span class="p">,</span><span class="s1">&#39;student_count_total&#39;</span><span class="p">,</span><span class="s1">&#39;student_count_black&#39;</span><span class="p">,</span><span class="s1">&#39;student_count_hispanic&#39;</span><span class="p">,</span><span class="s1">&#39;student_count_white&#39;</span><span class="p">,</span><span class="s1">&#39;zip&#39;</span><span class="p">]]</span>
-<span class="n">df23</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;zip&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">60623</span><span class="p">]</span>
-<span class="n">df23</span><span class="o">=</span><span class="n">df23</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df23</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="s2">&quot;total&quot;</span><span class="p">,</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="s2">&quot;hispanic&quot;</span><span class="p">,</span><span class="s2">&quot;white&quot;</span><span class="p">,</span><span class="s2">&quot;zip&quot;</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df23</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
-    <span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;%black&#39;</span><span class="p">]</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;black&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;total&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">%hi</span><span class="s1">spanic&#39;</span><span class="p">]</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;hispanic&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;total&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;%white&#39;</span><span class="p">]</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;white&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df23</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;total&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span> <span class="c1">#sklearn is a machine learning library</span>
-<span class="n">X</span><span class="o">=</span><span class="n">df23</span><span class="p">[[</span><span class="s2">&quot;%black&quot;</span><span class="p">]]</span>
-<span class="n">Y</span><span class="o">=</span><span class="n">df23</span><span class="p">[[</span><span class="s2">&quot;</span><span class="si">%hi</span><span class="s2">spanic&quot;</span><span class="p">]]</span>
-<span class="n">reg</span><span class="o">=</span><span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intercept is &quot;</span><span class="p">,</span> <span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Slope is &quot;</span><span class="p">,</span> <span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R^2 for OLS is &quot;</span><span class="p">,</span> <span class="n">reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">))</span>
-<span class="c1"># x values on the regression line will be between 0 and 100 with a spacing of .0</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span> <span class="p">,</span><span class="mf">.01</span><span class="p">)</span> 
-<span class="c1"># define the regression line y = mx+b here</span>
-<span class="p">[[</span><span class="n">m</span><span class="p">]]</span><span class="o">=</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
-<span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">=</span><span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span>
-<span class="n">y</span> <span class="o">=</span>  <span class="n">m</span><span class="o">*</span><span class="n">x</span>  <span class="o">+</span> <span class="n">b</span>   
-
-<span class="n">fig</span><span class="o">=</span><span class="n">df23</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;%black&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%hi</span><span class="s1">spanic&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>  
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;% Black vs % Hispanic in 60623 pre-K - 8 Schools&#39;</span><span class="p">)</span>  
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;% Black&#39;</span><span class="p">)</span>  
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;% Hispanic&#39;</span><span class="p">)</span>  
-<span class="c1"># plot the regression line </span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1">#add the color for red</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([],[],</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+<div class="toggle docutils container">
+<p>Problem 1)
+The system is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+a+b&amp;=0,\\
+a + 4b&amp;=5,\\
+a+7b&amp;=8;
+\end{align*}\]</div>
+<p>or, in matrix form,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{pmatrix}
+1&amp; 1\\
+1&amp; 4\\
+1&amp;7\\
+\end{pmatrix}
+\begin{pmatrix}
+a\\
+b\\
+\end{pmatrix}=
+\begin{pmatrix}
+0\\
+5\\
+8\\
+\end{pmatrix}.
+\end{align*}\]</div>
+<p>The normal equations are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{pmatrix}
+1&amp; 1&amp;1\\
+1&amp;4&amp;7\\
+\end{pmatrix}
+\begin{pmatrix}
+0\\
+5\\
+8\\
+\end{pmatrix}=
+\begin{pmatrix}
+1&amp; 1&amp;1\\
+1&amp;4&amp;7\\
+\end{pmatrix}
+\begin{pmatrix}
+1&amp; 1\\
+1&amp; 4\\
+1&amp;7\\
+\end{pmatrix}
+\begin{pmatrix}
+a\\
+b
+\end{pmatrix},
+\end{align*}\]</div>
+<p>or</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{pmatrix}
+13\\
+76
+\end{pmatrix}=
+\begin{pmatrix}
+3&amp;12\\
+12&amp;66
+\end{pmatrix}
+\begin{pmatrix}
+a\\
+b
+\end{pmatrix}.
+\end{align*}\]</div>
+<p>Solving the normal equations gives the least-squares solution <span class="math notranslate nohighlight">\(a=-1\)</span>,  <span class="math notranslate nohighlight">\(b=4/3\)</span>.</p>
 </div>
+<div class="toggle docutils container">
+<p>Problem 2)</p>
+<p>The system is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+a-b+c&amp;=1,\\
+a&amp;=0,\\
+a+b+c&amp;=2,\\
+a+2b+4c&amp;=3;\\
+\end{align*}\]</div>
+<p>or, in matrix form,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{pmatrix}
+1&amp; -1&amp;1\\
+1&amp; 0&amp;0\\
+1&amp;1&amp;1\\
+1&amp; 2&amp;4
+\end{pmatrix}
+\begin{pmatrix}
+a\\
+b\\
+c
+\end{pmatrix}=
+\begin{pmatrix}
+1\\
+0\\
+2\\
+3
+\end{pmatrix}.
+\end{align*}\]</div>
+<p>The normal equations are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{pmatrix}
+1&amp; 1&amp;1&amp;1\\
+-1&amp;0&amp;1&amp;2\\
+1&amp;0&amp;1&amp;4
+\end{pmatrix}
+\begin{pmatrix}
+1\\
+0\\
+2\\
+3
+\end{pmatrix}=
+\begin{pmatrix}
+1&amp; 1&amp;1&amp;1\\
+-1&amp;0&amp;1&amp;2\\
+1&amp;0&amp;1&amp;4
+\end{pmatrix}
+\begin{pmatrix}
+1&amp; -1&amp;1\\
+1&amp; 0&amp;0\\
+1&amp;1&amp;1\\
+1&amp; 2&amp;4
+\end{pmatrix}
+\begin{pmatrix}
+a\\
+b
+\end{pmatrix},
+\end{align*}\]</div>
+<p>or</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{pmatrix}
+6\\
+7\\
+15
+\end{pmatrix}=
+\begin{pmatrix}
+4&amp;2&amp;6\\
+2&amp;6&amp;8\\
+6&amp;8&amp;18
+\end{pmatrix}
+\begin{pmatrix}
+a\\
+b\\
+c
+\end{pmatrix}.
+\end{align*}\]</div>
+<p>Solving the normal equations gives the least-squares solution <span class="math notranslate nohighlight">\(a=3/5, b=3/10\)</span>, and <span class="math notranslate nohighlight">\(c=1/2.\)</span></p>
 </div>
-</details>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept is  [98.71284906]
-Slope is  [[-0.99515441]]
-R^2 for OLS is  0.9996943205528053
-</pre></div>
-</div>
-<img alt="../../_images/f822534280ddb0e2c30fe622ea75aebedc25588f7e19aa2f18c07d1b31adc652.png" src="../../_images/f822534280ddb0e2c30fe622ea75aebedc25588f7e19aa2f18c07d1b31adc652.png" />
-</div>
-</div>
-<p>The graph above shows schools that are predominantly hispanic or preominantly black.</p>
 </section>
 <section id="k-means-clustering">
 <h2><span class="section-number">10.6.2. </span>K-means clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h2>

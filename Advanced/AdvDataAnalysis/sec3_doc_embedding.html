@@ -342,9 +342,10 @@
 <li class="toctree-l2"><a class="reference internal" href="sec4_classification_algos.html">14.5. Classification of Texts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sec5_classification_eval.html">14.6. Evaluating Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sec6_applications.html">14.7. Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solutions.html">14.8. Solutions to Exercises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nlp_lab.html">14.9. JNB Lab: United States Grant Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nlp_lab_solutions.html">14.10. JNB Lab Solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solutions_sec1-4.html">14.8. Solutions to Exercises: Sections 1 to 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solutions_sec5-7.html">14.9. Solutions to Exercises: Sections 5 to 7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_lab.html">14.10. JNB Lab: United States Grant Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_lab_solutions.html">14.11. JNB Lab Solutions</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexSystems.html">15. COMPLEX SYSTEMS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -622,28 +623,22 @@ document.write(`
 <p class="admonition-title">Warning</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> package can be finicky, especially on certain distributions of Python and on computers that are not very powerful. However, it is a versatile and useful package for document embedding, which is an important part of natural language processing. If you encounter trouble with <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>, try using a kernel on a different version of Python (such as Python 3.9) and/or a reduced version of the dataset. If necessary, the code from this section can be skipped, and later sections will not depend on code from this one.</p>
 </div>
-<p>We’re going to use the tokenizer found in the <code class="docutils literal notranslate"><span class="pre">nltk.data</span></code> library:</p>
+<p>To start, we first need to break our document corpus into sentences, using a tokenizer from <code class="docutils literal notranslate"><span class="pre">nltk</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk.data</span>
-<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">word_tokenize</span><span class="p">,</span> <span class="n">sent_tokenize</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt/english.pickle&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>To start, we first need to break our document corpus into sentences:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_df_sentence</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">text_df_sdg</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">text_df_sample</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">sdg</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">text_df</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">sdg</span><span class="p">,</span> <span class="n">text_df</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
-    <span class="n">sentences</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> 
-    <span class="n">text_df_sentence</span> <span class="o">+=</span> <span class="n">sentences</span>
-    <span class="n">text_df_sdg</span> <span class="o">+=</span> <span class="p">[</span><span class="n">sdg</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
-    <span class="n">text_df_sample</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
-<span class="n">sentence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text_df_sentence</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="n">text_df_sdg</span><span class="p">,</span> <span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="n">text_df_sample</span><span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tokenize_into_sentences</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
+    <span class="n">corpus_sentence</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">corpus_sdg</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">corpus_sample</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">sdg</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">corpus</span><span class="o">.</span><span class="n">sdg</span><span class="p">,</span> <span class="n">corpus</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
+        <span class="n">sentences</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> 
+        <span class="n">corpus_sentence</span> <span class="o">+=</span> <span class="n">sentences</span>
+        <span class="n">corpus_sdg</span> <span class="o">+=</span> <span class="p">[</span><span class="n">sdg</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+        <span class="n">corpus_sample</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+    <span class="n">sentence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">corpus_sentence</span><span class="p">,</span> <span class="s2">&quot;sdg&quot;</span><span class="p">:</span> <span class="n">corpus_sdg</span><span class="p">,</span> <span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="n">corpus_sample</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">sentence_df</span>
+
+<span class="n">sentence_df</span> <span class="o">=</span> <span class="n">tokenize_into_sentences</span><span class="p">(</span><span class="n">text_df</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -744,12 +739,12 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<div class="admonition-exercise-3-1 admonition">
-<p class="admonition-title">Exercise 3.1</p>
+<div class="admonition-exercise-1 admonition">
+<p class="admonition-title">Exercise 1</p>
 <p>What are the dimensions of the <code class="docutils literal notranslate"><span class="pre">text_df</span></code> and <code class="docutils literal notranslate"><span class="pre">sentence_df</span></code> dataframes? What do each of the dimension numbers represent?</p>
 </div>
-<div class="admonition-exercise-3-2 admonition">
-<p class="admonition-title">Exercise 3.2</p>
+<div class="admonition-exercise-2 admonition">
+<p class="admonition-title">Exercise 2</p>
 <p>Evaluate the performance of the sentence tokenizer by picking one of the sample texts, manually breaking it into sentences, and determining whether your sentence divisions match the corresponding ones in <code class="docutils literal notranslate"><span class="pre">sentence_df</span></code>.</p>
 </div>
 <p>An important question to ask is how many sentences each document has; in other words, what is the distribution of the number of sentences in each text? We can determine that by <em>grouping</em> the dataframe by sample, counting the number of sentences in each group, and then counting those counts:</p>
@@ -815,7 +810,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <p>Note that the first time you run this, it may take some time (5+ minutes) to complete the process.</p>
-<p>We are now ready to use USE! We will be returning back to embedding in more depth in Section 5, but as an example, we will embed some training and testing vectors:</p>
+<p>We are now ready to use USE! We will be returning back to embedding in more depth in Section 6, but as an example, we will embed some training and testing vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">sentence_df</span><span class="o">.</span><span class="n">text</span>
@@ -881,9 +876,9 @@ array([[-0.06285849,  0.05835171, -0.0444552 , ..., -0.02508012,
 </div>
 </div>
 </div>
-<div class="admonition-exercise-3-3 admonition">
-<p class="admonition-title">Exercise 3.3</p>
-<p>Take two documents, one labeled as SDG 1 and the other as SDG 8. Segment these into sentences, compute the embedding, and find the dot product between the embeddings.</p>
+<div class="admonition-exercise-3 admonition">
+<p class="admonition-title">Exercise 3</p>
+<p>Take two documents, one labeled as SDG 1 and the other as SDG 8. Segment these into sentences, compute the embeddings, and find the dot product between the embeddings.</p>
 </div>
 </section>
 </section>
