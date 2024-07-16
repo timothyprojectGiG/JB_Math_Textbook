@@ -1,4 +1,4 @@
-# ADVANCED DATA ANALYSIS - Ying Li, Jonathan Zhu, Claire Wagner
+# ADVANCED DATA ANALYSIS - Jonathan Zhu, Claire Wagner, Ying Li
 :::{note}
-Dr. Li, assisted by Jonathan Zhu and Claire Wagner, will discuss advanced methods in analyzing U.N. Sustainable Development Goal data.
+Jonathan Zhu, Claire Wagner, and Dr. Li will discuss advanced methods in analyzing U.N. Sustainable Development Goal data.
 :::

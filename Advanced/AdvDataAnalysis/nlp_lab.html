@@ -1,0 +1,1022 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>14.9. JNB Lab: United States Grant Data &#8212; An Introduction to Python Jupyter Notebooks for College Math Teachers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=07d05eac" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Advanced/AdvDataAnalysis/nlp_lab';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="14.10. JNB Lab: United States Grant Data" href="nlp_lab_solutions.html" />
+    <link rel="prev" title="14.8. Solutions to Exercises" href="solutions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="An Introduction to Python Jupyter Notebooks for College Math Teachers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    An Introduction to Python Jupyter Notebooks for College Math Teachers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Preface.html">1. PREFACE</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../JMM23.html">1.1. JMM 2023</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lab.html">1.2. JNB LAB: Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../labsolutions.html">1.3. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreCollege.html">2. PRE-COLLEGE - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/PreCollegeIntro.html">2.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Elementary/Arithmetic/elementary.html">2.2. Elementary Blackboard Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/GettingStarted/python.html">2.3. Beginning Python Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/Chicago.html">2.4. Glimpse of Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/steam.html">2.5. Arts in STEM (STEAM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/solutions.html">2.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demo.html">2.7. JNB LAB: After-School Program Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreCollege/Celestial/demosolutions.html">2.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Intropy.html">3. PYTHON PROGRAMMING GUIDE - Thomas VanDrunen, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/PythonProgrammingGuideIntro.html">3.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Introduction_to_Python.html">3.2. Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Data.html">3.3. Working with Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/solutions.html">3.4. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plab.html">3.5. JNB Lab: Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Programming/Plabsolutions.html">3.6. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Data.html">4. EXPLORATORY DATA ANALYSIS - Jonathan Zhu</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec1_basic_intro.html">4.1. Basic EDA: Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec2_basic_tabular.html">4.2. Basic EDA: Data Investigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec3_basic_plotting.html">4.3. Basic EDA: Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec4_basic_solutions.html">4.4. Basic EDA: Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec5_advanced_intro.html">4.5. Advanced EDA: Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec6_advanced_tabular.html">4.6. Advanced EDA: Data Investigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec7_advanced_plotting.html">4.7. Advanced EDA: Plotting and Statistical Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec8_advanced_report.html">4.8. Advanced EDA: Making EDA Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/sec9_advanced_solution.html">4.9. Advanced EDA: Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/lab.html">4.10. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/EDA/labsolution.html">4.11. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prob.html">5. PROBABILITY - Laura Gross, Yiheng Liang</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/prob.html">5.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/prob1.html">5.2. Random Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/prob2.html">5.3. Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/prob3.html">5.4. Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/prob4.html">5.5. Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/prob4a.html">5.6. Random Walks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/prob5.html">5.7. Agent-based Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/prob6.html">5.8. Mathematical Games</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/solutions.html">5.9. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/lab.html">5.10. JNB Lab Homicides in Chicago</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/ProbIntro/labsolution.html">5.11. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Stat.html">6. STATISTICAL INFERENCE - Peter Jantsch, Claire Wagner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/StatInf/00_Instructor_Notes.html">6.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/StatInf/01_Foundations.html">6.2. Foundations of Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/StatInf/02_Inference_Categorical.html">6.3. Hypothesis Testing for Categorical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/StatInf/03_Inference_Numerical.html">6.4. Hypothesis Testing for Numerical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProbStat/StatInf/04_Regression.html">6.5. Linear Regression</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedCalc.html">7. APPLIED CALCULUS FOR DAILY LIFE - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AppliedCalculusIntro.html">7.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/twocommodity.html">7.2. Linear Systems and the Two-commodity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/marginal.html">7.3. Marginal and Average Cost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/design.html">7.4. Optimization and Object Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/cobbs.html">7.5. Optimization and Cobbs-Douglas Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/rates.html">7.6. Related Rates and Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/football.html">7.7. Related Rates with Trig Functions and Football</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/jnb7.html">7.8. Probability Distributions and Drive Thrus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/control.html">7.9. Normal Distribution and Process Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ols.html">7.10. Partial Derivatives and OLS Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/gini.html">7.11. Area Between Curves and the Gini Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/income.html">7.12. Integral Test and Income Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/ode.html">7.13. Ordinary Differential Equations and Exponential Growth/Decay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/solutions.html">7.14. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClab.html">7.15. JNB Lab: Calculus of Entropy in Daily Life and Monte Carlo Simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedCalc/AClabsolutions.html">7.16. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Calc.html">8. CALCULUS - Inne Singgih</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Intro.html">8.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/2Functions.html">8.2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/3Limits.html">8.3. Limits, Continuity, and Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/4%20Derivatives.html">8.4. Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/5%20Integrals.html">8.5. Integrals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/6%20ParametricEquations.html">8.6. Parametric Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/7%20Sequences%20and%20Series.html">8.7. Sequences and Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/Solutions.html">8.8. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clab.html">8.9. JNB LAB: Calculus Animations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Calculus/clabsolution.html">8.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear.html">9. LINEAR ALGEBRA - Soheil Anbouhi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/0.html">9.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/1.html">9.2. Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/2.html">9.3. Matrices and Determinants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/3.html">9.4. Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/4.html">9.5. Eigenvalues and Eigenvectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/5.html">9.6. Orthogonality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/Solutions.html">9.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlab.html">9.8. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/Linear/LAlabsolutions.html">9.9. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Aplin.html">10. LINEAR ALGEBRA AND OPTIMIZATION FOR DATA ANALYSIS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../LinearAlgebra/Introduction.html">10.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LinearAlgebra/OLS/jnb1.html">10.2. OLS Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LinearAlgebra/KMeans/jnb2.html">10.3. K-means Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LinearAlgebra/PCA/jnb3.html">10.4. Dimension Reduction by Principal Component Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LinearAlgebra/SVM/jnb4.html">10.5. Binary Classification of Labeled Data by Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LinearAlgebra/solutions.html">10.6. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LinearAlgebra/ALlab.html">10.7. JNB LAB: Linear Algebra for Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LinearAlgebra/ALlabsolution.html">10.8. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../DifEq.html">11. DIFFERENTIAL EQUATIONS - Rachel Petrik</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations.html">11.1. Overview of Chapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE2.html">11.2. Introduction to Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE3.html">11.3. First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE4.html">11.4. Second-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE5.html">11.5. Systems of First-Order Differential Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DE6.html">11.6. Laplace Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/DESolutions.html">11.7. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab.html">11.8. JNB Lab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/DifEq/Differential%20Equations%20Book%201%20Lab%20Answer%20Key.html">11.9. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../AppliedDifEq.html">12. DIFFERENTIAL EQUATIONS FOR THE BENEFIT OF SOCIETY - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/AppliedDiffEqIntro.html">12.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/covid.html">12.2. Logistic Growth and COVID-19</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/sir.html">12.3. The Basic SIR Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cholera.html">12.4. Cholera in Haiti</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/cws/cws.html">12.5. CWS Model of Alzheimer’s Disease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/gravity/gravity.html">12.6. Gravity Fed Water Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/erc/erc.html">12.7. Earthquake Resistant Construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/solutions.html">12.8. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/hiv/lab.html">12.9. JNB Lab: HIV-AIDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Undergrad/AppliedDifEq/labsolutions.html">12.10. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexVar.html">13. COMPLEX VARIABLES IN GROUNDWATER MODELING - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Complex/complex_variables_1.html">13.1. Setting the Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Complex/complex_variables_2.html">13.2. Complex Analysis Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Complex/complex_variables_3.html">13.3. Idealized Groundwater Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Complex/complex_variables_4.html">13.4. Contaminant Extraction Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Complex/complex_variables_solutions.html">13.5. Solutions to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Complex/complex_variables_lab.html">13.6. JNB LAB: Complex Potentials and Contaminant Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Complex/complex_variables_lab_solution.html">13.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../AdvData.html">14. ADVANCED DATA ANALYSIS - Jonathan Zhu, Claire Wagner, Ying Li</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sec0_data.html">14.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec1_preprocessing.html">14.2. Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec2_transform_features.html">14.3. About Text Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec3_doc_embedding.html">14.4. Document Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec4_classification_algos.html">14.5. Classification of Texts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec5_classification_eval.html">14.6. Evaluating Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sec6_applications.html">14.7. Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solutions.html">14.8. Solutions to Exercises</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">14.9. JNB Lab: United States Grant Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_lab_solutions.html">14.10. JNB Lab: United States Grant Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ComplexSystems.html">15. COMPLEX SYSTEMS - Wheaton College Team</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ComplexSystems/complex_systems_1.html">15.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ComplexSystems/complex_systems_2.html">15.2. Fundamental Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ComplexSystems/complex_systems_3.html">15.3. Mathematical Concepts from Equilibrium Statistical Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ComplexSystems/complex_systems_4.html">15.4. Societal Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ComplexSystems/complex_systems_solutions.html">15.5. Solution to Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ComplexSystems/complex_systems_lab.html">15.6. JNB LAB: Complex Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ComplexSystems/complex_systems_labsolution.html">15.7. JNB Lab Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/timothyprojectGiG/JB_Math_Textbook/main?urlpath=tree/src/Advanced/AdvDataAnalysis/nlp_lab.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/timothyprojectGiG/JB_Math_Textbook/issues/new?title=Issue%20on%20page%20%2FAdvanced/AdvDataAnalysis/nlp_lab.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Advanced/AdvDataAnalysis/nlp_lab.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>JNB Lab: United States Grant Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises-part-1-supervised-learning-and-vectorizations">14.9.1. Lab Exercises, Part 1: Supervised Learning and Vectorizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">14.9.2. Unsupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises-part-2-unsupervised-learning">14.9.3. Lab Exercises, Part 2: Unsupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises-part-3-similarity">14.9.4. Lab Exercises, Part 3: Similarity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-ai-and-language-models">14.9.5. Generative AI and Language Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises-part-4-generative-ai-and-language-models">14.9.6. Lab Exercises, Part 4: Generative AI and Language Models</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="jnb-lab-united-states-grant-data">
+<h1><span class="section-number">14.9. </span>JNB Lab: United States Grant Data<a class="headerlink" href="#jnb-lab-united-states-grant-data" title="Link to this heading">#</a></h1>
+<p>The United States keeps a record of all of the grant applications it receives. The dataset of grants is updated every day and can be found at <a class="reference external" href="https://www.grants.gov/xml-extract">https://www.grants.gov/xml-extract</a> to be downloaded as an xml file. In this lab, we will be classifying these grant entries into the various UN SDG goals that we talked about throughout the chapter.</p>
+<section id="lab-exercises-part-1-supervised-learning-and-vectorizations">
+<h2><span class="section-number">14.9.1. </span>Lab Exercises, Part 1: Supervised Learning and Vectorizations<a class="headerlink" href="#lab-exercises-part-1-supervised-learning-and-vectorizations" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">pandas</span></code> to read in the provided xml file, which is from June 25, 2024, when this lab was first being started. You can use xml files from other days, but the solutions and exercises for this lab are based off of this file.</p></li>
+</ol>
+<div class="cell tag_remove-input tag_remove-ouput docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+Intel MKL WARNING: Support of Intel(R) Streaming SIMD Extensions 4.2 (Intel(R) SSE4.2) enabled only processors has been deprecated. Intel oneAPI Math Kernel Library 2025.0 will require Intel(R) Advanced Vector Extensions (Intel(R) AVX) instructions.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we’ve read in the data, we can take a look at it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OpportunityID</th>
+      <th>OpportunityTitle</th>
+      <th>OpportunityNumber</th>
+      <th>OpportunityCategory</th>
+      <th>FundingInstrumentType</th>
+      <th>CategoryOfFundingActivity</th>
+      <th>CategoryExplanation</th>
+      <th>CFDANumbers</th>
+      <th>EligibleApplicants</th>
+      <th>AdditionalInformationOnEligibility</th>
+      <th>...</th>
+      <th>CloseDateExplanation</th>
+      <th>OpportunityCategoryExplanation</th>
+      <th>EstimatedSynopsisPostDate</th>
+      <th>FiscalYear</th>
+      <th>EstimatedSynopsisCloseDate</th>
+      <th>EstimatedSynopsisCloseDateExplanation</th>
+      <th>EstimatedAwardDate</th>
+      <th>EstimatedProjectStartDate</th>
+      <th>GrantorContactName</th>
+      <th>GrantorContactPhoneNumber</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>262148</td>
+      <td>Establishment of the Edmund S. Muskie Graduate...</td>
+      <td>SCAPPD-14-AW-161-SCA-08152014</td>
+      <td>D</td>
+      <td>CA</td>
+      <td>O</td>
+      <td>Public Diplomacy</td>
+      <td>19.040</td>
+      <td>25.0</td>
+      <td>Eligibility for U.S. institutions is limited t...</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>262149</td>
+      <td>Eradication of Yellow Crazy Ants on Johnston A...</td>
+      <td>F14AS00402</td>
+      <td>D</td>
+      <td>CA</td>
+      <td>NR</td>
+      <td>None</td>
+      <td>15.608</td>
+      <td>99.0</td>
+      <td>The recipient has already been selected for th...</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>131073</td>
+      <td>Cooperative Ecosystem Studies Unit, Piedmont S...</td>
+      <td>G12AS20003</td>
+      <td>D</td>
+      <td>CA</td>
+      <td>ST</td>
+      <td>None</td>
+      <td>15.808</td>
+      <td>25.0</td>
+      <td>This financial assistance opportunity is being...</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>131094</td>
+      <td>Plant Feedstock Genomics for Bioenergy:  A Joi...</td>
+      <td>DE-FOA-0000598</td>
+      <td>D</td>
+      <td>G</td>
+      <td>ST</td>
+      <td>None</td>
+      <td>81.049</td>
+      <td>99.0</td>
+      <td>DOE Eligibility Criteria: Applicants from U.S....</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>131095</td>
+      <td>Management of HIV-Related Lung Disease and Car...</td>
+      <td>RFA-HL-12-034</td>
+      <td>D</td>
+      <td>G</td>
+      <td>HL</td>
+      <td>None</td>
+      <td>93.838</td>
+      <td>25.0</td>
+      <td>Other Eligible Applicants include the followin...</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div></div></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>What variable seems to be the best for which to classify these grant applications into various UN SDGs?</p></li>
+<li><p>Take the variable you’ve chosen above and transform it into a bag of words matrix.</p></li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>From the bag of words that you’ve made, identify the first ten features and print them out.</p></li>
+</ol>
+<ol class="arabic simple" start="5">
+<li><p>Refer to the <a class="reference internal" href="sec2_transform_features.html"><span class="std std-doc">section on Document-Term Matrices</span></a> to create another vectorization of the documents. Show features 100-110.</p></li>
+</ol>
+<ol class="arabic simple" start="6">
+<li><p>(Bonus, if you have a strong computer) Create yet another vectorization, similar to the above, but using bigrams. Again, show features 100-110.</p></li>
+</ol>
+<ol class="arabic simple" start="7">
+<li><p>Once again, make another vectorization, using the TF-IDF Vectorizer. Show features 100-110.</p></li>
+</ol>
+<ol class="arabic simple" start="8">
+<li><p>Using the function you made in Exercise 4.4, modify it so as to train a model on the entire UNSDG dataset. Then, use this model to assign predicted classes to each of the entries in the dataset using the Perceptron, Naive Bayes, and Ridge Classifier models.</p></li>
+</ol>
+<p>One thing you’ve probably noticed is that this dataset does not explicitly have UNSDG classes associated with it. While we can do what we did in the previous exercise for this lab, it is often not the case that we have pre-labeled data. As such, one thing we can turn to is <em>unsupervised learning</em>. This was mentioned in the <a class="reference internal" href="sec4_classification_algos.html"><span class="std std-doc">section giving an overview on machine learning</span></a> and involves data that is not already labeled with the “correct” category.</p>
+</section>
+<section id="unsupervised-learning">
+<h2><span class="section-number">14.9.2. </span>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Link to this heading">#</a></h2>
+<p>Two popular algorithms for unsupervised learning revolve around what is known as <em>clustering</em>. Clustering, similar to how the name sounds, puts data points into clusters such that there is high similarity within the cluster and low similarity between different clusters. The algorithms for this are a deterministic method called <span class="math notranslate nohighlight">\(k\)</span>-means, which puts each data point into a definitive cluster, and a probabilistic method called Gaussian Mixture Modeling, which assigns probabilities for each data point belonging in any cluster.</p>
+<p><span class="math notranslate nohighlight">\(k\)</span>-means is described in more detail in the <a class="reference internal" href="../LinearAlgebra/KMeans/jnb2.html"><span class="std std-doc">chapter on linear algebra and optimization</span></a>. In practice, however, <span class="math notranslate nohighlight">\(k\)</span>-means clustering takes the following procedure:</p>
+<ol class="arabic simple">
+<li><p>Create <span class="math notranslate nohighlight">\(k\)</span> random points to serve as centroids; you choose the value of <span class="math notranslate nohighlight">\(k\)</span>. These will be the “centers” of each of our clusters.</p></li>
+<li><p>Assign each existing data point to its closest centroid. This is typically done with Euclidean distance, or
+$<span class="math notranslate nohighlight">\(
+\text{dist} = \sqrt{(x_1-a_1)^2 + (x_2-a_2)^2 + ... + (x_j-a_j)^2}
+\)</span><span class="math notranslate nohighlight">\(
+for data point \)</span>x<span class="math notranslate nohighlight">\( and centroid \)</span>a<span class="math notranslate nohighlight">\(, each with \)</span>j$ features (columns in the dataset).</p></li>
+<li><p>Measure the distance of each point from its assigned centroid and sum all these distances for all <span class="math notranslate nohighlight">\(n\)</span> points. Again, this is done with Euclidean distance.</p></li>
+<li><p>Re-calculate the centroid of each cluster by taking the mean vector of all points in the cluster.</p></li>
+<li><p>Repeat steps 2-4 until the total distance metric changes marginally between iterations, or until the centroids do not change position between iterations.</p></li>
+</ol>
+<p>Gaussian Mixture Modeling is similar to <span class="math notranslate nohighlight">\(k\)</span>-means, except it assigns probabilities for each point belonging to each cluster, assuming that each point follows a multivariate normal distribution from each cluster’s mean point. In practice, it is performed with the Expectation-Maximization (EM) algorithm. Its procedure works as follows:</p>
+<ol class="arabic simple">
+<li><p>Create <span class="math notranslate nohighlight">\(k\)</span> random points to serve as means, and assign each cluster a <span class="math notranslate nohighlight">\(j \times j\)</span> covariance matrix; this can be randomly set, but it is more common to use the identity matrix. These mean vectors and covariance matrices are the <em>mixture parameters</em>. We also need a prior probability to help with normalization in the next step, which is a single vector of length <span class="math notranslate nohighlight">\(k\)</span> detailing the prior probability of a point belonging in any one cluster. This vector is known as the <em>mixing proportions</em>.</p></li>
+<li><p><em>Expectation Step</em>: Calculate the log-likelihood of the current data points given these randomly set parameters. This involves two main steps:</p></li>
+</ol>
+<ul class="simple">
+<li><p>(a) Calculate the probability of each point belonging in each cluster using the multivariate normal probability density function. Following this, multiply these values by the respective probability found in the mixing proportions, then normalize these probabilities so that they sum to 1. These probabilities are stored in a matrix known as a <em>hidden matrix</em>.</p></li>
+<li><p>(b) Take the cluster of highest probability for each point, then take the natural log of that probability. Perform that over all points, taking the sum of the natural logs.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><em>Maximization Step</em>: Given the points assigned to each cluster of maximum likelihood, re-calculate the mean vector and covariance matrix for each cluster, as well as the mixing proportions.</p></li>
+</ol>
+<ul class="simple">
+<li><p>To recalculate mixing proportions, take the cluster where each point has greatest probability to be in and “assign” the point that cluster. Then for each cluster, the new proportion is simply the number of points assigned to that cluster, divided by the total number of points.</p></li>
+<li><p>To recalculate mean vectors, for each entry in each mean vector, take the corresponding feature in the data and take the dot product of it to each of the columns in the hidden matrix. Normalize the result based on the sums of the cluster, which gives us a single value for each k; we then do that <span class="math notranslate nohighlight">\(j\)</span> times to get the full matrix.</p></li>
+<li><p>To recalculate covariance matrices, for each cluster, take the deviation of each point from the mean of the cluster and use these deviations to calculate a new covariance matrix. Then normalize the entries in this covariance matrix by the sums of the probabilities for that cluster.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>Repeat the Expectation and Maximization Steps until the increase in log-likelihood falls below a specified threshold. Note that various mathematical theories prove that the log-likelihood always increases with each iteration, but at some point this increase will be minimal.</p></li>
+</ol>
+<p>Clusters can be evaluated by a variety of metrics, including consulting domain experts or using Jaccard index. Evaluation of these clusters is beyond the scope of this lab.</p>
+</section>
+<section id="lab-exercises-part-2-unsupervised-learning">
+<h2><span class="section-number">14.9.3. </span>Lab Exercises, Part 2: Unsupervised Learning<a class="headerlink" href="#lab-exercises-part-2-unsupervised-learning" title="Link to this heading">#</a></h2>
+<ol class="arabic simple" start="9">
+<li><p>Look at the documentation for <span class="math notranslate nohighlight">\(k\)</span>-means and the EM algorithm on <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> and use these with various <span class="math notranslate nohighlight">\(k\)</span> to cluster the grants. If you have a powerful computer, try <span class="math notranslate nohighlight">\(k = 17\)</span> to match the number of UN SDGs.</p></li>
+<li><p>Look at the entries for one of the <span class="math notranslate nohighlight">\(k\)</span>-means clusters you made in the previous exercise. How similar are the entries to each other?</p></li>
+<li><p>Compare the entries from the previous cluster you analyzed to a different cluster. How similar are the entries in the first cluster to the ones in the new cluster?</p></li>
+<li><p>(Bonus) Implement <span class="math notranslate nohighlight">\(k\)</span>-means and the EM algorithm only using the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> package - feel free to consult other resources for mathematical help. This exercise is not for the faint of heart but is advisable for those who want to improve their understanding of the mathematics underlying these methods!</p></li>
+</ol>
+</section>
+<section id="lab-exercises-part-3-similarity">
+<h2><span class="section-number">14.9.4. </span>Lab Exercises, Part 3: Similarity<a class="headerlink" href="#lab-exercises-part-3-similarity" title="Link to this heading">#</a></h2>
+<ol class="arabic simple" start="13">
+<li><p>Construct a heatmap for 40 of the grants in the dataset.</p></li>
+<li><p>Isolate twenty of the entries, then write a function that will take one of these twenty entries and an integer <span class="math notranslate nohighlight">\(k\)</span> as an input; the function will return the <span class="math notranslate nohighlight">\(k\)</span> most similar entries in the rest of the dataset.</p></li>
+</ol>
+</section>
+<section id="generative-ai-and-language-models">
+<h2><span class="section-number">14.9.5. </span>Generative AI and Language Models<a class="headerlink" href="#generative-ai-and-language-models" title="Link to this heading">#</a></h2>
+<p>With the rise of generative AI and large language models like the GPT-system of models developed by OpenAI, it is easier than ever to give a model a string of text and have it classify these texts into predicted UN SDGs.</p>
+<p>So how exactly do these models work? The exact mathematical theory behind these models is highly complex as they build on years of research on AI, natural language processing, and machine learning. We mention generative text models briefly in <a class="reference internal" href="sec2_transform_features.html"><span class="std std-doc">a previous section</span></a>, and state that these models are similar to probabilistic language models but are <em>generative</em> in the sense that they will generate the next word in the sequence based on a highly complex model.</p>
+<p>We won’t have you recreate any generative AI programs here. Instead, we will provide a quick guide through best practices to use them in the context of text classification.</p>
+<p>The guiding principle is to <strong>be as specific as possible and narrow the desired task as much as you can.</strong> Expect that you will sometimes get incorrect results, or ones that do not align with the task you intended. As you go, iterate and fine-tune the prompts so that they become more specific.</p>
+<p>Additionally, some advanced prompting techniques exist, including few-shot prompting and chain-of-thought prompting, which provides some examples for the LLM or guides the LLM through a few reasoning steps, respectively.</p>
+</section>
+<section id="lab-exercises-part-4-generative-ai-and-language-models">
+<h2><span class="section-number">14.9.6. </span>Lab Exercises, Part 4: Generative AI and Language Models<a class="headerlink" href="#lab-exercises-part-4-generative-ai-and-language-models" title="Link to this heading">#</a></h2>
+<ol class="arabic simple" start="15">
+<li><p>Use a LLM available online, such as ChatGPT, and ask it what UNSDGs it predicts some of the grants to fall under using simple question asking. For example, “For a grant with the title __________, what UNSDG aligns best with the grant?” Do the classifications make sense?</p></li>
+<li><p>Use few-shot prompting to classify some other grants. Utilize your own previous classification models (or your own classifications) to provide shots to the prompt. For example, “The grant titled _____________ falls under UN SDG _____. The grant titled __________ falls under which UNSDG?” Compare the classifications from this step with the classifications from the previous step.</p></li>
+<li><p>(Bonus) Check out the following additional resources for more details on LLM prompting. Code along with the code provided on the pages and provide your resulting notebooks to answer this question. Extend the principles found in resources to some of these grant titles as well.</p></li>
+</ol>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cookbook.openai.com/examples/multiclass_classification_for_transactions">https://cookbook.openai.com/examples/multiclass_classification_for_transactions</a>: a resource from OpenAI, utilizing the capabilities of some of their own models, to classify text documents</p></li>
+<li><p><a class="reference external" href="https://huggingface.co/docs/transformers/main/tasks/prompting">https://huggingface.co/docs/transformers/main/tasks/prompting</a>: a resource from HuggingFace, a package we used in this section, that talks more about general LLM prompting.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Advanced/AdvDataAnalysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="solutions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">14.8. </span>Solutions to Exercises</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nlp_lab_solutions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14.10. </span>JNB Lab: United States Grant Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises-part-1-supervised-learning-and-vectorizations">14.9.1. Lab Exercises, Part 1: Supervised Learning and Vectorizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">14.9.2. Unsupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises-part-2-unsupervised-learning">14.9.3. Lab Exercises, Part 2: Unsupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises-part-3-similarity">14.9.4. Lab Exercises, Part 3: Similarity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-ai-and-language-models">14.9.5. Generative AI and Language Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-exercises-part-4-generative-ai-and-language-models">14.9.6. Lab Exercises, Part 4: Generative AI and Language Models</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul Isihara, Claire Wagner, Peter Jantsch, and Thomas VanDrunen, Editors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' width=88 style='border-width:0' src='https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png'/></a>
+  Except where otherwise noted, this work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
