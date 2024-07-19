@@ -643,8 +643,8 @@ document.write(`
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="jnb-lab-the-framingham-heart-study">
 <h1><span class="section-number">6.7. </span>JNB Lab: The Framingham Heart Study<a class="headerlink" href="#jnb-lab-the-framingham-heart-study" title="Link to this heading">#</a></h1>
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Framingham_Heart_Study">Framingham Heart Study</a> is an ongoing study of cardiovascular health in the United States. The initial study followed over 5,000 volunteers from  Framingham, Massachusetts, USA over the course of several decades, and it still continues today. The study led to important findings in many areas, including a link between cholesterol and heart disease. (These excercises are inspired by an assignment from UC Berkeley’s <a class="reference external" href="http://data8.org/">Data 8</a>.)</p>
-<p>We load in the data below from the file <code class="docutils literal notranslate"><span class="pre">framingham.csv</span></code> (click <a class="reference download internal" download="" href="../../_downloads/676633eefefb056c2f9726ae9198fbe9/framingham.csv"><span class="xref download myst">here</span></a> to download a copy). There are a number of different interesting variables to explore, but we will focus on exploring total cholesterol levels (<code class="docutils literal notranslate"><span class="pre">TOTCHOL</span></code>) versus the occurence of heart disease (<code class="docutils literal notranslate"><span class="pre">ANYCHD</span></code>). The variable <code class="docutils literal notranslate"><span class="pre">ANYCHD</span></code> takes the value <code class="docutils literal notranslate"><span class="pre">0</span></code> if the patient does not have heart disease and the value <code class="docutils literal notranslate"><span class="pre">1</span></code> if they do.</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Framingham_Heart_Study">Framingham Heart Study</a> is an ongoing study of cardiovascular health in the United States. The initial study followed over 5,000 volunteers from  Framingham, Massachusetts, USA over the course of several decades, and it still continues today. The study led to important findings in many areas, including a link between cholesterol and heart disease. (These exercises are inspired by an assignment from UC Berkeley’s <a class="reference external" href="http://data8.org/">Data 8</a>.)</p>
+<p>We load in the data below from the file <code class="docutils literal notranslate"><span class="pre">framingham.csv</span></code> (click <a class="reference download internal" download="" href="../../_downloads/676633eefefb056c2f9726ae9198fbe9/framingham.csv"><span class="xref download myst">here</span></a> to download a copy). There are a number of different interesting variables to explore, but we will focus on exploring total cholesterol levels (<code class="docutils literal notranslate"><span class="pre">TOTCHOL</span></code>) versus the occurrence of heart disease (<code class="docutils literal notranslate"><span class="pre">ANYCHD</span></code>). The variable <code class="docutils literal notranslate"><span class="pre">ANYCHD</span></code> takes the value <code class="docutils literal notranslate"><span class="pre">0</span></code> if the patient does not have heart disease and the value <code class="docutils literal notranslate"><span class="pre">1</span></code> if they do.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">framingham</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;framingham.csv&quot;</span><span class="p">)</span>
@@ -749,7 +749,7 @@ document.write(`
 </div>
 <section id="part-1-explore-the-data">
 <h2><span class="section-number">6.7.1. </span>Part 1: Explore the data<a class="headerlink" href="#part-1-explore-the-data" title="Link to this heading">#</a></h2>
-<p>As always, it’s important to take a look at your data before you dive into any kind of inference. We first note that we have both categorical and numerical variables, which changes what types of vizualization we might be interested in. First, we’ll look at the size of the data frame, which shows that we have 3842 observations of 9 variables.</p>
+<p>As always, it’s important to take a look at your data before you dive into any kind of inference. We first note that we have both categorical and numerical variables, which changes what types of visualization we might be interested in. First, we’ll look at the size of the data frame, which shows that we have 3842 observations of 9 variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">framingham</span><span class="o">.</span><span class="n">shape</span>
@@ -762,27 +762,27 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Since we are interested in how cholesterol connects to occurence of heart disease, we next explore those variables. Like the penguin example in the text, we will separate our data into our two samples. Then we’ll calculate the mean cholesterol rating for each group.</p>
+<p>Since we are interested in how cholesterol connects to occurrence of heart disease, we next explore those variables. Like the penguin example in the text, we will separate our data into our two samples. Then we’ll calculate the mean cholesterol rating for each group.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chd</span> <span class="o">=</span> <span class="n">framingham</span><span class="p">[</span><span class="n">framingham</span><span class="p">[</span><span class="s1">&#39;ANYCHD&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 <span class="n">nochd</span> <span class="o">=</span> <span class="n">framingham</span><span class="p">[</span><span class="n">framingham</span><span class="p">[</span><span class="s1">&#39;ANYCHD&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean total cholesterol for those with an occurence of CHD is </span><span class="si">{</span><span class="n">chd</span><span class="p">[</span><span class="s1">&#39;TOTCHOL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean total cholesterol for those without occurence of CHD is </span><span class="si">{</span><span class="n">nochd</span><span class="p">[</span><span class="s1">&#39;TOTCHOL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean total cholesterol for those with an occurrence of CHD is </span><span class="si">{</span><span class="n">chd</span><span class="p">[</span><span class="s1">&#39;TOTCHOL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean total cholesterol for those without occurrence of CHD is </span><span class="si">{</span><span class="n">nochd</span><span class="p">[</span><span class="s1">&#39;TOTCHOL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean total cholesterol for those with an occurence of CHD is 249.482.
-The mean total cholesterol for those without occurence of CHD is 232.846.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean total cholesterol for those with an occurrence of CHD is 249.482.
+The mean total cholesterol for those without occurrence of CHD is 232.846.
 </pre></div>
 </div>
 </div>
 </div>
 <p>The means are different, but it’s not clear if they are a lot different, or just a little bit. That depends on the sample sizes and the distribution of cholesterol levels!</p>
 <ol class="arabic simple">
-<li><p>Write a line or two of code to figure out how many people in the study have an occurence of CHD and how many do not.</p></li>
+<li><p>Write a line or two of code to figure out how many people in the study have an occurrence of CHD and how many do not.</p></li>
 <li><p>Make a histogram of the cholesterol levels for both samples. Describe the distributions’ centers, shapes, and compare the two.</p></li>
 </ol>
 </section>
