@@ -17,13 +17,13 @@ Welcome to the wonderful world of Jupyter Notebooks (JNBs)!
 In this book, we will be using JNBs as type of user-friendly way to input and execute codes in the Python programming language.  JNBs also are useful to create documents which include photos, videos, slide presentations, as well as output to Python computer programs.  In fact, this entire book is written using JNBs.
 
 
-To get started, it will be very helpful if you consult with someone who is already using JNBs. If that is not possible, you will need to install Jupyter Notebooks using the free Anaconda distribution downloadable from www.anaconda.com.  If you then use then skip  to Section 2.3 Beginning Python Programming in the PRE_COLLEGE chapter (if you are using the online book, you can navigate using the left menu bar), that will hopefully help you install and run your first JNB. Then you can try to work through the rest of the PRE_COLLEGE chapter. 
+To get started, it will be very helpful if you consult with someone who is already using JNBs. If that is not possible, you will need to install Jupyter Notebooks using the free Anaconda distribution downloadable from www.anaconda.com.  If you then use then skip  to Section 2.3 Beginning Python Programming in the PRE-COLLEGE chapter (if you are using the online book, you can navigate using the left menu bar), that will hopefully help you install and run your first JNB. Then you can try to work through the rest of the PRE-COLLEGE chapter. 
 
 We wish you all the best!
 ```
 
 This first edition would not be possible except for the contributions of a congenial team of faculty who worked together during Summer 2023 (acknowledged as authors of their contributed chapters), as well as a team of students (Jakob Hildebrandt, Gavin McClowry and Jonathan Zhu) who did a variety of edits during Summer 2024. The exceptional contribution of Claire Wagner to create both the online and PDF versions of this book must also be acknowledged.   
 
-As this work was completed at the time of my transition to professor emertius, my hope and prayer is that this book will prove to be useful to the next generation of faculty and students.
+As this work was completed at the time of my transition to professor emeritus, my hope and prayer is that this book will prove to be useful to the next generation of faculty and students.
 
 P. Isihara, Wheaton College, Wheaton IL, July 2024
