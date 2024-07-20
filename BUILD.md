@@ -8,12 +8,12 @@ If you encounter unexpected errors with the build, try running the command `jupy
 
 Here are the latest versions of these packages and distributions known to successfully build the book:
 
-Jupyter Book      : 1.0.2
-External ToC      : 1.0.1
-MyST-Parser       : 2.0.0
-MyST-NB           : 1.1.1
-Sphinx Book Theme : 1.1.3
-Jupyter-Cache     : 1.0.0
-NbClient          : 0.10.0
-ghp-import        : 2.1.0
-texlive           : 20240312
+* Jupyter Book      : 1.0.2
+* External ToC      : 1.0.1
+* MyST-Parser       : 2.0.0
+* MyST-NB           : 1.1.1
+* Sphinx Book Theme : 1.1.3
+* Jupyter-Cache     : 1.0.0
+* NbClient          : 0.10.0
+* ghp-import        : 2.1.0
+* texlive           : 20240312
