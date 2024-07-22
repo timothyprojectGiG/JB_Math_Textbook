@@ -1,9 +1,5 @@
 # PREFACE
 
-:::{note}
-If you are reading a static version of this textbook (such as a PDF), please visit {{ '[the web version of this section]({website}/{path}.html)'.format(website=web_ver_url, path=env.docname) }} to engage with this interactive resource.
-:::
-
 This book is an introduction to the use of Python Jupyter Notebooks (JNBs) for college math teachers and their students. The book is an evolving work in progress, but we hope this 1st Edition may already be quite useful to a college math teacher who is interested to use Jupyter Notebooks in their courses.  Each section of the book has been written in the form of a Jupyter Notebook and can be downloaded using the download button at the top menu bar. In some cases, additional data files or image files may need to be downloaded as well. All the files are available in the src folder of the github repository https://github.com/timothyprojectGiG/JB_Math_Textbook   
 
 Each chapter contains a JNB lab with solutions.  Experienced teachers can modify these labs and create new labs tailored to their courses. The chapters were written by different authors/authorship teams, and as such, vary in style. Each chapter essentially can be read independently of the others as long as one has the pre-requisite mathematical knowledge. Some effort has been made to standardize the chapter formats, and the index may help the reader find specific topics of interest. There is virtually no limit to what can be done with JNBs, and we hope this work serves as a useful starting point for teachers and students to enrich and enliven the study of mathematics using this tool.
