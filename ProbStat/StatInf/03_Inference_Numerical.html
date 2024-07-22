@@ -762,8 +762,8 @@ document.write(`
 </div>
 <p>Using this data, we are going to explore the question of whether the Gentoo penguins at the Palmer Station differ significantly in body mass from the average Gentoo penguin body mass found in the scientific literature. (This example was inspired by <a class="reference external" href="https://github.com/MSCI-599/unit_3_penguins">Erin Meyer-Gutbrod</a>.)</p>
 <p>We can find more information about the worldwide average body mass of the Gentoo penguin by using the <a class="reference external" href="https://eol.org/pages/45512076">Encyclopedia of Life</a>. Based on this page, it looks like the average body mass is 5500 grams. If we let <span class="math notranslate nohighlight">\(\mu\)</span> be the average body mass of Gentoo penguins in the Palmer Station area, our hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-edd14f57-5b52-4e7d-8b72-54a9fda5935f">
-<span class="eqno">(6.12)<a class="headerlink" href="#equation-edd14f57-5b52-4e7d-8b72-54a9fda5935f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b8ceb0a2-5d88-4c60-a7c8-5ec18d66524e">
+<span class="eqno">(6.12)<a class="headerlink" href="#equation-b8ceb0a2-5d88-4c60-a7c8-5ec18d66524e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 \end{equation}\]</div>
 <p>What about the mean body mass for penguins in our sample data?</p>
@@ -837,12 +837,9 @@ H_0: \mu = 5500, \\ H_1: \mu \neq 5500.
 </div>
 </div>
 <p>Though we could introduce a test based on the standard normal distribution—as we did in the <a class="reference internal" href="02_Inference_Categorical.html"><span class="std std-doc">previous section</span></a>—in the case of numerical data, we are going to utilize the <strong>T-test</strong> instead. As the name suggests, this test is based on the Student’s T-distribution. We do this because the T-test will apply both to the cases when the sample size is large and to the cases when it is relatively small.</p>
-<div class="highlight-{index}Student's notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 </section>
 <section id="the-students-t-distribution">
-<h2><span class="section-number">6.4.2. </span>The Student’s T-Distribution<a class="headerlink" href="#the-students-t-distribution" title="Link to this heading">#</a></h2>
+<span id="index-0"></span><h2><span class="section-number">6.4.2. </span>The Student’s T-Distribution<a class="headerlink" href="#the-students-t-distribution" title="Link to this heading">#</a></h2>
 <p>When hypothesizing about a population proportion, the null hypothesis gives us a value of <span class="math notranslate nohighlight">\(p\)</span> that determines both the mean and standard deviation of the null distribution. On the other hand, the CLT for sample means tells us that as long as <span class="math notranslate nohighlight">\(n\)</span> is large enough,</p>
 <div class="math notranslate nohighlight">
 \[\overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}} \right).\]</div>
@@ -968,12 +965,9 @@ if (outputEl) {{
                         })                };                });            </script>        </div></div></div>
 </div>
 <p>When <span class="math notranslate nohighlight">\(n\)</span> is large (<span class="math notranslate nohighlight">\(\ge 30\)</span> or so), then <span class="math notranslate nohighlight">\(S\)</span> should be close to <span class="math notranslate nohighlight">\(\sigma\)</span>, and the T-distribution more or less resembles the standard normal <span class="math notranslate nohighlight">\(Z\)</span>. So why use T at all? It turns out that the T-distribution can also be useful in cases when we do not have a large enough sample size to use the normal distribution! In this case, as we’ve already mentioned, we do need one extra assumption: that the population distribution has a normal distribution. This ensures that the sample average will also have a normal distribution. We’ll come back to this with a small sample example later in the section.</p>
-<div class="highlight-{index}T-Test notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 </section>
 <section id="the-t-test">
-<h2><span class="section-number">6.4.3. </span>The T-Test<a class="headerlink" href="#the-t-test" title="Link to this heading">#</a></h2>
+<span id="index-1"></span><h2><span class="section-number">6.4.3. </span>The T-Test<a class="headerlink" href="#the-t-test" title="Link to this heading">#</a></h2>
 <p>Now back to our current example: to use a T-test, we need to check the assumption that the underlying data come from a normal distribution. We have <span class="math notranslate nohighlight">\(n=119\)</span> observations, which means we’re working with a large sample case. Additionally, the histogram of the body mass of the Gentoo penguins is roughly mound-shaped, so using the T-test is appropriate for this situation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1294,18 +1288,15 @@ P-value is 0.000.
 <li><p>Perform the test and report the test statistic and <span class="math notranslate nohighlight">\(P\)</span>-value.</p></li>
 <li><p>What do you conclude? If you find a significant difference, give a confidence interval for average bill length.</p></li>
 </ol>
-<div class="highlight-{index}Two-Sample notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 </section>
 </section>
 <section id="two-sample-t-test">
-<h2><span class="section-number">6.4.4. </span>Two-Sample T-Test<a class="headerlink" href="#two-sample-t-test" title="Link to this heading">#</a></h2>
+<span id="index-2"></span><h2><span class="section-number">6.4.4. </span>Two-Sample T-Test<a class="headerlink" href="#two-sample-t-test" title="Link to this heading">#</a></h2>
 <p>We can also use the T-test to examine the difference between two population means. Typically, this is done to find out if two populations have the same mean or not.</p>
 <p>We can return to our Palmer Penguins example and look at whether the Adélie and Chinstrap penguins from this area have the same average body mass.</p>
 <p>Letting <span class="math notranslate nohighlight">\(\mu_1\)</span> be the average body mass of Adélie penguins and <span class="math notranslate nohighlight">\(\mu_2\)</span> be the average body mass of Chinstrap penguins in the Palmer station area, our hypotheses are</p>
-<div class="amsmath math notranslate nohighlight" id="equation-25977093-940d-463e-ad1d-6e14a052115c">
-<span class="eqno">(6.14)<a class="headerlink" href="#equation-25977093-940d-463e-ad1d-6e14a052115c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7ce400cd-d72b-4bcf-81cb-8f150244b043">
+<span class="eqno">(6.14)<a class="headerlink" href="#equation-7ce400cd-d72b-4bcf-81cb-8f150244b043" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_0: \mu_1 - \mu_2 = 0, \\ H_1: \mu_1 - \mu_2 \neq 0.
 \end{equation}\]</div>
 <p>Let’s look at our samples:</p>
@@ -1327,24 +1318,21 @@ The mean Chinstrap body mass in the sample data is 3733.088.
 </div>
 </div>
 <p>These are slightly different, but are they enough different for us to reject the null hypothesis? We need a test statistic to quantify this.</p>
-<div class="highlight-{index}Test notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 <section id="the-test-statistic">
-<h3>The Test Statistic<a class="headerlink" href="#the-test-statistic" title="Link to this heading">#</a></h3>
+<span id="index-3"></span><h3>The Test Statistic<a class="headerlink" href="#the-test-statistic" title="Link to this heading">#</a></h3>
 <p>When the sample sizes <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span> are large enough (typically both <span class="math notranslate nohighlight">\(n_1 \geq 30\)</span> and <span class="math notranslate nohighlight">\(n_2 \geq 30\)</span>), we have</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5db5aa1a-f66e-4618-aa0a-5c6a9c40d7e0">
-<span class="eqno">(6.15)<a class="headerlink" href="#equation-5db5aa1a-f66e-4618-aa0a-5c6a9c40d7e0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b4326a29-cc10-471d-bce5-6f7e1b71ec4e">
+<span class="eqno">(6.15)<a class="headerlink" href="#equation-b4326a29-cc10-471d-bce5-6f7e1b71ec4e" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \overline{X}_1 - \overline{X}_2 \sim N \left( \mu_1 - \mu_2, \sqrt{ \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} } \right),
 \end{equation}\]</div>
 <p>and hence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-642fcf53-dac4-4039-bd1b-a3dbfb59cb3c">
-<span class="eqno">(6.16)<a class="headerlink" href="#equation-642fcf53-dac4-4039-bd1b-a3dbfb59cb3c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-67e5ec84-79a5-4ba5-bbc6-e8a2fd6ea395">
+<span class="eqno">(6.16)<a class="headerlink" href="#equation-67e5ec84-79a5-4ba5-bbc6-e8a2fd6ea395" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\overline{X}_1 - \overline{X}_2 - (\mu_1 - \mu_2)}{ \sqrt{ \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} }} \sim N(0,1).
 \end{equation}\]</div>
 <p>Just as before, the null hypothesis will tell us about <span class="math notranslate nohighlight">\(\mu_1-\mu_2\)</span>, but not about <span class="math notranslate nohighlight">\(\sigma_1\)</span> and <span class="math notranslate nohighlight">\(\sigma_2\)</span>, so we’ll estimate them from the data using <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span>. Making that substitution for the standard deviations, we have a T-distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-26c345a3-e388-467b-b042-6a6700c38f6d">
-<span class="eqno">(6.17)<a class="headerlink" href="#equation-26c345a3-e388-467b-b042-6a6700c38f6d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8153be7e-1a8b-42da-83ac-318e21073cab">
+<span class="eqno">(6.17)<a class="headerlink" href="#equation-8153be7e-1a8b-42da-83ac-318e21073cab" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\overline{X}_1 - \overline{X}_2 - (\mu_1 - \mu_2)}{ \sqrt{ \frac{S_1^2}{n_1} + \frac{S_2^2}{n_2} }} \sim t_{\nu},
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\nu\)</span> represents the degrees of freedom. The exact value of <span class="math notranslate nohighlight">\(\nu\)</span> will be calculated by something called Welch’s method, but we can let the software handle that details of the computation. You can keep in mind the intuition that if <span class="math notranslate nohighlight">\(S_1 \approx S_2\)</span>, then <span class="math notranslate nohighlight">\(\nu\)</span> will be about <span class="math notranslate nohighlight">\(n_1 + n_2 - 2\)</span>. On the other hand, if <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> are very different, then <span class="math notranslate nohighlight">\(\nu \approx \min({n_1, n_2})\)</span>.</p>
