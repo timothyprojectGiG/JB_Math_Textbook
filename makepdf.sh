@@ -17,6 +17,9 @@ do
   jb build "$srcdir" --builder latex
 done
 
+# copy custom cover to latexdir
+cp cover.pdf "$latexdir/"
+
 cd "$latexdir"
 
 # do initial build of pdf

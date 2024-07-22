@@ -2,7 +2,7 @@ To build the HTML for this textbook, run the command `jupyter-book build src`. O
 
 To update the GitHub Pages website after building the HTML, run the command `ghp-import -p -n -f src/_build/html`.
 
-To build the PDF for this textbook, run the script `makepdf.sh`. (In addition to `jupyter-book`, you will need a TeX distribution such as `texlive`.) Once the build is finished, the PDF can be found in `src/_build/latex` and is named `JNBbook.pdf`. Please note that the PDF will not include the custom cover, which must be added manually.
+To build the PDF for this textbook, run the script `makepdf.sh`. (In addition to `jupyter-book`, you will need a TeX distribution such as `texlive`.) Once the build is finished, the PDF can be found in `src/_build/latex` and is named `JNBbook.pdf`.
 
 If you encounter unexpected errors with the build, try running the command `jupyter-book clean src` to clean the `_build` directory.
 
