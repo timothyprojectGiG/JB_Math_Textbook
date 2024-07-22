@@ -62,9 +62,11 @@ sphinx:
     latex_additional_files:
       - "custom.tex.txt"
     latex_elements:
-      preamble: "\\input{custom.tex.txt}"
-      maketitle: "\\author{Paul Isihara, Claire Wagner, Peter Jantsch, \\and and Thomas VanDrunen, Editors} \\sphinxmaketitle"
-      fncychap: "\\usepackage[Sonny]{fncychap}" # for chapter title styling
+      preamble: \setcounter{secnumdepth}{2}
+      maketitle: | # to correct overflow
+        \author{Paul Isihara, Claire Wagner, Peter Jantsch, \and and Thomas VanDrunen, Editors}
+        \sphinxmaketitle
+      fncychap: \usepackage[Sonny]{fncychap} # for chapter title styling
       extraclassoptions: "openany,oneside" # to avoid unnecessary blank pages
     html_js_files:
     - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
